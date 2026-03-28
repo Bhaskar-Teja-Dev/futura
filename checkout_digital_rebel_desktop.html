@@ -259,31 +259,31 @@
                                 <div>
                                     <h3
                                         class="font-headline font-black text-2xl uppercase text-primary-fixed tracking-tight">
-                                        Rebel Pro</h3>
-                                    <p class="font-body text-surface/70 text-sm mt-1 uppercase tracking-widest">Annual
-                                        Membership</p>
+                                        Rebel Pro / Elite</h3>
+                                    <p class="font-body text-surface/70 text-sm mt-1 uppercase tracking-widest">Monthly
+                                        Access</p>
                                 </div>
-                                <span class="font-headline font-black text-2xl">$49.00</span>
+                                <span class="font-headline font-black text-2xl">₹199</span>
                             </div>
                             <div class="space-y-4">
                                 <div
                                     class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
                                     <span>Subtotal</span>
-                                    <span>$49.00</span>
+                                    <span>₹199</span>
                                 </div>
                                 <div
                                     class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
                                     <span>Rebel Tax (0%)</span>
-                                    <span>$0.00</span>
+                                    <span>₹0</span>
                                 </div>
                             </div>
                             <div class="pt-6 border-t-4 border-primary-fixed flex justify-between items-center">
                                 <span class="font-headline font-black text-3xl uppercase">Total</span>
                                 <div class="text-right">
                                     <span
-                                        class="block font-headline font-black text-4xl text-primary-fixed leading-none">$49.00</span>
+                                        class="block font-headline font-black text-4xl text-primary-fixed leading-none">₹199</span>
                                     <span class="text-[10px] font-bold uppercase text-surface/50 tracking-widest">Billed
-                                        Annually</span>
+                                        Monthly</span>
                                 </div>
                             </div>
                         </div>
@@ -373,28 +373,19 @@
                     btnCheckout.innerHTML = 'CONNECTING_TO_NODE...';
                     btnCheckout.style.pointerEvents = 'none';
 
-                    // 1. Create order on the backend
-                    const orderRes = await futuraApi.payments.buyPro();
-                    if (orderRes.error) throw new Error(orderRes.error);
-
-                    // 2. Open Razorpay CheckOut
+                    // 1. Initialize Razorpay Client-Side Direct Logic
                     const options = {
                         key: FUTURA_CONFIG.RAZORPAY_KEY_ID,
-                        amount: orderRes.order.amount,
-                        currency: orderRes.order.currency,
+                        amount: 19900, // 199 INR
+                        currency: "INR",
                         name: "Digital Rebel",
-                        description: "Rebel Pro - Annual Subscription",
-                        order_id: orderRes.order.id,
+                        description: "Rebel Pro - Elite Monthly Access",
                         handler: async function (response) {
                             try {
                                 btnCheckout.innerHTML = 'VERIFYING_CRYPTOGRAPHIC_SEAL...';
 
-                                // 3. Verify on the backend
-                                const verifyRes = await futuraApi.payments.verify({
-                                    razorpay_order_id: response.razorpay_order_id,
-                                    razorpay_payment_id: response.razorpay_payment_id,
-                                    razorpay_signature: response.razorpay_signature
-                                });
+                                // 2. Verify on the backend
+                                const verifyRes = await futuraApi.subscriptions.purchasePro(response.razorpay_payment_id);
 
                                 if (verifyRes.error) throw new Error(verifyRes.error);
 
@@ -407,7 +398,7 @@
 
                             } catch (err) {
                                 console.error('Verification Error:', err);
-                                alert('Payment verification failed.');
+                                alert('Payment verification failed. ' + err.message);
                                 resetButton();
                             }
                         },

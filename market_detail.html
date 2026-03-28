@@ -320,6 +320,15 @@
             h.push({ ticker, companyName: stock.name, amount: a, price: stock.price, date: new Date().toISOString() });
             localStorage.setItem('portfolioHoldings', JSON.stringify(h));
             
+            // Log as contribution to increment streak (saving)
+            try {
+              await futuraApi.contributions.create({
+                amount: Math.round(a / 10), // Convert Zens back to USD metric for streak tracking
+                contribution_date: new Date().toISOString().split('T')[0],
+                note: '[MARKET_INVESTMENT] ' + ticker
+              });
+            } catch (e) { console.error('Silent streak log failed', e); }
+
             ov.remove();
             showToast(`${a.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated!`);
           } else {

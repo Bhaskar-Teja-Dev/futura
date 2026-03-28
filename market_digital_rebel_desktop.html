@@ -118,11 +118,11 @@
     <div class="flex items-center gap-8">
       <span class="text-2xl font-black text-[#121212] tracking-tighter font-headline">DIGITAL REBEL</span>
       <div class="hidden md:flex gap-6 items-center">
-        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#68FD00] hover:text-[#121212] transition-colors duration-100"
+        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
           href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-        <a class="font-headline font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#68FD00] pb-1 hover:bg-[#68FD00] hover:text-[#121212] transition-colors duration-100"
+        <a class="font-headline font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#cafd00] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
           href="market_digital_rebel_desktop.html">Markets</a>
-        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#68FD00] hover:text-[#121212] transition-colors duration-100"
+        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
           href="assets_digital_rebel_desktop.html">Assets</a>
         <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
           href="learn_digital_rebel_desktop.html">Learn</a>
@@ -130,12 +130,15 @@
     </div>
     <div class="flex items-center gap-4">
       <!-- ZENS BALANCE PILL -->
-      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
+      <div id="nav-zens-pill"
+        class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
         <span>🪙</span>
         <span id="nav-zens-balance">--</span>
       </div>
       <!-- ADD MONEY BTN -->
-      <button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })" class="hidden md:block bg-[##cafd00] text-[#121212] border-2 border-[#121212] font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors hard-shadow-sm active:translate-y-1 active:shadow-none">
+      <button
+        onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })"
+        class="hidden md:block bg-[##cafd00] text-[#121212] border-2 border-[#121212] font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors hard-shadow-sm active:translate-y-1 active:shadow-none">
         ADD MONEY
       </button>
 
@@ -145,9 +148,10 @@
       <a href="settings_digital_rebel_desktop.html"
         class="material-symbols-outlined p-2 hover:bg-[#68FD00] border-2 border-transparent hover:border-[#121212] transition-all inline-flex items-center justify-center"
         data-icon="settings">settings</a>
-      <div class="w-10 h-10 border-2 border-[#121212] bg-[#68FD00] flex items-center justify-center overflow-hidden cursor-pointer" id="nav-avatar">
-        <img alt="User Profile" class="w-full h-full object-cover"
-          data-alt="close-up portrait of a stylish person"
+      <div
+        class="w-10 h-10 border-2 border-[#121212] bg-[#68FD00] flex items-center justify-center overflow-hidden cursor-pointer"
+        id="nav-avatar">
+        <img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a stylish person"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRMSTAkV3q57A8vsSy6PmvoBX4yhAFI8BgQ88TFBePb83P1DuwFU925pZCQzZ6wjq9CbDZMqa9Uz13ar4Xz-5mfeRb6BckAHmtIFLo6bhgb685g9fnqjwDTsr2nBxJ7W78RDp4l977ydaaYa4-TvNlal6PR8D43WfDYZ8jN_LWsRU_mDBzEfDHJmWlbHQNYX4Dpkt-MUXlOCfYoialvBa4GuUail7tiMD09qWFnhoCSx7cZtkMX-in0TYq3cvnUHTN0I8X7VZzS1Zu" />
       </div>
     </div>
@@ -164,13 +168,38 @@
           </h1>
         </div>
         <div class="bg-white border-2 border-[#121212] p-4 hard-shadow flex gap-8 items-center">
-          <div>
+          <div class="relative group cursor-help">
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Global Volume</p>
-            <p class="font-headline font-black text-2xl text-[#121212]">$4.2B</p>
+            <p id="global-volume" class="font-headline font-black text-2xl text-[#121212]">--</p>
+
+            <!-- Neo-Brutalist Hover Tooltip -->
+            <div
+              class="absolute top-full left-0 mt-2 w-64 bg-[#121212] border-2 border-[#121212] p-4 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none"
+              style="box-shadow: 4px 4px 0px 0px #cafd00;">
+              <p
+                class="font-headline font-black text-[11px] uppercase tracking-widest text-[#cafd00] mb-2 border-b border-[#333] pb-1">
+                MARKET VOLUME EXPLAINED</p>
+              <p class="font-body text-[12px] text-white/90 leading-relaxed mb-3">Volume tracks how aggressively capital
+                is circulating. High volume confirms the truth of a price movement.</p>
+
+              <div class="bg-[#1a1a1a] p-2 border border-error-container/30 mb-2">
+                <span class="font-headline font-bold text-[10px] text-error-container uppercase block mb-0.5">WHEN TO BE
+                  SCARED</span>
+                <span class="font-body text-[11px] text-white/70">High volume + Prices Crashing = Panic capitulation and
+                  systemic sell-offs.</span>
+              </div>
+
+              <div class="bg-[#1a1a1a] p-2 border border-[#cafd00]/30">
+                <span class="font-headline font-bold text-[10px] text-[#cafd00] uppercase block mb-0.5">WHEN TO BE
+                  EXCITED</span>
+                <span class="font-body text-[11px] text-white/70">High volume + Prices Rising = Genuine accumulation and
+                  institutional FOMO.</span>
+              </div>
+            </div>
           </div>
           <div>
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Market Sentiment</p>
-            <p class="font-headline font-black text-2xl text-primary">AGGRESSIVE</p>
+            <p id="market-sentiment" class="font-headline font-black text-2xl text-[#121212]">--</p>
           </div>
         </div>
       </div>
@@ -181,39 +210,42 @@
         title="Toggle Market View">
         <span class="w-12 h-[2px] bg-[#121212]"></span>
         <h2 id="market-label" class="font-headline font-black text-3xl uppercase tracking-tighter">TOP MOVERS</h2>
-        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 ml-2 hover:bg-[#121212] hover:text-white transition-colors" id="btn-movers">MOVERS</span>
-        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 hover:bg-[#121212] hover:text-white transition-colors" id="btn-gainers">GAINERS</span>
-        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 hover:bg-[#121212] hover:text-white transition-colors" id="btn-losers">LOSERS</span>
+        <span
+          class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 ml-2 hover:bg-[#121212] hover:text-white transition-colors"
+          id="btn-movers">MOVERS</span>
+        <span
+          class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 hover:bg-[#121212] hover:text-white transition-colors"
+          id="btn-gainers">GAINERS</span>
+        <span
+          class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 hover:bg-[#121212] hover:text-white transition-colors"
+          id="btn-losers">LOSERS</span>
       </div>
       <div id="market-list-container" class="space-y-4">
         <!-- JS Hydrated -->
       </div>
-    </section>on>
-    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-      <div id="leverage-banner"
-        class="md:col-span-2 bg-[#121212] p-8 hard-shadow flex flex-col justify-between overflow-hidden relative group cursor-pointer">
-        <div class="relative z-10">
-          <h3 class="text-[#68FD00] font-headline font-black text-4xl tracking-tighter uppercase mb-4 leading-none">
-            Unlock Leverage Trading</h3>
-          <p class="text-white font-body max-w-md mb-8">Take control of the market with our new margin tools. High risk,
-            high reward. Only for the bold.</p>
-          <button id="activate-now-btn"
-            class="bg-white text-[#121212] border-2 border-white px-8 py-4 font-headline font-black uppercase tracking-widest hover:bg-[#68FD00] hover:border-[#68FD00] transition-colors">ACTIVATE_NOW</button>
+    </section>
+    <section class="mb-12">
+      <div id="signals-banner"
+        class="bg-tertiary-container p-8 border-2 border-[#121212] hard-shadow relative group transition-all duration-500 overflow-hidden cursor-default">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 relative z-10">
+          <div>
+            <span class="material-symbols-outlined text-4xl mb-4">rocket_launch</span>
+            <h3 class="font-headline font-black text-3xl uppercase tracking-tighter mb-2">REBEL SIGNALS</h3>
+            <p class="font-body text-sm max-w-xl">Live AI-driven alpha derived from your retirement projection
+              trajectory and active market volatility.</p>
+          </div>
+          <span
+            class="font-headline font-black text-sm uppercase underline decoration-4 underline-offset-4 opacity-50 group-hover:hidden transition-all">HOVER
+            TO DECRYPT</span>
         </div>
+
+        <!-- Hover Expandable Section -->
         <div
-          class="absolute right-0 bottom-0 w-64 h-64 opacity-20 grayscale group-hover:grayscale-0 transition-all duration-500">
-          <img alt="Leverage Graphic" class="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4_cCLr1n3l7Ze5ln2MnO2gfpkrjawPOpmGlcNhKmZI3jXSUuQ8l00t-CfeFFsqk5kBf1EmtWnW_Q0HIqI2siqUJDlWlwxMqYLQ1bkodv6jsQrFqqa4-5N5LNOSzZKMMmHfMUucVdna_EQGhOLBgzRBoC9rEYEUTNhLuF1VMEZzCd8B3CUINoBMgxq0odR_GU2GPA8bhZ4S2B14lePPzcrYMMVm9FK982_Kpd9XIflosQW7yTp8zjwID6LCYrnR02J6_PQuWMFsBWm" />
+          class="max-h-0 opacity-0 group-hover:max-h-[600px] group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] mt-0 group-hover:mt-8">
+          <div class="border-t-2 border-[#121212] pt-8 grid grid-cols-1 md:grid-cols-2 gap-8" id="dynamic-signals">
+            <p class="font-headline font-black text-sm uppercase animate-pulse">Syncing neural feed...</p>
+          </div>
         </div>
-      </div>
-      <div id="signals-banner" class="bg-tertiary-container p-8 border-2 border-[#121212] hard-shadow cursor-pointer">
-        <span class="material-symbols-outlined text-4xl mb-4" data-icon="rocket_launch">rocket_launch</span>
-        <h3 class="font-headline font-black text-2xl uppercase tracking-tighter mb-4">REBEL SIGNALS</h3>
-        <p class="font-body text-sm mb-6">AI-driven market insights delivered directly to your terminal. No noise, just
-          alpha.</p>
-        <a id="learn-more-link"
-          class="font-headline font-black text-sm uppercase underline decoration-4 underline-offset-4 cursor-pointer">Learn
-          More</a>
       </div>
     </section>
   </main>
@@ -364,7 +396,7 @@
         const amt = Math.floor(parseFloat(amountInput.value) || 0);
         if (amt < 50) { showToast('Minimum investment is 50 ZENS', 'error'); return; }
         if (amt > currentZensBalance) { showToast('Insufficient ZENS Balance. Please add money.', 'error'); return; }
-        
+
         // Disable button to prevent double-click
         confirmBtn.disabled = true;
         confirmBtn.style.opacity = '0.5';
@@ -372,7 +404,7 @@
 
         try {
           const result = await futuraApi.zens.spend(amt);
-          
+
           if (result.success) {
             // Update UI Nav Balance immediately
             const navBalance = document.getElementById('nav-zens-balance');
@@ -382,7 +414,16 @@
             const holdings = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
             holdings.push({ ticker, companyName: name, amount: amt, price, date: new Date().toISOString() });
             localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
-            
+
+            // Log as contribution to increment streak (saving)
+            try {
+              await futuraApi.contributions.create({
+                amount: Math.round(amt / 10),
+                contribution_date: new Date().toISOString().split('T')[0],
+                note: '[MARKET_INVESTMENT] ' + ticker
+              });
+            } catch (e) { console.error('Silent streak log failed', e); }
+
             ov.remove();
             showToast(`${amt.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated.`, 'success');
           } else {
@@ -399,82 +440,79 @@
     }
 
 
-    // ── Leverage Trading Modal ────────────────────────────────────────────────
-    function openLeverageModal() {
-      const score = parseFloat(localStorage.getItem('blindnessScore') || '0.5');
-      createOverlay(`
-      <div style="background:#fff;border:3px solid #121212;box-shadow:8px 8px 0 #121212;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;animation:slideUp .2s ease;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 24px 0;">
-          <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:-.01em;">LEVERAGE TRADING — EDUCATIONAL OVERVIEW</h2>
-          <button onclick="this.closest('div[style]').parentElement.parentElement.remove()" style="background:none;border:none;font-size:28px;cursor:pointer;font-weight:900;line-height:1;">×</button>
-        </div>
-        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:12px;color:#767777;">This feature is for demonstration purposes only. No real money is involved.</p>
-        <div style="padding:0 24px 24px;display:flex;flex-direction:column;gap:16px;">
-          <div style="border:2px solid #e0e0e0;padding:16px;">
-            <h3 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;margin-bottom:8px;">What is Leverage?</h3>
-            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;">Leverage lets you control a larger investment position with a smaller amount of capital. With 5× leverage, ₹10,000 controls ₹50,000 worth of assets.</p>
-          </div>
-          <div style="border:2px solid #b02500;padding:16px;background:#fff8f7;">
-            <h3 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;margin-bottom:8px;color:#b02500;">⚠ Risk Warning</h3>
-            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;">Leverage amplifies both gains AND losses. A 20% market drop with 5× leverage means a 100% loss of your capital. Retirement funds should <strong>NEVER</strong> use leverage.</p>
-          </div>
-          <div style="border:2px solid #e0e0e0;padding:16px;">
-            <h3 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;margin-bottom:8px;">Why This Matters For Retirement</h3>
-            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;">Gen Z investors chasing leveraged returns are 3× more likely to have a Retirement Blindness score below 30%. Long-term compounding in index funds outperforms leveraged trading for 94% of retail investors over 20 years.</p>
-          </div>
-          <div style="border:2px solid #68FD00;background:#f9ffe0;padding:16px;">
-            <p style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;">YOUR RETIREMENT AWARENESS SCORE: ${Math.round(score * 100)}%</p>
-            <p style="font-family:'Inter',sans-serif;font-size:12px;margin-top:6px;">Recommended action: Increase SIP before exploring leverage.</p>
-          </div>
-          <button onclick="this.closest('div[style]').parentElement.parentElement.remove();window.location.href='dashboard_digital_rebel_desktop.html';"
-            style="background:#68FD00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
-            GO BACK TO MY PROJECTIONS</button>
-        </div>
-      </div>`);
-    }
+    // Leverage & Signals Modals Removed. Replaced with dynamic hover pipeline.
+    async function hydrateSignals() {
+      const container = document.getElementById('dynamic-signals');
+      if (!container) return;
 
-    // ── Rebel Signals Bottom Sheet ────────────────────────────────────────────
-    function openSignalsSheet() {
-      const sheet = document.createElement('div');
-      sheet.style.cssText = 'position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;background:rgba(18,18,18,.6);';
-      sheet.innerHTML = `
-      <div style="background:#fff;border:3px solid #121212;border-bottom:none;box-shadow:0 -8px 0 #121212;width:100%;max-width:720px;max-height:85vh;overflow-y:auto;padding:24px;animation:slideUp .25s ease;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-          <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;">REBEL SIGNALS — HOW IT WORKS</h2>
-          <button onclick="this.closest('div[style]').parentElement.remove()" style="background:none;border:none;font-size:28px;cursor:pointer;font-weight:900;">×</button>
-        </div>
-        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#5a5a5a;margin-bottom:20px;">AI-generated market observations based on price momentum, volume spikes, and sentiment shifts.</p>
-        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
-          <div style="border:2px solid #121212;padding:14px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-              <span style="background:#4caf50;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">MOMENTUM UP</span>
-              <span style="background:#e8f5e9;border:1.5px solid #4caf50;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#4caf50;">HIGH CONFIDENCE</span>
+      try {
+        const topGainer = [...marketDataSnapshot].sort((a, b) => b.change - a.change)[0];
+        const topLoser = [...marketDataSnapshot].sort((a, b) => a.change - b.change)[0];
+
+        let currentBalance = parseInt(document.getElementById('nav-zens-balance')?.textContent?.replace(/,/g, '') || '0', 10);
+        if (isNaN(currentBalance)) currentBalance = 0;
+
+        const monthlyInv = Math.max(100, Math.floor(currentBalance * 0.1));
+
+        let cAge = parseInt(localStorage.getItem('userAge'), 10);
+        if (isNaN(cAge) || cAge < 18) cAge = 25;
+
+        let rAge = parseInt(localStorage.getItem('userRetirementAge'), 10);
+        if (isNaN(rAge) || rAge < 40) rAge = 60;
+
+        const payload = {
+          currentAge: cAge,
+          retirementAge: rAge,
+          monthlyIncome: 50000,
+          monthlyExpense: 20000,
+          currentSavings: currentBalance,
+          monthlyInvestment: monthlyInv,
+          returnRate: 0.15
+        };
+
+        const proj = await futuraApi.projection.calculate(payload);
+
+        let projectionBlock = '';
+        if (proj.result) {
+          projectionBlock = `
+            <div style="border:2px solid #121212;padding:14px;background:#fff;height:100%;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <span style="background:#a400a4;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">COMPOUNDING ALPHA</span>
+                <span style="background:#fce4fc;border:1.5px solid #a400a4;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#a400a4;">LINKED TO YOUR PLAN</span>
+              </div>
+              <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;">If you direct 10% of your current liquid ZENS (${monthlyInv} ZENS/mo) into high-volatility assets like <strong>${topGainer.ticker}</strong> averaging 15% YOY, your corpus could violently scale to <strong>🪙 ${Math.floor(proj.result.totalCorpus).toLocaleString('en-US')}</strong> by age ${payload.retirementAge}.</p>
             </div>
-            <p style="font-family:'Inter',sans-serif;font-size:13px;">NVDA showing strong institutional buying. +22.1% in 24h. Volume 3× above 30-day average.</p>
-          </div>
-          <div style="border:2px solid #121212;padding:14px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-              <span style="background:#ff8800;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">CAUTION</span>
-              <span style="background:#fff3cd;border:1.5px solid #ff8800;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#ff8800;">MODERATE CONFIDENCE</span>
+          `;
+        }
+
+        container.innerHTML = `
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <div style="border:2px solid #121212;padding:14px;background:#fff;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <span style="background:#4caf50;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">LONG MOMENTUM</span>
+                <span style="background:#e8f5e9;border:1.5px solid #4caf50;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#4caf50;">HIGH CONFIDENCE</span>
+              </div>
+              <p style="font-family:'Inter',sans-serif;font-size:13px;"><strong>${topGainer.ticker}</strong> is displaying violent upward action (+${topGainer.change}%). Algorithmic sentiment suggests heavy institutional backstopping.</p>
             </div>
-            <p style="font-family:'Inter',sans-serif;font-size:13px;">AAPL declining on low volume. Potential support at $185. Watch for reversal.</p>
-          </div>
-          <div style="border:2px solid #121212;padding:14px;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-              <span style="background:#a400a4;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">RETIREMENT RELEVANCE</span>
-              <span style="background:#fce4fc;border:1.5px solid #a400a4;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#a400a4;">LINKED TO YOUR PLAN</span>
+            
+            <div style="border:2px solid #121212;padding:14px;background:#fff;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+                <span style="background:#ff8800;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">CAUTION</span>
+                <span style="background:#fff3cd;border:1.5px solid #ff8800;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#ff8800;">MODERATE CONFIDENCE</span>
+              </div>
+              <p style="font-family:'Inter',sans-serif;font-size:13px;"><strong>${topLoser.ticker}</strong> collapsed by ${topLoser.change}% in 24h. We recommend rotating out of this asset immediately before further degradation.</p>
             </div>
-            <p style="font-family:'Inter',sans-serif;font-size:13px;">Index funds tracking NIFTY 50 up 1.2% this week. Your SIP is benefiting. Projected corpus increased by ₹18,000.</p>
           </div>
-        </div>
-        <button onclick="this.closest('div[style]').parentElement.remove();window.location.href='dashboard_digital_rebel_desktop.html';"
-          style="width:100%;background:#68FD00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
-          VIEW MY DASHBOARD</button>
-      </div>`;
-      document.body.appendChild(sheet);
-      sheet.addEventListener('click', e => { if (e.target === sheet) sheet.remove(); });
-      document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { sheet.remove(); document.removeEventListener('keydown', esc); } });
+          <div style="display:flex;flex-direction:column;justify-content:stretch;">
+            ${projectionBlock}
+          </div>
+        `;
+      } catch (err) {
+        console.error('Neural Net Error:', err);
+        container.innerHTML = `<p class="text-error font-headline font-bold text-sm">Failed to connect to Neural Net: ${err.message || 'Unknown error'}</p>`;
+      }
     }
+    // Old signals modal logic fully stripped
 
     // ── Tooltip helper ────────────────────────────────────────────────────────
     function addTooltip(el, text) {
@@ -511,9 +549,32 @@
     // Simulate realistic 24h changes
     const marketDataSnapshot = ACTIVE_TICKERS.map(t => {
       // Randomize change between -8% and +12%
-      const swing = (Math.random() * 20) - 8; 
+      const swing = (Math.random() * 20) - 8;
       const currentPrice = Math.round(t.basePrice * (1 + (swing / 100)));
       return { ...t, price: currentPrice, change: parseFloat(swing.toFixed(1)) };
+    });
+
+    // Calculate dynamic global volume & sentiment
+    const totalChange = marketDataSnapshot.reduce((sum, t) => sum + t.change, 0);
+    const avgChange = totalChange / marketDataSnapshot.length;
+
+    let sentimentText = 'NEUTRAL';
+    let sentimentColor = 'text-[#767777]';
+    if (avgChange > 2) { sentimentText = 'HYPER-BULLISH'; sentimentColor = 'text-[#05472A]'; }
+    else if (avgChange > 0) { sentimentText = 'BULLISH'; sentimentColor = 'text-[#0B6623]'; }
+    else if (avgChange < -2) { sentimentText = 'BLOODBATH'; sentimentColor = '#8D021F'; }
+    else if (avgChange < 0) { sentimentText = 'BEARISH'; sentimentColor = 'text-error-container'; }
+
+    // Tie volume variance to sentiment volatility
+    const baseVolumeM = 1250;
+    const volVolatility = Math.abs(avgChange) * 150;
+    const currentVol = Math.floor(baseVolumeM + volVolatility + (Math.random() * 100));
+
+    // Update DOM lazily
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('market-sentiment').textContent = sentimentText;
+      document.getElementById('market-sentiment').className = `font-headline font-black text-2xl uppercase ${sentimentColor}`;
+      document.getElementById('global-volume').textContent = `🪙 ${currentVol}M`;
     });
 
     let currentMarketMode = 'movers'; // movers | gainers | losers
@@ -539,7 +600,7 @@
       // Update button styling
       ['movers', 'gainers', 'losers'].forEach(mode => {
         const btn = document.getElementById(`btn-${mode}`);
-        if(btn) {
+        if (btn) {
           if (mode === currentMarketMode) {
             btn.className = "font-headline font-bold text-xs text-white bg-[#121212] border border-[#121212] px-2 py-0.5 ml-2";
           } else {
@@ -560,11 +621,11 @@
         const changeColor = isUp ? 'text-[#68FD00]' : 'text-error-container';
         const sparkColor = isUp ? '#68FD00' : '#b02500';
         const points = isUp ? '0,35 20,25 40,30 60,10 80,15 100,5' : '0,5 20,15 40,10 60,30 80,25 100,38';
-        
+
         const el = document.createElement('div');
         el.className = 'stock-row bg-white border-2 border-[transparent] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-all cursor-pointer neo-shadow';
         el.dataset.ticker = d.ticker;
-        
+
         el.innerHTML = `
           <div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
             ${d.ticker}
@@ -586,7 +647,7 @@
             BUY
           </button>
         `;
-        
+
         container.appendChild(el);
 
         // Click row to view details
@@ -613,11 +674,10 @@
       const session = await requireAuth();
       if (!session) return;
 
-      // Banner events
-      document.getElementById('leverage-banner')?.addEventListener('click', openLeverageModal);
-      document.getElementById('activate-now-btn')?.addEventListener('click', e => { e.stopPropagation(); openLeverageModal(); });
-      document.getElementById('signals-banner')?.addEventListener('click', openSignalsSheet);
-      document.getElementById('learn-more-link')?.addEventListener('click', e => { e.stopPropagation(); openSignalsSheet(); });
+      // Remove old modal listeners
+
+      // Hydrate Signals dynamically upon load
+      hydrateSignals();
 
       // Initialize Market List
       renderMarketList();

@@ -55,11 +55,19 @@ const futuraApi = {
         method: 'POST',
         body: JSON.stringify({ amount })
       }),
+    add: (amount) =>
+      apiFetch('/api/zens/credit', {
+        method: 'POST',
+        body: JSON.stringify({ amount })
+      }),
     balance: () => apiFetch('/api/zens/balance')
   },
   subscriptions: {
-    purchasePro: () =>
-      apiFetch('/api/subscriptions/purchase-pro', { method: 'POST' })
+    purchasePro: (razorpay_payment_id) =>
+      apiFetch('/api/subscriptions/purchase-pro', { 
+        method: 'POST',
+        body: JSON.stringify({ razorpay_payment_id })
+      })
   }
 };
 
@@ -165,19 +173,14 @@ function initiateRazorpayPurchase(amountINR, zensExpected, onSuccess) {
   rzp.open();
 }
 
-// Purchase Pro with Zens (500 Zens → 30 days)
-async function buyPro(onSuccess) {
+// Purchase Elite / Pro using Razorpay Payment ID
+async function buyPro(razorpay_payment_id) {
   try {
-    const result = await futuraApi.subscriptions.purchasePro();
-    if (onSuccess) onSuccess(result);
+    const result = await futuraApi.subscriptions.purchasePro(razorpay_payment_id);
     return result;
   } catch (err) {
     const msg = err.message || '';
-    if (msg.includes('insufficient_zens')) {
-      alert('Not enough Zens! Buy more first.');
-    } else {
-      alert('Failed to purchase Pro: ' + msg);
-    }
+    alert('Failed to upgrade to Elite: ' + msg);
     throw err;
   }
 }

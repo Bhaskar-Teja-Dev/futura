@@ -1,33 +1,51 @@
 import { Hono } from 'hono'
+import { z } from 'zod'
+import { zValidator } from '@hono/zod-validator'
 import { getSupabase } from '../lib/supabase'
 import type { Env, Variables } from '../types'
 
 const router = new Hono<{ Bindings: Env; Variables: Variables }>()
 
-const PRO_COST_ZENS = 500
-const PRO_DURATION_DAYS = 30
+const purchaseSchema = z.object({
+  razorpay_payment_id: z.string().min(1)
+})
 
-router.post('/purchase-pro', async (c) => {
+const PRO_PRICE_PAISE = 19900 // 199 INR
+
+router.post('/purchase-pro', zValidator('json', purchaseSchema), async (c) => {
   const userId = c.get('userId')
-  const supabase = getSupabase(c.env)
+  const { razorpay_payment_id } = c.req.valid('json')
 
-  // Call the atomic database function
-  const { data, error } = await supabase.rpc('purchase_pro_with_zens', {
-    p_user_id: userId,
-    p_cost: PRO_COST_ZENS,
-    p_days: PRO_DURATION_DAYS
-  })
+  const credentials = btoa(`${c.env.RAZORPAY_KEY_ID}:${c.env.RAZORPAY_KEY_SECRET}`)
+  const rzpRes = await fetch(
+    `https://api.razorpay.com/v1/payments/${encodeURIComponent(razorpay_payment_id)}`,
+    {
+      method: 'GET',
+      headers: { Authorization: `Basic ${credentials}` }
+    }
+  )
 
-  if (error) {
-    // The DB function raises an exception if insufficient Zens
-    const isInsufficientZens = error.message?.includes('Insufficient')
-    return c.json(
-      { error: isInsufficientZens ? 'insufficient_zens' : error.message },
-      isInsufficientZens ? 400 : 500
+  if (!rzpRes.ok) return c.json({ error: 'razorpay_verification_failed' }, 400)
+
+  let payment = (await rzpRes.json()) as { status: string; amount: number }
+
+  if (payment.status === 'authorized') {
+    const captureRes = await fetch(
+      `https://api.razorpay.com/v1/payments/${encodeURIComponent(razorpay_payment_id)}/capture`,
+      {
+        method: 'POST',
+        headers: { Authorization: `Basic ${credentials}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: payment.amount, currency: "INR" })
+      }
     )
+    if (captureRes.ok) payment = (await captureRes.json()) as any
   }
 
-  return c.json({ success: true, result: data })
+  if (payment.status !== 'captured') return c.json({ error: 'payment_not_captured' }, 400)
+  if (payment.amount < PRO_PRICE_PAISE) return c.json({ error: 'insufficient_payment_amount' }, 400)
+
+  // Successfully paid 199 INR for Elite Pro
+  return c.json({ success: true, message: 'Welcome to the Elite' })
 })
 
 export { router as subscriptionsRouter }

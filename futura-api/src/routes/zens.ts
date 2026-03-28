@@ -143,4 +143,37 @@ router.post('/spend', zValidator('json', spendSchema), async (c) => {
   return c.json({ success: true, zens: newBalance })
 })
 
+const creditSchema = z.object({
+  amount: z.number().positive().int() // Zens to credit
+})
+
+router.post('/credit', zValidator('json', creditSchema), async (c) => {
+  const userId = c.get('userId')
+  const { amount } = c.req.valid('json')
+
+  const supabase = getSupabase(c.env)
+  
+  const { data: profile, error: fetchError } = await supabase
+    .from('profiles')
+    .select('zens')
+    .eq('id', userId)
+    .single()
+
+  if (fetchError || !profile) {
+    return c.json({ error: 'profile_not_found' }, 404)
+  }
+
+  const newBalance = profile.zens + amount
+  const { error: updateError } = await supabase
+    .from('profiles')
+    .update({ zens: newBalance })
+    .eq('id', userId)
+
+  if (updateError) {
+    return c.json({ error: updateError.message }, 500)
+  }
+
+  return c.json({ success: true, zens: newBalance })
+})
+
 export { router as zensRouter }

@@ -136,12 +136,15 @@
     </div>
     <div class="flex items-center gap-4">
       <!-- ZENS BALANCE PILL -->
-      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-inverse-surface text-primary-fixed border-2 border-inverse-surface px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
+      <div id="nav-zens-pill"
+        class="hidden md:flex items-center gap-2 bg-inverse-surface text-primary-fixed border-2 border-inverse-surface px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
         <span>🪙</span>
         <span id="nav-zens-balance">--</span>
       </div>
       <!-- ADD MONEY BTN -->
-      <button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })" class="hidden md:block bg-primary-fixed text-inverse-surface border-2 border-inverse-surface font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors hard-shadow-sm active:translate-y-1 active:shadow-none">
+      <button
+        onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })"
+        class="hidden md:block bg-primary-fixed text-inverse-surface border-2 border-inverse-surface font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors hard-shadow-sm active:translate-y-1 active:shadow-none">
         ADD MONEY
       </button>
 
@@ -150,8 +153,7 @@
       <a href="settings_digital_rebel_desktop.html"
         class="material-symbols-outlined text-inverse-surface hover:bg-primary-fixed p-1 transition-all inline-flex items-center justify-center">settings</a>
       <div class="w-10 h-10 border-2 border-inverse-surface overflow-hidden cursor-pointer" id="nav-avatar">
-        <img alt="User Profile" class="w-full h-full object-cover"
-          data-alt="extreme close up portrait of a man"
+        <img alt="User Profile" class="w-full h-full object-cover" data-alt="extreme close up portrait of a man"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaeB9JbGMibQcx_8_SkdFDJOz2ngIB9rFkZXvaQ17PcHKnBmAkAIfqNkACX5HyrPzNA9fP62VKAg8EQUIRDhjmzFiqpv1aiNfhDcI19_JIfSj7uHnzqy0L-9tr55IfEzB9QuyVGTMZL2t1nTfq73fQYOZpI_lyN0Bzmh64wUKNZvvLOAsc3RZ-aurEzvqya2bR3RlInSZtQqhT2ffZI16HCPWrv4E7bcJlR3Jh_O9wcJ2g0AhQNWq02r-uNt2Lz-yOtZIbcBxCRpl3" />
       </div>
     </div>
@@ -178,22 +180,37 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
       <!-- Total Value Bento Card -->
       <div class="lg:col-span-2 bg-inverse-surface p-8 border-2 border-inverse-surface flex flex-col justify-between">
-        <p class="font-headline font-bold text-primary-fixed uppercase tracking-[0.3em] text-xs mb-4">TOTAL_VALUE (ZENS EQ)</p>
+        <p class="font-headline font-bold text-primary-fixed uppercase tracking-[0.3em] text-xs mb-4">TOTAL_VALUE (ZENS
+          EQ)</p>
         <div>
           <span id="total-warchest"
             class="font-headline text-7xl md:text-9xl font-black text-primary-fixed leading-none lime-glow">🪙 0</span>
-          <div class="flex items-center gap-2 mt-4 text-primary-fixed">
-            <span class="material-symbols-outlined">trending_up</span>
-            <span class="font-headline font-bold">+12.4% THIS_MONTH</span>
+          <div class="flex items-center gap-2 mt-4 text-primary-fixed" id="total-change-container">
+            <span class="material-symbols-outlined" id="total-change-icon">trending_up</span>
+            <span class="font-headline font-bold" id="total-change-text">--% THIS_MONTH</span>
           </div>
         </div>
       </div>
       <!-- Secondary Info Boxes -->
       <div class="flex flex-col gap-6">
-        <div class="bg-white p-6 border-2 border-inverse-surface hard-shadow-sm flex-1">
-          <p class="font-headline font-bold text-on-surface-variant uppercase tracking-widest text-xs mb-2">LIQUID_CASH
-          </p>
-          <p class="font-headline text-3xl font-black text-inverse-surface">$42,000.00</p>
+        <div class="bg-white p-6 border-2 border-inverse-surface hard-shadow-sm flex-1 relative group"
+          id="liquid-cash-box">
+          <div class="flex justify-between items-center mb-2">
+            <p class="font-headline font-bold text-on-surface-variant uppercase tracking-widest text-xs">LIQUID_CASH</p>
+            <button onclick="editLiquidCash()"
+              class="material-symbols-outlined text-sm cursor-pointer hover:text-primary-fixed transition-colors"
+              title="Edit Liquid Cash">edit</button>
+          </div>
+          <p id="liquid-cash-val" class="font-headline text-3xl font-black text-inverse-surface">🪙 0</p>
+
+          <!-- Tooltip -->
+          <div id="liquid-cash-tooltip"
+            class="absolute -top-12 left-0 w-max bg-primary-fixed text-inverse-surface px-4 py-2 font-headline font-black text-xs uppercase tracking-widest shadow-[4px_4px_0px_0px_#121212] border-2 border-[#121212] opacity-0 invisible transition-all duration-300 pointer-events-none z-50">
+            Edit your liquid cash reserves
+            <div
+              class="absolute -bottom-2 left-6 w-4 h-4 bg-primary-fixed border-b-2 border-r-2 border-[#121212] rotate-45 pointer-events-none">
+            </div>
+          </div>
         </div>
         <div class="bg-white p-6 border-2 border-inverse-surface hard-shadow-sm flex-1">
           <p class="font-headline font-bold text-on-surface-variant uppercase tracking-widest text-xs mb-2">ASSET_COUNT
@@ -283,10 +300,15 @@
       // 1. Load Portfolio Holdings (ZENS Stocks)
       let portfolioZensSubtotal = 0;
       let assetUnitsCount = 0;
+
+      // Tracking variables for dynamic momentum
+      let totalAmountInvested = 0;
+      let totalWeightedReturn = 0;
+
       try {
         const holdingsStr = localStorage.getItem('portfolioHoldings') || '[]';
         const holdings = JSON.parse(holdingsStr);
-        
+
         assetUnitsCount += holdings.length;
 
         if (holdings.length === 0) {
@@ -298,8 +320,11 @@
             portfolioZensSubtotal += amountInvested;
 
             // Mock an active return for visual aesthetic
-            const swing = (Math.random() * 8) - 2; 
+            const swing = (Math.random() * 8) - 2;
             const isUp = swing >= 0;
+
+            totalAmountInvested += amountInvested;
+            totalWeightedReturn += (amountInvested * swing);
 
             const card = document.createElement('div');
             card.className = 'bg-white border-2 border-inverse-surface p-6 flex flex-col md:flex-row justify-between items-center gap-6 hover:bg-surface-container-low transition-colors';
@@ -317,10 +342,29 @@
                 <span class="font-headline font-black text-2xl text-inverse-surface">🪙 ${amountInvested.toLocaleString('en-US')}</span>
                 <span class="${isUp ? 'text-primary' : 'text-error'} font-bold text-xs uppercase tracking-widest">${isUp ? '+' : ''}${swing.toFixed(1)}% RETURN</span>
               </div>
-              <button onclick="alert('Sell logic coming soon for ${h.ticker}!')" class="w-full md:w-auto px-8 py-3 bg-inverse-surface text-primary-fixed font-headline font-black uppercase text-xs hard-shadow-sm hover:bg-error hover:text-white transition-all">SELL</button>
+              <button onclick="window.sellAsset(${index}, '${h.ticker}', ${amountInvested}, ${swing})" class="w-full md:w-auto px-8 py-3 bg-inverse-surface text-primary-fixed font-headline font-black uppercase text-xs hard-shadow-sm hover:bg-error hover:text-white transition-all">SELL</button>
             `;
             stocksList.appendChild(card);
           });
+        }
+
+        // Compute and inject dynamic momentum
+        if (totalAmountInvested > 0) {
+          const avgSwing = totalWeightedReturn / totalAmountInvested;
+          const isNetUp = avgSwing >= 0;
+          const changeContainer = document.getElementById('total-change-container');
+          const changeIcon = document.getElementById('total-change-icon');
+          const changeText = document.getElementById('total-change-text');
+
+          if (isNetUp) {
+            changeContainer.className = "flex items-center gap-2 mt-4 text-primary-fixed";
+            changeIcon.textContent = "trending_up";
+            changeText.textContent = "+" + avgSwing.toFixed(2) + "% THIS_MONTH";
+          } else {
+            changeContainer.className = "flex items-center gap-2 mt-4 text-error";
+            changeIcon.textContent = "trending_down";
+            changeText.textContent = avgSwing.toFixed(2) + "% THIS_MONTH";
+          }
         }
       } catch (err) {
         console.error('Failed to parse portfolio holdings:', err);
@@ -333,8 +377,7 @@
         if (res.error) throw new Error(res.error);
 
         const contributions = res.contributions || [];
-        assetUnitsCount += contributions.length;
-
+        
         grid.innerHTML = ''; // clear
 
         if (contributions.length === 0) {
@@ -352,6 +395,8 @@
           let assetName = 'UNCLASSIFIED_ENTRY';
 
           if (c.note) {
+            if (c.note.startsWith('[MARKET_INVESTMENT]')) return; // Filter out automated market logs
+            
             const match = c.note.match(/^\[(.*?)\]\s*(.*)$/);
             if (match) {
               typeBadge = match[1];
@@ -361,6 +406,7 @@
             }
           }
 
+          assetUnitsCount++; // Increment only for valid displayed manual entries
           const card = document.createElement('div');
           card.className = 'bg-white border-2 border-inverse-surface p-8 relative overflow-hidden group';
           card.innerHTML = `
@@ -390,14 +436,241 @@
         grid.innerHTML = '<p class="text-error uppercase p-4 text-xs font-bold border-2 border-error">DATA_FETCH_ERROR</p>';
       }
 
-      // 3. Final Computation & UI Update
+      // 3. Handle Liquid Cash
+      let liquidZens = parseInt(localStorage.getItem('trackedLiquidCash') || '0', 10);
+      if (isNaN(liquidZens)) liquidZens = 0;
+
+      const lcValEl = document.getElementById('liquid-cash-val');
+      if (lcValEl) lcValEl.textContent = '🪙 ' + liquidZens.toLocaleString('en-US');
+
+      // 4. Fetch Wallet Balance & Final Computation
+      let walletZens = 0;
+      try {
+        const balRes = await futuraApi.zens.balance();
+        walletZens = balRes.zens || 0;
+      } catch (e) { console.error('Wallet fetch failed', e); }
+
       countEl.textContent = `${assetUnitsCount} UNITS`;
+
+      const totalWarchestZens = portfolioZensSubtotal + manualZensSubtotal + liquidZens + walletZens;
+
+      // Custom Count-Up and Scale Animation
+      const duration = 1200;
+      const startTime = performance.now();
+
+      totalEl.style.display = 'inline-block';
+      totalEl.style.transformOrigin = 'left center';
+      totalEl.style.willChange = 'transform';
+
+      function animateWarchest(time) {
+        let progress = (time - startTime) / duration;
+        if (progress > 1) progress = 1;
+
+        // Exp easing for numbers
+        const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+        const currentVal = Math.floor(totalWarchestZens * ease);
+
+        totalEl.textContent = '🪙 ' + currentVal.toLocaleString('en-US');
+
+        // Scale easing: Up to 1.15 in first 30%, back to 1 over remaining 70%
+        if (progress < 0.3) {
+          const s = 1 + (progress / 0.3) * 0.15;
+          totalEl.style.transform = `scale(${s})`;
+        } else {
+          const remaining = (progress - 0.3) / 0.7;
+          const s = 1.15 - (remaining * 0.15);
+          totalEl.style.transform = `scale(${s})`;
+        }
+
+        if (progress < 1) {
+          requestAnimationFrame(animateWarchest);
+        } else {
+          totalEl.style.transform = 'scale(1)';
+        }
+      }
+      requestAnimationFrame(animateWarchest);
+
+      // Edit Liquid Cash Binding
+      window.editLiquidCash = () => {
+        const current = localStorage.getItem('trackedLiquidCash') || '0';
+
+        document.getElementById('custom-liquid-modal')?.remove();
+        const modal = document.createElement('div');
+        modal.id = 'custom-liquid-modal';
+        modal.className = 'fixed inset-0 z-[1000] flex items-center justify-center bg-[#121212]/80 backdrop-blur-sm px-4';
+        modal.innerHTML = `
+          <div class="bg-white border-4 border-[#121212] p-8 w-full max-w-md shadow-[12px_12px_0px_0px_#cafd00] relative">
+            <button class="absolute top-4 right-4 material-symbols-outlined text-3xl font-black hover:text-error transition-colors" onclick="document.getElementById('custom-liquid-modal').remove()">close</button>
+            <h2 class="font-headline font-black text-3xl uppercase tracking-tighter text-[#121212] mb-2">UPDATE RESERVES</h2>
+            <p class="font-body text-sm font-bold text-on-surface-variant uppercase tracking-widest mb-6">Input uninvested liquid ZENS</p>
+            
+            <div class="relative mb-6">
+               <span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-black text-2xl text-[#121212]">🪙</span>
+               <input type="number" id="liquid-input-field" class="w-full bg-surface-container-low border-2 border-[#121212] focus:border-primary-fixed focus:bg-white focus:outline-none p-4 pl-12 font-headline font-black text-3xl text-[#121212] transition-colors" value="${current}" />
+            </div>
+            
+            <button id="liquid-save-btn" class="w-full bg-[#cafd00] text-[#121212] border-2 border-[#121212] p-4 font-headline font-black text-xl uppercase tracking-widest hover:bg-[#121212] hover:text-[#cafd00] transition-colors active:translate-y-1 shadow-[4px_4px_0px_0px_#121212] active:shadow-none">SAVE OVERRIDE</button>
+          </div>
+        `;
+        document.body.appendChild(modal);
+
+        setTimeout(() => document.getElementById('liquid-input-field')?.focus(), 50);
+
+        document.getElementById('liquid-save-btn').onclick = () => {
+          const raw = document.getElementById('liquid-input-field').value;
+          if (raw !== "" && !isNaN(parseInt(raw, 10))) {
+            localStorage.setItem('trackedLiquidCash', parseInt(raw, 10));
+            location.reload();
+          }
+        };
+
+        document.getElementById('liquid-input-field').addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') document.getElementById('liquid-save-btn').click();
+        });
+
+        document.addEventListener('keydown', function esc(e) {
+          if (e.key === 'Escape') {
+            document.getElementById('custom-liquid-modal')?.remove();
+            document.removeEventListener('keydown', esc);
+          }
+        });
+      };
+
+      // Tooltip visibility loop if 0
+      if (liquidZens === 0) {
+        const box = document.getElementById('liquid-cash-box');
+        const tip = document.getElementById('liquid-cash-tooltip');
+        if (box && tip) {
+          box.addEventListener('mouseenter', () => {
+            if (parseInt(localStorage.getItem('trackedLiquidCash') || '0', 10) === 0) {
+              tip.classList.remove('opacity-0', 'invisible');
+              tip.classList.add('opacity-100', 'visible', 'animate-bounce');
+            }
+          });
+          box.addEventListener('mouseleave', () => {
+            tip.classList.add('opacity-0', 'invisible');
+            tip.classList.remove('opacity-100', 'visible', 'animate-bounce');
+          });
+            // 5. Sell Logic: Pre-Confirmation and Execution Receipt
+    window.sellAsset = (index, ticker, investedStr, swingStr) => {
+      const invested = parseFloat(investedStr);
+      const swing = parseFloat(swingStr);
       
-      const totalWarchestZens = portfolioZensSubtotal + manualZensSubtotal;
-      totalEl.textContent = '🪙 ' + totalWarchestZens.toLocaleString('en-US');
+      const pnl = invested * (swing / 100);
+      const finalProceeds = Math.max(0, Math.floor(invested + pnl));
+      const isProfit = pnl >= 0;
+      const colorHex = isProfit ? '#cafd00' : '#ff3b30'; // neo-green or warning red
+      const textColor = isProfit ? '#121212' : '#ffffff';
+      
+      // Render Pre-Confirmation Modal
+      const modal = document.createElement('div');
+      modal.id = 'sell-confirmation-modal';
+      modal.className = 'fixed inset-0 z-[2000] flex items-center justify-center bg-[#121212]/90 backdrop-blur-md px-4';
+      
+      modal.innerHTML = `
+        <div id="sell-modal-card" class="bg-[#121212] border-4 p-8 w-full max-w-md relative text-white animate-slideUp" style="border-color:${colorHex}; box-shadow: 12px 12px 0px 0px ${colorHex};">
+          <div class="flex items-center gap-4 mb-6 pb-6 border-b-2 border-surface-container-high">
+             <span class="material-symbols-outlined text-5xl" style="color:${colorHex}">help_center</span>
+             <div>
+                <h2 class="font-headline font-black text-3xl uppercase tracking-tighter" style="color:${colorHex}">CONFIRM ACTION</h2>
+                <p class="font-body text-xs font-bold text-on-surface-variant uppercase tracking-widest">SELL ${ticker} PORTFOLIO BLOCK</p>
+             </div>
+          </div>
+          
+          <p class="font-body text-sm mb-6 text-white/80">You are about to liquidate your entire position in <strong class="text-white">${ticker}</strong> and return the proceeds to your primary global warchest.</p>
+          
+          <div class="grid grid-cols-2 gap-4 mb-8">
+             <div class="bg-surface-container-low p-4 border border-surface-container-high">
+               <p class="font-headline font-bold text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">PROCEEDS (EST)</p>
+               <p class="font-headline font-black text-2xl text-white">🪙 ${finalProceeds.toLocaleString('en-US')}</p>
+             </div>
+             <div class="p-4" style="background:${colorHex}1a; border: 1px solid ${colorHex}4d;"> 
+               <p class="font-headline font-bold text-[10px] uppercase tracking-widest mb-1" style="color:${colorHex}">PNL IMPACT</p>
+               <p class="font-headline font-black text-2xl" style="color:${colorHex}">${isProfit ? '+' : ''}${Math.floor(pnl).toLocaleString('en-US')}</p>
+             </div>
+          </div>
+          
+          <div class="flex flex-row-reverse gap-4">
+            <button id="execute-sell-btn" class="flex-[2] border-2 p-4 font-headline font-black text-xl uppercase tracking-widest hover:opacity-80 transition-colors" style="background:${colorHex}; border-color:${colorHex}; color:${textColor}; box-shadow: 4px 4px 0px 0px #ffffff;">EXECUTE</button>
+            <button id="cancel-sell-btn" class="flex-1 border-2 border-surface-container-high p-4 font-headline font-black text-[10px] uppercase tracking-widest hover:bg-surface-container-high transition-colors text-white">CANCEL (ESC)</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
 
-    });
-  </script>
+      // Event handling to cancel
+      const closeModal = () => modal.remove();
+      document.getElementById('cancel-sell-btn').onclick = closeModal;
+      
+      modal.onclick = (e) => {
+         if(e.target === modal) closeModal();
+      };
+
+      const escHandler = (e) => {
+        if (e.key === 'Escape') {
+          closeModal();
+          document.removeEventListener('keydown', escHandler);
+        }
+      };
+      document.addEventListener('keydown', escHandler);
+
+      // Execution Logic
+      document.getElementById('execute-sell-btn').onclick = async () => {
+        const btn = document.getElementById('execute-sell-btn');
+        btn.innerHTML = `<span class="material-symbols-outlined animate-spin align-middle mr-2 text-sm">sync</span> PROCESSING`;
+        btn.disabled = true;
+        document.getElementById('cancel-sell-btn').style.opacity = '0.5';
+        document.getElementById('cancel-sell-btn').style.pointerEvents = 'none';
+        modal.onclick = null; // Disable outside click while processing
+
+        try {
+          const res = await futuraApi.zens.add(finalProceeds);
+          if (res.error) throw new Error(res.error);
+
+          // Strip only the SPECIFIC item from local holdings using the passed index
+          const holdingsStr = localStorage.getItem('portfolioHoldings') || '[]';
+          let holdings = JSON.parse(holdingsStr);
+          holdings.splice(index, 1);
+          localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
+          
+          // Re-render UI block for Receipt
+          const labelText = isProfit ? 'PROFIT SECURED' : 'LOSS REALIZED';
+          const icon = isProfit ? 'check_circle' : 'warning';
+          
+          document.getElementById('sell-modal-card').innerHTML = `
+            <div class="flex items-center gap-4 mb-6 pb-6 border-b-2 border-surface-container-high">
+               <span class="material-symbols-outlined text-5xl" style="color:${colorHex}">${icon}</span>
+               <div>
+                  <h2 class="font-headline font-black text-3xl uppercase tracking-tighter" style="color:${colorHex}">ORDER FILLED</h2>
+                  <p class="font-body text-xs font-bold text-on-surface-variant uppercase tracking-widest">${ticker} LIQUIDATED</p>
+               </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 mb-8">
+               <div class="bg-surface-container-low p-4 border border-surface-container-high">
+                 <p class="font-headline font-bold text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">PROCEEDS (ZENS)</p>
+                 <p class="font-headline font-black text-2xl text-white">🪙 ${finalProceeds.toLocaleString('en-US')}</p>
+               </div>
+               <div class="p-4" style="background:${colorHex}1a; border: 1px solid ${colorHex}4d;"> 
+                 <p class="font-headline font-bold text-[10px] uppercase tracking-widest mb-1" style="color:${colorHex}">${labelText}</p>
+                 <p class="font-headline font-black text-2xl" style="color:${colorHex}">${isProfit ? '+' : ''}${Math.floor(pnl).toLocaleString('en-US')}</p>
+               </div>
+            </div>
+            
+            <button onclick="location.reload()" class="w-full border-2 p-4 font-headline font-black text-xl uppercase tracking-widest hover:opacity-80 transition-colors" style="background:${colorHex}; border-color:${colorHex}; color:${textColor}; box-shadow: 4px 4px 0px 0px #ffffff;">ACKNOWLEDGE</button>
+          `;
+          
+          // Clean up the general esc handler so they must explicitly acknowledge
+          document.removeEventListener('keydown', escHandler);
+
+        } catch (err) {
+          console.error(err);
+          alert("System error processing trade. Order aborted.");
+          closeModal();
+        }
+      };
+    };
+  });
+</script>
 </body>
-
 </html>
