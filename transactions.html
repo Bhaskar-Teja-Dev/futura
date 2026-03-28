@@ -294,7 +294,12 @@
           assetName = c.note;
         }
       }
-      return { ...c, typeBadge, assetName };
+
+      // Conversion rule: $1 USD = 10 ZENS
+      const isLocal = c.id?.startsWith('local-');
+      const zensValue = isLocal ? c.amount : Math.round(c.amount * 10);
+
+      return { ...c, typeBadge, assetName, zensValue };
     }
 
     function normalizeLocalStock(h) {
@@ -314,7 +319,7 @@
         <div class="col-span-3">ASSET_NAME</div>
         <div class="col-span-2">TYPE</div>
         <div class="col-span-2 text-right">QUANTITY</div>
-        <div class="col-span-2 text-right">PRICE_UNIT</div>
+        <div class="col-span-2 text-right">ZENS_VALUE</div>
         <div class="col-span-2 text-right">TOTAL_VALUE</div>
         <div class="col-span-1 text-right">DATE</div>
       </div>`;
@@ -357,12 +362,12 @@
     <p class="font-headline font-black text-lg">1.00</p>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
-    <p class="text-xs font-bold text-outline lg:hidden">PRICE_UNIT</p>
-    <p class="font-headline font-bold text-lg">$${c.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+    <p class="text-xs font-bold text-outline lg:hidden">ZENS_VALUE</p>
+    <p class="font-headline font-bold text-lg">🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
     <p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
-    <p class="font-headline font-black text-lg text-primary-fixed-variant">$${c.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+    <p class="font-headline font-black text-lg text-primary-fixed-variant">🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
 </div>
 <div class="col-span-12 lg:col-span-1 text-right mt-4 lg:mt-0">
     <p class="font-headline font-bold text-xs uppercase text-outline underline">${new Date(c.contribution_date).toLocaleDateString()}</p>
@@ -377,18 +382,31 @@
       if (!container) return;
       container.innerHTML = '';
 
-      const sorted = [...data].sort((a, b) => new Date(a.contribution_date) - new Date(b.contribution_date)).slice(-10);
-      const maxAmount = Math.max(...sorted.map(d => d.amount), 1);
+      // 1. Group by Date
+      const groups = {};
+      data.forEach(c => {
+        const p = parseContribution(c);
+        const day = p.contribution_date;
+        groups[day] = (groups[day] || 0) + p.zensValue;
+      });
 
-      sorted.forEach(d => {
-        const height = (d.amount / maxAmount) * 100;
+      // 2. Sort Chronologically (Past to Present)
+      const sortedDays = Object.keys(groups).sort((a, b) => new Date(a) - new Date(b)).slice(-14);
+      if (sortedDays.length === 0) return;
+
+      const maxDayVal = Math.max(...sortedDays.map(d => groups[d]), 1);
+
+      // 3. Render
+      sortedDays.forEach(day => {
+        const total = groups[day];
+        const height = (total / maxDayVal) * 100;
         const bar = document.createElement('div');
         bar.className = 'flex-1 bg-primary-fixed border-2 border-on-surface neo-shadow relative group hover:bg-inverse-primary transition-all duration-300 ease-out';
-        bar.style.height = '0%'; // Start at 0 for animation
-        setTimeout(() => { bar.style.height = `${height}%`; }, 50); // Animate to target height
+        bar.style.height = '0%';
+        setTimeout(() => { bar.style.height = `${height}%`; }, 50);
         bar.innerHTML = `
-          <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 hidden group-hover:block neo-shadow z-20">$${Math.round(d.amount)}</div>
-          <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase truncate w-full text-center">${new Date(d.contribution_date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</div>
+          <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 hidden group-hover:block neo-shadow z-20 whitespace-nowrap">DAILY_VOL: 🪙 ${Math.round(total)}</div>
+          <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase truncate w-full text-center">${new Date(day).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</div>
         `;
         container.appendChild(bar);
       });
@@ -396,11 +414,11 @@
 
     async function downloadCSV() {
       if (allContributions.length === 0) return;
-      const headers = ['Date', 'Asset', 'Type', 'Amount', 'Source'];
+      const headers = ['Date', 'Asset', 'Type', 'Zens Value', 'USD Amount', 'Source'];
       const rows = allContributions.map(c => {
         const p = parseContribution(c);
         const source = c.id?.startsWith('local-') ? 'Local Portfolio' : 'API Vault';
-        return [new Date(c.contribution_date).toLocaleDateString(), p.assetName, p.typeBadge, c.amount, source];
+        return [new Date(c.contribution_date).toLocaleDateString(), p.assetName, p.typeBadge, p.zensValue, c.amount, source];
       });
       const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -436,20 +454,21 @@
           new Date(b.contribution_date) - new Date(a.contribution_date)
         );
 
-        let totalVolume = 0;
+        let totalZensVolume = 0;
         let buyCount = 0;
         let sellCount = 0;
 
         allContributions.forEach(c => {
-          totalVolume += c.amount;
           const p = parseContribution(c);
+          totalZensVolume += p.zensValue;
           if (p.typeBadge.includes('SELL')) sellCount++;
           else buyCount++;
         });
 
         renderTransactions(allContributions);
 
-        if (totalVolEl) totalVolEl.textContent = `$${totalVolume.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        if (totalVolEl) totalVolEl.textContent = `🪙 ${totalZensVolume.toLocaleString('en-US')}`;
+
         const totalTrades = buyCount + sellCount;
         if (totalTrades > 0) {
           const buyPercent = Math.round((buyCount / totalTrades) * 100);
@@ -457,8 +476,8 @@
           if (buyPressureEl) buyPressureEl.textContent = `${buyPercent}% BUY_PRESSURE`;
           if (sellLiquidityEl) sellLiquidityEl.textContent = `${sellPercent}% SELL_LIQUIDITY`;
         }
-        if (plSnapshotEl && totalVolume > 0) {
-          plSnapshotEl.textContent = `+$${(totalVolume * 0.024).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+        if (plSnapshotEl && totalZensVolume > 0) {
+          plSnapshotEl.textContent = `+🪙 ${(totalZensVolume * 0.024).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
         }
 
         document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -476,13 +495,10 @@
             if (type === 'stocks') {
               filtered = allContributions.filter(c => parseContribution(c).typeBadge.includes('STOCK'));
             } else if (type === 'assets') {
-              // Assets = Everything NOT a stock
               filtered = allContributions.filter(c => !parseContribution(c).typeBadge.includes('STOCK'));
             }
 
             renderTransactions(filtered);
-
-            // If chart view is active, update it instantly
             if (!document.getElementById('chart-view').classList.contains('hidden')) {
               renderChart(filtered);
             }
@@ -506,7 +522,6 @@
           document.getElementById('view-chart-btn').classList.add('bg-primary-fixed');
           document.getElementById('view-list-btn').classList.remove('bg-primary-fixed');
 
-          // Render current active filtered list
           const activeBtn = document.querySelector('.filter-btn.active-filter');
           const type = activeBtn ? activeBtn.id.split('-')[1] : 'all';
           let filtered = allContributions;
