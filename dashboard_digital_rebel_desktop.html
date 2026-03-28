@@ -101,6 +101,101 @@
             background-image: radial-gradient(#d3d5d5 1px, transparent 1px);
             background-size: 20px 20px;
         }
+
+        /* ─── Streak Fire System ─── */
+        @keyframes fireGlow {
+            0%, 100% { filter: drop-shadow(0 0 6px #cafd00) drop-shadow(0 0 12px #cafd0066); }
+            50% { filter: drop-shadow(0 0 14px #cafd00) drop-shadow(0 0 28px #cafd00aa); }
+        }
+
+        @keyframes firePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        @keyframes fireFlicker {
+            0% { opacity: 1; transform: translateY(0) scaleY(1); }
+            25% { opacity: 0.9; transform: translateY(-2px) scaleY(1.04); }
+            50% { opacity: 1; transform: translateY(-1px) scaleY(0.98); }
+            75% { opacity: 0.85; transform: translateY(-3px) scaleY(1.06); }
+            100% { opacity: 1; transform: translateY(0) scaleY(1); }
+        }
+
+        @keyframes streakCountUp {
+            0% { transform: scale(0.5) rotateX(90deg); opacity: 0; }
+            60% { transform: scale(1.15) rotateX(-5deg); opacity: 1; }
+            100% { transform: scale(1) rotateX(0); opacity: 1; }
+        }
+
+        @keyframes particle {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+
+        @keyframes replenishPulse {
+            0%, 100% { background-color: #f95630; }
+            50% { background-color: #ff81f5; }
+        }
+
+        @keyframes shakeWarning {
+            0%, 100% { transform: rotate(1deg); }
+            25% { transform: rotate(-1deg); }
+            50% { transform: rotate(1.5deg); }
+            75% { transform: rotate(-0.5deg); }
+        }
+
+        .streak-badge { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+        .streak-badge.milestone {
+            animation: firePulse 1.5s ease-in-out infinite;
+        }
+
+        .streak-badge .fire-icon {
+            transition: all 0.3s ease;
+        }
+
+        .streak-badge.milestone .fire-icon {
+            animation: fireFlicker 0.8s ease-in-out infinite, fireGlow 2s ease-in-out infinite;
+        }
+
+        .streak-number {
+            animation: streakCountUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .streak-badge.dead {
+            opacity: 0.5;
+            filter: grayscale(0.8);
+        }
+
+        .streak-badge.replenish {
+            animation: shakeWarning 0.5s ease-in-out infinite;
+        }
+
+        .replenish-banner {
+            animation: replenishPulse 1.2s ease-in-out infinite;
+        }
+
+        .fire-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 0;
+            pointer-events: none;
+            animation: particle 1s ease-out forwards;
+        }
+
+        /* Milestone tier colors */
+        .streak-tier-1 { /* 5+ */ --streak-accent: #cafd00; }
+        .streak-tier-2 { /* 10+ */ --streak-accent: #beee00; }
+        .streak-tier-3 { /* 25+ */ --streak-accent: #ff81f5; }
+        .streak-tier-4 { /* 50+ */ --streak-accent: #ff61f8; }
+        .streak-tier-5 { /* 100+ */ --streak-accent: #f95630; }
+
+        .streak-tier-3 .fire-icon,
+        .streak-tier-4 .fire-icon,
+        .streak-tier-5 .fire-icon {
+            color: var(--streak-accent) !important;
+        }
     </style>
 </head>
 
@@ -205,15 +300,24 @@
                         compared to last cycle.</p>
                 </div>
                 <!-- Gamification Badge -->
-                <div
-                    class="bg-tertiary-container border-4 border-inverse-surface p-6 neo-shadow flex flex-col items-center justify-center text-center rotate-1">
-                    <span class="material-symbols-outlined text-6xl mb-2"
+                <div id="streak-badge"
+                    class="streak-badge bg-tertiary-container border-4 border-inverse-surface p-6 neo-shadow flex flex-col items-center justify-center text-center rotate-1 relative overflow-hidden">
+                    <div id="streak-particles" class="absolute inset-0 pointer-events-none"></div>
+                    <span id="streak-fire-icon" class="fire-icon material-symbols-outlined text-6xl mb-2"
                         style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-                    <h2 class="font-headline font-black text-4xl uppercase tracking-tight">42-DAY</h2>
+                    <h2 id="streak-count" class="streak-number font-headline font-black text-4xl uppercase tracking-tight">
+                        <span class="opacity-30">...</span>
+                    </h2>
                     <p class="font-headline font-bold uppercase tracking-widest text-sm">Saving Streak</p>
-                    <div
+                    <div id="streak-label"
                         class="mt-4 bg-inverse-surface text-surface px-4 py-1 font-headline font-black text-xs uppercase italic">
-                        UNSTOPPABLE</div>
+                        LOADING</div>
+                    <!-- Replenish warning (hidden by default) -->
+                    <div id="streak-replenish-banner" class="hidden mt-3 w-full">
+                        <div class="replenish-banner text-surface-container-lowest px-3 py-2 font-headline font-black text-[10px] uppercase tracking-wider text-center border-2 border-inverse-surface">
+                            ⚠ STREAK AT RISK — SAVE NOW TO RECOVER
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Bento Grid Content -->
@@ -396,6 +500,122 @@
     <script src="/js/auth.js"></script>
     <script src="/js/api.js"></script>
     <script>
+        // ─── Streak Fire Effect System ───────────────────────────────
+        const MILESTONES = [5, 10, 25, 50, 100, 150, 200, 250, 365, 500, 1000];
+
+        function getStreakTier(streak) {
+            if (streak >= 100) return 5;
+            if (streak >= 50) return 4;
+            if (streak >= 25) return 3;
+            if (streak >= 10) return 2;
+            if (streak >= 5) return 1;
+            return 0;
+        }
+
+        function getStreakLabel(streak, canReplenish) {
+            if (canReplenish) return '⚠ RECOVER NOW';
+            if (streak === 0) return 'START SAVING';
+            if (streak >= 100) return 'LEGENDARY';
+            if (streak >= 50) return 'UNSTOPPABLE';
+            if (streak >= 25) return 'ON FIRE';
+            if (streak >= 10) return 'BLAZING';
+            if (streak >= 5) return 'BUILDING';
+            if (streak >= 3) return 'RISING';
+            return 'IGNITING';
+        }
+
+        function isMilestone(streak) {
+            return MILESTONES.includes(streak);
+        }
+
+        function spawnFireParticles(container, count, accent) {
+            const colors = ['#cafd00', '#beee00', '#ff81f5', accent || '#cafd00', '#ffffff'];
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.className = 'fire-particle';
+                p.style.cssText = `
+                    left: ${40 + Math.random() * 20}%;
+                    top: ${30 + Math.random() * 30}%;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    --tx: ${(Math.random() - 0.5) * 120}px;
+                    --ty: ${-30 - Math.random() * 80}px;
+                    animation-delay: ${Math.random() * 0.6}s;
+                    animation-duration: ${0.6 + Math.random() * 0.8}s;
+                    width: ${4 + Math.random() * 6}px;
+                    height: ${4 + Math.random() * 6}px;
+                `;
+                container.appendChild(p);
+                setTimeout(() => p.remove(), 1600);
+            }
+        }
+
+        function hydrateStreak(streakData) {
+            const badge = document.getElementById('streak-badge');
+            const countEl = document.getElementById('streak-count');
+            const labelEl = document.getElementById('streak-label');
+            const fireIcon = document.getElementById('streak-fire-icon');
+            const particles = document.getElementById('streak-particles');
+            const replenishBanner = document.getElementById('streak-replenish-banner');
+
+            if (!badge || !countEl || !labelEl) return;
+
+            const streak = streakData.current || 0;
+            const canReplenish = streakData.can_replenish || false;
+            const tier = getStreakTier(streak);
+            const label = getStreakLabel(streak, canReplenish);
+
+            // Set count text with animation
+            countEl.innerHTML = `${streak}-DAY`;
+            countEl.style.animation = 'none';
+            countEl.offsetHeight; // trigger reflow
+            countEl.style.animation = 'streakCountUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+
+            // Set label
+            labelEl.textContent = label;
+
+            // Remove all previous tier classes
+            badge.classList.remove('milestone', 'dead', 'replenish',
+                'streak-tier-1', 'streak-tier-2', 'streak-tier-3', 'streak-tier-4', 'streak-tier-5');
+
+            if (streak === 0 && !canReplenish) {
+                // Dead streak
+                badge.classList.add('dead');
+                fireIcon.textContent = 'local_fire_department';
+                fireIcon.style.opacity = '0.3';
+                labelEl.style.backgroundColor = '#767777';
+            } else if (canReplenish) {
+                // Replenish warning state
+                badge.classList.add('replenish');
+                replenishBanner.classList.remove('hidden');
+                fireIcon.style.color = '#f95630';
+                labelEl.style.backgroundColor = '#f95630';
+            } else {
+                // Active streak
+                if (tier > 0) {
+                    badge.classList.add('milestone', `streak-tier-${tier}`);
+
+                    // Spawn particles for milestones
+                    if (isMilestone(streak)) {
+                        const accent = getComputedStyle(badge).getPropertyValue('--streak-accent').trim();
+                        spawnFireParticles(particles, 20, accent);
+                        // Keep spawning for a wow effect
+                        let bursts = 0;
+                        const interval = setInterval(() => {
+                            spawnFireParticles(particles, 12, accent);
+                            bursts++;
+                            if (bursts >= 4) clearInterval(interval);
+                        }, 800);
+                    }
+                }
+
+                // Scale fire icon based on tier
+                const sizes = ['text-6xl', 'text-7xl', 'text-7xl', 'text-8xl', 'text-8xl', 'text-9xl'];
+                fireIcon.className = fireIcon.className.replace(/text-\d+xl/g, '');
+                fireIcon.classList.add(sizes[tier] || 'text-6xl');
+            }
+        }
+
+        // ─── Main Dashboard Init ─────────────────────────────────────
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 // 1. Enforce Auth
@@ -406,17 +626,22 @@
                 const userNameEl = document.getElementById('user-name');
                 if (userNameEl) userNameEl.textContent = email.split('@')[0];
 
-                // 2. Fetch Profile & Goals
+                // 2. Fetch streak data (fire it early, don't block)
+                const streakPromise = futuraApi.contributions.streak().catch(err => {
+                    console.warn('Streak fetch failed:', err);
+                    return { streak: { current: 0, longest: 0, can_replenish: false } };
+                });
+
+                // 3. Fetch Profile & Goals
                 const goalsResult = await futuraApi.goals.get();
                 const goal = goalsResult.goal;
 
                 if (!goal) {
-                    // Redirect to onboarding if they skipped it somehow
                     window.location.href = 'onboarding_step_1_age.html';
                     return;
                 }
 
-                // 3. Execution Projection logic
+                // 4. Execution Projection logic
                 const projectionPayload = {
                     currentAge: goal.current_age || 25,
                     retirementAge: goal.retirement_age || 65,
@@ -432,7 +657,7 @@
                 const projectionRes = await futuraApi.projection.calculate(projectionPayload);
                 const data = projectionRes.result;
 
-                // 4. Bind resulting data to charts/progress bars
+                // 5. Bind resulting data to charts/progress bars
                 if (data) {
                     const requiredAmountEl = document.getElementById('required-amount');
                     if (requiredAmountEl) requiredAmountEl.textContent = '$' + Math.round(data.requiredMonthlyInvestment || 0).toLocaleString();
@@ -443,10 +668,13 @@
                     const freedomPercentEl = document.getElementById('freedom-percent');
                     if (freedomPercentEl) freedomPercentEl.textContent = Math.round(data.probability || 0) + '%';
 
-                    // Update visual width of the freedom bar realistically instead of hardcoded 68%
                     const probBar = document.querySelector('.bg-primary-fixed.border-r-4.border-inverse-surface[style*="width"]');
                     if (probBar) probBar.style.width = Math.round(data.probability || 0) + '%';
                 }
+
+                // 6. Hydrate streak (awaited from the early-fired promise)
+                const streakRes = await streakPromise;
+                hydrateStreak(streakRes.streak);
 
             } catch (err) {
                 console.error("Dashboard Load Error:", err);
