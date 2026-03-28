@@ -551,7 +551,11 @@
             tip.classList.add('opacity-0', 'invisible');
             tip.classList.remove('opacity-100', 'visible', 'animate-bounce');
           });
-            // 5. Sell Logic: Pre-Confirmation and Execution Receipt
+        }
+      }
+    });
+
+    // 5. Sell Logic: Pre-Confirmation and Execution Receipt
     window.sellAsset = (index, ticker, investedStr, swingStr) => {
       const invested = parseFloat(investedStr);
       const swing = parseFloat(swingStr);
@@ -670,7 +674,6 @@
         }
       };
     };
-  });
 </script>
 </body>
 </html>
