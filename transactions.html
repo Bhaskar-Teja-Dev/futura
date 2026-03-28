@@ -295,11 +295,14 @@
         }
       }
 
-      // Conversion rule: $1 USD = 10 ZENS
       const isLocal = c.id?.startsWith('local-');
       const zensValue = isLocal ? c.amount : Math.round(c.amount * 10);
 
-      return { ...c, typeBadge, assetName, zensValue };
+      // Determine if it's a Sell/Liquidation vs a Buy/Investment
+      const isSell = typeBadge.includes('SELL') || typeBadge.includes('LIQUIDATE');
+      const isBuy = !isSell;
+
+      return { ...c, typeBadge, assetName, zensValue, isSell, isBuy };
     }
 
     function normalizeLocalStock(h) {
@@ -310,6 +313,58 @@
         created_at: h.date,
         id: `local-${h.ticker}-${h.date}`
       };
+    }
+
+    function updateStats(list) {
+      const totalVolEl = document.getElementById('total-volume');
+      const buyPressureEl = document.getElementById('buy-pressure');
+      const sellLiquidityEl = document.getElementById('sell-liquidity');
+      const plSnapshotEl = document.getElementById('pl-snapshot');
+
+      let totalZensVolume = 0;
+      let totalNetZensPL = 0;
+      let buyCount = 0;
+      let sellCount = 0;
+
+      list.forEach(c => {
+        const p = parseContribution(c);
+        totalZensVolume += p.zensValue;
+        if (p.isSell) {
+          sellCount++;
+          totalNetZensPL += p.zensValue;
+        } else {
+          buyCount++;
+          totalNetZensPL -= p.zensValue;
+        }
+      });
+
+      if (totalVolEl) totalVolEl.textContent = `🪙 ${totalZensVolume.toLocaleString('en-US')}`;
+
+      const totalTrades = buyCount + sellCount;
+      if (totalTrades > 0) {
+        const buyPercent = Math.round((buyCount / totalTrades) * 100);
+        const sellPercent = 100 - buyPercent;
+        if (buyPressureEl) buyPressureEl.textContent = `${buyPercent}% BUY_PRESSURE`;
+        if (sellLiquidityEl) sellLiquidityEl.textContent = `${sellPercent}% SELL_LIQUIDITY`;
+      }
+
+      if (plSnapshotEl) {
+        const prefix = totalNetZensPL >= 0 ? '+🪙 ' : '-🪙 ';
+        const absVal = Math.abs(totalNetZensPL);
+        plSnapshotEl.textContent = `${prefix}${absVal.toLocaleString('en-US')}`;
+
+        // Color coding
+        if (totalNetZensPL > 0) {
+          plSnapshotEl.classList.remove('text-on-surface');
+          plSnapshotEl.classList.add('text-primary-fixed-variant'); // Green-ish
+        } else if (totalNetZensPL < 0) {
+          plSnapshotEl.classList.remove('text-on-surface');
+          plSnapshotEl.classList.add('text-error'); // Red
+        } else {
+          plSnapshotEl.classList.remove('text-primary-fixed-variant', 'text-error');
+          plSnapshotEl.classList.add('text-on-surface');
+        }
+      }
     }
 
     function renderTransactions(list) {
@@ -363,11 +418,11 @@
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
     <p class="text-xs font-bold text-outline lg:hidden">ZENS_VALUE</p>
-    <p class="font-headline font-bold text-lg">🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
+    <p class="font-headline font-bold text-lg">${parsed.isSell ? '+' : '-'}🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
     <p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
-    <p class="font-headline font-black text-lg text-primary-fixed-variant">🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
+    <p class="font-headline font-black text-lg ${parsed.isSell ? 'text-primary-fixed-variant' : 'text-error'}">🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
 </div>
 <div class="col-span-12 lg:col-span-1 text-right mt-4 lg:mt-0">
     <p class="font-headline font-bold text-xs uppercase text-outline underline">${new Date(c.contribution_date).toLocaleDateString()}</p>
@@ -381,44 +436,64 @@
       const container = document.getElementById('chart-container');
       if (!container) return;
       container.innerHTML = '';
+      container.className = 'h-64 flex items-end gap-2 justify-center border-b-2 border-on-surface pb-1'; // Ensure baseline
 
-      // 1. Group by Date
+      // 1. Group by Date with Net Performance logic
       const groups = {};
       data.forEach(c => {
         const p = parseContribution(c);
         const day = p.contribution_date;
-        groups[day] = (groups[day] || 0) + p.zensValue;
+        const val = p.isSell ? p.zensValue : -p.zensValue;
+        groups[day] = (groups[day] || 0) + val;
       });
 
       // 2. Sort Chronologically (Past to Present)
-      const sortedDays = Object.keys(groups).sort((a, b) => new Date(a) - new Date(b)).slice(-14);
+      const sortedDays = Object.keys(groups).sort((a, b) => new Date(a) - new Date(b)).slice(-12);
       if (sortedDays.length === 0) return;
 
-      const maxDayVal = Math.max(...sortedDays.map(d => groups[d]), 1);
+      const absValues = sortedDays.map(d => Math.abs(groups[d]));
+      const maxDayVal = Math.max(...absValues, 100); // Scale to at least 100
 
       // 3. Render
       sortedDays.forEach(day => {
-        const total = groups[day];
-        const height = (total / maxDayVal) * 100;
+        const netVal = groups[day];
+        const height = (Math.abs(netVal) / maxDayVal) * 90; // Use 90% of height for safety
+        const isProfit = netVal >= 0;
+
         const bar = document.createElement('div');
-        bar.className = 'flex-1 bg-primary-fixed border-2 border-on-surface neo-shadow relative group hover:bg-inverse-primary transition-all duration-300 ease-out';
-        bar.style.height = '0%';
-        setTimeout(() => { bar.style.height = `${height}%`; }, 50);
+        // CSS: h-full flex flex-col justify-end to represent the chart column
+        bar.className = 'w-full max-w-[40px] flex flex-col justify-end h-full relative group';
+
+        // Timezone-safe date label
+        const [y, m, d] = day.split('-');
+        const dateObj = new Date(y, m - 1, d);
+        const label = dateObj.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+
         bar.innerHTML = `
-          <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 hidden group-hover:block neo-shadow z-20 whitespace-nowrap">DAILY_VOL: 🪙 ${Math.round(total)}</div>
-          <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase truncate w-full text-center">${new Date(day).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</div>
+          <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 hidden group-hover:block neo-shadow z-20 whitespace-nowrap">
+            NET_PERF: ${isProfit ? '+' : ''}🪙 ${Math.round(netVal)}
+          </div>
+          <div class="w-full ${isProfit ? 'bg-primary-fixed' : 'bg-error'} border-2 border-on-surface neo-shadow transition-all duration-500 ease-out" 
+               style="height: 0%"></div>
+          <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase truncate w-full text-center">${label}</div>
         `;
+
         container.appendChild(bar);
+        // Animate height
+        setTimeout(() => {
+          const innerBar = bar.querySelector('div:nth-child(2)');
+          if (innerBar) innerBar.style.height = `${height}%`;
+        }, 50);
       });
     }
 
     async function downloadCSV() {
       if (allContributions.length === 0) return;
-      const headers = ['Date', 'Asset', 'Type', 'Zens Value', 'USD Amount', 'Source'];
+      const headers = ['Date', 'Asset', 'Type', 'Intent', 'Zens Value', 'USD Amount', 'Source'];
       const rows = allContributions.map(c => {
         const p = parseContribution(c);
         const source = c.id?.startsWith('local-') ? 'Local Portfolio' : 'API Vault';
-        return [new Date(c.contribution_date).toLocaleDateString(), p.assetName, p.typeBadge, p.zensValue, c.amount, source];
+        return [new Date(c.contribution_date).toLocaleDateString(), p.assetName, p.typeBadge, p.isSell ? 'SELL' : 'BUY', p.zensValue, c.amount, source];
       });
       const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -435,10 +510,6 @@
     document.addEventListener('DOMContentLoaded', async () => {
       const session = await requireAuth();
       if (!session) return;
-      const totalVolEl = document.getElementById('total-volume');
-      const buyPressureEl = document.getElementById('buy-pressure');
-      const sellLiquidityEl = document.getElementById('sell-liquidity');
-      const plSnapshotEl = document.getElementById('pl-snapshot');
 
       try {
         const res = await futuraApi.contributions.list();
@@ -454,31 +525,8 @@
           new Date(b.contribution_date) - new Date(a.contribution_date)
         );
 
-        let totalZensVolume = 0;
-        let buyCount = 0;
-        let sellCount = 0;
-
-        allContributions.forEach(c => {
-          const p = parseContribution(c);
-          totalZensVolume += p.zensValue;
-          if (p.typeBadge.includes('SELL')) sellCount++;
-          else buyCount++;
-        });
-
         renderTransactions(allContributions);
-
-        if (totalVolEl) totalVolEl.textContent = `🪙 ${totalZensVolume.toLocaleString('en-US')}`;
-
-        const totalTrades = buyCount + sellCount;
-        if (totalTrades > 0) {
-          const buyPercent = Math.round((buyCount / totalTrades) * 100);
-          const sellPercent = 100 - buyPercent;
-          if (buyPressureEl) buyPressureEl.textContent = `${buyPercent}% BUY_PRESSURE`;
-          if (sellLiquidityEl) sellLiquidityEl.textContent = `${sellPercent}% SELL_LIQUIDITY`;
-        }
-        if (plSnapshotEl && totalZensVolume > 0) {
-          plSnapshotEl.textContent = `+🪙 ${(totalZensVolume * 0.024).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
-        }
+        updateStats(allContributions);
 
         document.querySelectorAll('.filter-btn').forEach(btn => {
           btn.addEventListener('click', (e) => {
@@ -499,6 +547,7 @@
             }
 
             renderTransactions(filtered);
+            updateStats(filtered);
             if (!document.getElementById('chart-view').classList.contains('hidden')) {
               renderChart(filtered);
             }
