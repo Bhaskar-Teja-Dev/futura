@@ -51,7 +51,9 @@ router.post('/', zValidator('json', goalsSchema), async (c) => {
     return c.json({ error: error.message }, 500)
   }
 
-  await supabase
+  // Use Service Role to ensure we can create the profile row on first goal save
+  const supabaseAdmin = getSupabase(c.env)
+  await supabaseAdmin
     .from('profiles')
     .upsert({ id: userId, onboarding_complete: true }, { onConflict: 'id' })
 

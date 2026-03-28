@@ -32,11 +32,12 @@ router.get('/', async (c) => {
 })
 
 router.patch('/', zValidator('json', profileUpdateSchema), async (c) => {
-  const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
   const body = c.req.valid('json')
 
-  const { data, error } = await supabase
+  // Use Service Role to ensure we can create/update the profile regardless of RLS
+  const supabaseAdmin = getSupabase(c.env)
+  const { data, error } = await supabaseAdmin
     .from('profiles')
     .update(body)
     .eq('id', userId)

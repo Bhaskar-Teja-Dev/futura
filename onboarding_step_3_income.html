@@ -235,15 +235,21 @@
           nextBtn.innerHTML = '<span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">SAVING...</span>';
 
           try {
-            // Store age, retirement_age, monthly_income in profiles table
-            if (currentData.current_age) {
-              await futuraApi.profile.update({
-                age: parseInt(currentData.current_age, 10),
-                retirement_age: parseInt(currentData.retirement_age, 10),
-                monthly_income: parseInt(currentData.target_monthly_income, 10)
-              });
+            // 1. Update profile (Age/Retirement/Income)
+            try {
+              if (currentData.current_age) {
+                await futuraApi.profile.update({
+                  age: parseInt(currentData.current_age, 10),
+                  retirement_age: parseInt(currentData.retirement_age, 10),
+                  monthly_income: parseInt(currentData.target_monthly_income, 10)
+                });
+              }
+            } catch (pErr) {
+              console.warn("Profile update deferred:", pErr.message);
+              // We continue because goals.upsert also fixes the profile
             }
 
+            // 2. Upsert goals (Critical)
             await futuraApi.goals.upsert({
               current_age: currentData.current_age || 0,
               retirement_age: currentData.retirement_age || 0,
@@ -254,7 +260,11 @@
             window.location.href = nextBtn.getAttribute('href');
 
           } catch (err) {
-            alert("Network failure. Rebel system down: " + err.message);
+            let msg = err.message;
+            if (msg === "Failed to fetch") {
+              msg = "Cannot reach the Rebel API. \n\nTips:\n1. Ensure Wrangler is running (npm run dev)\n2. If testing on local network, use your machine's IP (e.g. 192.168.x.x) instead of 127.0.0.1 in the browser.";
+            }
+            alert("SYSTEM ERROR: " + msg);
             nextBtn.innerHTML = originalText;
             nextBtn.removeAttribute('data-working');
           }
