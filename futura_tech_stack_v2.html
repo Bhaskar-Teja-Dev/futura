@@ -1,0 +1,591 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 4rem; font-family: var(--font-sans); }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 0 1.5rem; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 2rem; }
+  .logo { font-size: 18px; font-weight: 500; letter-spacing: -0.5px; }
+  .logo span { background: #c8f135; color: #1a1a0a; padding: 2px 7px; border-radius: 4px; margin-right: 6px; font-size: 13px; }
+  .doc-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase; background: #e6f1fb; color: #0C447C; }
+  .doc-title { font-size: 26px; font-weight: 500; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .doc-sub { font-size: 14px; color: var(--color-text-secondary); }
+  .meta-row { display: flex; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+  .meta-item { font-size: 12px; color: var(--color-text-secondary); }
+  .meta-item strong { color: var(--color-text-primary); font-weight: 500; display: block; }
+  h2 { font-size: 18px; font-weight: 500; margin: 2.5rem 0 0.75rem; letter-spacing: -0.3px; border-top: 0.5px solid var(--color-border-tertiary); padding-top: 2rem; }
+  h2:first-of-type { border-top: none; padding-top: 0; margin-top: 1.5rem; }
+  h3 { font-size: 14px; font-weight: 500; margin: 1.5rem 0 0.5rem; color: var(--color-text-primary); }
+  p { font-size: 14px; line-height: 1.7; color: var(--color-text-secondary); margin-bottom: 0.75rem; }
+  .section { margin-bottom: 0.5rem; }
+  .arch-block { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem; margin: 0.75rem 0; }
+  .arch-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .arch-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 400; }
+  .tag-blue { background: #e6f1fb; color: #0C447C; }
+  .tag-green { background: #eaf3de; color: #3B6D11; }
+  .tag-amber { background: #faeeda; color: #633806; }
+  .tag-purple { background: #eeedfe; color: #3C3489; }
+  .tag-teal { background: #e1f5ee; color: #085041; }
+  .arch-body { font-size: 13px; color: var(--color-text-secondary); line-height: 1.7; }
+  .arch-body strong { color: var(--color-text-primary); font-weight: 500; }
+  code { font-family: var(--font-mono); font-size: 12px; background: var(--color-background-secondary); padding: 2px 6px; border-radius: 4px; color: var(--color-text-primary); }
+  .code-block { background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin: 0.75rem 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.8; color: var(--color-text-primary); overflow-x: auto; white-space: pre; }
+  .table-wrap { margin: 1rem 0; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-secondary); padding: 8px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  td { padding: 10px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); color: var(--color-text-secondary); vertical-align: top; line-height: 1.6; }
+  td:first-child { color: var(--color-text-primary); font-weight: 500; font-family: var(--font-mono); font-size: 12px; }
+  .model-field { display: flex; font-size: 12px; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); gap: 8px; flex-wrap: wrap; }
+  .model-field:last-child { border-bottom: none; }
+  .field-name { font-family: var(--font-mono); color: var(--color-text-primary); font-weight: 500; min-width: 160px; }
+  .field-type { color: #185FA5; min-width: 100px; font-family: var(--font-mono); }
+  .field-note { color: var(--color-text-secondary); font-style: italic; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.75rem 0; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); color: var(--color-text-secondary); }
+  .flow-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0; margin: 1rem 0; }
+  .flow-node { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); padding: 12px 14px; position: relative; }
+  .flow-node:not(:last-child)::after { content: '→'; position: absolute; right: -10px; top: 50%; transform: translateY(-50%); font-size: 14px; color: var(--color-text-secondary); z-index: 1; }
+  .flow-node-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--color-text-secondary); margin-bottom: 4px; }
+  .flow-node-name { font-size: 13px; font-weight: 500; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 1rem 0; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+  .card-label { font-size: 11px; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .card-value { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .card-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+  .divider { height: 0.5px; background: var(--color-border-tertiary); margin: 2rem 0; }
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo"><span>FUTURA</span> Tech Stack Document v2.0</div>
+  </div>
+
+  <div class="doc-header">
+    <div class="doc-badge">Tech Stack Document</div>
+    <div class="doc-title">Architecture & Backend Integration Guide</div>
+    <div class="doc-sub">Full-stack serverless web app · Engineering handoff · Version 2.0</div>
+    <div class="meta-row">
+      <div class="meta-item"><strong>Frontend</strong>Next.js 14 (App Router)</div>
+      <div class="meta-item"><strong>Backend</strong>Hono.js on Cloudflare Workers</div>
+      <div class="meta-item"><strong>Database</strong>Supabase (Postgres + Realtime + RLS)</div>
+      <div class="meta-item"><strong>Auth</strong>Google OAuth via Supabase Auth</div>
+      <div class="meta-item"><strong>Payments</strong>RevenueCat Web + Stripe</div>
+      <div class="meta-item"><strong>Hosting</strong>Vercel (frontend) + Cloudflare Workers (API)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>1. Why this stack</h2>
+    <p>The original spec listed Google Stitch as the frontend. Google Stitch is not a publicly available product — the closest match in Google's ecosystem is Firebase App Hosting or Firebase Studio. Rather than build on an undocumented surface, this document replaces Stitch with <strong>Next.js 14</strong> on Vercel, which is production-proven, serverless-native, and fully compatible with Supabase, RevenueCat, and Google OAuth.</p>
+    <p>The backend layer is <strong>Hono.js running on Cloudflare Workers</strong> — a typed, ultra-lightweight HTTP framework designed for edge runtimes. It is fully compatible with Supabase's service-role client, handles RevenueCat webhooks, executes business logic, and keeps every compute unit serverless. There is no always-on server, no Docker, and no DevOps overhead.</p>
+    <div class="card-grid">
+      <div class="card"><div class="card-label">Frontend</div><div class="card-value">Next.js 14</div><div class="card-desc">App Router, RSC, Vercel edge middleware for auth guards</div></div>
+      <div class="card"><div class="card-label">Backend API</div><div class="card-value">Hono on CF Workers</div><div class="card-desc">Typed REST API, runs at edge in 150+ PoPs globally</div></div>
+      <div class="card"><div class="card-label">Database</div><div class="card-value">Supabase</div><div class="card-desc">Postgres + RLS + Realtime + Auth + Storage</div></div>
+      <div class="card"><div class="card-label">Auth</div><div class="card-value">Supabase Auth</div><div class="card-desc">Google OAuth 2.0, PKCE, JWT session management</div></div>
+      <div class="card"><div class="card-label">Payments</div><div class="card-value">RevenueCat Web</div><div class="card-desc">Entitlement management, Stripe billing, webhook sync</div></div>
+      <div class="card"><div class="card-label">Deploy</div><div class="card-value">Vercel + CF</div><div class="card-desc">Zero-config CI/CD from GitHub for both layers</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. Full architecture overview</h2>
+    <p>All traffic enters through the Next.js frontend on Vercel. Authenticated requests requiring server-side business logic are proxied to the Hono API on Cloudflare Workers. The Workers communicate with Supabase using the service-role key (bypassing RLS for privileged operations) and with RevenueCat's REST API for entitlement checks and webhook processing.</p>
+
+    <div class="arch-block">
+      <div class="arch-title">Request lifecycle <span class="arch-tag tag-blue">end to end</span></div>
+      <div class="arch-body">
+        <strong>1. Browser</strong> → Next.js frontend (Vercel CDN)<br>
+        <strong>2. Auth check</strong> → Supabase Auth (Google OAuth PKCE) → session JWT stored in httpOnly cookie<br>
+        <strong>3. Page render</strong> → Next.js Server Component reads Supabase directly via service client for SSR<br>
+        <strong>4. Mutations / business logic</strong> → Next.js calls Hono API (<code>api.futura.app</code>) with Bearer JWT<br>
+        <strong>5. Hono Worker</strong> → validates JWT via Supabase Auth → executes logic → reads/writes Supabase Postgres<br>
+        <strong>6. Entitlement checks</strong> → Hono queries <code>user_subscriptions</code> table (synced by RC webhook)<br>
+        <strong>7. RevenueCat events</strong> → Stripe webhook → RC → POST to <code>/webhooks/revenuecat</code> on Hono → upserts <code>user_subscriptions</code>
+      </div>
+    </div>
+
+    <div class="arch-block">
+      <div class="arch-title">Environment separation</div>
+      <div class="arch-body">
+        <strong>Vercel env vars (frontend-safe):</strong> <code>NEXT_PUBLIC_SUPABASE_URL</code>, <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>, <code>NEXT_PUBLIC_API_BASE_URL</code><br><br>
+        <strong>Cloudflare Worker secrets (never exposed to browser):</strong> <code>SUPABASE_SERVICE_ROLE_KEY</code>, <code>REVENUECAT_API_KEY</code>, <code>REVENUECAT_WEBHOOK_SECRET</code>, <code>JWT_SECRET</code>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>3. Backend — Hono.js on Cloudflare Workers</h2>
+    <h3>Project structure</h3>
+    <div class="code-block">futura-api/                     # Cloudflare Worker (Hono)
+├── src/
+│   ├── index.ts               # Hono app entry, route registration
+│   ├── middleware/
+│   │   ├── auth.ts            # JWT validation via Supabase
+│   │   └── entitlement.ts     # Pro-gate middleware
+│   ├── routes/
+│   │   ├── goals.ts           # GET/POST /goals
+│   │   ├── contributions.ts   # GET/POST /contributions
+│   │   ├── projection.ts      # POST /projection (server-side calc)
+│   │   ├── profile.ts         # GET/PATCH /profile
+│   │   └── webhooks.ts        # POST /webhooks/revenuecat
+│   ├── lib/
+│   │   ├── supabase.ts        # Supabase service-role client
+│   │   └── revenuecat.ts      # RC REST helpers
+│   └── types.ts               # Shared types / Env bindings
+├── wrangler.toml              # CF Workers config
+└── package.json</div>
+
+    <h3>App entry and auth middleware</h3>
+    <div class="code-block">// src/index.ts
+import { Hono } from 'hono'
+import { cors } from 'hono/cors'
+import { authMiddleware } from './middleware/auth'
+import { goalsRouter } from './routes/goals'
+import { contributionsRouter } from './routes/contributions'
+import { projectionRouter } from './routes/projection'
+import { webhooksRouter } from './routes/webhooks'
+
+const app = new Hono&lt;{ Bindings: Env }>()
+
+app.use('*', cors({ origin: 'https://futura.app', credentials: true }))
+
+// Public routes
+app.route('/webhooks', webhooksRouter)
+
+// Protected routes — auth middleware applied
+app.use('/api/*', authMiddleware)
+app.route('/api/goals', goalsRouter)
+app.route('/api/contributions', contributionsRouter)
+app.route('/api/projection', projectionRouter)
+
+export default app</div>
+
+    <div class="code-block">// src/middleware/auth.ts
+import { createMiddleware } from 'hono/factory'
+import { createClient } from '@supabase/supabase-js'
+
+export const authMiddleware = createMiddleware&lt;{ Bindings: Env }>(
+  async (c, next) => {
+    const token = c.req.header('Authorization')?.replace('Bearer ', '')
+    if (!token) return c.json({ error: 'unauthorized' }, 401)
+
+    const supabase = createClient(c.env.SUPABASE_URL, c.env.SUPABASE_SERVICE_ROLE_KEY)
+    const { data: { user }, error } = await supabase.auth.getUser(token)
+
+    if (error || !user) return c.json({ error: 'invalid_token' }, 401)
+
+    c.set('userId', user.id)
+    c.set('userEmail', user.email)
+    await next()
+  }
+)</div>
+
+    <h3>Pro entitlement middleware</h3>
+    <div class="code-block">// src/middleware/entitlement.ts
+import { createMiddleware } from 'hono/factory'
+import { getSupabase } from '../lib/supabase'
+
+export const requirePro = createMiddleware&lt;{ Bindings: Env }>(
+  async (c, next) => {
+    const userId = c.get('userId')
+    const supabase = getSupabase(c.env)
+
+    const { data } = await supabase
+      .from('user_subscriptions')
+      .select('entitlement, expires_at')
+      .eq('user_id', userId)
+      .single()
+
+    const isPro =
+      data?.entitlement === 'pro' &&
+      (!data.expires_at || new Date(data.expires_at) > new Date())
+
+    if (!isPro) return c.json({ error: 'pro_required', upgrade_url: '/upgrade' }, 403)
+    await next()
+  }
+)</div>
+
+    <h3>Example route — contributions</h3>
+    <div class="code-block">// src/routes/contributions.ts
+import { Hono } from 'hono'
+import { zValidator } from '@hono/zod-validator'
+import { z } from 'zod'
+import { getSupabase } from '../lib/supabase'
+
+const router = new Hono&lt;{ Bindings: Env; Variables: { userId: string } }>()
+
+const contributionSchema = z.object({
+  amount: z.number().positive().max(100000),
+  contribution_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  note: z.string().max(200).optional(),
+})
+
+router.get('/', async (c) => {
+  const supabase = getSupabase(c.env)
+  const { data, error } = await supabase
+    .from('contributions')
+    .select('*')
+    .eq('user_id', c.get('userId'))
+    .order('contribution_date', { ascending: false })
+    .limit(50)
+
+  if (error) return c.json({ error: error.message }, 500)
+  return c.json({ contributions: data })
+})
+
+router.post('/', zValidator('json', contributionSchema), async (c) => {
+  const supabase = getSupabase(c.env)
+  const body = c.req.valid('json')
+
+  const { data, error } = await supabase
+    .from('contributions')
+    .insert({ ...body, user_id: c.get('userId') })
+    .select()
+    .single()
+
+  if (error) return c.json({ error: error.message }, 500)
+  return c.json({ contribution: data }, 201)
+})
+
+export { router as contributionsRouter }</div>
+
+    <h3>RevenueCat webhook handler</h3>
+    <div class="code-block">// src/routes/webhooks.ts — receives RC purchase/cancellation events
+import { Hono } from 'hono'
+import { createHmac } from 'node:crypto'
+import { getSupabase } from '../lib/supabase'
+
+const router = new Hono&lt;{ Bindings: Env }>()
+
+router.post('/revenuecat', async (c) => {
+  // Verify RC webhook signature
+  const sig = c.req.header('X-RevenueCat-Signature') ?? ''
+  const body = await c.req.text()
+  const expected = createHmac('sha256', c.env.REVENUECAT_WEBHOOK_SECRET)
+    .update(body).digest('hex')
+  if (sig !== expected) return c.json({ error: 'invalid_signature' }, 401)
+
+  const event = JSON.parse(body)
+  const { event: { type, app_user_id, expiration_at_ms } } = event
+
+  const entitlement = ['INITIAL_PURCHASE', 'RENEWAL', 'UNCANCELLATION'].includes(type)
+    ? 'pro' : 'free'
+  const expiresAt = expiration_at_ms
+    ? new Date(expiration_at_ms).toISOString() : null
+
+  const supabase = getSupabase(c.env)
+  await supabase.from('user_subscriptions').upsert({
+    revenuecat_customer_id: app_user_id,
+    entitlement,
+    expires_at: expiresAt,
+    updated_at: new Date().toISOString(),
+  }, { onConflict: 'revenuecat_customer_id' })
+
+  return c.json({ received: true })
+})
+
+export { router as webhooksRouter }</div>
+  </div>
+
+  <div class="section">
+    <h2>4. Frontend — Next.js 14 (App Router)</h2>
+    <h3>Project structure</h3>
+    <div class="code-block">futura-web/                          # Next.js 14 on Vercel
+├── app/
+│   ├── layout.tsx                   # Root layout, Supabase provider
+│   ├── page.tsx                     # Landing page (unauthenticated)
+│   ├── auth/callback/route.ts       # OAuth exchange route handler
+│   ├── onboarding/page.tsx          # Goal wizard (protected)
+│   ├── dashboard/page.tsx           # Main dashboard (protected)
+│   ├── projection/page.tsx          # Scenario engine (Pro-gated)
+│   ├── learn/page.tsx               # Finance Bites
+│   ├── upgrade/page.tsx             # RevenueCat paywall
+│   └── settings/page.tsx
+├── components/
+│   ├── ProjectionChart.tsx          # Recharts line chart
+│   ├── ContributionLogger.tsx       # Quick-log widget
+│   ├── StreakCounter.tsx
+│   └── ProGate.tsx                  # Wraps Pro-only UI
+├── lib/
+│   ├── supabase/browser.ts          # Anon client (browser)
+│   ├── supabase/server.ts           # Server client (RSC / Server Actions)
+│   └── api.ts                       # Typed fetch wrapper → Hono API
+├── middleware.ts                    # Vercel Edge: auth guard on protected routes
+└── next.config.js</div>
+
+    <h3>Vercel Edge middleware — auth guard</h3>
+    <div class="code-block">// middleware.ts — runs at Vercel edge before every request
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs'
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+const PROTECTED = ['/dashboard', '/onboarding', '/projection', '/learn', '/settings']
+
+export async function middleware(req: NextRequest) {
+  const res = NextResponse.next()
+  const supabase = createMiddlewareClient({ req, res })
+  const { data: { session } } = await supabase.auth.getSession()
+
+  const isProtected = PROTECTED.some(p => req.nextUrl.pathname.startsWith(p))
+  if (isProtected && !session) {
+    return NextResponse.redirect(new URL('/', req.url))
+  }
+  return res
+}
+
+export const config = { matcher: ['/((?!_next/static|_next/image|favicon).*)'] }</div>
+
+    <h3>Typed API client (frontend → Hono)</h3>
+    <div class="code-block">// lib/api.ts — all calls to Hono Worker go through here
+import { createBrowserClient } from '@supabase/ssr'
+
+async function getToken(): Promise&lt;string> {
+  const supabase = createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
+  const { data: { session } } = await supabase.auth.getSession()
+  return session?.access_token ?? ''
+}
+
+async function apiFetch&lt;T>(path: string, options?: RequestInit): Promise&lt;T> {
+  const token = await getToken()
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${path}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+      ...options?.headers,
+    },
+  })
+  if (!res.ok) throw new Error(await res.text())
+  return res.json()
+}
+
+export const api = {
+  contributions: {
+    list: () => apiFetch('/api/contributions'),
+    create: (body: ContributionPayload) =>
+      apiFetch('/api/contributions', { method: 'POST', body: JSON.stringify(body) }),
+  },
+  goals: {
+    get: () => apiFetch('/api/goals'),
+    upsert: (body: GoalPayload) =>
+      apiFetch('/api/goals', { method: 'POST', body: JSON.stringify(body) }),
+  },
+  projection: {
+    calculate: (body: ProjectionPayload) =>
+      apiFetch('/api/projection', { method: 'POST', body: JSON.stringify(body) }),
+  },
+}</div>
+  </div>
+
+  <div class="section">
+    <h2>5. Authentication — Google OAuth via Supabase</h2>
+    <div class="arch-block">
+      <div class="arch-title">OAuth flow <span class="arch-tag tag-teal">PKCE + httpOnly cookies</span></div>
+      <div class="arch-body">
+        <strong>1.</strong> User clicks "Sign in with Google" → <code>supabase.auth.signInWithOAuth({ provider: 'google' })</code><br>
+        <strong>2.</strong> Browser redirected to Google consent screen<br>
+        <strong>3.</strong> Google returns auth code to <code>/auth/callback</code><br>
+        <strong>4.</strong> Next.js route handler exchanges code for session via <code>supabase.auth.exchangeCodeForSession(code)</code><br>
+        <strong>5.</strong> Supabase JWT stored in httpOnly cookie (not localStorage — XSS-safe)<br>
+        <strong>6.</strong> Database trigger <code>on_auth_user_created</code> fires → inserts row in <code>profiles</code> and <code>user_subscriptions</code> (entitlement: 'free')<br>
+        <strong>7.</strong> User redirected to <code>/onboarding</code> (first time) or <code>/dashboard</code> (returning)
+      </div>
+    </div>
+    <div class="code-block">-- Supabase: trigger to bootstrap new user
+CREATE OR REPLACE FUNCTION public.handle_new_user()
+RETURNS trigger LANGUAGE plpgsql SECURITY DEFINER AS $$
+BEGIN
+  INSERT INTO public.profiles (id, email, display_name, avatar_url)
+  VALUES (
+    NEW.id,
+    NEW.email,
+    NEW.raw_user_meta_data->>'full_name',
+    NEW.raw_user_meta_data->>'avatar_url'
+  );
+
+  INSERT INTO public.user_subscriptions (user_id, entitlement)
+  VALUES (NEW.id, 'free');
+
+  RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER on_auth_user_created
+  AFTER INSERT ON auth.users
+  FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();</div>
+  </div>
+
+  <div class="section">
+    <h2>6. Database — Supabase Postgres</h2>
+    <h3>Data models</h3>
+
+    <div class="arch-block">
+      <div class="arch-title">profiles <span class="arch-tag tag-blue">1 row per user</span></div>
+      <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">PK · FK → auth.users.id</span></div>
+      <div class="model-field"><span class="field-name">email</span><span class="field-type">text</span><span class="field-note">from Google OAuth claim</span></div>
+      <div class="model-field"><span class="field-name">display_name</span><span class="field-type">text</span></div>
+      <div class="model-field"><span class="field-name">avatar_url</span><span class="field-type">text</span></div>
+      <div class="model-field"><span class="field-name">onboarding_complete</span><span class="field-type">boolean</span><span class="field-note">default false</span></div>
+      <div class="model-field"><span class="field-name">revenuecat_user_id</span><span class="field-type">text</span><span class="field-note">RC customer ID, set on first RC call</span></div>
+      <div class="model-field"><span class="field-name">created_at</span><span class="field-type">timestamptz</span><span class="field-note">auto</span></div>
+    </div>
+
+    <div class="arch-block">
+      <div class="arch-title">user_goals <span class="arch-tag tag-blue">1 active row per user</span></div>
+      <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">PK</span></div>
+      <div class="model-field"><span class="field-name">user_id</span><span class="field-type">uuid</span><span class="field-note">FK → profiles.id · UNIQUE</span></div>
+      <div class="model-field"><span class="field-name">current_age</span><span class="field-type">int2</span></div>
+      <div class="model-field"><span class="field-name">retirement_age</span><span class="field-type">int2</span></div>
+      <div class="model-field"><span class="field-name">target_monthly_income</span><span class="field-type">numeric(10,2)</span></div>
+      <div class="model-field"><span class="field-name">annual_return_rate</span><span class="field-type">numeric(5,4)</span><span class="field-note">default 0.0700</span></div>
+      <div class="model-field"><span class="field-name">risk_profile</span><span class="field-type">text</span><span class="field-note">conservative | moderate | aggressive</span></div>
+      <div class="model-field"><span class="field-name">updated_at</span><span class="field-type">timestamptz</span><span class="field-note">auto-updated</span></div>
+    </div>
+
+    <div class="arch-block">
+      <div class="arch-title">contributions <span class="arch-tag tag-blue">many per user</span></div>
+      <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">PK · default gen_random_uuid()</span></div>
+      <div class="model-field"><span class="field-name">user_id</span><span class="field-type">uuid</span><span class="field-note">FK → profiles.id</span></div>
+      <div class="model-field"><span class="field-name">amount</span><span class="field-type">numeric(10,2)</span></div>
+      <div class="model-field"><span class="field-name">currency</span><span class="field-type">text</span><span class="field-note">default 'GBP'</span></div>
+      <div class="model-field"><span class="field-name">contribution_date</span><span class="field-type">date</span></div>
+      <div class="model-field"><span class="field-name">note</span><span class="field-note">text · nullable</span><span class="field-type"></span></div>
+      <div class="model-field"><span class="field-name">created_at</span><span class="field-type">timestamptz</span><span class="field-note">auto</span></div>
+    </div>
+
+    <div class="arch-block">
+      <div class="arch-title">user_subscriptions <span class="arch-tag tag-green">managed by RC webhook only</span></div>
+      <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">PK</span></div>
+      <div class="model-field"><span class="field-name">user_id</span><span class="field-type">uuid</span><span class="field-note">FK → profiles.id · UNIQUE</span></div>
+      <div class="model-field"><span class="field-name">revenuecat_customer_id</span><span class="field-type">text</span><span class="field-note">UNIQUE — RC's app_user_id</span></div>
+      <div class="model-field"><span class="field-name">entitlement</span><span class="field-type">text</span><span class="field-note">free | pro</span></div>
+      <div class="model-field"><span class="field-name">expires_at</span><span class="field-type">timestamptz</span><span class="field-note">null = free tier</span></div>
+      <div class="model-field"><span class="field-name">updated_at</span><span class="field-type">timestamptz</span><span class="field-note">set by Hono webhook handler</span></div>
+    </div>
+
+    <div class="arch-block">
+      <div class="arch-title">streaks <span class="arch-tag tag-purple">computed daily by cron</span></div>
+      <div class="model-field"><span class="field-name">user_id</span><span class="field-type">uuid</span><span class="field-note">PK · FK → profiles.id</span></div>
+      <div class="model-field"><span class="field-name">current_streak</span><span class="field-type">int4</span><span class="field-note">consecutive days logged</span></div>
+      <div class="model-field"><span class="field-name">longest_streak</span><span class="field-type">int4</span></div>
+      <div class="model-field"><span class="field-name">last_contribution_date</span><span class="field-type">date</span></div>
+      <div class="model-field"><span class="field-name">updated_at</span><span class="field-type">timestamptz</span></div>
+    </div>
+
+    <h3>Row Level Security policies</h3>
+    <div class="code-block">-- Applied to: profiles, user_goals, contributions, streaks
+ALTER TABLE contributions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "select_own" ON contributions
+  FOR SELECT USING (user_id = auth.uid());
+
+CREATE POLICY "insert_own" ON contributions
+  FOR INSERT WITH CHECK (user_id = auth.uid());
+
+CREATE POLICY "update_own" ON contributions
+  FOR UPDATE USING (user_id = auth.uid());
+
+-- user_subscriptions: NO client write access — service role only
+ALTER TABLE user_subscriptions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "select_own_sub" ON user_subscriptions
+  FOR SELECT USING (user_id = auth.uid());
+
+-- Hono Worker uses SUPABASE_SERVICE_ROLE_KEY → bypasses RLS for writes
+-- This prevents any client-side entitlement spoofing</div>
+  </div>
+
+  <div class="section">
+    <h2>7. RevenueCat integration</h2>
+    <div class="arch-block">
+      <div class="arch-title">Entitlement flow <span class="arch-tag tag-amber">purchase → webhook → Supabase</span></div>
+      <div class="arch-body">
+        <strong>Purchase:</strong> Frontend links to RevenueCat's hosted web checkout for the Pro plan (Stripe under the hood). No PCI scope for Futura. RC creates a customer using the Supabase user UUID as <code>app_user_id</code>.<br><br>
+        <strong>Post-purchase:</strong> RC fires <code>INITIAL_PURCHASE</code> webhook → Hono <code>/webhooks/revenuecat</code> → upserts <code>user_subscriptions.entitlement = 'pro'</code>.<br><br>
+        <strong>Renewal / cancellation:</strong> RC fires <code>RENEWAL</code> or <code>CANCELLATION</code> → Hono updates entitlement + <code>expires_at</code> accordingly.<br><br>
+        <strong>Gate enforcement:</strong> Hono's <code>requirePro</code> middleware reads <code>user_subscriptions</code> on every protected API call — no RC API call at request time, keeping latency low.
+      </div>
+    </div>
+    <div class="arch-block">
+      <div class="arch-title">RC customer ID strategy</div>
+      <div class="arch-body">Use the Supabase <code>auth.uid()</code> UUID as the RevenueCat <code>app_user_id</code>. This creates a 1:1 mapping without any lookup table. When the Hono worker first touches RC for a user, it calls <code>GET /v1/subscribers/{supabase_uid}</code> — RC creates the customer if they don't exist.</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>8. API reference</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Method + Path</th><th>Auth</th><th>Entitlement</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>GET /api/profile</td><td>JWT</td><td>Free</td><td>Returns profile + subscription status</td></tr>
+          <tr><td>PATCH /api/profile</td><td>JWT</td><td>Free</td><td>Update display_name, onboarding_complete</td></tr>
+          <tr><td>GET /api/goals</td><td>JWT</td><td>Free</td><td>Get current retirement goal</td></tr>
+          <tr><td>POST /api/goals</td><td>JWT</td><td>Free</td><td>Upsert goal (wizard + edits)</td></tr>
+          <tr><td>GET /api/contributions</td><td>JWT</td><td>Free</td><td>List last 50 contributions</td></tr>
+          <tr><td>POST /api/contributions</td><td>JWT</td><td>Free</td><td>Log a contribution, update streak</td></tr>
+          <tr><td>POST /api/projection</td><td>JWT</td><td>Free</td><td>Basic projection (fixed 7% rate)</td></tr>
+          <tr><td>POST /api/projection/scenarios</td><td>JWT</td><td>Pro</td><td>Multi-scenario with custom rates</td></tr>
+          <tr><td>GET /api/allocation</td><td>JWT</td><td>Pro</td><td>Asset allocation by risk profile</td></tr>
+          <tr><td>GET /api/report/pdf</td><td>JWT</td><td>Pro</td><td>Generate personalised PDF report</td></tr>
+          <tr><td>POST /webhooks/revenuecat</td><td>HMAC sig</td><td>None</td><td>RC event → update user_subscriptions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>9. Deployment and CI/CD</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Layer</th><th>Platform</th><th>Deploy trigger</th><th>Config</th></tr></thead>
+        <tbody>
+          <tr><td>Frontend (Next.js)</td><td>Vercel</td><td>Push to main branch</td><td>vercel.json — zero-config</td></tr>
+          <tr><td>Backend API (Hono)</td><td>Cloudflare Workers</td><td>Push to main branch via wrangler deploy</td><td>wrangler.toml — routes, env bindings</td></tr>
+          <tr><td>Database migrations</td><td>Supabase CLI</td><td>Manual or GitHub Action on PR merge</td><td>supabase/migrations/*.sql</td></tr>
+          <tr><td>Secrets</td><td>CF Worker Secrets + Vercel env</td><td>Set once via CLI</td><td>Never committed to repo</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="arch-block">
+      <div class="arch-title">wrangler.toml (Hono Worker config)</div>
+      <div class="arch-body" style="font-family: var(--font-mono); font-size: 12px; line-height: 1.8;">
+name = "futura-api"<br>
+main = "src/index.ts"<br>
+compatibility_date = "2024-09-23"<br>
+compatibility_flags = ["nodejs_compat"]<br><br>
+[vars]<br>
+SUPABASE_URL = "https://xxxx.supabase.co"<br><br>
+# Secrets set via: wrangler secret put SUPABASE_SERVICE_ROLE_KEY<br>
+# wrangler secret put REVENUECAT_API_KEY<br>
+# wrangler secret put REVENUECAT_WEBHOOK_SECRET<br><br>
+[[routes]]<br>
+pattern = "api.futura.app/*"<br>
+zone_name = "futura.app"
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>10. Third-party integrations summary</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Service</th><th>Role</th><th>Called from</th></tr></thead>
+        <tbody>
+          <tr><td>Supabase Auth</td><td>Google OAuth, JWT sessions</td><td>Next.js frontend + Hono (validation)</td></tr>
+          <tr><td>Supabase Postgres</td><td>All persistent data</td><td>Hono (service role) + Next.js RSC (server client)</td></tr>
+          <tr><td>Supabase Realtime</td><td>Live streak + projection updates</td><td>Next.js browser client</td></tr>
+          <tr><td>RevenueCat REST API</td><td>Create/retrieve RC customers</td><td>Hono Worker only</td></tr>
+          <tr><td>RevenueCat Web Billing</td><td>Stripe-backed subscription purchase</td><td>Frontend redirect to RC hosted checkout</td></tr>
+          <tr><td>Google OAuth</td><td>Identity provider</td><td>Via Supabase Auth (no direct Google calls)</td></tr>
+          <tr><td>Resend</td><td>Weekly summary + streak emails</td><td>Hono cron trigger (CF Cron Triggers)</td></tr>
+          <tr><td>PostHog</td><td>Product analytics, funnels, feature flags</td><td>Next.js client (posthog-js)</td></tr>
+          <tr><td>Sentry</td><td>Error monitoring — frontend + backend</td><td>Next.js + Hono (sentry/cloudflare)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

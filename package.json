@@ -1,0 +1,16 @@
+{
+  "name": "futura",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "futura-api",
+    "futura-web"
+  ],
+  "scripts": {
+    "dev:api": "npm --workspace futura-api run dev",
+    "deploy:api": "npm --workspace futura-api run deploy",
+    "dev:web": "npm --workspace futura-web run dev",
+    "build:web": "npm --workspace futura-web run build",
+    "start:web": "npm --workspace futura-web run start"
+  }
+}

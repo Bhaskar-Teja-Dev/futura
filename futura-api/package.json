@@ -1,0 +1,21 @@
+{
+  "name": "futura-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.7.4",
+    "@supabase/supabase-js": "^2.57.4",
+    "hono": "^4.9.8",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260312.0",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.39.0"
+  }
+}

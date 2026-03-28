@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  padding: 24px;
+  background: #0e0e0e;
+  color: #f5f5f0;
+}
+
+a {
+  color: #c8f135;
+}
+
+button {
+  background: #c8f135;
+  color: #111;
+  border: 0;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+input,
+select {
+  padding: 8px;
+  margin: 4px 0 12px;
+  display: block;
+  min-width: 280px;
+}
+
+.card {
+  border: 1px solid #2a2a2a;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: #1a1a1a;
+}

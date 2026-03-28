@@ -1,0 +1,620 @@
+
+<style>
+  :root {
+    --lime: #c8f135;
+    --lime-dark: #a8d020;
+    --ink: var(--color-text-primary);
+    --muted: var(--color-text-secondary);
+    --surface: var(--color-background-secondary);
+    --border: var(--color-border-tertiary);
+    --card: var(--color-background-primary);
+    --r: var(--border-radius-lg);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 0 0 1.5rem; border-bottom: 0.5px solid var(--border); margin-bottom: 2rem; }
+  .logo { font-size: 18px; font-weight: 500; letter-spacing: -0.5px; }
+  .logo span { background: var(--lime); color: #1a1a0a; padding: 2px 7px; border-radius: 4px; margin-right: 6px; font-size: 13px; font-weight: 500; }
+  .tabs { display: flex; gap: 4px; background: var(--surface); border-radius: var(--border-radius-md); padding: 4px; }
+  .tab { padding: 6px 14px; border-radius: 6px; font-size: 13px; cursor: pointer; color: var(--muted); border: none; background: transparent; transition: all 0.15s; white-space: nowrap; }
+  .tab.active { background: var(--card); color: var(--ink); border: 0.5px solid var(--border); font-weight: 500; }
+  .tab:hover:not(.active) { color: var(--ink); }
+  .doc { display: none; }
+  .doc.active { display: block; }
+  .doc-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
+  .doc-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .badge-prd { background: #e8f5e0; color: #3B6D11; }
+  .badge-design { background: #faeeda; color: #633806; }
+  .badge-tech { background: #e6f1fb; color: #0C447C; }
+  .doc-title { font-size: 26px; font-weight: 500; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.5px; }
+  .doc-sub { font-size: 14px; color: var(--muted); }
+  .meta-row { display: flex; gap: 2rem; margin-top: 1rem; flex-wrap: wrap; }
+  .meta-item { font-size: 12px; color: var(--muted); }
+  .meta-item strong { color: var(--ink); font-weight: 500; display: block; }
+  h2 { font-size: 18px; font-weight: 500; margin: 2rem 0 0.75rem; letter-spacing: -0.3px; }
+  h3 { font-size: 15px; font-weight: 500; margin: 1.5rem 0 0.5rem; color: var(--ink); }
+  p { font-size: 14px; line-height: 1.7; color: var(--muted); margin-bottom: 0.75rem; }
+  .section { margin-bottom: 2.5rem; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 1rem 0; }
+  .card { background: var(--card); border: 0.5px solid var(--border); border-radius: var(--r); padding: 1rem 1.25rem; }
+  .card-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .card-value { font-size: 20px; font-weight: 500; margin-bottom: 4px; }
+  .card-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.75rem 0; }
+  .pill { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border); background: var(--surface); color: var(--muted); }
+  .pill.green { background: #eaf3de; color: #3B6D11; border-color: #c0dd97; }
+  .pill.amber { background: #faeeda; color: #633806; border-color: #FAC775; }
+  .pill.blue { background: #e6f1fb; color: #0C447C; border-color: #B5D4F4; }
+  .pill.red { background: #fcebeb; color: #791F1F; border-color: #F7C1C1; }
+  .pill.purple { background: #eeedfe; color: #3C3489; border-color: #CECBF6; }
+  .table-wrap { margin: 1rem 0; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { text-align: left; font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); padding: 8px 12px; border-bottom: 0.5px solid var(--border); }
+  td { padding: 10px 12px; border-bottom: 0.5px solid var(--border); color: var(--muted); vertical-align: top; line-height: 1.5; }
+  td:first-child { color: var(--ink); font-weight: 500; }
+  .story-block { background: var(--surface); border-radius: var(--r); padding: 1rem 1.25rem; margin: 0.75rem 0; border-left: 3px solid var(--lime-dark); }
+  .story-as { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 4px; }
+  .story-text { font-size: 13px; color: var(--ink); line-height: 1.6; margin-bottom: 6px; }
+  .story-so { font-size: 12px; color: var(--muted); font-style: italic; }
+  .flow-steps { display: flex; flex-direction: column; gap: 0; margin: 1rem 0; }
+  .flow-step { display: flex; gap: 12px; align-items: flex-start; }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--lime); color: #1a1a0a; font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .step-body { padding-bottom: 1.25rem; border-left: 1px dashed var(--border); padding-left: 12px; flex: 1; }
+  .step-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .arch-block { background: var(--card); border: 0.5px solid var(--border); border-radius: var(--r); padding: 1.25rem; margin: 0.75rem 0; }
+  .arch-title { font-size: 13px; font-weight: 500; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .arch-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 400; }
+  .arch-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  code { font-family: var(--font-mono); font-size: 12px; background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  .code-block { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--r); padding: 1rem; margin: 0.75rem 0; font-family: var(--font-mono); font-size: 12px; line-height: 1.7; color: var(--ink); overflow-x: auto; white-space: pre; }
+  .tier-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1rem 0; }
+  .tier-card { border: 0.5px solid var(--border); border-radius: var(--r); padding: 1.25rem; background: var(--card); }
+  .tier-card.pro { border-color: #c0dd97; }
+  .tier-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .tier-price { font-size: 22px; font-weight: 500; margin-bottom: 12px; }
+  .tier-price span { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .tier-feature { font-size: 13px; color: var(--muted); padding: 5px 0; border-bottom: 0.5px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .tier-feature:last-child { border-bottom: none; }
+  .check { width: 14px; height: 14px; border-radius: 50%; background: #eaf3de; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .check::after { content: ''; display: block; width: 6px; height: 4px; border-left: 1.5px solid #3B6D11; border-bottom: 1.5px solid #3B6D11; transform: rotate(-45deg) translateY(-1px); }
+  .x-mark { width: 14px; height: 14px; border-radius: 50%; background: var(--surface); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 10px; color: var(--muted); }
+  .model-field { display: flex; font-size: 12px; padding: 5px 0; border-bottom: 0.5px solid var(--border); gap: 8px; }
+  .model-field:last-child { border-bottom: none; }
+  .field-name { font-family: var(--font-mono); color: var(--ink); font-weight: 500; min-width: 130px; }
+  .field-type { color: #185FA5; min-width: 80px; }
+  .field-note { color: var(--muted); font-style: italic; }
+  @media (max-width: 600px) {
+    .tier-grid { grid-template-columns: 1fr; }
+    .tabs { flex-wrap: wrap; }
+    .topbar { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+</style>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo"><span>FUTURA</span> Product Docs v1.0</div>
+    <div class="tabs">
+      <button class="tab active" onclick="showDoc('prd',this)">PRD</button>
+      <button class="tab" onclick="showDoc('design',this)">Design</button>
+      <button class="tab" onclick="showDoc('tech',this)">Tech Stack</button>
+    </div>
+  </div>
+
+  <!-- PRD -->
+  <div class="doc active" id="doc-prd">
+    <div class="doc-header">
+      <div class="doc-badge badge-prd">Product Requirements Document</div>
+      <div class="doc-title">Futura — Gen Z Retirement Planning Web App</div>
+      <div class="doc-sub">Version 1.0 · Ready for engineering handoff</div>
+      <div class="meta-row">
+        <div class="meta-item"><strong>Status</strong>Draft for review</div>
+        <div class="meta-item"><strong>Owner</strong>Product</div>
+        <div class="meta-item"><strong>Stack</strong>Google Stitch · Supabase · RevenueCat · Google OAuth</div>
+        <div class="meta-item"><strong>Platform</strong>Web (serverless)</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>1. Problem statement</h2>
+      <p>Gen Z — broadly, adults aged 18–27 in 2025 — is the first generation that will overwhelmingly rely on personal savings rather than pensions for retirement. Yet the concept of "retirement" triggers disengagement rather than action. Three compounding forces drive this:</p>
+      <div class="card-grid">
+        <div class="card"><div class="card-label">Temporal distance</div><div class="card-value">40+ yrs</div><div class="card-desc">Average gap between a 22-year-old and retirement, making it psychologically remote</div></div>
+        <div class="card"><div class="card-label">Competing urgency</div><div class="card-value">67%</div><div class="card-desc">Of Gen Z cites rent, student debt, or living costs as their top financial priority</div></div>
+        <div class="card"><div class="card-label">Literacy gap</div><div class="card-value">2 in 5</div><div class="card-desc">Gen Z adults cannot define compound interest or explain how an index fund works</div></div>
+        <div class="card"><div class="card-label">Retirement blindness</div><div class="card-value">73%</div><div class="card-desc">Have no retirement savings target and have never used a retirement calculator</div></div>
+      </div>
+      <p>Existing tools (Vanguard, Fidelity, MoneySuperMarket) are built for 45-year-olds — dense, jargon-heavy, and visually austere. Futura's hypothesis: if retirement can be made tangible, social, and habit-forming, Gen Z will engage with it the same way they engage with Duolingo or fitness apps.</p>
+    </div>
+
+    <div class="section">
+      <h2>2. Target personas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Persona</th><th>Profile</th><th>Key pain</th><th>What Futura gives them</th></tr></thead>
+          <tbody>
+            <tr><td>The Starter</td><td>19–22, student or first job, £0 saved</td><td>"I can't afford to save anything"</td><td>Micro-contribution habit, visual progress that makes £10/month feel meaningful</td></tr>
+            <tr><td>The Procrastinator</td><td>23–27, earns >£25k, vaguely guilty</td><td>"I know I should but haven't started"</td><td>One-tap onboarding, clear "start today" CTA, guilt-free framing</td></tr>
+            <tr><td>The Side-Hustler</td><td>20–26, freelance or gig economy</td><td>No workplace pension, sporadic income</td><td>Irregular contribution mode, ISA/SIPP guidance, tax-saving context</td></tr>
+            <tr><td>The Curious Optimizer</td><td>24–28, has some savings, wants to go deeper</td><td>"I don't know if I'm on track"</td><td>Projection engine, scenario modelling, premium asset allocation breakdowns</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>3. Goals and success metrics</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Goal</th><th>Metric</th><th>Target (6 months post-launch)</th></tr></thead>
+          <tbody>
+            <tr><td>Acquisition</td><td>Monthly signups via Google OAuth</td><td>5,000 verified accounts</td></tr>
+            <tr><td>Activation</td><td>Users who complete onboarding + set a goal</td><td>60% of signups</td></tr>
+            <tr><td>Engagement</td><td>DAU/MAU ratio</td><td>≥ 25% (habit signal)</td></tr>
+            <tr><td>Habit formation</td><td>7-day contribution streaks</td><td>30% of active users</td></tr>
+            <tr><td>Monetisation</td><td>Free → Pro conversion</td><td>8% of activated users</td></tr>
+            <tr><td>Retention</td><td>60-day retention</td><td>≥ 40%</td></tr>
+            <tr><td>NPS</td><td>Net Promoter Score</td><td>≥ 45</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>4. Core features</h2>
+      <h3>4.1 Free tier features</h3>
+      <div class="story-block">
+        <div class="story-as">User story · Onboarding</div>
+        <div class="story-text">As a new user, I want to sign up with my Google account in under 30 seconds so I don't abandon before I've started.</div>
+        <div class="story-so">Acceptance: Google OAuth completes, Supabase user row created, onboarding wizard launched — all within one page navigation.</div>
+      </div>
+      <div class="story-block">
+        <div class="story-as">User story · Retirement goal wizard</div>
+        <div class="story-text">As a first-time user, I want a 3-step wizard that asks me my age, target retirement age, and desired monthly income, so Futura can calculate my savings target instantly.</div>
+        <div class="story-so">Acceptance: wizard stores goal to Supabase <code>user_goals</code> table; projection visible on dashboard on completion.</div>
+      </div>
+      <div class="story-block">
+        <div class="story-as">User story · Dashboard</div>
+        <div class="story-text">As a returning user, I want to see my projected retirement pot, current savings, and contribution streak on a single screen so I feel motivated to keep going.</div>
+        <div class="story-so">Acceptance: dashboard loads in &lt;1.5s; streak counter updates on contribution log; projection recalculates on any change.</div>
+      </div>
+      <div class="story-block">
+        <div class="story-as">User story · Contribution logging</div>
+        <div class="story-text">As a user, I want to log a contribution (manual entry) in under 10 seconds so that the habit feels frictionless.</div>
+        <div class="story-so">Acceptance: one-tap quick-log from dashboard; confirmation animation plays; streak incremented.</div>
+      </div>
+      <div class="story-block">
+        <div class="story-as">User story · Financial literacy bites</div>
+        <div class="story-text">As a financially inexperienced user, I want a daily 60-second "Finance Bite" card so I can learn one concept at a time without feeling overwhelmed.</div>
+        <div class="story-so">Acceptance: one new card per day from content CMS; card marked as read in Supabase; streak bonus awarded on read.</div>
+      </div>
+
+      <h3>4.2 Pro tier features (RevenueCat-gated)</h3>
+      <div class="story-block">
+        <div class="story-as">User story · Scenario modelling</div>
+        <div class="story-text">As a Pro user, I want to model "what if" scenarios — changing retirement age, contribution amount, or investment return — so I understand the impact of my choices.</div>
+        <div class="story-so">Acceptance: sliders update projection in real-time; paywall shown on first tap to free users with RevenueCat offering.</div>
+      </div>
+      <div class="story-block">
+        <div class="story-as">User story · Asset allocation breakdown</div>
+        <div class="story-text">As a Pro user, I want to see an interactive breakdown of where my money should be invested (stocks, bonds, cash) based on my age and risk profile.</div>
+        <div class="story-so">Acceptance: allocation chart rendered from user profile; updates when user adjusts risk slider; gated behind Pro entitlement check.</div>
+      </div>
+      <div class="story-block">
+        <div class="story-as">User story · PDF retirement report</div>
+        <div class="story-text">As a Pro user, I want to download a personalised retirement roadmap PDF I can share with a financial adviser.</div>
+        <div class="story-so">Acceptance: PDF generated server-side with user data; RevenueCat entitlement checked before generation endpoint is called.</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>5. Monetisation model</h2>
+      <div class="tier-grid">
+        <div class="tier-card">
+          <div class="tier-name">Free</div>
+          <div class="tier-price">£0 <span>forever</span></div>
+          <div class="tier-feature"><span class="check"></span>Google OAuth sign-up</div>
+          <div class="tier-feature"><span class="check"></span>Retirement goal wizard</div>
+          <div class="tier-feature"><span class="check"></span>Basic projection dashboard</div>
+          <div class="tier-feature"><span class="check"></span>Contribution logging + streaks</div>
+          <div class="tier-feature"><span class="check"></span>Daily Finance Bites (1/day)</div>
+          <div class="tier-feature"><span class="x-mark">–</span>Scenario modelling</div>
+          <div class="tier-feature"><span class="x-mark">–</span>Asset allocation breakdown</div>
+          <div class="tier-feature"><span class="x-mark">–</span>PDF retirement report</div>
+          <div class="tier-feature"><span class="x-mark">–</span>Tax optimisation tips</div>
+        </div>
+        <div class="tier-card pro">
+          <div class="tier-name">Pro</div>
+          <div class="tier-price">£4.99 <span>/ month</span></div>
+          <div class="tier-feature"><span class="check"></span>Everything in Free</div>
+          <div class="tier-feature"><span class="check"></span>Unlimited scenario modelling</div>
+          <div class="tier-feature"><span class="check"></span>Asset allocation breakdown</div>
+          <div class="tier-feature"><span class="check"></span>PDF retirement roadmap</div>
+          <div class="tier-feature"><span class="check"></span>Tax optimisation (ISA/SIPP tips)</div>
+          <div class="tier-feature"><span class="check"></span>Priority Finance Bites (full library)</div>
+          <div class="tier-feature"><span class="check"></span>Streak recovery tokens (2/month)</div>
+        </div>
+      </div>
+      <p>RevenueCat manages entitlement checking. Web purchases are handled via RevenueCat's web billing (Stripe under the hood). Entitlement status is synced to Supabase <code>user_subscriptions</code> via RevenueCat webhooks.</p>
+    </div>
+
+    <div class="section">
+      <h2>6. Out of scope (v1)</h2>
+      <div class="pill-row">
+        <span class="pill red">Direct broker integrations</span>
+        <span class="pill red">Open Banking / PSD2 sync</span>
+        <span class="pill red">Regulated financial advice</span>
+        <span class="pill red">Native mobile apps</span>
+        <span class="pill red">Social / friend comparison</span>
+        <span class="pill red">Employer pension sync</span>
+        <span class="pill red">Multi-currency / global markets</span>
+        <span class="pill red">Portfolio rebalancing engine</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESIGN DOC -->
+  <div class="doc" id="doc-design">
+    <div class="doc-header">
+      <div class="doc-badge badge-design">Design Document</div>
+      <div class="doc-title">UX & Visual Design — Futura Web</div>
+      <div class="doc-sub">For design and frontend handoff · Version 1.0</div>
+      <div class="meta-row">
+        <div class="meta-item"><strong>Platform</strong>Web (desktop-first, responsive)</div>
+        <div class="meta-item"><strong>Accessibility</strong>WCAG 2.1 AA</div>
+        <div class="meta-item"><strong>Target</strong>Gen Z, 18–28</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>1. UX philosophy</h2>
+      <p>Gen Z users make snap judgements — if Futura feels like a bank's website in the first 10 seconds, they will leave. The UX must feel more like a productivity or fitness app than a financial tool. Four principles govern every design decision:</p>
+      <div class="card-grid">
+        <div class="card"><div class="card-label">Principle 1</div><div class="card-value" style="font-size:15px;">Progress over perfection</div><div class="card-desc">Celebrate any action — logging £5, reading a Finance Bite, setting a goal. Never show empty states without a clear, low-friction next action.</div></div>
+        <div class="card"><div class="card-label">Principle 2</div><div class="card-value" style="font-size:15px;">Reduce dread, show hope</div><div class="card-desc">Frame data positively. "You're on track to retire with £380,000" not "You need to save £380,000." Language is warm, never alarming.</div></div>
+        <div class="card"><div class="card-label">Principle 3</div><div class="card-value" style="font-size:15px;">Instant gratification</div><div class="card-desc">Every input changes something on screen immediately — sliders animate in real-time, contributions trigger animations. The app rewards engagement in the moment.</div></div>
+        <div class="card"><div class="card-label">Principle 4</div><div class="card-value" style="font-size:15px;">Conversational, not clinical</div><div class="card-desc">Copy uses "you/your" throughout. Financial terms are followed by plain-language parentheticals. No acronyms without explanation on first use.</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>2. Visual design direction</h2>
+      <h3>Aesthetic: Bold editorial minimalism</h3>
+      <p>Futura uses a dark base with high-contrast lime-green accents — energetic, contemporary, and the opposite of a bank. Typography is the primary design element. White space is used aggressively to prevent overwhelm.</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Token</th><th>Value</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td>Primary background</td><td><code>#0E0E0E</code></td><td>Page background, app shell</td></tr>
+            <tr><td>Surface</td><td><code>#1A1A1A</code></td><td>Card backgrounds, nav</td></tr>
+            <tr><td>Border</td><td><code>#2A2A2A</code></td><td>Dividers, card borders</td></tr>
+            <tr><td>Accent / CTA</td><td><code>#C8F135</code></td><td>Primary buttons, streak highlights, progress bars</td></tr>
+            <tr><td>Text primary</td><td><code>#F5F5F0</code></td><td>Headings, labels</td></tr>
+            <tr><td>Text secondary</td><td><code>#888880</code></td><td>Body copy, supporting info</td></tr>
+            <tr><td>Danger</td><td><code>#FF5C5C</code></td><td>Errors, warnings only</td></tr>
+            <tr><td>Display font</td><td>Syne (700)</td><td>Hero figures, projected pot amount</td></tr>
+            <tr><td>Body font</td><td>Instrument Sans (400/500)</td><td>All UI copy</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Motion guidelines</h3>
+      <div class="pill-row">
+        <span class="pill blue">Page transitions: 200ms ease-out</span>
+        <span class="pill blue">Number counters: 600ms spring</span>
+        <span class="pill blue">Streak fire: CSS keyframe pulse</span>
+        <span class="pill blue">Contribution log: confetti burst (canvas)</span>
+        <span class="pill blue">Projection chart: draw-on animation</span>
+        <span class="pill blue">Paywall: slide-up sheet 300ms</span>
+      </div>
+      <p>Respect <code>prefers-reduced-motion</code>: all animations must be disabled or replaced with instant transitions when this media query is active.</p>
+    </div>
+
+    <div class="section">
+      <h2>3. Key screens and user flows</h2>
+      <h3>3.1 Onboarding flow</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <div class="step-body"><div class="step-title">Landing page (unauthenticated)</div><div class="step-desc">Hero: animated projection counter counting up to a large pot figure. Single CTA: "Start for free — takes 30 seconds." Google OAuth button is the only sign-up method. No email/password field to remove friction.</div></div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <div class="step-body"><div class="step-title">Google OAuth consent</div><div class="step-desc">Redirect to Google, return to /auth/callback. Supabase session created. First-time users routed to wizard; returning users to dashboard.</div></div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <div class="step-body"><div class="step-title">Goal wizard — Step 1: Your age</div><div class="step-desc">Large number input, "How old are you?" Copy: "No judgement — the earlier you start, the more powerful compound interest gets." Progress bar: 33%.</div></div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">4</div>
+          <div class="step-body"><div class="step-title">Goal wizard — Step 2: Retirement age</div><div class="step-desc">Slider defaulting to 65, range 50–75. Live preview: "That's [X] years of compound growth." Progress bar: 66%.</div></div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">5</div>
+          <div class="step-body"><div class="step-title">Goal wizard — Step 3: Monthly income goal</div><div class="step-desc">Slider for desired monthly income in retirement (£500–£5,000). Instantly shows required pot and monthly contribution. Progress bar: 100%.</div></div>
+        </div>
+        <div class="flow-step">
+          <div class="step-num">6</div>
+          <div class="step-body"><div class="step-title">First dashboard reveal</div><div class="step-desc">Animated "your journey starts here" reveal. Projection chart animates in. Streak initialised at Day 0. CTA: "Log your first contribution" or "Learn something today."</div></div>
+        </div>
+      </div>
+
+      <h3>3.2 Dashboard layout</h3>
+      <div class="card" style="margin: 0.75rem 0;">
+        <div class="card-label">Dashboard zones (desktop: 3-column grid)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px;">
+          <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:8px;padding:10px;font-size:12px;">
+            <div style="font-weight:500;margin-bottom:4px;">Left column</div>
+            <div style="color:var(--muted);line-height:1.6;">Projected pot (hero number)<br>Contribution streak<br>Quick-log CTA</div>
+          </div>
+          <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:8px;padding:10px;font-size:12px;">
+            <div style="font-weight:500;margin-bottom:4px;">Centre column</div>
+            <div style="color:var(--muted);line-height:1.6;">Projection chart (30yr line)<br>Scenario sliders (Pro)<br>On-track indicator</div>
+          </div>
+          <div style="background:var(--surface);border:0.5px solid var(--border);border-radius:8px;padding:10px;font-size:12px;">
+            <div style="font-weight:500;margin-bottom:4px;">Right column</div>
+            <div style="color:var(--muted);line-height:1.6;">Today's Finance Bite<br>Recent contributions<br>Upsell prompt (free users)</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>3.3 Habit-building loops</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Loop</th><th>Trigger</th><th>Variable reward</th><th>Investment</th></tr></thead>
+          <tbody>
+            <tr><td>Contribution streak</td><td>Daily contribution log reminder (opt-in push)</td><td>Streak milestone badges (7, 30, 100 days)</td><td>User data + habit identity</td></tr>
+            <tr><td>Finance Bite</td><td>"Daily bite ready" notification</td><td>XP points, knowledge level up</td><td>Reading time (60s)</td></tr>
+            <tr><td>Projection unlock</td><td>Pot passes milestone (£1k, £5k, £10k…)</td><td>Animated celebration + share card</td><td>Continued contributions</td></tr>
+            <tr><td>Weekly summary</td><td>Every Sunday 5pm email</td><td>Personalised insight about their week</td><td>Email open habit</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>4. Accessibility</h2>
+      <div class="pill-row">
+        <span class="pill green">WCAG 2.1 AA minimum</span>
+        <span class="pill green">4.5:1 contrast ratio (text)</span>
+        <span class="pill green">3:1 contrast ratio (UI components)</span>
+        <span class="pill green">Full keyboard navigation</span>
+        <span class="pill green">ARIA labels on all interactive elements</span>
+        <span class="pill green">Focus indicators visible at all times</span>
+        <span class="pill green">Touch targets ≥ 44×44px</span>
+        <span class="pill green">Screen reader tested (NVDA + VoiceOver)</span>
+      </div>
+      <p>The dark theme must maintain contrast ratios. Lime accent (#C8F135) on dark bg (#0E0E0E) achieves 9.8:1 — well above AA. All charts must include text alternatives or data tables for screen readers. Animations must respect <code>prefers-reduced-motion</code>.</p>
+    </div>
+  </div>
+
+  <!-- TECH STACK DOC -->
+  <div class="doc" id="doc-tech">
+    <div class="doc-header">
+      <div class="doc-badge badge-tech">Tech Stack Document</div>
+      <div class="doc-title">Architecture & Integration Guide — Futura</div>
+      <div class="doc-sub">For engineering handoff · Version 1.0</div>
+      <div class="meta-row">
+        <div class="meta-item"><strong>Frontend</strong>Google Stitch</div>
+        <div class="meta-item"><strong>Database</strong>Supabase (Postgres + Realtime)</div>
+        <div class="meta-item"><strong>Auth</strong>Google OAuth via Supabase Auth</div>
+        <div class="meta-item"><strong>Payments</strong>RevenueCat Web</div>
+        <div class="meta-item"><strong>Hosting</strong>Serverless (Vercel / Cloud Run)</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>1. Architecture overview</h2>
+      <div class="arch-block">
+        <div class="arch-title">Request flow (unauthenticated → authenticated)</div>
+        <div class="arch-body">
+          Browser → Google Stitch frontend → Supabase Auth (Google OAuth) → Supabase Postgres → Supabase Edge Functions (business logic) → RevenueCat API (entitlement check) → Response
+        </div>
+      </div>
+      <div class="arch-block">
+        <div class="arch-title">Serverless deployment topology</div>
+        <div class="arch-body">
+          All server-side logic lives in <strong>Supabase Edge Functions</strong> (Deno runtime) and/or <strong>Vercel Serverless Functions</strong>. No persistent server. Google Stitch handles frontend rendering and routing. Static assets served from CDN. No Docker required.
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>2. Authentication — Google OAuth via Supabase</h2>
+      <div class="arch-block">
+        <div class="arch-title">Integration pattern <span class="arch-tag" style="background:#e6f1fb;color:#0C447C;">Supabase Auth</span></div>
+        <div class="arch-body">Supabase Auth natively supports Google OAuth as a provider. No custom OAuth implementation is needed. Configure in Supabase dashboard: Auth → Providers → Google. Supply Google Cloud Console OAuth 2.0 credentials (Client ID + Secret). Supabase handles PKCE flow, token exchange, and session management.</div>
+      </div>
+      <div class="code-block">// Google Stitch — sign in
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+async function signInWithGoogle() {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/auth/callback`
+    }
+  })
+}
+
+// /auth/callback route — exchange code for session
+const { data, error } = await supabase.auth.exchangeCodeForSession(
+  new URL(location.href).searchParams.get('code')
+)</div>
+      <p>On first login, a Supabase Database Trigger (<code>on_auth_user_created</code>) inserts a row into the <code>profiles</code> table, seeding default values. The JWT issued by Supabase Auth is used for all subsequent API calls via the <code>Authorization: Bearer</code> header.</p>
+    </div>
+
+    <div class="section">
+      <h2>3. Data models</h2>
+      <h3>profiles</h3>
+      <div class="arch-block">
+        <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">FK → auth.users.id (PK)</span></div>
+        <div class="model-field"><span class="field-name">email</span><span class="field-type">text</span><span class="field-note">from Google OAuth claim</span></div>
+        <div class="model-field"><span class="field-name">display_name</span><span class="field-type">text</span><span class="field-note">from Google profile.name</span></div>
+        <div class="model-field"><span class="field-name">avatar_url</span><span class="field-type">text</span><span class="field-note">Google profile picture URL</span></div>
+        <div class="model-field"><span class="field-name">onboarding_complete</span><span class="field-type">boolean</span><span class="field-note">default false</span></div>
+        <div class="model-field"><span class="field-name">revenuecat_user_id</span><span class="field-type">text</span><span class="field-note">maps to RC customer ID</span></div>
+        <div class="model-field"><span class="field-name">created_at</span><span class="field-type">timestamptz</span><span class="field-note">auto</span></div>
+      </div>
+
+      <h3>user_goals</h3>
+      <div class="arch-block">
+        <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">PK</span></div>
+        <div class="model-field"><span class="field-name">user_id</span><span class="field-type">uuid</span><span class="field-note">FK → profiles.id</span></div>
+        <div class="model-field"><span class="field-name">current_age</span><span class="field-type">int2</span></div>
+        <div class="model-field"><span class="field-name">retirement_age</span><span class="field-type">int2</span></div>
+        <div class="model-field"><span class="field-name">target_monthly_income</span><span class="field-type">numeric(10,2)</span><span class="field-note">in GBP</span></div>
+        <div class="model-field"><span class="field-name">risk_profile</span><span class="field-type">text</span><span class="field-note">conservative | moderate | aggressive</span></div>
+        <div class="model-field"><span class="field-name">updated_at</span><span class="field-type">timestamptz</span><span class="field-note">auto</span></div>
+      </div>
+
+      <h3>contributions</h3>
+      <div class="arch-block">
+        <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">PK</span></div>
+        <div class="model-field"><span class="field-name">user_id</span><span class="field-type">uuid</span><span class="field-note">FK → profiles.id</span></div>
+        <div class="model-field"><span class="field-name">amount</span><span class="field-type">numeric(10,2)</span></div>
+        <div class="model-field"><span class="field-name">currency</span><span class="field-type">text</span><span class="field-note">default 'GBP'</span></div>
+        <div class="model-field"><span class="field-name">contribution_date</span><span class="field-type">date</span></div>
+        <div class="model-field"><span class="field-name">note</span><span class="field-type">text</span><span class="field-note">nullable</span></div>
+      </div>
+
+      <h3>user_subscriptions</h3>
+      <div class="arch-block">
+        <div class="model-field"><span class="field-name">id</span><span class="field-type">uuid</span><span class="field-note">PK</span></div>
+        <div class="model-field"><span class="field-name">user_id</span><span class="field-type">uuid</span><span class="field-note">FK → profiles.id</span></div>
+        <div class="model-field"><span class="field-name">revenuecat_customer_id</span><span class="field-type">text</span></div>
+        <div class="model-field"><span class="field-name">entitlement</span><span class="field-type">text</span><span class="field-note">free | pro</span></div>
+        <div class="model-field"><span class="field-name">expires_at</span><span class="field-type">timestamptz</span><span class="field-note">null = free</span></div>
+        <div class="model-field"><span class="field-name">updated_at</span><span class="field-type">timestamptz</span><span class="field-note">updated by RC webhook</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>4. RevenueCat integration (web)</h2>
+      <div class="arch-block">
+        <div class="arch-title">Entitlement gating flow</div>
+        <div class="arch-body">
+          1. On sign-in, frontend calls <code>/functions/v1/rc-identify</code> Edge Function with Supabase JWT.<br>
+          2. Edge Function calls RevenueCat REST API: <code>POST /v1/subscribers/{user_id}</code> to create/retrieve customer.<br>
+          3. Edge Function upserts <code>user_subscriptions</code> with current entitlement status.<br>
+          4. Frontend reads entitlement from Supabase — no direct RC SDK call from the browser for security.<br>
+          5. RevenueCat webhook (<code>INITIAL_PURCHASE</code>, <code>RENEWAL</code>, <code>CANCELLATION</code> events) hits <code>/functions/v1/rc-webhook</code>, which updates <code>user_subscriptions</code>.
+        </div>
+      </div>
+      <div class="code-block">// Supabase Edge Function: entitlement check helper
+async function getUserEntitlement(userId: string): Promise<'free' | 'pro'> {
+  const { data } = await supabase
+    .from('user_subscriptions')
+    .select('entitlement')
+    .eq('user_id', userId)
+    .single()
+  return data?.entitlement ?? 'free'
+}
+
+// Gate a Pro feature
+export async function handler(req: Request) {
+  const { userId } = await getAuthUser(req)
+  const entitlement = await getUserEntitlement(userId)
+  if (entitlement !== 'pro') {
+    return new Response(JSON.stringify({ error: 'pro_required' }), { status: 403 })
+  }
+  // ... Pro feature logic
+}</div>
+      <p>For web purchases, RevenueCat Web Billing (Stripe) is used. The purchase button on the frontend opens RevenueCat's hosted checkout — no PCI scope for Futura. After payment, RC fires the webhook within seconds, updating the user's entitlement in Supabase.</p>
+    </div>
+
+    <div class="section">
+      <h2>5. Google Stitch frontend</h2>
+      <p>Google Stitch provides the component framework and routing. It integrates with Supabase via the Supabase JS client. Key conventions:</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Route</th><th>Component</th><th>Auth required</th><th>Entitlement</th></tr></thead>
+          <tbody>
+            <tr><td><code>/</code></td><td>LandingPage</td><td>No</td><td>None</td></tr>
+            <tr><td><code>/auth/callback</code></td><td>AuthCallback</td><td>No</td><td>None</td></tr>
+            <tr><td><code>/onboarding</code></td><td>GoalWizard</td><td>Yes</td><td>Free</td></tr>
+            <tr><td><code>/dashboard</code></td><td>Dashboard</td><td>Yes</td><td>Free</td></tr>
+            <tr><td><code>/projection</code></td><td>ProjectionEngine</td><td>Yes</td><td>Pro (scenarios)</td></tr>
+            <tr><td><code>/learn</code></td><td>FinanceBites</td><td>Yes</td><td>Free (1/day) / Pro (all)</td></tr>
+            <tr><td><code>/settings</code></td><td>Settings</td><td>Yes</td><td>Free</td></tr>
+            <tr><td><code>/upgrade</code></td><td>PaywallPage</td><td>Yes</td><td>None</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>Route guards: a Stitch middleware checks <code>supabase.auth.getSession()</code> on every protected route. If no session, redirect to <code>/</code>. If session but no <code>onboarding_complete</code>, redirect to <code>/onboarding</code>.</p>
+    </div>
+
+    <div class="section">
+      <h2>6. Projection engine</h2>
+      <p>Retirement projections run client-side for instant interactivity. The formula uses standard future value with monthly compounding:</p>
+      <div class="code-block">// Retirement projection — runs in browser (no server call needed)
+function projectRetirementPot(params: {
+  currentAge: number
+  retirementAge: number
+  monthlyContribution: number
+  annualReturn: number  // default 0.07 (7% global equities estimate)
+  existingPot?: number
+}): number {
+  const months = (params.retirementAge - params.currentAge) * 12
+  const monthlyRate = params.annualReturn / 12
+  const futureValueContributions =
+    params.monthlyContribution * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate)
+  const futureValueExisting =
+    (params.existingPot ?? 0) * Math.pow(1 + monthlyRate, months)
+  return Math.round(futureValueContributions + futureValueExisting)
+}</div>
+      <p>The 7% annual return default is sourced from long-run global equity index averages (MSCI World, 1970–2023). Users can adjust this in Pro mode. A disclaimer is shown on all projection screens: "Projections are illustrative only and not financial advice."</p>
+    </div>
+
+    <div class="section">
+      <h2>7. Third-party integrations</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Service</th><th>Purpose</th><th>Integration method</th></tr></thead>
+          <tbody>
+            <tr><td>Supabase Auth</td><td>Google OAuth, session management</td><td>Supabase JS SDK</td></tr>
+            <tr><td>Supabase Postgres</td><td>All user data, goals, contributions</td><td>Supabase JS SDK + RLS policies</td></tr>
+            <tr><td>Supabase Edge Functions</td><td>Server-side business logic, webhook handlers</td><td>Deno / TypeScript</td></tr>
+            <tr><td>RevenueCat Web</td><td>Subscription management, entitlement gating</td><td>RC REST API from Edge Functions; hosted checkout for web payments</td></tr>
+            <tr><td>Google OAuth</td><td>Identity provider</td><td>Via Supabase Auth (no direct Google API calls)</td></tr>
+            <tr><td>Resend (or Supabase Auth emails)</td><td>Weekly summary emails, streak reminders</td><td>Supabase Edge Function cron + Resend API</td></tr>
+            <tr><td>Sentry</td><td>Error monitoring</td><td>Sentry JS SDK in Stitch frontend</td></tr>
+            <tr><td>PostHog</td><td>Product analytics (events, funnels, feature flags)</td><td>PostHog JS SDK</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>8. Security and Row Level Security</h2>
+      <div class="arch-block">
+        <div class="arch-title">RLS policies (all tables)</div>
+        <div class="arch-body">Every table has RLS enabled. Users can only SELECT/INSERT/UPDATE rows where <code>user_id = auth.uid()</code>. The <code>user_subscriptions</code> table is additionally protected: only the service role (used by Edge Functions) can UPDATE entitlement — never the anon client. This prevents client-side entitlement spoofing.</div>
+      </div>
+      <div class="code-block">-- Example RLS policy: contributions table
+ALTER TABLE contributions ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Users can only see their own contributions"
+ON contributions FOR SELECT
+USING (user_id = auth.uid());
+
+CREATE POLICY "Users can insert their own contributions"
+ON contributions FOR INSERT
+WITH CHECK (user_id = auth.uid());</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showDoc(id, btn) {
+  document.querySelectorAll('.doc').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('doc-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>

@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.env.local.example
+!.dev.vars.example
+dist/
+coverage/
+*.tsbuildinfo
+.qodo/
+
+# Accidental tsc output next to sources
+futura-api/src/**/*.js
