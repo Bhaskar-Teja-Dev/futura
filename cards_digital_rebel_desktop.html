@@ -139,7 +139,7 @@
 <h2 class="font-headline font-black text-2xl uppercase tracking-tighter bg-[#121212] text-[#f6f6f6] px-4 py-1">ACTIVE_REBEL_CARDS</h2>
 <div class="flex-1 h-1 bg-[#121212]"></div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8" id="cards-grid">
 <!-- Card 1 -->
 <div class="neo-card-pattern-1 border-4 border-[#121212] p-8 aspect-[1.586/1] flex flex-col justify-between text-[#f6f6f6] hard-shadow-lg relative overflow-hidden group">
 <div class="flex justify-between items-start z-10">
@@ -288,4 +288,67 @@
 <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="add_manual_asset_digital_rebel.html">Add Asset</a>
 </div>
 </footer>
+<script>
+(function () {
+  const PATTERNS = [
+    { bg: 'neo-card-pattern-1', text: '#f6f6f6', badge: 'bg-[#cafd00] text-[#121212]' },
+    { bg: 'bg-[#121212]', text: '#cafd00', badge: 'bg-white text-[#121212]' },
+    { bg: 'bg-[#4e6300]', text: '#cafd00', badge: 'bg-[#cafd00] text-[#121212]' },
+    { bg: 'bg-[#a400a4]', text: '#ff81f5', badge: 'bg-[#ff81f5] text-[#121212]' },
+  ];
+
+  function renderUserCards() {
+    const grid = document.getElementById('cards-grid');
+    const cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+    if (!cards.length) return;
+
+    // Remove any previously rendered user cards to avoid duplicates on refresh
+    grid.querySelectorAll('[data-user-card]').forEach(el => el.remove());
+
+    cards.forEach((card, i) => {
+      const pattern = PATTERNS[i % PATTERNS.length];
+      const el = document.createElement('div');
+      el.setAttribute('data-user-card', card.id);
+      el.className = `${pattern.bg} border-4 border-[#121212] p-8 aspect-[1.586/1] flex flex-col justify-between hard-shadow-lg relative overflow-hidden group`;
+      el.style.color = pattern.text;
+      el.innerHTML = `
+        <div class="flex justify-between items-start z-10">
+          <span class="material-symbols-outlined text-5xl" style="color:${pattern.text}">credit_card</span>
+          <span class="font-headline font-black italic text-xl" style="color:${pattern.text}">REBEL_CARD</span>
+        </div>
+        <div class="z-10">
+          <p class="font-mono text-2xl tracking-widest mb-4" style="color:${pattern.text}">**** **** **** ${card.lastFour}</p>
+          <div class="flex justify-between items-end">
+            <div>
+              <p class="text-[10px] uppercase font-headline tracking-widest opacity-70" style="color:${pattern.text}">Card Holder</p>
+              <p class="font-headline font-black uppercase" style="color:${pattern.text}">${card.name}</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="${pattern.badge} px-4 py-1 border-2 border-[#121212] font-headline font-black rotate-2 text-sm">ACTIVE</div>
+              <button onclick="deleteCard(${card.id})" title="Remove card" class="bg-[#b02500] text-white border-2 border-[#121212] w-8 h-8 flex items-center justify-center font-black text-lg hover:scale-110 transition-transform z-20">&times;</button>
+            </div>
+          </div>
+        </div>`;
+      // Insert before the stats bento card (last static child)
+      const staticCards = grid.children;
+      // Insert as 3rd element (after the 2 static cards, before the bento box) or at end
+      const bentoBox = grid.querySelector('.bg-\\[\\#cafd00\\]');
+      if (bentoBox) {
+        grid.insertBefore(el, bentoBox);
+      } else {
+        grid.appendChild(el);
+      }
+    });
+  }
+
+  window.deleteCard = function(id) {
+    let cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+    cards = cards.filter(c => c.id !== id);
+    localStorage.setItem('rebel_cards', JSON.stringify(cards));
+    document.querySelector(`[data-user-card="${id}"]`)?.remove();
+  };
+
+  renderUserCards();
+})();
+</script>
 </body></html>
