@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Rebel | Own The Revolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#d3d5d5",
+              "error": "#b02500",
+              "surface-container-high": "#e1e3e3",
+              "on-primary-fixed": "#3a4a00",
+              "error-dim": "#b92902",
+              "on-surface-variant": "#5a5c5c",
+              "on-secondary-fixed-variant": "#5c5b5b",
+              "on-primary-fixed-variant": "#526900",
+              "tertiary-fixed": "#ff81f5",
+              "primary-fixed": "#cafd00",
+              "surface-container-highest": "#dbdddd",
+              "on-primary": "#e1ff88",
+              "error-container": "#f95630",
+              "on-primary-container": "#4a5e00",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed-dim": "#d7d4d3",
+              "surface-variant": "#dbdddd",
+              "surface-tint": "#4e6300",
+              "on-secondary-fixed": "#403f3f",
+              "surface": "#f6f6f6",
+              "inverse-on-surface": "#9c9d9d",
+              "on-tertiary": "#ffeef8",
+              "primary-fixed-dim": "#beee00",
+              "on-surface": "#2d2f2f",
+              "primary": "#4e6300",
+              "on-secondary": "#f5f2f1",
+              "surface-container": "#e7e8e8",
+              "primary-container": "#cafd00",
+              "on-secondary-container": "#525151",
+              "on-background": "#2d2f2f",
+              "on-error-container": "#520c00",
+              "surface-bright": "#f6f6f6",
+              "on-tertiary-fixed-variant": "#6a006a",
+              "inverse-surface": "#0c0f0f",
+              "secondary-container": "#e5e2e1",
+              "tertiary-container": "#ff81f5",
+              "inverse-primary": "#cafd00",
+              "on-tertiary-container": "#5b005b",
+              "tertiary": "#a400a4",
+              "surface-container-low": "#f0f1f1",
+              "secondary-dim": "#504f4f",
+              "tertiary-dim": "#900090",
+              "secondary-fixed": "#e5e2e1",
+              "on-tertiary-fixed": "#320032",
+              "primary-dim": "#435600",
+              "outline": "#767777",
+              "outline-variant": "#acadad",
+              "on-error": "#ffefec",
+              "background": "#f6f6f6",
+              "secondary": "#5c5b5b",
+              "tertiary-fixed-dim": "#ff61f8"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            shadow-color: #121212;
+            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .neo-shadow-large {
+            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .active-nav-shadow {
+            box-shadow: 2px 2px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .hover-lift:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
+<div class="flex items-center gap-8">
+<a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
+<nav class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
+<a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html" id="nav-dashboard">Dashboard</a>
+<a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="projections_digital_rebel_desktop.html" id="nav-markets">Markets</a>
+<a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="projections_digital_rebel_desktop.html" id="nav-assets">Assets</a>
+<a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html" id="nav-vault">Vault</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-surface-container border-2 border-on-surface px-3 py-1 neo-shadow" id="search-container">
+<span class="material-symbols-outlined text-on-surface-variant text-sm pr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-xs font-headline uppercase tracking-widest w-32" placeholder="Search Markets" type="text"/>
+</div>
+<a href="onboarding_digital_rebel_desktop.html" class="bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs px-4 py-2 hover-lift transition-all no-underline" id="btn-connect-wallet">
+                Connect Wallet
+            </a>
+<div class="flex gap-2">
+<a href="dashboard_digital_rebel_desktop.html"><span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all">notifications</span></a>
+<a href="settings_digital_rebel_desktop.html"><span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all">settings</span></a>
+</div>
+</div>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[921px] flex flex-col md:flex-row items-stretch border-b-4 border-on-surface overflow-hidden" id="hero-section">
+<div class="flex-1 p-8 md:p-16 flex flex-col justify-center bg-surface z-10 relative">
+<div class="inline-block bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface px-4 py-1 font-headline font-black uppercase tracking-widest text-sm mb-6 -rotate-2 w-fit" id="hero-alpha-badge">
+                    V0.4: AGGRESSIVE_ALPHA
+                </div>
+<h1 class="font-headline font-black text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase text-on-surface mb-8" id="hero-title">
+                    OWN THE <br/><span class="text-primary-fixed drop-shadow-[4px_4px_0px_#121212]">REVOLUTION</span>
+</h1>
+<p class="font-headline text-xl md:text-2xl uppercase font-bold tracking-tight text-on-surface-variant max-w-xl mb-12" id="hero-description">
+                    Traditional finance is a dead protocol. High-speed, zero-custody, total transparency. The stack built for those who never wait.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6">
+<a href="onboarding_digital_rebel_desktop.html" class="bg-primary-fixed text-on-primary-fixed px-8 py-4 border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter flex items-center justify-center gap-3 neo-shadow-large hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(18,18,18,1)] transition-all group no-underline" id="btn-google-signin">
+<img alt="G" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbSlYWQx7duriQ_rj1NkH12h0GPa6HXIDIMazPgvscwHaU0LrccorkuzuIhtDpMuUMIEvQc27qUB_AaYDxuJNz7VeElyUlxaHNGnABnsN5QMzTBTDVSGsx05jIxorxhKmdzR_IiiffekEIQR4xadI5EnXGV8YwxwVHVVo88rn9uq2i-uyNK-W1jaVVwvyb9vqadxunjI4sluWlaRmjOGa0sqxde0pAYhzni0eKL2qxhiuPvpW56hqN44MwRReBRJzNUdWS-P6qOwh"/>
+                        Sign in with Google
+                    </a>
+<a href="dashboard_digital_rebel_desktop.html" class="bg-surface-container-lowest text-on-surface px-8 py-4 border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter neo-shadow hover:bg-on-surface hover:text-surface transition-all no-underline" id="btn-view-live-feed">
+                        View Live Feed
+                    </a>
+</div>
+<div class="mt-16 flex items-center gap-4">
+<div class="flex -space-x-3">
+<img class="w-12 h-12 border-2 border-on-surface grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyq1m9nE4pMMSMT8TnEDlgwtdeVt4vkQhh0DWbWsswluXuTnFVGm2mjGnOw3jARaKPYo5trD_AKG91_rpRRZ1pB4WcrZQUp_bx5q8lXSBfY9VFsb1l6ZdGY0SqqJ7ZGXL2z3EH-YHDzwLNxaFtPX8Iqiw6H9PnTzDvD8_huU4keUlhPT7MgoUzNRePnoHT9R9GgM4ddS3M_78rN6lx0bcF-pTcjOna3orrM9qe4VH02qR2m8J2-bMAu_2J1Yb44-yk4awssdZOM6-o"/>
+<img class="w-12 h-12 border-2 border-on-surface grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFMcMek-FWVIV_d_rqQ2NlKrDnPvwKjXPdhfSRaTQta6ncvPInDNoFMXVfy2IrHiGMhSg_RDDi2BT6-htmuEFaj15u7DyjR3Z8PVNnjMxGGUq5_7PcbOBaebLTmjPLMQ_wXrMWahtHbMZ4f3N1EjJnh8TVWdsmbVsL-yxOuGctIwlmGX1AaANW_fM6AsmoJ6Mx0M1ZLXC_QZNP6WGpK_sIp0s8aLmeZwGhDSelh8hbQ-jVbGfuNhrlM_gmbE9U74_x0aBX2p9Mm1bD"/>
+<img class="w-12 h-12 border-2 border-on-surface grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEV2Q4rXjyGlFeSH0ZJoFuKMmgAg31feLnI-xab-dX0llNJNd_1pfiw8l_1P-2bNm8tuaj2UP2Ee4oiwkYdOtM40LP8Js4VHu2Cy057XVw5Lv4h4teyPu7oylD8jZBeeGSUDp36QluqOlhrMe0kk_LckbXkoi9LYyB8e-8tME7L-n7hBQr5yiAA3SOPA2m4MMO-v3JGCVcgZuOp4j9Rhj3iV-3LONj13bTPI8Tbd_F58j__jHehocoykvuZVCQ4jN1aNTJH0sOb5po"/>
+</div>
+<span class="font-headline font-black text-xs uppercase tracking-widest" id="active-rebels-count">+12.4k rebels active now</span>
+</div>
+</div>
+<div class="flex-1 min-h-[400px] bg-primary-fixed border-l-4 border-on-surface relative group">
+<div class="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-80" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQI8Wl4_K8x4wNmN9tifE_OPA1BeHo5vTZZZ1E6NMnT6Mk0PrFfpSCYC0Q7SeJA3CsT02HGl05ghQycOCoVQLinXm6CCi4hjvOJiMkKyt1KhGZiqWYotNdB2yBAEMv3nDDh3heHgIZW5yDu4ICDrfa05TgbHxsW-CD1mBAwB9-zHQl2CoE6ldJIVgW3ONqK9rESrgQioZD8yb9LESW3srx1Iar8QhqLWVEmYA3tCt-VlmfhaEvyCabLomzHNVjPuzTKLd9g3zZ5xn-')"></div>
+<div class="absolute inset-0 flex items-center justify-center p-8">
+<div class="bg-surface-container-lowest border-4 border-on-surface p-6 neo-shadow-large rotate-3 group-hover:rotate-0 transition-transform duration-500" id="vault-card">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline font-black text-2xl uppercase leading-none">Global Vault</h3>
+<p class="text-[10px] font-headline font-black opacity-50 uppercase tracking-widest mt-1">Status: Operational</p>
+</div>
+<span class="material-symbols-outlined text-4xl">bolt</span>
+</div>
+<div class="space-y-4">
+<div class="h-12 bg-surface-container border-2 border-on-surface flex items-center px-4 justify-between">
+<span class="font-headline font-bold text-xs">$REBEL_TOKEN</span>
+<span class="text-primary font-black">+42.8%</span>
+</div>
+<div class="h-12 bg-surface-container border-2 border-on-surface flex items-center px-4 justify-between">
+<span class="font-headline font-bold text-xs">SETTLEMENT_TIME</span>
+<span class="font-black">0.02s</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Propositions - Bento Grid -->
+<section class="p-8 md:p-16 bg-[#121212] dark:bg-black" id="protocol-rules-section">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div class="max-w-2xl">
+<h2 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter text-primary-fixed mb-4">
+                        The Protocol <br/>Rules
+                    </h2>
+<p class="font-headline font-bold text-surface-container-highest uppercase text-lg">
+                        Everything you were told about finance was a lie. We're here to fix the source code.
+                    </p>
+</div>
+<div class="hidden lg:block text-right">
+<span class="font-headline font-black text-9xl text-white/5 uppercase select-none">REBEL</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="rules-grid">
+<!-- Instant Settlement -->
+<div class="bg-surface p-8 border-4 border-on-surface neo-shadow hover-lift group" id="card-instant-settlement">
+<div class="w-16 h-16 bg-primary-fixed border-2 border-on-surface flex items-center justify-center mb-8 rotate-3 group-hover:rotate-0 transition-all">
+<span class="material-symbols-outlined text-4xl font-black">electric_bolt</span>
+</div>
+<h3 class="font-headline font-black text-3xl uppercase mb-4 tracking-tighter">Instant <br/>Settlement</h3>
+<p class="font-body text-on-surface-variant font-medium">
+                        Wait cycles are for the legacy world. Execute trades and move capital in sub-second blocks. Absolute speed is our baseline.
+                    </p>
+<div class="mt-8 pt-8 border-t-2 border-surface-container">
+<a href="learn_digital_rebel_desktop.html" class="font-headline font-black text-xs uppercase tracking-widest text-primary hover:underline cursor-pointer no-underline">Read the docs →</a>
+</div>
+</div>
+<!-- Zero Custody -->
+<div class="bg-primary-fixed p-8 border-4 border-on-surface neo-shadow hover-lift group" id="card-zero-custody">
+<div class="w-16 h-16 bg-surface border-2 border-on-surface flex items-center justify-center mb-8 -rotate-3 group-hover:rotate-0 transition-all">
+<span class="material-symbols-outlined text-4xl font-black">lock_open</span>
+</div>
+<h3 class="font-headline font-black text-3xl uppercase mb-4 tracking-tighter">Zero <br/>Custody</h3>
+<p class="font-body text-on-primary-fixed font-medium">
+                        Your keys, your access. We never hold your assets. You are the sovereign ruler of your digital wealth. No permission required.
+                    </p>
+<div class="mt-8 pt-8 border-t-2 border-on-primary-fixed/20">
+<a href="settings_digital_rebel_desktop.html" class="font-headline font-black text-xs uppercase tracking-widest text-on-primary-fixed hover:underline cursor-pointer no-underline">Security audit v4 →</a>
+</div>
+</div>
+<!-- Ghost Mode -->
+<div class="bg-tertiary-fixed p-8 border-4 border-on-surface neo-shadow hover-lift group" id="card-ghost-mode">
+<div class="w-16 h-16 bg-surface border-2 border-on-surface flex items-center justify-center mb-8 rotate-6 group-hover:rotate-0 transition-all">
+<span class="material-symbols-outlined text-4xl font-black">visibility_off</span>
+</div>
+<h3 class="font-headline font-black text-3xl uppercase mb-4 tracking-tighter">Ghost <br/>Mode</h3>
+<p class="font-body text-on-tertiary-container font-medium">
+                        Encryption-first privacy. Operate without being tracked by legacy surveillance entities. Your identity is your choice.
+                    </p>
+<div class="mt-8 pt-8 border-t-2 border-on-tertiary-container/20">
+<a href="settings_digital_rebel_desktop.html" class="font-headline font-black text-xs uppercase tracking-widest text-on-tertiary-container hover:underline cursor-pointer no-underline">Privacy.exe →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Asset Market Snapshot -->
+<section class="bg-surface py-24 px-8 border-b-4 border-on-surface overflow-hidden" id="market-snapshot-section">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+<div class="lg:w-1/2">
+<h2 class="font-headline font-black text-5xl md:text-6xl uppercase tracking-tighter mb-8 leading-[0.9]">
+                        LIVE FROM THE <br/><span class="bg-on-surface text-primary-fixed px-2">WAR_ROOM</span>
+</h2>
+<div class="space-y-4" id="market-list">
+<div class="flex items-center justify-between p-4 bg-surface-container border-2 border-on-surface neo-shadow">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-[#f6f6f6] border-2 border-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined font-black">token</span>
+</div>
+<div>
+<p class="font-headline font-black uppercase text-sm leading-none">RBL_GENESIS</p>
+<p class="text-[10px] font-headline font-bold opacity-60">MARKET CAP: $4.2B</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-black text-xl">$142.20</p>
+<p class="text-primary font-black text-xs uppercase">+14.2%</p>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container border-2 border-on-surface neo-shadow">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-[#f6f6f6] border-2 border-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined font-black">currency_bitcoin</span>
+</div>
+<div>
+<p class="font-headline font-black uppercase text-sm leading-none">BTC_CORE</p>
+<p class="text-[10px] font-headline font-bold opacity-60">MARKET CAP: $1.2T</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-headline font-black text-xl">$64,302</p>
+<p class="text-error font-black text-xs uppercase">-2.4%</p>
+</div>
+</div>
+</div>
+<a href="projections_digital_rebel_desktop.html" class="mt-12 w-full lg:w-fit px-12 py-5 bg-on-surface text-surface font-headline font-black uppercase text-xl neo-shadow hover:bg-primary-fixed hover:text-on-surface transition-colors inline-block text-center no-underline" id="btn-enter-marketplace">
+                        Enter Marketplace
+                    </a>
+</div>
+<div class="lg:w-1/2 relative">
+<div class="relative z-10 border-4 border-on-surface neo-shadow-large">
+<img class="w-full grayscale hover:grayscale-0 transition-all duration-700" id="market-preview-image" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc_dlxOeV7StrZjUfmnrrB52UuZhfSZy_FF-A0Hm_m9Ki9SAxa0TzZBtNwUEmkBF4PgP7ntmKH_kEU7fSz0gFQ0RbSZd3R4U12-MLkMFE3Lq20wnI2fNCslGYeo8btGTVxpg4kvBhutahvyOG_dPtRfOr8gdqEf_XA4wpe9UcA9VJXD76pIFj5dls0Buz_ZgDCS16_kNQtsIFrMyNaKB2hjybtx0BtJj1okx94Nh12oGdDUMkdHO1x5CKGkHmJer_I6okKxmytCQGs"/>
+</div>
+<!-- Decorative Sticker -->
+<div class="absolute -top-6 -right-6 z-20 bg-primary-fixed border-2 border-on-surface px-6 py-3 rotate-12 neo-shadow">
+<p class="font-headline font-black text-sm uppercase">HIGH_VOLATILITY</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#121212] dark:bg-[#000000] w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 border-t-4 border-[#cafd00]" id="main-footer">
+<div class="flex flex-col items-center md:items-start">
+<a href="index.html" class="text-4xl font-black text-[#cafd00] font-headline no-underline">DIGITAL REBEL</a>
+<p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©2024 DIGITAL REBEL. NO PERMISSION GRANTED.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-8" id="footer-links">
+<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-[#cafd00]" href="index.html">Manifesto</a>
+<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="settings_digital_rebel_desktop.html">Privacy.exe</a>
+<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="settings_digital_rebel_desktop.html">Terms.sh</a>
+<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="settings_digital_rebel_desktop.html">Security</a>
+<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="projections_digital_rebel_desktop.html">API</a>
+</div>
+<div class="flex gap-4" id="footer-social-actions">
+<div class="w-12 h-12 border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all">
+<span class="material-symbols-outlined font-black">terminal</span>
+</div>
+<div class="w-12 h-12 border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all">
+<span class="material-symbols-outlined font-black">hub</span>
+</div>
+</div>
+</footer>
+<!-- Supabase + Futura Auth -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/js/config.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/api.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Wire Google sign-in button
+    const googleBtn = document.getElementById('btn-google-signin');
+    if (googleBtn) {
+      googleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        signInWithGoogle();
+      });
+    }
+  });
+</script>
+</body></html>

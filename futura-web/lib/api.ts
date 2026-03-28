@@ -88,5 +88,16 @@ export const api = {
   },
   allocation: {
     get: () => apiFetch('/api/allocation')
+  },
+  zens: {
+    purchase: (razorpay_payment_id: string) =>
+      apiFetch('/api/zens/purchase', {
+        method: 'POST',
+        body: JSON.stringify({ razorpay_payment_id })
+      })
+  },
+  subscriptions: {
+    purchasePro: () =>
+      apiFetch('/api/subscriptions/purchase-pro', { method: 'POST' })
   }
 }

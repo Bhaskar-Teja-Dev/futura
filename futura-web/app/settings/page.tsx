@@ -1,24 +1,37 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getCustomerInfo } from '../../lib/revenuecat'
-import { CustomerPortalLink } from '../../components/CustomerPortalLink'
+import { api } from '../../lib/api'
 
 export default function SettingsPage() {
-  const [customerInfoText, setCustomerInfoText] = useState('Loading customer info...')
-  const [portalUrl, setPortalUrl] = useState<string>('')
+  const [zens, setZens] = useState<number | null>(null)
+  const [proStatus, setProStatus] = useState<string>('Loading...')
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const load = async () => {
       try {
-        const info = await getCustomerInfo()
-        setCustomerInfoText(JSON.stringify(info, null, 2))
-        // RevenueCat's customer management UX for web is hosted. Keep this placeholder
-        // ready to be swapped with your configured management URL.
-        setPortalUrl('https://www.revenuecat.com/docs/web/web-billing/web-sdk')
-      } catch (error) {
-        console.error(error)
-        setCustomerInfoText('Could not load customer info.')
+        const result = await api.profile.get() as {
+          profile?: { zens: number }
+          subscription?: { entitlement: string; expires_at: string | null }
+        }
+
+        setZens(result?.profile?.zens ?? 0)
+
+        const sub = result?.subscription
+        if (sub?.entitlement === 'pro') {
+          const expiresAt = sub.expires_at ? new Date(sub.expires_at) : null
+          if (!expiresAt || expiresAt > new Date()) {
+            setProStatus(`Pro active${expiresAt ? ` — expires ${expiresAt.toLocaleDateString()}` : ''}`)
+          } else {
+            setProStatus('Pro expired')
+          }
+        } else {
+          setProStatus('Free')
+        }
+      } catch (err) {
+        console.error(err)
+        setError('Could not load profile info.')
       }
     }
 
@@ -27,15 +40,22 @@ export default function SettingsPage() {
 
   return (
     <main>
-      <h1>Settings (Placeholder)</h1>
-      <div className="card">
-        <h2>Subscription</h2>
-        <CustomerPortalLink url={portalUrl} />
-      </div>
-      <div className="card">
-        <h2>Customer info</h2>
-        <pre>{customerInfoText}</pre>
-      </div>
+      <h1>Settings</h1>
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        <>
+          <div className="card">
+            <h2>Zens Balance</h2>
+            <p>{zens !== null ? `${zens} Zens` : 'Loading...'}</p>
+          </div>
+          <div className="card">
+            <h2>Subscription</h2>
+            <p>{proStatus}</p>
+            <a href="/upgrade">Manage subscription</a>
+          </div>
+        </>
+      )}
     </main>
   )
 }

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>REBEL_CHECKOUT | Digital Rebel</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary-container": "#5b005b",
+                        "on-primary-container": "#4a5e00",
+                        "on-background": "#2d2f2f",
+                        "error": "#b02500",
+                        "tertiary": "#a400a4",
+                        "primary-fixed-dim": "#beee00",
+                        "background": "#f6f6f6",
+                        "surface": "#f6f6f6",
+                        "inverse-surface": "#0c0f0f",
+                        "inverse-primary": "#cafd00",
+                        "on-tertiary-fixed": "#320032",
+                        "secondary-fixed": "#e5e2e1",
+                        "primary": "#4e6300",
+                        "secondary-dim": "#504f4f",
+                        "primary-fixed": "#cafd00",
+                        "secondary-container": "#e5e2e1",
+                        "surface-container": "#e7e8e8",
+                        "on-error-container": "#520c00",
+                        "outline-variant": "#acadad",
+                        "on-tertiary-fixed-variant": "#6a006a",
+                        "primary-dim": "#435600",
+                        "surface-container-low": "#f0f1f1",
+                        "secondary-fixed-dim": "#d7d4d3",
+                        "outline": "#767777",
+                        "on-primary-fixed-variant": "#526900",
+                        "tertiary-container": "#ff81f5",
+                        "on-secondary": "#f5f2f1",
+                        "on-primary-fixed": "#3a4a00",
+                        "surface-dim": "#d3d5d5",
+                        "on-secondary-fixed-variant": "#5c5b5b",
+                        "tertiary-fixed-dim": "#ff61f8",
+                        "tertiary-dim": "#900090",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#e1ff88",
+                        "primary-container": "#cafd00",
+                        "on-surface": "#2d2f2f",
+                        "surface-variant": "#dbdddd",
+                        "secondary": "#5c5b5b",
+                        "tertiary-fixed": "#ff81f5",
+                        "on-error": "#ffefec",
+                        "on-tertiary": "#ffeef8",
+                        "on-surface-variant": "#5a5c5c",
+                        "surface-container-highest": "#dbdddd",
+                        "on-secondary-fixed": "#403f3f",
+                        "inverse-on-surface": "#9c9d9d",
+                        "surface-tint": "#4e6300",
+                        "on-secondary-container": "#525151",
+                        "error-dim": "#b92902",
+                        "surface-container-high": "#e1e3e3",
+                        "surface-bright": "#f6f6f6",
+                        "error-container": "#f95630"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .neo-shadow-lg {
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+        .active-press:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-inverse-surface">
+<!-- TopAppBar from JSON Logic -->
+<header class="bg-[#f6f6f6] dark:bg-[#121212] docked full-width top-0 border-b-2 border-[#121212] dark:border-[#f6f6f6] sticky z-50">
+<div class="flex justify-between items-center w-full px-4 h-16 max-w-none">
+<div class="flex items-center gap-4">
+<span class="font-['Lexend'] font-black uppercase tracking-tighter text-2xl text-[#121212] dark:text-[#f6f6f6] tracking-[-0.02em]">Digital Rebel</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a href="dashboard_digital_rebel_desktop.html" class="font-['Lexend'] font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-colors px-2 cursor-pointer">Dashboard</a>
+<span class="font-['Lexend'] font-black uppercase tracking-tighter text-[#cafd00] px-2 cursor-pointer">Checkout</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-[#4e6300] dark:text-[#cafd00] p-2 hover:bg-[#cafd00] hover:text-[#121212] transition-colors">account_balance_wallet</button>
+<button class="material-symbols-outlined text-[#4e6300] dark:text-[#cafd00] p-2 hover:bg-[#cafd00] hover:text-[#121212] transition-colors">notifications</button>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 py-12 md:py-20">
+<!-- Page Header -->
+<div class="mb-12 border-l-8 border-primary-fixed pl-6">
+<h1 class="font-headline font-black text-6xl md:text-8xl tracking-tighter uppercase leading-none">
+                REBEL_CHECKOUT
+            </h1>
+<p class="font-headline text-xl mt-2 text-secondary font-bold uppercase tracking-widest">Secure Transmission Protocol Active</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Column: Payment Details -->
+<div class="lg:col-span-7 space-y-12">
+<!-- Payment Method Section -->
+<section class="bg-surface-container-lowest border-2 border-on-background neo-shadow p-8">
+<h2 class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl">payments</span>
+                        01. Payment Method
+                    </h2>
+<!-- Toggle Options -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+<button class="flex items-center justify-center gap-3 p-4 border-2 border-on-background bg-primary-fixed text-on-surface font-headline font-black uppercase tracking-tight">
+<span class="material-symbols-outlined">credit_card</span>
+                            Credit / Debit
+                        </button>
+<button class="flex items-center justify-center gap-3 p-4 border-2 border-on-background bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight">
+<span class="material-symbols-outlined">currency_bitcoin</span>
+                            Pay with Crypto
+                        </button>
+</div>
+<!-- Card Details Form -->
+<div class="space-y-6">
+<div class="space-y-2">
+<label class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">Cardholder Name</label>
+<input class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors" placeholder="REBEL SURNAME" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">Card Number</label>
+<div class="relative">
+<input class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors" placeholder="0000 0000 0000 0000" type="text"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-secondary">lock</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">Expiry Date</label>
+<input class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors" placeholder="MM/YY" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">CVC / CVV</label>
+<input class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors" placeholder="***" type="text"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Billing Address Mock -->
+<section class="bg-surface-container-lowest border-2 border-on-background neo-shadow p-8">
+<h2 class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-4xl">location_on</span>
+                        02. Billing Address
+                    </h2>
+<div class="space-y-6">
+<input class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg" placeholder="STREET ADDRESS" type="text"/>
+<div class="grid grid-cols-2 gap-6">
+<input class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg" placeholder="CITY" type="text"/>
+<input class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg" placeholder="POSTAL CODE" type="text"/>
+</div>
+</div>
+</section>
+<!-- Trust Signals -->
+<div class="flex flex-wrap gap-4">
+<div class="bg-primary-fixed-dim border-2 border-on-background px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+<span class="font-headline font-black text-xs uppercase tracking-tighter">SECURED BY REBEL_SHIELD</span>
+</div>
+<div class="bg-on-background text-surface px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">enhanced_encryption</span>
+<span class="font-headline font-black text-xs uppercase tracking-tighter">AES-256 ENCRYPTION</span>
+</div>
+<div class="bg-surface-container-high border-2 border-on-background px-4 py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-xl">workspace_premium</span>
+<span class="font-headline font-black text-xs uppercase tracking-tighter">PCI DSS COMPLIANT</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Order Summary -->
+<div class="lg:col-span-5">
+<div class="sticky top-28 space-y-8">
+<!-- Summary Card -->
+<section class="bg-inverse-surface text-surface border-2 border-on-background neo-shadow-lg p-8 relative overflow-hidden">
+<!-- Design Decoration -->
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary-fixed opacity-10 rotate-12"></div>
+<h2 class="font-headline font-black text-4xl uppercase mb-8 relative z-10">ORDER SUMMARY</h2>
+<div class="space-y-6 relative z-10">
+<div class="flex justify-between items-start border-b-2 border-surface/20 pb-6">
+<div>
+<h3 class="font-headline font-black text-2xl uppercase text-primary-fixed tracking-tight">Rebel Pro</h3>
+<p class="font-body text-surface/70 text-sm mt-1 uppercase tracking-widest">Annual Membership</p>
+</div>
+<span class="font-headline font-black text-2xl">$49.00</span>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
+<span>Subtotal</span>
+<span>$49.00</span>
+</div>
+<div class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
+<span>Rebel Tax (0%)</span>
+<span>$0.00</span>
+</div>
+</div>
+<div class="pt-6 border-t-4 border-primary-fixed flex justify-between items-center">
+<span class="font-headline font-black text-3xl uppercase">Total</span>
+<div class="text-right">
+<span class="block font-headline font-black text-4xl text-primary-fixed leading-none">$49.00</span>
+<span class="text-[10px] font-bold uppercase text-surface/50 tracking-widest">Billed Annually</span>
+</div>
+</div>
+</div>
+<!-- Benefit Badges -->
+<div class="mt-8 grid grid-cols-2 gap-2">
+<div class="bg-surface/10 p-3 border border-surface/20">
+<span class="material-symbols-outlined text-primary-fixed block mb-1">bolt</span>
+<span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">Unlimited Access</span>
+</div>
+<div class="bg-surface/10 p-3 border border-surface/20">
+<span class="material-symbols-outlined text-primary-fixed block mb-1">support_agent</span>
+<span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">Elite Support</span>
+</div>
+</div>
+</section>
+<!-- Execute Button -->
+<button class="w-full bg-primary-fixed text-on-surface border-2 border-on-background p-8 font-headline font-black text-3xl uppercase tracking-tighter neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-100 flex items-center justify-center gap-4 group">
+                        EXECUTE PAYMENT
+                        <span class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+<!-- Confirmation Notice -->
+<div class="p-6 bg-surface-container border-2 border-on-background text-xs font-bold uppercase leading-relaxed tracking-wider text-secondary">
+                        By clicking "EXECUTE PAYMENT", you authorize Digital Rebel to charge your payment method for the amount shown above. Subscriptions auto-renew unless canceled 24h before period end. No refunds for partial months. 
+                    </div>
+<!-- Side Image / Illustration Space -->
+<div class="relative h-64 border-2 border-on-background overflow-hidden grayscale contrast-150">
+<img alt="Abstract digital encryption grid" class="w-full h-full object-cover" data-alt="Abstract futuristic digital grid with glowing green matrix code elements, sharp perspective, dark background, high contrast neo-brutalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8RHsGAaDx-qpMiRPY38KEM-AbVSneuZdAWHfawzR32GwS8zS6n2VJ4EGtgHghhYxZzz-JaGeVQdIjiAOLwya6eQVjmetLM97xUowLsZCIzNReTIjJhiLvqFUWdaMk0ZDEil_OkhSb6qgZ4CcmkPPaqCXSqq-D3WdXaDA1xDRGqBB5pi5dnMWotKK81hZLrS2tIAKvDSIY6K6uT_aTAJgegOsbG-qfWOYo4DltIR5HKq2FHOeDqFU_q2kQDpQODjXba9_ebYX9HN6s"/>
+<div class="absolute inset-0 bg-primary-fixed/20 mix-blend-multiply"></div>
+<div class="absolute bottom-4 left-4 bg-on-background text-surface px-3 py-1 font-headline font-black text-sm uppercase">
+                            NODE_ID: 77-RX2
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Space -->
+<footer class="mt-20 border-t-2 border-on-background bg-surface-container-high py-12">
+<div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<div class="font-headline font-black text-2xl uppercase tracking-tighter">
+                REBEL_OPERATIONS
+            </div>
+<div class="flex gap-8 font-headline font-bold text-sm uppercase tracking-widest flex-wrap">
+<a class="hover:bg-primary-fixed px-1" href="landing_digital_rebel_desktop.html">Home</a>
+<a class="hover:bg-primary-fixed px-1" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+<a class="hover:bg-primary-fixed px-1" href="upgrade_digital_rebel_desktop.html">Upgrade</a>
+<a class="hover:bg-primary-fixed px-1" href="settings_digital_rebel_desktop.html">Settings</a>
+<a class="hover:bg-primary-fixed px-1" href="learn_digital_rebel_desktop.html">Learn</a>
+<a class="hover:bg-primary-fixed px-1" href="assets_digital_rebel_desktop.html">Assets</a>
+<a class="hover:bg-primary-fixed px-1" href="market_digital_rebel_desktop.html">Market</a>
+<a class="hover:bg-primary-fixed px-1" href="transactions.html">Transactions</a>
+<a class="hover:bg-primary-fixed px-1" href="cards_digital_rebel_desktop.html">Cards</a>
+<a class="hover:bg-primary-fixed px-1" href="add_card_digital_rebel.html">Add Card</a>
+<a class="hover:bg-primary-fixed px-1" href="add_manual_asset_digital_rebel.html">Add Asset</a>
+</div>
+</div>
+</footer>
+</body></html>

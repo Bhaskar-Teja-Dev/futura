@@ -2,8 +2,8 @@ export type Env = {
   SUPABASE_URL: string
   SUPABASE_ANON_KEY: string
   SUPABASE_SERVICE_ROLE_KEY: string
-  REVENUECAT_API_KEY: string
-  REVENUECAT_WEBHOOK_SECRET: string
+  RAZORPAY_KEY_ID: string
+  RAZORPAY_KEY_SECRET: string
   FRONTEND_ORIGIN?: string
 }
 

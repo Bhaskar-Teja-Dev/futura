@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Onboarding - Step 1</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed": "#403f3f",
+              "on-tertiary-container": "#5b005b",
+              "surface": "#f6f6f6",
+              "on-primary-container": "#4a5e00",
+              "inverse-surface": "#0c0f0f",
+              "surface-bright": "#f6f6f6",
+              "secondary-container": "#e5e2e1",
+              "on-primary-fixed-variant": "#526900",
+              "primary-fixed": "#cafd00",
+              "on-secondary-fixed-variant": "#5c5b5b",
+              "tertiary-fixed-dim": "#ff61f8",
+              "primary-dim": "#435600",
+              "error-dim": "#b92902",
+              "on-primary": "#e1ff88",
+              "outline-variant": "#acadad",
+              "secondary-fixed-dim": "#d7d4d3",
+              "on-error-container": "#520c00",
+              "tertiary-container": "#ff81f5",
+              "error-container": "#f95630",
+              "on-secondary-container": "#525151",
+              "surface-container-low": "#f0f1f1",
+              "surface-container-high": "#e1e3e3",
+              "primary": "#4e6300",
+              "surface-dim": "#d3d5d5",
+              "on-background": "#2d2f2f",
+              "tertiary-dim": "#900090",
+              "on-secondary": "#f5f2f1",
+              "surface-variant": "#dbdddd",
+              "on-error": "#ffefec",
+              "secondary": "#5c5b5b",
+              "on-tertiary-fixed": "#320032",
+              "primary-container": "#cafd00",
+              "tertiary": "#a400a4",
+              "surface-container-highest": "#dbdddd",
+              "inverse-primary": "#cafd00",
+              "secondary-fixed": "#e5e2e1",
+              "on-tertiary-fixed-variant": "#6a006a",
+              "secondary-dim": "#504f4f",
+              "surface-container": "#e7e8e8",
+              "tertiary-fixed": "#ff81f5",
+              "surface-container-lowest": "#ffffff",
+              "on-tertiary": "#ffeef8",
+              "outline": "#767777",
+              "on-surface-variant": "#5a5c5c",
+              "inverse-on-surface": "#9c9d9d",
+              "surface-tint": "#4e6300",
+              "error": "#b02500",
+              "background": "#f6f6f6",
+              "primary-fixed-dim": "#beee00",
+              "on-surface": "#2d2f2f",
+              "on-primary-fixed": "#3a4a00"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .active-neo-shadow:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px 0px rgba(18, 18, 18, 1);
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-inverse-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50 border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+<div class="flex items-center gap-2">
+<span class="text-2xl font-black text-[#121212] dark:text-[#f6f6f6] tracking-[-0.02em] font-['Lexend'] uppercase">Digital Rebel</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-[#cafd00] hover:text-[#121212] transition-all p-2 flex items-center justify-center border-2 border-[#121212] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-4 pt-24 pb-12 overflow-hidden">
+<!-- Progress Container -->
+<div class="w-full max-w-2xl mb-12">
+<div class="flex justify-between items-end mb-2">
+<span class="font-headline font-black text-xs uppercase tracking-widest text-primary">Mission Progress</span>
+<span class="font-headline font-black text-2xl text-inverse-surface">33%</span>
+</div>
+<div class="h-8 w-full border-4 border-inverse-surface bg-surface-container-highest relative overflow-hidden">
+<div class="h-full bg-primary-fixed border-r-4 border-inverse-surface" style="width: 33.33%"></div>
+</div>
+</div>
+<!-- Main Content Area: Bento Layout -->
+<div class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- Left Column: Visual & Headline -->
+<div class="md:col-span-7 bg-surface-container-lowest border-4 border-inverse-surface neo-shadow p-8 flex flex-col justify-between">
+<div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black text-xs px-3 py-1 inline-block border-2 border-inverse-surface mb-6 uppercase tracking-widest -rotate-2">
+                        Deployment Step 01
+                    </div>
+<h1 class="font-headline font-black text-5xl md:text-7xl leading-[0.9] text-inverse-surface uppercase tracking-tighter mb-8">
+                        HOW OLD<br/>ARE YOU?
+                    </h1>
+<p class="font-body text-xl text-secondary max-w-md leading-tight">
+                        We need your chronological data to calibrate the wealth trajectory engine. Don't lie to the machine.
+                    </p>
+</div>
+<div class="mt-12 border-t-4 border-inverse-surface pt-6 flex items-center gap-4">
+<div class="h-12 w-12 bg-primary-fixed border-2 border-inverse-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-inverse-surface" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<span class="font-headline font-bold text-sm uppercase tracking-tight">Real-time projection active</span>
+</div>
+</div>
+<!-- Right Column: Massive Input -->
+<div class="md:col-span-5 flex flex-col gap-6">
+<!-- Giant Input Card -->
+<div class="flex-grow bg-primary-fixed border-4 border-inverse-surface neo-shadow p-8 flex flex-col items-center justify-center relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]" data-icon="numbers">numbers</span>
+</div>
+<label class="font-headline font-black text-xs uppercase tracking-widest mb-4 self-start bg-inverse-surface text-primary-fixed px-2 py-1" for="age-input">Current Age</label>
+<div class="relative w-full">
+<input class="w-full bg-transparent border-none text-[120px] md:text-[160px] font-headline font-black text-center text-inverse-surface focus:ring-0 placeholder:opacity-20 selection:bg-inverse-surface selection:text-primary-fixed" id="age-input" max="120" min="18" placeholder="00" type="number"/>
+</div>
+<div class="w-full border-t-4 border-inverse-surface mt-4 pt-4 flex justify-between">
+<span class="font-headline font-bold text-sm uppercase">Years</span>
+<span class="font-headline font-bold text-sm uppercase">Earth-Cycle</span>
+</div>
+</div>
+<!-- Navigation Action -->
+    <!-- Supabase + Futura Auth -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Protect page
+            const session = await requireAuth();
+            if (!session) return;
+
+            const nextBtn = document.querySelector('a[href*="onboarding_step_2_retirement"]');
+            const ageInput = document.getElementById('age-input');
+
+            if (nextBtn && ageInput) {
+                nextBtn.href = '#'; // Prevent default link
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const age = ageInput.value;
+                    if (!age || age < 18 || age > 120) {
+                        alert('Please enter a valid age (18-120).');
+                        return;
+                    }
+                    localStorage.setItem('onboarding_age', age);
+                    window.location.href = 'onboarding_step_2_retirement.html';
+                });
+            }
+        });
+    </script>
+</body></html>

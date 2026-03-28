@@ -13,3 +13,5 @@ coverage/
 
 # Accidental tsc output next to sources
 futura-api/src/**/*.js
+futura/Integrating Razorpay Zens System.md
+futura/Removing RevenueCat Payment Integration.md

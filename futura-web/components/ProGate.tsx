@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { hasFuturaProEntitlement } from '../lib/revenuecat'
+import { api } from '../lib/api'
 
 type ProGateProps = {
   children: React.ReactNode
@@ -13,8 +13,14 @@ export function ProGate({ children }: ProGateProps) {
   useEffect(() => {
     const check = async () => {
       try {
-        const hasPro = await hasFuturaProEntitlement()
-        setStatus(hasPro ? 'allowed' : 'blocked')
+        const result = await api.profile.get() as {
+          subscription?: { entitlement: string; expires_at: string | null }
+        }
+        const sub = result?.subscription
+        const isPro =
+          sub?.entitlement === 'pro' &&
+          (!sub.expires_at || new Date(sub.expires_at) > new Date())
+        setStatus(isPro ? 'allowed' : 'blocked')
       } catch {
         setStatus('blocked')
       }

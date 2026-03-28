@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Onboarding - Step 2</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#403f3f",
+                        "on-tertiary-container": "#5b005b",
+                        "surface": "#f6f6f6",
+                        "on-primary-container": "#4a5e00",
+                        "inverse-surface": "#0c0f0f",
+                        "surface-bright": "#f6f6f6",
+                        "secondary-container": "#e5e2e1",
+                        "on-primary-fixed-variant": "#526900",
+                        "primary-fixed": "#cafd00",
+                        "on-secondary-fixed-variant": "#5c5b5b",
+                        "tertiary-fixed-dim": "#ff61f8",
+                        "primary-dim": "#435600",
+                        "error-dim": "#b92902",
+                        "on-primary": "#e1ff88",
+                        "outline-variant": "#acadad",
+                        "secondary-fixed-dim": "#d7d4d3",
+                        "on-error-container": "#520c00",
+                        "tertiary-container": "#ff81f5",
+                        "error-container": "#f95630",
+                        "on-secondary-container": "#525151",
+                        "surface-container-low": "#f0f1f1",
+                        "surface-container-high": "#e1e3e3",
+                        "primary": "#4e6300",
+                        "surface-dim": "#d3d5d5",
+                        "on-background": "#2d2f2f",
+                        "tertiary-dim": "#900090",
+                        "on-secondary": "#f5f2f1",
+                        "surface-variant": "#dbdddd",
+                        "on-error": "#ffefec",
+                        "secondary": "#5c5b5b",
+                        "on-tertiary-fixed": "#320032",
+                        "primary-container": "#cafd00",
+                        "tertiary": "#a400a4",
+                        "surface-container-highest": "#dbdddd",
+                        "inverse-primary": "#cafd00",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed-variant": "#6a006a",
+                        "secondary-dim": "#504f4f",
+                        "surface-container": "#e7e8e8",
+                        "tertiary-fixed": "#ff81f5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffeef8",
+                        "outline": "#767777",
+                        "on-surface-variant": "#5a5c5c",
+                        "inverse-on-surface": "#9c9d9d",
+                        "surface-tint": "#4e6300",
+                        "error": "#b02500",
+                        "background": "#f6f6f6",
+                        "primary-fixed-dim": "#beee00",
+                        "on-surface": "#2d2f2f",
+                        "on-primary-fixed": "#3a4a00"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .neo-shadow-lg {
+            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .active-press:active {
+            transform: translate(2px, 2px);
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-fixed selection:text-inverse-surface">
+<!-- Header / TopAppBar -->
+<header class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 fixed top-0 border-b-2 border-[#121212] dark:border-[#f6f6f6] z-50">
+<div class="font-['Lexend'] font-black uppercase tracking-tighter text-2xl text-[#121212] dark:text-[#f6f6f6] tracking-[-0.02em]">
+            Digital Rebel
+        </div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-[#4e6300] dark:text-[#cafd00] text-3xl">account_circle</span>
+</div>
+</header>
+<main class="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-12">
+<div class="w-full max-w-2xl flex flex-col gap-12">
+<!-- Progress Section -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<span class="font-headline font-black text-sm uppercase tracking-widest text-outline">Phase 02</span>
+<span class="font-headline font-black text-sm text-on-surface">66% COMPLETE</span>
+</div>
+<div class="h-8 w-full bg-surface-container border-2 border-inverse-surface neo-shadow">
+<div class="h-full bg-primary-fixed border-r-2 border-inverse-surface" style="width: 66%"></div>
+</div>
+</div>
+<!-- Content Card -->
+<div class="bg-surface-container-lowest border-2 border-inverse-surface p-8 md:p-12 neo-shadow-lg flex flex-col gap-8 relative overflow-hidden">
+<!-- Decorative Sticker -->
+<div class="absolute -top-2 -right-8 bg-tertiary-fixed text-on-tertiary-fixed font-headline font-bold text-xs py-1 px-10 rotate-45 border-b-2 border-inverse-surface uppercase">
+                    Critical
+                </div>
+<div class="flex flex-col gap-4">
+<h1 class="font-headline font-black text-4xl md:text-6xl text-inverse-surface leading-none tracking-tighter uppercase">
+                        WHEN DO YOU <br/> <span class="text-primary">WANT TO</span> <br/> RETIRE?
+                    </h1>
+<p class="font-body text-lg text-secondary max-w-md">
+                        The "Digital Rebel" lifestyle requires precise timing. Tell us the age you plan to disconnect from the machine.
+                    </p>
+</div>
+<!-- Giant Input Field -->
+<div class="flex flex-col gap-4">
+<label class="font-headline font-bold uppercase tracking-widest text-xs text-outline" for="retirement-age">Target Age</label>
+<div class="relative flex items-center group">
+<input class="w-full bg-surface border-4 border-inverse-surface p-6 md:p-10 font-headline font-black text-6xl md:text-8xl text-inverse-surface focus:ring-0 focus:outline-none focus:bg-surface-container-high transition-colors placeholder:text-surface-dim" id="retirement-age" placeholder="65" type="number"/>
+<span class="absolute right-8 font-headline font-black text-4xl text-outline pointer-events-none group-focus-within:text-inverse-surface">YRS</span>
+</div>
+</div>
+<!-- Action Button -->
+<div class="flex flex-col md:flex-row gap-6 mt-4">
+<    <!-- Supabase + Futura Auth -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Protect page
+            const session = await requireAuth();
+            if (!session) return;
+
+            const nextBtn = document.querySelector('a[href*="onboarding_step_3_income"]');
+            const backBtn = document.querySelector('a[href*="onboarding_step_1_age"]');
+            const retirementInput = document.getElementById('retirement-age');
+
+            if (nextBtn && retirementInput) {
+                nextBtn.href = '#';
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const age = retirementInput.value;
+                    if (!age || age < 18 || age > 120) {
+                        alert('Please enter a valid retirement age (18-120).');
+                        return;
+                    }
+                    localStorage.setItem('onboarding_retirement_age', age);
+                    window.location.href = 'onboarding_step_3_income.html';
+                });
+            }
+
+            if (backBtn) {
+                backBtn.href = 'onboarding_step_1_age.html';
+            }
+        });
+    </script>
+</body></html>

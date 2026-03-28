@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Lexend:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#2d2f2f",
+              "tertiary": "#a400a4",
+              "tertiary-dim": "#900090",
+              "surface-dim": "#d3d5d5",
+              "primary-dim": "#435600",
+              "on-tertiary-container": "#5b005b",
+              "tertiary-fixed-dim": "#ff61f8",
+              "surface-container-highest": "#dbdddd",
+              "on-secondary-fixed-variant": "#5c5b5b",
+              "secondary-container": "#e5e2e1",
+              "error-container": "#f95630",
+              "tertiary-fixed": "#ff81f5",
+              "surface-container-high": "#e1e3e3",
+              "on-surface-variant": "#5a5c5c",
+              "surface-container-lowest": "#ffffff",
+              "surface-container-low": "#f0f1f1",
+              "primary-fixed": "#cafd00",
+              "primary-container": "#cafd00",
+              "outline-variant": "#acadad",
+              "outline": "#767777",
+              "surface-tint": "#4e6300",
+              "inverse-primary": "#cafd00",
+              "on-error": "#ffefec",
+              "secondary-fixed": "#e5e2e1",
+              "on-tertiary-fixed": "#320032",
+              "on-primary": "#e1ff88",
+              "on-primary-container": "#4a5e00",
+              "secondary-fixed-dim": "#d7d4d3",
+              "error-dim": "#b92902",
+              "secondary": "#5c5b5b",
+              "inverse-surface": "#0c0f0f",
+              "surface-bright": "#f6f6f6",
+              "on-primary-fixed-variant": "#526900",
+              "primary-fixed-dim": "#beee00",
+              "on-tertiary-fixed-variant": "#6a006a",
+              "on-secondary-fixed": "#403f3f",
+              "secondary-dim": "#504f4f",
+              "surface": "#f6f6f6",
+              "on-secondary-container": "#525151",
+              "on-secondary": "#f5f2f1",
+              "primary": "#4e6300",
+              "on-background": "#2d2f2f",
+              "background": "#f6f6f6",
+              "tertiary-container": "#ff81f5",
+              "surface-container": "#e7e8e8",
+              "on-primary-fixed": "#3a4a00",
+              "surface-variant": "#dbdddd",
+              "inverse-on-surface": "#9c9d9d",
+              "on-tertiary": "#ffeef8",
+              "error": "#b02500",
+              "on-error-container": "#520c00"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-grid {
+            background-image: radial-gradient(#767777 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .hard-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+        }
+        .hard-shadow-sm {
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+        .active-sticker {
+            transform: translate(4px, -4px);
+            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-black">
+<!-- TopAppBar (Authority Source: JSON) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-black dark:border-white">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black italic tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">REBEL_FIN</span>
+<nav class="hidden md:flex gap-6 h-full items-center">
+<a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all" href="dashboard_digital_rebel_desktop.html">DASHBOARD</a>
+<a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all" href="market_digital_rebel_desktop.html">MARKETS</a>
+<a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all" href="cards_digital_rebel_desktop.html">CARDS</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center gap-4 bg-surface-container-low border-2 border-black px-3 py-1">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-transparent border-none focus:ring-0 font-headline font-bold text-xs uppercase w-48" placeholder="SEARCH_ASSETS..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 hover:bg-[#cafd00] transition-colors border-2 border-transparent active:border-black">notifications</button>
+<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined p-2 hover:bg-[#cafd00] transition-colors border-2 border-transparent active:border-black inline-flex items-center justify-center">settings</a>
+<div class="w-10 h-10 border-2 border-black bg-primary-fixed overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="close-up portrait of a stylish young man with piercings and edgy urban fashion looking directly at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOaMU3aR1ksxrrJ29vFXxTWjBKviT4Obbw9ec8zcMkQvM_BRuJYN2XLE2DtSKc_7CX6cZkoZLjRSk6FZCHaPWatkGSXf-S1rHv_JStSQO_nee9JTk4hk1_ppdeZqpq23KwHwglXjLxQCzyfgfsuNMZ4V173LRkRljJV2nA0yMPYRXLR39VUTozv2p_Ot8Kb1drzKcbbWFPsJl2zEV4FyVGMgz5pYyndUdsH4vhQjgCgPZXDMtDFFKGvFxa9VsDtqCEt5W-VsMGwrLp"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-16 min-h-screen neo-grid">
+<div class="max-w-6xl mx-auto p-12">
+<!-- Page Header -->
+<div class="mb-12 relative">
+<div class="absolute -top-6 -left-4 bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black px-4 py-1 text-sm border-2 border-black -rotate-2 z-10">NEW_ASSET</div>
+<h2 class="text-6xl font-headline font-black uppercase tracking-tighter text-on-background mb-2">ADD_CARD</h2>
+<div class="h-2 w-32 bg-primary-fixed border-b-2 border-black"></div>
+</div>
+<!-- Bento Layout Content -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left: Form Section -->
+<div class="col-span-12 lg:col-span-7 bg-surface-container-lowest border-4 border-black p-8 hard-shadow relative">
+<form class="space-y-8">
+<div>
+<label class="block font-headline font-black uppercase text-sm tracking-widest mb-3">CARDHOLDER_NAME</label>
+<input class="w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="ENTER FULL NAME" type="text" value="J. VALENTINE"/>
+</div>
+<div>
+<label class="block font-headline font-black uppercase text-sm tracking-widest mb-3">CARD_NUMBER</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold text-xl tracking-[0.2em] focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="0000 0000 0000 0000" type="text" value="4455 8899 0011 2233"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-3xl">credit_card</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<label class="block font-headline font-black uppercase text-sm tracking-widest mb-3">EXPIRY_DATE</label>
+<input class="w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="MM / YY" type="text" value="12 / 28"/>
+</div>
+<div>
+<label class="block font-headline font-black uppercase text-sm tracking-widest mb-3">CVV_CODE</label>
+<input class="w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="***" type="password" value="999"/>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-primary-fixed text-black border-4 border-black p-6 font-headline font-black text-2xl uppercase tracking-tighter hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] active:translate-x-0 active:translate-y-0 active:shadow-none transition-all flex justify-center items-center gap-4" type="submit">
+                                ADD_CARD <span class="material-symbols-outlined font-black">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Right: Preview Section -->
+<div class="col-span-12 lg:col-span-5 flex flex-col gap-8">
+<!-- Card Preview -->
+<div class="relative group">
+<!-- Card Face -->
+<div class="aspect-[1.586/1] w-full bg-inverse-surface border-4 border-black p-8 text-white flex flex-col justify-between overflow-hidden relative hard-shadow-sm">
+<!-- Texture Overlays -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCaXxJZiV_poDPiulPfuS2SRZMbx3uE3lXeipX1100HI14m-1wgueWHX-Da4DxmXi5bYaONY44aggqrtf2eLQAmswiTUXUCD46n3Bh4rnQev_j8zB7yo9kZk5wlUdG1mE0G4kqFJjlG21iTxDbWfsYwBnThKNPw4CJngY6Zm0rgT7P6Z8tmmIvWvMgFC3krC58JuGtpRo1TvOwD5rr_HlRS9WQyJtGKI39TldLNYxzjqIcktCkpetoab_-3Y3P8z8535AvZya6Ob9ku');"></div>
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-primary-fixed rotate-45 opacity-20 blur-3xl"></div>
+<div class="flex justify-between items-start relative z-10">
+<div class="w-16 h-12 bg-surface-container-highest/20 border-2 border-white/30 backdrop-blur-sm"></div>
+<span class="font-headline font-black italic text-xl tracking-tighter text-primary-fixed">REBEL_ELITE</span>
+</div>
+<div class="space-y-4 relative z-10">
+<div class="font-headline font-bold text-2xl tracking-[0.2em]">4455 8899 0011 2233</div>
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<div class="text-[10px] font-headline font-black uppercase opacity-60 tracking-widest">CARD_HOLDER</div>
+<div class="font-headline font-bold tracking-widest text-sm">J. VALENTINE</div>
+</div>
+<div class="text-right space-y-1">
+<div class="text-[10px] font-headline font-black uppercase opacity-60 tracking-widest">EXPIRES</div>
+<div class="font-headline font-bold text-sm">12/28</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card Label Sticker -->
+<div class="absolute -bottom-4 -right-4 bg-primary-fixed text-black font-headline font-black px-4 py-2 border-2 border-black rotate-3 hard-shadow-sm">
+                            LIVE_PREVIEW
+                        </div>
+</div>
+<!-- Side Info Cards -->
+<div class="bg-primary-container border-2 border-black p-6 space-y-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary-container font-black">shield</span>
+<h3 class="font-headline font-black uppercase text-sm tracking-tight">ENCRYPTED_VAULT</h3>
+</div>
+<p class="text-xs font-bold text-on-primary-container leading-relaxed">Your payment data is fragmented and stored across our decentralized rogue network. Total anonymity, zero compromise.</p>
+</div>
+<div class="bg-surface-container-high border-2 border-black p-6">
+<h4 class="font-headline font-black uppercase text-[10px] mb-4 opacity-60 tracking-widest">RECENT_CARDS</h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between border-b-2 border-black/10 pb-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-5 bg-black"></div>
+<span class="font-headline font-bold text-xs">•••• 4412</span>
+</div>
+<span class="text-[10px] font-black bg-black text-white px-2">DEBIT</span>
+</div>
+<div class="flex items-center justify-between border-b-2 border-black/10 pb-2">
+<div class="flex items-center gap-3">
+<div class="w-8 h-5 bg-tertiary"></div>
+<span class="font-headline font-bold text-xs">•••• 0098</span>
+</div>
+<span class="text-[10px] font-black bg-tertiary text-white px-2">CREDIT</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Section / Help Grid -->
+<div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="border-2 border-black p-6 hover:bg-white transition-colors group cursor-pointer">
+<span class="material-symbols-outlined mb-4 group-hover:rotate-12 transition-transform">help_center</span>
+<h5 class="font-headline font-black uppercase text-sm mb-2">NEED_HELP?</h5>
+<p class="text-xs opacity-70">Contact our 24/7 underground support channel.</p>
+</div>
+<div class="border-2 border-black p-6 hover:bg-white transition-colors group cursor-pointer">
+<span class="material-symbols-outlined mb-4 group-hover:rotate-12 transition-transform">lock_reset</span>
+<h5 class="font-headline font-black uppercase text-sm mb-2">SECURITY_PROTOCOL</h5>
+<p class="text-xs opacity-70">Review our high-clearance encryption standards.</p>
+</div>
+<div class="border-2 border-black p-6 hover:bg-white transition-colors group cursor-pointer">
+<span class="material-symbols-outlined mb-4 group-hover:rotate-12 transition-transform">receipt_long</span>
+<h5 class="font-headline font-black uppercase text-sm mb-2">CARD_TERMS</h5>
+<p class="text-xs opacity-70">The rules of the rebellion. No small print here.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Restricted to relevant screens as per mandate) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary-fixed border-4 border-black text-black flex items-center justify-center hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-0 active:translate-y-0 active:shadow-none transition-all z-50">
+<span class="material-symbols-outlined text-3xl font-black">add</span>
+</button>
+</body></html>

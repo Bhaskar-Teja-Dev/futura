@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Digital Rebel | Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-dim": "#d3d5d5",
+                        "error": "#b02500",
+                        "surface-container-high": "#e1e3e3",
+                        "on-primary-fixed": "#3a4a00",
+                        "error-dim": "#b92902",
+                        "on-surface-variant": "#5a5c5c",
+                        "on-secondary-fixed-variant": "#5c5b5b",
+                        "on-primary-fixed-variant": "#526900",
+                        "tertiary-fixed": "#ff81f5",
+                        "primary-fixed": "#cafd00",
+                        "surface-container-highest": "#dbdddd",
+                        "on-primary": "#e1ff88",
+                        "error-container": "#f95630",
+                        "on-primary-container": "#4a5e00",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#d7d4d3",
+                        "surface-variant": "#dbdddd",
+                        "surface-tint": "#4e6300",
+                        "on-secondary-fixed": "#403f3f",
+                        "surface": "#f6f6f6",
+                        "inverse-on-surface": "#9c9d9d",
+                        "on-tertiary": "#ffeef8",
+                        "primary-fixed-dim": "#beee00",
+                        "on-surface": "#2d2f2f",
+                        "primary": "#4e6300",
+                        "on-secondary": "#f5f2f1",
+                        "surface-container": "#e7e8e8",
+                        "primary-container": "#cafd00",
+                        "on-secondary-container": "#525151",
+                        "on-background": "#2d2f2f",
+                        "on-error-container": "#520c00",
+                        "surface-bright": "#f6f6f6",
+                        "on-tertiary-fixed-variant": "#6a006a",
+                        "inverse-surface": "#0c0f0f",
+                        "secondary-container": "#e5e2e1",
+                        "tertiary-container": "#ff81f5",
+                        "inverse-primary": "#cafd00",
+                        "on-tertiary-container": "#5b005b",
+                        "tertiary": "#a400a4",
+                        "surface-container-low": "#f0f1f1",
+                        "secondary-dim": "#504f4f",
+                        "tertiary-dim": "#900090",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-tertiary-fixed": "#320032",
+                        "primary-dim": "#435600",
+                        "outline": "#767777",
+                        "outline-variant": "#acadad",
+                        "on-error": "#ffefec",
+                        "background": "#f6f6f6",
+                        "secondary": "#5c5b5b",
+                        "tertiary-fixed-dim": "#ff61f8"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .neo-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .neo-shadow-sm {
+            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .neo-shadow-hover:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 12px 12px 0px 0px rgba(18, 18, 18, 1);
+        }
+        .active-step {
+            transform: skew(-10deg);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-background min-h-screen">
+<!-- Header / Brand Anchor -->
+<header class="w-full bg-surface py-6 px-8 flex justify-between items-center sticky top-0 z-50 border-b-2 border-inverse-surface">
+<h1 class="font-headline font-black text-3xl uppercase tracking-tighter text-inverse-surface">
+            Digital Rebel
+        </h1>
+<div class="flex items-center gap-4">
+<span class="font-headline font-bold text-xs uppercase tracking-widest text-outline">Session: Unauthenticated</span>
+<div class="w-10 h-10 bg-surface-container-high border-2 border-inverse-surface"></div>
+</div>
+</header>
+<main class="max-w-4xl mx-auto px-6 py-12 md:py-24">
+<!-- Progress Indicator -->
+<section class="mb-16">
+<div class="flex justify-between items-end mb-4">
+<h2 class="font-headline font-black text-xl uppercase tracking-widest">Initialization Protocol</h2>
+<span class="font-headline font-black text-primary text-2xl">01 / 03</span>
+</div>
+<div class="w-full h-8 bg-surface-container border-2 border-inverse-surface flex p-1">
+<div class="w-1/3 h-full bg-primary-fixed border-r-2 border-inverse-surface"></div>
+<div class="w-1/3 h-full bg-transparent"></div>
+<div class="w-1/3 h-full bg-transparent"></div>
+</div>
+<div class="flex justify-between mt-2 font-headline font-bold text-[10px] uppercase tracking-[0.2em] text-outline">
+<span class="text-inverse-surface">Timeline Mapping</span>
+<span>Asset Allocation</span>
+<span>Risk Synthesis</span>
+</div>
+</section>
+<!-- Bento Grid Form Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Hero Visual Section -->
+<div class="md:col-span-5 relative group">
+<div class="absolute -inset-2 bg-tertiary-fixed opacity-20 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow h-full flex flex-col justify-between overflow-hidden">
+<div>
+<span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed font-headline font-bold text-xs px-3 py-1 border-2 border-inverse-surface mb-6 uppercase tracking-wider">
+                            Step 01: Core Logic
+                        </span>
+<h3 class="font-headline font-black text-5xl leading-none uppercase tracking-tighter mb-6">
+                            Define Your <br/><span class="text-primary italic">Exit</span> Strategy.
+                        </h3>
+<p class="text-on-surface-variant font-medium leading-relaxed">
+                            Traditional banks want you to work until you're obsolete. We want you to rebel. Tell us where you are and when you're leaving the machine.
+                        </p>
+</div>
+<div class="mt-8 border-t-2 border-inverse-surface pt-6">
+<div class="flex gap-2 items-center">
+<span class="material-symbols-outlined text-primary font-bold">bolt</span>
+<span class="font-headline font-black text-sm uppercase tracking-widest">Real-time projection active</span>
+</div>
+</div>
+<!-- Decorative background image -->
+<div class="absolute -right-12 -bottom-12 opacity-10 rotate-12 pointer-events-none">
+<img alt="Abstract geometric rebel shape" class="w-64 h-64" data-alt="Abstract neo-brutalist geometric pattern with sharp angles and high contrast black and white shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqPED8jIoalNO3F4CqChrYl6TOnxMkvlG8JfOPFI6FRVfISDxoh8m6o2N9j_6Ht2ntahu1F_9ELCdTP5Iuhr9fzmFCHeX3pqfscO8rXocQ6ju0AaVkRm-ddvFZia_2A_ljG6286Glq6H6ME0mRd6ehMQx1q633ZH5DUHwiVe-ZESGEwIF7ivNZLcYgjEbhg9S4lYdG5tLOdJq8zv3qo1i3RmoAiY10l934lChyB3cMsVRfC7eRYxGcJx-cQ5W6kYxuKBjstJ_RSydN"/>
+</div>
+</div>
+</div>
+<!-- Main Input Form Section -->
+<form action="#" class="md:col-span-7 space-y-8">
+<div class="bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow">
+<div class="space-y-10">
+<!-- Age Input -->
+<div class="group">
+<label class="block font-headline font-black text-sm uppercase tracking-widest mb-4 flex justify-between items-center" for="current_age">
+<span>Current Earth Age</span>
+<span class="text-outline-variant font-body lowercase tracking-normal italic font-medium">required.exe</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface border-4 border-inverse-surface px-6 py-5 font-headline font-black text-3xl focus:ring-0 focus:border-primary-fixed focus:bg-surface-container-high transition-colors outline-none placeholder:text-surface-dim" id="current_age" name="current_age" placeholder="25" type="number"/>
+<div class="absolute right-6 top-1/2 -translate-y-1/2 font-headline font-bold text-outline uppercase tracking-widest pointer-events-none">
+                                    Years
+                                </div>
+</div>
+</div>
+<!-- Retirement Age Input -->
+<div class="group">
+<label class="block font-headline font-black text-sm uppercase tracking-widest mb-4 flex justify-between items-center" for="target_age">
+<span>Target Liberation Age</span>
+<span class="text-outline-variant font-body lowercase tracking-normal italic font-medium">required.exe</span>
+</label>
+<div class="relative">
+<input class="w-full bg-surface border-4 border-inverse-surface px-6 py-5 font-headline font-black text-3xl focus:ring-0 focus:border-primary-fixed focus:bg-surface-container-high transition-colors outline-none placeholder:text-surface-dim" id="target_age" name="target_age" placeholder="45" type="number"/>
+<div class="absolute right-6 top-1/2 -translate-y-1/2 font-headline font-bold text-outline uppercase tracking-widest pointer-events-none">
+                                    Years
+                                </div>
+</div>
+</div>
+<!-- Quote/Sticker section -->
+<div class="bg-primary border-2 border-inverse-surface p-4 flex gap-4 items-start">
+<span class="material-symbols-outlined text-primary-fixed text-3xl" data-weight="fill">warning</span>
+<p class="text-on-primary font-headline font-bold text-xs uppercase leading-tight tracking-wider">
+                                Note: Early liberation requires aggressive asset deployment and significant capital rebellion. Proceed with intent.
+                            </p>
+</div>
+</div>
+</div>
+<!-- CTA Section -->
+<div class="pt-4">
+<button class="group w-full bg-primary-fixed border-4 border-inverse-surface py-6 px-10 flex justify-between items-center neo-shadow-sm hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[12px_12px_0px_0px_rgba(18,18,18,1)] active:translate-x-0 active:translate-y-0 active:shadow-none transition-all" type="submit">
+<span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">
+                            Continue to Step 2
+                        </span>
+<div class="flex items-center gap-2">
+<span class="font-headline font-bold text-xs uppercase tracking-widest text-inverse-surface opacity-60">Asset Map</span>
+<span class="material-symbols-outlined text-3xl font-black">arrow_forward</span>
+</div>
+</button>
+<p class="text-center mt-6 font-headline font-bold text-[10px] uppercase tracking-[0.3em] text-outline">
+                        Encryption protocol active: AES-256 REBEL_SHIELD
+                    </p>
+</div>
+</form>
+</div>
+</main>
+<!-- Content-specific Footer (Simple) -->
+<footer class="w-full py-12 px-8 border-t-4 border-primary-fixed mt-12 bg-inverse-surface text-surface">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="font-headline font-black text-2xl uppercase tracking-tighter">
+                Digital <span class="text-primary-fixed">Rebel</span>
+</div>
+<div class="flex gap-8 font-headline font-bold text-[10px] uppercase tracking-widest text-outline-variant">
+<a class="hover:text-primary-fixed transition-colors" href="landing_digital_rebel_desktop.html">Home</a>
+<a class="hover:text-primary-fixed transition-colors" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+<a class="hover:text-primary-fixed transition-colors" href="learn_digital_rebel_desktop.html">Learn</a>
+</div>
+<div class="text-[10px] font-headline font-bold text-outline-variant uppercase tracking-widest">
+                ©2024 DIGITAL REBEL. NO PERMISSION GRANTED.
+            </div>
+</div>
+</footer>
+</body></html>

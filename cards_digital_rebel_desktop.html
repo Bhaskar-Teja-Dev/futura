@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DIGITAL REBEL | CARDS MANAGEMENT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-tertiary-fixed": "#320032",
+                "on-error": "#ffefec",
+                "on-surface-variant": "#5a5c5c",
+                "surface-tint": "#4e6300",
+                "surface-bright": "#f6f6f6",
+                "on-secondary-fixed": "#403f3f",
+                "surface-container-low": "#f0f1f1",
+                "secondary-container": "#e5e2e1",
+                "secondary-fixed": "#e5e2e1",
+                "on-primary-container": "#4a5e00",
+                "tertiary-fixed-dim": "#ff61f8",
+                "primary-container": "#cafd00",
+                "on-primary": "#e1ff88",
+                "inverse-on-surface": "#9c9d9d",
+                "primary-fixed": "#cafd00",
+                "secondary": "#5c5b5b",
+                "outline-variant": "#acadad",
+                "secondary-dim": "#504f4f",
+                "surface-dim": "#d3d5d5",
+                "background": "#f6f6f6",
+                "primary-dim": "#435600",
+                "tertiary": "#a400a4",
+                "tertiary-dim": "#900090",
+                "tertiary-container": "#ff81f5",
+                "surface-container-highest": "#dbdddd",
+                "primary-fixed-dim": "#beee00",
+                "error-container": "#f95630",
+                "secondary-fixed-dim": "#d7d4d3",
+                "on-tertiary": "#ffeef8",
+                "on-secondary-fixed-variant": "#5c5b5b",
+                "on-primary-fixed": "#3a4a00",
+                "on-error-container": "#520c00",
+                "on-tertiary-container": "#5b005b",
+                "error": "#b02500",
+                "surface": "#f6f6f6",
+                "outline": "#767777",
+                "on-tertiary-fixed-variant": "#6a006a",
+                "surface-container-high": "#e1e3e3",
+                "on-secondary": "#f5f2f1",
+                "on-background": "#2d2f2f",
+                "on-secondary-container": "#525151",
+                "on-primary-fixed-variant": "#526900",
+                "inverse-surface": "#0c0f0f",
+                "surface-variant": "#dbdddd",
+                "primary": "#4e6300",
+                "surface-container-lowest": "#ffffff",
+                "error-dim": "#b92902",
+                "tertiary-fixed": "#ff81f5",
+                "surface-container": "#e7e8e8",
+                "inverse-primary": "#cafd00",
+                "on-surface": "#2d2f2f"
+              },
+              fontFamily: {
+                "headline": ["Lexend"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hard-shadow {
+            box-shadow: 4px 4px 0px 0px #121212;
+        }
+        .hard-shadow-lg {
+            box-shadow: 8px 8px 0px 0px #121212;
+        }
+        .neo-card-pattern-1 {
+            background-color: #121212;
+            background-image: radial-gradient(#cafd00 2px, transparent 2px);
+            background-size: 20px 20px;
+        }
+        .neo-card-pattern-2 {
+            background-color: #4e6300;
+            background-image: linear-gradient(45deg, #cafd00 25%, transparent 25%, transparent 50%, #cafd00 50%, #cafd00 75%, transparent 75%, transparent);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 border-b-2 border-[#121212] bg-white flex justify-between items-center px-6 h-16 shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-[#121212] tracking-tighter font-headline italic">DIGITAL REBEL</span>
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+<a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100" href="market_digital_rebel_desktop.html">Markets</a>
+<a class="font-headline font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#cafd00] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100" href="cards_digital_rebel_desktop.html">Cards</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent active:border-[#121212]">notifications</button>
+<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent active:border-[#121212] inline-flex items-center justify-center">settings</a>
+<div class="w-10 h-10 border-2 border-[#121212] bg-primary-fixed">
+<img alt="User Profile" data-alt="minimalist pixel art avatar of a rebel character with neon green hair and dark sunglasses on a flat background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwDq_muka5zbEfqhaWCerndcTs9KTBHANJq2xnb-vNg4nd1qfzAXGuTSBZYSgZ2T0AfVtZFLLcebaMZSYnGNzZqZabCVWJRlaFOPxBeW76Huq4AqTJ85HsIMyK-r8xnDJduw3613Fc69DemDONxnqt0Ba2yRG6eIaB2Y4Qxj4QyQYs0drAUt32tKdrmWGkzFebyf_19j4KKy38MMvNGkHqy2RnQCHb7TxDcMW1M7kQ2gFSVUXj7pPtniwFBShoLRdJKwhWcRJ3cyAn"/>
+</div>
+</div>
+</nav>
+<!-- Sidebar & Main Content -->
+<div class="flex pt-16 flex-1">
+<!-- Main Canvas -->
+<main class="flex-1 p-8 space-y-8">
+<header class="flex justify-between items-end border-b-4 border-[#121212] pb-4">
+<div>
+<h1 class="font-headline font-black text-6xl tracking-tighter uppercase leading-none">Cards Management</h1>
+<p class="font-headline font-bold text-primary-dim uppercase tracking-[0.2em] mt-2">Control your digital footprint / 0.00% Latency</p>
+</div>
+<div class="relative group">
+<a href="add_card_digital_rebel.html" class="bg-tertiary-container text-on-tertiary-container font-headline font-black px-8 py-4 border-2 border-[#121212] hard-shadow hover:translate-y-[-2px] hover:translate-x-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(18,18,18,1)] transition-all rotate-[-1deg] uppercase tracking-tighter inline-block">
+                        ADD NEW CARD
+                    </a>
+</div>
+</header>
+<!-- Active Rebel Cards Grid -->
+<section>
+<div class="flex items-center gap-4 mb-6">
+<h2 class="font-headline font-black text-2xl uppercase tracking-tighter bg-[#121212] text-[#f6f6f6] px-4 py-1">ACTIVE_REBEL_CARDS</h2>
+<div class="flex-1 h-1 bg-[#121212]"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="neo-card-pattern-1 border-4 border-[#121212] p-8 aspect-[1.586/1] flex flex-col justify-between text-[#f6f6f6] hard-shadow-lg relative overflow-hidden group">
+<div class="flex justify-between items-start z-10">
+<span class="material-symbols-outlined text-5xl">contactless</span>
+<span class="font-headline font-black italic text-xl">TITANIUM_ELITE</span>
+</div>
+<div class="z-10">
+<p class="font-mono text-2xl tracking-widest mb-4">**** **** **** 8829</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] uppercase font-headline tracking-widest opacity-70">Card Holder</p>
+<p class="font-headline font-black uppercase">REBEL_OPERATIVE_01</p>
+</div>
+<div class="bg-[#cafd00] text-[#121212] px-4 py-1 border-2 border-[#121212] font-headline font-black rotate-3">
+                                    ACTIVE
+                                </div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="neo-card-pattern-2 border-4 border-[#121212] p-8 aspect-[1.586/1] flex flex-col justify-between text-[#121212] hard-shadow-lg relative overflow-hidden group">
+<div class="flex justify-between items-start z-10">
+<span class="material-symbols-outlined text-5xl">ac_unit</span>
+<span class="font-headline font-black italic text-xl">COLD_STORAGE</span>
+</div>
+<div class="z-10">
+<p class="font-mono text-2xl tracking-widest mb-4">**** **** **** 4401</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] uppercase font-headline tracking-widest opacity-70">Vault ID</p>
+<p class="font-headline font-black uppercase">REBEL_VAULT_77</p>
+</div>
+<div class="bg-white text-[#121212] px-4 py-1 border-2 border-[#121212] font-headline font-black -rotate-2">
+                                    FROZEN
+                                </div>
+</div>
+</div>
+</div>
+<!-- Card Details/Stats (Bento style) -->
+<div class="border-4 border-[#121212] bg-[#cafd00] p-6 hard-shadow-lg flex flex-col justify-center gap-4">
+<p class="font-headline font-black text-4xl uppercase leading-tight">Total Liquidity Across Cards</p>
+<div class="flex items-baseline gap-2">
+<span class="text-6xl font-black font-headline tracking-tighter">$142.8K</span>
+</div>
+<div class="bg-[#121212] text-white p-4">
+<p class="font-headline font-bold uppercase tracking-widest text-xs">+12.4% THIS MONTH</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Sections -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- SPENDING_LIMITS -->
+<section class="border-4 border-[#121212] bg-surface-container-lowest p-8 hard-shadow-lg">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline font-black text-3xl uppercase tracking-tighter">SPENDING_LIMITS</h2>
+<span class="material-symbols-outlined text-3xl">trending_up</span>
+</div>
+<div class="space-y-6">
+<div class="border-2 border-[#121212] p-4 bg-surface-container flex items-center justify-between">
+<div>
+<p class="font-headline font-black uppercase text-sm">DAILY TRANSACTION CAP</p>
+<p class="text-4xl font-black font-headline tracking-tighter">$5,000</p>
+</div>
+<div class="w-16 h-8 bg-[#cafd00] border-2 border-[#121212] relative cursor-pointer">
+<div class="absolute right-1 top-1 w-6 h-5 bg-[#121212]"></div>
+</div>
+</div>
+<div class="border-2 border-[#121212] p-4 bg-white flex items-center justify-between">
+<div>
+<p class="font-headline font-black uppercase text-sm">ATM WITHDRAWAL LIMIT</p>
+<p class="text-4xl font-black font-headline tracking-tighter">$1,200</p>
+</div>
+<div class="w-16 h-8 bg-surface-variant border-2 border-[#121212] relative cursor-pointer">
+<div class="absolute left-1 top-1 w-6 h-5 bg-[#121212]"></div>
+</div>
+</div>
+<div class="border-2 border-[#121212] p-4 bg-surface-container flex items-center justify-between">
+<div>
+<p class="font-headline font-black uppercase text-sm">E-COMMERCE BLOCKER</p>
+<p class="font-headline font-bold text-error uppercase">ENABLED</p>
+</div>
+<div class="w-16 h-8 bg-error-container border-2 border-[#121212] relative cursor-pointer">
+<div class="absolute right-1 top-1 w-6 h-5 bg-[#121212]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECURITY_PROTOCOLS -->
+<section class="border-4 border-[#121212] bg-white p-8 hard-shadow-lg">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline font-black text-3xl uppercase tracking-tighter">SECURITY_PROTOCOLS</h2>
+<span class="material-symbols-outlined text-3xl">gpp_maybe</span>
+</div>
+<div class="space-y-4">
+<div class="p-4 border-2 border-[#121212] hover:bg-primary-fixed transition-colors flex items-center gap-4 cursor-pointer group">
+<span class="material-symbols-outlined text-4xl">fingerprint</span>
+<div class="flex-1">
+<p class="font-headline font-black uppercase tracking-tight">Biometric Confirmation</p>
+<p class="text-xs uppercase tracking-widest font-bold opacity-60">High Security Layer</p>
+</div>
+<span class="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<div class="p-4 border-2 border-[#121212] bg-primary-fixed flex items-center gap-4 cursor-pointer">
+<span class="material-symbols-outlined text-4xl" data-weight="fill">shield_person</span>
+<div class="flex-1">
+<p class="font-headline font-black uppercase tracking-tight">Geofence Locking</p>
+<p class="text-xs uppercase tracking-widest font-bold">Lock card to GPS radius</p>
+</div>
+<div class="w-6 h-6 border-2 border-[#121212] flex items-center justify-center bg-[#121212]">
+<span class="material-symbols-outlined text-white text-sm">check</span>
+</div>
+</div>
+<div class="p-4 border-2 border-[#121212] hover:bg-tertiary-container transition-colors flex items-center gap-4 cursor-pointer group">
+<span class="material-symbols-outlined text-4xl">vpn_key</span>
+<div class="flex-1">
+<p class="font-headline font-black uppercase tracking-tight">Dynamic CVV Generation</p>
+<p class="text-xs uppercase tracking-widest font-bold opacity-60">Refreshes every 60 seconds</p>
+</div>
+<span class="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+<div class="p-4 border-2 border-[#121212] border-dashed bg-surface-container-low flex flex-col items-center justify-center py-6 gap-2">
+<p class="font-headline font-black text-sm uppercase">EMERGENCY PROTOCOL</p>
+<button class="bg-error text-white font-headline font-black px-12 py-3 border-2 border-[#121212] hard-shadow active:translate-y-1 transition-all uppercase tracking-tighter">
+                                KILL SWITCH ALL CARDS
+                            </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full border-t-2 border-[#cafd00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
+<div class="flex flex-col items-center md:items-start gap-1">
+<span class="text-[#cafd00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
+<p class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6]">© 2024 DIGITAL REBEL. NO PERMISSION REQUIRED.</p>
+</div>
+<div class="flex gap-8 flex-wrap">
+<a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+<a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="settings_digital_rebel_desktop.html">Settings</a>
+<a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="learn_digital_rebel_desktop.html">Learn</a>
+<a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="checkout_digital_rebel_desktop.html">Checkout</a>
+<a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="assets_digital_rebel_desktop.html">Assets</a><a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="transactions.html">Transactions</a><a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="market_digital_rebel_desktop.html">Market</a>
+<a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="add_card_digital_rebel.html">Add Card</a>
+<a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="add_manual_asset_digital_rebel.html">Add Asset</a>
+</div>
+</footer>
+</body></html>
