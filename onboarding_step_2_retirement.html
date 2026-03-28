@@ -216,17 +216,29 @@
     <script src="/js/config.js"></script>
     <script src="/js/auth.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 1. Enforce Auth
+            const session = await requireAuth();
+            if (!session) return;
+
+            // 2. Validate Sequence (Must have current_age from Step 1)
+            const saved = localStorage.getItem('onboarding_data');
+            let currentData = {};
+            if (saved) {
+                try {
+                    currentData = JSON.parse(saved);
+                } catch (e) { }
+            }
+
+            if (!currentData.current_age) {
+                window.location.href = 'onboarding_step_1_age.html';
+                return;
+            }
+
             const nextBtn = document.querySelector('a[href="onboarding_step_3_income.html"]');
             const input = document.getElementById('retirement-age');
 
-            const saved = localStorage.getItem('onboarding_data');
-            if (saved) {
-                try {
-                    const data = JSON.parse(saved);
-                    if (data.retirement_age) input.value = data.retirement_age;
-                } catch (e) { }
-            }
+            if (currentData.retirement_age) input.value = currentData.retirement_age;
 
             if (nextBtn && input) {
                 nextBtn.addEventListener('click', (e) => {

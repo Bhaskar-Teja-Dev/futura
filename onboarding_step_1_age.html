@@ -211,7 +211,11 @@
   <script src="/js/config.js"></script>
   <script src="/js/auth.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Enforce Auth
+      const session = await requireAuth();
+      if (!session) return;
+
       const nextBtn = document.querySelector('a[href="onboarding_step_2_retirement.html"]');
       const input = document.getElementById('age-input');
 
