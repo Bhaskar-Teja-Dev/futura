@@ -297,6 +297,16 @@
       return { ...c, typeBadge, assetName };
     }
 
+    function normalizeLocalStock(h) {
+      return {
+        amount: parseFloat(h.amount) || 0,
+        contribution_date: h.date,
+        note: `[STOCK] ${h.ticker}: ${h.companyName}`,
+        created_at: h.date,
+        id: `local-${h.ticker}-${h.date}`
+      };
+    }
+
     function renderTransactions(list) {
       const listEl = document.getElementById('transaction-list');
       const originalHeader = `
@@ -335,7 +345,7 @@
         <div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline font-black text-xl">${initial}</div>
         <div>
             <p class="font-headline font-black text-lg leading-none truncate">${parsed.assetName.substring(0, 25)}</p>
-            <p class="text-xs font-bold text-outline">USER_VAULT</p>
+            <p class="text-xs font-bold text-outline">${c.id?.startsWith('local-') ? 'PORTFOLIO_HOLDING' : 'USER_VAULT'}</p>
         </div>
     </div>
 </div>
@@ -367,7 +377,7 @@
       if (!container) return;
       container.innerHTML = '';
 
-      const sorted = [...data].sort((a, b) => new Date(a.contribution_date) - new Date(b.contribution_date)).slice(-7);
+      const sorted = [...data].sort((a, b) => new Date(a.contribution_date) - new Date(b.contribution_date)).slice(-10);
       const maxAmount = Math.max(...sorted.map(d => d.amount), 1);
 
       sorted.forEach(d => {
@@ -385,10 +395,11 @@
 
     async function downloadCSV() {
       if (allContributions.length === 0) return;
-      const headers = ['Date', 'Asset', 'Type', 'Amount'];
+      const headers = ['Date', 'Asset', 'Type', 'Amount', 'Source'];
       const rows = allContributions.map(c => {
         const p = parseContribution(c);
-        return [new Date(c.contribution_date).toLocaleDateString(), p.assetName, p.typeBadge, c.amount];
+        const source = c.id?.startsWith('local-') ? 'Local Portfolio' : 'API Vault';
+        return [new Date(c.contribution_date).toLocaleDateString(), p.assetName, p.typeBadge, c.amount, source];
       });
       const csvContent = [headers, ...rows].map(e => e.join(",")).join("\n");
       const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -412,18 +423,31 @@
 
       try {
         const res = await futuraApi.contributions.list();
-        if (res.error) throw new Error(res.error);
-        allContributions = res.contributions || [];
+        const apiContribs = res.contributions || [];
+
+        let localStocks = [];
+        try {
+          const raw = localStorage.getItem('portfolioHoldings') || '[]';
+          localStocks = JSON.parse(raw).map(normalizeLocalStock);
+        } catch (e) { console.error('Local parse error', e); }
+
+        allContributions = [...apiContribs, ...localStocks].sort((a, b) =>
+          new Date(b.contribution_date) - new Date(a.contribution_date)
+        );
+
         let totalVolume = 0;
         let buyCount = 0;
         let sellCount = 0;
+
         allContributions.forEach(c => {
           totalVolume += c.amount;
           const p = parseContribution(c);
           if (p.typeBadge.includes('SELL')) sellCount++;
           else buyCount++;
         });
+
         renderTransactions(allContributions);
+
         if (totalVolEl) totalVolEl.textContent = `$${totalVolume.toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
         const totalTrades = buyCount + sellCount;
         if (totalTrades > 0) {
@@ -454,14 +478,16 @@
         document.getElementById('btn-export-csv').addEventListener('click', downloadCSV);
 
         document.getElementById('view-list-btn').addEventListener('click', () => {
-          document.getElementById('transaction-list').classList.remove('hidden');
+          document.transactionList = document.getElementById('transaction-list');
+          document.transactionList.classList.remove('hidden');
           document.getElementById('chart-view').classList.add('hidden');
           document.getElementById('view-list-btn').classList.add('bg-primary-fixed');
           document.getElementById('view-chart-btn').classList.remove('bg-primary-fixed');
         });
 
         document.getElementById('view-chart-btn').addEventListener('click', () => {
-          document.getElementById('transaction-list').classList.add('hidden');
+          document.transactionList = document.getElementById('transaction-list');
+          document.transactionList.classList.add('hidden');
           document.getElementById('chart-view').classList.remove('hidden');
           document.getElementById('view-chart-btn').classList.add('bg-primary-fixed');
           document.getElementById('view-list-btn').classList.remove('bg-primary-fixed');
