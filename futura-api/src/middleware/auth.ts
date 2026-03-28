@@ -1,5 +1,5 @@
 import { createMiddleware } from 'hono/factory'
-import { createClient } from '@supabase/supabase-js'
+import { getSupabase } from '../lib/supabase'
 import type { Env, Variables } from '../types'
 
 export const authMiddleware = createMiddleware<{ Bindings: Env; Variables: Variables }>(
@@ -10,7 +10,7 @@ export const authMiddleware = createMiddleware<{ Bindings: Env; Variables: Varia
       return c.json({ error: 'unauthorized' }, 401)
     }
 
-    const supabase = createClient(c.env.SUPABASE_URL, c.env.SUPABASE_SERVICE_ROLE_KEY)
+    const supabase = getSupabase(c.env)
     const {
       data: { user },
       error

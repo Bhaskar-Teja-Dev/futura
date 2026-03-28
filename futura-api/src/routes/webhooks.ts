@@ -26,7 +26,26 @@ async function verifySignature(body: string, signature: string, secret: string) 
   )
   const digest = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(body))
   const expected = toHex(digest)
-  return signature.length === expected.length && signature === expected
+
+  if (signature.length !== expected.length) {
+    return false
+  }
+
+  const encoder = new TextEncoder()
+  const sigBuf = encoder.encode(signature)
+  const expBuf = encoder.encode(expected)
+
+  // timingSafeEqual is available globally in Cloudflare Workers (nodejs_compat)
+  if (typeof globalThis.crypto !== 'undefined' && 'timingSafeEqual' in globalThis.crypto) {
+    return (globalThis.crypto as unknown as { timingSafeEqual: (a: BufferSource, b: BufferSource) => boolean }).timingSafeEqual(sigBuf, expBuf)
+  }
+
+  // Fallback: constant-time comparison
+  let mismatch = 0
+  for (let i = 0; i < sigBuf.length; i++) {
+    mismatch |= sigBuf[i] ^ expBuf[i]
+  }
+  return mismatch === 0
 }
 
 router.post('/revenuecat', async (c) => {

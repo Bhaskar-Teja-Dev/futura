@@ -41,8 +41,10 @@ function projectRetirementPot(params: {
   }
 
   const futureValueContributions =
-    params.monthlyContribution *
-    ((Math.pow(1 + monthlyRate, months) - 1) / (monthlyRate || 1 / 12))
+    monthlyRate === 0
+      ? params.monthlyContribution * months
+      : params.monthlyContribution *
+        ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate)
   const futureValueExisting = (params.existingPot ?? 0) * Math.pow(1 + monthlyRate, months)
   return Math.round(futureValueContributions + futureValueExisting)
 }

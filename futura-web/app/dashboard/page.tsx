@@ -17,18 +17,24 @@ export default function DashboardPage() {
   const loadData = async () => {
     setStatus('Loading...')
     try {
-      const [profile, goals, contributions, projection] = await Promise.all([
+      const [profile, goals, contributions] = await Promise.all([
         api.profile.get(),
         api.goals.get(),
-        api.contributions.list(),
-        api.projection.calculate({
-          currentAge: 22,
-          retirementAge: 65,
-          monthlyContribution: 150,
-          annualReturn: 0.07,
+        api.contributions.list()
+      ])
+
+      const goalData = (goals as { goal?: { current_age: number; retirement_age: number; target_monthly_income: number; annual_return_rate?: number } })?.goal
+
+      let projection = null
+      if (goalData) {
+        projection = await api.projection.calculate({
+          currentAge: goalData.current_age,
+          retirementAge: goalData.retirement_age,
+          monthlyContribution: goalData.target_monthly_income,
+          annualReturn: goalData.annual_return_rate ?? 0.07,
           existingPot: 0
         })
-      ])
+      }
 
       setData({
         profile,

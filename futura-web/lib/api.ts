@@ -4,6 +4,7 @@ export type ContributionPayload = {
   amount: number
   contribution_date: string
   note?: string
+  currency?: string
 }
 
 export type GoalPayload = {
@@ -19,6 +20,15 @@ export type ProjectionPayload = {
   retirementAge: number
   monthlyContribution: number
   annualReturn?: number
+  existingPot?: number
+}
+
+export type ScenarioPayload = {
+  name: string
+  currentAge: number
+  retirementAge: number
+  monthlyContribution: number
+  annualReturn: number
   existingPot?: number
 }
 
@@ -73,7 +83,7 @@ export const api = {
   projection: {
     calculate: (body: ProjectionPayload) =>
       apiFetch('/api/projection', { method: 'POST', body: JSON.stringify(body) }),
-    scenarios: (body: { scenarios: ProjectionPayload[] }) =>
+    scenarios: (body: { scenarios: ScenarioPayload[] }) =>
       apiFetch('/api/projection/scenarios', { method: 'POST', body: JSON.stringify(body) })
   },
   allocation: {
