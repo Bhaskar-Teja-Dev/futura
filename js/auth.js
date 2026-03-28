@@ -65,6 +65,13 @@ async function checkOnboarding() {
 
     // Redirection Logic
     if (isOnboarded) {
+      // Set persistent flag for zero-flash hiding on next load
+      localStorage.setItem('futura_onboarding_complete', 'true');
+
+      // Hide sign-in button if onboarded
+      const googleBtn = document.getElementById('btn-google-signin');
+      if (googleBtn) googleBtn.style.display = 'none';
+
       if (currentPath === '/' || currentPath.includes('index.html') || currentPath.includes('onboarding_')) {
         // Use a flag to avoid infinite loops if the redirect is already in progress
         if (!window.location.search.includes('redirecting')) {
@@ -112,15 +119,15 @@ async function updateNavAuth() {
   authButtons.forEach(btn => {
     if (session) {
       if (btn.id === 'btn-google-signin') {
-        btn.style.display = 'none'; // Hide as per user request
+        btn.innerHTML = '<span class="material-symbols-outlined">terminal</span> ENTER TERMINAL';
       } else {
-        // Replace button content/behavior for others
         btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
-        btn.onclick = (e) => {
-          e.preventDefault();
-          window.location.href = '/dashboard_digital_rebel_desktop.html';
-        };
       }
+
+      btn.onclick = (e) => {
+        e.preventDefault();
+        window.location.href = '/dashboard_digital_rebel_desktop.html';
+      };
     } else {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
