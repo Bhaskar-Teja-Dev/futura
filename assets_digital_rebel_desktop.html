@@ -377,7 +377,7 @@
         if (res.error) throw new Error(res.error);
 
         const contributions = res.contributions || [];
-        
+
         grid.innerHTML = ''; // clear
 
         if (contributions.length === 0) {
@@ -396,7 +396,7 @@
 
           if (c.note) {
             if (c.note.startsWith('[MARKET_INVESTMENT]')) return; // Filter out automated market logs
-            
+
             const match = c.note.match(/^\[(.*?)\]\s*(.*)$/);
             if (match) {
               typeBadge = match[1];
@@ -559,18 +559,18 @@
     window.sellAsset = (index, ticker, investedStr, swingStr) => {
       const invested = parseFloat(investedStr);
       const swing = parseFloat(swingStr);
-      
+
       const pnl = invested * (swing / 100);
       const finalProceeds = Math.max(0, Math.floor(invested + pnl));
       const isProfit = pnl >= 0;
       const colorHex = isProfit ? '#cafd00' : '#ff3b30'; // neo-green or warning red
       const textColor = isProfit ? '#121212' : '#ffffff';
-      
+
       // Render Pre-Confirmation Modal
       const modal = document.createElement('div');
       modal.id = 'sell-confirmation-modal';
       modal.className = 'fixed inset-0 z-[2000] flex items-center justify-center bg-[#121212]/90 backdrop-blur-md px-4';
-      
+
       modal.innerHTML = `
         <div id="sell-modal-card" class="bg-[#121212] border-4 p-8 w-full max-w-md relative text-white animate-slideUp" style="border-color:${colorHex}; box-shadow: 12px 12px 0px 0px ${colorHex};">
           <div class="flex items-center gap-4 mb-6 pb-6 border-b-2 border-surface-container-high">
@@ -605,9 +605,9 @@
       // Event handling to cancel
       const closeModal = () => modal.remove();
       document.getElementById('cancel-sell-btn').onclick = closeModal;
-      
+
       modal.onclick = (e) => {
-         if(e.target === modal) closeModal();
+        if (e.target === modal) closeModal();
       };
 
       const escHandler = (e) => {
@@ -636,11 +636,11 @@
           let holdings = JSON.parse(holdingsStr);
           holdings.splice(index, 1);
           localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
-          
+
           // Re-render UI block for Receipt
           const labelText = isProfit ? 'PROFIT SECURED' : 'LOSS REALIZED';
           const icon = isProfit ? 'check_circle' : 'warning';
-          
+
           document.getElementById('sell-modal-card').innerHTML = `
             <div class="flex items-center gap-4 mb-6 pb-6 border-b-2 border-surface-container-high">
                <span class="material-symbols-outlined text-5xl" style="color:${colorHex}">${icon}</span>
@@ -663,7 +663,7 @@
             
             <button onclick="location.reload()" class="w-full border-2 p-4 font-headline font-black text-xl uppercase tracking-widest hover:opacity-80 transition-colors" style="background:${colorHex}; border-color:${colorHex}; color:${textColor}; box-shadow: 4px 4px 0px 0px #ffffff;">ACKNOWLEDGE</button>
           `;
-          
+
           // Clean up the general esc handler so they must explicitly acknowledge
           document.removeEventListener('keydown', escHandler);
 
@@ -674,6 +674,7 @@
         }
       };
     };
-</script>
+  </script>
 </body>
+
 </html>

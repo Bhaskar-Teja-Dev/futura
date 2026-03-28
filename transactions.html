@@ -315,26 +315,57 @@
       };
     }
 
+    function calculatePnL(list) {
+      const sorted = [...list].sort((a, b) => new Date(a.contribution_date) - new Date(b.contribution_date));
+      const assetStacks = {}; // FIFO stacks for each asset
+      const realizedPnLMap = {}; // Store PnL for each transaction ID
+
+      sorted.forEach(c => {
+        const p = parseContribution(c);
+        const asset = p.assetName;
+
+        if (p.isBuy) {
+          if (!assetStacks[asset]) assetStacks[asset] = [];
+          assetStacks[asset].push(p.zensValue);
+          realizedPnLMap[c.id] = 0; // Buys don't have realized PnL
+        } else if (p.isSell) {
+          let pnl = 0;
+          if (assetStacks[asset] && assetStacks[asset].length > 0) {
+            const costBasis = assetStacks[asset].shift(); // FIFO
+            pnl = p.zensValue - costBasis;
+          } else {
+            // No matching buy found (e.g., initial balance or untracked buy)
+            pnl = 0;
+          }
+          realizedPnLMap[c.id] = pnl;
+        }
+      });
+      return realizedPnLMap;
+    }
+
     function updateStats(list) {
       const totalVolEl = document.getElementById('total-volume');
       const buyPressureEl = document.getElementById('buy-pressure');
       const sellLiquidityEl = document.getElementById('sell-liquidity');
       const plSnapshotEl = document.getElementById('pl-snapshot');
+      const plPercentageEl = document.getElementById('pl-percentage');
 
+      const pnlMap = calculatePnL(list);
       let totalZensVolume = 0;
-      let totalNetZensPL = 0;
+      let totalRealizedPL = 0;
       let buyCount = 0;
       let sellCount = 0;
+      let totalBuyCost = 0;
 
       list.forEach(c => {
         const p = parseContribution(c);
         totalZensVolume += p.zensValue;
         if (p.isSell) {
           sellCount++;
-          totalNetZensPL += p.zensValue;
+          totalRealizedPL += (pnlMap[c.id] || 0);
         } else {
           buyCount++;
-          totalNetZensPL -= p.zensValue;
+          totalBuyCost += p.zensValue;
         }
       });
 
@@ -349,33 +380,40 @@
       }
 
       if (plSnapshotEl) {
-        const prefix = totalNetZensPL >= 0 ? '+🪙 ' : '-🪙 ';
-        const absVal = Math.abs(totalNetZensPL);
+        const prefix = totalRealizedPL >= 0 ? '+🪙 ' : '-🪙 ';
+        const absVal = Math.abs(totalRealizedPL);
         plSnapshotEl.textContent = `${prefix}${absVal.toLocaleString('en-US')}`;
 
         // Color coding
-        if (totalNetZensPL > 0) {
-          plSnapshotEl.classList.remove('text-on-surface');
+        if (totalRealizedPL > 0) {
+          plSnapshotEl.classList.remove('text-on-surface', 'text-error');
           plSnapshotEl.classList.add('text-primary-fixed-variant'); // Green-ish
-        } else if (totalNetZensPL < 0) {
-          plSnapshotEl.classList.remove('text-on-surface');
+        } else if (totalRealizedPL < 0) {
+          plSnapshotEl.classList.remove('text-on-surface', 'text-primary-fixed-variant');
           plSnapshotEl.classList.add('text-error'); // Red
         } else {
           plSnapshotEl.classList.remove('text-primary-fixed-variant', 'text-error');
           plSnapshotEl.classList.add('text-on-surface');
         }
       }
+
+      if (plPercentageEl && totalBuyCost > 0) {
+        const perc = (totalRealizedPL / totalBuyCost) * 100;
+        plPercentageEl.textContent = `${perc >= 0 ? '↑' : '↓'} ${Math.abs(perc).toFixed(1)}% TOTAL_NET_GAIN`;
+      }
     }
 
     function renderTransactions(list) {
       const listEl = document.getElementById('transaction-list');
+      const pnlMap = calculatePnL(list);
+
       const originalHeader = `
       <div class="hidden lg:grid grid-cols-12 px-6 py-4 bg-on-surface text-surface font-headline font-black text-xs tracking-widest uppercase">
         <div class="col-span-3">ASSET_NAME</div>
         <div class="col-span-2">TYPE</div>
         <div class="col-span-2 text-right">QUANTITY</div>
         <div class="col-span-2 text-right">ZENS_VALUE</div>
-        <div class="col-span-2 text-right">TOTAL_VALUE</div>
+        <div class="col-span-2 text-right">P/L_IMPACT</div>
         <div class="col-span-1 text-right">DATE</div>
       </div>`;
 
@@ -396,9 +434,18 @@
       list.forEach(c => {
         const parsed = parseContribution(c);
         const initial = parsed.assetName.charAt(0).toUpperCase();
+        const pnl = pnlMap[c.id] || 0;
 
         const row = document.createElement('div');
         row.className = 'group grid grid-cols-1 md:grid-cols-12 items-center px-6 py-8 md:py-6 bg-surface-container-lowest border-4 border-on-surface neo-shadow hover:-translate-y-1 hover:translate-x-1 transition-all mb-4';
+
+        let pnlDisplay = '--';
+        let pnlColor = 'text-outline';
+        if (parsed.isSell) {
+          pnlDisplay = (pnl >= 0 ? '+' : '-') + '🪙 ' + Math.abs(pnl).toLocaleString('en-US');
+          pnlColor = pnl >= 0 ? 'text-primary-fixed-variant' : 'text-error';
+        }
+
         row.innerHTML = `
 <div class="col-span-12 lg:col-span-3 mb-4 lg:mb-0">
     <div class="flex items-center gap-4">
@@ -421,8 +468,8 @@
     <p class="font-headline font-bold text-lg">${parsed.isSell ? '+' : '-'}🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
-    <p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
-    <p class="font-headline font-black text-lg ${parsed.isSell ? 'text-primary-fixed-variant' : 'text-error'}">🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
+    <p class="text-xs font-bold text-outline lg:hidden">P/L_IMPACT</p>
+    <p class="font-headline font-black text-lg ${pnlColor}">${pnlDisplay}</p>
 </div>
 <div class="col-span-12 lg:col-span-1 text-right mt-4 lg:mt-0">
     <p class="font-headline font-bold text-xs uppercase text-outline underline">${new Date(c.contribution_date).toLocaleDateString()}</p>
@@ -438,12 +485,15 @@
       container.innerHTML = '';
       container.className = 'h-64 flex items-end gap-2 justify-center border-b-2 border-on-surface pb-1'; // Ensure baseline
 
-      // 1. Group by Date with Net Performance logic
+      // 1. Group by Date with Realized P/L logic
+      const pnlMap = calculatePnL(data);
       const groups = {};
       data.forEach(c => {
         const p = parseContribution(c);
         const day = p.contribution_date;
-        const val = p.isSell ? p.zensValue : -p.zensValue;
+        // For chart, we show the Realized P/L for sells, and 0 (or negative cost) for buys?
+        // Let's show the net realized P/L for the day.
+        const val = pnlMap[c.id] || 0;
         groups[day] = (groups[day] || 0) + val;
       });
 
@@ -471,7 +521,7 @@
 
         bar.innerHTML = `
           <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 hidden group-hover:block neo-shadow z-20 whitespace-nowrap">
-            NET_PERF: ${isProfit ? '+' : ''}🪙 ${Math.round(netVal)}
+            REALIZED_PNL: ${isProfit ? '+' : ''}🪙 ${Math.round(netVal)}
           </div>
           <div class="w-full ${isProfit ? 'bg-primary-fixed' : 'bg-error'} border-2 border-on-surface neo-shadow transition-all duration-500 ease-out" 
                style="height: 0%"></div>
@@ -486,6 +536,7 @@
         }, 50);
       });
     }
+
 
     async function downloadCSV() {
       if (allContributions.length === 0) return;
