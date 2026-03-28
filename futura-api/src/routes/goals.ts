@@ -42,7 +42,8 @@ router.post('/', zValidator('json', goalsSchema), async (c) => {
       { 
         id: userId, 
         email: userEmail,
-        onboarding_complete: true 
+        onboarding_complete: true,
+        zens: 10000 // Give new users purchasing power
       }, 
       { onConflict: 'id' }
     )

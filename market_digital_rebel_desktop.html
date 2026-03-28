@@ -33,10 +33,10 @@
             "secondary-fixed": "#e5e2e1",
             "on-primary-container": "#4a5e00",
             "tertiary-fixed-dim": "#ff61f8",
-            "primary-container": "#cafd00",
+            "primary-container": "#68FD00",
             "on-primary": "#e1ff88",
             "inverse-on-surface": "#9c9d9d",
-            "primary-fixed": "#cafd00",
+            "primary-fixed": "#68FD00",
             "secondary": "#5c5b5b",
             "outline-variant": "#acadad",
             "secondary-dim": "#504f4f",
@@ -71,7 +71,7 @@
             "error-dim": "#b92902",
             "tertiary-fixed": "#ff81f5",
             "surface-container": "#e7e8e8",
-            "inverse-primary": "#cafd00",
+            "inverse-primary": "#68FD00",
             "on-surface": "#2d2f2f"
           },
           fontFamily: {
@@ -118,24 +118,34 @@
     <div class="flex items-center gap-8">
       <span class="text-2xl font-black text-[#121212] tracking-tighter font-headline">DIGITAL REBEL</span>
       <div class="hidden md:flex gap-6 items-center">
-        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
+        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#68FD00] hover:text-[#121212] transition-colors duration-100"
           href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-        <a class="font-headline font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#cafd00] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
+        <a class="font-headline font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#68FD00] pb-1 hover:bg-[#68FD00] hover:text-[#121212] transition-colors duration-100"
           href="market_digital_rebel_desktop.html">Markets</a>
-        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
+        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#68FD00] hover:text-[#121212] transition-colors duration-100"
           href="assets_digital_rebel_desktop.html">Assets</a>
       </div>
     </div>
     <div class="flex items-center gap-4">
+      <!-- ZENS BALANCE PILL -->
+      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#68FD00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
+        <span>🪙</span>
+        <span id="nav-zens-balance">--</span>
+      </div>
+      <!-- ADD MONEY BTN -->
+      <button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })" class="hidden md:block bg-[##cafd00] text-[#121212] border-2 border-[#121212] font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors hard-shadow-sm active:translate-y-1 active:shadow-none">
+        ADD MONEY
+      </button>
+
       <button
-        class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all"
+        class="material-symbols-outlined p-2 hover:bg-[#68FD00] border-2 border-transparent hover:border-[#121212] transition-all"
         data-icon="notifications">notifications</button>
       <a href="settings_digital_rebel_desktop.html"
-        class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all inline-flex items-center justify-center"
+        class="material-symbols-outlined p-2 hover:bg-[#68FD00] border-2 border-transparent hover:border-[#121212] transition-all inline-flex items-center justify-center"
         data-icon="settings">settings</a>
-      <div class="w-10 h-10 border-2 border-[#121212] bg-[#cafd00] flex items-center justify-center overflow-hidden">
+      <div class="w-10 h-10 border-2 border-[#121212] bg-[#68FD00] flex items-center justify-center overflow-hidden cursor-pointer" id="nav-avatar">
         <img alt="User Profile" class="w-full h-full object-cover"
-          data-alt="close-up portrait of a stylish person with neon lighting highlights and punk aesthetic"
+          data-alt="close-up portrait of a stylish person"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRMSTAkV3q57A8vsSy6PmvoBX4yhAFI8BgQ88TFBePb83P1DuwFU925pZCQzZ6wjq9CbDZMqa9Uz13ar4Xz-5mfeRb6BckAHmtIFLo6bhgb685g9fnqjwDTsr2nBxJ7W78RDp4l977ydaaYa4-TvNlal6PR8D43WfDYZ8jN_LWsRU_mDBzEfDHJmWlbHQNYX4Dpkt-MUXlOCfYoialvBa4GuUail7tiMD09qWFnhoCSx7cZtkMX-in0TYq3cvnUHTN0I8X7VZzS1Zu" />
       </div>
     </div>
@@ -165,243 +175,28 @@
     </header>
     <!-- Markets Grid / Bento Style for Top Movers -->
     <section class="mb-12">
-      <div class="flex items-center gap-4 mb-6 cursor-pointer select-none" id="movers-toggle"
-        title="Toggle Movers/Losers">
+      <div class="flex items-center gap-4 mb-6 cursor-pointer select-none" id="market-toggle"
+        title="Toggle Market View">
         <span class="w-12 h-[2px] bg-[#121212]"></span>
-        <h2 id="movers-label" class="font-headline font-black text-3xl uppercase tracking-tighter">TOP 10 MOVERS</h2>
-        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 ml-2">CLICK TO
-          TOGGLE</span>
+        <h2 id="market-label" class="font-headline font-black text-3xl uppercase tracking-tighter">TOP MOVERS</h2>
+        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 ml-2 hover:bg-[#121212] hover:text-white transition-colors" id="btn-movers">MOVERS</span>
+        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 hover:bg-[#121212] hover:text-white transition-colors" id="btn-gainers">GAINERS</span>
+        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 hover:bg-[#121212] hover:text-white transition-colors" id="btn-losers">LOSERS</span>
       </div>
-      <div class="space-y-4">
-        <div data-ticker="TSLA" data-name="Tesla Inc." data-price="178.44" data-change="+12.4" data-risk="HIGH"
-          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
-            TSLA</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Tesla Inc.</p>
-            <p class="font-headline font-black text-3xl leading-none">$178.44</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-[#cafd00]">+12.4%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
-              <polyline fill="none" points="0,35 20,25 40,30 60,10 80,15 100,5" stroke="#cafd00" stroke-width="3">
-              </polyline>
-            </svg>
-          </div>
-          <button data-buy="TSLA"
-            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
-        </div>
-        <div data-ticker="AAPL" data-name="Apple Inc." data-price="191.04" data-change="-4.2" data-risk="MODERATE"
-          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
-            AAPL</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Apple Inc.</p>
-            <p class="font-headline font-black text-3xl leading-none">$191.04</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-error-container">-4.2%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
-              <polyline fill="none" points="0,5 20,15 40,10 60,30 80,25 100,38" stroke="#b02500" stroke-width="3">
-              </polyline>
-            </svg>
-          </div>
-          <button data-buy="AAPL"
-            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
-        </div>
-        <div data-ticker="NVDA" data-name="NVIDIA Corp." data-price="894.52" data-change="+22.1" data-risk="HIGH"
-          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
-            NVDA</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">NVIDIA Corp.</p>
-            <p class="font-headline font-black text-3xl leading-none">$894.52</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-[#cafd00]">+22.1%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
-              <polyline fill="none" points="0,38 20,30 40,25 60,15 80,5 100,2" stroke="#cafd00" stroke-width="3">
-              </polyline>
-            </svg>
-          </div>
-          <button data-buy="NVDA"
-            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
-        </div>
-        <div data-ticker="META" data-name="Meta Platforms" data-price="485.58" data-change="+3.8" data-risk="MODERATE"
-          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
-            META</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Meta Platforms</p>
-            <p class="font-headline font-black text-3xl leading-none">$485.58</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-[#cafd00]">+3.8%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
-              <polyline fill="none" points="0,20 30,15 50,18 70,10 100,5" stroke="#cafd00" stroke-width="3"></polyline>
-            </svg>
-          </div>
-          <button data-buy="META"
-            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
-        </div>
-        <div data-ticker="AMZN" data-name="Amazon.com Inc." data-price="175.01" data-change="-1.5" data-risk="MODERATE"
-          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
-            AMZN</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Amazon.com Inc.</p>
-            <p class="font-headline font-black text-3xl leading-none">$175.01</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-error-container">-1.5%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
-              <polyline fill="none" points="0,15 30,20 60,35 100,30" stroke="#b02500" stroke-width="3"></polyline>
-            </svg>
-          </div>
-          <button data-buy="AMZN"
-            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
-        </div>
-        <div data-ticker="MSFT" data-name="Microsoft" data-price="415.50" data-change="+0.8" data-risk="MODERATE"
-          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
-            MSFT</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Microsoft</p>
-            <p class="font-headline font-black text-3xl leading-none">$415.50</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-[#cafd00]">+0.8%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
-              <polyline fill="none" points="0,25 50,23 100,20" stroke="#cafd00" stroke-width="3"></polyline>
-            </svg>
-          </div>
-          <button data-buy="MSFT"
-            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
-        </div>
-        <div data-ticker="GOOGL" data-name="Alphabet Inc." data-price="147.60" data-change="-2.1" data-risk="MODERATE"
-          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
-            GOOGL</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Alphabet Inc.</p>
-            <p class="font-headline font-black text-3xl leading-none">$147.60</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-error-container">-2.1%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
-              <polyline fill="none" points="0,10 50,25 100,35" stroke="#b02500" stroke-width="3"></polyline>
-            </svg>
-          </div>
-          <button data-buy="GOOGL"
-            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
-        </div>
-        <!-- Stock Row 8 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
-            NFLX</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Netflix Inc.</p>
-            <p class="font-headline font-black text-3xl leading-none">$610.56</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-[#cafd00]">+6.7%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
-              <polyline fill="none" points="0,30 20,20 50,25 80,10 100,5" stroke="#cafd00" stroke-width="3"></polyline>
-            </svg>
-          </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-        </div>
-        <!-- Stock Row 9 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
-            AMD</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Advanced Micro Devices
-            </p>
-            <p class="font-headline font-black text-3xl leading-none">$162.33</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-[#cafd00]">+8.2%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
-              <polyline fill="none" points="0,35 40,20 70,25 100,5" stroke="#cafd00" stroke-width="3"></polyline>
-            </svg>
-          </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-        </div>
-        <!-- Stock Row 10 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-          <div
-            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
-            UBER</div>
-          <div class="flex-grow">
-            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Uber Technologies</p>
-            <p class="font-headline font-black text-3xl leading-none">$74.12</p>
-          </div>
-          <div class="text-right shrink-0">
-            <p class="font-headline font-black text-xl text-error-container">-0.3%</p>
-            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-          </div>
-          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
-              <polyline fill="none" points="0,10 50,15 100,12" stroke="#b02500" stroke-width="3"></polyline>
-            </svg>
-          </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-        </div>
+      <div id="market-list-container" class="space-y-4">
+        <!-- JS Hydrated -->
       </div>
-    </section>
+    </section>on>
     <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
       <div id="leverage-banner"
         class="md:col-span-2 bg-[#121212] p-8 hard-shadow flex flex-col justify-between overflow-hidden relative group cursor-pointer">
         <div class="relative z-10">
-          <h3 class="text-[#cafd00] font-headline font-black text-4xl tracking-tighter uppercase mb-4 leading-none">
+          <h3 class="text-[#68FD00] font-headline font-black text-4xl tracking-tighter uppercase mb-4 leading-none">
             Unlock Leverage Trading</h3>
           <p class="text-white font-body max-w-md mb-8">Take control of the market with our new margin tools. High risk,
             high reward. Only for the bold.</p>
           <button id="activate-now-btn"
-            class="bg-white text-[#121212] border-2 border-white px-8 py-4 font-headline font-black uppercase tracking-widest hover:bg-[#cafd00] hover:border-[#cafd00] transition-colors">ACTIVATE_NOW</button>
+            class="bg-white text-[#121212] border-2 border-white px-8 py-4 font-headline font-black uppercase tracking-widest hover:bg-[#68FD00] hover:border-[#68FD00] transition-colors">ACTIVATE_NOW</button>
         </div>
         <div
           class="absolute right-0 bottom-0 w-64 h-64 opacity-20 grayscale group-hover:grayscale-0 transition-all duration-500">
@@ -422,30 +217,30 @@
   </main>
   <!-- Footer -->
   <footer
-    class="w-full border-t-2 border-[#cafd00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
+    class="w-full border-t-2 border-[#68FD00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
     <div class="flex items-center gap-4">
-      <span class="text-[#cafd00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
+      <span class="text-[#68FD00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
       <span class="text-[#f6f6f6] font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase">© 2024 DIGITAL
         REBEL. NO PERMISSION REQUIRED.</span>
     </div>
     <div class="flex gap-6 flex-wrap">
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="settings_digital_rebel_desktop.html">Settings</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="learn_digital_rebel_desktop.html">Learn</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="checkout_digital_rebel_desktop.html">Checkout</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="assets_digital_rebel_desktop.html">Assets</a><a
-        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="transactions.html">Transactions</a><a
-        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="cards_digital_rebel_desktop.html">Cards</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="add_card_digital_rebel.html">Add Card</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="add_manual_asset_digital_rebel.html">Add Asset</a>
     </div>
   </footer>
@@ -513,20 +308,28 @@
            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#121212;">
            ✅ Your retirement plan is in good shape. This addition can supplement your portfolio.</p></div>`;
 
+      const currentZensBalance = parseInt(document.getElementById('nav-zens-balance')?.textContent?.replace(/,/g, '') || '0', 10);
+
       const ov = createOverlay(`
       <div class="buy-overlay" style="background:#fff;border:3px solid #121212;box-shadow:8px 8px 0 #121212;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:slideUp .2s ease;">
         <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0;">
           <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:-.02em;">QUICK BUY — ${ticker}</h2>
           <button onclick="this.closest('.buy-overlay').parentElement.remove()" style="background:none;border:none;font-size:24px;cursor:pointer;font-weight:900;">×</button>
         </div>
-        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${name} · $${price} · ${change}% today</p>
+        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${name} · ${price} ZENS · ${change}% today</p>
         <div style="padding:0 24px 24px;">
-          <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">How much to invest monthly?</label>
-          <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
-            <span style="background:#121212;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;">₹</span>
-            <input id="buy-amount" type="number" min="500" value="1000" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
+          
+          <div style="background:#121212;color:#68FD00;border:2px solid #121212;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Available Balance</span>
+            <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">🪙 ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
           </div>
-          <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: ₹500</p>
+
+          <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">How many ZENS to invest?</label>
+          <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
+            <span style="background:#121212;color:#68FD00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;font-size:20px;">🪙</span>
+            <input id="buy-amount" type="number" min="50" max="${currentZensBalance}" value="100" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
+          </div>
+          <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: 50 ZENS</p>
 
           <div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin-bottom:16px;">
             <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Retirement Impact Preview</p>
@@ -538,7 +341,7 @@
 
           ${warningBlock}
 
-          <button id="confirm-buy" style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;margin-bottom:8px;">CONFIRM INVESTMENT</button>
+          <button id="confirm-buy" style="width:100%;background:#68FD00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;margin-bottom:8px;transition:0.2s;position:relative;">CONFIRM INVESTMENT</button>
           <button onclick="this.closest('.buy-overlay').parentElement.remove()" style="width:100%;background:transparent;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:12px;cursor:pointer;">CANCEL</button>
         </div>
       </div>`);
@@ -547,22 +350,52 @@
       const preview = ov.querySelector('#corpus-preview');
       function updatePreview() {
         const amt = parseFloat(amountInput.value) || 0;
-        const corpus = calcCorpus(amt, returnRate, years);
-        preview.textContent = `Adding ₹${amt.toLocaleString('en-IN')}/month would add ₹${corpus.toLocaleString('en-IN')} to your corpus by ${retYear}.`;
+        const equivalentInUSD = amt; // Zens -> USD mapping is 1:1 for simulation
+        const corpus = calcCorpus(equivalentInUSD, returnRate, years);
+        preview.textContent = `Adding ${amt.toLocaleString('en-US')} ZENS/month could add ${corpus.toLocaleString('en-US')} ZENS equivalence to your corpus by ${retYear}.`;
       }
       updatePreview();
       amountInput.addEventListener('input', updatePreview);
 
-      ov.querySelector('#confirm-buy').addEventListener('click', () => {
-        const amt = parseFloat(amountInput.value) || 0;
-        if (amt < 500) { showToast('Minimum investment is ₹500', 'error'); return; }
-        const holdings = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
-        holdings.push({ ticker, companyName: name, amount: amt, price, date: new Date().toISOString() });
-        localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
-        ov.remove();
-        showToast(`₹${amt.toLocaleString('en-IN')} added to ${ticker}. Portfolio updated.`);
+      const confirmBtn = ov.querySelector('#confirm-buy');
+      confirmBtn.addEventListener('click', async () => {
+        const amt = Math.floor(parseFloat(amountInput.value) || 0);
+        if (amt < 50) { showToast('Minimum investment is 50 ZENS', 'error'); return; }
+        if (amt > currentZensBalance) { showToast('Insufficient ZENS Balance. Please add money.', 'error'); return; }
+        
+        // Disable button to prevent double-click
+        confirmBtn.disabled = true;
+        confirmBtn.style.opacity = '0.5';
+        confirmBtn.textContent = 'PROCESSING...';
+
+        try {
+          const result = await futuraApi.zens.spend(amt);
+          
+          if (result.success) {
+            // Update UI Nav Balance immediately
+            const navBalance = document.getElementById('nav-zens-balance');
+            if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
+
+            // Push to portfolio
+            const holdings = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
+            holdings.push({ ticker, companyName: name, amount: amt, price, date: new Date().toISOString() });
+            localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
+            
+            ov.remove();
+            showToast(`${amt.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated.`, 'success');
+          } else {
+            throw new Error(result.error);
+          }
+        } catch (err) {
+          console.error('Buy error:', err);
+          showToast('Failed to purchase: ' + err.message, 'error');
+          confirmBtn.disabled = false;
+          confirmBtn.style.opacity = '1';
+          confirmBtn.textContent = 'CONFIRM INVESTMENT';
+        }
       });
     }
+
 
     // ── Leverage Trading Modal ────────────────────────────────────────────────
     function openLeverageModal() {
@@ -587,12 +420,12 @@
             <h3 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;margin-bottom:8px;">Why This Matters For Retirement</h3>
             <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;">Gen Z investors chasing leveraged returns are 3× more likely to have a Retirement Blindness score below 30%. Long-term compounding in index funds outperforms leveraged trading for 94% of retail investors over 20 years.</p>
           </div>
-          <div style="border:2px solid #cafd00;background:#f9ffe0;padding:16px;">
+          <div style="border:2px solid #68FD00;background:#f9ffe0;padding:16px;">
             <p style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;">YOUR RETIREMENT AWARENESS SCORE: ${Math.round(score * 100)}%</p>
             <p style="font-family:'Inter',sans-serif;font-size:12px;margin-top:6px;">Recommended action: Increase SIP before exploring leverage.</p>
           </div>
           <button onclick="this.closest('div[style]').parentElement.parentElement.remove();window.location.href='dashboard_digital_rebel_desktop.html';"
-            style="background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
+            style="background:#68FD00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
             GO BACK TO MY PROJECTIONS</button>
         </div>
       </div>`);
@@ -633,7 +466,7 @@
           </div>
         </div>
         <button onclick="this.closest('div[style]').parentElement.remove();window.location.href='dashboard_digital_rebel_desktop.html';"
-          style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
+          style="width:100%;background:#68FD00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
           VIEW MY DASHBOARD</button>
       </div>`;
       document.body.appendChild(sheet);
@@ -649,7 +482,7 @@
         document.querySelectorAll('.market-tooltip').forEach(t => t.remove());
         const tip = document.createElement('div');
         tip.className = 'market-tooltip';
-        tip.style.cssText = `position:fixed;z-index:500;background:#121212;color:#fff;font-family:'Inter',sans-serif;font-size:12px;padding:10px 14px;border:2px solid #cafd00;max-width:280px;line-height:1.5;`;
+        tip.style.cssText = `position:fixed;z-index:500;background:#121212;color:#fff;font-family:'Inter',sans-serif;font-size:12px;padding:10px 14px;border:2px solid #68FD00;max-width:280px;line-height:1.5;`;
         tip.textContent = text;
         document.body.appendChild(tip);
         const r = el.getBoundingClientRect();
@@ -659,111 +492,170 @@
       });
     }
 
-    // ── Movers / Losers toggle ────────────────────────────────────────────────
-    let moversMode = true;
-    const TICKERS_DATA = [
-      { ticker: 'TSLA', name: 'Tesla Inc.', price: 178.44, change: 12.4, risk: 'HIGH', sparkUp: true },
-      { ticker: 'AAPL', name: 'Apple Inc.', price: 191.04, change: -4.2, risk: 'MODERATE', sparkUp: false },
-      { ticker: 'NVDA', name: 'NVIDIA Corp.', price: 894.52, change: 22.1, risk: 'HIGH', sparkUp: true },
-      { ticker: 'META', name: 'Meta Platforms', price: 485.58, change: 3.8, risk: 'MODERATE', sparkUp: true },
-      { ticker: 'AMZN', name: 'Amazon.com Inc.', price: 175.01, change: -1.5, risk: 'MODERATE', sparkUp: false },
-      { ticker: 'MSFT', name: 'Microsoft', price: 415.50, change: 0.8, risk: 'MODERATE', sparkUp: true },
-      { ticker: 'GOOGL', name: 'Alphabet Inc.', price: 147.60, change: -2.1, risk: 'MODERATE', sparkUp: false },
-      { ticker: 'NFLX', name: 'Netflix Inc.', price: 610.56, change: 6.7, risk: 'MODERATE', sparkUp: true },
-      { ticker: 'AMD', name: 'Advanced Micro Devices', price: 162.33, change: 8.2, risk: 'HIGH', sparkUp: true },
-      { ticker: 'UBER', name: 'Uber Technologies', price: 74.12, change: -0.3, risk: 'MODERATE', sparkUp: false },
+    // ── Simulated Market Engine (ZENS Based) ──────────────────────────────────
+    const ACTIVE_TICKERS = [
+      { ticker: 'TSLA', name: 'Tesla Inc.', risk: 'HIGH', basePrice: 17800.44 },
+      { ticker: 'AAPL', name: 'Apple Inc.', risk: 'MODERATE', basePrice: 19100.04 },
+      { ticker: 'NVDA', name: 'NVIDIA Corp.', risk: 'HIGH', basePrice: 89000.52 },
+      { ticker: 'META', name: 'Meta Platforms', risk: 'MODERATE', basePrice: 48500.58 },
+      { ticker: 'AMZN', name: 'Amazon.com Inc.', risk: 'MODERATE', basePrice: 17500.01 },
+      { ticker: 'MSFT', name: 'Microsoft', risk: 'MODERATE', basePrice: 41500.50 },
+      { ticker: 'GOOGL', name: 'Alphabet Inc.', risk: 'MODERATE', basePrice: 14700.60 },
+      { ticker: 'NFLX', name: 'Netflix Inc.', risk: 'MODERATE', basePrice: 61000.56 },
+      { ticker: 'AMD', name: 'Advanced Micro Devices', risk: 'HIGH', basePrice: 16200.33 },
+      { ticker: 'UBER', name: 'Uber Technologies', risk: 'MODERATE', basePrice: 7400.12 },
     ];
+
+    // Simulate realistic 24h changes
+    const marketDataSnapshot = ACTIVE_TICKERS.map(t => {
+      // Randomize change between -8% and +12%
+      const swing = (Math.random() * 20) - 8; 
+      const currentPrice = Math.round(t.basePrice * (1 + (swing / 100)));
+      return { ...t, price: currentPrice, change: parseFloat(swing.toFixed(1)) };
+    });
+
+    let currentMarketMode = 'movers'; // movers | gainers | losers
+
+    function renderMarketList() {
+      const container = document.getElementById('market-list-container');
+      const label = document.getElementById('market-label');
+      if (!container) return;
+
+      let sortedData = [];
+      if (currentMarketMode === 'gainers') {
+        sortedData = [...marketDataSnapshot].filter(d => d.change > 0).sort((a, b) => b.change - a.change);
+        label.textContent = 'TOP GAINERS (ZENS)';
+      } else if (currentMarketMode === 'losers') {
+        sortedData = [...marketDataSnapshot].filter(d => d.change < 0).sort((a, b) => a.change - b.change);
+        label.textContent = 'TOP LOSERS (ZENS)';
+      } else {
+        // Movers: Highest absolute change
+        sortedData = [...marketDataSnapshot].sort((a, b) => Math.abs(b.change) - Math.abs(a.change));
+        label.textContent = 'TOP MOVERS (ZENS)';
+      }
+
+      // Update button styling
+      ['movers', 'gainers', 'losers'].forEach(mode => {
+        const btn = document.getElementById(`btn-${mode}`);
+        if(btn) {
+          if (mode === currentMarketMode) {
+            btn.className = "font-headline font-bold text-xs text-white bg-[#121212] border border-[#121212] px-2 py-0.5 ml-2";
+          } else {
+            btn.className = "font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 ml-2 hover:bg-[#121212] hover:text-white transition-colors cursor-pointer";
+            btn.onclick = () => { currentMarketMode = mode; renderMarketList(); };
+          }
+        }
+      });
+
+      container.innerHTML = '';
+      if (sortedData.length === 0) {
+        container.innerHTML = '<p class="p-8 text-center text-[#767777] font-headline">No matching assets found.</p>';
+        return;
+      }
+
+      sortedData.forEach((d, idx) => {
+        const isUp = d.change >= 0;
+        const changeColor = isUp ? 'text-[#68FD00]' : 'text-error-container';
+        const sparkColor = isUp ? '#68FD00' : '#b02500';
+        const points = isUp ? '0,35 20,25 40,30 60,10 80,15 100,5' : '0,5 20,15 40,10 60,30 80,25 100,38';
+        
+        const el = document.createElement('div');
+        el.className = 'stock-row bg-white border-2 border-[transparent] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-all cursor-pointer neo-shadow';
+        el.dataset.ticker = d.ticker;
+        
+        el.innerHTML = `
+          <div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#68FD00] font-headline font-black text-xl shrink-0">
+            ${d.ticker}
+          </div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">${d.name}</p>
+            <p class="font-headline font-black text-3xl leading-none">🪙 ${d.price.toLocaleString('en-US')}</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl ${changeColor}">${isUp ? '+' : ''}${d.change}%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
+              <polyline fill="none" points="${points}" stroke="${sparkColor}" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button data-buy="${d.ticker}" class="buy-btn bg-[#68FD00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">
+            BUY
+          </button>
+        `;
+        
+        container.appendChild(el);
+
+        // Click row to view details
+        el.addEventListener('click', e => {
+          if (e.target.closest('.buy-btn')) return;
+          window.location.href = `market_detail.html?ticker=${d.ticker}`;
+        });
+
+        // Click Buy Button
+        el.querySelector('.buy-btn').addEventListener('click', e => {
+          e.stopPropagation();
+          openBuyModal(d.ticker, d.name, d.price, d.change, d.risk);
+        });
+
+        // Stagger entrance animation
+        el.animate([
+          { opacity: 0, transform: 'translateY(20px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ], { duration: 300, delay: idx * 40, fill: 'forwards' });
+      });
+    }
 
     document.addEventListener('DOMContentLoaded', async () => {
       const session = await requireAuth();
       if (!session) return;
 
       // Banner events
-      document.getElementById('leverage-banner').addEventListener('click', openLeverageModal);
-      document.getElementById('activate-now-btn').addEventListener('click', e => { e.stopPropagation(); openLeverageModal(); });
-      document.getElementById('signals-banner').addEventListener('click', openSignalsSheet);
-      document.getElementById('learn-more-link').addEventListener('click', e => { e.stopPropagation(); openSignalsSheet(); });
+      document.getElementById('leverage-banner')?.addEventListener('click', openLeverageModal);
+      document.getElementById('activate-now-btn')?.addEventListener('click', e => { e.stopPropagation(); openLeverageModal(); });
+      document.getElementById('signals-banner')?.addEventListener('click', openSignalsSheet);
+      document.getElementById('learn-more-link')?.addEventListener('click', e => { e.stopPropagation(); openSignalsSheet(); });
 
-      // Tooltips — null-safe selectors
+      // Initialize Market List
+      renderMarketList();
+
+      // Tooltips
       const liveFeedEl = document.querySelector('.inline-block.bg-primary');
-      const statsBox = document.querySelector('header .bg-white');
-      const statDivs = statsBox ? statsBox.querySelectorAll(':scope > div') : [];
-      if (liveFeedEl) addTooltip(liveFeedEl, 'Market data refreshes every 30 seconds. All prices are simulated for demonstration purposes.');
-      if (statDivs[0]) addTooltip(statDivs[0], 'Total simulated trading volume across all tracked instruments in the last 24 hours.');
-      if (statDivs[1]) addTooltip(statDivs[1].querySelector('p:last-child') || statDivs[1], 'AGGRESSIVE: Market momentum is strongly bullish. High volume, rising prices. Higher risk of correction.');
-
-      // Movers/Losers toggle
-      document.getElementById('movers-toggle').addEventListener('click', () => {
-        moversMode = !moversMode;
-        document.getElementById('movers-label').textContent = moversMode ? 'TOP 10 MOVERS' : 'TOP 10 LOSERS';
-        const rows = document.querySelectorAll('.stock-row');
-        const sorted = moversMode
-          ? [...TICKERS_DATA].sort((a, b) => b.change - a.change)
-          : [...TICKERS_DATA].sort((a, b) => a.change - b.change);
-        const container = rows[0]?.parentElement;
-        if (!container) return;
-        rows.forEach(r => r.remove());
-        sorted.forEach(d => {
-          const isUp = d.change >= 0;
-          const changeColor = isUp ? '#cafd00' : '#f95630';
-          const sparkColor = isUp ? '#cafd00' : '#b02500';
-          const points = isUp ? '0,35 20,25 40,30 60,10 80,15 100,5' : '0,5 20,15 40,10 60,30 80,25 100,38';
-          const el = document.createElement('div');
-          el.className = 'stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap items-center gap-6 hover:bg-gray-50 transition-colors cursor-pointer';
-          el.dataset.ticker = d.ticker; el.dataset.name = d.name; el.dataset.price = d.price; el.dataset.change = d.change; el.dataset.risk = d.risk;
-          el.style.boxShadow = '4px 4px 0 #121212';
-          el.innerHTML = `<div style="width:64px;height:64px;background:#121212;display:flex;align-items:center;justify-content:center;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;flex-shrink:0;">${d.ticker}</div>
-          <div style="flex-grow:1;"><p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#767777;">${d.name}</p><p style="font-family:'Lexend',sans-serif;font-weight:900;font-size:28px;line-height:1;">$${d.price}</p></div>
-          <div style="text-align:right;flex-shrink:0;"><p style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;color:${changeColor};">${d.change >= 0 ? '+' : ''}${d.change}%</p><p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#767777;">Last 24h</p></div>
-          <div style="width:128px;height:48px;border:1px dashed #767777;"><svg style="width:100%;height:100%;padding:4px;" viewBox="0 0 100 40"><polyline fill="none" points="${points}" stroke="${sparkColor}" stroke-width="3"></polyline></svg></div>
-          <button data-buy="${d.ticker}" class="buy-btn" style="background:#cafd00;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;padding:12px 28px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;z-index:10;">BUY</button>`;
-          container.appendChild(el);
-          wireRow(el);
-        });
-      });
-
-      // Wire static rows
-      function wireRow(row) {
-        row.addEventListener('click', e => {
-          if (e.target.classList.contains('buy-btn') || e.target.closest('.buy-btn')) return;
-          window.location.href = `market_detail.html?ticker=${row.dataset.ticker}`;
-        });
-        const btn = row.querySelector('.buy-btn,[data-buy]');
-        if (btn) btn.addEventListener('click', e => {
-          e.stopPropagation();
-          const d = row.dataset;
-          openBuyModal(d.ticker, d.name, d.price, d.change, d.risk);
-        });
-      }
-      document.querySelectorAll('.stock-row').forEach(wireRow);
+      if (liveFeedEl) addTooltip(liveFeedEl, 'Market data refreshes every 30 seconds. Prices dynamically simulate using ZENS as base currency.');
 
       // Nav brand
-      document.querySelector('nav span.font-black').style.cursor = 'pointer';
-      document.querySelector('nav span.font-black').addEventListener('click', () => window.location.href = 'dashboard_digital_rebel_desktop.html');
+      const brand = document.querySelector('nav span.font-black');
+      if (brand) {
+        brand.style.cursor = 'pointer';
+        brand.addEventListener('click', () => window.location.href = 'dashboard_digital_rebel_desktop.html');
+      }
 
       // Avatar dropdown
-      const avatarWrap = document.querySelector('nav .w-10');
-      avatarWrap.style.cursor = 'pointer';
-      avatarWrap.addEventListener('click', e => {
-        e.stopPropagation();
-        document.querySelector('.avatar-dropdown')?.remove();
-        const dd = document.createElement('div');
-        dd.className = 'avatar-dropdown';
-        dd.style.cssText = 'position:fixed;background:#fff;border:2px solid #121212;box-shadow:4px 4px 0 #121212;z-index:500;min-width:180px;';
-        const r = avatarWrap.getBoundingClientRect();
-        dd.style.top = (r.bottom + 4) + 'px';
-        dd.style.right = (window.innerWidth - r.right) + 'px';
-        [['My Profile', 'settings_digital_rebel_desktop.html'], ['Assets', 'assets_digital_rebel_desktop.html'], ['Dashboard', 'dashboard_digital_rebel_desktop.html']].forEach(([label, href]) => {
-          const a = document.createElement('a');
-          a.href = href; a.textContent = label;
-          a.style.cssText = 'display:block;padding:10px 16px;font-family:Lexend,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.07em;text-decoration:none;color:#121212;border-bottom:1px solid #e0e0e0;';
-          a.onmouseover = () => a.style.background = '#cafd00';
-          a.onmouseout = () => a.style.background = '';
-          dd.appendChild(a);
+      const avatarWrap = document.querySelector('#nav-avatar') || document.querySelector('nav .w-10');
+      if (avatarWrap) {
+        avatarWrap.style.cursor = 'pointer';
+        avatarWrap.addEventListener('click', e => {
+          e.stopPropagation();
+          document.querySelector('.avatar-dropdown')?.remove();
+          const dd = document.createElement('div');
+          dd.className = 'avatar-dropdown';
+          dd.style.cssText = 'position:fixed;background:#fff;border:2px solid #121212;box-shadow:4px 4px 0 #121212;z-index:500;min-width:180px;';
+          const r = avatarWrap.getBoundingClientRect();
+          dd.style.top = (r.bottom + 4) + 'px';
+          dd.style.right = (window.innerWidth - r.right) + 'px';
+          [['My Profile', 'settings_digital_rebel_desktop.html'], ['Assets', 'assets_digital_rebel_desktop.html'], ['Dashboard', 'dashboard_digital_rebel_desktop.html']].forEach(([label, href]) => {
+            const a = document.createElement('a');
+            a.href = href; a.textContent = label;
+            a.style.cssText = 'display:block;padding:10px 16px;font-family:Lexend,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.07em;text-decoration:none;color:#121212;border-bottom:1px solid #e0e0e0;';
+            a.onmouseover = () => a.style.background = '#68FD00';
+            a.onmouseout = () => a.style.background = '';
+            dd.appendChild(a);
+          });
+          document.body.appendChild(dd);
+          setTimeout(() => document.addEventListener('click', () => dd.remove(), { once: true }), 10);
         });
-        document.body.appendChild(dd);
-        setTimeout(() => document.addEventListener('click', () => dd.remove(), { once: true }), 10);
-      });
+      }
     });
   </script>
 </body>
