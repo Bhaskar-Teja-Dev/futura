@@ -12,5 +12,8 @@
     "dev:web": "npm --workspace futura-web run dev",
     "build:web": "npm --workspace futura-web run build",
     "start:web": "npm --workspace futura-web run start"
+  },
+  "dependencies": {
+    "cors": "^2.8.6"
   }
 }

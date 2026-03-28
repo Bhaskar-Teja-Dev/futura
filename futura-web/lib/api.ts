@@ -90,6 +90,7 @@ export const api = {
     get: () => apiFetch('/api/allocation')
   },
   zens: {
+    balance: () => apiFetch('/api/zens/balance'),
     purchase: (razorpay_payment_id: string) =>
       apiFetch('/api/zens/purchase', {
         method: 'POST',

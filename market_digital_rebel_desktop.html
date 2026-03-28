@@ -1,371 +1,471 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MARKET_V01 | DIGITAL REBEL</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-tertiary-fixed": "#320032",
-              "on-error": "#ffefec",
-              "on-surface-variant": "#5a5c5c",
-              "surface-tint": "#4e6300",
-              "surface-bright": "#f6f6f6",
-              "on-secondary-fixed": "#403f3f",
-              "surface-container-low": "#f0f1f1",
-              "secondary-container": "#e5e2e1",
-              "secondary-fixed": "#e5e2e1",
-              "on-primary-container": "#4a5e00",
-              "tertiary-fixed-dim": "#ff61f8",
-              "primary-container": "#cafd00",
-              "on-primary": "#e1ff88",
-              "inverse-on-surface": "#9c9d9d",
-              "primary-fixed": "#cafd00",
-              "secondary": "#5c5b5b",
-              "outline-variant": "#acadad",
-              "secondary-dim": "#504f4f",
-              "surface-dim": "#d3d5d5",
-              "background": "#f6f6f6",
-              "primary-dim": "#435600",
-              "tertiary": "#a400a4",
-              "tertiary-dim": "#900090",
-              "tertiary-container": "#ff81f5",
-              "surface-container-highest": "#dbdddd",
-              "primary-fixed-dim": "#beee00",
-              "error-container": "#f95630",
-              "secondary-fixed-dim": "#d7d4d3",
-              "on-tertiary": "#ffeef8",
-              "on-secondary-fixed-variant": "#5c5b5b",
-              "on-primary-fixed": "#3a4a00",
-              "on-error-container": "#520c00",
-              "on-tertiary-container": "#5b005b",
-              "error": "#b02500",
-              "surface": "#f6f6f6",
-              "outline": "#767777",
-              "on-tertiary-fixed-variant": "#6a006a",
-              "surface-container-high": "#e1e3e3",
-              "on-secondary": "#f5f2f1",
-              "on-background": "#2d2f2f",
-              "on-secondary-container": "#525151",
-              "on-primary-fixed-variant": "#526900",
-              "inverse-surface": "#0c0f0f",
-              "surface-variant": "#dbdddd",
-              "primary": "#4e6300",
-              "surface-container-lowest": "#ffffff",
-              "error-dim": "#b92902",
-              "tertiary-fixed": "#ff81f5",
-              "surface-container": "#e7e8e8",
-              "inverse-primary": "#cafd00",
-              "on-surface": "#2d2f2f"
-            },
-            fontFamily: {
-              "headline": ["Lexend"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>MARKET_V01 | DIGITAL REBEL</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed": "#320032",
+            "on-error": "#ffefec",
+            "on-surface-variant": "#5a5c5c",
+            "surface-tint": "#4e6300",
+            "surface-bright": "#f6f6f6",
+            "on-secondary-fixed": "#403f3f",
+            "surface-container-low": "#f0f1f1",
+            "secondary-container": "#e5e2e1",
+            "secondary-fixed": "#e5e2e1",
+            "on-primary-container": "#4a5e00",
+            "tertiary-fixed-dim": "#ff61f8",
+            "primary-container": "#cafd00",
+            "on-primary": "#e1ff88",
+            "inverse-on-surface": "#9c9d9d",
+            "primary-fixed": "#cafd00",
+            "secondary": "#5c5b5b",
+            "outline-variant": "#acadad",
+            "secondary-dim": "#504f4f",
+            "surface-dim": "#d3d5d5",
+            "background": "#f6f6f6",
+            "primary-dim": "#435600",
+            "tertiary": "#a400a4",
+            "tertiary-dim": "#900090",
+            "tertiary-container": "#ff81f5",
+            "surface-container-highest": "#dbdddd",
+            "primary-fixed-dim": "#beee00",
+            "error-container": "#f95630",
+            "secondary-fixed-dim": "#d7d4d3",
+            "on-tertiary": "#ffeef8",
+            "on-secondary-fixed-variant": "#5c5b5b",
+            "on-primary-fixed": "#3a4a00",
+            "on-error-container": "#520c00",
+            "on-tertiary-container": "#5b005b",
+            "error": "#b02500",
+            "surface": "#f6f6f6",
+            "outline": "#767777",
+            "on-tertiary-fixed-variant": "#6a006a",
+            "surface-container-high": "#e1e3e3",
+            "on-secondary": "#f5f2f1",
+            "on-background": "#2d2f2f",
+            "on-secondary-container": "#525151",
+            "on-primary-fixed-variant": "#526900",
+            "inverse-surface": "#0c0f0f",
+            "surface-variant": "#dbdddd",
+            "primary": "#4e6300",
+            "surface-container-lowest": "#ffffff",
+            "error-dim": "#b92902",
+            "tertiary-fixed": "#ff81f5",
+            "surface-container": "#e7e8e8",
+            "inverse-primary": "#cafd00",
+            "on-surface": "#2d2f2f"
           },
+          fontFamily: {
+            "headline": ["Lexend"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
         },
-      }
-    </script>
-<style>
-        body {
-            background-color: #f6f6f6;
-            background-image: radial-gradient(#121212 0.5px, transparent 0.5px);
-            background-size: 24px 24px;
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .hard-shadow {
-            box-shadow: 4px 4px 0px 0px rgba(18,18,18,1);
-        }
-        .hard-shadow-hover:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 8px 8px 0px 0px rgba(18,18,18,1);
-        }
-        .hard-shadow-hover:active {
-            transform: translate(0px, 0px);
-            box-shadow: 0px 0px 0px 0px rgba(18,18,18,1);
-        }
-    </style>
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f6f6f6;
+      background-image: radial-gradient(#121212 0.5px, transparent 0.5px);
+      background-size: 24px 24px;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .hard-shadow {
+      box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .hard-shadow-hover:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .hard-shadow-hover:active {
+      transform: translate(0px, 0px);
+      box-shadow: 0px 0px 0px 0px rgba(18, 18, 18, 1);
+    }
+  </style>
 </head>
+
 <body class="font-body text-on-background min-h-screen flex flex-col">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full z-50 border-b-2 border-[#121212] bg-white flex justify-between items-center px-6 h-16 w-full max-w-none shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
-<div class="flex items-center gap-8">
-<span class="text-2xl font-black text-[#121212] tracking-tighter font-headline">DIGITAL REBEL</span>
-<div class="hidden md:flex gap-6 items-center">
-<a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-headline font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#cafd00] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100" href="market_digital_rebel_desktop.html">Markets</a>
-<a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100" href="assets_digital_rebel_desktop.html">Assets</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all" data-icon="notifications">notifications</button>
-<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all inline-flex items-center justify-center" data-icon="settings">settings</a>
-<div class="w-10 h-10 border-2 border-[#121212] bg-[#cafd00] flex items-center justify-center overflow-hidden">
-<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a stylish person with neon lighting highlights and punk aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRMSTAkV3q57A8vsSy6PmvoBX4yhAFI8BgQ88TFBePb83P1DuwFU925pZCQzZ6wjq9CbDZMqa9Uz13ar4Xz-5mfeRb6BckAHmtIFLo6bhgb685g9fnqjwDTsr2nBxJ7W78RDp4l977ydaaYa4-TvNlal6PR8D43WfDYZ8jN_LWsRU_mDBzEfDHJmWlbHQNYX4Dpkt-MUXlOCfYoialvBa4GuUail7tiMD09qWFnhoCSx7cZtkMX-in0TYq3cvnUHTN0I8X7VZzS1Zu"/>
-</div>
-</div>
-</nav>
-<!-- Main Content -->
-<main class="mt-16 p-8 flex-grow">
-<header class="mb-12">
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-<div>
-<div class="inline-block bg-primary text-white px-3 py-1 font-headline font-black text-sm mb-4">
-                        LIVE_FEED // 001
-                    </div>
-<h1 class="font-headline text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">MARKET_V01</h1>
-</div>
-<div class="bg-white border-2 border-[#121212] p-4 hard-shadow flex gap-8 items-center">
-<div>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Global Volume</p>
-<p class="font-headline font-black text-2xl text-[#121212]">$4.2B</p>
-</div>
-<div>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Market Sentiment</p>
-<p class="font-headline font-black text-2xl text-primary">AGGRESSIVE</p>
-</div>
-</div>
-</div>
-</header>
-<!-- Markets Grid / Bento Style for Top Movers -->
-<section class="mb-12">
-<div class="flex items-center gap-4 mb-6">
-<span class="w-12 h-[2px] bg-[#121212]"></span>
-<h2 class="font-headline font-black text-3xl uppercase tracking-tighter">TOP 10 MOVERS</h2>
-</div>
-<div class="space-y-4">
-<!-- Stock Row 1 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">TSLA</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Tesla Inc.</p>
-<p class="font-headline font-black text-3xl leading-none">$178.44</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-[#cafd00]">+12.4%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<!-- Simulated Sparkline -->
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,35 20,25 40,30 60,10 80,15 100,5" stroke="#cafd00" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 2 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">AAPL</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Apple Inc.</p>
-<p class="font-headline font-black text-3xl leading-none">$191.04</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-error-container">-4.2%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,5 20,15 40,10 60,30 80,25 100,38" stroke="#b02500" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 3 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">NVDA</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">NVIDIA Corp.</p>
-<p class="font-headline font-black text-3xl leading-none">$894.52</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-[#cafd00]">+22.1%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,38 20,30 40,25 60,15 80,5 100,2" stroke="#cafd00" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 4 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">META</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Meta Platforms</p>
-<p class="font-headline font-black text-3xl leading-none">$485.58</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-[#cafd00]">+3.8%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,20 30,15 50,18 70,10 100,5" stroke="#cafd00" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 5 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">AMZN</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Amazon.com Inc.</p>
-<p class="font-headline font-black text-3xl leading-none">$175.01</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-error-container">-1.5%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,15 30,20 60,35 100,30" stroke="#b02500" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 6 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">MSFT</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Microsoft</p>
-<p class="font-headline font-black text-3xl leading-none">$415.50</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-[#cafd00]">+0.8%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,25 50,23 100,20" stroke="#cafd00" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 7 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">GOOGL</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Alphabet Inc.</p>
-<p class="font-headline font-black text-3xl leading-none">$147.60</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-error-container">-2.1%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,10 50,25 100,35" stroke="#b02500" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 8 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">NFLX</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Netflix Inc.</p>
-<p class="font-headline font-black text-3xl leading-none">$610.56</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-[#cafd00]">+6.7%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,30 20,20 50,25 80,10 100,5" stroke="#cafd00" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 9 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">AMD</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Advanced Micro Devices</p>
-<p class="font-headline font-black text-3xl leading-none">$162.33</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-[#cafd00]">+8.2%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,35 40,20 70,25 100,5" stroke="#cafd00" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-<!-- Stock Row 10 -->
-<div class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
-<div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">UBER</div>
-<div class="flex-grow">
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Uber Technologies</p>
-<p class="font-headline font-black text-3xl leading-none">$74.12</p>
-</div>
-<div class="text-right shrink-0">
-<p class="font-headline font-black text-xl text-error-container">-0.3%</p>
-<p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
-</div>
-<div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-<svg class="w-full h-full p-1" viewbox="0 0 100 40">
-<polyline fill="none" points="0,10 50,15 100,12" stroke="#b02500" stroke-width="3"></polyline>
-</svg>
-</div>
-<button class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
-</div>
-</div>
-</section>
-<!-- Asymmetric Promotional Area -->
-<section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-<div class="md:col-span-2 bg-[#121212] p-8 hard-shadow flex flex-col justify-between overflow-hidden relative group">
-<div class="relative z-10">
-<h3 class="text-[#cafd00] font-headline font-black text-4xl tracking-tighter uppercase mb-4 leading-none">Unlock Leverage Trading</h3>
-<p class="text-white font-body max-w-md mb-8">Take control of the market with our new margin tools. High risk, high reward. Only for the bold.</p>
-<button class="bg-white text-[#121212] border-2 border-white px-8 py-4 font-headline font-black uppercase tracking-widest hover:bg-[#cafd00] hover:border-[#cafd00] transition-colors">ACTIVATE_NOW</button>
-</div>
-<div class="absolute right-0 bottom-0 w-64 h-64 opacity-20 grayscale group-hover:grayscale-0 transition-all duration-500">
-<img alt="Leverage Graphic" class="w-full h-full object-cover" data-alt="abstract digital connection network with neon green lines and points on a dark black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4_cCLr1n3l7Ze5ln2MnO2gfpkrjawPOpmGlcNhKmZI3jXSUuQ8l00t-CfeFFsqk5kBf1EmtWnW_Q0HIqI2siqUJDlWlwxMqYLQ1bkodv6jsQrFqqa4-5N5LNOSzZKMMmHfMUucVdna_EQGhOLBgzRBoC9rEYEUTNhLuF1VMEZzCd8B3CUINoBMgxq0odR_GU2GPA8bhZ4S2B14lePPzcrYMMVm9FK982_Kpd9XIflosQW7yTp8zjwID6LCYrnR02J6_PQuWMFsBWm"/>
-</div>
-</div>
-<div class="bg-tertiary-container p-8 border-2 border-[#121212] hard-shadow">
-<span class="material-symbols-outlined text-4xl mb-4" data-icon="rocket_launch">rocket_launch</span>
-<h3 class="font-headline font-black text-2xl uppercase tracking-tighter mb-4">REBEL SIGNALS</h3>
-<p class="font-body text-sm mb-6">AI-driven market insights delivered directly to your terminal. No noise, just alpha.</p>
-<a class="font-headline font-black text-sm uppercase underline decoration-4 underline-offset-4" href="#">Learn More</a>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="w-full border-t-2 border-[#cafd00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
-<div class="flex items-center gap-4">
-<span class="text-[#cafd00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
-<span class="text-[#f6f6f6] font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase">© 2024 DIGITAL REBEL. NO PERMISSION REQUIRED.</span>
-</div>
-<div class="flex gap-6 flex-wrap">
-<a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="settings_digital_rebel_desktop.html">Settings</a>
-<a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="learn_digital_rebel_desktop.html">Learn</a>
-<a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="upgrade_digital_rebel_desktop.html">Upgrade</a>
-<a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="projections_digital_rebel_desktop.html">PROJECTIONS</a>
-</div>
-</footer>
-    <!-- Supabase + Futura Auth -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="/js/config.js"></script>
-    <script src="/js/auth.js"></script>
-    <script src="/js/api.js"></script>
-</body></html>
+  <!-- TopNavBar -->
+  <nav
+    class="fixed top-0 w-full z-50 border-b-2 border-[#121212] bg-white flex justify-between items-center px-6 h-16 w-full max-w-none shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+    <div class="flex items-center gap-8">
+      <span class="text-2xl font-black text-[#121212] tracking-tighter font-headline">DIGITAL REBEL</span>
+      <div class="hidden md:flex gap-6 items-center">
+        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
+          href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+        <a class="font-headline font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#cafd00] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
+          href="market_digital_rebel_desktop.html">Markets</a>
+        <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100"
+          href="assets_digital_rebel_desktop.html">Assets</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <button
+        class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all"
+        data-icon="notifications">notifications</button>
+      <a href="settings_digital_rebel_desktop.html"
+        class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all inline-flex items-center justify-center"
+        data-icon="settings">settings</a>
+      <div class="w-10 h-10 border-2 border-[#121212] bg-[#cafd00] flex items-center justify-center overflow-hidden">
+        <img alt="User Profile" class="w-full h-full object-cover"
+          data-alt="close-up portrait of a stylish person with neon lighting highlights and punk aesthetic"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRMSTAkV3q57A8vsSy6PmvoBX4yhAFI8BgQ88TFBePb83P1DuwFU925pZCQzZ6wjq9CbDZMqa9Uz13ar4Xz-5mfeRb6BckAHmtIFLo6bhgb685g9fnqjwDTsr2nBxJ7W78RDp4l977ydaaYa4-TvNlal6PR8D43WfDYZ8jN_LWsRU_mDBzEfDHJmWlbHQNYX4Dpkt-MUXlOCfYoialvBa4GuUail7tiMD09qWFnhoCSx7cZtkMX-in0TYq3cvnUHTN0I8X7VZzS1Zu" />
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content -->
+  <main class="mt-16 p-8 flex-grow">
+    <header class="mb-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <div class="inline-block bg-primary text-white px-3 py-1 font-headline font-black text-sm mb-4">
+            LIVE_FEED // 001
+          </div>
+          <h1 class="font-headline text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">MARKET_V01
+          </h1>
+        </div>
+        <div class="bg-white border-2 border-[#121212] p-4 hard-shadow flex gap-8 items-center">
+          <div>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Global Volume</p>
+            <p class="font-headline font-black text-2xl text-[#121212]">$4.2B</p>
+          </div>
+          <div>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Market Sentiment</p>
+            <p class="font-headline font-black text-2xl text-primary">AGGRESSIVE</p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Markets Grid / Bento Style for Top Movers -->
+    <section class="mb-12">
+      <div class="flex items-center gap-4 mb-6">
+        <span class="w-12 h-[2px] bg-[#121212]"></span>
+        <h2 class="font-headline font-black text-3xl uppercase tracking-tighter">TOP 10 MOVERS</h2>
+      </div>
+      <div class="space-y-4">
+        <!-- Stock Row 1 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
+            TSLA</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Tesla Inc.</p>
+            <p class="font-headline font-black text-3xl leading-none">$178.44</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-[#cafd00]">+12.4%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <!-- Simulated Sparkline -->
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,35 20,25 40,30 60,10 80,15 100,5" stroke="#cafd00" stroke-width="3">
+              </polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 2 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
+            AAPL</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Apple Inc.</p>
+            <p class="font-headline font-black text-3xl leading-none">$191.04</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-error-container">-4.2%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,5 20,15 40,10 60,30 80,25 100,38" stroke="#b02500" stroke-width="3">
+              </polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 3 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
+            NVDA</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">NVIDIA Corp.</p>
+            <p class="font-headline font-black text-3xl leading-none">$894.52</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-[#cafd00]">+22.1%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,38 20,30 40,25 60,15 80,5 100,2" stroke="#cafd00" stroke-width="3">
+              </polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 4 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
+            META</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Meta Platforms</p>
+            <p class="font-headline font-black text-3xl leading-none">$485.58</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-[#cafd00]">+3.8%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,20 30,15 50,18 70,10 100,5" stroke="#cafd00" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 5 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
+            AMZN</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Amazon.com Inc.</p>
+            <p class="font-headline font-black text-3xl leading-none">$175.01</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-error-container">-1.5%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,15 30,20 60,35 100,30" stroke="#b02500" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 6 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
+            MSFT</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Microsoft</p>
+            <p class="font-headline font-black text-3xl leading-none">$415.50</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-[#cafd00]">+0.8%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,25 50,23 100,20" stroke="#cafd00" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 7 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
+            GOOGL</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Alphabet Inc.</p>
+            <p class="font-headline font-black text-3xl leading-none">$147.60</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-error-container">-2.1%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,10 50,25 100,35" stroke="#b02500" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 8 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
+            NFLX</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Netflix Inc.</p>
+            <p class="font-headline font-black text-3xl leading-none">$610.56</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-[#cafd00]">+6.7%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,30 20,20 50,25 80,10 100,5" stroke="#cafd00" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 9 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
+            AMD</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Advanced Micro Devices
+            </p>
+            <p class="font-headline font-black text-3xl leading-none">$162.33</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-[#cafd00]">+8.2%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,35 40,20 70,25 100,5" stroke="#cafd00" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+        <!-- Stock Row 10 -->
+        <div
+          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+          <div
+            class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
+            UBER</div>
+          <div class="flex-grow">
+            <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">Uber Technologies</p>
+            <p class="font-headline font-black text-3xl leading-none">$74.12</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-headline font-black text-xl text-error-container">-0.3%</p>
+            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
+          </div>
+          <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
+            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+              <polyline fill="none" points="0,10 50,15 100,12" stroke="#b02500" stroke-width="3"></polyline>
+            </svg>
+          </div>
+          <button
+            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+        </div>
+      </div>
+    </section>
+    <!-- Asymmetric Promotional Area -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div
+        class="md:col-span-2 bg-[#121212] p-8 hard-shadow flex flex-col justify-between overflow-hidden relative group">
+        <div class="relative z-10">
+          <h3 class="text-[#cafd00] font-headline font-black text-4xl tracking-tighter uppercase mb-4 leading-none">
+            Unlock Leverage Trading</h3>
+          <p class="text-white font-body max-w-md mb-8">Take control of the market with our new margin tools. High risk,
+            high reward. Only for the bold.</p>
+          <button
+            class="bg-white text-[#121212] border-2 border-white px-8 py-4 font-headline font-black uppercase tracking-widest hover:bg-[#cafd00] hover:border-[#cafd00] transition-colors">ACTIVATE_NOW</button>
+        </div>
+        <div
+          class="absolute right-0 bottom-0 w-64 h-64 opacity-20 grayscale group-hover:grayscale-0 transition-all duration-500">
+          <img alt="Leverage Graphic" class="w-full h-full object-cover"
+            data-alt="abstract digital connection network with neon green lines and points on a dark black background"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4_cCLr1n3l7Ze5ln2MnO2gfpkrjawPOpmGlcNhKmZI3jXSUuQ8l00t-CfeFFsqk5kBf1EmtWnW_Q0HIqI2siqUJDlWlwxMqYLQ1bkodv6jsQrFqqa4-5N5LNOSzZKMMmHfMUucVdna_EQGhOLBgzRBoC9rEYEUTNhLuF1VMEZzCd8B3CUINoBMgxq0odR_GU2GPA8bhZ4S2B14lePPzcrYMMVm9FK982_Kpd9XIflosQW7yTp8zjwID6LCYrnR02J6_PQuWMFsBWm" />
+        </div>
+      </div>
+      <div class="bg-tertiary-container p-8 border-2 border-[#121212] hard-shadow">
+        <span class="material-symbols-outlined text-4xl mb-4" data-icon="rocket_launch">rocket_launch</span>
+        <h3 class="font-headline font-black text-2xl uppercase tracking-tighter mb-4">REBEL SIGNALS</h3>
+        <p class="font-body text-sm mb-6">AI-driven market insights delivered directly to your terminal. No noise, just
+          alpha.</p>
+        <a class="font-headline font-black text-sm uppercase underline decoration-4 underline-offset-4" href="#">Learn
+          More</a>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer
+    class="w-full border-t-2 border-[#cafd00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
+    <div class="flex items-center gap-4">
+      <span class="text-[#cafd00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
+      <span class="text-[#f6f6f6] font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase">© 2024 DIGITAL
+        REBEL. NO PERMISSION REQUIRED.</span>
+    </div>
+    <div class="flex gap-6 flex-wrap">
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="settings_digital_rebel_desktop.html">Settings</a>
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="learn_digital_rebel_desktop.html">Learn</a>
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="checkout_digital_rebel_desktop.html">Checkout</a>
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="assets_digital_rebel_desktop.html">Assets</a><a
+        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="transactions.html">Transactions</a><a
+        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="cards_digital_rebel_desktop.html">Cards</a>
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="add_card_digital_rebel.html">Add Card</a>
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
+        href="add_manual_asset_digital_rebel.html">Add Asset</a>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Basic Auth enforcement
+      const session = await requireAuth();
+      if (!session) return;
+    });
+  </script>
+</body>
+
+</html>

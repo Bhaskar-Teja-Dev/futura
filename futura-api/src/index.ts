@@ -15,12 +15,9 @@ const app = new Hono<{ Bindings: Env; Variables: Variables }>()
 app.use(
   '*',
   cors({
-    origin: (origin, c) => {
-      const allow = c.env.FRONTEND_ORIGIN ?? 'http://localhost:3000'
-      return origin === allow ? origin : null
-    },
+    origin: (origin) => origin || '*',
     allowHeaders: ['Content-Type', 'Authorization'],
-    allowMethods: ['GET', 'POST', 'PATCH', 'OPTIONS'],
+    allowMethods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     credentials: true
   })
 )

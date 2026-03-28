@@ -1,348 +1,347 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>NEO_FIN | TRANSACTIONS_LOG</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-surface": "#2d2f2f",
-              "on-secondary-fixed": "#403f3f",
-              "surface": "#f6f6f6",
-              "primary": "#4e6300",
-              "on-primary-fixed-variant": "#526900",
-              "tertiary-fixed": "#ff81f5",
-              "error-dim": "#b92902",
-              "inverse-primary": "#cafd00",
-              "on-secondary-fixed-variant": "#5c5b5b",
-              "primary-fixed": "#cafd00",
-              "on-secondary-container": "#525151",
-              "on-secondary": "#f5f2f1",
-              "on-primary-container": "#4a5e00",
-              "surface-container": "#e7e8e8",
-              "surface-container-low": "#f0f1f1",
-              "on-error": "#ffefec",
-              "error-container": "#f95630",
-              "on-tertiary-fixed-variant": "#6a006a",
-              "surface-variant": "#dbdddd",
-              "surface-tint": "#4e6300",
-              "primary-fixed-dim": "#beee00",
-              "outline-variant": "#acadad",
-              "surface-container-lowest": "#ffffff",
-              "inverse-surface": "#0c0f0f",
-              "primary-dim": "#435600",
-              "secondary-fixed": "#e5e2e1",
-              "surface-bright": "#f6f6f6",
-              "error": "#b02500",
-              "on-tertiary-fixed": "#320032",
-              "background": "#f6f6f6",
-              "tertiary-dim": "#900090",
-              "surface-container-high": "#e1e3e3",
-              "on-primary": "#e1ff88",
-              "on-error-container": "#520c00",
-              "secondary-fixed-dim": "#d7d4d3",
-              "surface-container-highest": "#dbdddd",
-              "tertiary-fixed-dim": "#ff61f8",
-              "secondary-container": "#e5e2e1",
-              "on-primary-fixed": "#3a4a00",
-              "on-background": "#2d2f2f",
-              "on-tertiary": "#ffeef8",
-              "secondary": "#5c5b5b",
-              "tertiary-container": "#ff81f5",
-              "on-surface-variant": "#5a5c5c",
-              "primary-container": "#cafd00",
-              "surface-dim": "#d3d5d5",
-              "tertiary": "#a400a4",
-              "inverse-on-surface": "#9c9d9d",
-              "outline": "#767777",
-              "on-tertiary-container": "#5b005b",
-              "secondary-dim": "#504f4f"
-            },
-            fontFamily: {
-              "headline": ["Lexend"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>NEO_FIN | TRANSACTIONS_LOG</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface": "#2d2f2f",
+            "on-secondary-fixed": "#403f3f",
+            "surface": "#f6f6f6",
+            "primary": "#4e6300",
+            "on-primary-fixed-variant": "#526900",
+            "tertiary-fixed": "#ff81f5",
+            "error-dim": "#b92902",
+            "inverse-primary": "#cafd00",
+            "on-secondary-fixed-variant": "#5c5b5b",
+            "primary-fixed": "#cafd00",
+            "on-secondary-container": "#525151",
+            "on-secondary": "#f5f2f1",
+            "on-primary-container": "#4a5e00",
+            "surface-container": "#e7e8e8",
+            "surface-container-low": "#f0f1f1",
+            "on-error": "#ffefec",
+            "error-container": "#f95630",
+            "on-tertiary-fixed-variant": "#6a006a",
+            "surface-variant": "#dbdddd",
+            "surface-tint": "#4e6300",
+            "primary-fixed-dim": "#beee00",
+            "outline-variant": "#acadad",
+            "surface-container-lowest": "#ffffff",
+            "inverse-surface": "#0c0f0f",
+            "primary-dim": "#435600",
+            "secondary-fixed": "#e5e2e1",
+            "surface-bright": "#f6f6f6",
+            "error": "#b02500",
+            "on-tertiary-fixed": "#320032",
+            "background": "#f6f6f6",
+            "tertiary-dim": "#900090",
+            "surface-container-high": "#e1e3e3",
+            "on-primary": "#e1ff88",
+            "on-error-container": "#520c00",
+            "secondary-fixed-dim": "#d7d4d3",
+            "surface-container-highest": "#dbdddd",
+            "tertiary-fixed-dim": "#ff61f8",
+            "secondary-container": "#e5e2e1",
+            "on-primary-fixed": "#3a4a00",
+            "on-background": "#2d2f2f",
+            "on-tertiary": "#ffeef8",
+            "secondary": "#5c5b5b",
+            "tertiary-container": "#ff81f5",
+            "on-surface-variant": "#5a5c5c",
+            "primary-container": "#cafd00",
+            "surface-dim": "#d3d5d5",
+            "tertiary": "#a400a4",
+            "inverse-on-surface": "#9c9d9d",
+            "outline": "#767777",
+            "on-tertiary-container": "#5b005b",
+            "secondary-dim": "#504f4f"
           },
+          fontFamily: {
+            "headline": ["Lexend"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
         },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .neo-shadow {
-            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
-        }
-        .neo-shadow-lg {
-            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
-        }
-        .neo-shadow-active {
-            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
-        }
-        body {
-            background-color: #f6f6f6;
-            color: #121212;
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .neo-shadow {
+      box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    }
+
+    .neo-shadow-lg {
+      box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+    }
+
+    .neo-shadow-active {
+      box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+    }
+
+    body {
+      background-color: #f6f6f6;
+      color: #121212;
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
+
 <body class="bg-surface text-on-surface min-h-screen">
-<!-- TopNavBar -->
-<nav class="fixed top-0 w-full border-b-2 border-[#121212] z-50 bg-[#f6f6f6] dark:bg-[#121212] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center px-6 h-20 w-full mx-auto">
-<div class="flex items-center gap-8">
-<span class="text-2xl font-black italic tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-['Lexend']">NEO_FIN</span>
-<div class="hidden md:flex gap-6">
-<a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all" href="assets_digital_rebel_desktop.html">Assets</a>
-<a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all" href="market_digital_rebel_desktop.html">Market</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="relative hidden sm:block">
-<input class="bg-surface border-2 border-on-surface px-4 py-2 font-headline font-bold text-sm focus:ring-0 focus:border-primary-fixed outline-none w-64" placeholder="SEARCH_ASSETS..." type="text"/>
-<span class="material-symbols-outlined absolute right-3 top-2.5">search</span>
-</div>
-<button class="w-10 h-10 border-2 border-on-surface flex items-center justify-center hover:bg-primary-fixed transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none neo-shadow">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-<div class="w-10 h-10 border-2 border-on-surface overflow-hidden">
-<img alt="User profile" class="w-full h-full object-cover" data-alt="close up headshot of a stylish young professional with a modern aesthetic and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGc9YRbtn3h-X6sCwp8EyfL5g2n3bFKQoZw7WLshCL4Ro3SLE4MxMxf6cZC2ll16lEJxPcVD3Gv5bxGvNpreN-YXV5RQvFK1BFFE_rPBu0jf4WfIsmVQwYMUDDLqBZXwDSckAoM36NnlmElm1LmIGEuGz5FJsxvtyIwAXHg0yUXPrDaGYQzWt9kuJZ5LnnaaPeAR7A6LtoBK4vgKQYRnL8PBHP_PTy3ZzF1OMwF_oYqJf-mdMy_I2jMGynh6VVFESGqU2VtiVo_Sj8"/>
-</div>
-</div>
-</nav>
-<!-- Main Content Area -->
-<main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
-<!-- Header Section -->
-<header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
-<div>
-<span class="inline-block bg-primary-fixed text-on-primary-fixed font-headline font-black px-3 py-1 text-sm border-2 border-on-surface mb-4 transform -rotate-1">ACTIVITY_FEED_V.2</span>
-<h1 class="text-4xl md:text-6xl font-headline font-black tracking-tighter uppercase leading-none">
-                    TRANSACTIONS<br/><span class="text-primary">_LOG</span>
-</h1>
-</div>
-<div class="flex gap-4">
-<button class="bg-surface border-4 border-on-surface px-6 py-3 font-headline font-black uppercase tracking-tight neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none">
-                    EXPORT_CSV
-                </button>
-<button class="bg-primary-fixed border-4 border-on-surface px-6 py-3 font-headline font-black uppercase tracking-tight neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none">
-                    NEW_TRADE
-                </button>
-</div>
-</header>
-<!-- Stats Overview (Asymmetric Bento) -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
-<div class="md:col-span-8 bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow flex flex-col justify-between">
-<div>
-<p class="font-headline font-bold text-outline uppercase tracking-widest mb-2">Total Volume (30D)</p>
-<p class="text-5xl font-headline font-black">$1,248,390.42</p>
-</div>
-<div class="mt-8 flex gap-8 items-center">
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 bg-primary-fixed border-2 border-on-surface"></span>
-<span class="font-headline font-bold text-sm">74% BUY_PRESSURE</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="w-3 h-3 bg-tertiary-fixed border-2 border-on-surface"></span>
-<span class="font-headline font-bold text-sm">26% SELL_LIQUIDITY</span>
-</div>
-</div>
-</div>
-<div class="md:col-span-4 bg-primary-fixed border-4 border-on-surface p-8 neo-shadow relative overflow-hidden">
-<div class="relative z-10">
-<p class="font-headline font-black text-on-primary-fixed uppercase tracking-widest mb-2">P/L_SNAPSHOT</p>
-<p class="text-5xl font-headline font-black text-on-primary-fixed">+$12.4K</p>
-<p class="font-headline font-bold text-on-primary-fixed mt-4">↑ 4.2% THIS_MONTH</p>
-</div>
-<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-20 rotate-12 scale-150">trending_up</span>
-</div>
-</div>
-<!-- Filters -->
-<div class="mb-8 flex flex-wrap gap-4 items-center">
-<span class="font-headline font-black uppercase text-sm">Filter_by:</span>
-<button class="px-4 py-2 border-2 border-on-surface bg-on-surface text-surface font-headline font-bold text-xs uppercase">ALL_TRADES</button>
-<button class="px-4 py-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed transition-all font-headline font-bold text-xs uppercase">STOCKS_ONLY</button>
-<button class="px-4 py-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed transition-all font-headline font-bold text-xs uppercase">CRYPTO</button>
-<div class="ml-auto border-2 border-on-surface flex bg-surface overflow-hidden">
-<button class="px-4 py-2 font-headline font-bold text-xs uppercase border-r-2 border-on-surface bg-primary-fixed">LIST</button>
-<button class="px-4 py-2 font-headline font-bold text-xs uppercase hover:bg-surface-container">CHART</button>
-</div>
-</div>
-<!-- Transaction List -->
-<div class="flex flex-col gap-4">
-<!-- Table Header -->
-<div class="hidden lg:grid grid-cols-12 px-6 py-4 bg-on-surface text-surface font-headline font-black text-xs tracking-widest uppercase">
-<div class="col-span-3">ASSET_NAME</div>
-<div class="col-span-2">TYPE</div>
-<div class="col-span-2 text-right">QUANTITY</div>
-<div class="col-span-2 text-right">PRICE_UNIT</div>
-<div class="col-span-2 text-right">TOTAL_VALUE</div>
-<div class="col-span-1 text-right">DATE</div>
-</div>
-<!-- Transaction Item 1 -->
-<div class="group grid grid-cols-1 md:grid-cols-12 items-center px-6 py-8 md:py-6 bg-surface-container-lowest border-4 border-on-surface neo-shadow hover:-translate-y-1 hover:translate-x-1 transition-all">
+  <!-- TopNavBar -->
+  <nav
+    class="fixed top-0 w-full border-b-2 border-[#121212] z-50 bg-[#f6f6f6] dark:bg-[#121212] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center px-6 h-20 w-full mx-auto">
+    <div class="flex items-center gap-8">
+      <span
+        class="text-2xl font-black italic tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-['Lexend']">NEO_FIN</span>
+      <div class="hidden md:flex gap-6">
+        <a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all"
+          href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+        <a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all"
+          href="assets_digital_rebel_desktop.html">Assets</a>
+        <a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all"
+          href="market_digital_rebel_desktop.html">Market</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="relative hidden sm:block">
+        <input
+          class="bg-surface border-2 border-on-surface px-4 py-2 font-headline font-bold text-sm focus:ring-0 focus:border-primary-fixed outline-none w-64"
+          placeholder="SEARCH_ASSETS..." type="text" />
+        <span class="material-symbols-outlined absolute right-3 top-2.5">search</span>
+      </div>
+      <button
+        class="w-10 h-10 border-2 border-on-surface flex items-center justify-center hover:bg-primary-fixed transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none neo-shadow">
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <div class="w-10 h-10 border-2 border-on-surface overflow-hidden">
+        <img alt="User profile" class="w-full h-full object-cover"
+          data-alt="close up headshot of a stylish young professional with a modern aesthetic and neutral background"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGc9YRbtn3h-X6sCwp8EyfL5g2n3bFKQoZw7WLshCL4Ro3SLE4MxMxf6cZC2ll16lEJxPcVD3Gv5bxGvNpreN-YXV5RQvFK1BFFE_rPBu0jf4WfIsmVQwYMUDDLqBZXwDSckAoM36NnlmElm1LmIGEuGz5FJsxvtyIwAXHg0yUXPrDaGYQzWt9kuJZ5LnnaaPeAR7A6LtoBK4vgKQYRnL8PBHP_PTy3ZzF1OMwF_oYqJf-mdMy_I2jMGynh6VVFESGqU2VtiVo_Sj8" />
+      </div>
+    </div>
+  </nav>
+  <!-- Main Content Area -->
+  <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div>
+        <span
+          class="inline-block bg-primary-fixed text-on-primary-fixed font-headline font-black px-3 py-1 text-sm border-2 border-on-surface mb-4 transform -rotate-1">ACTIVITY_FEED_V.2</span>
+        <h1 class="text-4xl md:text-6xl font-headline font-black tracking-tighter uppercase leading-none">
+          TRANSACTIONS<br /><span class="text-primary">_LOG</span>
+        </h1>
+      </div>
+      <div class="flex gap-4">
+        <button
+          class="bg-surface border-4 border-on-surface px-6 py-3 font-headline font-black uppercase tracking-tight neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none">
+          EXPORT_CSV
+        </button>
+        <button
+          class="bg-primary-fixed border-4 border-on-surface px-6 py-3 font-headline font-black uppercase tracking-tight neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none">
+          NEW_TRADE
+        </button>
+      </div>
+    </header>
+    <!-- Stats Overview (Asymmetric Bento) -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+      <div
+        class="md:col-span-8 bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow flex flex-col justify-between">
+        <div>
+          <p class="font-headline font-bold text-outline uppercase tracking-widest mb-2">Total Volume (30D)</p>
+          <p class="text-5xl font-headline font-black">$1,248,390.42</p>
+        </div>
+        <div class="mt-8 flex gap-8 items-center">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-primary-fixed border-2 border-on-surface"></span>
+            <span class="font-headline font-bold text-sm">74% BUY_PRESSURE</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 bg-tertiary-fixed border-2 border-on-surface"></span>
+            <span class="font-headline font-bold text-sm">26% SELL_LIQUIDITY</span>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-4 bg-primary-fixed border-4 border-on-surface p-8 neo-shadow relative overflow-hidden">
+        <div class="relative z-10">
+          <p class="font-headline font-black text-on-primary-fixed uppercase tracking-widest mb-2">P/L_SNAPSHOT</p>
+          <p class="text-5xl font-headline font-black text-on-primary-fixed">+$12.4K</p>
+          <p class="font-headline font-bold text-on-primary-fixed mt-4">↑ 4.2% THIS_MONTH</p>
+        </div>
+        <span
+          class="material-symbols-outlined absolute -bottom-4 -right-4 text-9xl opacity-20 rotate-12 scale-150">trending_up</span>
+      </div>
+    </div>
+    <!-- Filters -->
+    <div class="mb-8 flex flex-wrap gap-4 items-center">
+      <span class="font-headline font-black uppercase text-sm">Filter_by:</span>
+      <button
+        class="px-4 py-2 border-2 border-on-surface bg-on-surface text-surface font-headline font-bold text-xs uppercase">ALL_TRADES</button>
+      <button
+        class="px-4 py-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed transition-all font-headline font-bold text-xs uppercase">STOCKS_ONLY</button>
+      <button
+        class="px-4 py-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed transition-all font-headline font-bold text-xs uppercase">CRYPTO</button>
+      <div class="ml-auto border-2 border-on-surface flex bg-surface overflow-hidden">
+        <button
+          class="px-4 py-2 font-headline font-bold text-xs uppercase border-r-2 border-on-surface bg-primary-fixed">LIST</button>
+        <button class="px-4 py-2 font-headline font-bold text-xs uppercase hover:bg-surface-container">CHART</button>
+      </div>
+    </div>
+    <!-- Transaction List -->
+    <div id="transaction-list" class="flex flex-col gap-4">
+      <!-- Table Header -->
+      <div
+        class="hidden lg:grid grid-cols-12 px-6 py-4 bg-on-surface text-surface font-headline font-black text-xs tracking-widest uppercase">
+        <div class="col-span-3">ASSET_NAME</div>
+        <div class="col-span-2">TYPE</div>
+        <div class="col-span-2 text-right">QUANTITY</div>
+        <div class="col-span-2 text-right">PRICE_UNIT</div>
+        <div class="col-span-2 text-right">TOTAL_VALUE</div>
+        <div class="col-span-1 text-right">DATE</div>
+      </div>
+      <!-- Hydrated by JS -->
+      <!-- End of Log Marker -->
+      <div class="mt-12 mb-20 flex flex-col items-center">
+        <div class="h-1 w-full bg-on-surface mb-8"></div>
+        <div
+          class="bg-[#121212] text-[#cafd00] font-headline font-black px-8 py-4 border-4 border-on-surface inline-block uppercase tracking-tighter">
+          END_OF_TRANSACTION_HISTORY_REACHED
+        </div>
+        <p class="mt-4 font-headline font-bold uppercase text-outline text-sm">Synchronizing with node #8249...</p>
+        <button class="mt-8 flex items-center gap-2 font-headline font-black uppercase text-sm hover:underline">
+          <span class="material-symbols-outlined">expand_more</span>
+          LOAD_PREVIOUS_MONTH
+        </button>
+      </div>
+    </div>
+  </main>
+  <!-- BottomNavBar (Mobile Only) -->
+  <nav
+    class="md:hidden fixed bottom-0 left-0 w-full h-16 flex justify-around items-stretch bg-[#cafd00] border-t-4 border-[#121212] z-50">
+    <a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95"
+      href="#">
+      <span class="material-symbols-outlined">home</span>
+      <span class="font-['Lexend'] font-bold text-[10px] uppercase">Home</span>
+    </a>
+    <a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95"
+      href="#">
+      <span class="material-symbols-outlined">account_balance_wallet</span>
+      <span class="font-['Lexend'] font-bold text-[10px] uppercase">Wallet</span>
+    </a>
+    <a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95"
+      href="#">
+      <span class="material-symbols-outlined">swap_horiz</span>
+      <span class="font-['Lexend'] font-bold text-[10px] uppercase">Trade</span>
+    </a>
+    <a class="bg-[#121212] text-[#cafd00] flex flex-col items-center justify-center h-full w-full last:border-r-0 hover:invert transition-all active:scale-95"
+      href="#">
+      <span class="material-symbols-outlined">history</span>
+      <span class="font-['Lexend'] font-bold text-[10px] uppercase">History</span>
+    </a>
+  </nav>
+  </nav>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const session = await requireAuth();
+      if (!session) return;
+
+      const listEl = document.getElementById('transaction-list');
+
+      try {
+        const res = await futuraApi.contributions.list();
+        if (res.error) throw new Error(res.error);
+
+        const contributions = res.contributions || [];
+
+        if (contributions.length === 0) {
+          listEl.innerHTML += '<div class="p-8 text-center bg-surface-container-lowest border-4 border-on-surface"><p class="font-headline font-black text-xs uppercase tracking-widest text-outline">NO_TRANSACTIONS_FOUND</p></div>';
+        }
+
+        contributions.forEach(c => {
+          // Extract type
+          let typeBadge = 'ASSET';
+          let assetName = 'MANUAL_ENTRY';
+
+          if (c.note) {
+            const match = c.note.match(/^\[(.*?)\]\s*(.*)$/);
+            if (match) {
+              typeBadge = match[1];
+              assetName = match[2];
+            } else {
+              assetName = c.note;
+            }
+          }
+
+          const initial = assetName.charAt(0).toUpperCase();
+
+          const row = document.createElement('div');
+          row.className = 'group grid grid-cols-1 md:grid-cols-12 items-center px-6 py-8 md:py-6 bg-surface-container-lowest border-4 border-on-surface neo-shadow hover:-translate-y-1 hover:translate-x-1 transition-all';
+          row.innerHTML = `
 <div class="col-span-12 lg:col-span-3 mb-4 lg:mb-0">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline font-black text-xl">T</div>
-<div>
-<p class="font-headline font-black text-lg leading-none">TSLA_MOTORS</p>
-<p class="text-xs font-bold text-outline">NASDAQ:TSLA</p>
-</div>
-</div>
+    <div class="flex items-center gap-4">
+        <div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline font-black text-xl">${initial}</div>
+        <div>
+            <p class="font-headline font-black text-lg leading-none truncate">${assetName.substring(0, 25)}</p>
+            <p class="text-xs font-bold text-outline">USER_VAULT</p>
+        </div>
+    </div>
 </div>
 <div class="col-span-6 lg:col-span-2 mb-4 lg:mb-0">
-<span class="inline-block bg-primary-fixed text-on-primary-fixed font-headline font-black px-4 py-1 border-2 border-on-surface text-xs uppercase">BUY_LONG</span>
+    <span class="inline-block bg-primary-fixed text-on-primary-fixed font-headline font-black px-4 py-1 border-2 border-on-surface text-xs uppercase underline underline-offset-2">${typeBadge.substring(0, 10)}</span>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right mb-4 lg:mb-0">
-<p class="text-xs font-bold text-outline lg:hidden">QUANTITY</p>
-<p class="font-headline font-black text-lg">45.00</p>
+    <p class="text-xs font-bold text-outline lg:hidden">QUANTITY</p>
+    <p class="font-headline font-black text-lg">1.00</p>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">PRICE_UNIT</p>
-<p class="font-headline font-bold text-lg">$168.42</p>
+    <p class="text-xs font-bold text-outline lg:hidden">PRICE_UNIT</p>
+    <p class="font-headline font-bold text-lg">$${c.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
-<p class="font-headline font-black text-lg text-primary-fixed-variant">$7,578.90</p>
+    <p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
+    <p class="font-headline font-black text-lg text-primary-fixed-variant">$${c.amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
 </div>
 <div class="col-span-12 lg:col-span-1 text-right mt-4 lg:mt-0">
-<p class="font-headline font-bold text-xs uppercase text-outline">OCT_24_2023</p>
-<p class="text-[10px] font-bold text-outline uppercase">14:22_EST</p>
+    <p class="font-headline font-bold text-xs uppercase text-outline underline">${new Date(c.contribution_date).toLocaleDateString()}</p>
+    <p class="text-[10px] font-bold text-outline uppercase">${new Date(c.created_at || c.contribution_date).toLocaleTimeString()}</p>
 </div>
-</div>
-<!-- Transaction Item 2 -->
-<div class="group grid grid-cols-1 md:grid-cols-12 items-center px-6 py-8 md:py-6 bg-surface-container-lowest border-4 border-on-surface neo-shadow hover:-translate-y-1 hover:translate-x-1 transition-all">
-<div class="col-span-12 lg:col-span-3 mb-4 lg:mb-0">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline font-black text-xl">A</div>
-<div>
-<p class="font-headline font-black text-lg leading-none">APPLE_INC</p>
-<p class="text-xs font-bold text-outline">NASDAQ:AAPL</p>
-</div>
-</div>
-</div>
-<div class="col-span-6 lg:col-span-2 mb-4 lg:mb-0">
-<span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black px-4 py-1 border-2 border-on-surface text-xs uppercase transform rotate-2">SELL_EXIT</span>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right mb-4 lg:mb-0">
-<p class="text-xs font-bold text-outline lg:hidden">QUANTITY</p>
-<p class="font-headline font-black text-lg">120.00</p>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">PRICE_UNIT</p>
-<p class="font-headline font-bold text-lg">$192.15</p>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
-<p class="font-headline font-black text-lg text-error">$23,058.00</p>
-</div>
-<div class="col-span-12 lg:col-span-1 text-right mt-4 lg:mt-0">
-<p class="font-headline font-bold text-xs uppercase text-outline">OCT_23_2023</p>
-<p class="text-[10px] font-bold text-outline uppercase">09:45_EST</p>
-</div>
-</div>
-<!-- Transaction Item 3 -->
-<div class="group grid grid-cols-1 md:grid-cols-12 items-center px-6 py-8 md:py-6 bg-surface-container-lowest border-4 border-on-surface neo-shadow hover:-translate-y-1 hover:translate-x-1 transition-all">
-<div class="col-span-12 lg:col-span-3 mb-4 lg:mb-0">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline font-black text-xl">N</div>
-<div>
-<p class="font-headline font-black text-lg leading-none">NVIDIA_CORP</p>
-<p class="text-xs font-bold text-outline">NASDAQ:NVDA</p>
-</div>
-</div>
-</div>
-<div class="col-span-6 lg:col-span-2 mb-4 lg:mb-0">
-<span class="inline-block bg-primary-fixed text-on-primary-fixed font-headline font-black px-4 py-1 border-2 border-on-surface text-xs uppercase">BUY_ACCUM</span>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right mb-4 lg:mb-0">
-<p class="text-xs font-bold text-outline lg:hidden">QUANTITY</p>
-<p class="font-headline font-black text-lg">10.00</p>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">PRICE_UNIT</p>
-<p class="font-headline font-bold text-lg">$452.10</p>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
-<p class="font-headline font-black text-lg text-primary-fixed-variant">$4,521.00</p>
-</div>
-<div class="col-span-12 lg:col-span-1 text-right mt-4 lg:mt-0">
-<p class="font-headline font-bold text-xs uppercase text-outline">OCT_22_2023</p>
-<p class="text-[10px] font-bold text-outline uppercase">16:58_EST</p>
-</div>
-</div>
-<!-- Transaction Item 4 -->
-<div class="group grid grid-cols-1 md:grid-cols-12 items-center px-6 py-8 md:py-6 bg-surface-container-lowest border-4 border-on-surface neo-shadow hover:-translate-y-1 hover:translate-x-1 transition-all">
-<div class="col-span-12 lg:col-span-3 mb-4 lg:mb-0">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 border-2 border-on-surface bg-surface-container flex items-center justify-center font-headline font-black text-xl">M</div>
-<div>
-<p class="font-headline font-black text-lg leading-none">MICROSOFT</p>
-<p class="text-xs font-bold text-outline">NASDAQ:MSFT</p>
-</div>
-</div>
-</div>
-<div class="col-span-6 lg:col-span-2 mb-4 lg:mb-0">
-<span class="inline-block bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black px-4 py-1 border-2 border-on-surface text-xs uppercase">SELL_PARTIAL</span>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right mb-4 lg:mb-0">
-<p class="text-xs font-bold text-outline lg:hidden">QUANTITY</p>
-<p class="font-headline font-black text-lg">25.00</p>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">PRICE_UNIT</p>
-<p class="font-headline font-bold text-lg">$330.11</p>
-</div>
-<div class="col-span-6 lg:col-span-2 text-right">
-<p class="text-xs font-bold text-outline lg:hidden">TOTAL_VALUE</p>
-<p class="font-headline font-black text-lg text-error">$8,252.75</p>
-</div>
-<div class="col-span-12 lg:col-span-1 text-right mt-4 lg:mt-0">
-<p class="font-headline font-bold text-xs uppercase text-outline">OCT_20_2023</p>
-<p class="text-[10px] font-bold text-outline uppercase">11:15_EST</p>
-</div>
-</div>
-<!-- End of Log Marker -->
-<div class="mt-12 mb-20 flex flex-col items-center">
-<div class="h-1 w-full bg-on-surface mb-8"></div>
-<div class="bg-[#121212] text-[#cafd00] font-headline font-black px-8 py-4 border-4 border-on-surface inline-block uppercase tracking-tighter">
-                    END_OF_TRANSACTION_HISTORY_REACHED
-                </div>
-<p class="mt-4 font-headline font-bold uppercase text-outline text-sm">Synchronizing with node #8249...</p>
-<button class="mt-8 flex items-center gap-2 font-headline font-black uppercase text-sm hover:underline">
-<span class="material-symbols-outlined">expand_more</span>
-                    LOAD_PREVIOUS_MONTH
-                </button>
-</div>
-</div>
-</main>
-<!-- BottomNavBar (Mobile Only) -->
-<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 flex justify-around items-stretch bg-[#cafd00] border-t-4 border-[#121212] z-50">
-<a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95" href="#">
-<span class="material-symbols-outlined">home</span>
-<span class="font-['Lexend'] font-bold text-[10px] uppercase">Home</span>
-</a>
-<a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95" href="#">
-<span class="material-symbols-outlined">account_balance_wallet</span>
-<span class="font-['Lexend'] font-bold text-[10px] uppercase">Wallet</span>
-</a>
-<a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95" href="#">
-<span class="material-symbols-outlined">swap_horiz</span>
-<span class="font-['Lexend'] font-bold text-[10px] uppercase">Trade</span>
-</a>
-<a class="bg-[#121212] text-[#cafd00] flex flex-col items-center justify-center h-full w-full last:border-r-0 hover:invert transition-all active:scale-95" href="#">
-<span class="material-symbols-outlined">history</span>
-<span class="font-['Lexend'] font-bold text-[10px] uppercase">History</span>
-</a>
-</nav>
-</body></html>
+            `;
+          // Insert before the END_OF_LOG marker or at bottom
+          listEl.appendChild(row);
+        });
+
+      } catch (err) {
+        console.error(err);
+        listEl.innerHTML += '<div class="p-8 text-center border-4 border-error"><p class="text-error font-bold text-xs uppercase">SYNC_FAILURE</p></div>';
+      }
+    });
+  </script>
+</body>
+
+</html>

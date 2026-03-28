@@ -13,6 +13,21 @@ const purchaseSchema = z.object({
 const ZEN_PACK_AMOUNT_PAISE = 5000 // ₹50 in paise
 const ZEN_PACK_CREDITS = 500
 
+router.get('/balance', async (c) => {
+  const supabase = getSupabase(c.env, c.get('token'))
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('zens')
+    .eq('id', c.get('userId'))
+    .single()
+
+  if (error) {
+    return c.json({ error: error.message }, 500)
+  }
+
+  return c.json({ zens: data.zens })
+})
+
 router.post('/purchase', zValidator('json', purchaseSchema), async (c) => {
   const userId = c.get('userId')
   const { razorpay_payment_id } = c.req.valid('json')

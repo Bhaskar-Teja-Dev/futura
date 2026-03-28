@@ -27,12 +27,22 @@ export default function DashboardPage() {
 
       let projection = null
       if (goalData) {
+        // Map available goal data to realistic defaults for the full simulation engine
         projection = await api.projection.calculate({
-          currentAge: goalData.current_age,
-          retirementAge: goalData.retirement_age,
-          monthlyContribution: goalData.target_monthly_income,
-          annualReturn: goalData.annual_return_rate ?? 0.07,
-          existingPot: 0
+          currentAge: goalData.current_age || 25,
+          retirementAge: goalData.retirement_age || 65,
+          lifeExpectancy: 85,
+          monthlyIncome: 50000,                            // Default placeholder if missing
+          monthlyExpense: 30000,                           // Default placeholder if missing
+          currentSavings: 0,
+          monthlyInvestment: goalData.target_monthly_income || 5000, // Adapting to new inputs
+          inflationRate: 0.06,
+          returnRate: goalData.annual_return_rate ?? 0.12,
+          returnMin: 0.07,
+          returnMax: 0.15,
+          inflationMin: 0.04,
+          inflationMax: 0.09,
+          simulations: 2000
         })
       }
 

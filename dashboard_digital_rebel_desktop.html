@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Digital Rebel | Dashboard</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Digital Rebel | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -71,272 +79,380 @@
                         "body": ["Inter"],
                         "label": ["Inter"]
                     },
-                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
                 },
             },
         }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .neo-shadow {
             box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
         }
+
         .neo-shadow-large {
             box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
         }
+
         .rebel-grid {
             background-image: radial-gradient(#d3d5d5 1px, transparent 1px);
             background-size: 20px 20px;
         }
     </style>
 </head>
-<body class="bg-surface font-body text-on-surface rebel-grid min-h-screen">
-<!-- TopNavBar -->
-<nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
-<div class="flex items-center gap-8">
-<span class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">Digital Rebel</span>
-<div class="hidden md:flex gap-6">
-<a class="font-Lexend font-black tracking-tighter uppercase text-[#121212] dark:text-[#cafd00] border-b-4 border-[#cafd00]" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100" href="projections_digital_rebel_desktop.html">Markets</a>
-<a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100" href="projections_digital_rebel_desktop.html">Assets</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="hidden lg:flex relative">
-<input class="bg-surface-container border-2 border-inverse-surface px-4 py-1 font-headline font-bold text-xs uppercase tracking-widest focus:ring-0 focus:border-primary-fixed outline-none" placeholder="SEARCH_VAULT..." type="text"/>
-</div>
-<span class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all">notifications</span>
-<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all inline-flex items-center justify-center">settings</a>
-<button id="btn-connect-wallet" class="bg-primary-fixed text-inverse-surface border-2 border-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-tighter neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">Connect Wallet</button>
-</div>
-</nav>
-<div class="flex h-full">
-<!-- SideNavBar -->
-<aside class="fixed left-0 top-0 h-full w-64 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] hidden lg:flex z-40">
-<div class="px-6 mb-8 flex items-center gap-3">
-<div class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden">
-<img alt="Rebel_01" class="w-full h-full object-cover" data-alt="Cyberpunk style profile avatar with neon accents and high contrast lighting in a brutalist frame" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy"/>
-</div>
-<div>
-<h3 id="user-display-name" class="font-Lexend font-black uppercase tracking-widest text-xs">Rebel_01</h3>
-<p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-tertiary">Elite Tier</p>
-</div>
-</div>
-<nav class="flex-1 space-y-1">
-<a class="flex items-center gap-4 py-3 px-6 bg-[#cafd00] text-[#121212] border-2 border-[#121212] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs active:scale-95 transition-all" href="dashboard_digital_rebel_desktop.html">
-<span class="material-symbols-outlined">grid_view</span> Overview
-                </a>
-<a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all" href="projections_digital_rebel_desktop.html">
-<span class="material-symbols-outlined">trending_up</span> Projections
-                </a>
-<a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all" href="#">
-<span class="material-symbols-outlined">swap_horiz</span> Transactions
-                </a>
-<a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all" href="checkout_digital_rebel_desktop.html">
-<span class="material-symbols-outlined">credit_card</span> Cards
-                </a>
-<a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all" href="#">
-<span class="material-symbols-outlined">bolt</span> Staking
-                </a>
-<a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all" href="settings_digital_rebel_desktop.html">
-<span class="material-symbols-outlined">help_outline</span> Support
-                </a>
-</nav>
-<div class="p-4 border-t-2 border-inverse-surface mt-auto">
-<a href="upgrade_digital_rebel_desktop.html" class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade Power</a>
-<a id="logout-link" class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs cursor-pointer" href="#">
-<span class="material-symbols-outlined">logout</span> Logout
-                </a>
-</div>
-</aside>
-<!-- Main Content Canvas -->
-<main class="lg:ml-64 flex-1 p-6 md:p-10">
-<!-- Hero Header Section -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-<div class="md:col-span-2 flex flex-col justify-end bg-inverse-surface text-surface p-8 neo-shadow-large relative overflow-hidden">
-<div class="absolute top-0 right-0 p-4">
-<span class="bg-primary-fixed text-inverse-surface px-3 py-1 font-headline font-black text-xs uppercase tracking-tighter -rotate-2 inline-block border border-inverse-surface">SYSTEM_LIVE</span>
-</div>
-<h1 class="font-headline font-black text-6xl uppercase tracking-tighter leading-none mb-4">REBEL_DASHBOARD</h1>
-<p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory. You are currently operating at <span class="text-primary-fixed font-bold">142% efficiency</span> compared to last cycle.</p>
-</div>
-<!-- Gamification Badge -->
-<div class="bg-tertiary-container border-4 border-inverse-surface p-6 neo-shadow flex flex-col items-center justify-center text-center rotate-1">
-<span class="material-symbols-outlined text-6xl mb-2" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
-<h2 id="zens-balance" class="font-headline font-black text-4xl uppercase tracking-tight">0 ZENS</h2>
-<p class="font-headline font-bold uppercase tracking-widest text-sm">Saving Streak</p>
-<div class="mt-4 bg-inverse-surface text-surface px-4 py-1 font-headline font-black text-xs uppercase italic">UNSTOPPABLE</div>
-</div>
-</div>
-<!-- Bento Grid Content -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-<!-- Portfolio Goal / Progress Bar -->
-<div class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow">
-<div class="flex justify-between items-end mb-6">
-<div>
-<h3 class="font-headline font-black text-2xl uppercase tracking-tight">Freedom Age Target</h3>
-<p id="retirement-status" class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Current Project: -- Years Old</p>
-</div>
-<div class="text-right">
-<span id="progress-percent" class="font-headline font-black text-4xl text-primary">68%</span>
-</div>
-</div>
-<div class="w-full h-12 bg-surface-container border-2 border-inverse-surface relative overflow-hidden">
-<div id="progress-bar" class="h-full bg-primary-fixed border-r-4 border-inverse-surface" style="width: 68%;"></div>
-<div class="absolute inset-0 flex items-center justify-between px-4 mix-blend-difference text-surface font-headline font-black uppercase text-xs tracking-widest">
-<span>SURVIVAL</span>
-<span>FREEDOM</span>
-</div>
-</div>
-<div class="mt-6 grid grid-cols-3 gap-4">
-<div class="p-4 border-2 border-inverse-surface bg-surface">
-<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Monthly Income</p>
-<p id="display-income" class="font-headline font-black text-xl">$0</p>
-</div>
-<div class="p-4 border-2 border-inverse-surface bg-surface">
-<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Current Age</p>
-<p id="display-age" class="font-headline font-black text-xl">--</p>
-</div>
-<div class="p-4 border-2 border-inverse-surface bg-surface">
-<p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Target Exit</p>
-<p id="display-retirement" class="font-headline font-black text-xl">--</p>
-</div>
-</div>
-</div>
-<!-- Recent Contributions -->
-<div class="md:col-span-4 bg-surface-container-high border-2 border-inverse-surface p-6 neo-shadow">
-<h3 class="font-headline font-black text-xl uppercase tracking-tight mb-4 border-b-2 border-inverse-surface pb-2">Recent Flow</h3>
-<div class="space-y-4">
-<div class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed bg-inverse-surface p-1">north_east</span>
-<div>
-<p class="font-headline font-black text-xs uppercase">Vault Deposit</p>
-<p class="text-[10px] text-on-surface-variant">OCT 24, 2024</p>
-</div>
-</div>
-<span class="font-headline font-black text-sm">+$2,400</span>
-</div>
-<div class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-tertiary bg-inverse-surface p-1">bolt</span>
-<div>
-<p class="font-headline font-black text-xs uppercase">Yield Harvest</p>
-<p class="text-[10px] text-on-surface-variant">OCT 22, 2024</p>
-</div>
-</div>
-<span class="font-headline font-black text-sm">+$412</span>
-</div>
-<div class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed bg-inverse-surface p-1">north_east</span>
-<div>
-<p class="font-headline font-black text-xs uppercase">Automated Buy</p>
-<p class="text-[10px] text-on-surface-variant">OCT 20, 2024</p>
-</div>
-</div>
-<span class="font-headline font-black text-sm">+$1,500</span>
-</div>
-</div>
-<button class="w-full mt-6 py-2 border-2 border-inverse-surface font-headline font-bold uppercase text-[10px] tracking-widest hover:bg-inverse-surface hover:text-surface transition-colors">View All Streams</button>
-</div>
-<!-- Summary Projection Graph Placeholder -->
-<div class="md:col-span-12 bg-surface border-2 border-inverse-surface p-8 neo-shadow relative overflow-hidden">
-<div class="flex justify-between items-start mb-10">
-<div>
-<h3 class="font-headline font-black text-2xl uppercase tracking-tight">Wealth Projection</h3>
-<p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Scenario: Hyper-Growth Mode (Alpha)</p>
-</div>
-<div class="flex gap-2">
-<button class="px-3 py-1 bg-primary-fixed border-2 border-inverse-surface font-headline font-black text-[10px] uppercase">1Y</button>
-<button class="px-3 py-1 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase">5Y</button>
-<button class="px-3 py-1 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase underline">MAX</button>
-</div>
-</div>
-<div class="h-64 w-full flex items-end gap-1 relative">
-<!-- Abstract Geometric Graph Visualization -->
-<div class="absolute inset-0 bg-surface-container opacity-20 rebel-grid"></div>
-<div class="flex-1 bg-inverse-surface h-[20%] relative group">
-<div class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-tertiary-fixed text-inverse-surface text-[10px] font-black px-2 py-1 border border-inverse-surface">2024</div>
-</div>
-<div class="flex-1 bg-inverse-surface h-[25%]"></div>
-<div class="flex-1 bg-inverse-surface h-[32%]"></div>
-<div class="flex-1 bg-inverse-surface h-[30%]"></div>
-<div class="flex-1 bg-inverse-surface h-[45%]"></div>
-<div class="flex-1 bg-inverse-surface h-[52%]"></div>
-<div class="flex-1 bg-inverse-surface h-[60%]"></div>
-<div class="flex-1 bg-inverse-surface h-[58%]"></div>
-<div class="flex-1 bg-primary-fixed h-[75%] border-x-4 border-inverse-surface relative group">
-<div class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-inverse-surface text-primary-fixed text-[10px] font-black px-2 py-1 border border-primary-fixed w-max">2032 FREEDOM</div>
-</div>
-<div class="flex-1 bg-primary-fixed h-[85%] border-x-4 border-inverse-surface"></div>
-<div class="flex-1 bg-primary-fixed h-[95%] border-x-4 border-inverse-surface"></div>
-<div class="flex-1 bg-primary-fixed h-[100%] border-x-4 border-inverse-surface"></div>
-</div>
-<div class="absolute bottom-8 right-8 border-l-4 border-b-4 border-primary-fixed p-4 bg-inverse-surface text-surface">
-<p class="font-headline font-black text-3xl">+$1.2M</p>
-<p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-primary-fixed">ESTIMATED TERMINAL VALUE</p>
-</div>
-</div>
-</div>
-</main>
-</div>
-<!-- Footer -->
-<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
-<div class="flex flex-col gap-2">
-<span class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL REBEL</span>
-<p class="font-Lexend font-black uppercase text-[10px] tracking-[0.3em] text-[#f6f6f6]">©2024 DIGITAL REBEL. NO PERMISSION GRANTED.</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8">
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="index.html">Home</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="settings_digital_rebel_desktop.html">Settings</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="learn_digital_rebel_desktop.html">Learn</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="upgrade_digital_rebel_desktop.html">Upgrade</a>
-</div>
-</footer>
 
-    <!-- Supabase + Futura Auth -->
+<body class="bg-surface font-body text-on-surface rebel-grid min-h-screen">
+    <!-- TopNavBar -->
+    <nav
+        class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+        <div class="flex items-center gap-8">
+            <span
+                class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">Digital
+                Rebel</span>
+            <div class="hidden md:flex gap-6">
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#121212] dark:text-[#cafd00] border-b-4 border-[#cafd00]"
+                    href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
+                    href="market_digital_rebel_desktop.html">Markets</a>
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
+                    href="assets_digital_rebel_desktop.html">Assets</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden lg:flex relative">
+                <input
+                    class="bg-surface-container border-2 border-inverse-surface px-4 py-1 font-headline font-bold text-xs uppercase tracking-widest focus:ring-0 focus:border-primary-fixed outline-none"
+                    placeholder="SEARCH_VAULT..." type="text" />
+            </div>
+            <span
+                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all">notifications</span>
+            <a href="settings_digital_rebel_desktop.html"
+                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all inline-flex items-center justify-center">settings</a>
+            <button
+                class="bg-primary-fixed text-inverse-surface border-2 border-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-tighter neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">Connect
+                Wallet</button>
+        </div>
+    </nav>
+    <div class="flex h-full">
+        <!-- SideNavBar -->
+        <aside
+            class="fixed left-0 top-0 h-full w-64 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] hidden lg:flex z-40">
+            <div class="px-6 mb-8 flex items-center gap-3">
+                <div
+                    class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden">
+                    <img alt="Rebel_01" class="w-full h-full object-cover"
+                        data-alt="Cyberpunk style profile avatar with neon accents and high contrast lighting in a brutalist frame"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+                </div>
+                <div>
+                    <h3 id="user-name" class="font-Lexend font-black uppercase tracking-widest text-xs">Rebel_01</h3>
+                    <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-tertiary">Elite Tier</p>
+                </div>
+            </div>
+            <nav class="flex-1 space-y-1">
+                <a class="flex items-center gap-4 py-3 px-6 bg-[#cafd00] text-[#121212] border-2 border-[#121212] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs active:scale-95 transition-all"
+                    href="dashboard_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">grid_view</span> Overview
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="projections_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">trending_up</span> Projections
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="transactions.html">
+                    <span class="material-symbols-outlined">swap_horiz</span> Transactions
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="cards_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">credit_card</span> Cards
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">bolt</span> Staking
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="settings_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">help_outline</span> Support
+                </a>
+            </nav>
+            <div class="p-4 border-t-2 border-inverse-surface mt-auto">
+                <a href="upgrade_digital_rebel_desktop.html"
+                    class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
+                    Power</a>
+                <a class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
+                    href="#">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+        <!-- Main Content Canvas -->
+        <main class="lg:ml-64 flex-1 p-6 md:p-10">
+            <!-- Hero Header Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                <div
+                    class="md:col-span-2 flex flex-col justify-end bg-inverse-surface text-surface p-8 neo-shadow-large relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4">
+                        <span
+                            class="bg-primary-fixed text-inverse-surface px-3 py-1 font-headline font-black text-xs uppercase tracking-tighter -rotate-2 inline-block border border-inverse-surface">SYSTEM_LIVE</span>
+                    </div>
+                    <h1 class="font-headline font-black text-6xl uppercase tracking-tighter leading-none mb-4">
+                        REBEL_DASHBOARD</h1>
+                    <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory. You are
+                        currently operating at <span class="text-primary-fixed font-bold">142% efficiency</span>
+                        compared to last cycle.</p>
+                </div>
+                <!-- Gamification Badge -->
+                <div
+                    class="bg-tertiary-container border-4 border-inverse-surface p-6 neo-shadow flex flex-col items-center justify-center text-center rotate-1">
+                    <span class="material-symbols-outlined text-6xl mb-2"
+                        style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                    <h2 class="font-headline font-black text-4xl uppercase tracking-tight">42-DAY</h2>
+                    <p class="font-headline font-bold uppercase tracking-widest text-sm">Saving Streak</p>
+                    <div
+                        class="mt-4 bg-inverse-surface text-surface px-4 py-1 font-headline font-black text-xs uppercase italic">
+                        UNSTOPPABLE</div>
+                </div>
+            </div>
+            <!-- Bento Grid Content -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Portfolio Goal / Progress Bar -->
+                <div class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow">
+                    <div class="flex justify-between items-end mb-6">
+                        <div>
+                            <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Freedom Age Target
+                            </h3>
+                            <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Current
+                                Project: 42 Years Old</p>
+                        </div>
+                        <div class="text-right">
+                            <span id="freedom-percent" class="font-headline font-black text-4xl text-primary">0%</span>
+                        </div>
+                    </div>
+                    <div
+                        class="w-full h-12 bg-surface-container border-2 border-inverse-surface relative overflow-hidden">
+                        <div class="h-full bg-primary-fixed border-r-4 border-inverse-surface" style="width: 68%;">
+                        </div>
+                        <div
+                            class="absolute inset-0 flex items-center justify-between px-4 mix-blend-difference text-surface font-headline font-black uppercase text-xs tracking-widest">
+                            <span>SURVIVAL</span>
+                            <span>FREEDOM</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 grid grid-cols-3 gap-4">
+                        <div class="p-4 border-2 border-inverse-surface bg-surface">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Staked
+                            </p>
+                            <p id="staked-amount" class="font-headline font-black text-xl">$0</p>
+                        </div>
+                        <div class="p-4 border-2 border-inverse-surface bg-surface">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Liquid
+                            </p>
+                            <p id="liquid-amount" class="font-headline font-black text-xl">$0</p>
+                        </div>
+                        <div class="p-4 border-2 border-inverse-surface bg-surface">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Required
+                                SIP
+                            </p>
+                            <p id="required-amount" class="font-headline font-black text-xl">$0</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Contributions -->
+                <div class="md:col-span-4 bg-surface-container-high border-2 border-inverse-surface p-6 neo-shadow">
+                    <h3
+                        class="font-headline font-black text-xl uppercase tracking-tight mb-4 border-b-2 border-inverse-surface pb-2">
+                        Recent Flow</h3>
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="material-symbols-outlined text-primary-fixed bg-inverse-surface p-1">north_east</span>
+                                <div>
+                                    <p class="font-headline font-black text-xs uppercase">Vault Deposit</p>
+                                    <p class="text-[10px] text-on-surface-variant">OCT 24, 2024</p>
+                                </div>
+                            </div>
+                            <span class="font-headline font-black text-sm">+$2,400</span>
+                        </div>
+                        <div
+                            class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-tertiary bg-inverse-surface p-1">bolt</span>
+                                <div>
+                                    <p class="font-headline font-black text-xs uppercase">Yield Harvest</p>
+                                    <p class="text-[10px] text-on-surface-variant">OCT 22, 2024</p>
+                                </div>
+                            </div>
+                            <span class="font-headline font-black text-sm">+$412</span>
+                        </div>
+                        <div
+                            class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <span
+                                    class="material-symbols-outlined text-primary-fixed bg-inverse-surface p-1">north_east</span>
+                                <div>
+                                    <p class="font-headline font-black text-xs uppercase">Automated Buy</p>
+                                    <p class="text-[10px] text-on-surface-variant">OCT 20, 2024</p>
+                                </div>
+                            </div>
+                            <span class="font-headline font-black text-sm">+$1,500</span>
+                        </div>
+                    </div>
+                    <button
+                        class="w-full mt-6 py-2 border-2 border-inverse-surface font-headline font-bold uppercase text-[10px] tracking-widest hover:bg-inverse-surface hover:text-surface transition-colors">View
+                        All Streams</button>
+                </div>
+                <!-- Summary Projection Graph Placeholder -->
+                <div
+                    class="md:col-span-12 bg-surface border-2 border-inverse-surface p-8 neo-shadow relative overflow-hidden">
+                    <div class="flex justify-between items-start mb-10">
+                        <div>
+                            <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Wealth Projection
+                            </h3>
+                            <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Scenario:
+                                Hyper-Growth Mode (Alpha)</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button
+                                class="px-3 py-1 bg-primary-fixed border-2 border-inverse-surface font-headline font-black text-[10px] uppercase">1Y</button>
+                            <button
+                                class="px-3 py-1 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase">5Y</button>
+                            <button
+                                class="px-3 py-1 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase underline">MAX</button>
+                        </div>
+                    </div>
+                    <div class="h-64 w-full flex items-end gap-1 relative">
+                        <!-- Abstract Geometric Graph Visualization -->
+                        <div class="absolute inset-0 bg-surface-container opacity-20 rebel-grid"></div>
+                        <div class="flex-1 bg-inverse-surface h-[20%] relative group">
+                            <div
+                                class="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-tertiary-fixed text-inverse-surface text-[10px] font-black px-2 py-1 border border-inverse-surface">
+                                2024</div>
+                        </div>
+                        <div class="flex-1 bg-inverse-surface h-[25%]"></div>
+                        <div class="flex-1 bg-inverse-surface h-[32%]"></div>
+                        <div class="flex-1 bg-inverse-surface h-[30%]"></div>
+                        <div class="flex-1 bg-inverse-surface h-[45%]"></div>
+                        <div class="flex-1 bg-inverse-surface h-[52%]"></div>
+                        <div class="flex-1 bg-inverse-surface h-[60%]"></div>
+                        <div class="flex-1 bg-inverse-surface h-[58%]"></div>
+                        <div class="flex-1 bg-primary-fixed h-[75%] border-x-4 border-inverse-surface relative group">
+                            <div
+                                class="absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-inverse-surface text-primary-fixed text-[10px] font-black px-2 py-1 border border-primary-fixed w-max">
+                                2032 FREEDOM</div>
+                        </div>
+                        <div class="flex-1 bg-primary-fixed h-[85%] border-x-4 border-inverse-surface"></div>
+                        <div class="flex-1 bg-primary-fixed h-[95%] border-x-4 border-inverse-surface"></div>
+                        <div class="flex-1 bg-primary-fixed h-[100%] border-x-4 border-inverse-surface"></div>
+                    </div>
+                    <div
+                        class="absolute bottom-8 right-8 border-l-4 border-b-4 border-primary-fixed p-4 bg-inverse-surface text-surface">
+                        <p id="terminal-value" class="font-headline font-black text-3xl">+$0</p>
+                        <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-primary-fixed">
+                            ESTIMATED TERMINAL VALUE</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Footer -->
+    <footer
+        class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
+        <div class="flex flex-col gap-2">
+            <span class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL
+                REBEL</span>
+            <p class="font-Lexend font-black uppercase text-[10px] tracking-[0.3em] text-[#f6f6f6]">©2024 DIGITAL REBEL.
+                NO PERMISSION GRANTED.</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8">
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="landing_digital_rebel_desktop.html">Home</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="settings_digital_rebel_desktop.html">Settings</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="learn_digital_rebel_desktop.html">Learn</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="checkout_digital_rebel_desktop.html">Checkout</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="assets_digital_rebel_desktop.html">Assets</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="market_digital_rebel_desktop.html">Market</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="transactions.html">Transactions</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="cards_digital_rebel_desktop.html">Cards</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="add_card_digital_rebel.html">Add Card</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="add_manual_asset_digital_rebel.html">Add Asset</a>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="/js/config.js"></script>
     <script src="/js/auth.js"></script>
     <script src="/js/api.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            // Protect page
-            const session = await requireAuth();
-            if (!session) return;
-
-            // Load Profile Data
             try {
-                const { data: profile, error } = await getSupabase()
-                    .from('profiles')
-                    .select('*')
-                    .eq('id', session.user.id)
-                    .single();
+                // 1. Enforce Auth
+                const session = await requireAuth();
+                if (!session) return;
 
-                if (error) throw error;
+                const email = session.user.email;
+                const userNameEl = document.getElementById('user-name');
+                if (userNameEl) userNameEl.textContent = email.split('@')[0];
 
-                if (profile) {
-                    // Update UI
-                    document.getElementById('user-display-name').textContent = (session.user.email?.split('@')[0] || 'REBEL').toUpperCase();
-                    document.getElementById('zens-balance').textContent = (profile.zens || 0) + ' ZENS';
-                    document.getElementById('retirement-status').textContent = `Current Project: ${profile.retirement_age} Years Old`;
-                    document.getElementById('display-income').textContent = `$${profile.monthly_income?.toLocaleString()}`;
-                    document.getElementById('display-age').textContent = profile.age;
-                    document.getElementById('display-retirement').textContent = profile.retirement_age;
+                // 2. Fetch Profile & Goals
+                const goalsResult = await futuraApi.goals.get();
+                const goal = goalsResult.goal;
 
-                    // Simple progress calculation (age vs retirement age vs some arbitrary goal)
-                    const yearsLeft = profile.retirement_age - profile.age;
-                    const progress = Math.min(100, Math.max(0, (profile.age / profile.retirement_age) * 100));
-                    document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
-                    document.getElementById('progress-bar').style.width = progress + '%';
+                if (!goal) {
+                    // Redirect to onboarding if they skipped it somehow
+                    window.location.href = 'onboarding_step_1_age.html';
+                    return;
                 }
+
+                // 3. Execution Projection logic
+                const projectionPayload = {
+                    currentAge: goal.current_age || 25,
+                    retirementAge: goal.retirement_age || 65,
+                    monthlyIncome: goal.target_monthly_income || 50000,
+                    monthlyExpense: (goal.target_monthly_income || 50000) * 0.6,
+                    currentSavings: 0,
+                    monthlyInvestment: (goal.target_monthly_income || 50000) * 0.2,
+                    inflationRate: 0.06,
+                    returnRate: goal.annual_return_rate ?? 0.12,
+                    simulations: 2000
+                };
+
+                const projectionRes = await futuraApi.projection.calculate(projectionPayload);
+                const data = projectionRes.result;
+
+                // 4. Bind resulting data to charts/progress bars
+                if (data) {
+                    const requiredAmountEl = document.getElementById('required-amount');
+                    if (requiredAmountEl) requiredAmountEl.textContent = '$' + Math.round(data.requiredMonthlyInvestment || 0).toLocaleString();
+
+                    const terminalValueEl = document.getElementById('terminal-value');
+                    if (terminalValueEl && data.futureSavings) terminalValueEl.textContent = '+$' + (data.futureSavings / 1000000).toFixed(1) + 'M';
+
+                    const freedomPercentEl = document.getElementById('freedom-percent');
+                    if (freedomPercentEl) freedomPercentEl.textContent = Math.round(data.probability || 0) + '%';
+
+                    // Update visual width of the freedom bar realistically instead of hardcoded 68%
+                    const probBar = document.querySelector('.bg-primary-fixed.border-r-4.border-inverse-surface[style*="width"]');
+                    if (probBar) probBar.style.width = Math.round(data.probability || 0) + '%';
+                }
+
             } catch (err) {
-                console.error('Error loading dashboard data:', err);
+                console.error("Dashboard Load Error:", err);
             }
         });
     </script>
-</body></html>
->
+</body>
+
+</html>

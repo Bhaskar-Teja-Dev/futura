@@ -53,21 +53,35 @@ export default function UpgradePage() {
   }
 
   return (
-    <main>
-      <h1>Upgrade to Futura Pro</h1>
+  return (
+    <main style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+      <h1 style={{ textAlign: 'center', marginBottom: '2rem' }}>Upgrade to Futura Pro</h1>
 
-      <div className="card">
-        <h2>Your Balance</h2>
-        <p>{zens !== null ? `${zens} Zens` : 'Loading...'}</p>
-        {isPro && <p><strong>✅ Pro is active</strong></p>}
+      <div style={{ padding: '1.5rem', border: '1px solid #eaeaea', borderRadius: '8px', marginBottom: '1.5rem', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+        <h2 style={{ marginTop: 0 }}>Your Balance</h2>
+        <p style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
+          {zens !== null ? `🪙 ${zens} Zens` : 'Loading...'}
+        </p>
+        {isPro && <p style={{ color: 'green', fontWeight: 'bold' }}>✅ Pro is active</p>}
       </div>
 
-      <div className="card">
-        <h2>Unlock Pro — 500 Zens for 30 Days</h2>
+      <div style={{ padding: '1.5rem', border: '1px solid #eaeaea', borderRadius: '8px', marginBottom: '1.5rem', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+        <h2 style={{ marginTop: 0 }}>Unlock Pro — 500 Zens for 30 Days</h2>
+        <p style={{ color: '#666', marginBottom: '1rem' }}>Get access to advanced projection scenarios and custom allocations.</p>
         <button
           type="button"
           onClick={handlePurchasePro}
           disabled={purchasing || isPro || (zens !== null && zens < 500)}
+          style={{
+            padding: '0.75rem 1.5rem',
+            backgroundColor: isPro || (zens !== null && zens < 500) ? '#ccc' : '#6366f1',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: isPro || (zens !== null && zens < 500) ? 'not-allowed' : 'pointer',
+            fontWeight: 'bold',
+            width: '100%'
+          }}
         >
           {isPro
             ? 'Already Pro'
@@ -77,11 +91,16 @@ export default function UpgradePage() {
                 ? 'Processing...'
                 : 'Unlock Pro (500 Zens)'}
         </button>
-        {message ? <p>{message}</p> : null}
+        {message && (
+          <p style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: '#f0fdf4', color: '#166534', borderRadius: '4px', textAlign: 'center' }}>
+            {message}
+          </p>
+        )}
       </div>
 
-      <div className="card">
-        <h2>Buy Zens</h2>
+      <div style={{ padding: '1.5rem', border: '1px solid #eaeaea', borderRadius: '8px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)' }}>
+        <h2 style={{ marginTop: 0 }}>Buy Zens</h2>
+        <p style={{ color: '#666', marginBottom: '1rem' }}>Need more Zens? Top up your balance securely via Razorpay.</p>
         <PaywallModal onSuccess={(newBalance) => setZens(newBalance)} />
       </div>
     </main>

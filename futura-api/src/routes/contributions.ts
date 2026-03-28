@@ -74,34 +74,41 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     .eq('user_id', userId)
     .maybeSingle()
 
+  // If the incoming date is older than (or same as) the recorded last date,
+  // skip the streak update entirely — back-dated contributions must not reset
+  // or alter an already-established streak.
+  let streakToReturn = streakRow?.current_streak ?? 0
+
+  if (streakRow?.last_contribution_date) {
+    const lastMs = new Date(`${streakRow.last_contribution_date}T00:00:00Z`).getTime()
+    const incomingMs = new Date(`${body.contribution_date}T00:00:00Z`).getTime()
+
+    if (incomingMs <= lastMs) {
+      // Back-dated or duplicate-dated entry — do not touch the streak row
+      return c.json({ contribution: data, streak: streakToReturn }, 201)
+    }
+  }
+
   const nextCurrent = calculateStreak(
     streakRow?.last_contribution_date ?? null,
     streakRow?.current_streak ?? 0,
     body.contribution_date
   )
   const nextLongest = Math.max(nextCurrent, streakRow?.longest_streak ?? 0)
-
-  let nextLastDate = body.contribution_date
-  if (streakRow?.last_contribution_date) {
-    const last = new Date(`${streakRow.last_contribution_date}T00:00:00Z`)
-    const current = new Date(`${body.contribution_date}T00:00:00Z`)
-    if (current.getTime() < last.getTime()) {
-      nextLastDate = streakRow.last_contribution_date
-    }
-  }
+  streakToReturn = nextCurrent
 
   await supabase.from('streaks').upsert(
     {
       user_id: userId,
       current_streak: nextCurrent,
       longest_streak: nextLongest,
-      last_contribution_date: nextLastDate,
+      last_contribution_date: body.contribution_date,
       updated_at: new Date().toISOString()
     },
     { onConflict: 'user_id' }
   )
 
-  return c.json({ contribution: data, streak: nextCurrent }, 201)
+  return c.json({ contribution: data, streak: streakToReturn }, 201)
 })
 
 export { router as contributionsRouter }

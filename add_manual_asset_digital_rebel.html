@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>REBEL_FIN | ADD_ASSET</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>REBEL_FIN | ADD_ASSET</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -48,180 +56,306 @@
             },
         }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .neo-shadow {
-            box-shadow: 8px 8px 0px 0px rgba(0,0,0,1);
+            box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
         }
+
         .neo-shadow-sm {
-            box-shadow: 4px 4px 0px 0px rgba(0,0,0,1);
+            box-shadow: 4px 4px 0px 0px rgba(0, 0, 0, 1);
         }
+
         .neo-shadow-active {
-            box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+            box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
             transform: translate(2px, 2px);
         }
     </style>
 </head>
+
 <body class="bg-background font-body text-on-surface">
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-black">
-<div class="flex items-center gap-8">
-<span class="text-2xl font-black italic tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">REBEL_FIN</span>
-<nav class="hidden md:flex gap-6 h-full items-center">
-<a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all" href="dashboard_digital_rebel_desktop.html">DASHBOARD</a>
-<a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all" href="market_digital_rebel_desktop.html">MARKETS</a>
-<a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all" href="assets_digital_rebel_desktop.html">ASSETS</a>
-</nav>
-</div>
-<div class="flex items-center gap-4">
-<div class="relative hidden lg:block">
-<input class="bg-white border-2 border-black px-4 py-1 font-headline font-bold text-sm w-64 focus:outline-none focus:ring-0" placeholder="SEARCH_VAULT" type="text"/>
-<span class="material-symbols-outlined absolute right-2 top-1.5">search</span>
-</div>
-<span class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-black transition-all">notifications</span>
-<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-black transition-all inline-flex items-center justify-center">settings</a>
-<div class="w-10 h-10 border-2 border-black bg-white overflow-hidden">
-<img alt="User profile" data-alt="close up headshot of a person with a minimalist streetwear style, high contrast urban photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTJTOtLrs1W3Ug9Bn-6ExKP2gk3TAwvNl06aHjTIGrfIQg8bs93gC4qS9E_f2vJ1cVhmFXgPHdmJzmvhiMtxRahcmqdXUFyeTxlhx53f4NGdsu0-FA5-VFwNB-8NVnFz1aLEAejwZId9BnRa0bCJAXsWIo5OeJ_C2BaKVyGKevK42xZ87KulYGAF_0zPUmCaNBxumAcX3Kvx2hnfCl02n324XC6s1_SmX1JUh51gJsUMBL_QXfA-cyC9z77kgQixL2BLAKSg00225h"/>
-</div>
-</div>
-</header>
-<!-- SideNavBar (Hidden) -->
-<!-- Main Content -->
-<main class="pt-24 px-8 pb-12">
-<div class="max-w-6xl mx-auto">
-<header class="mb-12">
-<h1 class="text-6xl font-black font-headline uppercase tracking-tighter mb-2">MANUAL_ASSET_ENTRY</h1>
-<p class="text-xl font-bold font-headline bg-black text-white inline-block px-4 py-1 italic uppercase">Tracking the Unconventional</p>
-</header>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-<!-- Entry Form -->
-<section class="lg:col-span-7 bg-white border-4 border-black p-8 neo-shadow">
-<h2 class="text-2xl font-black font-headline uppercase mb-8 flex items-center gap-2">
-<span class="material-symbols-outlined bg-primary-fixed p-1 border-2 border-black">add_box</span>
+    <!-- TopNavBar -->
+    <header
+        class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-black">
+        <div class="flex items-center gap-8">
+            <span
+                class="text-2xl font-black italic tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">REBEL_FIN</span>
+            <nav class="hidden md:flex gap-6 h-full items-center">
+                <a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all"
+                    href="dashboard_digital_rebel_desktop.html">DASHBOARD</a>
+                <a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all"
+                    href="market_digital_rebel_desktop.html">MARKETS</a>
+                <a class="font-headline font-black uppercase tracking-tighter text-[#767777] hover:bg-[#cafd00] hover:text-black px-2 py-1 transition-all"
+                    href="assets_digital_rebel_desktop.html">ASSETS</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="relative hidden lg:block">
+                <input
+                    class="bg-white border-2 border-black px-4 py-1 font-headline font-bold text-sm w-64 focus:outline-none focus:ring-0"
+                    placeholder="SEARCH_VAULT" type="text" />
+                <span class="material-symbols-outlined absolute right-2 top-1.5">search</span>
+            </div>
+            <span
+                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-black transition-all">notifications</span>
+            <a href="settings_digital_rebel_desktop.html"
+                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-black transition-all inline-flex items-center justify-center">settings</a>
+            <div class="w-10 h-10 border-2 border-black bg-white overflow-hidden">
+                <img alt="User profile"
+                    data-alt="close up headshot of a person with a minimalist streetwear style, high contrast urban photography"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTJTOtLrs1W3Ug9Bn-6ExKP2gk3TAwvNl06aHjTIGrfIQg8bs93gC4qS9E_f2vJ1cVhmFXgPHdmJzmvhiMtxRahcmqdXUFyeTxlhx53f4NGdsu0-FA5-VFwNB-8NVnFz1aLEAejwZId9BnRa0bCJAXsWIo5OeJ_C2BaKVyGKevK42xZ87KulYGAF_0zPUmCaNBxumAcX3Kvx2hnfCl02n324XC6s1_SmX1JUh51gJsUMBL_QXfA-cyC9z77kgQixL2BLAKSg00225h" />
+            </div>
+        </div>
+    </header>
+    <!-- SideNavBar (Hidden) -->
+    <!-- Main Content -->
+    <main class="pt-24 px-8 pb-12">
+        <div class="max-w-6xl mx-auto">
+            <header class="mb-12">
+                <h1 class="text-6xl font-black font-headline uppercase tracking-tighter mb-2">MANUAL_ASSET_ENTRY</h1>
+                <p class="text-xl font-bold font-headline bg-black text-white inline-block px-4 py-1 italic uppercase">
+                    Tracking the Unconventional</p>
+            </header>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Entry Form -->
+                <section class="lg:col-span-7 bg-white border-4 border-black p-8 neo-shadow">
+                    <h2 class="text-2xl font-black font-headline uppercase mb-8 flex items-center gap-2">
+                        <span
+                            class="material-symbols-outlined bg-primary-fixed p-1 border-2 border-black">add_box</span>
                         Define Your Asset
                     </h2>
-<form class="space-y-8">
-<div class="space-y-2">
-<label class="block font-headline font-black uppercase text-sm tracking-widest">Asset Name</label>
-<input class="w-full border-2 border-black p-4 font-headline font-bold text-lg focus:bg-surface-container-high focus:border-[3px] outline-none transition-all" placeholder="e.g., ROLEX SUBMARINER 1968" type="text"/>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-<div class="space-y-2">
-<label class="block font-headline font-black uppercase text-sm tracking-widest">Asset Type</label>
-<select class="w-full border-2 border-black p-4 font-headline font-bold text-lg bg-white appearance-none cursor-pointer focus:bg-surface-container-high focus:border-[3px] outline-none transition-all">
-<option>PHYSICAL_GOODS</option>
-<option>COLLECTIBLES</option>
-<option>CRYPTO_OFF_CHAIN</option>
-<option>FINE_ART</option>
-</select>
-</div>
-<div class="space-y-2">
-<label class="block font-headline font-black uppercase text-sm tracking-widest">Date of Acquisition</label>
-<input class="w-full border-2 border-black p-4 font-headline font-bold text-lg focus:bg-surface-container-high focus:border-[3px] outline-none transition-all" type="date"/>
-</div>
-</div>
-<div class="space-y-2">
-<label class="block font-headline font-black uppercase text-sm tracking-widest">Estimated Value (USD)</label>
-<div class="relative">
-<span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-black text-2xl">$</span>
-<input class="w-full border-2 border-black p-4 pl-10 font-headline font-black text-4xl text-primary focus:bg-surface-container-high focus:border-[3px] outline-none transition-all tracking-tighter" placeholder="0.00" type="number"/>
-</div>
-</div>
-<div class="pt-4">
-<button class="w-full md:w-auto bg-primary-fixed border-4 border-black px-12 py-5 font-headline font-black text-2xl uppercase tracking-tighter neo-shadow-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-3" type="submit">
+                    <form id="add-asset-form" class="space-y-8">
+                        <div class="space-y-2">
+                            <label class="block font-headline font-black uppercase text-sm tracking-widest">Asset
+                                Name</label>
+                            <input id="asset-name"
+                                class="w-full border-2 border-black p-4 font-headline font-bold text-lg focus:bg-surface-container-high focus:border-[3px] outline-none transition-all"
+                                placeholder="e.g., ROLEX SUBMARINER 1968" type="text" />
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-2">
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest">Asset
+                                    Type</label>
+                                <select id="asset-type"
+                                    class="w-full border-2 border-black p-4 font-headline font-bold text-lg bg-white appearance-none cursor-pointer focus:bg-surface-container-high focus:border-[3px] outline-none transition-all">
+                                    <option>PHYSICAL_GOODS</option>
+                                    <option>COLLECTIBLES</option>
+                                    <option>CRYPTO_OFF_CHAIN</option>
+                                    <option>FINE_ART</option>
+                                </select>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest">Date of
+                                    Acquisition</label>
+                                <input id="asset-date"
+                                    class="w-full border-2 border-black p-4 font-headline font-bold text-lg focus:bg-surface-container-high focus:border-[3px] outline-none transition-all"
+                                    type="date" />
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block font-headline font-black uppercase text-sm tracking-widest">Estimated
+                                Value (USD)</label>
+                            <div class="relative">
+                                <span
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-black text-2xl">$</span>
+                                <input id="asset-value"
+                                    class="w-full border-2 border-black p-4 pl-10 font-headline font-black text-4xl text-primary focus:bg-surface-container-high focus:border-[3px] outline-none transition-all tracking-tighter"
+                                    placeholder="0.00" type="number" />
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <button id="btn-submit"
+                                class="w-full md:w-auto bg-primary-fixed border-4 border-black px-12 py-5 font-headline font-black text-2xl uppercase tracking-tighter neo-shadow-sm hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-3"
+                                type="submit">
                                 SECURE_ENTRY
                                 <span class="material-symbols-outlined font-black">arrow_forward</span>
-</button>
-</div>
-</form>
-</section>
-<!-- Preview Column -->
-<section class="lg:col-span-5 space-y-8">
-<!-- Warchest Preview Card -->
-<div class="bg-inverse-surface border-4 border-black p-8 text-white relative overflow-hidden neo-shadow group">
-<!-- Decorative background texture -->
-<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#cafd00 1px, transparent 1px); background-size: 10px 10px;"></div>
-<div class="relative z-10">
-<div class="flex justify-between items-start mb-12">
-<div class="bg-primary-fixed text-black px-3 py-1 font-headline font-black text-xs uppercase -rotate-2 border-2 border-black">
+                            </button>
+                        </div>
+                    </form>
+                </section>
+                <!-- Preview Column -->
+                <section class="lg:col-span-5 space-y-8">
+                    <!-- Warchest Preview Card -->
+                    <div
+                        class="bg-inverse-surface border-4 border-black p-8 text-white relative overflow-hidden neo-shadow group">
+                        <!-- Decorative background texture -->
+                        <div class="absolute inset-0 opacity-10 pointer-events-none"
+                            style="background-image: radial-gradient(#cafd00 1px, transparent 1px); background-size: 10px 10px;">
+                        </div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-12">
+                                <div
+                                    class="bg-primary-fixed text-black px-3 py-1 font-headline font-black text-xs uppercase -rotate-2 border-2 border-black">
                                     WARCHEST_ENTRY
                                 </div>
-<span class="material-symbols-outlined text-primary-fixed text-4xl">security</span>
-</div>
-<div class="space-y-4 mb-12">
-<h3 class="text-4xl font-headline font-black tracking-tighter leading-none">PREVIEW_ASSET</h3>
-<p class="font-headline font-bold text-outline uppercase tracking-widest text-sm">Awaiting Final Secure...</p>
-</div>
-<div class="grid grid-cols-2 gap-4 border-t-2 border-outline pt-6">
-<div>
-<p class="text-[10px] font-headline font-black text-outline uppercase">VALUATION</p>
-<p class="text-2xl font-headline font-black text-primary-fixed tracking-tight">$0.00</p>
-</div>
-<div>
-<p class="text-[10px] font-headline font-black text-outline uppercase">RISK_LEVEL</p>
-<p class="text-2xl font-headline font-black tracking-tight">LOW_MOD</p>
-</div>
-</div>
-</div>
-<!-- Floating Sticker Badge -->
-<div class="absolute -right-6 -bottom-6 bg-tertiary-container text-on-tertiary-container border-2 border-black p-8 font-headline font-black text-sm uppercase rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                                <span class="material-symbols-outlined text-primary-fixed text-4xl">security</span>
+                            </div>
+                            <div class="space-y-4 mb-12">
+                                <h3 id="preview-name"
+                                    class="text-4xl font-headline font-black tracking-tighter leading-none">
+                                    PREVIEW_ASSET</h3>
+                                <p id="preview-type"
+                                    class="font-headline font-bold text-outline uppercase tracking-widest text-sm">
+                                    Awaiting Final Secure...</p>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 border-t-2 border-outline pt-6">
+                                <div>
+                                    <p class="text-[10px] font-headline font-black text-outline uppercase">VALUATION</p>
+                                    <p id="preview-value"
+                                        class="text-2xl font-headline font-black text-primary-fixed tracking-tight">
+                                        $0.00</p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-headline font-black text-outline uppercase">RISK_LEVEL
+                                    </p>
+                                    <p class="text-2xl font-headline font-black tracking-tight">LOW_MOD</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Floating Sticker Badge -->
+                        <div
+                            class="absolute -right-6 -bottom-6 bg-tertiary-container text-on-tertiary-container border-2 border-black p-8 font-headline font-black text-sm uppercase rotate-12 group-hover:rotate-0 transition-transform duration-500">
                             RAW_DATA
                         </div>
-</div>
-<!-- Guidelines Card -->
-<div class="bg-surface-container-low border-2 border-black p-6">
-<h4 class="font-headline font-black uppercase text-sm mb-4 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm">info</span> Entry Protocols
+                    </div>
+                    <!-- Guidelines Card -->
+                    <div class="bg-surface-container-low border-2 border-black p-6">
+                        <h4 class="font-headline font-black uppercase text-sm mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">info</span> Entry Protocols
                         </h4>
-<ul class="space-y-3 font-headline font-bold text-xs uppercase tracking-wider text-on-surface-variant">
-<li class="flex items-center gap-2">
-<span class="w-2 h-2 bg-black"></span>
+                        <ul
+                            class="space-y-3 font-headline font-bold text-xs uppercase tracking-wider text-on-surface-variant">
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-black"></span>
                                 Values must be in USD equivalent
                             </li>
-<li class="flex items-center gap-2">
-<span class="w-2 h-2 bg-black"></span>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-black"></span>
                                 Physical assets require proof of origin
                             </li>
-<li class="flex items-center gap-2">
-<span class="w-2 h-2 bg-black"></span>
+                            <li class="flex items-center gap-2">
+                                <span class="w-2 h-2 bg-black"></span>
                                 Quarterly appraisal is recommended
                             </li>
-</ul>
-</div>
-<!-- Asymmetric Graphic Card -->
-<div class="border-2 border-black h-48 relative overflow-hidden bg-primary group">
-<img alt="Asset Illustration" class="w-full h-full object-cover grayscale mix-blend-multiply opacity-50 group-hover:grayscale-0 transition-all duration-700" data-alt="dramatic macro shot of a vintage mechanical watch movement with brass gears and sharp metallic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH6u01Cly6w3IWTuUEuswY-BmgSZhe_1V7LQu6PkiqGdxplJwnEMSiffRNAZsPDby8Y-os7v_McmwutS7TyGCjlx5LCWVbMOf9Z2djoCwRkfvCDi54Zxy8XZPeJZQAGXbkG7o5wLNMNbKRFt5t7CvU6bqdWDTZgB_EUwLcd-0iUc_TtgX2R9qj7W3AHr21e9Sq920EnmY26ARRkEUcwGu2eyuzaYFSbj-aNXkJCvwIkdgIdpprSAbSopIHMebDOEwP-mMB6VQWAsbH"/>
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="border-4 border-black bg-white p-4 font-headline font-black text-xl uppercase -rotate-6 shadow-[8px_8px_0px_0px_#000]">
+                        </ul>
+                    </div>
+                    <!-- Asymmetric Graphic Card -->
+                    <div class="border-2 border-black h-48 relative overflow-hidden bg-primary group">
+                        <img alt="Asset Illustration"
+                            class="w-full h-full object-cover grayscale mix-blend-multiply opacity-50 group-hover:grayscale-0 transition-all duration-700"
+                            data-alt="dramatic macro shot of a vintage mechanical watch movement with brass gears and sharp metallic lighting"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH6u01Cly6w3IWTuUEuswY-BmgSZhe_1V7LQu6PkiqGdxplJwnEMSiffRNAZsPDby8Y-os7v_McmwutS7TyGCjlx5LCWVbMOf9Z2djoCwRkfvCDi54Zxy8XZPeJZQAGXbkG7o5wLNMNbKRFt5t7CvU6bqdWDTZgB_EUwLcd-0iUc_TtgX2R9qj7W3AHr21e9Sq920EnmY26ARRkEUcwGu2eyuzaYFSbj-aNXkJCvwIkdgIdpprSAbSopIHMebDOEwP-mMB6VQWAsbH" />
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div
+                                class="border-4 border-black bg-white p-4 font-headline font-black text-xl uppercase -rotate-6 shadow-[8px_8px_0px_0px_#000]">
                                 VISUAL_VAULT
                             </div>
-</div>
-</div>
-</section>
-</div>
-<!-- Bottom Stats Grid (Bento Style) -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12">
-<div class="md:col-span-2 border-2 border-black p-6 bg-white flex flex-col justify-between h-40 neo-shadow-sm">
-<p class="font-headline font-black uppercase text-xs">Total_Warchest_Power</p>
-<div class="flex items-end justify-between">
-<span class="text-5xl font-headline font-black tracking-tighter">$1.24M</span>
-<span class="text-xs font-black bg-primary-fixed border border-black px-2">+4.2%</span>
-</div>
-</div>
-<div class="border-2 border-black p-6 bg-tertiary-container text-on-tertiary-container h-40 neo-shadow-sm">
-<p class="font-headline font-black uppercase text-xs">Off_Grid_Ratio</p>
-<p class="text-5xl font-headline font-black mt-4">28%</p>
-</div>
-<div class="border-2 border-black p-6 bg-primary-fixed h-40 neo-shadow-sm">
-<p class="font-headline font-black uppercase text-xs">Vault_Integrity</p>
-<div class="flex items-center gap-2 mt-4">
-<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">verified_user</span>
-<span class="text-2xl font-headline font-black">ELITE</span>
-</div>
-</div>
-</div>
-</div>
-</main>
-</body></html>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Bottom Stats Grid (Bento Style) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-12">
+                <div
+                    class="md:col-span-2 border-2 border-black p-6 bg-white flex flex-col justify-between h-40 neo-shadow-sm">
+                    <p class="font-headline font-black uppercase text-xs">Total_Warchest_Power</p>
+                    <div class="flex items-end justify-between">
+                        <span class="text-5xl font-headline font-black tracking-tighter">$1.24M</span>
+                        <span class="text-xs font-black bg-primary-fixed border border-black px-2">+4.2%</span>
+                    </div>
+                </div>
+                <div
+                    class="border-2 border-black p-6 bg-tertiary-container text-on-tertiary-container h-40 neo-shadow-sm">
+                    <p class="font-headline font-black uppercase text-xs">Off_Grid_Ratio</p>
+                    <p class="text-5xl font-headline font-black mt-4">28%</p>
+                </div>
+                <div class="border-2 border-black p-6 bg-primary-fixed h-40 neo-shadow-sm">
+                    <p class="font-headline font-black uppercase text-xs">Vault_Integrity</p>
+                    <div class="flex items-center gap-2 mt-4">
+                        <span class="material-symbols-outlined text-4xl"
+                            style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                        <span class="text-2xl font-headline font-black">ELITE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await requireAuth();
+            if (!session) return;
+
+            const form = document.getElementById('add-asset-form');
+            const nameInput = document.getElementById('asset-name');
+            const typeSelect = document.getElementById('asset-type');
+            const dateInput = document.getElementById('asset-date');
+            const valueInput = document.getElementById('asset-value');
+
+            const prevName = document.getElementById('preview-name');
+            const prevType = document.getElementById('preview-type');
+            const prevValue = document.getElementById('preview-value');
+            const btnSubmit = document.getElementById('btn-submit');
+
+            // Dynamic preview hydration
+            nameInput.addEventListener('input', (e) => prevName.textContent = e.target.value.toUpperCase() || 'PREVIEW_ASSET');
+            typeSelect.addEventListener('change', (e) => prevType.textContent = e.target.value);
+            valueInput.addEventListener('input', (e) => {
+                const val = parseFloat(e.target.value) || 0;
+                prevValue.textContent = '$' + val.toLocaleString('en-US', { minimumFractionDigits: 2 });
+            });
+
+            // Form Submission
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const amount = parseFloat(valueInput.value);
+                if (!amount || amount <= 0) return alert('Enter a valid valuation.');
+
+                const dateStr = dateInput.value;
+                if (!dateStr) return alert('Enter the acquisition date.');
+
+                const note = `[${typeSelect.value}] ${nameInput.value}`;
+
+                try {
+                    btnSubmit.innerHTML = 'UPDATING_LEDGER...';
+                    btnSubmit.style.pointerEvents = 'none';
+
+                    const req = await futuraApi.contributions.create({
+                        amount: amount,
+                        contribution_date: dateStr,
+                        note: note
+                    });
+
+                    if (req.error) throw new Error(req.error);
+
+                    // Success visual cue
+                    prevName.textContent = 'SECURED_ON_CHAIN';
+                    prevName.classList.add('text-primary-fixed');
+                    setTimeout(() => {
+                        window.location.href = 'assets_digital_rebel_desktop.html';
+                    }, 1000);
+
+                } catch (err) {
+                    console.error(err);
+                    alert('Failed to secure asset: ' + err.message);
+                    btnSubmit.innerHTML = 'SECURE_ENTRY <span class="material-symbols-outlined font-black">arrow_forward</span>';
+                    btnSubmit.style.pointerEvents = 'auto';
+                }
+            });
+
+            // Populate user profile info (optional flair)
+            futuraApi.profile.get().then(res => {
+                // You can bind to header profile logic here if generalized
+            });
+        });
+    </script>
+</body>
+
+</html>

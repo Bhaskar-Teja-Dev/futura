@@ -1,232 +1,263 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Onboarding - Step 3</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "on-secondary-fixed": "#403f3f",
-              "on-tertiary-container": "#5b005b",
-              "surface": "#f6f6f6",
-              "on-primary-container": "#4a5e00",
-              "inverse-surface": "#0c0f0f",
-              "surface-bright": "#f6f6f6",
-              "secondary-container": "#e5e2e1",
-              "on-primary-fixed-variant": "#526900",
-              "primary-fixed": "#cafd00",
-              "on-secondary-fixed-variant": "#5c5b5b",
-              "tertiary-fixed-dim": "#ff61f8",
-              "primary-dim": "#435600",
-              "error-dim": "#b92902",
-              "on-primary": "#e1ff88",
-              "outline-variant": "#acadad",
-              "secondary-fixed-dim": "#d7d4d3",
-              "on-error-container": "#520c00",
-              "tertiary-container": "#ff81f5",
-              "error-container": "#f95630",
-              "on-secondary-container": "#525151",
-              "surface-container-low": "#f0f1f1",
-              "surface-container-high": "#e1e3e3",
-              "primary": "#4e6300",
-              "surface-dim": "#d3d5d5",
-              "on-background": "#2d2f2f",
-              "tertiary-dim": "#900090",
-              "on-secondary": "#f5f2f1",
-              "surface-variant": "#dbdddd",
-              "on-error": "#ffefec",
-              "secondary": "#5c5b5b",
-              "on-tertiary-fixed": "#320032",
-              "primary-container": "#cafd00",
-              "tertiary": "#a400a4",
-              "surface-container-highest": "#dbdddd",
-              "inverse-primary": "#cafd00",
-              "secondary-fixed": "#e5e2e1",
-              "on-tertiary-fixed-variant": "#6a006a",
-              "secondary-dim": "#504f4f",
-              "surface-container": "#e7e8e8",
-              "tertiary-fixed": "#ff81f5",
-              "surface-container-lowest": "#ffffff",
-              "on-tertiary": "#ffeef8",
-              "outline": "#767777",
-              "on-surface-variant": "#5a5c5c",
-              "inverse-on-surface": "#9c9d9d",
-              "surface-tint": "#4e6300",
-              "error": "#b02500",
-              "background": "#f6f6f6",
-              "primary-fixed-dim": "#beee00",
-              "on-surface": "#2d2f2f",
-              "on-primary-fixed": "#3a4a00"
-            },
-            fontFamily: {
-              "headline": ["Lexend"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"none": "0px", "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Onboarding - Step 3</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;600;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-secondary-fixed": "#403f3f",
+            "on-tertiary-container": "#5b005b",
+            "surface": "#f6f6f6",
+            "on-primary-container": "#4a5e00",
+            "inverse-surface": "#0c0f0f",
+            "surface-bright": "#f6f6f6",
+            "secondary-container": "#e5e2e1",
+            "on-primary-fixed-variant": "#526900",
+            "primary-fixed": "#cafd00",
+            "on-secondary-fixed-variant": "#5c5b5b",
+            "tertiary-fixed-dim": "#ff61f8",
+            "primary-dim": "#435600",
+            "error-dim": "#b92902",
+            "on-primary": "#e1ff88",
+            "outline-variant": "#acadad",
+            "secondary-fixed-dim": "#d7d4d3",
+            "on-error-container": "#520c00",
+            "tertiary-container": "#ff81f5",
+            "error-container": "#f95630",
+            "on-secondary-container": "#525151",
+            "surface-container-low": "#f0f1f1",
+            "surface-container-high": "#e1e3e3",
+            "primary": "#4e6300",
+            "surface-dim": "#d3d5d5",
+            "on-background": "#2d2f2f",
+            "tertiary-dim": "#900090",
+            "on-secondary": "#f5f2f1",
+            "surface-variant": "#dbdddd",
+            "on-error": "#ffefec",
+            "secondary": "#5c5b5b",
+            "on-tertiary-fixed": "#320032",
+            "primary-container": "#cafd00",
+            "tertiary": "#a400a4",
+            "surface-container-highest": "#dbdddd",
+            "inverse-primary": "#cafd00",
+            "secondary-fixed": "#e5e2e1",
+            "on-tertiary-fixed-variant": "#6a006a",
+            "secondary-dim": "#504f4f",
+            "surface-container": "#e7e8e8",
+            "tertiary-fixed": "#ff81f5",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffeef8",
+            "outline": "#767777",
+            "on-surface-variant": "#5a5c5c",
+            "inverse-on-surface": "#9c9d9d",
+            "surface-tint": "#4e6300",
+            "error": "#b02500",
+            "background": "#f6f6f6",
+            "primary-fixed-dim": "#beee00",
+            "on-surface": "#2d2f2f",
+            "on-primary-fixed": "#3a4a00"
           },
+          fontFamily: {
+            "headline": ["Lexend"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "none": "0px", "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
         },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .neo-shadow {
-            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .active-neo-shadow {
-            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
-            transform: translate(2px, 2px);
-        }
-    </style>
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .neo-shadow {
+      box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .active-neo-shadow {
+      box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+      transform: translate(2px, 2px);
+    }
+  </style>
 </head>
+
 <body class="bg-surface font-body text-on-background min-h-screen flex flex-col">
-<!-- Header / TopAppBar (Suppressed Shell as per Transactional Rule, but using custom minimal branding) -->
-<header class="w-full px-6 py-6 border-b-2 border-inverse-surface flex justify-between items-center bg-surface">
-<span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">
-            Digital Rebel
-        </span>
-<div class="px-3 py-1 bg-primary-container border-2 border-inverse-surface font-headline font-bold text-xs uppercase tracking-widest">
-            Step 3 / 3
+  <!-- Header / TopAppBar (Suppressed Shell as per Transactional Rule, but using custom minimal branding) -->
+  <header class="w-full px-6 py-6 border-b-2 border-inverse-surface flex justify-between items-center bg-surface">
+    <span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">
+      Digital Rebel
+    </span>
+    <div
+      class="px-3 py-1 bg-primary-container border-2 border-inverse-surface font-headline font-bold text-xs uppercase tracking-widest">
+      Step 3 / 3
+    </div>
+  </header>
+  <main class="flex-grow flex items-center justify-center p-6 sm:p-12">
+    <div class="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Content Left -->
+      <div class="lg:col-span-7 space-y-10">
+        <div class="inline-block px-4 py-2 bg-tertiary-fixed border-2 border-inverse-surface rotate-[-1deg]">
+          <span class="font-headline font-black text-lg uppercase tracking-tight text-on-tertiary-fixed">FINAL
+            STEP</span>
         </div>
-</header>
-<main class="flex-grow flex items-center justify-center p-6 sm:p-12">
-<div class="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-<!-- Content Left -->
-<div class="lg:col-span-7 space-y-10">
-<div class="inline-block px-4 py-2 bg-tertiary-fixed border-2 border-inverse-surface rotate-[-1deg]">
-<span class="font-headline font-black text-lg uppercase tracking-tight text-on-tertiary-fixed">FINAL STEP</span>
-</div>
-<h1 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter leading-none text-inverse-surface">
-                    YOUR <span class="text-primary-container bg-inverse-surface px-2">MONTHLY</span> INCOME?
-                </h1>
-<p class="font-body text-xl max-w-lg leading-relaxed text-secondary">
-                    Tell us the fuel for your rebellion. We use your net monthly salary to calculate your freedom timeline. Be honest, be bold.
-                </p>
-<!-- Giant Input Section -->
-<div class="relative group">
-<div class="absolute -top-4 -left-4 px-3 py-1 bg-inverse-surface text-primary-fixed font-headline font-bold text-sm z-10 border-2 border-inverse-surface">
-                        NET MONTHLY SALARY
-                    </div>
-<div class="flex items-center bg-surface-container-lowest border-4 border-inverse-surface neo-shadow p-6 group-focus-within:bg-primary-container transition-colors duration-200">
-<span class="font-headline font-black text-5xl text-inverse-surface mr-4">$</span>
-<input id="income-input" class="w-full bg-transparent border-none focus:ring-0 font-headline font-black text-6xl md:text-8xl p-0 text-inverse-surface placeholder-outline-variant" placeholder="0.00" type="number"/>
-</div>
-</div>
-</div>
-<!-- Visual Column / Bento Style Info -->
-<div class="lg:col-span-5 space-y-6">
-<!-- Progress Container -->
-<div class="bg-surface-container-high border-2 border-inverse-surface p-6">
-<div class="flex justify-between items-end mb-4">
-<span class="font-headline font-black text-sm uppercase tracking-widest">Onboarding Progress</span>
-<span class="font-headline font-black text-3xl">100%</span>
-</div>
-<div class="w-full h-8 bg-surface-container-lowest border-2 border-inverse-surface p-1">
-<div class="h-full bg-primary-container border-r-2 border-inverse-surface" style="width: 100%"></div>
-</div>
-</div>
-<!-- Bento Card: Impact -->
-<div class="bg-primary-container border-2 border-inverse-surface p-6 neo-shadow rotate-[1deg]">
-<div class="flex items-center gap-4 mb-4">
-<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">trending_up</span>
-<h3 class="font-headline font-black text-xl uppercase leading-tight">Income Impact</h3>
-</div>
-<p class="font-body font-semibold">Every dollar recorded accelerates your Rebel Score. Higher transparency leads to sharper financial strategies.</p>
-</div>
-<!-- Abstract Decorative Image (Neo-Brutalist Aesthetic) -->
-<div class="border-2 border-inverse-surface aspect-square overflow-hidden grayscale contrast-125">
-<img alt="Abstract financial patterns" class="w-full h-full object-cover" data-alt="Abstract geometric composition with heavy black lines, stark shadows, and vibrant electric lime highlights against a light grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN5MVZn4EANaOLfODUUSJSg6R8jcX_buAOiAxtFkixZNON1xqehqVxkljpYwopnQpmZYzZe6vDXulo_6asjygU7QPDttU0mEVTvOdpJESq6TYF1S2VcxYuEKjY6CZZGXa5jjysmAOQhlkfgZR6jl_ogiQ2dMps1sy1ZwlQqwvR5HV7rKDlCGDaVxcaoyXQR7_pZ9vz_kObq5esp9fGVgSrHyHTfsuJxAkBLEJIxzYe9K9ZUBlSEhq4ZSoyRaWnd6gBA2a2k5nPPQxQ"/>
-</div>
-</div>
-</div>
-</main>
-<!-- Footer Action Bar -->
-<footer class="w-full p-6 sm:p-12 border-t-2 border-inverse-surface bg-surface flex flex-col md:flex-row justify-between items-center gap-8">
-<div class="flex items-center gap-6">
-<a href="onboarding_step_2_retirement.html" class="font-headline font-black text-sm uppercase tracking-widest text-outline hover:text-inverse-surface transition-colors flex items-center gap-2 group inline-flex">
-<span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
-                Back
-            </a>
-<div class="hidden md:block w-px h-8 bg-outline-variant"></div>
-<p class="hidden md:block font-label text-xs uppercase tracking-tighter text-secondary max-w-xs">
-                By proceeding, you agree to our radical terms of transparency and rebellion.
-            </p>
-</div>
-<!-- The "GO TO DASHBOARD" Button -->
-<a href="#" id="finish-onboarding-btn" class="w-full md:w-auto px-12 py-6 bg-primary-container border-4 border-inverse-surface neo-shadow hover:active-neo-shadow active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-100 flex items-center justify-center gap-4 group inline-flex">
-<span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">
-                GO TO DASHBOARD
-            </span>
-<span class="material-symbols-outlined text-3xl font-bold" data-icon="arrow_forward">arrow_forward</span>
-</a>
-</footer>
+        <h1
+          class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter leading-none text-inverse-surface">
+          YOUR <span class="text-primary-container bg-inverse-surface px-2">MONTHLY</span> INCOME?
+        </h1>
+        <p class="font-body text-xl max-w-lg leading-relaxed text-secondary">
+          Tell us the fuel for your rebellion. We use your net monthly salary to calculate your freedom timeline. Be
+          honest, be bold.
+        </p>
+        <!-- Giant Input Section -->
+        <div class="relative group">
+          <div
+            class="absolute -top-4 -left-4 px-3 py-1 bg-inverse-surface text-primary-fixed font-headline font-bold text-sm z-10 border-2 border-inverse-surface">
+            NET MONTHLY SALARY
+          </div>
+          <div
+            class="flex items-center bg-surface-container-lowest border-4 border-inverse-surface neo-shadow p-6 group-focus-within:bg-primary-container transition-colors duration-200">
+            <span class="font-headline font-black text-5xl text-inverse-surface mr-4">$</span>
+            <input
+              class="w-full bg-transparent border-none focus:ring-0 font-headline font-black text-6xl md:text-8xl p-0 text-inverse-surface placeholder-outline-variant"
+              placeholder="0.00" type="number" />
+          </div>
+        </div>
+      </div>
+      <!-- Visual Column / Bento Style Info -->
+      <div class="lg:col-span-5 space-y-6">
+        <!-- Progress Container -->
+        <div class="bg-surface-container-high border-2 border-inverse-surface p-6">
+          <div class="flex justify-between items-end mb-4">
+            <span class="font-headline font-black text-sm uppercase tracking-widest">Onboarding Progress</span>
+            <span class="font-headline font-black text-3xl">100%</span>
+          </div>
+          <div class="w-full h-8 bg-surface-container-lowest border-2 border-inverse-surface p-1">
+            <div class="h-full bg-primary-container border-r-2 border-inverse-surface" style="width: 100%"></div>
+          </div>
+        </div>
+        <!-- Bento Card: Impact -->
+        <div class="bg-primary-container border-2 border-inverse-surface p-6 neo-shadow rotate-[1deg]">
+          <div class="flex items-center gap-4 mb-4">
+            <span class="material-symbols-outlined text-4xl"
+              style="font-variation-settings: 'FILL' 1;">trending_up</span>
+            <h3 class="font-headline font-black text-xl uppercase leading-tight">Income Impact</h3>
+          </div>
+          <p class="font-body font-semibold">Every dollar recorded accelerates your Rebel Score. Higher transparency
+            leads to sharper financial strategies.</p>
+        </div>
+        <!-- Abstract Decorative Image (Neo-Brutalist Aesthetic) -->
+        <div class="border-2 border-inverse-surface aspect-square overflow-hidden grayscale contrast-125">
+          <img alt="Abstract financial patterns" class="w-full h-full object-cover"
+            data-alt="Abstract geometric composition with heavy black lines, stark shadows, and vibrant electric lime highlights against a light grey background"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN5MVZn4EANaOLfODUUSJSg6R8jcX_buAOiAxtFkixZNON1xqehqVxkljpYwopnQpmZYzZe6vDXulo_6asjygU7QPDttU0mEVTvOdpJESq6TYF1S2VcxYuEKjY6CZZGXa5jjysmAOQhlkfgZR6jl_ogiQ2dMps1sy1ZwlQqwvR5HV7rKDlCGDaVxcaoyXQR7_pZ9vz_kObq5esp9fGVgSrHyHTfsuJxAkBLEJIxzYe9K9ZUBlSEhq4ZSoyRaWnd6gBA2a2k5nPPQxQ" />
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Footer Action Bar -->
+  <footer
+    class="w-full p-6 sm:p-12 border-t-2 border-inverse-surface bg-surface flex flex-col md:flex-row justify-between items-center gap-8">
+    <div class="flex items-center gap-6">
+      <a href="onboarding_step_2_retirement.html"
+        class="font-headline font-black text-sm uppercase tracking-widest text-outline hover:text-inverse-surface transition-colors flex items-center gap-2 group inline-flex">
+        <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+        Back
+      </a>
+      <div class="hidden md:block w-px h-8 bg-outline-variant"></div>
+      <p class="hidden md:block font-label text-xs uppercase tracking-tighter text-secondary max-w-xs">
+        By proceeding, you agree to our radical terms of transparency and rebellion.
+      </p>
+    </div>
+    <!-- The "GO TO DASHBOARD" Button -->
+    <a href="dashboard_digital_rebel_desktop.html"
+      class="w-full md:w-auto px-12 py-6 bg-primary-container border-4 border-inverse-surface neo-shadow hover:active-neo-shadow active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-100 flex items-center justify-center gap-4 group inline-flex">
+      <span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">
+        GO TO DASHBOARD
+      </span>
+      <span class="material-symbols-outlined text-3xl font-bold" data-icon="arrow_forward">arrow_forward</span>
+    </a>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const nextBtn = document.querySelector('a[href="dashboard_digital_rebel_desktop.html"]');
+      // We target the input inside the input section using structural query since it lacked an ID
+      const input = document.querySelector('input[placeholder="0.00"]');
+      if (input) input.id = "income-input";
 
-    <!-- Supabase + Futura Auth -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="/js/config.js"></script>
-    <script src="/js/auth.js"></script>
-    <script src="/js/api.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Protect page
-            const session = await requireAuth();
-            if (!session) return;
+      // Pre-fill
+      const saved = localStorage.getItem('onboarding_data');
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          if (data.target_monthly_income) input.value = data.target_monthly_income;
+        } catch (e) { }
+      }
 
-            const finishBtn = document.getElementById('finish-onboarding-btn');
-            const incomeInput = document.getElementById('income-input');
+      if (nextBtn && input) {
+        nextBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+          if (!input.value) {
+            alert("Submit your wealth fuel metric.");
+            return;
+          }
 
-            if (finishBtn && incomeInput) {
-                finishBtn.addEventListener('click', async (e) => {
-                    e.preventDefault();
-                    const income = incomeInput.value;
-                    if (!income || income <= 0) {
-                        alert('Please enter a valid monthly income.');
-                        return;
-                    }
+          const currentData = JSON.parse(localStorage.getItem('onboarding_data') || '{}');
+          currentData.target_monthly_income = parseInt(input.value, 10);
 
-                    finishBtn.innerHTML = 'SAVING...';
-                    finishBtn.style.opacity = '0.5';
-                    finishBtn.style.pointerEvents = 'none';
+          // Prevent double click
+          if (nextBtn.getAttribute('data-working') === 'true') return;
+          nextBtn.setAttribute('data-working', 'true');
 
-                    const age = localStorage.getItem('onboarding_age');
-                    const retirementAge = localStorage.getItem('onboarding_retirement_age');
+          const originalText = nextBtn.innerHTML;
+          nextBtn.innerHTML = '<span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">SAVING...</span>';
 
-                    try {
-                        const { error } = await getSupabase()
-                            .from('profiles')
-                            .update({
-                                age: parseInt(age),
-                                retirement_age: parseInt(retirementAge),
-                                monthly_income: parseFloat(income)
-                            })
-                            .eq('id', session.user.id);
-
-                        if (error) throw error;
-
-                        // Clear local storage
-                        localStorage.removeItem('onboarding_age');
-                        localStorage.removeItem('onboarding_retirement_age');
-
-                        window.location.href = 'dashboard_digital_rebel_desktop.html';
-                    } catch (err) {
-                        console.error('Submission error:', err);
-                        alert('Submission failed: ' + err.message);
-                        finishBtn.innerHTML = 'GO TO DASHBOARD';
-                        finishBtn.style.opacity = '1';
-                        finishBtn.style.pointerEvents = 'auto';
-                    }
-                });
+          try {
+            // If the profile age didn't exist yet, update it
+            if (currentData.current_age) {
+              await futuraApi.profile.update({ age: currentData.current_age });
             }
+
+            await futuraApi.goals.upsert({
+              current_age: currentData.current_age || 0,
+              retirement_age: currentData.retirement_age || 0,
+              target_monthly_income: currentData.target_monthly_income
+            });
+
+            localStorage.removeItem('onboarding_data');
+            window.location.href = nextBtn.getAttribute('href');
+
+          } catch (err) {
+            alert("Network failure. Rebel system down: " + err.message);
+            nextBtn.innerHTML = originalText;
+            nextBtn.removeAttribute('data-working');
+          }
         });
-    </script>
-</body></html>
+      }
+    });
+  </script>
+</body>
+
+</html>

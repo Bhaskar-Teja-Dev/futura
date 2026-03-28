@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Onboarding - Step 2</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Onboarding - Step 2</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -71,105 +79,177 @@
                         "body": ["Inter"],
                         "label": ["Inter"]
                     },
-                    borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
                 },
             },
         }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .neo-shadow {
             box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
         }
+
         .neo-shadow-lg {
             box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
         }
+
         .active-press:active {
             transform: translate(2px, 2px);
             box-shadow: none;
         }
     </style>
 </head>
+
 <body class="bg-background font-body text-on-surface selection:bg-primary-fixed selection:text-inverse-surface">
-<!-- Header / TopAppBar -->
-<header class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 fixed top-0 border-b-2 border-[#121212] dark:border-[#f6f6f6] z-50">
-<div class="font-['Lexend'] font-black uppercase tracking-tighter text-2xl text-[#121212] dark:text-[#f6f6f6] tracking-[-0.02em]">
+    <!-- Header / TopAppBar -->
+    <header
+        class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 fixed top-0 border-b-2 border-[#121212] dark:border-[#f6f6f6] z-50">
+        <div
+            class="font-['Lexend'] font-black uppercase tracking-tighter text-2xl text-[#121212] dark:text-[#f6f6f6] tracking-[-0.02em]">
             Digital Rebel
         </div>
-<div class="flex gap-4">
-<span class="material-symbols-outlined text-[#4e6300] dark:text-[#cafd00] text-3xl">account_circle</span>
-</div>
-</header>
-<main class="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-12">
-<div class="w-full max-w-2xl flex flex-col gap-12">
-<!-- Progress Section -->
-<div class="flex flex-col gap-2">
-<div class="flex justify-between items-end">
-<span class="font-headline font-black text-sm uppercase tracking-widest text-outline">Phase 02</span>
-<span class="font-headline font-black text-sm text-on-surface">66% COMPLETE</span>
-</div>
-<div class="h-8 w-full bg-surface-container border-2 border-inverse-surface neo-shadow">
-<div class="h-full bg-primary-fixed border-r-2 border-inverse-surface" style="width: 66%"></div>
-</div>
-</div>
-<!-- Content Card -->
-<div class="bg-surface-container-lowest border-2 border-inverse-surface p-8 md:p-12 neo-shadow-lg flex flex-col gap-8 relative overflow-hidden">
-<!-- Decorative Sticker -->
-<div class="absolute -top-2 -right-8 bg-tertiary-fixed text-on-tertiary-fixed font-headline font-bold text-xs py-1 px-10 rotate-45 border-b-2 border-inverse-surface uppercase">
+        <div class="flex gap-4">
+            <span class="material-symbols-outlined text-[#4e6300] dark:text-[#cafd00] text-3xl">account_circle</span>
+        </div>
+    </header>
+    <main class="min-h-screen flex flex-col items-center justify-center px-4 pt-24 pb-12">
+        <div class="w-full max-w-2xl flex flex-col gap-12">
+            <!-- Progress Section -->
+            <div class="flex flex-col gap-2">
+                <div class="flex justify-between items-end">
+                    <span class="font-headline font-black text-sm uppercase tracking-widest text-outline">Phase
+                        02</span>
+                    <span class="font-headline font-black text-sm text-on-surface">66% COMPLETE</span>
+                </div>
+                <div class="h-8 w-full bg-surface-container border-2 border-inverse-surface neo-shadow">
+                    <div class="h-full bg-primary-fixed border-r-2 border-inverse-surface" style="width: 66%"></div>
+                </div>
+            </div>
+            <!-- Content Card -->
+            <div
+                class="bg-surface-container-lowest border-2 border-inverse-surface p-8 md:p-12 neo-shadow-lg flex flex-col gap-8 relative overflow-hidden">
+                <!-- Decorative Sticker -->
+                <div
+                    class="absolute -top-2 -right-8 bg-tertiary-fixed text-on-tertiary-fixed font-headline font-bold text-xs py-1 px-10 rotate-45 border-b-2 border-inverse-surface uppercase">
                     Critical
                 </div>
-<div class="flex flex-col gap-4">
-<h1 class="font-headline font-black text-4xl md:text-6xl text-inverse-surface leading-none tracking-tighter uppercase">
-                        WHEN DO YOU <br/> <span class="text-primary">WANT TO</span> <br/> RETIRE?
+                <div class="flex flex-col gap-4">
+                    <h1
+                        class="font-headline font-black text-4xl md:text-6xl text-inverse-surface leading-none tracking-tighter uppercase">
+                        WHEN DO YOU <br /> <span class="text-primary">WANT TO</span> <br /> RETIRE?
                     </h1>
-<p class="font-body text-lg text-secondary max-w-md">
-                        The "Digital Rebel" lifestyle requires precise timing. Tell us the age you plan to disconnect from the machine.
+                    <p class="font-body text-lg text-secondary max-w-md">
+                        The "Digital Rebel" lifestyle requires precise timing. Tell us the age you plan to disconnect
+                        from the machine.
                     </p>
-</div>
-<!-- Giant Input Field -->
-<div class="flex flex-col gap-4">
-<label class="font-headline font-bold uppercase tracking-widest text-xs text-outline" for="retirement-age">Target Age</label>
-<div class="relative flex items-center group">
-<input class="w-full bg-surface border-4 border-inverse-surface p-6 md:p-10 font-headline font-black text-6xl md:text-8xl text-inverse-surface focus:ring-0 focus:outline-none focus:bg-surface-container-high transition-colors placeholder:text-surface-dim" id="retirement-age" placeholder="65" type="number"/>
-<span class="absolute right-8 font-headline font-black text-4xl text-outline pointer-events-none group-focus-within:text-inverse-surface">YRS</span>
-</div>
-</div>
-<!-- Action Button -->
-<div class="flex flex-col md:flex-row gap-6 mt-4">
-<    <!-- Supabase + Futura Auth -->
+                </div>
+                <!-- Giant Input Field -->
+                <div class="flex flex-col gap-4">
+                    <label class="font-headline font-bold uppercase tracking-widest text-xs text-outline"
+                        for="retirement-age">Target Age</label>
+                    <div class="relative flex items-center group">
+                        <input
+                            class="w-full bg-surface border-4 border-inverse-surface p-6 md:p-10 font-headline font-black text-6xl md:text-8xl text-inverse-surface focus:ring-0 focus:outline-none focus:bg-surface-container-high transition-colors placeholder:text-surface-dim"
+                            id="retirement-age" placeholder="65" type="number" />
+                        <span
+                            class="absolute right-8 font-headline font-black text-4xl text-outline pointer-events-none group-focus-within:text-inverse-surface">YRS</span>
+                    </div>
+                </div>
+                <!-- Action Button -->
+                <div class="flex flex-col md:flex-row gap-6 mt-4">
+                    <a href="onboarding_step_3_income.html"
+                        class="flex-1 bg-primary-fixed text-on-primary-fixed border-2 border-inverse-surface py-6 px-8 font-headline font-black text-2xl uppercase tracking-tight neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:neo-shadow-lg active-press transition-all flex items-center justify-center gap-3 inline-flex">
+                        NEXT
+                        <span class="material-symbols-outlined font-black">arrow_forward</span>
+                    </a>
+                    <a href="onboarding_step_1_age.html"
+                        class="bg-surface border-2 border-inverse-surface py-6 px-12 font-headline font-bold text-xl uppercase tracking-tight hover:bg-surface-container-high transition-all inline-flex items-center justify-center">
+                        BACK
+                    </a>
+                </div>
+            </div>
+            <!-- Visual Context Grid (Bento Style) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-primary-container p-6 border-2 border-inverse-surface neo-shadow flex flex-col gap-3">
+                    <span class="material-symbols-outlined text-4xl"
+                        style="font-variation-settings: 'FILL' 1;">payments</span>
+                    <h3 class="font-headline font-black uppercase text-sm leading-tight">Projected <br />Wealth Factor
+                    </h3>
+                    <p class="font-body text-xs font-semibold">1.4X Multiplier based on current velocity.</p>
+                </div>
+                <div
+                    class="md:col-span-2 bg-inverse-surface text-surface p-6 border-2 border-inverse-surface neo-shadow flex justify-between items-center overflow-hidden">
+                    <div class="flex flex-col gap-1">
+                        <h3 class="font-headline font-black uppercase text-xl">Early Exit?</h3>
+                        <p class="font-body text-sm text-outline-variant max-w-xs">Retiring before 55 increases risk
+                            profile but maximizes freedom tokens.</p>
+                    </div>
+                    <div
+                        class="h-24 w-24 border-2 border-primary-fixed flex items-center justify-center -rotate-12 bg-surface/5">
+                        <span class="material-symbols-outlined text-primary-fixed text-5xl">shutter_speed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Contextual Aesthetic Elements -->
+    <div class="fixed top-1/4 -left-12 -z-10 opacity-10">
+        <h2 class="font-headline font-black text-[20rem] text-inverse-surface leading-none select-none">EXIT</h2>
+    </div>
+    <!-- Bottom Nav Suppression Check: Page is transactional/onboarding, but UI shows navigation for visual consistency as per Shared Components request for Shell layout if applicable. However, rules state suppression for onboarding. I will provide a minimal footer instead. -->
+    <footer class="w-full bg-surface py-8 border-t-2 border-inverse-surface mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <p class="font-headline font-bold text-[10px] uppercase tracking-[0.2em] text-outline">Digital Rebel v2.0 //
+                Non-Traditional Systems</p>
+            <div class="flex gap-4">
+                <span class="w-3 h-3 bg-primary-fixed border border-inverse-surface"></span>
+                <span class="w-3 h-3 bg-tertiary-fixed border border-inverse-surface"></span>
+                <span class="w-3 h-3 bg-inverse-surface border border-surface"></span>
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="/js/config.js"></script>
     <script src="/js/auth.js"></script>
-    <script src="/js/api.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Protect page
-            const session = await requireAuth();
-            if (!session) return;
+        document.addEventListener('DOMContentLoaded', () => {
+            const nextBtn = document.querySelector('a[href="onboarding_step_3_income.html"]');
+            const input = document.getElementById('retirement-age');
 
-            const nextBtn = document.querySelector('a[href*="onboarding_step_3_income"]');
-            const backBtn = document.querySelector('a[href*="onboarding_step_1_age"]');
-            const retirementInput = document.getElementById('retirement-age');
-
-            if (nextBtn && retirementInput) {
-                nextBtn.href = '#';
-                nextBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const age = retirementInput.value;
-                    if (!age || age < 18 || age > 120) {
-                        alert('Please enter a valid retirement age (18-120).');
-                        return;
-                    }
-                    localStorage.setItem('onboarding_retirement_age', age);
-                    window.location.href = 'onboarding_step_3_income.html';
-                });
+            const saved = localStorage.getItem('onboarding_data');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    if (data.retirement_age) input.value = data.retirement_age;
+                } catch (e) { }
             }
 
-            if (backBtn) {
-                backBtn.href = 'onboarding_step_1_age.html';
+            if (nextBtn && input) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (!input.value) {
+                        alert("Enter your target retirement age.");
+                        return;
+                    }
+
+                    const currentData = JSON.parse(localStorage.getItem('onboarding_data') || '{}');
+                    currentData.retirement_age = parseInt(input.value, 10);
+
+                    if (currentData.current_age && currentData.retirement_age <= currentData.current_age) {
+                        alert("Retirement target must exceed your current chron-level.");
+                        return;
+                    }
+
+                    localStorage.setItem('onboarding_data', JSON.stringify(currentData));
+                    window.location.href = nextBtn.getAttribute('href');
+                });
             }
         });
     </script>
-</body></html>
+</body>
+
+</html>

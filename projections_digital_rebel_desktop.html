@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Projections | Digital Rebel</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Projections | Digital Rebel</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -76,30 +84,35 @@
             },
         }
     </script>
-<style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .neo-shadow {
-            shadow-offset: 4px 4px;
-            box-shadow: 4px 4px 0px 0px rgba(18,18,18,1);
+            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
         }
+
         .dark .neo-shadow {
-            box-shadow: 4px 4px 0px 0px rgba(246,246,246,1);
+            box-shadow: 4px 4px 0px 0px rgba(246, 246, 246, 1);
         }
+
         .neo-shadow-sm {
-            box-shadow: 2px 2px 0px 0px rgba(18,18,18,1);
+            box-shadow: 2px 2px 0px 0px rgba(18, 18, 18, 1);
         }
+
         input[type='range'] {
             -webkit-appearance: none;
             background: transparent;
         }
+
         input[type='range']::-webkit-slider-runnable-track {
             width: 100%;
             height: 8px;
             background: #2d2f2f;
             border: 1px solid #121212;
         }
+
         input[type='range']::-webkit-slider-thumb {
             -webkit-appearance: none;
             height: 24px;
@@ -111,236 +124,399 @@
         }
     </style>
 </head>
+
 <body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
-<!-- TopNavBar -->
-<header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] dark:shadow-[4px_4px_0px_0px_rgba(246,246,246,1)]">
-<div class="flex items-center gap-8">
-<h1 class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">Digital Rebel</h1>
-<nav class="hidden md:flex gap-6 items-center">
-<a class="font-headline font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-headline font-black tracking-tighter uppercase text-[#121212] dark:text-[#cafd00] border-b-4 border-[#cafd00] px-2 py-1" href="market_digital_rebel_desktop.html">Markets</a>
-<a class="font-headline font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="assets_digital_rebel_desktop.html">Assets</a>
-</nav>
-</div>
-<div class="flex items-center gap-4">
-<div class="hidden lg:block relative">
-<input class="bg-surface-container border-2 border-on-surface px-4 py-1 font-headline text-xs focus:ring-0 focus:outline-none focus:bg-surface-container-high w-48 uppercase tracking-widest" placeholder="SEARCH_DATABASE..." type="text"/>
-</div>
-<span class="material-symbols-outlined cursor-pointer hover:text-primary-fixed" data-icon="notifications">notifications</span>
-<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined cursor-pointer hover:text-primary-fixed inline-flex items-center justify-center" data-icon="settings">settings</a>
-<button class="bg-primary-fixed text-on-primary-fixed border-2 border-on-surface px-4 py-2 font-headline font-black uppercase text-xs tracking-tighter hover:bg-on-surface hover:text-primary-fixed transition-all neo-shadow-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none">Connect Wallet</button>
-</div>
-</header>
-<div class="flex">
-<!-- SideNavBar -->
-<aside class="fixed left-0 top-0 h-full flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] h-screen w-64 border-r-2 border-[#121212] dark:border-[#f6f6f6] z-40">
-<div class="px-6 mb-8">
-<div class="flex items-center gap-3 p-3 border-2 border-on-surface neo-shadow-sm bg-surface-container-lowest">
-<div class="w-10 h-10 bg-primary-fixed border-2 border-on-surface flex items-center justify-center">
-<span class="material-symbols-outlined text-on-primary-fixed" data-icon="person">person</span>
-</div>
-<div>
-<p class="font-headline font-bold uppercase tracking-widest text-[10px]">Rebel_01</p>
-<p class="font-body text-[10px] text-outline uppercase">Elite Tier</p>
-</div>
-</div>
-</div>
-<nav class="flex-1 space-y-2">
-<a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all" href="dashboard_digital_rebel_desktop.html">
-<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span> Overview
+    <!-- TopNavBar -->
+    <header
+        class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] dark:shadow-[4px_4px_0px_0px_rgba(246,246,246,1)]">
+        <div class="flex items-center gap-8">
+            <h1 class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">
+                Digital Rebel</h1>
+            <nav class="hidden md:flex gap-6 items-center">
+                <a class="font-headline font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1"
+                    href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+                <a class="font-headline font-black tracking-tighter uppercase text-[#121212] dark:text-[#cafd00] border-b-4 border-[#cafd00] px-2 py-1"
+                    href="market_digital_rebel_desktop.html">Markets</a>
+                <a class="font-headline font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1"
+                    href="assets_digital_rebel_desktop.html">Assets</a>
+            </nav>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden lg:block relative">
+                <input
+                    class="bg-surface-container border-2 border-on-surface px-4 py-1 font-headline text-xs focus:ring-0 focus:outline-none focus:bg-surface-container-high w-48 uppercase tracking-widest"
+                    placeholder="SEARCH_DATABASE..." type="text" />
+            </div>
+            <span class="material-symbols-outlined cursor-pointer hover:text-primary-fixed"
+                data-icon="notifications">notifications</span>
+            <a href="settings_digital_rebel_desktop.html"
+                class="material-symbols-outlined cursor-pointer hover:text-primary-fixed inline-flex items-center justify-center"
+                data-icon="settings">settings</a>
+            <button
+                class="bg-primary-fixed text-on-primary-fixed border-2 border-on-surface px-4 py-2 font-headline font-black uppercase text-xs tracking-tighter hover:bg-on-surface hover:text-primary-fixed transition-all neo-shadow-sm active:translate-x-[2px] active:translate-y-[2px] active:shadow-none">Connect
+                Wallet</button>
+        </div>
+    </header>
+    <div class="flex">
+        <!-- SideNavBar -->
+        <aside
+            class="fixed left-0 top-0 h-full flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] h-screen w-64 border-r-2 border-[#121212] dark:border-[#f6f6f6] z-40">
+            <div class="px-6 mb-8">
+                <div
+                    class="flex items-center gap-3 p-3 border-2 border-on-surface neo-shadow-sm bg-surface-container-lowest">
+                    <div class="w-10 h-10 bg-primary-fixed border-2 border-on-surface flex items-center justify-center">
+                        <span class="material-symbols-outlined text-on-primary-fixed" data-icon="person">person</span>
+                    </div>
+                    <div>
+                        <p class="font-headline font-bold uppercase tracking-widest text-[10px]">Rebel_01</p>
+                        <p class="font-body text-[10px] text-outline uppercase">Elite Tier</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex-1 space-y-2">
+                <a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all"
+                    href="dashboard_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined" data-icon="grid_view">grid_view</span> Overview
                 </a>
-<a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs bg-[#cafd00] text-[#121212] border-2 border-[#121212] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] mx-2 scale-95 transition-all" href="projections_digital_rebel_desktop.html">
-<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span> Projections
+                <a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs bg-[#cafd00] text-[#121212] border-2 border-[#121212] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] mx-2 scale-95 transition-all"
+                    href="projections_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined" data-icon="trending_up">trending_up</span> Projections
                 </a>
-<a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all" href="transactions.html">
-<span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span> Transactions
+                <a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all"
+                    href="transactions.html">
+                    <span class="material-symbols-outlined" data-icon="swap_horiz">swap_horiz</span> Transactions
                 </a>
-<a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all" href="cards_digital_rebel_desktop.html">
-<span class="material-symbols-outlined" data-icon="credit_card">credit_card</span> Cards
+                <a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all"
+                    href="cards_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined" data-icon="credit_card">credit_card</span> Cards
                 </a>
-<a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all" href="#">
-<span class="material-symbols-outlined" data-icon="Bolt">bolt</span> Staking
+                <a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="Bolt">bolt</span> Staking
                 </a>
-<a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all" href="settings_digital_rebel_desktop.html">
-<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span> Support
+                <a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all"
+                    href="settings_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span> Support
                 </a>
-</nav>
-<div class="p-6 border-t-2 border-on-surface">
-<a href="upgrade_digital_rebel_desktop.html" class="w-full py-4 border-2 border-on-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade Power</a>
-<a class="flex items-center gap-4 mt-6 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:italic" href="#">
-<span class="material-symbols-outlined" data-icon="logout">logout</span> Logout
+            </nav>
+            <div class="p-6 border-t-2 border-on-surface">
+                <a href="upgrade_digital_rebel_desktop.html"
+                    class="w-full py-4 border-2 border-on-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
+                    Power</a>
+                <a class="flex items-center gap-4 mt-6 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:italic"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="logout">logout</span> Logout
                 </a>
-</div>
-</aside>
-<!-- Main Content Area -->
-<main class="flex-1 ml-64 p-8 min-h-screen bg-surface">
-<!-- Breadcrumbs & Header -->
-<div class="mb-12">
-<div class="inline-block bg-on-surface text-surface px-2 py-1 font-headline font-black uppercase text-[10px] tracking-widest mb-4">
+            </div>
+        </aside>
+        <!-- Main Content Area -->
+        <main class="flex-1 ml-64 p-8 min-h-screen bg-surface">
+            <!-- Breadcrumbs & Header -->
+            <div class="mb-12">
+                <div
+                    class="inline-block bg-on-surface text-surface px-2 py-1 font-headline font-black uppercase text-[10px] tracking-widest mb-4">
                     EST_WEALTH_ACCUMULATION_v4.2
                 </div>
-<h2 class="text-6xl font-headline font-black uppercase tracking-tighter text-on-surface leading-tight">Future<br/><span class="text-primary">Projections</span></h2>
-</div>
-<!-- Bento Layout -->
-<div class="grid grid-cols-12 gap-6">
-<!-- Chart Section -->
-<div class="col-span-12 lg:col-span-8 space-y-6">
-<div class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow relative overflow-hidden">
-<div class="flex justify-between items-start mb-12">
-<div>
-<p class="font-headline font-bold text-xs uppercase tracking-widest text-outline">Projected Net Worth (2045)</p>
-<h3 class="text-5xl font-headline font-black tracking-tighter">$1,248,500.00</h3>
-</div>
-<div class="flex gap-2">
-<div class="bg-primary-fixed border-2 border-on-surface px-3 py-1 font-headline font-bold text-[10px] uppercase">Bull Case</div>
-<div class="bg-surface border-2 border-on-surface px-3 py-1 font-headline font-bold text-[10px] uppercase">Base</div>
-</div>
-</div>
-<!-- Brutalist Chart Placeholder -->
-<div class="h-80 w-full relative border-l-4 border-b-4 border-on-surface flex items-end overflow-hidden">
-<!-- Background Grid -->
-<div class="absolute inset-0 grid grid-cols-10 grid-rows-5 opacity-10">
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-<div class="border-r border-b border-on-surface"></div>
-</div>
-<!-- Bar Visuals -->
-<div class="flex-1 flex items-end justify-between px-4 gap-2 h-full z-10">
-<div class="w-full bg-on-surface h-[10%] opacity-20"></div>
-<div class="w-full bg-on-surface h-[15%] opacity-20"></div>
-<div class="w-full bg-on-surface h-[12%] opacity-20"></div>
-<div class="w-full bg-on-surface h-[22%] opacity-20"></div>
-<div class="w-full bg-on-surface h-[30%] opacity-20"></div>
-<div class="w-full bg-on-surface h-[28%] opacity-20"></div>
-<div class="w-full bg-on-surface h-[45%] opacity-20"></div>
-<div class="w-full bg-on-surface h-[55%] opacity-20"></div>
-<div class="w-full bg-primary-fixed border-t-4 border-on-surface h-[70%]"></div>
-<div class="w-full bg-primary-fixed border-t-4 border-on-surface h-[85%] relative">
-<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface font-headline font-black text-xs px-2 py-1 transform -rotate-2">TARGET_X</div>
-</div>
-</div>
-<!-- Legend -->
-<div class="absolute bottom-4 left-4 font-headline font-bold text-[10px] uppercase text-outline">Timeline: 2024 - 2045</div>
-</div>
-</div>
-<!-- Metrics -->
-<div class="grid grid-cols-3 gap-6">
-<div class="bg-surface border-2 border-on-surface p-4 neo-shadow-sm">
-<p class="font-headline font-bold text-[10px] uppercase text-outline mb-1">Total Contributions</p>
-<p class="text-2xl font-headline font-black tracking-tighter">$420,000</p>
-</div>
-<div class="bg-primary-fixed border-2 border-on-surface p-4 neo-shadow-sm">
-<p class="font-headline font-bold text-[10px] uppercase text-on-primary-fixed mb-1">Compounded Growth</p>
-<p class="text-2xl font-headline font-black tracking-tighter">+$828,500</p>
-</div>
-<div class="bg-surface border-2 border-on-surface p-4 neo-shadow-sm">
-<p class="font-headline font-bold text-[10px] uppercase text-outline mb-1">Tax Offset Est.</p>
-<p class="text-2xl font-headline font-black tracking-tighter">$32,150</p>
-</div>
-</div>
-</div>
-<!-- Control Sidebar -->
-<div class="col-span-12 lg:col-span-4 space-y-6">
-<div class="bg-on-surface text-surface border-4 border-on-surface p-6 neo-shadow">
-<div class="flex items-center gap-2 mb-6">
-<span class="material-symbols-outlined text-primary-fixed" data-icon="tune">tune</span>
-<h4 class="font-headline font-black uppercase text-lg tracking-widest">Pro Scenarios</h4>
-</div>
-<div class="space-y-8">
-<!-- Slider 1 -->
-<div class="space-y-4">
-<div class="flex justify-between font-headline font-bold uppercase text-[10px] tracking-widest">
-<span>Market Volatility</span>
-<span class="text-primary-fixed">High Impact</span>
-</div>
-<input class="w-full h-2 bg-outline appearance-none cursor-pointer" type="range"/>
-<div class="flex justify-between font-body text-[10px] opacity-60">
-<span>CONSERVATIVE</span>
-<span>CHAOTIC</span>
-</div>
-</div>
-<!-- Slider 2 -->
-<div class="space-y-4">
-<div class="flex justify-between font-headline font-bold uppercase text-[10px] tracking-widest">
-<span>Inflation Offset</span>
-<span class="text-primary-fixed">4.2%</span>
-</div>
-<input class="w-full h-2 bg-outline appearance-none cursor-pointer" type="range"/>
-<div class="flex justify-between font-body text-[10px] opacity-60">
-<span>LOW</span>
-<span>HYPER</span>
-</div>
-</div>
-<!-- Slider 3 -->
-<div class="space-y-4">
-<div class="flex justify-between font-headline font-bold uppercase text-[10px] tracking-widest">
-<span>Monthly Deposit</span>
-<span class="text-primary-fixed">$2,500</span>
-</div>
-<input class="w-full h-2 bg-outline appearance-none cursor-pointer" type="range"/>
-<div class="flex justify-between font-body text-[10px] opacity-60">
-<span>$500</span>
-<span>$10,000+</span>
-</div>
-</div>
-</div>
-<button class="w-full mt-10 bg-primary-fixed text-on-primary-fixed border-2 border-surface py-3 font-headline font-black uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all">
+                <h2 class="text-6xl font-headline font-black uppercase tracking-tighter text-on-surface leading-tight">
+                    Future<br /><span class="text-primary">Projections</span></h2>
+            </div>
+            <!-- Bento Layout -->
+            <div class="grid grid-cols-12 gap-6">
+                <!-- Chart Section -->
+                <div class="col-span-12 lg:col-span-8 space-y-6">
+                    <div
+                        class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow relative overflow-hidden">
+                        <div class="flex justify-between items-start mb-12">
+                            <div>
+                                <p class="font-headline font-bold text-xs uppercase tracking-widest text-outline">
+                                    Projected Net Worth (2045)</p>
+                                <h3 id="projection-total" class="text-5xl font-headline font-black tracking-tighter">
+                                    $1,248,500.00</h3>
+                            </div>
+                            <div class="flex gap-2">
+                                <div
+                                    class="bg-primary-fixed border-2 border-on-surface px-3 py-1 font-headline font-bold text-[10px] uppercase">
+                                    Bull Case</div>
+                                <div
+                                    class="bg-surface border-2 border-on-surface px-3 py-1 font-headline font-bold text-[10px] uppercase">
+                                    Base</div>
+                            </div>
+                        </div>
+                        <!-- Brutalist Chart Placeholder -->
+                        <div
+                            class="h-80 w-full relative border-l-4 border-b-4 border-on-surface flex items-end overflow-hidden">
+                            <!-- Background Grid -->
+                            <div class="absolute inset-0 grid grid-cols-10 grid-rows-5 opacity-10">
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                                <div class="border-r border-b border-on-surface"></div>
+                            </div>
+                            <!-- Bar Visuals -->
+                            <div class="flex-1 flex items-end justify-between px-4 gap-2 h-full z-10">
+                                <div class="w-full bg-on-surface h-[10%] opacity-20"></div>
+                                <div class="w-full bg-on-surface h-[15%] opacity-20"></div>
+                                <div class="w-full bg-on-surface h-[12%] opacity-20"></div>
+                                <div class="w-full bg-on-surface h-[22%] opacity-20"></div>
+                                <div class="w-full bg-on-surface h-[30%] opacity-20"></div>
+                                <div class="w-full bg-on-surface h-[28%] opacity-20"></div>
+                                <div class="w-full bg-on-surface h-[45%] opacity-20"></div>
+                                <div class="w-full bg-on-surface h-[55%] opacity-20"></div>
+                                <div class="w-full bg-primary-fixed border-t-4 border-on-surface h-[70%]"></div>
+                                <div class="w-full bg-primary-fixed border-t-4 border-on-surface h-[85%] relative">
+                                    <div
+                                        class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface font-headline font-black text-xs px-2 py-1 transform -rotate-2">
+                                        TARGET_X</div>
+                                </div>
+                            </div>
+                            <!-- Legend -->
+                            <div
+                                class="absolute bottom-4 left-4 font-headline font-bold text-[10px] uppercase text-outline">
+                                Timeline: 2024 - 2045</div>
+                        </div>
+                    </div>
+                    <!-- Metrics -->
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="bg-surface border-2 border-on-surface p-4 neo-shadow-sm">
+                            <p class="font-headline font-bold text-[10px] uppercase text-outline mb-1">Total
+                                Contributions</p>
+                            <p class="text-2xl font-headline font-black tracking-tighter">$420,000</p>
+                        </div>
+                        <div class="bg-primary-fixed border-2 border-on-surface p-4 neo-shadow-sm">
+                            <p class="font-headline font-bold text-[10px] uppercase text-on-primary-fixed mb-1">
+                                Compounded Growth</p>
+                            <p class="text-2xl font-headline font-black tracking-tighter">+$828,500</p>
+                        </div>
+                        <div class="bg-surface border-2 border-on-surface p-4 neo-shadow-sm">
+                            <p class="font-headline font-bold text-[10px] uppercase text-outline mb-1">Tax Offset Est.
+                            </p>
+                            <p class="text-2xl font-headline font-black tracking-tighter">$32,150</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Control Sidebar -->
+                <div class="col-span-12 lg:col-span-4 space-y-6">
+                    <div class="bg-on-surface text-surface border-4 border-on-surface p-6 neo-shadow">
+                        <div class="flex items-center gap-2 mb-6">
+                            <span class="material-symbols-outlined text-primary-fixed" data-icon="tune">tune</span>
+                            <h4 class="font-headline font-black uppercase text-lg tracking-widest">Pro Scenarios</h4>
+                        </div>
+                        <div class="space-y-8">
+                            <!-- Slider 1 -->
+                            <div class="space-y-4">
+                                <div
+                                    class="flex justify-between font-headline font-bold uppercase text-[10px] tracking-widest">
+                                    <span>Market Volatility</span>
+                                    <span class="text-primary-fixed">High Impact</span>
+                                </div>
+                                <input id="volatility-slider"
+                                    class="w-full h-2 bg-outline appearance-none cursor-pointer" type="range" min="0"
+                                    max="100" value="50" />
+                                <div class="flex justify-between font-body text-[10px] opacity-60">
+                                    <span>CONSERVATIVE</span>
+                                    <span>CHAOTIC</span>
+                                </div>
+                            </div>
+                            <!-- Slider 2 -->
+                            <div class="space-y-4">
+                                <div
+                                    class="flex justify-between font-headline font-bold uppercase text-[10px] tracking-widest">
+                                    <span>Inflation Offset</span>
+                                    <span class="text-primary-fixed">4.2%</span>
+                                </div>
+                                <input id="inflation-slider"
+                                    class="w-full h-2 bg-outline appearance-none cursor-pointer" type="range" min="2"
+                                    max="10" step="0.1" value="4.2" />
+                                <div class="flex justify-between font-body text-[10px] opacity-60">
+                                    <span>LOW</span>
+                                    <span>HYPER</span>
+                                </div>
+                            </div>
+                            <!-- Slider 3 -->
+                            <div class="space-y-4">
+                                <div
+                                    class="flex justify-between font-headline font-bold uppercase text-[10px] tracking-widest">
+                                    <span>Monthly Deposit</span>
+                                    <span class="text-primary-fixed">$2,500</span>
+                                </div>
+                                <input id="deposit-slider" class="w-full h-2 bg-outline appearance-none cursor-pointer"
+                                    type="range" min="500" max="10000" step="100" value="2500" />
+                                <div class="flex justify-between font-body text-[10px] opacity-60">
+                                    <span>$500</span>
+                                    <span>$10,000+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="btn-recalculate"
+                            class="w-full mt-10 bg-primary-fixed text-on-primary-fixed border-2 border-surface py-3 font-headline font-black uppercase tracking-widest hover:bg-surface hover:text-on-surface transition-all">
                             Recalculate Wealth
                         </button>
-</div>
-<!-- AI Suggestion Sticker -->
-<div class="bg-tertiary-fixed border-2 border-on-surface p-6 neo-shadow transform -rotate-1">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-3xl" data-icon="bolt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bolt</span>
-<div>
-<p class="font-headline font-black uppercase text-xs tracking-widest mb-2">REBEL_AI STRATEGY</p>
-<p class="font-body text-xs font-semibold leading-relaxed">Increasing your monthly deposit by <span class="underline">12%</span> today offsets projected inflation peaks in 2029.</p>
-</div>
-</div>
-</div>
-<!-- Image Section -->
-<div class="relative h-48 border-4 border-on-surface neo-shadow overflow-hidden group">
-<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Abstract 3D digital landscape with neon green lines and geometric spikes representing data volatility and market growth" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf8admXWeG0JwiILh525Et2z6hvVvqrJpxPtE3ScHBCtRHokhMj31NuuSx9qRW7NfPSfOt955QT_HkZfSmN89jfxpcjj7KFKEauI8Yc-LTxBrbd6PoQCQQ3-hZFrtEXEULV__PSv8NCwZhpWqdxC6fNWm2I6ibEe1Fq3yn8RpvvoUvFDcSMWaBKaGO6kH73WzHXo3V2YXph6UuCIfN1eHati_3HtCLEmhhqAWgvPDne6mXDZJYYxrL8oFDeZP5aQC3SGoxl882RSB8"/>
-<div class="absolute inset-0 bg-primary-fixed/20 mix-blend-multiply"></div>
-<div class="absolute bottom-2 left-2 bg-on-surface text-surface px-2 py-1 font-headline font-bold text-[10px] uppercase">Visualizing_Chaos.jpg</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-<!-- Footer -->
-<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
-<div class="flex flex-col items-center md:items-start gap-4">
-<h2 class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL REBEL</h2>
-<p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©2024 DIGITAL REBEL. NO PERMISSION GRANTED.</p>
-</div>
-<div class="flex gap-8 flex-wrap justify-center">
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="landing_digital_rebel_desktop.html">Home</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="assets_digital_rebel_desktop.html\">Assets</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="market_digital_rebel_desktop.html">Market</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="transactions.html">Transactions</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="cards_digital_rebel_desktop.html">Cards</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="add_card_digital_rebel.html">Add Card</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="add_manual_asset_digital_rebel.html">Add Asset</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="checkout_digital_rebel_desktop.html">Checkout</a>
-</div>
-</footer>
-</body></html>
+                    </div>
+                    <!-- AI Suggestion Sticker -->
+                    <div class="bg-tertiary-fixed border-2 border-on-surface p-6 neo-shadow transform -rotate-1">
+                        <div class="flex items-start gap-4">
+                            <span class="material-symbols-outlined text-3xl" data-icon="bolt" data-weight="fill"
+                                style="font-variation-settings: 'FILL' 1;">bolt</span>
+                            <div>
+                                <p class="font-headline font-black uppercase text-xs tracking-widest mb-2">REBEL_AI
+                                    STRATEGY</p>
+                                <p class="font-body text-xs font-semibold leading-relaxed">Increasing your monthly
+                                    deposit by <span class="underline">12%</span> today offsets projected inflation
+                                    peaks in 2029.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Image Section -->
+                    <div class="relative h-48 border-4 border-on-surface neo-shadow overflow-hidden group">
+                        <img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            data-alt="Abstract 3D digital landscape with neon green lines and geometric spikes representing data volatility and market growth"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf8admXWeG0JwiILh525Et2z6hvVvqrJpxPtE3ScHBCtRHokhMj31NuuSx9qRW7NfPSfOt955QT_HkZfSmN89jfxpcjj7KFKEauI8Yc-LTxBrbd6PoQCQQ3-hZFrtEXEULV__PSv8NCwZhpWqdxC6fNWm2I6ibEe1Fq3yn8RpvvoUvFDcSMWaBKaGO6kH73WzHXo3V2YXph6UuCIfN1eHati_3HtCLEmhhqAWgvPDne6mXDZJYYxrL8oFDeZP5aQC3SGoxl882RSB8" />
+                        <div class="absolute inset-0 bg-primary-fixed/20 mix-blend-multiply"></div>
+                        <div
+                            class="absolute bottom-2 left-2 bg-on-surface text-surface px-2 py-1 font-headline font-bold text-[10px] uppercase">
+                            Visualizing_Chaos.jpg</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Footer -->
+    <footer
+        class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
+        <div class="flex flex-col items-center md:items-start gap-4">
+            <h2 class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL REBEL</h2>
+            <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©2024 DIGITAL REBEL. NO
+                PERMISSION GRANTED.</p>
+        </div>
+        <div class="flex gap-8 flex-wrap justify-center">
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="landing_digital_rebel_desktop.html">Home</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="assets_digital_rebel_desktop.html">Assets</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="market_digital_rebel_desktop.html">Market</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="transactions.html">Transactions</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="cards_digital_rebel_desktop.html">Cards</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="add_card_digital_rebel.html">Add Card</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="add_manual_asset_digital_rebel.html">Add Asset</a>
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
+                href="checkout_digital_rebel_desktop.html">Checkout</a>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await requireAuth();
+            if (!session) return;
+
+            // Elements
+            const volSlider = document.getElementById('volatility-slider');
+            const infSlider = document.getElementById('inflation-slider');
+            const depSlider = document.getElementById('deposit-slider');
+            const btnRecalc = document.getElementById('btn-recalculate');
+            const totalEl = document.getElementById('projection-total');
+
+            // Labels corresponding to sliders
+            const infLabel = infSlider?.parentElement.querySelector('.text-primary-fixed');
+            const depLabel = depSlider?.parentElement.querySelector('.text-primary-fixed');
+
+            // Update labels instantly
+            if (infSlider && infLabel) {
+                infSlider.addEventListener('input', (e) => infLabel.textContent = e.target.value + '%');
+            }
+            if (depSlider && depLabel) {
+                depSlider.addEventListener('input', (e) => depLabel.textContent = '$' + parseInt(e.target.value).toLocaleString());
+            }
+
+            // Default payload basis
+            let basePayload = {
+                currentAge: 25,
+                retirementAge: 65,
+                monthlyIncome: 50000,
+                monthlyExpense: 30000,
+                currentSavings: 0,
+                monthlyInvestment: 2500,
+                inflationRate: 0.042,
+                returnRate: 0.12,
+                simulations: 2000
+            };
+
+            try {
+                const gRes = await futuraApi.goals.get();
+                if (gRes.goal) {
+                    basePayload.currentAge = gRes.goal.current_age || 25;
+                    basePayload.retirementAge = gRes.goal.retirement_age || 65;
+                    basePayload.monthlyIncome = gRes.goal.target_monthly_income || 50000;
+                    basePayload.monthlyExpense = basePayload.monthlyIncome * 0.6;
+                }
+            } catch (e) { }
+
+            const recalculate = async () => {
+                try {
+                    const infOffset = parseFloat(infSlider?.value || 4.2) / 100;
+                    const depAmt = parseInt(depSlider?.value || 2500, 10);
+
+                    // Pseudo-logic: mapping 0-100 volatility slider to return rate variance
+                    const vol = parseInt(volSlider?.value || 50, 10);
+                    const returnOffset = ((50 - vol) / 100) * 0.05; // -2.5% to +2.5% adjustment
+
+                    const payload = {
+                        ...basePayload,
+                        monthlyInvestment: depAmt,
+                        inflationRate: infOffset,
+                        returnRate: 0.12 + returnOffset
+                    };
+
+                    const originalText = btnRecalc.textContent;
+                    btnRecalc.textContent = 'CALCULATING...';
+                    btnRecalc.style.pointerEvents = 'none';
+
+                    const res = await futuraApi.projection.calculate(payload);
+                    if (res.result && totalEl) {
+                        totalEl.textContent = '$' + Math.round(res.result.futureSavings).toLocaleString();
+                    }
+
+                    btnRecalc.textContent = 'RECALCULATE WEALTH';
+                    btnRecalc.style.pointerEvents = 'auto';
+
+                } catch (err) {
+                    console.error(err);
+                    alert('Simulation failed.');
+                    btnRecalc.textContent = 'RECALCULATE WEALTH';
+                    btnRecalc.style.pointerEvents = 'auto';
+                }
+            };
+
+            if (btnRecalc) btnRecalc.addEventListener('click', recalculate);
+            // Initial calc
+            recalculate();
+        });
+    </script>
+</body>
+
+</html>

@@ -51,7 +51,9 @@ router.post('/', zValidator('json', goalsSchema), async (c) => {
     return c.json({ error: error.message }, 500)
   }
 
-  await supabase.from('profiles').update({ onboarding_complete: true }).eq('id', userId)
+  await supabase
+    .from('profiles')
+    .upsert({ id: userId, onboarding_complete: true }, { onConflict: 'id' })
 
   return c.json({ goal: data }, 201)
 })

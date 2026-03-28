@@ -38,9 +38,10 @@ router.patch('/', zValidator('json', profileUpdateSchema), async (c) => {
     .update(body)
     .eq('id', userId)
     .select('*')
-    .single()
+    .maybeSingle()
 
   if (error) {
+    console.error("Supabase update error:", error)
     return c.json({ error: error.message }, 500)
   }
 
