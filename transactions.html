@@ -204,8 +204,8 @@
         class="filter-btn px-4 py-2 border-2 border-on-surface bg-on-surface text-surface font-headline font-bold text-xs uppercase active-filter">ALL_TRADES</button>
       <button id="filter-stocks"
         class="filter-btn px-4 py-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed transition-all font-headline font-bold text-xs uppercase">STOCKS_ONLY</button>
-      <button id="filter-crypto"
-        class="filter-btn px-4 py-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed transition-all font-headline font-bold text-xs uppercase">CRYPTO</button>
+      <button id="filter-assets"
+        class="filter-btn px-4 py-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed transition-all font-headline font-bold text-xs uppercase">ASSETS_ONLY</button>
       <div class="ml-auto border-2 border-on-surface flex bg-surface overflow-hidden">
         <button id="view-list-btn"
           class="px-4 py-2 font-headline font-bold text-xs uppercase border-r-2 border-on-surface bg-primary-fixed">LIST</button>
@@ -383,8 +383,9 @@
       sorted.forEach(d => {
         const height = (d.amount / maxAmount) * 100;
         const bar = document.createElement('div');
-        bar.className = 'flex-1 bg-primary-fixed border-2 border-on-surface neo-shadow relative group hover:bg-inverse-primary transition-all';
-        bar.style.height = `${height}%`;
+        bar.className = 'flex-1 bg-primary-fixed border-2 border-on-surface neo-shadow relative group hover:bg-inverse-primary transition-all duration-300 ease-out';
+        bar.style.height = '0%'; // Start at 0 for animation
+        setTimeout(() => { bar.style.height = `${height}%`; }, 50); // Animate to target height
         bar.innerHTML = `
           <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 hidden group-hover:block neo-shadow z-20">$${Math.round(d.amount)}</div>
           <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase truncate w-full text-center">${new Date(d.contribution_date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}</div>
@@ -468,10 +469,23 @@
             });
             btn.classList.add('bg-on-surface', 'text-surface', 'active-filter');
             btn.classList.remove('bg-surface');
+
             const type = btn.id.split('-')[1];
-            if (type === 'all') renderTransactions(allContributions);
-            else if (type === 'stocks') renderTransactions(allContributions.filter(c => parseContribution(c).typeBadge.includes('STOCK')));
-            else if (type === 'crypto') renderTransactions(allContributions.filter(c => parseContribution(c).typeBadge.includes('CRYPTO')));
+            let filtered = allContributions;
+
+            if (type === 'stocks') {
+              filtered = allContributions.filter(c => parseContribution(c).typeBadge.includes('STOCK'));
+            } else if (type === 'assets') {
+              // Assets = Everything NOT a stock
+              filtered = allContributions.filter(c => !parseContribution(c).typeBadge.includes('STOCK'));
+            }
+
+            renderTransactions(filtered);
+
+            // If chart view is active, update it instantly
+            if (!document.getElementById('chart-view').classList.contains('hidden')) {
+              renderChart(filtered);
+            }
           });
         });
 
@@ -491,7 +505,15 @@
           document.getElementById('chart-view').classList.remove('hidden');
           document.getElementById('view-chart-btn').classList.add('bg-primary-fixed');
           document.getElementById('view-list-btn').classList.remove('bg-primary-fixed');
-          renderChart(allContributions);
+
+          // Render current active filtered list
+          const activeBtn = document.querySelector('.filter-btn.active-filter');
+          const type = activeBtn ? activeBtn.id.split('-')[1] : 'all';
+          let filtered = allContributions;
+          if (type === 'stocks') filtered = allContributions.filter(c => parseContribution(c).typeBadge.includes('STOCK'));
+          else if (type === 'assets') filtered = allContributions.filter(c => !parseContribution(c).typeBadge.includes('STOCK'));
+
+          renderChart(filtered);
         });
       } catch (err) {
         console.error(err);
