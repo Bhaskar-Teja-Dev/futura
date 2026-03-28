@@ -130,16 +130,28 @@
           href="market_digital_rebel_desktop.html">Markets</a>
         <a class="font-headline font-black uppercase tracking-tighter text-inverse-surface border-b-4 border-primary-fixed pb-1"
           href="assets_digital_rebel_desktop.html">Assets</a>
+        <a class="font-headline font-black uppercase tracking-tighter text-on-surface-variant hover:bg-primary-fixed hover:text-inverse-surface transition-colors duration-100 pb-1"
+          href="learn_digital_rebel_desktop.html">Learn</a>
       </div>
     </div>
     <div class="flex items-center gap-4">
+      <!-- ZENS BALANCE PILL -->
+      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-inverse-surface text-primary-fixed border-2 border-inverse-surface px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
+        <span>🪙</span>
+        <span id="nav-zens-balance">--</span>
+      </div>
+      <!-- ADD MONEY BTN -->
+      <button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })" class="hidden md:block bg-primary-fixed text-inverse-surface border-2 border-inverse-surface font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors hard-shadow-sm active:translate-y-1 active:shadow-none">
+        ADD MONEY
+      </button>
+
       <button
         class="material-symbols-outlined text-inverse-surface hover:bg-primary-fixed p-1 transition-all">notifications</button>
       <a href="settings_digital_rebel_desktop.html"
         class="material-symbols-outlined text-inverse-surface hover:bg-primary-fixed p-1 transition-all inline-flex items-center justify-center">settings</a>
-      <div class="w-10 h-10 border-2 border-inverse-surface overflow-hidden">
+      <div class="w-10 h-10 border-2 border-inverse-surface overflow-hidden cursor-pointer" id="nav-avatar">
         <img alt="User Profile" class="w-full h-full object-cover"
-          data-alt="extreme close up portrait of a man with intense gaze and gritty urban lighting high contrast monochrome style"
+          data-alt="extreme close up portrait of a man"
           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaeB9JbGMibQcx_8_SkdFDJOz2ngIB9rFkZXvaQ17PcHKnBmAkAIfqNkACX5HyrPzNA9fP62VKAg8EQUIRDhjmzFiqpv1aiNfhDcI19_JIfSj7uHnzqy0L-9tr55IfEzB9QuyVGTMZL2t1nTfq73fQYOZpI_lyN0Bzmh64wUKNZvvLOAsc3RZ-aurEzvqya2bR3RlInSZtQqhT2ffZI16HCPWrv4E7bcJlR3Jh_O9wcJ2g0AhQNWq02r-uNt2Lz-yOtZIbcBxCRpl3" />
       </div>
     </div>

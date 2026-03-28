@@ -56,7 +56,7 @@
 	<nav
 		class="fixed top-0 w-full z-50 border-b-2 border-[#121212] bg-white flex justify-between items-center px-6 h-16 shadow-[4px_4px_0_rgba(18,18,18,1)]">
 		<div class="flex items-center gap-8">
-			<a href="market_digital_rebel_desktop.html"
+			<a href="dashboard_digital_rebel_desktop.html"
 				class="font-headline font-black text-2xl text-[#121212] tracking-tighter"
 				style="font-family:'Lexend',sans-serif;">DIGITAL REBEL</a>
 			<div class="hidden md:flex gap-6">
@@ -71,8 +71,21 @@
 					style="font-family:'Lexend',sans-serif;">Assets</a>
 			</div>
 		</div>
-		<a href="settings_digital_rebel_desktop.html"
-			class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all">settings</a>
+
+		<div class="flex items-center gap-4">
+			<!-- ZENS BALANCE PILL -->
+			<div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm" style="box-shadow:2px 2px 0 #121212;">
+				<span>🪙</span>
+				<span id="nav-zens-balance">--</span>
+			</div>
+			<!-- ADD MONEY BTN -->
+			<button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })" class="hidden md:block bg-[#cafd00] text-[#121212] border-2 border-[#121212] font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors cursor-pointer" style="box-shadow:2px 2px 0 #121212;">
+				ADD MONEY
+			</button>
+
+			<a href="settings_digital_rebel_desktop.html"
+				class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all">settings</a>
+		</div>
 	</nav>
 
 	<main class="mt-16 p-6 md:p-10 flex-grow max-w-5xl mx-auto w-full">
@@ -175,16 +188,16 @@
 	<script src="/js/api.js"></script>
 	<script>
 		const STOCK_DATA = {
-			TSLA: { name: 'Tesla Inc.', price: 178.44, change: 12.4, risk: 'HIGH', returnRate: 0.18, open: 159.20, high: 182.10, low: 157.80, volume: '48.2M' },
-			AAPL: { name: 'Apple Inc.', price: 191.04, change: -4.2, risk: 'MODERATE', returnRate: 0.14, open: 199.30, high: 200.10, low: 189.50, volume: '52.7M' },
-			NVDA: { name: 'NVIDIA Corp.', price: 894.52, change: 22.1, risk: 'HIGH', returnRate: 0.22, open: 732.80, high: 901.00, low: 730.10, volume: '41.0M' },
-			META: { name: 'Meta Platforms', price: 485.58, change: 3.8, risk: 'MODERATE', returnRate: 0.16, open: 467.50, high: 490.20, low: 465.00, volume: '18.3M' },
-			AMZN: { name: 'Amazon.com Inc.', price: 175.01, change: -1.5, risk: 'MODERATE', returnRate: 0.13, open: 177.70, high: 178.90, low: 173.40, volume: '29.1M' },
-			MSFT: { name: 'Microsoft', price: 415.50, change: 0.8, risk: 'MODERATE', returnRate: 0.15, open: 412.20, high: 418.00, low: 410.50, volume: '19.5M' },
-			GOOGL: { name: 'Alphabet Inc.', price: 147.60, change: -2.1, risk: 'MODERATE', returnRate: 0.14, open: 150.80, high: 151.60, low: 146.90, volume: '23.6M' },
-			NFLX: { name: 'Netflix Inc.', price: 610.56, change: 6.7, risk: 'MODERATE', returnRate: 0.15, open: 572.00, high: 614.00, low: 570.20, volume: '8.9M' },
-			AMD: { name: 'Advanced Micro Devices', price: 162.33, change: 8.2, risk: 'HIGH', returnRate: 0.20, open: 150.00, high: 164.50, low: 149.20, volume: '35.7M' },
-			UBER: { name: 'Uber Technologies', price: 74.12, change: -0.3, risk: 'MODERATE', returnRate: 0.12, open: 74.35, high: 75.10, low: 73.30, volume: '14.2M' },
+			TSLA: { name: 'Tesla Inc.', risk: 'HIGH', basePrice: 17800, returnRate: 0.18, open: 15920, high: 18210, low: 15780, volume: '48.2M' },
+			AAPL: { name: 'Apple Inc.', risk: 'MODERATE', basePrice: 19100, returnRate: 0.14, open: 19930, high: 20010, low: 18950, volume: '52.7M' },
+			NVDA: { name: 'NVIDIA Corp.', risk: 'HIGH', basePrice: 89000, returnRate: 0.22, open: 73280, high: 90100, low: 73010, volume: '41.0M' },
+			META: { name: 'Meta Platforms', risk: 'MODERATE', basePrice: 48500, returnRate: 0.16, open: 46750, high: 49020, low: 46500, volume: '18.3M' },
+			AMZN: { name: 'Amazon.com Inc.', risk: 'MODERATE', basePrice: 17500, returnRate: 0.13, open: 17770, high: 17890, low: 17340, volume: '29.1M' },
+			MSFT: { name: 'Microsoft', risk: 'MODERATE', basePrice: 41500, returnRate: 0.15, open: 41220, high: 41800, low: 41050, volume: '19.5M' },
+			GOOGL: { name: 'Alphabet Inc.', risk: 'MODERATE', basePrice: 14700, returnRate: 0.14, open: 15080, high: 15160, low: 14690, volume: '23.6M' },
+			NFLX: { name: 'Netflix Inc.', risk: 'MODERATE', basePrice: 61000, returnRate: 0.15, open: 57200, high: 61400, low: 57020, volume: '8.9M' },
+			AMD: { name: 'Advanced Micro Devices', risk: 'HIGH', basePrice: 16200, returnRate: 0.20, open: 15000, high: 16450, low: 14920, volume: '35.7M' },
+			UBER: { name: 'Uber Technologies', risk: 'MODERATE', basePrice: 7400, returnRate: 0.12, open: 7435, high: 7510, low: 7330, volume: '14.2M' },
 		};
 
 		const CHART_POINTS = {
@@ -239,6 +252,9 @@
 			try { goal = JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { }
 			const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
 			const retYear = new Date().getFullYear() + years;
+
+			const currentZensBalance = parseInt(document.getElementById('nav-zens-balance')?.textContent?.replace(/,/g, '') || '0', 10);
+
 			const ov = document.createElement('div');
 			ov.style.cssText = 'position:fixed;inset:0;background:rgba(18,18,18,.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease;';
 			ov.innerHTML = `<style>@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes sU{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}</style>
@@ -247,13 +263,21 @@
           <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;">QUICK BUY — ${ticker}</h2>
           <button onclick="this.closest('div[style*=inset]').remove()" style="background:none;border:none;font-size:26px;cursor:pointer;font-weight:900;">×</button>
         </div>
-        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${stock.name} · $${stock.price} · ${stock.change > 0 ? '+' : ''}${stock.change}% today</p>
+        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${stock.name} · ${stock.price} ZENS · ${stock.change > 0 ? '+' : ''}${stock.change}% today</p>
         <div style="padding:0 24px 24px;">
-          <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Monthly Investment</label>
-          <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
-            <span style="background:#121212;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;">₹</span>
-            <input id="buy-amount" type="number" min="500" value="1000" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
+
+          <div style="background:#121212;color:#cafd00;border:2px solid #121212;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Available Balance</span>
+            <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">🪙 ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
           </div>
+
+          <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">How many ZENS to invest?</label>
+          <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
+            <span style="background:#121212;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;font-size:20px;">🪙</span>
+            <input id="buy-amount" type="number" min="50" max="${currentZensBalance}" value="100" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
+          </div>
+          <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: 50 ZENS</p>
+
           <div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin:16px 0;">
             <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;margin-bottom:6px;">Retirement Impact</p>
             <p id="buy-preview" style="font-family:'Lexend',sans-serif;font-weight:900;font-size:13px;"></p>
@@ -265,22 +289,49 @@
 			document.body.appendChild(ov);
 			ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
 			document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { ov.remove(); document.removeEventListener('keydown', esc); } });
-			const inp = ov.querySelector('#buy-amount');
+			
+      const inp = ov.querySelector('#buy-amount');
 			const prev = ov.querySelector('#buy-preview');
 			function upd() {
 				const a = parseFloat(inp.value) || 0;
 				const c = calcCorpus(a, stock.returnRate, years);
-				prev.textContent = `₹${a.toLocaleString('en-IN')}/month → ₹${c.toLocaleString('en-IN')} corpus by ${retYear}.`;
+				prev.textContent = `Adding ${a.toLocaleString('en-US')} ZENS/month → ${c.toLocaleString('en-US')} ZENS equivalence to corpus by ${retYear}.`;
 			}
 			upd(); inp.addEventListener('input', upd);
-			ov.querySelector('#confirm-buy').addEventListener('click', () => {
-				const a = parseFloat(inp.value) || 0;
-				if (a < 500) { showToast('Minimum is ₹500', 'error'); return; }
-				const h = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
-				h.push({ ticker, companyName: stock.name, amount: a, price: stock.price, date: new Date().toISOString() });
-				localStorage.setItem('portfolioHoldings', JSON.stringify(h));
-				ov.remove();
-				showToast(`₹${a.toLocaleString('en-IN')} added to ${ticker}. Portfolio updated!`);
+			
+      const confirmBtn = ov.querySelector('#confirm-buy');
+      confirmBtn.addEventListener('click', async () => {
+				const a = Math.floor(parseFloat(inp.value) || 0);
+				if (a < 50) { showToast('Minimum investment is 50 ZENS', 'error'); return; }
+        if (a > currentZensBalance) { showToast('Insufficient ZENS Balance. Please add money.', 'error'); return; }
+
+        confirmBtn.disabled = true;
+        confirmBtn.style.opacity = '0.5';
+        confirmBtn.textContent = 'PROCESSING...';
+
+        try {
+          const result = await futuraApi.zens.spend(a);
+          
+          if (result.success) {
+            const navBalance = document.getElementById('nav-zens-balance');
+            if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
+
+            const h = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
+            h.push({ ticker, companyName: stock.name, amount: a, price: stock.price, date: new Date().toISOString() });
+            localStorage.setItem('portfolioHoldings', JSON.stringify(h));
+            
+            ov.remove();
+            showToast(`${a.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated!`);
+          } else {
+            throw new Error(result.error);
+          }
+        } catch(err) {
+          console.error(err);
+          showToast('Failed to purchase: ' + err.message, 'error');
+          confirmBtn.disabled = false;
+          confirmBtn.style.opacity = '1';
+          confirmBtn.textContent = 'CONFIRM INVESTMENT';
+        }
 			});
 		}
 
@@ -290,12 +341,17 @@
 
 			const params = new URLSearchParams(location.search);
 			const ticker = (params.get('ticker') || '').toUpperCase();
-			const stock = STOCK_DATA[ticker];
-
-			if (!stock) {
+			
+      // Generate daily swing dynamically matching market
+      const rawStock = STOCK_DATA[ticker];
+			if (!rawStock) {
 				document.querySelector('main').innerHTML = `<div class="text-center py-24"><h1 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:48px;">TICKER NOT FOUND</h1><a href="market_digital_rebel_desktop.html" style="font-family:'Lexend',sans-serif;font-weight:700;text-decoration:underline;">← Back to Markets</a></div>`;
 				return;
 			}
+
+      const swing = (Math.random() * 20) - 8; 
+      const currentPrice = Math.round(rawStock.basePrice * (1 + (swing / 100)));
+      const stock = { ...rawStock, price: currentPrice, change: parseFloat(swing.toFixed(1)) };
 
 			const isUp = stock.change >= 0;
 			const r = riskInfo(stock.risk);
@@ -303,15 +359,16 @@
 			document.title = `${ticker} | DIGITAL REBEL`;
 			document.getElementById('ticker-badge').textContent = ticker;
 			document.getElementById('company-name').textContent = stock.name;
-			document.getElementById('stock-price').textContent = `$${stock.price}`;
+			document.getElementById('stock-price').textContent = `🪙 ${stock.price.toLocaleString('en-US')}`;
 			document.getElementById('change-badge').textContent = `${isUp ? '+' : ''}${stock.change}%`;
 			document.getElementById('change-badge').style.color = isUp ? '#4caf50' : '#b02500';
 			const rb = document.getElementById('risk-badge');
 			rb.textContent = r.label;
 			rb.style.background = r.bg; rb.style.color = r.text; rb.style.borderColor = r.border;
-			document.getElementById('stat-open').textContent = `$${stock.open}`;
-			document.getElementById('stat-high').textContent = `$${stock.high}`;
-			document.getElementById('stat-low').textContent = `$${stock.low}`;
+			
+      document.getElementById('stat-open').textContent = `🪙 ${stock.open.toLocaleString('en-US')}`;
+			document.getElementById('stat-high').textContent = `🪙 ${stock.high.toLocaleString('en-US')}`;
+			document.getElementById('stat-low').textContent = `🪙 ${stock.low.toLocaleString('en-US')}`;
 			document.getElementById('stat-vol').textContent = stock.volume;
 
 			// Retirement Relevance
@@ -321,7 +378,7 @@
 			const corpus = calcCorpus(1000, stock.returnRate, years);
 			const retYear = new Date().getFullYear() + years;
 			document.getElementById('retirement-text').textContent =
-				`If you invested ₹1,000/month in ${ticker} for ${years} years at ${Math.round(stock.returnRate * 100)}% historical return, your corpus contribution would be ₹${corpus.toLocaleString('en-IN')} by ${retYear}.`;
+				`If you invested 1,000 ZENS/month in ${ticker} for ${years} years at ${Math.round(stock.returnRate * 100)}% historical return, your corpus contribution would be ${corpus.toLocaleString('en-US')} ZENS equivalence by ${retYear}.`;
 
 			// Chart
 			let activeRange = '24H';
@@ -336,8 +393,19 @@
 			});
 
 			// BUY button
-			document.getElementById('detail-buy-btn').textContent = `BUY ${ticker}`;
+			document.getElementById('detail-buy-btn').textContent = `BUY ${ticker} (ZENS)`;
 			document.getElementById('detail-buy-btn').addEventListener('click', () => openBuyModal(ticker, stock));
+
+      // Refresh Navigation Pill manually since it's an isolated page
+      try {
+        const balanceResponse = await futuraApi.zens.balance();
+        if (balanceResponse && typeof balanceResponse.zens === 'number') {
+          const pill = document.getElementById('nav-zens-balance');
+          if (pill) pill.textContent = balanceResponse.zens.toLocaleString('en-US') + ' ZENS';
+        }
+      } catch (err) {
+        console.error('Failed to load Zens balance for details page:', err);
+      }
 		});
 	</script>
 </body>

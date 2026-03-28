@@ -123,6 +123,19 @@ async function updateNavAuth() {
     }
   });
 
+  // Populate Zens Balance in Nav if applicable
+  if (session) {
+    const zensPill = document.getElementById('nav-zens-balance');
+    if (zensPill) {
+      try {
+        const { zens } = await futuraApi.zens.balance();
+        zensPill.textContent = (zens || 0).toLocaleString('en-US') + ' ZENS';
+      } catch (err) {
+        console.error("Failed to load Zens balance:", err);
+      }
+    }
+  }
+
   // Find logout links
   const logoutLinks = document.querySelectorAll('#logout-link, [href*="index.html"]:has(.material-symbols-outlined), .btn-logout');
   logoutLinks.forEach(link => {

@@ -214,6 +214,8 @@
                     href="market_digital_rebel_desktop.html">Markets</a>
                 <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
                     href="assets_digital_rebel_desktop.html">Assets</a>
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
+                    href="learn_digital_rebel_desktop.html">Learn</a>
             </div>
         </div>
         <div class="flex items-center gap-4">
@@ -226,9 +228,15 @@
                 class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all">notifications</span>
             <a href="settings_digital_rebel_desktop.html"
                 class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all inline-flex items-center justify-center">settings</a>
-            <button
-                class="bg-primary-fixed text-inverse-surface border-2 border-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-tighter neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">Connect
-                Wallet</button>
+            
+            <!-- ZENS BALANCE PILL -->
+            <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow">
+                <span>🪙</span>
+                <span id="nav-zens-balance">--</span>
+            </div>
+            <!-- ADD MONEY BTN -->
+            <button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })"
+                class="bg-primary-fixed text-inverse-surface border-2 border-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-tighter neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">Add Money</button>
         </div>
     </nav>
     <div class="flex h-full">
