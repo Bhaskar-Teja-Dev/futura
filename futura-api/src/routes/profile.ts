@@ -20,25 +20,18 @@ router.get('/', async (c) => {
   const userId = c.get('userId')
 
   // Fetch existing profile (bypass RLS for existence check)
-  const { data: existingProfile } = await supabaseAdmin
+  const { data: profile, error: profileError } = await supabaseAdmin
     .from('profiles')
     .select('*')
     .eq('id', userId)
     .maybeSingle()
 
-  let profile = existingProfile
-  if (!existingProfile) {
-    // Only initialize if missing
-    const { data: newProfile, error: insertError } = await supabaseAdmin
-      .from('profiles')
-      .insert({ id: userId })
-      .select('*')
-      .single()
+  if (profileError) {
+    return c.json({ error: profileError.message }, 500)
+  }
 
-    if (insertError) {
-      return c.json({ error: insertError.message }, 500)
-    }
-    profile = newProfile
+  if (!profile) {
+    return c.json({ error: 'Profile not found' }, 404)
   }
 
   const { data: subscription, error: subError } = await supabase

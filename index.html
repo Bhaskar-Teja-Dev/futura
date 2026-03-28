@@ -138,6 +138,12 @@
         id="btn-connect-wallet">
         Connect Wallet
       </a>
+      <a href="#"
+        class="flex items-center gap-2 bg-surface text-on-surface border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs px-4 py-2 hover-lift transition-all no-underline"
+        id="btn-google-signin">
+        <span class="material-symbols-outlined text-sm">login</span>
+        Sign in with Google
+      </a>
       <div class="flex gap-2">
         <a href="dashboard_digital_rebel_desktop.html"><span
             class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all">notifications</span></a>
@@ -391,6 +397,19 @@
   <script src="/js/config.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/api.js"></script>
+  <style>
+    /* Auth Guard: Prevents ghost sessions and UI flickering */
+    html.auth-verified #btn-google-signin,
+    html.auth-verified [id*="connect-wallet"] {
+      display: none !important;
+    }
+
+    /* Optional: Show loading state if session exists but not verified */
+    html.auth-loading #btn-google-signin {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  </style>
   <script>
       // Robust Visibility Control: Hide sign-in button immediately if session detected
       (function () {
@@ -402,13 +421,11 @@
           try {
             const session = JSON.parse(sessionStr);
             if (session && session.user) {
-              // If we have a session, the user is 'already in the database'
-              // We can't know onboarding_complete here without an API call, 
-              // but we can look for our own custom flag in localStorage
               const onboardingForceHide = localStorage.getItem('futura_onboarding_complete') === 'true';
-
               if (onboardingForceHide) {
-                document.write('<style>#btn-google-signin { display: none !important; }</style>');
+                document.documentElement.classList.add('auth-verified');
+              } else {
+                document.documentElement.classList.add('auth-loading');
               }
             }
           } catch (e) { }
@@ -427,7 +444,5 @@
     });
   </script>
 </body>
-
-</html>
 
 </html>

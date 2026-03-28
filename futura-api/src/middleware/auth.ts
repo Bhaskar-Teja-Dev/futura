@@ -22,6 +22,7 @@ export const authMiddleware = createMiddleware<{ Bindings: Env; Variables: Varia
 
     c.set('userId', user.id)
     c.set('userEmail', user.email ?? '')
+    c.set('userName', user.user_metadata?.full_name ?? user.email?.split('@')[0] ?? 'Rebel')
     c.set('token', token)
     await next()
   }

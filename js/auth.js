@@ -30,7 +30,7 @@ async function signInWithGoogle() {
   const { error } = await getSupabase().auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: window.location.origin + '/index.html'
+      redirectTo: window.location.origin + '/index.html?auth_callback=true'
     }
   });
   if (error) {
@@ -45,42 +45,65 @@ async function signOut() {
   window.location.href = '/index.html';
 }
 
+let _profileVerified = false;
+
 // Check if onboarding is completed
 async function checkOnboarding() {
   const session = await getSession();
-  if (!session) return;
+  const currentPath = window.location.pathname;
+
+  if (!session) {
+    _profileVerified = true;
+    updateNavAuth();
+    return;
+  }
 
   try {
-    // We call the API instead of direct Supabase to trigger auto-initialization
-    // and to get the source-of-truth profile data.
     const res = await fetch(`${FUTURA_CONFIG.API_BASE_URL}/api/profile`, {
       headers: { 'Authorization': `Bearer ${session.access_token}` }
     });
 
+    if (res.status === 404) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const isNewLogin = urlParams.has('auth_callback') || window.location.hash.includes('access_token');
+
+      if (isNewLogin) {
+        if (!currentPath.includes('onboarding_')) {
+          window.location.href = '/onboarding_step_1_age.html';
+        }
+        return;
+      } else {
+        console.warn('Profile missing. Aggressive logout.');
+        document.documentElement.classList.remove('auth-verified', 'auth-loading');
+        localStorage.clear();
+        sessionStorage.clear();
+        await signOut();
+        return;
+      }
+    }
+
     if (!res.ok) throw new Error('Failed to fetch profile');
     const { profile } = await res.json();
+    _profileVerified = true;
 
     const isOnboarded = profile && profile.onboarding_complete;
-    const currentPath = window.location.pathname;
 
-    // Redirection Logic
     if (isOnboarded) {
-      // Set persistent flag for zero-flash hiding on next load
       localStorage.setItem('futura_onboarding_complete', 'true');
-
-      // Hide sign-in button if onboarded
+      document.documentElement.classList.add('auth-verified');
+      document.documentElement.classList.remove('auth-loading');
       const googleBtn = document.getElementById('btn-google-signin');
       if (googleBtn) googleBtn.style.display = 'none';
 
       if (currentPath === '/' || currentPath.includes('index.html') || currentPath.includes('onboarding_')) {
-        // Use a flag to avoid infinite loops if the redirect is already in progress
         if (!window.location.search.includes('redirecting')) {
           window.location.href = '/dashboard_digital_rebel_desktop.html';
           return;
         }
       }
     } else {
-      // Only redirect to onboarding if NOT already on an onboarding page
+      localStorage.removeItem('futura_onboarding_complete');
+      document.documentElement.classList.remove('auth-verified', 'auth-loading');
       if (!currentPath.includes('onboarding_')) {
         if (currentPath.includes('dashboard_') || currentPath.includes('market_') || currentPath.includes('assets_') || currentPath.includes('index.html') || currentPath === '/') {
           window.location.href = '/onboarding_step_1_age.html';
@@ -89,11 +112,15 @@ async function checkOnboarding() {
       }
     }
 
-    // If we get here, we are on the correct page. Reveal the body if hidden.
+    // UI is now safe to update
+    updateNavAuth();
     document.body.style.opacity = '1';
   } catch (err) {
     console.error('Onboarding check failed:', err);
-    document.body.style.opacity = '1'; // Reveal anyway in case of error
+    document.documentElement.classList.remove('auth-verified', 'auth-loading');
+    _profileVerified = true;
+    updateNavAuth();
+    document.body.style.opacity = '1';
   }
 }
 
@@ -117,7 +144,7 @@ async function updateNavAuth() {
   );
 
   authButtons.forEach(btn => {
-    if (session) {
+    if (session && _profileVerified) {
       if (btn.id === 'btn-google-signin') {
         btn.innerHTML = '<span class="material-symbols-outlined">terminal</span> ENTER TERMINAL';
       } else {
@@ -176,7 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
       checkOnboarding();
       updateNavAuth();
     } else if (event === 'SIGNED_OUT') {
-      document.body.style.opacity = '1'; // Always reveal if logged out
+      document.documentElement.classList.remove('auth-verified', 'auth-loading');
+      _profileVerified = true;
+      updateNavAuth();
+      document.body.style.opacity = '1';
     }
   });
 });

@@ -31,6 +31,7 @@ router.get('/', async (c) => {
 
 router.post('/', zValidator('json', goalsSchema), async (c) => {
   const userId = c.get('userId')
+  const userName = c.get('userName')
   const userEmail = c.get('userEmail')
   const body = c.req.valid('json')
   const supabaseAdmin = getSupabase(c.env)
@@ -50,6 +51,10 @@ router.post('/', zValidator('json', goalsSchema), async (c) => {
       {
         id: userId,
         email: userEmail,
+        display_name: userName,
+        age: body.current_age,
+        retirement_age: body.retirement_age,
+        monthly_income: body.target_monthly_income,
         onboarding_complete: true,
         zens: initialZens // Only give 10000 if first time or wiped
       },
