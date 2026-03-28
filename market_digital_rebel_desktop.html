@@ -33,10 +33,10 @@
             "secondary-fixed": "#e5e2e1",
             "on-primary-container": "#4a5e00",
             "tertiary-fixed-dim": "#ff61f8",
-            "primary-container": "#68FD00",
+            "primary-container": "#cafd00",
             "on-primary": "#e1ff88",
             "inverse-on-surface": "#9c9d9d",
-            "primary-fixed": "#68FD00",
+            "primary-fixed": "#cafd00",
             "secondary": "#5c5b5b",
             "outline-variant": "#acadad",
             "secondary-dim": "#504f4f",
@@ -71,7 +71,7 @@
             "error-dim": "#b92902",
             "tertiary-fixed": "#ff81f5",
             "surface-container": "#e7e8e8",
-            "inverse-primary": "#68FD00",
+            "inverse-primary": "#cafd00",
             "on-surface": "#2d2f2f"
           },
           fontFamily: {
@@ -128,7 +128,7 @@
     </div>
     <div class="flex items-center gap-4">
       <!-- ZENS BALANCE PILL -->
-      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#68FD00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
+      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm hard-shadow-sm">
         <span>🪙</span>
         <span id="nav-zens-balance">--</span>
       </div>
@@ -319,7 +319,7 @@
         <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${name} · ${price} ZENS · ${change}% today</p>
         <div style="padding:0 24px 24px;">
           
-          <div style="background:#121212;color:#68FD00;border:2px solid #121212;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
+          <div style="background:#121212;color:#cafd00;border:2px solid #121212;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Available Balance</span>
             <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">🪙 ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
           </div>
@@ -341,7 +341,7 @@
 
           ${warningBlock}
 
-          <button id="confirm-buy" style="width:100%;background:#68FD00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;margin-bottom:8px;transition:0.2s;position:relative;">CONFIRM INVESTMENT</button>
+          <button id="confirm-buy" style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;margin-bottom:8px;transition:0.2s;position:relative;">CONFIRM INVESTMENT</button>
           <button onclick="this.closest('.buy-overlay').parentElement.remove()" style="width:100%;background:transparent;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:12px;cursor:pointer;">CANCEL</button>
         </div>
       </div>`);
@@ -564,7 +564,7 @@
         el.dataset.ticker = d.ticker;
         
         el.innerHTML = `
-          <div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#68FD00] font-headline font-black text-xl shrink-0">
+          <div class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
             ${d.ticker}
           </div>
           <div class="flex-grow">
@@ -580,7 +580,7 @@
               <polyline fill="none" points="${points}" stroke="${sparkColor}" stroke-width="3"></polyline>
             </svg>
           </div>
-          <button data-buy="${d.ticker}" class="buy-btn bg-[#68FD00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">
+          <button data-buy="${d.ticker}" class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">
             BUY
           </button>
         `;
@@ -648,7 +648,7 @@
             const a = document.createElement('a');
             a.href = href; a.textContent = label;
             a.style.cssText = 'display:block;padding:10px 16px;font-family:Lexend,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.07em;text-decoration:none;color:#121212;border-bottom:1px solid #e0e0e0;';
-            a.onmouseover = () => a.style.background = '#68FD00';
+            a.onmouseover = () => a.style.background = '#cafd00';
             a.onmouseout = () => a.style.background = '';
             dd.appendChild(a);
           });
