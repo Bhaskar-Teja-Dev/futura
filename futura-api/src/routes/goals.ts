@@ -31,13 +31,26 @@ router.get('/', async (c) => {
 
 router.post('/', zValidator('json', goalsSchema), async (c) => {
   const userId = c.get('userId')
+  const userEmail = c.get('userEmail')
   const body = c.req.valid('json')
   const supabaseAdmin = getSupabase(c.env)
 
   // 1. Ensure profile row exists FIRST (Fixes foreign key constraint violation)
-  await supabaseAdmin
+  const { error: profileError } = await supabaseAdmin
     .from('profiles')
-    .upsert({ id: userId, onboarding_complete: true }, { onConflict: 'id' })
+    .upsert(
+      { 
+        id: userId, 
+        email: userEmail,
+        onboarding_complete: true 
+      }, 
+      { onConflict: 'id' }
+    )
+    
+  if (profileError) {
+    console.error("Supabase profile create error:", profileError)
+    return c.json({ error: "Failed to initialize user profile: " + profileError.message }, 500)
+  }
 
   // 2. Now it is safe to upsert goals
   const { data, error } = await supabaseAdmin
