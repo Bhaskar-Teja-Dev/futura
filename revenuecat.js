@@ -5,7 +5,7 @@ let purchasesInstance = null;
 export async function initRevenueCat(userId = null) {
   try {
     purchasesInstance = await Purchases.configure({
-      apiKey: 'test_luADZmVbUPiGHBoUPqsPtUbGEEW',
+      apiKey: process.env.NEXT_PUBLIC_REVENUECAT_API_KEY,
       appUserId: userId || null, // optional (recommended if you have auth)
     });
 
