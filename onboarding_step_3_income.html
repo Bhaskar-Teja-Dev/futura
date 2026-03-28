@@ -235,9 +235,13 @@
           nextBtn.innerHTML = '<span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">SAVING...</span>';
 
           try {
-            // If the profile age didn't exist yet, update it
+            // Store age, retirement_age, monthly_income in profiles table
             if (currentData.current_age) {
-              await futuraApi.profile.update({ age: currentData.current_age });
+              await futuraApi.profile.update({
+                age: parseInt(currentData.current_age, 10),
+                retirement_age: parseInt(currentData.retirement_age, 10),
+                monthly_income: parseInt(currentData.target_monthly_income, 10)
+              });
             }
 
             await futuraApi.goals.upsert({
