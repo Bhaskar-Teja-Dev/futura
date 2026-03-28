@@ -7,7 +7,7 @@ import type { Env, Variables } from '../types'
 const router = new Hono<{ Bindings: Env; Variables: Variables }>()
 
 const contributionSchema = z.object({
-  amount: z.number().positive().max(100000),
+  amount: z.number().positive().max(100000000000), // increased to 100 billion
   contribution_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   note: z.string().max(200).optional(),
   currency: z.string().length(3).optional()

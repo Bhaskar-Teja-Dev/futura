@@ -100,13 +100,13 @@ async function buyZens(onSuccess) {
         <button data-amount="50" data-zens="500" class="zens-pack" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:3px solid #121212;background:#f8f8f8;cursor:pointer;transition:all 0.1s;">
           <div style="text-align:left;">
             <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;">🪙 500 <span style="font-size:12px;color:#767777;">ZENS</span></div>
-            <div style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#4caf50;margin-top:4px;">STARTER PACK</div>
+            <div style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#000000;margin-top:4px;">STARTER PACK</div>
           </div>
           <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;">₹50</div>
         </button>
 
         <!-- Package 2 -->
-        <button data-amount="200" data-zens="2000" class="zens-pack" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:3px solid #121212;background:#68FD00;cursor:pointer;transition:all 0.1s;position:relative;box-shadow:4px 4px 0 #121212;">
+        <button data-amount="200" data-zens="2000" class="zens-pack" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:3px solid #121212;background:#cafd00;cursor:pointer;transition:all 0.1s;position:relative;box-shadow:4px 4px 0 #121212;">
           <div style="position:absolute;top:-12px;right:-12px;background:#121212;color:#fff;font-family:'Lexend',sans-serif;font-weight:900;font-size:10px;padding:4px 8px;border:2px solid #fff;transform:rotate(4deg);">MOST POPULAR</div>
           <div style="text-align:left;">
             <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;color:#121212;">🪙 2,000 <span style="font-size:12px;color:#121212;opacity:0.8;">ZENS</span></div>
@@ -118,7 +118,7 @@ async function buyZens(onSuccess) {
         <!-- Package 3 -->
         <button data-amount="1000" data-zens="10000" class="zens-pack" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:3px solid #121212;background:#121212;color:#fff;cursor:pointer;transition:all 0.1s;">
           <div style="text-align:left;">
-            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;color:#68FD00;">🪙 10,000 <span style="font-size:12px;color:#fff;opacity:0.7;">ZENS</span></div>
+            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;color:#cafd00;">🪙 10,000 <span style="font-size:12px;color:#fff;opacity:0.7;">ZENS</span></div>
             <div style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#fff;opacity:0.9;margin-top:4px;">WHALE PACK</div>
           </div>
           <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;">₹1000</div>
