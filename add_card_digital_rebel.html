@@ -340,6 +340,7 @@
         number: cardRaw,
         lastFour: lastFour,
         expiry: expiryInput.value.replace(/\s/g, ''),
+        balance: Math.floor(8000 + Math.random() * 57000),
         addedAt: new Date().toISOString()
       });
       localStorage.setItem('rebel_cards', JSON.stringify(existingCards));

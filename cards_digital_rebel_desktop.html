@@ -81,12 +81,8 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
         }
-        .hard-shadow {
-            box-shadow: 4px 4px 0px 0px #121212;
-        }
-        .hard-shadow-lg {
-            box-shadow: 8px 8px 0px 0px #121212;
-        }
+        .hard-shadow  { box-shadow: 4px 4px 0px 0px #121212; }
+        .hard-shadow-lg { box-shadow: 8px 8px 0px 0px #121212; }
         .neo-card-pattern-1 {
             background-color: #121212;
             background-image: radial-gradient(#cafd00 2px, transparent 2px);
@@ -97,6 +93,55 @@
             background-image: linear-gradient(45deg, #cafd00 25%, transparent 25%, transparent 50%, #cafd00 50%, #cafd00 75%, transparent 75%, transparent);
             background-size: 40px 40px;
         }
+        /* User card action overlay */
+        .user-card-actions {
+            position: absolute; top: 0; right: 0;
+            display: flex; gap: 0; opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: 30;
+        }
+        .user-card-wrap:hover .user-card-actions { opacity: 1; }
+        .user-card-actions button {
+            border: none; cursor: pointer;
+            font-family: 'Lexend', sans-serif; font-weight: 900;
+            font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 0.05em; padding: 6px 10px;
+            border-bottom: 2px solid #121212; border-left: 2px solid #121212;
+            transition: filter 0.15s;
+        }
+        .user-card-actions button:hover { filter: brightness(1.15); }
+        /* Kill-switch modal */
+        #kill-modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.75); z-index: 200;
+            justify-content: center; align-items: center;
+        }
+        #kill-modal.open { display: flex; }
+        #kill-modal-box {
+            background: #fff; border: 4px solid #121212;
+            box-shadow: 12px 12px 0 #b02500;
+            padding: 2.5rem; max-width: 420px; width: 90%;
+        }
+        /* System toast */
+        #sys-toast {
+            position: fixed; bottom: 2rem; left: 50%;
+            transform: translateX(-50%) translateY(5rem);
+            background: #121212; color: #cafd00;
+            font-family: 'Lexend', sans-serif; font-weight: 900;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+            padding: 0.75rem 2rem; border: 3px solid #cafd00;
+            box-shadow: 6px 6px 0 #cafd00;
+            display: flex; align-items: center; gap: 0.75rem;
+            z-index: 300; opacity: 0;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            white-space: nowrap;
+        }
+        #sys-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+        /* Toggle animation */
+        .toggle-knob { transition: left 0.2s ease; }
     </style>
 </head>
 <body class="bg-surface font-body text-on-background min-h-screen flex flex-col">
@@ -111,7 +156,7 @@
 </div>
 </div>
 <div class="flex items-center gap-4">
-<button class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent active:border-[#121212]">notifications</button>
+<button id="btn-notifications" class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent active:border-[#121212]">notifications</button>
 <a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent active:border-[#121212] inline-flex items-center justify-center">settings</a>
 <div class="w-10 h-10 border-2 border-[#121212] bg-primary-fixed">
 <img alt="User Profile" data-alt="minimalist pixel art avatar of a rebel character with neon green hair and dark sunglasses on a flat background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwDq_muka5zbEfqhaWCerndcTs9KTBHANJq2xnb-vNg4nd1qfzAXGuTSBZYSgZ2T0AfVtZFLLcebaMZSYnGNzZqZabCVWJRlaFOPxBeW76Huq4AqTJ85HsIMyK-r8xnDJduw3613Fc69DemDONxnqt0Ba2yRG6eIaB2Y4Qxj4QyQYs0drAUt32tKdrmWGkzFebyf_19j4KKy38MMvNGkHqy2RnQCHb7TxDcMW1M7kQ2gFSVUXj7pPtniwFBShoLRdJKwhWcRJ3cyAn"/>
@@ -140,52 +185,15 @@
 <div class="flex-1 h-1 bg-[#121212]"></div>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8" id="cards-grid">
-<!-- Card 1 -->
-<div class="neo-card-pattern-1 border-4 border-[#121212] p-8 aspect-[1.586/1] flex flex-col justify-between text-[#f6f6f6] hard-shadow-lg relative overflow-hidden group">
-<div class="flex justify-between items-start z-10">
-<span class="material-symbols-outlined text-5xl">contactless</span>
-<span class="font-headline font-black italic text-xl">TITANIUM_ELITE</span>
-</div>
-<div class="z-10">
-<p class="font-mono text-2xl tracking-widest mb-4">**** **** **** 8829</p>
-<div class="flex justify-between items-end">
-<div>
-<p class="text-[10px] uppercase font-headline tracking-widest opacity-70">Card Holder</p>
-<p class="font-headline font-black uppercase">REBEL_OPERATIVE_01</p>
-</div>
-<div class="bg-[#cafd00] text-[#121212] px-4 py-1 border-2 border-[#121212] font-headline font-black rotate-3">
-                                    ACTIVE
-                                </div>
-</div>
-</div>
-</div>
-<!-- Card 2 -->
-<div class="neo-card-pattern-2 border-4 border-[#121212] p-8 aspect-[1.586/1] flex flex-col justify-between text-[#121212] hard-shadow-lg relative overflow-hidden group">
-<div class="flex justify-between items-start z-10">
-<span class="material-symbols-outlined text-5xl">ac_unit</span>
-<span class="font-headline font-black italic text-xl">COLD_STORAGE</span>
-</div>
-<div class="z-10">
-<p class="font-mono text-2xl tracking-widest mb-4">**** **** **** 4401</p>
-<div class="flex justify-between items-end">
-<div>
-<p class="text-[10px] uppercase font-headline tracking-widest opacity-70">Vault ID</p>
-<p class="font-headline font-black uppercase">REBEL_VAULT_77</p>
-</div>
-<div class="bg-white text-[#121212] px-4 py-1 border-2 border-[#121212] font-headline font-black -rotate-2">
-                                    FROZEN
-                                </div>
-</div>
-</div>
-</div>
 <!-- Card Details/Stats (Bento style) -->
 <div class="border-4 border-[#121212] bg-[#cafd00] p-6 hard-shadow-lg flex flex-col justify-center gap-4">
-<p class="font-headline font-black text-4xl uppercase leading-tight">Total Liquidity Across Cards</p>
+<p class="font-headline font-black text-4xl uppercase leading-tight">Total Liquidity<br/>Across Cards</p>
 <div class="flex items-baseline gap-2">
-<span class="text-6xl font-black font-headline tracking-tighter">$142.8K</span>
+  <span id="liquidity-amount" class="text-6xl font-black font-headline tracking-tighter">$142.8K</span>
 </div>
-<div class="bg-[#121212] text-white p-4">
-<p class="font-headline font-bold uppercase tracking-widest text-xs">+12.4% THIS MONTH</p>
+<div class="bg-[#121212] text-white p-4 flex items-center justify-between">
+  <p id="liquidity-change" class="font-headline font-bold uppercase tracking-widest text-xs">+12.4% THIS MONTH</p>
+  <p id="liquidity-cards" class="font-headline font-bold uppercase tracking-widest text-xs opacity-60">2 CARDS ACTIVE</p>
 </div>
 </div>
 </div>
@@ -199,31 +207,31 @@
 <span class="material-symbols-outlined text-3xl">trending_up</span>
 </div>
 <div class="space-y-6">
-<div class="border-2 border-[#121212] p-4 bg-surface-container flex items-center justify-between">
+<div id="row-daily" class="border-2 border-[#121212] p-4 bg-surface-container flex items-center justify-between transition-opacity">
 <div>
 <p class="font-headline font-black uppercase text-sm">DAILY TRANSACTION CAP</p>
-<p class="text-4xl font-black font-headline tracking-tighter">$5,000</p>
+<p id="daily-value" class="text-4xl font-black font-headline tracking-tighter">$5,000</p>
 </div>
-<div class="w-16 h-8 bg-[#cafd00] border-2 border-[#121212] relative cursor-pointer">
-<div class="absolute right-1 top-1 w-6 h-5 bg-[#121212]"></div>
+<div id="toggle-daily" data-state="on" class="w-16 h-8 border-2 border-[#121212] relative cursor-pointer" style="background:#cafd00">
+  <div class="toggle-knob absolute top-1 w-6 h-5 bg-[#121212]" style="left:calc(100% - 1.75rem - 2px)"></div>
 </div>
 </div>
-<div class="border-2 border-[#121212] p-4 bg-white flex items-center justify-between">
+<div id="row-atm" class="border-2 border-[#121212] p-4 bg-white flex items-center justify-between transition-opacity" style="opacity:0.45">
 <div>
 <p class="font-headline font-black uppercase text-sm">ATM WITHDRAWAL LIMIT</p>
-<p class="text-4xl font-black font-headline tracking-tighter">$1,200</p>
+<p id="atm-value" class="text-4xl font-black font-headline tracking-tighter line-through text-[#767777]">$1,200</p>
 </div>
-<div class="w-16 h-8 bg-surface-variant border-2 border-[#121212] relative cursor-pointer">
-<div class="absolute left-1 top-1 w-6 h-5 bg-[#121212]"></div>
+<div id="toggle-atm" data-state="off" class="w-16 h-8 border-2 border-[#121212] relative cursor-pointer" style="background:#dbdddd">
+  <div class="toggle-knob absolute top-1 w-6 h-5 bg-[#121212]" style="left:2px"></div>
 </div>
 </div>
-<div class="border-2 border-[#121212] p-4 bg-surface-container flex items-center justify-between">
+<div id="row-ecom" class="border-2 border-[#121212] p-4 bg-surface-container flex items-center justify-between">
 <div>
 <p class="font-headline font-black uppercase text-sm">E-COMMERCE BLOCKER</p>
-<p class="font-headline font-bold text-error uppercase">ENABLED</p>
+<p id="ecom-label" class="font-headline font-bold text-error uppercase">ENABLED</p>
 </div>
-<div class="w-16 h-8 bg-error-container border-2 border-[#121212] relative cursor-pointer">
-<div class="absolute right-1 top-1 w-6 h-5 bg-[#121212]"></div>
+<div id="toggle-ecom" data-state="on" class="w-16 h-8 border-2 border-[#121212] relative cursor-pointer" style="background:#f95630">
+  <div class="toggle-knob absolute top-1 w-6 h-5 bg-[#121212]" style="left:calc(100% - 1.75rem - 2px)"></div>
 </div>
 </div>
 </div>
@@ -235,7 +243,7 @@
 <span class="material-symbols-outlined text-3xl">gpp_maybe</span>
 </div>
 <div class="space-y-4">
-<div class="p-4 border-2 border-[#121212] hover:bg-primary-fixed transition-colors flex items-center gap-4 cursor-pointer group">
+<div id="btn-biometric" class="p-4 border-2 border-[#121212] hover:bg-primary-fixed transition-colors flex items-center gap-4 cursor-pointer group">
 <span class="material-symbols-outlined text-4xl">fingerprint</span>
 <div class="flex-1">
 <p class="font-headline font-black uppercase tracking-tight">Biometric Confirmation</p>
@@ -243,35 +251,56 @@
 </div>
 <span class="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </div>
-<div class="p-4 border-2 border-[#121212] bg-primary-fixed flex items-center gap-4 cursor-pointer">
-<span class="material-symbols-outlined text-4xl" data-weight="fill">shield_person</span>
+<div id="btn-geofence" data-state="on" class="p-4 border-2 border-[#121212] flex items-center gap-4 cursor-pointer" style="background:#cafd00">
+<span class="material-symbols-outlined text-4xl">shield_person</span>
 <div class="flex-1">
 <p class="font-headline font-black uppercase tracking-tight">Geofence Locking</p>
-<p class="text-xs uppercase tracking-widest font-bold">Lock card to GPS radius</p>
+<p id="geofence-sub" class="text-xs uppercase tracking-widest font-bold">Lock card to GPS radius — ON</p>
 </div>
-<div class="w-6 h-6 border-2 border-[#121212] flex items-center justify-center bg-[#121212]">
+<div id="geofence-check" class="w-6 h-6 border-2 border-[#121212] flex items-center justify-center bg-[#121212]">
 <span class="material-symbols-outlined text-white text-sm">check</span>
 </div>
 </div>
-<div class="p-4 border-2 border-[#121212] hover:bg-tertiary-container transition-colors flex items-center gap-4 cursor-pointer group">
+<div id="btn-cvv" class="p-4 border-2 border-[#121212] hover:bg-tertiary-container transition-colors flex items-center gap-4 cursor-pointer group">
 <span class="material-symbols-outlined text-4xl">vpn_key</span>
 <div class="flex-1">
 <p class="font-headline font-black uppercase tracking-tight">Dynamic CVV Generation</p>
-<p class="text-xs uppercase tracking-widest font-bold opacity-60">Refreshes every 60 seconds</p>
+<p id="cvv-sub" class="text-xs uppercase tracking-widest font-bold opacity-60">Refreshes every 60 seconds</p>
 </div>
+<span id="cvv-value" class="font-headline font-black text-2xl tracking-widest"></span>
 <span class="material-symbols-outlined text-3xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </div>
 <div class="p-4 border-2 border-[#121212] border-dashed bg-surface-container-low flex flex-col items-center justify-center py-6 gap-2">
 <p class="font-headline font-black text-sm uppercase">EMERGENCY PROTOCOL</p>
-<button class="bg-error text-white font-headline font-black px-12 py-3 border-2 border-[#121212] hard-shadow active:translate-y-1 transition-all uppercase tracking-tighter">
-                                KILL SWITCH ALL CARDS
-                            </button>
+<button id="btn-killswitch" class="bg-error text-white font-headline font-black px-12 py-3 border-2 border-[#121212] hard-shadow active:translate-y-1 transition-all uppercase tracking-tighter">
+  KILL SWITCH ALL CARDS
+</button>
 </div>
 </div>
 </section>
 </div>
 </main>
 </div>
+
+<!-- Kill-Switch Confirmation Modal -->
+<div id="kill-modal">
+  <div id="kill-modal-box">
+    <p class="font-headline font-black text-xs uppercase tracking-widest text-error mb-2">⚠ EMERGENCY PROTOCOL</p>
+    <h3 class="font-headline font-black text-3xl uppercase tracking-tighter mb-4 leading-tight">Freeze All<br/>Active Cards?</h3>
+    <p class="text-sm font-bold opacity-70 mb-8">This will immediately freeze every card you have added. You can unfreeze them individually afterwards.</p>
+    <div class="flex gap-4">
+      <button id="kill-confirm" class="flex-1 bg-error text-white font-headline font-black py-4 border-2 border-[#121212] hard-shadow uppercase tracking-tighter hover:brightness-110 transition-all">Confirm Freeze</button>
+      <button id="kill-cancel" class="flex-1 bg-white font-headline font-black py-4 border-2 border-[#121212] hard-shadow uppercase tracking-tighter hover:bg-surface-container transition-all">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- System Toast -->
+<div id="sys-toast">
+  <span id="sys-toast-icon" class="material-symbols-outlined">check_circle</span>
+  <span id="sys-toast-msg">Done</span>
+</div>
+
 <!-- Footer -->
 <footer class="w-full border-t-2 border-[#cafd00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
 <div class="flex flex-col items-center md:items-start gap-1">
@@ -288,67 +317,369 @@
 <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="add_manual_asset_digital_rebel.html">Add Asset</a>
 </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/js/config.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/api.js"></script>
 <script>
-(function () {
-  const PATTERNS = [
-    { bg: 'neo-card-pattern-1', text: '#f6f6f6', badge: 'bg-[#cafd00] text-[#121212]' },
-    { bg: 'bg-[#121212]', text: '#cafd00', badge: 'bg-white text-[#121212]' },
-    { bg: 'bg-[#4e6300]', text: '#cafd00', badge: 'bg-[#cafd00] text-[#121212]' },
-    { bg: 'bg-[#a400a4]', text: '#ff81f5', badge: 'bg-[#ff81f5] text-[#121212]' },
+(async function () {
+
+  var BASE_LIQUIDITY = 142800;
+  var dailyCapVal = 5000;
+  var atmLimitVal = 1200;
+
+  try {
+    if (typeof requireAuth !== 'undefined') {
+      const session = await requireAuth();
+      if (session) {
+        const goalsResult = await futuraApi.goals.get();
+        const goal = goalsResult.goal;
+        
+        if (goal && goal.target_monthly_income) {
+          const monthlyIncome = goal.target_monthly_income;
+          dailyCapVal = Math.round(monthlyIncome * 0.1);
+          atmLimitVal = Math.round(monthlyIncome * 0.024);
+          
+          const projectionPayload = {
+            currentAge: goal.current_age || 25,
+            retirementAge: goal.retirement_age || 65,
+            monthlyIncome: monthlyIncome,
+            monthlyExpense: monthlyIncome * 0.6,
+            currentSavings: 0,
+            monthlyInvestment: monthlyIncome * 0.2,
+            inflationRate: 0.06,
+            returnRate: goal.annual_return_rate ?? 0.12,
+            simulations: 2000
+          };
+          
+          if (futuraApi.projection && futuraApi.projection.calculate) {
+            const projectionRes = await futuraApi.projection.calculate(projectionPayload);
+            if (projectionRes && projectionRes.result && projectionRes.result.futureSavings) {
+              BASE_LIQUIDITY = projectionRes.result.futureSavings;
+            }
+          }
+        }
+      }
+    }
+  } catch(e) {
+    console.error("Failed to load user dynamic limits:", e);
+  }
+
+  function formatMoney(val) {
+    return '$' + val.toLocaleString('en-US');
+  }
+
+  /* ─── TOAST ─── */
+  function showToast(msg, icon) {
+    var t = document.getElementById('sys-toast');
+    document.getElementById('sys-toast-msg').textContent = msg;
+    document.getElementById('sys-toast-icon').textContent = icon || 'check_circle';
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(function() { t.classList.remove('show'); }, 2800);
+  }
+
+  /* ─── CARD PALETTES ─── */
+  var PALETTES = [
+    { bg: '#121212', pattern: 'radial-gradient(#cafd00 2px,transparent 2px)', sz: '20px 20px', fg: '#f6f6f6', accent: '#cafd00', accentFg: '#121212' },
+    { bg: '#4e6300', pattern: 'linear-gradient(45deg,#cafd00 25%,transparent 25%,transparent 50%,#cafd00 50%,#cafd00 75%,transparent 75%,transparent)', sz: '40px 40px', fg: '#121212', accent: '#ffffff', accentFg: '#121212' },
+    { bg: '#0a0a2e', pattern: 'none', sz: 'auto', fg: '#cafd00', accent: '#cafd00', accentFg: '#0a0a2e' },
+    { bg: '#a400a4', pattern: 'radial-gradient(rgba(255,129,245,0.3) 1px,transparent 1px)', sz: '16px 16px', fg: '#ff81f5', accent: '#ff81f5', accentFg: '#121212' },
   ];
 
+  /* ─── BUILD A CARD ELEMENT ─── */
+  function buildCard(card, p) {
+    var frozen = !!card.frozen;
+    var wrap = document.createElement('div');
+    wrap.setAttribute('data-user-card', card.id);
+    wrap.className = 'user-card-wrap';
+    wrap.style.cssText = [
+      'border:4px solid #121212',
+      'padding:2rem',
+      'display:flex',
+      'flex-direction:column',
+      'justify-content:space-between',
+      'position:relative',
+      'overflow:hidden',
+      'aspect-ratio:1.586',
+      'box-shadow:8px 8px 0 #121212',
+      'background-color:' + p.bg,
+      'background-image:' + p.pattern,
+      'background-size:' + p.sz
+    ].join(';');
+
+    /* Masked card number — bullet dots, correct spacing */
+    var masked = '\u2022\u2022\u2022\u2022\u00a0\u2022\u2022\u2022\u2022\u00a0\u2022\u2022\u2022\u2022\u00a0' + card.lastFour;
+
+    /* Status badge */
+    var badgeBg  = frozen ? '#3a3a5c' : p.accent;
+    var badgeFg  = frozen ? '#cafd00' : p.accentFg;
+    var badgeTxt = frozen ? 'FROZEN'  : 'ACTIVE';
+
+    /* Frozen overlay */
+    var frozenHtml = frozen ? (
+      '<div style="position:absolute;inset:0;background:rgba(10,10,46,0.88);z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem">' +
+        '<span class="material-symbols-outlined" style="font-size:3.5rem;color:#cafd00">lock</span>' +
+        '<span style="font-family:Lexend,sans-serif;font-weight:900;font-size:0.9rem;text-transform:uppercase;letter-spacing:0.15em;color:#cafd00">Card Frozen</span>' +
+      '</div>'
+    ) : '';
+
+    /* Hover action buttons */
+    var freezeLabel = frozen ? 'UNFREEZE' : 'FREEZE';
+    var freezeBg    = frozen ? '#cafd00'  : '#0a0a2e';
+    var freezeColor = frozen ? '#121212'  : '#cafd00';
+    var actionsHtml = '<div class="user-card-actions">' +
+      '<button onclick="freezeCard(' + card.id + ')" style="background:' + freezeBg + ';color:' + freezeColor + '">' + freezeLabel + '</button>' +
+      '<button onclick="deleteCard(' + card.id + ')" style="background:#b02500;color:#fff">DELETE</button>' +
+    '</div>';
+
+    wrap.innerHTML = frozenHtml + actionsHtml +
+      '<div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:10">' +
+        '<span class="material-symbols-outlined" style="font-size:3rem;color:' + p.fg + '">' + (card.icon || 'credit_card') + '</span>' +
+        '<span style="font-family:Lexend,sans-serif;font-weight:900;font-style:italic;font-size:1rem;color:' + p.fg + '">' + (card.title || 'REBEL_CARD') + '</span>' +
+      '</div>' +
+      '<div style="position:relative;z-index:10">' +
+        '<p style="font-family:monospace;font-size:1.25rem;letter-spacing:0.04em;margin-bottom:0.75rem;color:' + p.fg + '">' + masked + '</p>' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-end">' +
+          '<div>' +
+            '<p style="font-family:Lexend,sans-serif;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.65;color:' + p.fg + '">Card Holder</p>' +
+            '<p style="font-family:Lexend,sans-serif;font-weight:900;text-transform:uppercase;font-size:0.85rem;color:' + p.fg + '">' + card.name + '</p>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">' +
+            '<p style="font-family:Lexend,sans-serif;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.65;color:' + p.fg + '">Expires</p>' +
+            '<p style="font-family:Lexend,sans-serif;font-weight:700;font-size:0.8rem;color:' + p.fg + '">' + (card.expiry || '--/--') + '</p>' +
+          '</div>' +
+          '<span style="font-family:Lexend,sans-serif;font-weight:900;font-size:0.75rem;background:' + badgeBg + ';color:' + badgeFg + ';padding:3px 14px;border:2px solid #121212;transform:rotate(2deg);display:inline-block">' + badgeTxt + '</span>' +
+        '</div>' +
+      '</div>';
+
+    return wrap;
+  }
+
+  /* ─── RENDER ALL USER CARDS ─── */
   function renderUserCards() {
-    const grid = document.getElementById('cards-grid');
-    const cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+    var grid = document.getElementById('cards-grid');
+    if (!grid) return;
+    grid.querySelectorAll('[data-user-card]').forEach(function(el) { el.remove(); });
+    var cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
     if (!cards.length) return;
+    cards.forEach(function(card, i) {
+      var el = buildCard(card, PALETTES[i % PALETTES.length]);
+      var ref = grid.lastElementChild;
+      if (ref) grid.insertBefore(el, ref); else grid.appendChild(el);
+    });
+  }
 
-    // Remove any previously rendered user cards to avoid duplicates on refresh
-    grid.querySelectorAll('[data-user-card]').forEach(el => el.remove());
+  /* ─── FREEZE / UNFREEZE ─── */
+  window.freezeCard = function(id) {
+    var cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+    var card = null, idx = 0;
+    cards.forEach(function(c, i) { if (c.id === id) { card = c; idx = i; } });
+    if (!card) return;
+    card.frozen = !card.frozen;
+    localStorage.setItem('rebel_cards', JSON.stringify(cards));
+    var oldEl = document.querySelector('[data-user-card="' + id + '"]');
+    var newEl = buildCard(card, PALETTES[idx % PALETTES.length]);
+    if (oldEl) oldEl.replaceWith(newEl);
+    showToast(card.frozen ? 'Card frozen' : 'Card unfrozen', card.frozen ? 'lock' : 'lock_open');
+  };
 
-    cards.forEach((card, i) => {
-      const pattern = PATTERNS[i % PATTERNS.length];
-      const el = document.createElement('div');
-      el.setAttribute('data-user-card', card.id);
-      el.className = `${pattern.bg} border-4 border-[#121212] p-8 aspect-[1.586/1] flex flex-col justify-between hard-shadow-lg relative overflow-hidden group`;
-      el.style.color = pattern.text;
-      el.innerHTML = `
-        <div class="flex justify-between items-start z-10">
-          <span class="material-symbols-outlined text-5xl" style="color:${pattern.text}">credit_card</span>
-          <span class="font-headline font-black italic text-xl" style="color:${pattern.text}">REBEL_CARD</span>
-        </div>
-        <div class="z-10">
-          <p class="font-mono text-2xl tracking-widest mb-4" style="color:${pattern.text}">**** **** **** ${card.lastFour}</p>
-          <div class="flex justify-between items-end">
-            <div>
-              <p class="text-[10px] uppercase font-headline tracking-widest opacity-70" style="color:${pattern.text}">Card Holder</p>
-              <p class="font-headline font-black uppercase" style="color:${pattern.text}">${card.name}</p>
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="${pattern.badge} px-4 py-1 border-2 border-[#121212] font-headline font-black rotate-2 text-sm">ACTIVE</div>
-              <button onclick="deleteCard(${card.id})" title="Remove card" class="bg-[#b02500] text-white border-2 border-[#121212] w-8 h-8 flex items-center justify-center font-black text-lg hover:scale-110 transition-transform z-20">&times;</button>
-            </div>
-          </div>
-        </div>`;
-      // Insert before the stats bento card (last static child)
-      const staticCards = grid.children;
-      // Insert as 3rd element (after the 2 static cards, before the bento box) or at end
-      const bentoBox = grid.querySelector('.bg-\\[\\#cafd00\\]');
-      if (bentoBox) {
-        grid.insertBefore(el, bentoBox);
+  /* ─── DELETE ─── */
+  window.deleteCard = function(id) {
+    var cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+    cards = cards.filter(function(c) { return c.id !== id; });
+    localStorage.setItem('rebel_cards', JSON.stringify(cards));
+    var el = document.querySelector('[data-user-card="' + id + '"]');
+    if (el) el.remove();
+    showToast('Card removed', 'delete');
+  };
+
+  /* ─── SPENDING LIMIT TOGGLES ─── */
+  function initToggle(toggleId, key, onClr, offClr, rowId, valueId, activeVal, labelId, onLbl, offLbl) {
+    var el = document.getElementById(toggleId);
+    if (!el) return;
+    var saved = localStorage.getItem('toggle_' + key);
+    if (saved !== null) el.dataset.state = saved;
+
+    function apply() {
+      var on = el.dataset.state === 'on';
+      /* Toggle pill */
+      el.style.background = on ? onClr : offClr;
+      var knob = el.querySelector('.toggle-knob');
+      if (knob) knob.style.left = on ? 'calc(100% - 1.75rem - 2px)' : '2px';
+      /* Row dimming */
+      if (rowId) {
+        var row = document.getElementById(rowId);
+        if (row) row.style.opacity = on ? '1' : '0.45';
+      }
+      /* Value text */
+      if (valueId) {
+        var valEl = document.getElementById(valueId);
+        if (valEl) {
+          if (on) {
+            valEl.textContent = activeVal;
+            valEl.style.textDecoration = 'none';
+            valEl.style.color = '';
+          } else {
+            valEl.textContent = 'SUSPENDED';
+            valEl.style.textDecoration = 'line-through';
+            valEl.style.color = '#767777';
+          }
+        }
+      }
+      /* Status label (e-commerce) */
+      if (labelId) {
+        var lbl = document.getElementById(labelId);
+        if (lbl) { lbl.textContent = on ? onLbl : offLbl; lbl.style.color = on ? '' : '#767777'; }
+      }
+    }
+
+    apply();
+    el.addEventListener('click', function() {
+      el.dataset.state = el.dataset.state === 'on' ? 'off' : 'on';
+      localStorage.setItem('toggle_' + key, el.dataset.state);
+      apply();
+      var label = el.dataset.state === 'on' ? 'ENABLED' : 'SUSPENDED';
+      showToast(key.replace(/_/g, ' ').toUpperCase() + ': ' + label, el.dataset.state === 'on' ? 'toggle_on' : 'toggle_off');
+    });
+  }
+
+  initToggle('toggle-daily', 'daily_cap',  '#cafd00', '#dbdddd', 'row-daily', 'daily-value', formatMoney(dailyCapVal), null, '', '');
+  initToggle('toggle-atm',   'atm_limit',  '#cafd00', '#dbdddd', 'row-atm',   'atm-value',   formatMoney(atmLimitVal), null, '', '');
+  initToggle('toggle-ecom',  'ecom_block', '#f95630', '#dbdddd', 'row-ecom',  null,           null,    'ecom-label', 'ENABLED', 'DISABLED');
+
+  /* ─── GEOFENCE TOGGLE ─── */
+  var geoEl = document.getElementById('btn-geofence');
+  if (geoEl) {
+    var gfSaved = localStorage.getItem('geofence');
+    if (gfSaved !== null) geoEl.dataset.state = gfSaved;
+    function applyGeo() {
+      var on = geoEl.dataset.state === 'on';
+      geoEl.style.background = on ? '#cafd00' : '#f0f1f1';
+      var chk = document.getElementById('geofence-check');
+      var sub = document.getElementById('geofence-sub');
+      if (chk) chk.style.background = on ? '#121212' : '#dbdddd';
+      if (sub) sub.textContent = 'Lock card to GPS radius \u2014 ' + (on ? 'ON' : 'OFF');
+    }
+    applyGeo();
+    geoEl.addEventListener('click', function() {
+      geoEl.dataset.state = geoEl.dataset.state === 'on' ? 'off' : 'on';
+      localStorage.setItem('geofence', geoEl.dataset.state);
+      applyGeo();
+      showToast('Geofence ' + geoEl.dataset.state.toUpperCase(), 'location_on');
+    });
+  }
+
+  /* ─── BIOMETRIC ─── */
+  var bioEl = document.getElementById('btn-biometric');
+  if (bioEl) {
+    bioEl.addEventListener('click', function() {
+      showToast('Biometric scan initiated', 'fingerprint');
+    });
+  }
+
+  /* ─── DYNAMIC CVV ─── */
+  var cvvEl  = document.getElementById('btn-cvv');
+  var cvvDisp = document.getElementById('cvv-value');
+  var cvvSub  = document.getElementById('cvv-sub');
+  var cvvOn = false, cvvTimer = null;
+  if (cvvEl && cvvDisp) {
+    function genCVV() {
+      cvvDisp.textContent = Math.floor(100 + Math.random() * 900);
+      cvvDisp.style.color = '#a400a4';
+    }
+    cvvEl.addEventListener('click', function() {
+      cvvOn = !cvvOn;
+      if (cvvOn) {
+        genCVV();
+        cvvTimer = setInterval(genCVV, 8000);
+        if (cvvSub) cvvSub.textContent = 'Live CVV \u2014 refreshes every 8s';
+        showToast('Dynamic CVV active', 'vpn_key');
       } else {
-        grid.appendChild(el);
+        clearInterval(cvvTimer);
+        cvvDisp.textContent = '';
+        if (cvvSub) cvvSub.textContent = 'Refreshes every 60 seconds';
+        showToast('CVV hidden', 'visibility_off');
       }
     });
   }
 
-  window.deleteCard = function(id) {
-    let cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
-    cards = cards.filter(c => c.id !== id);
-    localStorage.setItem('rebel_cards', JSON.stringify(cards));
-    document.querySelector(`[data-user-card="${id}"]`)?.remove();
-  };
+  /* ─── KILL SWITCH ─── */
+  var killBtn = document.getElementById('btn-killswitch');
+  var killModal = document.getElementById('kill-modal');
+  if (killBtn && killModal) {
+    killBtn.addEventListener('click', function() { killModal.classList.add('open'); });
+    document.getElementById('kill-cancel').addEventListener('click', function() { killModal.classList.remove('open'); });
+    killModal.addEventListener('click', function(e) { if (e.target === killModal) killModal.classList.remove('open'); });
+    document.getElementById('kill-confirm').addEventListener('click', function() {
+      var cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+      cards.forEach(function(c) { c.frozen = true; });
+      localStorage.setItem('rebel_cards', JSON.stringify(cards));
+      killModal.classList.remove('open');
+      renderUserCards();
+      showToast('All cards frozen', 'lock');
+    });
+  }
+
+  /* ─── LIQUIDITY CALCULATOR ─── */
+  // BASE_LIQUIDITY relies on dynamic API result now
+  function updateLiquidity() {
+    var cards = JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+    var userTotal = 0;
+    var activeCount = 0; // Handled dynamically via localStorage
+    cards.forEach(function(c) {
+      if (!c.frozen) {
+        userTotal += (c.balance || 0);
+        activeCount++;
+      }
+    });
+    var total = BASE_LIQUIDITY + userTotal;
+    // Simulate last month was 12.4% lower
+    var pct = (((total - (total / 1.124)) / (total / 1.124)) * 100).toFixed(1);
+    // Format number
+    var fmt;
+    if (total >= 1000000) fmt = '$' + (total / 1000000).toFixed(2) + 'M';
+    else fmt = '$' + (total / 1000).toFixed(1) + 'K';
+    var amtEl = document.getElementById('liquidity-amount');
+    var chgEl = document.getElementById('liquidity-change');
+    var crdEl = document.getElementById('liquidity-cards');
+    if (amtEl) {
+      amtEl.style.transition = 'opacity 0.3s';
+      amtEl.style.opacity = '0';
+      setTimeout(function() {
+        amtEl.textContent = fmt;
+        amtEl.style.opacity = '1';
+      }, 200);
+    }
+    if (chgEl) chgEl.textContent = '+' + pct + '% THIS MONTH';
+    if (crdEl) crdEl.textContent = activeCount + ' CARD' + (activeCount !== 1 ? 'S' : '') + ' ACTIVE';
+  }
+
+  /* Wrap freeze/delete to also update liquidity */
+  var _origFreeze = window.freezeCard;
+  window.freezeCard = function(id) { _origFreeze(id); updateLiquidity(); };
+  var _origDelete = window.deleteCard;
+  window.deleteCard = function(id) { _origDelete(id); updateLiquidity(); };
+
+  /* ─── INIT ─── */
+  if (!localStorage.getItem('rebel_cards_init')) {
+    localStorage.setItem('rebel_cards', JSON.stringify([
+      { id: Date.now() + 1, name: 'REBEL_OPERATIVE_01', lastFour: '8829', expiry: '12/28', balance: 0, frozen: false, icon: 'contactless', title: 'TITANIUM_ELITE' },
+      { id: Date.now() + 2, name: 'REBEL_VAULT_77', lastFour: '4401', expiry: '05/26', balance: 0, frozen: true, icon: 'ac_unit', title: 'COLD_STORAGE' }
+    ]));
+    localStorage.setItem('rebel_cards_init', 'true');
+  }
+
+  var notifBtn = document.getElementById('btn-notifications');
+  if (notifBtn) {
+    notifBtn.addEventListener('click', function() {
+      showToast('System is secure. No alerts.', 'notifications_active');
+    });
+  }
 
   renderUserCards();
+  updateLiquidity();
+
 })();
 </script>
 </body></html>
