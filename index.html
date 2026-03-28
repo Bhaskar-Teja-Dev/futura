@@ -1,100 +1,111 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Digital Rebel | Own The Revolution</title>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "surface-dim": "#d3d5d5",
-              "error": "#b02500",
-              "surface-container-high": "#e1e3e3",
-              "on-primary-fixed": "#3a4a00",
-              "error-dim": "#b92902",
-              "on-surface-variant": "#5a5c5c",
-              "on-secondary-fixed-variant": "#5c5b5b",
-              "on-primary-fixed-variant": "#526900",
-              "tertiary-fixed": "#ff81f5",
-              "primary-fixed": "#cafd00",
-              "surface-container-highest": "#dbdddd",
-              "on-primary": "#e1ff88",
-              "error-container": "#f95630",
-              "on-primary-container": "#4a5e00",
-              "surface-container-lowest": "#ffffff",
-              "secondary-fixed-dim": "#d7d4d3",
-              "surface-variant": "#dbdddd",
-              "surface-tint": "#4e6300",
-              "on-secondary-fixed": "#403f3f",
-              "surface": "#f6f6f6",
-              "inverse-on-surface": "#9c9d9d",
-              "on-tertiary": "#ffeef8",
-              "primary-fixed-dim": "#beee00",
-              "on-surface": "#2d2f2f",
-              "primary": "#4e6300",
-              "on-secondary": "#f5f2f1",
-              "surface-container": "#e7e8e8",
-              "primary-container": "#cafd00",
-              "on-secondary-container": "#525151",
-              "on-background": "#2d2f2f",
-              "on-error-container": "#520c00",
-              "surface-bright": "#f6f6f6",
-              "on-tertiary-fixed-variant": "#6a006a",
-              "inverse-surface": "#0c0f0f",
-              "secondary-container": "#e5e2e1",
-              "tertiary-container": "#ff81f5",
-              "inverse-primary": "#cafd00",
-              "on-tertiary-container": "#5b005b",
-              "tertiary": "#a400a4",
-              "surface-container-low": "#f0f1f1",
-              "secondary-dim": "#504f4f",
-              "tertiary-dim": "#900090",
-              "secondary-fixed": "#e5e2e1",
-              "on-tertiary-fixed": "#320032",
-              "primary-dim": "#435600",
-              "outline": "#767777",
-              "outline-variant": "#acadad",
-              "on-error": "#ffefec",
-              "background": "#f6f6f6",
-              "secondary": "#5c5b5b",
-              "tertiary-fixed-dim": "#ff61f8"
-            },
-            fontFamily: {
-              "headline": ["Lexend"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Digital Rebel | Own The Revolution</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-dim": "#d3d5d5",
+            "error": "#b02500",
+            "surface-container-high": "#e1e3e3",
+            "on-primary-fixed": "#3a4a00",
+            "error-dim": "#b92902",
+            "on-surface-variant": "#5a5c5c",
+            "on-secondary-fixed-variant": "#5c5b5b",
+            "on-primary-fixed-variant": "#526900",
+            "tertiary-fixed": "#ff81f5",
+            "primary-fixed": "#cafd00",
+            "surface-container-highest": "#dbdddd",
+            "on-primary": "#e1ff88",
+            "error-container": "#f95630",
+            "on-primary-container": "#4a5e00",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#d7d4d3",
+            "surface-variant": "#dbdddd",
+            "surface-tint": "#4e6300",
+            "on-secondary-fixed": "#403f3f",
+            "surface": "#f6f6f6",
+            "inverse-on-surface": "#9c9d9d",
+            "on-tertiary": "#ffeef8",
+            "primary-fixed-dim": "#beee00",
+            "on-surface": "#2d2f2f",
+            "primary": "#4e6300",
+            "on-secondary": "#f5f2f1",
+            "surface-container": "#e7e8e8",
+            "primary-container": "#cafd00",
+            "on-secondary-container": "#525151",
+            "on-background": "#2d2f2f",
+            "on-error-container": "#520c00",
+            "surface-bright": "#f6f6f6",
+            "on-tertiary-fixed-variant": "#6a006a",
+            "inverse-surface": "#0c0f0f",
+            "secondary-container": "#e5e2e1",
+            "tertiary-container": "#ff81f5",
+            "inverse-primary": "#cafd00",
+            "on-tertiary-container": "#5b005b",
+            "tertiary": "#a400a4",
+            "surface-container-low": "#f0f1f1",
+            "secondary-dim": "#504f4f",
+            "tertiary-dim": "#900090",
+            "secondary-fixed": "#e5e2e1",
+            "on-tertiary-fixed": "#320032",
+            "primary-dim": "#435600",
+            "outline": "#767777",
+            "outline-variant": "#acadad",
+            "on-error": "#ffefec",
+            "background": "#f6f6f6",
+            "secondary": "#5c5b5b",
+            "tertiary-fixed-dim": "#ff61f8"
           },
+          fontFamily: {
+            "headline": ["Lexend"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          },
+          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
         },
-      }
-    </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .neo-shadow {
-            shadow-color: #121212;
-            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .neo-shadow-large {
-            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .active-nav-shadow {
-            box-shadow: 2px 2px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .hover-lift:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
-        }
-    </style>
+      },
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .neo-shadow {
+      shadow-color: #121212;
+      box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .neo-shadow-large {
+      box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .active-nav-shadow {
+      box-shadow: 2px 2px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .hover-lift:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+    }
+  </style>
 </head>
+
 <body class="bg-surface font-body text-on-surface">
 <!-- TopAppBar -->
 <header class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
@@ -105,7 +116,6 @@
 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="projections_digital_rebel_desktop.html" id="nav-markets">Markets</a>
 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="projections_digital_rebel_desktop.html" id="nav-assets">Assets</a>
 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html" id="nav-vault">Vault</a>
-<a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="learn_digital_rebel_desktop.html" id="nav-learn">Learn</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
@@ -296,9 +306,11 @@
 <a href="index.html" class="text-4xl font-black text-[#cafd00] font-headline no-underline">DIGITAL REBEL</a>
 <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©2024 DIGITAL REBEL. NO PERMISSION GRANTED.</p>
 </div>
-<div class="flex items-center gap-6" id="footer-social-actions">
+<div class="flex flex-wrap justify-center gap-8" id="footer-links">
 <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="settings_digital_rebel_desktop.html">Terms.sh</a>
 <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all" href="settings_digital_rebel_desktop.html">Security</a>
+</div>
+<div class="flex gap-4" id="footer-social-actions">
 <div class="w-12 h-12 border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all">
 <span class="material-symbols-outlined font-black">terminal</span>
 </div>
@@ -325,3 +337,5 @@
   });
 </script>
 </body></html>
+
+</html>
