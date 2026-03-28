@@ -50,27 +50,35 @@ async function checkOnboarding() {
   const session = await getSession();
   if (!session) return;
 
-  const { data: profile, error } = await getSupabase()
-    .from('profiles')
-    .select('age')
-    .eq('id', session.user.id)
-    .single();
+  try {
+    // We call the API instead of direct Supabase to trigger auto-initialization
+    // and to get the source-of-truth profile data.
+    const res = await fetch(`${FUTURA_CONFIG.API_BASE_URL}/api/profile`, {
+      headers: { 'Authorization': `Bearer ${session.access_token}` }
+    });
 
-  if (error) {
-    console.error('Error checking onboarding status:', error);
-    return;
-  }
+    if (!res.ok) throw new Error('Failed to fetch profile');
+    const { profile } = await res.json();
 
-  const isOnboarded = profile && profile.age;
-  const currentPath = window.location.pathname;
+    const isOnboarded = profile && profile.onboarding_complete;
+    const currentPath = window.location.pathname;
 
-  // If onboarded and on landing/index, go to dashboard
-  if (isOnboarded && (currentPath === '/' || currentPath === '/index.html')) {
-    window.location.href = '/dashboard_digital_rebel_desktop.html';
-  } 
-  // If not onboarded and on dashboard/index, go to onboarding step 1
-  else if (!isOnboarded && (currentPath === '/index.html' || currentPath === '/dashboard_digital_rebel_desktop.html')) {
-    window.location.href = '/onboarding_step_1_age.html';
+    // Redirection Logic
+    if (isOnboarded) {
+      // If onboarded, only allow dashboard/market/assets etc. 
+      // Redirect away from index/onboarding
+      if (currentPath === '/' || currentPath.includes('index.html') || currentPath.includes('onboarding_')) {
+        window.location.href = '/dashboard_digital_rebel_desktop.html';
+      }
+    } else {
+      // If not onboarded, only allow onboarding pages
+      // Redirect away from dashboard/market/assets
+      if (currentPath.includes('dashboard_') || currentPath.includes('market_') || currentPath.includes('assets_') || currentPath.includes('index.html') || currentPath === '/') {
+        window.location.href = '/onboarding_step_1_age.html';
+      }
+    }
+  } catch (err) {
+    console.error('Onboarding check failed:', err);
   }
 }
 
@@ -121,7 +129,7 @@ async function updateNavAuth() {
 // Auto-init on DOM ready
 document.addEventListener('DOMContentLoaded', () => {
   updateNavAuth();
-  
+
   // Only check onboarding once session is established
   getSupabase().auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {

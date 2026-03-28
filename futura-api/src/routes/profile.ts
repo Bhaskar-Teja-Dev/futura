@@ -15,14 +15,22 @@ const profileUpdateSchema = z.object({
 })
 
 router.get('/', async (c) => {
+  const supabaseAdmin = getSupabase(c.env)
   const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
 
-  const [{ data: profile, error: profileError }, { data: subscription, error: subError }] =
-    await Promise.all([
-      supabase.from('profiles').select('*').eq('id', userId).maybeSingle(),
-      supabase.from('user_subscriptions').select('*').eq('user_id', userId).maybeSingle()
-    ])
+  // Auto-initialize profile row if missing (using admin to bypass potential insert RLS)
+  const { data: profile, error: profileError } = await supabaseAdmin
+    .from('profiles')
+    .upsert({ id: userId }, { onConflict: 'id' })
+    .select('*')
+    .single()
+
+  const { data: subscription, error: subError } = await supabase
+    .from('user_subscriptions')
+    .select('*')
+    .eq('user_id', userId)
+    .maybeSingle()
 
   if (profileError || subError) {
     return c.json({ error: profileError?.message ?? subError?.message ?? 'unknown_error' }, 500)

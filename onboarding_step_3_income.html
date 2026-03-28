@@ -241,7 +241,8 @@
                 await futuraApi.profile.update({
                   age: parseInt(currentData.current_age, 10),
                   retirement_age: parseInt(currentData.retirement_age, 10),
-                  monthly_income: parseInt(currentData.target_monthly_income, 10)
+                  monthly_income: parseInt(currentData.target_monthly_income, 10),
+                  onboarding_complete: true
                 });
               }
             } catch (pErr) {
