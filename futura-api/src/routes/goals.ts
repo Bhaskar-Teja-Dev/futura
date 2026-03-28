@@ -36,18 +36,26 @@ router.post('/', zValidator('json', goalsSchema), async (c) => {
   const supabaseAdmin = getSupabase(c.env)
 
   // 1. Ensure profile row exists FIRST (Fixes foreign key constraint violation)
+  const { data: existingProfile } = await supabaseAdmin
+    .from('profiles')
+    .select('zens')
+    .eq('id', userId)
+    .maybeSingle()
+
+  const initialZens = (existingProfile && existingProfile.zens >= 1000) ? existingProfile.zens : 10000
+
   const { error: profileError } = await supabaseAdmin
     .from('profiles')
     .upsert(
-      { 
-        id: userId, 
+      {
+        id: userId,
         email: userEmail,
         onboarding_complete: true,
-        zens: 10000 // Give new users purchasing power
-      }, 
+        zens: initialZens // Only give 10000 if first time or wiped
+      },
       { onConflict: 'id' }
     )
-    
+
   if (profileError) {
     console.error("Supabase profile create error:", profileError)
     return c.json({ error: "Failed to initialize user profile: " + profileError.message }, 500)

@@ -66,13 +66,19 @@ async function checkOnboarding() {
     // Redirection Logic
     if (isOnboarded) {
       if (currentPath === '/' || currentPath.includes('index.html') || currentPath.includes('onboarding_')) {
-        window.location.href = '/dashboard_digital_rebel_desktop.html';
-        return; // Stop execution
+        // Use a flag to avoid infinite loops if the redirect is already in progress
+        if (!window.location.search.includes('redirecting')) {
+          window.location.href = '/dashboard_digital_rebel_desktop.html';
+          return;
+        }
       }
     } else {
-      if (currentPath.includes('dashboard_') || currentPath.includes('market_') || currentPath.includes('assets_') || currentPath.includes('index.html') || currentPath === '/') {
-        window.location.href = '/onboarding_step_1_age.html';
-        return; // Stop execution
+      // Only redirect to onboarding if NOT already on an onboarding page
+      if (!currentPath.includes('onboarding_')) {
+        if (currentPath.includes('dashboard_') || currentPath.includes('market_') || currentPath.includes('assets_') || currentPath.includes('index.html') || currentPath === '/') {
+          window.location.href = '/onboarding_step_1_age.html';
+          return;
+        }
       }
     }
 
@@ -105,15 +111,15 @@ async function updateNavAuth() {
 
   authButtons.forEach(btn => {
     if (session) {
-      // If session exists, replace button content/behavior
-      btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
-      btn.onclick = (e) => {
-        e.preventDefault();
-        window.location.href = '/dashboard_digital_rebel_desktop.html';
-      };
-      // For the hero button specifically, we can hide it or change it to "ENTER TERMINAL"
       if (btn.id === 'btn-google-signin') {
-        btn.innerHTML = '<span class="material-symbols-outlined">terminal</span> ENTER TERMINAL';
+        btn.style.display = 'none'; // Hide as per user request
+      } else {
+        // Replace button content/behavior for others
+        btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
+        btn.onclick = (e) => {
+          e.preventDefault();
+          window.location.href = '/dashboard_digital_rebel_desktop.html';
+        };
       }
     } else {
       btn.addEventListener('click', (e) => {
