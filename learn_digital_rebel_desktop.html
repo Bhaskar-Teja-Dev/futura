@@ -1,245 +1,500 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
+<html class="light" lang="en">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Finance Bites | Digital Rebel</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "surface-dim": "#d3d5d5",
-              "error": "#b02500",
-              "surface-container-high": "#e1e3e3",
-              "on-primary-fixed": "#3a4a00",
-              "error-dim": "#b92902",
-              "on-surface-variant": "#5a5c5c",
-              "on-secondary-fixed-variant": "#5c5b5b",
-              "on-primary-fixed-variant": "#526900",
-              "tertiary-fixed": "#ff81f5",
-              "primary-fixed": "#cafd00",
-              "surface-container-highest": "#dbdddd",
-              "on-primary": "#e1ff88",
-              "error-container": "#f95630",
-              "on-primary-container": "#4a5e00",
-              "surface-container-lowest": "#ffffff",
-              "secondary-fixed-dim": "#d7d4d3",
-              "surface-variant": "#dbdddd",
-              "surface-tint": "#4e6300",
-              "on-secondary-fixed": "#403f3f",
-              "surface": "#f6f6f6",
-              "inverse-on-surface": "#9c9d9d",
-              "on-tertiary": "#ffeef8",
-              "primary-fixed-dim": "#beee00",
-              "on-surface": "#2d2f2f",
-              "primary": "#4e6300",
-              "on-secondary": "#f5f2f1",
-              "surface-container": "#e7e8e8",
-              "primary-container": "#cafd00",
-              "on-secondary-container": "#525151",
-              "on-background": "#2d2f2f",
-              "on-error-container": "#520c00",
-              "surface-bright": "#f6f6f6",
-              "on-tertiary-fixed-variant": "#6a006a",
-              "inverse-surface": "#0c0f0f",
-              "secondary-container": "#e5e2e1",
-              "tertiary-container": "#ff81f5",
-              "inverse-primary": "#cafd00",
-              "on-tertiary-container": "#5b005b",
-              "tertiary": "#a400a4",
-              "surface-container-low": "#f0f1f1",
-              "secondary-dim": "#504f4f",
-              "tertiary-dim": "#900090",
-              "secondary-fixed": "#e5e2e1",
-              "on-tertiary-fixed": "#320032",
-              "primary-dim": "#435600",
-              "outline": "#767777",
-              "outline-variant": "#acadad",
-              "on-error": "#ffefec",
-              "background": "#f6f6f6",
-              "secondary": "#5c5b5b",
-              "tertiary-fixed-dim": "#ff61f8"
-            },
-            fontFamily: {
-              "headline": ["Lexend"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
-          },
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-dim": "#d3d5d5","error": "#b02500","surface-container-high": "#e1e3e3",
+          "on-primary-fixed": "#3a4a00","error-dim": "#b92902","on-surface-variant": "#5a5c5c",
+          "on-secondary-fixed-variant": "#5c5b5b","on-primary-fixed-variant": "#526900",
+          "tertiary-fixed": "#ff81f5","primary-fixed": "#cafd00","surface-container-highest": "#dbdddd",
+          "on-primary": "#e1ff88","error-container": "#f95630","on-primary-container": "#4a5e00",
+          "surface-container-lowest": "#ffffff","secondary-fixed-dim": "#d7d4d3","surface-variant": "#dbdddd",
+          "surface-tint": "#4e6300","on-secondary-fixed": "#403f3f","surface": "#f6f6f6",
+          "inverse-on-surface": "#9c9d9d","on-tertiary": "#ffeef8","primary-fixed-dim": "#beee00",
+          "on-surface": "#2d2f2f","primary": "#4e6300","on-secondary": "#f5f2f1",
+          "surface-container": "#e7e8e8","primary-container": "#cafd00","on-secondary-container": "#525151",
+          "on-background": "#2d2f2f","on-error-container": "#520c00","surface-bright": "#f6f6f6",
+          "on-tertiary-fixed-variant": "#6a006a","inverse-surface": "#0c0f0f","secondary-container": "#e5e2e1",
+          "tertiary-container": "#ff81f5","inverse-primary": "#cafd00","on-tertiary-container": "#5b005b",
+          "tertiary": "#a400a4","surface-container-low": "#f0f1f1","secondary-dim": "#504f4f",
+          "tertiary-dim": "#900090","secondary-fixed": "#e5e2e1","on-tertiary-fixed": "#320032",
+          "primary-dim": "#435600","outline": "#767777","outline-variant": "#acadad",
+          "on-error": "#ffefec","background": "#f6f6f6","secondary": "#5c5b5b","tertiary-fixed-dim": "#ff61f8"
         },
-      }
-    </script>
+        fontFamily: { "headline": ["Lexend"], "body": ["Inter"], "label": ["Inter"] },
+        borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+      },
+    },
+  }
+</script>
 <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            vertical-align: middle;
-        }
-        .hard-shadow {
-            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .hard-shadow-hover:hover {
-            transform: translate(-4px, -4px);
-            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .active-interaction:active {
-            transform: translate(2px, 2px);
-            box-shadow: none;
-        }
-        .text-ink-trap {
-            letter-spacing: -0.02em;
-        }
-    </style>
+  .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
+  .hard-shadow { box-shadow: 4px 4px 0px 0px rgba(18,18,18,1); }
+  .hard-shadow-hover:hover { transform:translate(-4px,-4px); box-shadow:8px 8px 0px 0px rgba(18,18,18,1); }
+  .active-interaction:active { transform:translate(2px,2px); box-shadow:none; }
+  .text-ink-trap { letter-spacing:-0.02em; }
+
+  .modal-overlay { display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.75); align-items:center; justify-content:center; padding:1rem; }
+  .modal-overlay.open { display:flex; }
+  .modal-box { background:#f6f6f6; border:2px solid #121212; box-shadow:8px 8px 0px 0px rgba(18,18,18,1); max-width:640px; width:100%; max-height:90vh; overflow-y:auto; position:relative; animation:modalIn 0.18s ease; }
+  @keyframes modalIn { from{transform:translateY(24px) scale(0.97);opacity:0} to{transform:translateY(0) scale(1);opacity:1} }
+  .modal-close { position:absolute; top:1rem; right:1rem; background:#121212; color:#cafd00; border:none; cursor:pointer; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:900; font-family:'Lexend',sans-serif; z-index:10; }
+  .modal-close:hover { background:#cafd00; color:#121212; }
+
+  .wallet-btn { display:flex; align-items:center; gap:1rem; padding:1rem; border:2px solid #121212; background:#f0f1f1; cursor:pointer; width:100%; font-family:'Lexend',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; transition:background 0.1s; }
+  .wallet-btn:hover { background:#cafd00; }
+
+  .progress-bar { height:6px; background:#dbdddd; border:1px solid #121212; }
+  .progress-fill { height:100%; background:#cafd00; transition:width 0.4s ease; }
+
+  .article-content h3 { font-family:'Lexend'; font-weight:900; font-size:1.2rem; text-transform:uppercase; margin:1.5rem 0 0.5rem; }
+  .article-content p { margin-bottom:1rem; line-height:1.7; color:#5a5c5c; }
+  .article-content .callout { border-left:4px solid #cafd00; padding:1rem 1.5rem; background:#f0f1f1; margin:1.5rem 0; }
+  .article-content .callout p { color:#121212; font-weight:600; margin:0; }
+
+  #toast { position:fixed; bottom:2rem; right:2rem; z-index:99999; background:#121212; color:#cafd00; border:2px solid #cafd00; padding:0.75rem 1.5rem; font-family:'Lexend',sans-serif; font-weight:900; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; box-shadow:4px 4px 0px 0px #cafd00; transform:translateY(8rem); opacity:0; transition:transform 0.3s ease,opacity 0.3s ease; pointer-events:none; }
+  #toast.show { transform:translateY(0); opacity:1; }
+
+  .lesson-item { cursor:pointer; }
+  .plan-card { cursor:pointer; border:2px solid #121212; padding:1rem; text-align:center; transition:all 0.1s; }
+  .plan-card.selected { outline:3px solid #cafd00; outline-offset:-1px; }
+</style>
 </head>
 <body class="bg-surface font-body text-on-surface">
+
 <!-- TopNavBar -->
-<nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] dark:shadow-[4px_4px_0px_0px_rgba(246,246,246,1)]">
-<div class="flex items-center gap-8">
-<span class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">Digital Rebel</span>
-<div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm">
-<a class="text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="market_digital_rebel_desktop.html">Markets</a>
-<a class="text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="assets_digital_rebel_desktop.html">Assets</a>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<div class="hidden sm:flex items-center gap-2">
-<span class="material-symbols-outlined text-[#767777]">notifications</span>
-<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined text-[#767777] inline-flex items-center justify-center">settings</a>
-</div>
-<button class="bg-[#cafd00] text-[#121212] border-2 border-[#121212] px-4 py-2 font-headline font-black uppercase text-xs hard-shadow active-interaction">
-                Connect Wallet
-            </button>
-</div>
+<nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] border-b-2 border-[#121212] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+  <div class="flex items-center gap-8">
+    <span class="text-2xl font-black uppercase tracking-tighter text-[#121212] font-headline">Digital Rebel</span>
+    <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm">
+      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="market_digital_rebel_desktop.html">Markets</a>
+      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="assets_digital_rebel_desktop.html">Assets</a>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="hidden sm:flex items-center gap-2">
+      <button id="btn-notifications" class="material-symbols-outlined text-[#767777] hover:text-[#121212] transition-colors cursor-pointer bg-transparent border-none p-1">notifications</button>
+      <a id="btn-settings" href="settings_digital_rebel_desktop.html" class="material-symbols-outlined text-[#767777] inline-flex items-center justify-center">settings</a>
+    </div>
+    <button id="btn-connect-wallet" class="bg-[#cafd00] text-[#121212] border-2 border-[#121212] px-4 py-2 font-headline font-black uppercase text-xs hard-shadow active-interaction">
+      Connect Wallet
+    </button>
+  </div>
 </nav>
+
 <main class="max-w-7xl mx-auto px-6 py-12">
-<!-- Hero Section -->
-<header class="mb-16 border-b-4 border-inverse-surface pb-8">
-<div class="flex flex-col md:flex-row justify-between items-end gap-6">
-<div>
-<h1 class="text-6xl md:text-8xl font-headline font-black uppercase leading-none text-ink-trap">Finance<br/><span class="text-primary-fixed bg-inverse-surface px-4">Bites</span></h1>
-<p class="mt-6 text-xl font-medium max-w-xl border-l-4 border-primary-fixed pl-4">
-                        Raw, unfiltered truths about the machinery of money. No fluff. Just high-voltage economic reality.
-                    </p>
-</div>
-<div class="flex gap-2">
-<span class="bg-tertiary-container text-on-tertiary-container font-headline font-black uppercase text-xs px-3 py-1 border-2 border-inverse-surface rotate-[-2deg]">Updated Daily</span>
-<span class="bg-primary-fixed text-on-primary-fixed font-headline font-black uppercase text-xs px-3 py-1 border-2 border-inverse-surface rotate-[1deg]">84 Lessons</span>
-</div>
-</div>
-</header>
-<!-- Content Grid (Bento Style) -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
-<!-- Featured Card (Large) -->
-<article class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface hard-shadow overflow-hidden group">
-<div class="relative h-96 w-full">
-<img alt="Abstract digital network" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" data-alt="Abstract 3D render of sharp crystalline structures in neon lime and deep black with dramatic cinematic lighting and high contrast" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrVWaIYWBPBYWL-HzlSmQBCgjKxtYmZ4NgZ4w83weDWHNKY_Q2Wzb2qhlPeWKUdipMg8HFSskt0NGhEcHgwKDQCA-5yf_eJ0-wJ5ZZjp3oCMiyGp7ymSUgGgmnzpo6a4Hsn43JUkIdEboQu5Eg0mGr1olXTtGiw9SZGdcQYmoMFBY0JZIomVEkdkOw3noO7fDZDpLckeBxLmKSt2dT8OYAFsRj3nvFwfpSEKJXI2vVjRzqgNWPDies2pPS5s8rGix2CeBxZ2KLKrA0"/>
-<div class="absolute top-4 left-4 bg-primary-fixed text-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-widest text-sm border-2 border-inverse-surface">
-                        Must Read
-                    </div>
-</div>
-<div class="p-8">
-<div class="flex items-center gap-4 mb-4">
-<span class="font-headline font-bold text-xs tracking-widest uppercase text-outline">Macro Economy</span>
-<span class="text-xs text-outline">•</span>
-<span class="font-headline font-bold text-xs tracking-widest uppercase text-outline">12 Min Read</span>
-</div>
-<h2 class="text-4xl md:text-5xl font-headline font-black uppercase leading-tight mb-6 group-hover:text-primary transition-colors">Why Inflation is a Scam designed to tax your time</h2>
-<p class="text-lg text-on-surface-variant mb-8 line-clamp-3">
-                        The hidden mechanism that devalues your labor while you sleep. We break down the structural theft built into modern monetary policy and how to exit the cycle.
-                    </p>
-<button class="w-full md:w-auto bg-inverse-surface text-surface px-8 py-4 font-headline font-black uppercase tracking-widest hard-shadow-hover active-interaction flex items-center justify-center gap-4">
-                        Read Manifesto
-                        <span class="material-symbols-outlined">arrow_forward</span>
-</button>
-</div>
-</article>
-<!-- Secondary Card -->
-<article class="md:col-span-4 bg-primary-fixed border-2 border-inverse-surface hard-shadow flex flex-col group">
-<div class="p-8 flex-grow">
-<span class="font-headline font-bold text-xs tracking-widest uppercase text-on-primary-fixed-variant block mb-4">Compounding</span>
-<h3 class="text-3xl font-headline font-black uppercase leading-none mb-6">The Escape Velocity of Compounding</h3>
-<p class="font-medium text-on-primary-fixed-variant leading-relaxed">
-                        Math doesn't care about your feelings. Discover the tipping point where your capital starts working harder than you ever could.
-                    </p>
-</div>
-<div class="h-48 border-t-2 border-inverse-surface overflow-hidden">
-<img alt="Rocket engine" class="w-full h-full object-cover" data-alt="High contrast black and white photo of a powerful rocket engine ignition with intense sparks and smoke textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjl00XHA_D5S_Kg2Zt0CDqpTZEkDxjOoLQT_FCkjcF9HiFKpsDkRKBLP49_gKcAwKaA7-eDScTKX-DQvGyNrSJAkC448IQHrYzbJFC8UbJq8RiwOAIuW38FIOGQ3_JVceuwrgMSjXYAFvybI880z6-mK3IrR8f71N7pL1E8afJyzMLNJO9a-joVWJAR3rw04xLvTi1iLpMg9Xp7Ag7AuF2eFiE1cpkguqI5Bmzwc5G3QVFFmDo5Vi5LqbRBpgnl-JGHDoBtkVlF4JJ"/>
-</div>
-<div class="p-6 bg-inverse-surface">
-<a class="flex justify-between items-center text-primary-fixed font-headline font-black uppercase tracking-widest text-sm hover:translate-x-2 transition-transform" href="#">
-                        Launch Lesson
-                        <span class="material-symbols-outlined">bolt</span>
-</a>
-</div>
-</article>
-<!-- Small Bites Section Title -->
-<div class="md:col-span-12 mt-12 mb-4">
-<div class="flex items-center gap-4">
-<h4 class="text-2xl font-headline font-black uppercase tracking-tighter">Fast Execution</h4>
-<div class="h-1 flex-grow bg-inverse-surface"></div>
-</div>
-</div>
-<!-- List of smaller items -->
-<div class="md:col-span-4 bg-surface-container-low border-2 border-inverse-surface p-6 flex gap-6 items-start hover:bg-surface-container-high transition-colors">
-<div class="text-4xl font-headline font-black text-outline-variant">01</div>
-<div>
-<h5 class="text-xl font-headline font-black uppercase leading-tight mb-2">Debt as a Weapon</h5>
-<p class="text-sm text-on-surface-variant mb-4">How the wealthy use leverage to bypass traditional tax brackets.</p>
-<span class="font-headline font-bold text-[10px] uppercase tracking-tighter bg-inverse-surface text-surface px-2 py-0.5">5 min</span>
-</div>
-</div>
-<div class="md:col-span-4 bg-surface-container-low border-2 border-inverse-surface p-6 flex gap-6 items-start hover:bg-surface-container-high transition-colors">
-<div class="text-4xl font-headline font-black text-outline-variant">02</div>
-<div>
-<h5 class="text-xl font-headline font-black uppercase leading-tight mb-2">Liquidity Traps</h5>
-<p class="text-sm text-on-surface-variant mb-4">Recognizing the signs of a frozen market before you're stuck in it.</p>
-<span class="font-headline font-bold text-[10px] uppercase tracking-tighter bg-inverse-surface text-surface px-2 py-0.5">8 min</span>
-</div>
-</div>
-<div class="md:col-span-4 bg-surface-container-low border-2 border-inverse-surface p-6 flex gap-6 items-start hover:bg-surface-container-high transition-colors">
-<div class="text-4xl font-headline font-black text-outline-variant">03</div>
-<div>
-<h5 class="text-xl font-headline font-black uppercase leading-tight mb-2">The Fiat Mirage</h5>
-<p class="text-sm text-on-surface-variant mb-4">Understanding the transition from gold-backed to credit-backed worlds.</p>
-<span class="font-headline font-bold text-[10px] uppercase tracking-tighter bg-inverse-surface text-surface px-2 py-0.5">15 min</span>
-</div>
-</div>
-<!-- Wide Visual CTA -->
-<article class="md:col-span-12 relative h-80 border-2 border-inverse-surface overflow-hidden group cursor-pointer hard-shadow">
-<img alt="Cyberpunk city" class="w-full h-full object-cover brightness-50 group-hover:scale-105 transition-transform duration-700" data-alt="Futuristic cyberpunk cityscape with neon green signs, heavy rain, and brutalist concrete architecture at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb-ZASRkurtgq3TckLKM7rzyrib8EtSLWSxFkkiey6ovlrk0AkPlmzBtJxBwSaw5k_RYtrcZX18ltiEskZic4ZOyhtn9f0VSE2rDMfpeZipgX2K7IdBtZzXQ4TYsnc6qdq8tV6ddraV4c_mjvNiO0Yg17OiHbc8T0qrD4FkwKYCXkc-8XsfRXdmTqS0lQv3YgE-fyBqokDlBBQMAcLmo3ZQUHx1HQBAw-OUda-zBL-X1WHRaOEZWllGKMztTm96wnCzrFJOnq8kmpk"/>
-<div class="absolute inset-0 flex flex-col justify-center items-center text-center p-8 bg-black/40">
-<h2 class="text-4xl md:text-6xl font-headline font-black uppercase text-primary-fixed mb-4 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]">Master the Machine</h2>
-<p class="text-surface font-headline font-bold uppercase tracking-widest max-w-2xl">Access our full 12-week immersive protocol for digital wealth sovereignty.</p>
-<button class="mt-8 bg-tertiary-fixed text-on-tertiary-fixed border-2 border-inverse-surface px-10 py-4 font-headline font-black uppercase tracking-widest hard-shadow active-interaction">
-                        Join the resistance
-                    </button>
-</div>
-</article>
-</div>
+  <header class="mb-16 border-b-4 border-inverse-surface pb-8">
+    <div class="flex flex-col md:flex-row justify-between items-end gap-6">
+      <div>
+        <h1 class="text-6xl md:text-8xl font-headline font-black uppercase leading-none text-ink-trap">Finance<br/><span class="text-primary-fixed bg-inverse-surface px-4">Bites</span></h1>
+        <p class="mt-6 text-xl font-medium max-w-xl border-l-4 border-primary-fixed pl-4">Raw, unfiltered truths about the machinery of money. No fluff. Just high-voltage economic reality.</p>
+      </div>
+      <div class="flex gap-2">
+        <span class="bg-tertiary-container text-on-tertiary-container font-headline font-black uppercase text-xs px-3 py-1 border-2 border-inverse-surface rotate-[-2deg]">Updated Daily</span>
+        <button id="badge-lessons" class="bg-primary-fixed text-on-primary-fixed font-headline font-black uppercase text-xs px-3 py-1 border-2 border-inverse-surface rotate-[1deg] hover:scale-110 transition-transform active-interaction">84 Lessons</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+    <!-- Featured -->
+    <article class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface hard-shadow overflow-hidden group">
+      <div class="relative h-96 w-full">
+        <img alt="Abstract digital network" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrVWaIYWBPBYWL-HzlSmQBCgjKxtYmZ4NgZ4w83weDWHNKY_Q2Wzb2qhlPeWKUdipMg8HFSskt0NGhEcHgwKDQCA-5yf_eJ0-wJ5ZZjp3oCMiyGp7ymSUgGgmnzpo6a4Hsn43JUkIdEboQu5Eg0mGr1olXTtGiw9SZGdcQYmoMFBY0JZIomVEkdkOw3noO7fDZDpLckeBxLmKSt2dT8OYAFsRj3nvFwfpSEKJXI2vVjRzqgNWPDies2pPS5s8rGix2CeBxZ2KLKrA0"/>
+        <div class="absolute top-4 left-4 bg-primary-fixed text-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-widest text-sm border-2 border-inverse-surface">Must Read</div>
+      </div>
+      <div class="p-8">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="font-headline font-bold text-xs tracking-widest uppercase text-outline">Macro Economy</span>
+          <span class="text-xs text-outline">•</span>
+          <span class="font-headline font-bold text-xs tracking-widest uppercase text-outline">12 Min Read</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-headline font-black uppercase leading-tight mb-6 group-hover:text-primary transition-colors">Why Inflation is a Scam designed to tax your time</h2>
+        <p class="text-lg text-on-surface-variant mb-8 line-clamp-3">The hidden mechanism that devalues your labor while you sleep. We break down the structural theft built into modern monetary policy and how to exit the cycle.</p>
+        <button id="btn-read-manifesto" class="w-full md:w-auto bg-inverse-surface text-surface px-8 py-4 font-headline font-black uppercase tracking-widest hard-shadow-hover active-interaction flex items-center justify-center gap-4">
+          Read Manifesto <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- Secondary -->
+    <article class="md:col-span-4 bg-primary-fixed border-2 border-inverse-surface hard-shadow flex flex-col group">
+      <div class="p-8 flex-grow">
+        <span class="font-headline font-bold text-xs tracking-widest uppercase text-on-primary-fixed-variant block mb-4">Compounding</span>
+        <h3 class="text-3xl font-headline font-black uppercase leading-none mb-6">The Escape Velocity of Compounding</h3>
+        <p class="font-medium text-on-primary-fixed-variant leading-relaxed">Math doesn't care about your feelings. Discover the tipping point where your capital starts working harder than you ever could.</p>
+      </div>
+      <div class="h-48 border-t-2 border-inverse-surface overflow-hidden">
+        <img alt="Rocket engine" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjl00XHA_D5S_Kg2Zt0CDqpTZEkDxjOoLQT_FCkjcF9HiFKpsDkRKBLP49_gKcAwKaA7-eDScTKX-DQvGyNrSJAkC448IQHrYzbJFC8UbJq8RiwOAIuW38FIOGQ3_JVceuwrgMSjXYAFvybI880z6-mK3IrR8f71N7pL1E8afJyzMLNJO9a-joVWJAR3rw04xLvTi1iLpMg9Xp7Ag7AuF2eFiE1cpkguqI5Bmzwc5G3QVFFmDo5Vi5LqbRBpgnl-JGHDoBtkVlF4JJ"/>
+      </div>
+      <div class="p-6 bg-inverse-surface">
+        <button id="btn-launch-lesson" class="flex justify-between items-center w-full text-primary-fixed font-headline font-black uppercase tracking-widest text-sm hover:translate-x-2 transition-transform bg-transparent border-none cursor-pointer">
+          Launch Lesson <span class="material-symbols-outlined">bolt</span>
+        </button>
+      </div>
+    </article>
+
+    <!-- Section Header -->
+    <div class="md:col-span-12 mt-12 mb-4">
+      <div class="flex items-center gap-4">
+        <h4 class="text-2xl font-headline font-black uppercase tracking-tighter">Fast Execution</h4>
+        <div class="h-1 flex-grow bg-inverse-surface"></div>
+      </div>
+    </div>
+
+    <!-- Lessons -->
+    <div class="md:col-span-4 bg-surface-container-low border-2 border-inverse-surface p-6 flex gap-6 items-start hover:bg-surface-container-high transition-colors lesson-item" data-lesson="1">
+      <div class="text-4xl font-headline font-black text-outline-variant">01</div>
+      <div class="flex-1">
+        <h5 class="text-xl font-headline font-black uppercase leading-tight mb-2">Debt as a Weapon</h5>
+        <p class="text-sm text-on-surface-variant mb-4">How the wealthy use leverage to bypass traditional tax brackets.</p>
+        <div class="flex items-center justify-between">
+          <span class="font-headline font-bold text-[10px] uppercase tracking-tighter bg-inverse-surface text-surface px-2 py-0.5">5 min</span>
+          <button class="btn-start-lesson font-headline font-bold text-[10px] uppercase tracking-tighter text-primary-fixed bg-inverse-surface border-none cursor-pointer px-2 py-0.5 hover:bg-primary transition-colors" data-lesson="1">Start →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:col-span-4 bg-surface-container-low border-2 border-inverse-surface p-6 flex gap-6 items-start hover:bg-surface-container-high transition-colors lesson-item" data-lesson="2">
+      <div class="text-4xl font-headline font-black text-outline-variant">02</div>
+      <div class="flex-1">
+        <h5 class="text-xl font-headline font-black uppercase leading-tight mb-2">Liquidity Traps</h5>
+        <p class="text-sm text-on-surface-variant mb-4">Recognizing the signs of a frozen market before you're stuck in it.</p>
+        <div class="flex items-center justify-between">
+          <span class="font-headline font-bold text-[10px] uppercase tracking-tighter bg-inverse-surface text-surface px-2 py-0.5">8 min</span>
+          <button class="btn-start-lesson font-headline font-bold text-[10px] uppercase tracking-tighter text-primary-fixed bg-inverse-surface border-none cursor-pointer px-2 py-0.5 hover:bg-primary transition-colors" data-lesson="2">Start →</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:col-span-4 bg-surface-container-low border-2 border-inverse-surface p-6 flex gap-6 items-start hover:bg-surface-container-high transition-colors lesson-item" data-lesson="3">
+      <div class="text-4xl font-headline font-black text-outline-variant">03</div>
+      <div class="flex-1">
+        <h5 class="text-xl font-headline font-black uppercase leading-tight mb-2">The Fiat Mirage</h5>
+        <p class="text-sm text-on-surface-variant mb-4">Understanding the transition from gold-backed to credit-backed worlds.</p>
+        <div class="flex items-center justify-between">
+          <span class="font-headline font-bold text-[10px] uppercase tracking-tighter bg-inverse-surface text-surface px-2 py-0.5">15 min</span>
+          <button class="btn-start-lesson font-headline font-bold text-[10px] uppercase tracking-tighter text-primary-fixed bg-inverse-surface border-none cursor-pointer px-2 py-0.5 hover:bg-primary transition-colors" data-lesson="3">Start →</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </main>
-<!-- Footer -->
-<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
-<div class="flex flex-col gap-4">
-<span class="text-4xl font-black text-[#cafd00] font-headline">DIGITAL REBEL</span>
-<p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©2024 DIGITAL REBEL. NO PERMISSION GRANTED.</p>
-</div>
-<div class="flex flex-wrap justify-center gap-8">
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all underline underline-offset-8 decoration-[#cafd00]" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="settings_digital_rebel_desktop.html">Settings</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="checkout_digital_rebel_desktop.html">Checkout</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="assets_digital_rebel_desktop.html">Assets</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="market_digital_rebel_desktop.html">Market</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="transactions.html">Transactions</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="cards_digital_rebel_desktop.html">Cards</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="add_card_digital_rebel.html">Add Card</a>
-<a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="add_manual_asset_digital_rebel.html">Add Asset</a>
-</div>
+
+<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] border-t-4 border-[#cafd00]">
+  <div class="flex flex-col gap-4">
+    <span class="text-4xl font-black text-[#cafd00] font-headline">DIGITAL REBEL</span>
+    <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©2024 DIGITAL REBEL. NO PERMISSION GRANTED.</p>
+  </div>
+  <div class="flex flex-wrap justify-center gap-8">
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all underline underline-offset-8 decoration-[#cafd00]" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="settings_digital_rebel_desktop.html">Settings</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="checkout_digital_rebel_desktop.html">Checkout</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="assets_digital_rebel_desktop.html">Assets</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="market_digital_rebel_desktop.html">Market</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="transactions.html">Transactions</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="cards_digital_rebel_desktop.html">Cards</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="add_card_digital_rebel.html">Add Card</a>
+    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="add_manual_asset_digital_rebel.html">Add Asset</a>
+  </div>
 </footer>
-</body></html>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- ── WALLET MODAL ──────────────────────────────────────────────── -->
+<div id="modal-wallet" class="modal-overlay">
+  <div class="modal-box" style="max-width:460px">
+    <button class="modal-close" onclick="closeModal('modal-wallet')">✕</button>
+    <div class="p-8">
+      <p class="font-headline font-bold text-xs tracking-widest uppercase text-outline mb-2">Web3</p>
+      <h2 class="text-3xl font-headline font-black uppercase mb-1">Connect Wallet</h2>
+      <p class="text-sm text-on-surface-variant mb-6">Choose a provider to connect to Digital Rebel.</p>
+      <div class="flex flex-col gap-3 mb-6">
+        <button class="wallet-btn" onclick="connectWallet('MetaMask')"><span style="font-size:1.4rem">🦊</span><span>MetaMask</span><span class="ml-auto text-xs text-outline font-headline uppercase">Popular</span></button>
+        <button class="wallet-btn" onclick="connectWallet('WalletConnect')"><span style="font-size:1.4rem">🔵</span><span>WalletConnect</span></button>
+        <button class="wallet-btn" onclick="connectWallet('Coinbase Wallet')"><span style="font-size:1.4rem">🔷</span><span>Coinbase Wallet</span></button>
+        <button class="wallet-btn" onclick="connectWallet('Phantom')"><span style="font-size:1.4rem">👻</span><span>Phantom</span><span class="ml-auto text-xs text-outline font-headline uppercase">Solana</span></button>
+      </div>
+      <p class="text-xs text-on-surface-variant text-center font-headline">By connecting you agree to our terms and privacy policy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── NOTIFICATIONS MODAL ──────────────────────────────────────── -->
+<div id="modal-notifications" class="modal-overlay">
+  <div class="modal-box" style="max-width:420px">
+    <button class="modal-close" onclick="closeModal('modal-notifications')">✕</button>
+    <div class="p-8">
+      <h2 class="text-2xl font-headline font-black uppercase mb-6">Notifications</h2>
+      <div>
+        <div class="border-b-2 border-surface-container py-4 flex gap-4 items-start">
+          <div class="w-2 h-2 bg-primary-fixed border border-inverse-surface mt-2 shrink-0"></div>
+          <div><p class="font-headline font-bold text-sm uppercase">New Lesson Available</p><p class="text-xs text-on-surface-variant mt-1">The Hidden Cost of Dollar Hegemony has just dropped.</p><p class="text-xs text-outline mt-1">2 hours ago</p></div>
+        </div>
+        <div class="border-b-2 border-surface-container py-4 flex gap-4 items-start">
+          <div class="w-2 h-2 bg-tertiary-fixed border border-inverse-surface mt-2 shrink-0"></div>
+          <div><p class="font-headline font-bold text-sm uppercase">Market Alert</p><p class="text-xs text-on-surface-variant mt-1">BTC crossed $95K resistance zone. Analysis ready.</p><p class="text-xs text-outline mt-1">5 hours ago</p></div>
+        </div>
+        <div class="border-b-2 border-surface-container py-4 flex gap-4 items-start">
+          <div class="w-2 h-2 bg-surface-container border border-inverse-surface mt-2 shrink-0"></div>
+          <div><p class="font-headline font-bold text-sm uppercase">Protocol Update</p><p class="text-xs text-on-surface-variant mt-1">Week 6 of the 12-week immersive is now live.</p><p class="text-xs text-outline mt-1">Yesterday</p></div>
+        </div>
+        <div class="py-4 flex gap-4 items-start">
+          <div class="w-2 h-2 bg-surface-container border border-inverse-surface mt-2 shrink-0"></div>
+          <div><p class="font-headline font-bold text-sm uppercase">Streak Milestone</p><p class="text-xs text-on-surface-variant mt-1">You've maintained a 7-day learning streak.</p><p class="text-xs text-outline mt-1">2 days ago</p></div>
+        </div>
+      </div>
+      <button class="w-full mt-4 bg-inverse-surface text-surface py-3 font-headline font-black uppercase text-xs tracking-widest hover:bg-primary transition-colors" onclick="showToast('All notifications cleared');closeModal('modal-notifications')">Mark All as Read</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SETTINGS MODAL ───────────────────────────────────────────── -->
+<div id="modal-settings" class="modal-overlay">
+  <div class="modal-box" style="max-width:460px">
+    <button class="modal-close" onclick="closeModal('modal-settings')">✕</button>
+    <div class="p-8">
+      <h2 class="text-2xl font-headline font-black uppercase mb-6">Settings</h2>
+      <div class="flex flex-col gap-6">
+        <div>
+          <label class="font-headline font-bold text-xs uppercase tracking-widest block mb-2">Display Mode</label>
+          <div class="flex gap-3">
+            <button id="btn-light-mode" onclick="setMode('light')" class="flex-1 py-3 border-2 border-inverse-surface font-headline font-bold text-xs uppercase tracking-widest bg-primary-fixed text-inverse-surface">☀ Light</button>
+            <button id="btn-dark-mode" onclick="setMode('dark')" class="flex-1 py-3 border-2 border-inverse-surface font-headline font-bold text-xs uppercase tracking-widest bg-surface-container text-on-surface">☾ Dark</button>
+          </div>
+        </div>
+        <div>
+          <label class="font-headline font-bold text-xs uppercase tracking-widest block mb-3">Notifications</label>
+          <div class="border-2 border-inverse-surface divide-y-2 divide-surface-container">
+            <div class="flex items-center justify-between p-4 bg-surface-container-low">
+              <span class="text-sm font-headline font-bold uppercase">Email Alerts</span>
+              <input type="checkbox" checked class="w-5 h-5 accent-[#cafd00] cursor-pointer"/>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-surface-container-low">
+              <span class="text-sm font-headline font-bold uppercase">Market Alerts</span>
+              <input type="checkbox" class="w-5 h-5 accent-[#cafd00] cursor-pointer"/>
+            </div>
+            <div class="flex items-center justify-between p-4 bg-surface-container-low">
+              <span class="text-sm font-headline font-bold uppercase">New Lessons</span>
+              <input type="checkbox" checked class="w-5 h-5 accent-[#cafd00] cursor-pointer"/>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="font-headline font-bold text-xs uppercase tracking-widest block mb-2">Currency Display</label>
+          <select class="w-full border-2 border-inverse-surface p-3 font-headline font-bold text-sm uppercase bg-surface-container-low focus:outline-none">
+            <option>USD — US Dollar</option>
+            <option>EUR — Euro</option>
+            <option>INR — Indian Rupee</option>
+            <option>BTC — Bitcoin</option>
+            <option>ETH — Ethereum</option>
+          </select>
+        </div>
+        <button class="w-full bg-inverse-surface text-surface py-3 font-headline font-black uppercase text-xs tracking-widest hard-shadow active-interaction hover:bg-primary transition-colors" onclick="showToast('Settings saved');closeModal('modal-settings')">Save Settings</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ARTICLE MODAL ────────────────────────────────────────────── -->
+<div id="modal-article" class="modal-overlay">
+  <div class="modal-box" style="max-width:680px">
+    <button class="modal-close" onclick="closeModal('modal-article')">✕</button>
+    <div class="relative h-52 overflow-hidden">
+      <img class="w-full h-full object-cover grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrVWaIYWBPBYWL-HzlSmQBCgjKxtYmZ4NgZ4w83weDWHNKY_Q2Wzb2qhlPeWKUdipMg8HFSskt0NGhEcHgwKDQCA-5yf_eJ0-wJ5ZZjp3oCMiyGp7ymSUgGgmnzpo6a4Hsn43JUkIdEboQu5Eg0mGr1olXTtGiw9SZGdcQYmoMFBY0JZIomVEkdkOw3noO7fDZDpLckeBxLmKSt2dT8OYAFsRj3nvFwfpSEKJXI2vVjRzqgNWPDies2pPS5s8rGix2CeBxZ2KLKrA0" alt=""/>
+      <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+        <span class="bg-primary-fixed text-inverse-surface px-3 py-1 font-headline font-black uppercase text-xs">Macro Economy · 12 Min Read</span>
+      </div>
+    </div>
+    <div class="p-8 article-content">
+      <h2 class="text-3xl font-headline font-black uppercase leading-tight mb-1">Why Inflation is a Scam Designed to Tax Your Time</h2>
+      <p class="text-xs text-outline uppercase font-headline font-bold tracking-widest mb-4">Published March 28, 2026 · Digital Rebel</p>
+      <div class="progress-bar mb-6"><div class="progress-fill" id="article-progress" style="width:0%"></div></div>
+      <p>Every year, the purchasing power of your savings quietly evaporates. Not because of bad luck — but because of a deliberate architectural feature of the modern monetary system. This is not a conspiracy. It is policy.</p>
+      <h3>The Mechanism</h3>
+      <p>Central banks target 2% annual inflation as a feature, not a bug. This means in 35 years, your dollar is worth half what it is today. The laborer who saves in fiat is systematically taxed without a vote, without a line item, without a name.</p>
+      <div class="callout"><p>Every dollar saved is a loan to the system — repaid in devalued currency.</p></div>
+      <h3>Who Benefits?</h3>
+      <p>Asset holders. When money supply expands, value flows first to those who receive new money — governments, financial institutions, and the asset-rich. By the time it reaches wage earners, prices have adjusted. This is the Cantillon Effect.</p>
+      <h3>The Exit</h3>
+      <p>The exit is not rage. The exit is understanding. Hard assets, productive equity, scarce digital commodities — these preserve labor over time. The goal is not to beat inflation. The goal is to own things inflation cannot touch.</p>
+      <div class="flex gap-4 mt-8">
+        <button class="flex-1 bg-primary-fixed text-inverse-surface py-3 font-headline font-black uppercase text-xs tracking-widest border-2 border-inverse-surface hover:bg-primary-fixed-dim transition-colors" onclick="shareArticle()">Share</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── LESSON MODAL ─────────────────────────────────────────────── -->
+<div id="modal-lesson" class="modal-overlay">
+  <div class="modal-box" style="max-width:580px">
+    <button class="modal-close" onclick="closeModal('modal-lesson')">✕</button>
+    <div class="p-8">
+      <p class="font-headline font-bold text-xs tracking-widest uppercase text-outline mb-1" id="lesson-category">Lesson</p>
+      <h2 class="text-2xl font-headline font-black uppercase mb-4" id="lesson-title">—</h2>
+      <div class="progress-bar mb-6"><div class="progress-fill" id="lesson-progress" style="width:0%"></div></div>
+      <div id="lesson-content" class="article-content text-sm min-h-40"></div>
+      <div class="flex gap-3 mt-8">
+        <button id="btn-prev-step" class="px-6 py-3 border-2 border-inverse-surface font-headline font-black uppercase text-xs tracking-widest hover:bg-surface-container transition-colors opacity-40 cursor-not-allowed" onclick="lessonStep(-1)" disabled>← Back</button>
+        <button id="btn-next-step" class="flex-1 bg-inverse-surface text-surface py-3 font-headline font-black uppercase text-xs tracking-widest hover:bg-primary transition-colors" onclick="lessonStep(1)">Continue →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ── ALL LESSONS MODAL ────────────────────────────────────────── -->
+<div id="modal-all-lessons" class="modal-overlay">
+  <div class="modal-box" style="max-width:540px">
+    <button class="modal-close" onclick="closeModal('modal-all-lessons')">✕</button>
+    <div class="p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-headline font-black uppercase">All 84 Lessons</h2>
+        <span class="bg-primary-fixed text-inverse-surface font-headline font-black uppercase text-xs px-3 py-1 border border-inverse-surface">Free &amp; Pro</span>
+      </div>
+      <div id="all-lessons-list" class="flex flex-col max-h-[60vh] overflow-y-auto pr-1"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Data ─────────────────────────────────────────────────────────────────────
+const LESSONS = [
+  { id:1, title:"Debt as a Weapon", category:"Leverage", duration:"5 min", steps:[
+    { h:"What is Leverage?", b:"Leverage is borrowing capital to amplify returns. The wealthy don't just earn — they borrow against appreciating assets to fund their lifestyles while paying near-zero effective tax." },
+    { h:"The Tax Secret", b:"Loans are not taxable income. By borrowing against assets, the ultra-wealthy access liquidity without triggering capital gains events. The debt is repaid from future asset sales — often after death, stepping up the cost basis." },
+    { h:"The Exit Play", b:"Understanding debt as a tool, not a trap, means knowing when and how to use it. Low-interest debt against high-return assets is the fundamental equation of wealth accumulation." }
+  ]},
+  { id:2, title:"Liquidity Traps", category:"Markets", duration:"8 min", steps:[
+    { h:"What is a Liquidity Trap?", b:"A liquidity trap occurs when interest rates are near zero and monetary policy loses effectiveness. People hoard cash instead of investing, even when the economy needs stimulus." },
+    { h:"Recognizing the Signs", b:"Watch for: flat or inverted yield curves, central bank balance sheet expansion with no GDP growth response, and a sharp decline in money velocity. These signals often precede a frozen market." },
+    { h:"Navigating the Freeze", b:"In a liquidity trap, cash is king short-term but a trap long-term. Hard assets and foreign exposure become critical hedges. Stay liquid enough to survive, invested enough to thrive." }
+  ]},
+  { id:3, title:"The Fiat Mirage", category:"Monetary Theory", duration:"15 min", steps:[
+    { h:"From Gold to Credit", b:"In 1971, the US suspended the dollar's convertibility to gold, ending the Bretton Woods system. Every major currency became a credit-backed instrument from that point forward." },
+    { h:"What Backs Money Now?", b:"Faith. And military. The petrodollar system, geopolitical dominance, and network effects keep fiat viable. But these are structural dependencies, not fundamental value." },
+    { h:"The Implications", b:"In a pure fiat world, monetary supply is theoretically unlimited. The discipline of scarcity must come from outside the system — hence the appeal of fixed-supply assets as a monetary anchor." }
+  ]},
+];
+
+const TOPICS = ["Yield Curves","Portfolio Theory","Risk Parity","DeFi Mechanics","NFT Valuation","DAO Governance","Smart Contracts","Market Cycles","Elliott Waves","Technical Analysis","Fundamental Analysis","Derivatives","Options Pricing","Black-Scholes","Currency Wars","Reserve Currencies","CBDC Risks","Tax Harvesting","Estate Planning","Generational Wealth","Fractional Reserve Banking","M1 M2 M3","Quantitative Easing","Repo Markets","Shadow Banking","ETF Arbitrage","Index Funds","Factor Investing","Momentum Strategies","Mean Reversion","Volatility Trading","VIX Explained","Sector Rotation","Commodities","Oil & Geopolitics","Agricultural Assets","Precious Metals","Digital Scarcity","Bitcoin Halving","Ethereum Fundamentals","Altcoin Risk","Stablecoin Architecture","Cross-Chain Bridges","Decentralized Identity","Data Sovereignty","AI & Finance","Algorithmic Trading","HFT Ethics","Payment Rails","SWIFT Alternatives","Credit Scores Decoded","Insurance as Wealth Tool","REITs & Real Estate","Cap Rates","Mortgage Math","Startup Equity","Vesting Schedules","Angel Investing","VC Mechanics","IPO Dynamics","SPACs Explained","Short Selling","Margin Accounts","Bankruptcy & Recovery","Behavioral Finance","Loss Aversion","Confirmation Bias","Recency Bias","Herd Mentality","Contrarian Thinking","Value Investing","Growth vs Value","GARP Strategy","Dividend Investing","Capital Allocation","Corporate Buybacks","Activist Investing","Hedge Fund Strategies","Family Office Secrets","Sovereign Wealth Funds","Global Macro","Geopolitical Risk"];
+const ALL_LESSONS = [...LESSONS];
+TOPICS.forEach((t,i) => ALL_LESSONS.push({id:i+4,title:t,category:"Advanced",duration:`${(i%15)+3} min`}));
+
+// ── State ─────────────────────────────────────────────────────────────────────
+let currentLesson = null, currentStep = 0, selectedPlan = 'annual';
+
+// ── Modals ────────────────────────────────────────────────────────────────────
+function openModal(id)  { document.getElementById(id).classList.add('open');    document.body.style.overflow='hidden'; }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+document.querySelectorAll('.modal-overlay').forEach(el => el.addEventListener('click', e => { if(e.target===el) closeModal(el.id); }));
+document.addEventListener('keydown', e => { if(e.key==='Escape') document.querySelectorAll('.modal-overlay.open').forEach(m=>closeModal(m.id)); });
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._timer); t._timer = setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+// ── Progress ──────────────────────────────────────────────────────────────────
+function animateProgress(id, pct, ms) {
+  const el = document.getElementById(id); if(!el) return;
+  let s=null; requestAnimationFrame(function step(ts){ if(!s)s=ts; el.style.width=Math.min((ts-s)/ms,1)*pct+'%'; if((ts-s)<ms)requestAnimationFrame(step); });
+}
+
+// ── Wallet ────────────────────────────────────────────────────────────────────
+document.getElementById('btn-connect-wallet').addEventListener('click', ()=>openModal('modal-wallet'));
+function connectWallet(name) {
+  const btn = document.getElementById('btn-connect-wallet');
+  btn.textContent = name+' ✓'; btn.style.background='#cafd00';
+  closeModal('modal-wallet'); showToast(name+' connected successfully');
+}
+
+// ── Notifications ─────────────────────────────────────────────────────────────
+document.getElementById('btn-notifications').addEventListener('click', ()=>openModal('modal-notifications'));
+
+// ── Settings ──────────────────────────────────────────────────────────────────
+document.getElementById('btn-settings').addEventListener('click', (e)=>{ e.preventDefault(); openModal('modal-settings'); });
+function setMode(mode) {
+  document.documentElement.classList.toggle('dark', mode==='dark');
+  document.getElementById('btn-light-mode').className = document.getElementById('btn-light-mode').className.replace(/bg-\S+/,'') + (mode==='light' ? ' bg-primary-fixed text-inverse-surface' : ' bg-surface-container text-on-surface');
+  document.getElementById('btn-dark-mode').className  = document.getElementById('btn-dark-mode').className.replace(/bg-\S+/, '') + (mode==='dark'  ? ' bg-primary-fixed text-inverse-surface' : ' bg-surface-container text-on-surface');
+  showToast(mode.charAt(0).toUpperCase()+mode.slice(1)+' mode on');
+}
+
+// ── Article ───────────────────────────────────────────────────────────────────
+document.getElementById('btn-read-manifesto').addEventListener('click', ()=>{ openModal('modal-article'); animateProgress('article-progress',100,9000); });
+function shareArticle() {
+  if(navigator.share) navigator.share({title:'Why Inflation is a Scam',url:window.location.href});
+  else navigator.clipboard.writeText(window.location.href).then(()=>showToast('Link copied!'));
+  closeModal('modal-article');
+}
+
+// ── Lessons ───────────────────────────────────────────────────────────────────
+function openLesson(id) {
+  const lesson = LESSONS.find(l=>l.id===id);
+  if(!lesson){ showToast('Pro lesson — unlock with a plan'); return; }
+  currentLesson=lesson; currentStep=0; renderStep(); openModal('modal-lesson');
+}
+function renderStep() {
+  const s = currentLesson.steps[currentStep];
+  document.getElementById('lesson-category').textContent = currentLesson.category+' · '+currentLesson.duration;
+  document.getElementById('lesson-title').textContent    = currentLesson.title;
+  document.getElementById('lesson-content').innerHTML   = `<h3>${s.h}</h3><p>${s.b}</p>`;
+  const pct = ((currentStep+1)/currentLesson.steps.length)*100;
+  document.getElementById('lesson-progress').style.width = pct+'%';
+  const prev = document.getElementById('btn-prev-step');
+  const next = document.getElementById('btn-next-step');
+  prev.disabled = currentStep===0; prev.style.opacity = currentStep===0?'0.4':'1'; prev.style.cursor = currentStep===0?'not-allowed':'pointer';
+  next.textContent = currentStep===currentLesson.steps.length-1 ? 'Complete ✓' : 'Continue →';
+}
+function lessonStep(dir) {
+  if(dir===1 && currentStep===currentLesson.steps.length-1){ closeModal('modal-lesson'); showToast('"'+currentLesson.title+'" complete! 🎉'); return; }
+  currentStep = Math.max(0, Math.min(currentLesson.steps.length-1, currentStep+dir)); renderStep();
+}
+
+document.getElementById('btn-launch-lesson').addEventListener('click', ()=>openLesson(2));
+document.querySelectorAll('.btn-start-lesson').forEach(btn=>btn.addEventListener('click', e=>{ e.stopPropagation(); openLesson(+btn.dataset.lesson); }));
+document.querySelectorAll('.lesson-item').forEach(el=>el.addEventListener('click', ()=>openLesson(+el.dataset.lesson)));
+
+function selectPlan(plan) {
+  selectedPlan = plan;
+  showToast((plan==='monthly'?'Monthly':'Annual')+' plan selected');
+}
+function handleCheckout() { showToast('Redirecting to secure checkout…'); }
+
+// ── 84 Lessons badge ──────────────────────────────────────────────────────────
+document.getElementById('badge-lessons').addEventListener('click', ()=>{
+  const list = document.getElementById('all-lessons-list'); list.innerHTML='';
+  ALL_LESSONS.forEach((l,i)=>{
+    const el=document.createElement('div');
+    el.className='flex items-center gap-4 py-3 border-b border-surface-container cursor-pointer hover:bg-surface-container-low transition-colors px-2';
+    const isFree = i<3;
+    el.innerHTML=`
+      <span class="text-outline-variant font-headline font-black text-sm w-6 text-right shrink-0">${String(i+1).padStart(2,'0')}</span>
+      <div class="flex-1 min-w-0"><p class="font-headline font-bold text-sm uppercase truncate">${l.title}</p><p class="text-xs text-outline">${l.category}</p></div>
+      <span class="text-xs font-headline font-bold text-outline shrink-0">${l.duration}</span>
+      <span class="${isFree?'bg-primary-fixed text-inverse-surface':'bg-inverse-surface text-surface'} text-[9px] font-headline font-black uppercase px-1.5 py-0.5 shrink-0">${isFree?'Free':'Pro'}</span>
+    `;
+    el.addEventListener('click',()=>{ closeModal('modal-all-lessons'); if(isFree)openLesson(l.id); else showToast('Pro lesson — unlock with a plan'); });
+    list.appendChild(el);
+  });
+  openModal('modal-all-lessons');
+});
+</script>
+</body>
+</html>
