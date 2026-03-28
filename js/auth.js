@@ -65,20 +65,28 @@ async function checkOnboarding() {
 
     // Redirection Logic
     if (isOnboarded) {
-      // If onboarded, only allow dashboard/market/assets etc. 
-      // Redirect away from index/onboarding
       if (currentPath === '/' || currentPath.includes('index.html') || currentPath.includes('onboarding_')) {
-        window.location.href = '/dashboard_digital_rebel_desktop.html';
+        // Use a flag to avoid infinite loops if the redirect is already in progress
+        if (!window.location.search.includes('redirecting')) {
+          window.location.href = '/dashboard_digital_rebel_desktop.html';
+          return;
+        }
       }
     } else {
-      // If not onboarded, only allow onboarding pages
-      // Redirect away from dashboard/market/assets
-      if (currentPath.includes('dashboard_') || currentPath.includes('market_') || currentPath.includes('assets_') || currentPath.includes('index.html') || currentPath === '/') {
-        window.location.href = '/onboarding_step_1_age.html';
+      // Only redirect to onboarding if NOT already on an onboarding page
+      if (!currentPath.includes('onboarding_')) {
+        if (currentPath.includes('dashboard_') || currentPath.includes('market_') || currentPath.includes('assets_') || currentPath.includes('index.html') || currentPath === '/') {
+          window.location.href = '/onboarding_step_1_age.html';
+          return;
+        }
       }
     }
+
+    // If we get here, we are on the correct page. Reveal the body if hidden.
+    document.body.style.opacity = '1';
   } catch (err) {
     console.error('Onboarding check failed:', err);
+    document.body.style.opacity = '1'; // Reveal anyway in case of error
   }
 }
 
@@ -96,18 +104,23 @@ async function requireAuth() {
 async function updateNavAuth() {
   const session = await getSession();
 
-  // Find "Connect Wallet" buttons and convert to user indicator
-  const connectBtns = document.querySelectorAll(
-    '#btn-connect-wallet, #connect-wallet-btn, [id*="connect-wallet"]'
+  // Find "Connect Wallet" and Hero Sign-In buttons
+  const authButtons = document.querySelectorAll(
+    '#btn-connect-wallet, #connect-wallet-btn, #btn-google-signin, [id*="connect-wallet"]'
   );
 
-  connectBtns.forEach(btn => {
+  authButtons.forEach(btn => {
     if (session) {
-      btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
-      btn.onclick = (e) => {
-        e.preventDefault();
-        window.location.href = '/dashboard_digital_rebel_desktop.html';
-      };
+      if (btn.id === 'btn-google-signin') {
+        btn.style.display = 'none'; // Hide as per user request
+      } else {
+        // Replace button content/behavior for others
+        btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
+        btn.onclick = (e) => {
+          e.preventDefault();
+          window.location.href = '/dashboard_digital_rebel_desktop.html';
+        };
+      }
     } else {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -143,11 +156,20 @@ async function updateNavAuth() {
 document.addEventListener('DOMContentLoaded', () => {
   updateNavAuth();
 
+  // Safety Reveal: Ensure body is never permanently hidden if auth/api hangs
+  setTimeout(() => {
+    if (document.body.style.opacity === '0' || getComputedStyle(document.body).opacity === '0') {
+      document.body.style.opacity = '1';
+    }
+  }, 2500);
+
   // Only check onboarding once session is established
   getSupabase().auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
       checkOnboarding();
       updateNavAuth();
+    } else if (event === 'SIGNED_OUT') {
+      document.body.style.opacity = '1'; // Always reveal if logged out
     }
   });
 });

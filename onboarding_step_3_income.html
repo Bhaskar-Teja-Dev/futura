@@ -201,19 +201,30 @@
   <script src="/js/auth.js"></script>
   <script src="/js/api.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const nextBtn = document.querySelector('a[href="dashboard_digital_rebel_desktop.html"]');
-      // We target the input inside the input section using structural query since it lacked an ID
-      const input = document.querySelector('input[placeholder="0.00"]');
-      if (input) input.id = "income-input";
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 1. Enforce Auth
+      const session = await requireAuth();
+      if (!session) return;
 
-      // Pre-fill
+      // 2. Validate Sequence (Must have current_age and retirement_age)
       const saved = localStorage.getItem('onboarding_data');
+      let currentData = {};
       if (saved) {
         try {
-          const data = JSON.parse(saved);
-          if (data.target_monthly_income) input.value = data.target_monthly_income;
+          currentData = JSON.parse(saved);
         } catch (e) { }
+      }
+
+      if (!currentData.current_age || !currentData.retirement_age) {
+        window.location.href = 'onboarding_step_1_age.html';
+        return;
+      }
+
+      const nextBtn = document.querySelector('a[href="dashboard_digital_rebel_desktop.html"]');
+      const input = document.querySelector('input[placeholder="0.00"]');
+      if (input) {
+        input.id = "income-input";
+        if (currentData.target_monthly_income) input.value = currentData.target_monthly_income;
       }
 
       if (nextBtn && input) {
@@ -235,30 +246,18 @@
           nextBtn.innerHTML = '<span class="font-headline font-black text-2xl uppercase tracking-tighter text-inverse-surface">SAVING...</span>';
 
           try {
-            // 1. Update profile (Age/Retirement/Income)
-            try {
-              if (currentData.current_age) {
-                await futuraApi.profile.update({
-                  age: parseInt(currentData.current_age, 10),
-                  retirement_age: parseInt(currentData.retirement_age, 10),
-                  monthly_income: parseInt(currentData.target_monthly_income, 10),
-                  onboarding_complete: true
-                });
-              }
-            } catch (pErr) {
-              console.warn("Profile update deferred:", pErr.message);
-              // We continue because goals.upsert also fixes the profile
-            }
-
-            // 2. Upsert goals (Critical)
+            // 1. Upsert goals (This also initializes the profile and Zens balance in the backend)
             await futuraApi.goals.upsert({
-              current_age: currentData.current_age || 0,
-              retirement_age: currentData.retirement_age || 0,
+              current_age: parseInt(currentData.current_age, 10) || 0,
+              retirement_age: parseInt(currentData.retirement_age, 10) || 0,
               target_monthly_income: currentData.target_monthly_income
             });
 
             localStorage.removeItem('onboarding_data');
-            window.location.href = nextBtn.getAttribute('href');
+            // Redirect to dashboard with a small delay for DB consistency
+            setTimeout(() => {
+              window.location.href = nextBtn.getAttribute('href');
+            }, 500);
 
           } catch (err) {
             console.error("Onboarding Save Error:", err);

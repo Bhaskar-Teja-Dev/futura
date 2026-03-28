@@ -19,12 +19,27 @@ router.get('/', async (c) => {
   const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
 
-  // Auto-initialize profile row if missing (using admin to bypass potential insert RLS)
-  const { data: profile, error: profileError } = await supabaseAdmin
+  // Fetch existing profile (bypass RLS for existence check)
+  const { data: existingProfile } = await supabaseAdmin
     .from('profiles')
-    .upsert({ id: userId }, { onConflict: 'id' })
     .select('*')
-    .single()
+    .eq('id', userId)
+    .maybeSingle()
+
+  let profile = existingProfile
+  if (!existingProfile) {
+    // Only initialize if missing
+    const { data: newProfile, error: insertError } = await supabaseAdmin
+      .from('profiles')
+      .insert({ id: userId })
+      .select('*')
+      .single()
+
+    if (insertError) {
+      return c.json({ error: insertError.message }, 500)
+    }
+    profile = newProfile
+  }
 
   const { data: subscription, error: subError } = await supabase
     .from('user_subscriptions')
@@ -32,8 +47,8 @@ router.get('/', async (c) => {
     .eq('user_id', userId)
     .maybeSingle()
 
-  if (profileError || subError) {
-    return c.json({ error: profileError?.message ?? subError?.message ?? 'unknown_error' }, 500)
+  if (subError) {
+    return c.json({ error: subError.message }, 500)
   }
 
   return c.json({ profile, subscription })
