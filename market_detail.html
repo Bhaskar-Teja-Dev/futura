@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Stock Detail | DIGITAL REBEL</title>
+	<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Inter:wght@100..900&display=swap"
+		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+		rel="stylesheet" />
+	<style>
+		body {
+			background: #f6f6f6;
+			background-image: radial-gradient(#121212 0.5px, transparent 0.5px);
+			background-size: 24px 24px;
+			font-family: 'Inter', sans-serif;
+		}
+
+		.hard-shadow {
+			box-shadow: 4px 4px 0 #121212;
+		}
+
+		@keyframes slideUp {
+			from {
+				transform: translateY(40px);
+				opacity: 0
+			}
+
+			to {
+				transform: translateY(0);
+				opacity: 1
+			}
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0
+			}
+
+			to {
+				opacity: 1
+			}
+		}
+
+		.card {
+			animation: slideUp .25s ease both;
+		}
+	</style>
+</head>
+
+<body class="min-h-screen flex flex-col text-[#121212]">
+
+	<!-- Nav -->
+	<nav
+		class="fixed top-0 w-full z-50 border-b-2 border-[#121212] bg-white flex justify-between items-center px-6 h-16 shadow-[4px_4px_0_rgba(18,18,18,1)]">
+		<div class="flex items-center gap-8">
+			<a href="market_digital_rebel_desktop.html"
+				class="font-headline font-black text-2xl text-[#121212] tracking-tighter"
+				style="font-family:'Lexend',sans-serif;">DIGITAL REBEL</a>
+			<div class="hidden md:flex gap-6">
+				<a href="dashboard_digital_rebel_desktop.html"
+					class="font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212]"
+					style="font-family:'Lexend',sans-serif;">Dashboard</a>
+				<a href="market_digital_rebel_desktop.html"
+					class="font-black uppercase tracking-tighter text-[#121212] border-b-4 border-[#cafd00]"
+					style="font-family:'Lexend',sans-serif;">Markets</a>
+				<a href="assets_digital_rebel_desktop.html"
+					class="font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212]"
+					style="font-family:'Lexend',sans-serif;">Assets</a>
+			</div>
+		</div>
+		<a href="settings_digital_rebel_desktop.html"
+			class="material-symbols-outlined p-2 hover:bg-[#cafd00] border-2 border-transparent hover:border-[#121212] transition-all">settings</a>
+	</nav>
+
+	<main class="mt-16 p-6 md:p-10 flex-grow max-w-5xl mx-auto w-full">
+
+		<!-- Back + Header -->
+		<div class="card mb-8" style="animation-delay:.05s">
+			<a href="market_digital_rebel_desktop.html"
+				class="inline-flex items-center gap-2 font-black uppercase tracking-widest text-sm text-[#767777] hover:text-[#121212] mb-6"
+				style="font-family:'Lexend',sans-serif;">
+				<span class="material-symbols-outlined text-base">arrow_back</span> MARKETS
+			</a>
+			<div class="bg-white border-2 border-[#121212] p-6 hard-shadow flex flex-wrap items-center gap-6">
+				<div id="ticker-badge"
+					class="w-20 h-20 bg-[#121212] flex items-center justify-center text-[#cafd00] font-black text-2xl shrink-0"
+					style="font-family:'Lexend',sans-serif;">—</div>
+				<div class="flex-grow">
+					<p id="company-name" class="text-xs uppercase tracking-widest text-[#767777] mb-1"
+						style="font-family:'Lexend',sans-serif;font-weight:700;">Loading...</p>
+					<p id="stock-price" class="text-5xl font-black leading-none"
+						style="font-family:'Lexend',sans-serif;">—</p>
+				</div>
+				<div class="flex flex-col items-end gap-2">
+					<span id="change-badge" class="font-black text-2xl"
+						style="font-family:'Lexend',sans-serif;">—</span>
+					<span id="risk-badge" class="font-black text-xs px-3 py-1 border-2"
+						style="font-family:'Lexend',sans-serif;">—</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- Chart -->
+		<div class="card bg-white border-2 border-[#121212] p-6 hard-shadow mb-6" style="animation-delay:.1s">
+			<div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+				<h2 class="font-black uppercase tracking-widest text-sm" style="font-family:'Lexend',sans-serif;">PRICE
+					CHART</h2>
+				<div class="flex gap-2" id="range-btns">
+					<button data-range="24H"
+						class="range-btn active-range font-black text-xs px-3 py-1 border-2 border-[#121212] bg-[#cafd00]"
+						style="font-family:'Lexend',sans-serif;">24H</button>
+					<button data-range="7D" class="range-btn font-black text-xs px-3 py-1 border-2 border-[#121212]"
+						style="font-family:'Lexend',sans-serif;">7D</button>
+					<button data-range="1M" class="range-btn font-black text-xs px-3 py-1 border-2 border-[#121212]"
+						style="font-family:'Lexend',sans-serif;">1M</button>
+					<button data-range="1Y" class="range-btn font-black text-xs px-3 py-1 border-2 border-[#121212]"
+						style="font-family:'Lexend',sans-serif;">1Y</button>
+				</div>
+			</div>
+			<svg id="price-chart" viewBox="0 0 600 150" class="w-full" style="height:160px;"></svg>
+		</div>
+
+		<!-- Key Stats -->
+		<div class="card grid grid-cols-2 md:grid-cols-4 gap-4 mb-6" style="animation-delay:.15s">
+			<div class="bg-white border-2 border-[#121212] p-4 hard-shadow">
+				<p class="text-[10px] uppercase tracking-widest text-[#767777] mb-1"
+					style="font-family:'Lexend',sans-serif;font-weight:700;">Open</p>
+				<p id="stat-open" class="text-xl font-black" style="font-family:'Lexend',sans-serif;">—</p>
+			</div>
+			<div class="bg-white border-2 border-[#121212] p-4 hard-shadow">
+				<p class="text-[10px] uppercase tracking-widest text-[#767777] mb-1"
+					style="font-family:'Lexend',sans-serif;font-weight:700;">Day High</p>
+				<p id="stat-high" class="text-xl font-black" style="font-family:'Lexend',sans-serif;">—</p>
+			</div>
+			<div class="bg-white border-2 border-[#121212] p-4 hard-shadow">
+				<p class="text-[10px] uppercase tracking-widest text-[#767777] mb-1"
+					style="font-family:'Lexend',sans-serif;font-weight:700;">Day Low</p>
+				<p id="stat-low" class="text-xl font-black" style="font-family:'Lexend',sans-serif;">—</p>
+			</div>
+			<div class="bg-white border-2 border-[#121212] p-4 hard-shadow">
+				<p class="text-[10px] uppercase tracking-widest text-[#767777] mb-1"
+					style="font-family:'Lexend',sans-serif;font-weight:700;">Volume</p>
+				<p id="stat-vol" class="text-xl font-black" style="font-family:'Lexend',sans-serif;">—</p>
+			</div>
+		</div>
+
+		<!-- Retirement Relevance -->
+		<div class="card bg-[#cafd00] border-2 border-[#121212] p-6 hard-shadow mb-8" style="animation-delay:.2s">
+			<div class="flex items-center gap-3 mb-4">
+				<span class="material-symbols-outlined text-2xl">savings</span>
+				<h2 class="font-black uppercase tracking-widest text-sm" style="font-family:'Lexend',sans-serif;">
+					RETIREMENT RELEVANCE</h2>
+			</div>
+			<p id="retirement-text" class="text-[#121212] leading-relaxed"
+				style="font-family:'Inter',sans-serif;font-size:14px;">Calculating...</p>
+		</div>
+
+		<!-- BUY Button -->
+		<div class="card" style="animation-delay:.25s">
+			<button id="detail-buy-btn"
+				class="w-full bg-[#121212] text-[#cafd00] font-black text-xl uppercase tracking-widest py-6 border-2 border-[#121212] hard-shadow hover:bg-[#cafd00] hover:text-[#121212] transition-colors"
+				style="font-family:'Lexend',sans-serif;cursor:pointer;">
+				BUY —
+			</button>
+		</div>
+
+	</main>
+
+	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+	<script src="/js/config.js"></script>
+	<script src="/js/auth.js"></script>
+	<script src="/js/api.js"></script>
+	<script>
+		const STOCK_DATA = {
+			TSLA: { name: 'Tesla Inc.', price: 178.44, change: 12.4, risk: 'HIGH', returnRate: 0.18, open: 159.20, high: 182.10, low: 157.80, volume: '48.2M' },
+			AAPL: { name: 'Apple Inc.', price: 191.04, change: -4.2, risk: 'MODERATE', returnRate: 0.14, open: 199.30, high: 200.10, low: 189.50, volume: '52.7M' },
+			NVDA: { name: 'NVIDIA Corp.', price: 894.52, change: 22.1, risk: 'HIGH', returnRate: 0.22, open: 732.80, high: 901.00, low: 730.10, volume: '41.0M' },
+			META: { name: 'Meta Platforms', price: 485.58, change: 3.8, risk: 'MODERATE', returnRate: 0.16, open: 467.50, high: 490.20, low: 465.00, volume: '18.3M' },
+			AMZN: { name: 'Amazon.com Inc.', price: 175.01, change: -1.5, risk: 'MODERATE', returnRate: 0.13, open: 177.70, high: 178.90, low: 173.40, volume: '29.1M' },
+			MSFT: { name: 'Microsoft', price: 415.50, change: 0.8, risk: 'MODERATE', returnRate: 0.15, open: 412.20, high: 418.00, low: 410.50, volume: '19.5M' },
+			GOOGL: { name: 'Alphabet Inc.', price: 147.60, change: -2.1, risk: 'MODERATE', returnRate: 0.14, open: 150.80, high: 151.60, low: 146.90, volume: '23.6M' },
+			NFLX: { name: 'Netflix Inc.', price: 610.56, change: 6.7, risk: 'MODERATE', returnRate: 0.15, open: 572.00, high: 614.00, low: 570.20, volume: '8.9M' },
+			AMD: { name: 'Advanced Micro Devices', price: 162.33, change: 8.2, risk: 'HIGH', returnRate: 0.20, open: 150.00, high: 164.50, low: 149.20, volume: '35.7M' },
+			UBER: { name: 'Uber Technologies', price: 74.12, change: -0.3, risk: 'MODERATE', returnRate: 0.12, open: 74.35, high: 75.10, low: 73.30, volume: '14.2M' },
+		};
+
+		const CHART_POINTS = {
+			'24H': [0.97, 0.98, 1.0, 0.99, 1.01, 1.02, 1.04, 1.03, 1.05, 1.04, 1.06, 1.0],
+			'7D': [0.90, 0.92, 0.95, 0.93, 0.97, 1.0, 1.02],
+			'1M': [0.80, 0.85, 0.88, 0.84, 0.90, 0.95, 0.92, 0.97, 1.0, 1.02],
+			'1Y': [0.60, 0.65, 0.70, 0.68, 0.75, 0.80, 0.85, 0.88, 0.90, 0.95, 0.98, 1.0],
+		};
+
+		function drawChart(price, change, range) {
+			const pts = CHART_POINTS[range];
+			const isUp = change >= 0;
+			const color = isUp ? '#4caf50' : '#b02500';
+			const W = 600, H = 150, pad = 10;
+			const vals = pts.map(p => price * p);
+			const min = Math.min(...vals), max = Math.max(...vals);
+			const scaleX = i => pad + (i / (pts.length - 1)) * (W - pad * 2);
+			const scaleY = v => H - pad - ((v - min) / (max - min || 1)) * (H - pad * 2);
+			const points = pts.map((_, i) => `${scaleX(i)},${scaleY(vals[i])}`).join(' ');
+			const fillPath = `M${scaleX(0)},${H} ` + pts.map((_, i) => `L${scaleX(i)},${scaleY(vals[i])}`).join(' ') + ` L${scaleX(pts.length - 1)},${H} Z`;
+			document.getElementById('price-chart').innerHTML = `
+      <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".2"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
+      <path d="${fillPath}" fill="url(#cg)"/>
+      <polyline fill="none" points="${points}" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/>
+      ${pts.map((_, i) => `<circle cx="${scaleX(i)}" cy="${scaleY(vals[i])}" r="3" fill="${color}"/>`).join('')}`;
+		}
+
+		function riskInfo(risk) {
+			if (risk === 'HIGH') return { label: 'HIGH RISK', bg: '#b02500', border: '#b02500', text: '#fff' };
+			if (risk === 'LOW') return { label: 'LOW RISK', bg: '#4caf50', border: '#4caf50', text: '#fff' };
+			return { label: 'MODERATE RISK', bg: '#ff8800', border: '#ff8800', text: '#fff' };
+		}
+
+		function calcCorpus(amount, rate, years) {
+			const r = rate / 12;
+			if (!r) return amount * 12 * years;
+			return Math.round(amount * ((Math.pow(1 + r, years * 12) - 1) / r));
+		}
+
+		function showToast(msg, type = 'success') {
+			const colors = { success: '#4caf50', error: '#b02500', warning: '#ff8800' };
+			const t = document.createElement('div');
+			t.textContent = msg;
+			t.style.cssText = `position:fixed;bottom:24px;right:24px;z-index:9999;padding:14px 20px;background:${colors[type]};color:#fff;font-family:'Lexend',sans-serif;font-weight:700;font-size:13px;letter-spacing:.05em;border:2px solid #121212;box-shadow:4px 4px 0 #121212;opacity:0;transition:opacity .3s;max-width:320px;`;
+			document.body.appendChild(t);
+			requestAnimationFrame(() => t.style.opacity = '1');
+			setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3000);
+		}
+
+		function openBuyModal(ticker, stock) {
+			let goal = {};
+			try { goal = JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { }
+			const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
+			const retYear = new Date().getFullYear() + years;
+			const ov = document.createElement('div');
+			ov.style.cssText = 'position:fixed;inset:0;background:rgba(18,18,18,.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease;';
+			ov.innerHTML = `<style>@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes sU{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}</style>
+      <div style="background:#fff;border:3px solid #121212;box-shadow:8px 8px 0 #121212;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;animation:sU .2s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0;">
+          <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;">QUICK BUY — ${ticker}</h2>
+          <button onclick="this.closest('div[style*=inset]').remove()" style="background:none;border:none;font-size:26px;cursor:pointer;font-weight:900;">×</button>
+        </div>
+        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${stock.name} · $${stock.price} · ${stock.change > 0 ? '+' : ''}${stock.change}% today</p>
+        <div style="padding:0 24px 24px;">
+          <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">Monthly Investment</label>
+          <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
+            <span style="background:#121212;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;">₹</span>
+            <input id="buy-amount" type="number" min="500" value="1000" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
+          </div>
+          <div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin:16px 0;">
+            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;margin-bottom:6px;">Retirement Impact</p>
+            <p id="buy-preview" style="font-family:'Lexend',sans-serif;font-weight:900;font-size:13px;"></p>
+          </div>
+          <button id="confirm-buy" style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;padding:14px;cursor:pointer;margin-bottom:8px;">CONFIRM INVESTMENT</button>
+          <button onclick="this.closest('div[style*=inset]').remove()" style="width:100%;background:transparent;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;padding:12px;cursor:pointer;">CANCEL</button>
+        </div>
+      </div>`;
+			document.body.appendChild(ov);
+			ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+			document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { ov.remove(); document.removeEventListener('keydown', esc); } });
+			const inp = ov.querySelector('#buy-amount');
+			const prev = ov.querySelector('#buy-preview');
+			function upd() {
+				const a = parseFloat(inp.value) || 0;
+				const c = calcCorpus(a, stock.returnRate, years);
+				prev.textContent = `₹${a.toLocaleString('en-IN')}/month → ₹${c.toLocaleString('en-IN')} corpus by ${retYear}.`;
+			}
+			upd(); inp.addEventListener('input', upd);
+			ov.querySelector('#confirm-buy').addEventListener('click', () => {
+				const a = parseFloat(inp.value) || 0;
+				if (a < 500) { showToast('Minimum is ₹500', 'error'); return; }
+				const h = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
+				h.push({ ticker, companyName: stock.name, amount: a, price: stock.price, date: new Date().toISOString() });
+				localStorage.setItem('portfolioHoldings', JSON.stringify(h));
+				ov.remove();
+				showToast(`₹${a.toLocaleString('en-IN')} added to ${ticker}. Portfolio updated!`);
+			});
+		}
+
+		document.addEventListener('DOMContentLoaded', async () => {
+			const session = await requireAuth();
+			if (!session) return;
+
+			const params = new URLSearchParams(location.search);
+			const ticker = (params.get('ticker') || '').toUpperCase();
+			const stock = STOCK_DATA[ticker];
+
+			if (!stock) {
+				document.querySelector('main').innerHTML = `<div class="text-center py-24"><h1 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:48px;">TICKER NOT FOUND</h1><a href="market_digital_rebel_desktop.html" style="font-family:'Lexend',sans-serif;font-weight:700;text-decoration:underline;">← Back to Markets</a></div>`;
+				return;
+			}
+
+			const isUp = stock.change >= 0;
+			const r = riskInfo(stock.risk);
+
+			document.title = `${ticker} | DIGITAL REBEL`;
+			document.getElementById('ticker-badge').textContent = ticker;
+			document.getElementById('company-name').textContent = stock.name;
+			document.getElementById('stock-price').textContent = `$${stock.price}`;
+			document.getElementById('change-badge').textContent = `${isUp ? '+' : ''}${stock.change}%`;
+			document.getElementById('change-badge').style.color = isUp ? '#4caf50' : '#b02500';
+			const rb = document.getElementById('risk-badge');
+			rb.textContent = r.label;
+			rb.style.background = r.bg; rb.style.color = r.text; rb.style.borderColor = r.border;
+			document.getElementById('stat-open').textContent = `$${stock.open}`;
+			document.getElementById('stat-high').textContent = `$${stock.high}`;
+			document.getElementById('stat-low').textContent = `$${stock.low}`;
+			document.getElementById('stat-vol').textContent = stock.volume;
+
+			// Retirement Relevance
+			let goal = {};
+			try { goal = JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { }
+			const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
+			const corpus = calcCorpus(1000, stock.returnRate, years);
+			const retYear = new Date().getFullYear() + years;
+			document.getElementById('retirement-text').textContent =
+				`If you invested ₹1,000/month in ${ticker} for ${years} years at ${Math.round(stock.returnRate * 100)}% historical return, your corpus contribution would be ₹${corpus.toLocaleString('en-IN')} by ${retYear}.`;
+
+			// Chart
+			let activeRange = '24H';
+			drawChart(stock.price, stock.change, activeRange);
+			document.querySelectorAll('.range-btn').forEach(btn => {
+				btn.addEventListener('click', () => {
+					document.querySelectorAll('.range-btn').forEach(b => { b.style.background = ''; b.classList.remove('bg-[#cafd00]'); });
+					btn.style.background = '#cafd00';
+					activeRange = btn.dataset.range;
+					drawChart(stock.price, stock.change, activeRange);
+				});
+			});
+
+			// BUY button
+			document.getElementById('detail-buy-btn').textContent = `BUY ${ticker}`;
+			document.getElementById('detail-buy-btn').addEventListener('click', () => openBuyModal(ticker, stock));
+		});
+	</script>
+</body>
+
+</html>

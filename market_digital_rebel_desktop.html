@@ -165,14 +165,16 @@
     </header>
     <!-- Markets Grid / Bento Style for Top Movers -->
     <section class="mb-12">
-      <div class="flex items-center gap-4 mb-6">
+      <div class="flex items-center gap-4 mb-6 cursor-pointer select-none" id="movers-toggle"
+        title="Toggle Movers/Losers">
         <span class="w-12 h-[2px] bg-[#121212]"></span>
-        <h2 class="font-headline font-black text-3xl uppercase tracking-tighter">TOP 10 MOVERS</h2>
+        <h2 id="movers-label" class="font-headline font-black text-3xl uppercase tracking-tighter">TOP 10 MOVERS</h2>
+        <span class="font-headline font-bold text-xs text-[#767777] border border-[#767777] px-2 py-0.5 ml-2">CLICK TO
+          TOGGLE</span>
       </div>
       <div class="space-y-4">
-        <!-- Stock Row 1 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+        <div data-ticker="TSLA" data-name="Tesla Inc." data-price="178.44" data-change="+12.4" data-risk="HIGH"
+          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
           <div
             class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
             TSLA</div>
@@ -185,18 +187,16 @@
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
           </div>
           <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <!-- Simulated Sparkline -->
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
               <polyline fill="none" points="0,35 20,25 40,30 60,10 80,15 100,5" stroke="#cafd00" stroke-width="3">
               </polyline>
             </svg>
           </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+          <button data-buy="TSLA"
+            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
         </div>
-        <!-- Stock Row 2 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+        <div data-ticker="AAPL" data-name="Apple Inc." data-price="191.04" data-change="-4.2" data-risk="MODERATE"
+          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
           <div
             class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
             AAPL</div>
@@ -209,17 +209,16 @@
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
           </div>
           <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
               <polyline fill="none" points="0,5 20,15 40,10 60,30 80,25 100,38" stroke="#b02500" stroke-width="3">
               </polyline>
             </svg>
           </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+          <button data-buy="AAPL"
+            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
         </div>
-        <!-- Stock Row 3 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+        <div data-ticker="NVDA" data-name="NVIDIA Corp." data-price="894.52" data-change="+22.1" data-risk="HIGH"
+          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
           <div
             class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
             NVDA</div>
@@ -232,17 +231,16 @@
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
           </div>
           <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
               <polyline fill="none" points="0,38 20,30 40,25 60,15 80,5 100,2" stroke="#cafd00" stroke-width="3">
               </polyline>
             </svg>
           </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+          <button data-buy="NVDA"
+            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
         </div>
-        <!-- Stock Row 4 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+        <div data-ticker="META" data-name="Meta Platforms" data-price="485.58" data-change="+3.8" data-risk="MODERATE"
+          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
           <div
             class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
             META</div>
@@ -255,16 +253,15 @@
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
           </div>
           <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
               <polyline fill="none" points="0,20 30,15 50,18 70,10 100,5" stroke="#cafd00" stroke-width="3"></polyline>
             </svg>
           </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+          <button data-buy="META"
+            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
         </div>
-        <!-- Stock Row 5 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+        <div data-ticker="AMZN" data-name="Amazon.com Inc." data-price="175.01" data-change="-1.5" data-risk="MODERATE"
+          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
           <div
             class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
             AMZN</div>
@@ -277,16 +274,15 @@
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
           </div>
           <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
               <polyline fill="none" points="0,15 30,20 60,35 100,30" stroke="#b02500" stroke-width="3"></polyline>
             </svg>
           </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+          <button data-buy="AMZN"
+            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
         </div>
-        <!-- Stock Row 6 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+        <div data-ticker="MSFT" data-name="Microsoft" data-price="415.50" data-change="+0.8" data-risk="MODERATE"
+          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
           <div
             class="w-16 h-16 bg-[#121212] flex items-center justify-center text-tertiary-container font-headline font-black text-xl shrink-0">
             MSFT</div>
@@ -299,16 +295,15 @@
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
           </div>
           <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
               <polyline fill="none" points="0,25 50,23 100,20" stroke="#cafd00" stroke-width="3"></polyline>
             </svg>
           </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+          <button data-buy="MSFT"
+            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
         </div>
-        <!-- Stock Row 7 -->
-        <div
-          class="bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow">
+        <div data-ticker="GOOGL" data-name="Alphabet Inc." data-price="147.60" data-change="-2.1" data-risk="MODERATE"
+          class="stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap md:flex-nowrap items-center gap-6 hover:bg-surface-container-low transition-colors hard-shadow cursor-pointer">
           <div
             class="w-16 h-16 bg-[#121212] flex items-center justify-center text-[#cafd00] font-headline font-black text-xl shrink-0">
             GOOGL</div>
@@ -321,12 +316,12 @@
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Last 24h</p>
           </div>
           <div class="hidden lg:block w-32 h-12 bg-surface-container-high border border-dashed border-outline">
-            <svg class="w-full h-full p-1" viewbox="0 0 100 40">
+            <svg class="w-full h-full p-1" viewBox="0 0 100 40">
               <polyline fill="none" points="0,10 50,25 100,35" stroke="#b02500" stroke-width="3"></polyline>
             </svg>
           </div>
-          <button
-            class="bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all">BUY</button>
+          <button data-buy="GOOGL"
+            class="buy-btn bg-[#cafd00] border-2 border-[#121212] font-headline font-black px-8 py-3 uppercase tracking-widest hard-shadow-hover transition-all z-10">BUY</button>
         </div>
         <!-- Stock Row 8 -->
         <div
@@ -397,31 +392,30 @@
         </div>
       </div>
     </section>
-    <!-- Asymmetric Promotional Area -->
     <section class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-      <div
-        class="md:col-span-2 bg-[#121212] p-8 hard-shadow flex flex-col justify-between overflow-hidden relative group">
+      <div id="leverage-banner"
+        class="md:col-span-2 bg-[#121212] p-8 hard-shadow flex flex-col justify-between overflow-hidden relative group cursor-pointer">
         <div class="relative z-10">
           <h3 class="text-[#cafd00] font-headline font-black text-4xl tracking-tighter uppercase mb-4 leading-none">
             Unlock Leverage Trading</h3>
           <p class="text-white font-body max-w-md mb-8">Take control of the market with our new margin tools. High risk,
             high reward. Only for the bold.</p>
-          <button
+          <button id="activate-now-btn"
             class="bg-white text-[#121212] border-2 border-white px-8 py-4 font-headline font-black uppercase tracking-widest hover:bg-[#cafd00] hover:border-[#cafd00] transition-colors">ACTIVATE_NOW</button>
         </div>
         <div
           class="absolute right-0 bottom-0 w-64 h-64 opacity-20 grayscale group-hover:grayscale-0 transition-all duration-500">
           <img alt="Leverage Graphic" class="w-full h-full object-cover"
-            data-alt="abstract digital connection network with neon green lines and points on a dark black background"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4_cCLr1n3l7Ze5ln2MnO2gfpkrjawPOpmGlcNhKmZI3jXSUuQ8l00t-CfeFFsqk5kBf1EmtWnW_Q0HIqI2siqUJDlWlwxMqYLQ1bkodv6jsQrFqqa4-5N5LNOSzZKMMmHfMUucVdna_EQGhOLBgzRBoC9rEYEUTNhLuF1VMEZzCd8B3CUINoBMgxq0odR_GU2GPA8bhZ4S2B14lePPzcrYMMVm9FK982_Kpd9XIflosQW7yTp8zjwID6LCYrnR02J6_PQuWMFsBWm" />
         </div>
       </div>
-      <div class="bg-tertiary-container p-8 border-2 border-[#121212] hard-shadow">
+      <div id="signals-banner" class="bg-tertiary-container p-8 border-2 border-[#121212] hard-shadow cursor-pointer">
         <span class="material-symbols-outlined text-4xl mb-4" data-icon="rocket_launch">rocket_launch</span>
         <h3 class="font-headline font-black text-2xl uppercase tracking-tighter mb-4">REBEL SIGNALS</h3>
         <p class="font-body text-sm mb-6">AI-driven market insights delivered directly to your terminal. No noise, just
           alpha.</p>
-        <a class="font-headline font-black text-sm uppercase underline decoration-4 underline-offset-4" href="#">Learn
+        <a id="learn-more-link"
+          class="font-headline font-black text-sm uppercase underline decoration-4 underline-offset-4 cursor-pointer">Learn
           More</a>
       </div>
     </section>
@@ -460,10 +454,316 @@
   <script src="/js/auth.js"></script>
   <script src="/js/api.js"></script>
   <script>
+    // ── Toast System ──────────────────────────────────────────────────────────
+    function showToast(msg, type = 'success') {
+      const colors = { success: '#4caf50', error: '#b02500', warning: '#ff8800' };
+      const t = document.createElement('div');
+      t.textContent = msg;
+      t.style.cssText = `position:fixed;bottom:24px;right:24px;z-index:9999;padding:14px 20px;
+      background:${colors[type]};color:#fff;font-family:'Lexend',sans-serif;font-weight:700;
+      font-size:13px;letter-spacing:.05em;border:2px solid #121212;
+      box-shadow:4px 4px 0 #121212;opacity:0;transition:opacity .3s;max-width:320px;`;
+      document.body.appendChild(t);
+      requestAnimationFrame(() => { t.style.opacity = '1'; });
+      setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 300); }, 3000);
+    }
+
+    // ── Modal helper ──────────────────────────────────────────────────────────
+    function createOverlay(innerHTML) {
+      const ov = document.createElement('div');
+      ov.style.cssText = 'position:fixed;inset:0;background:rgba(18,18,18,.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease;';
+      ov.innerHTML = `<style>@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}</style>${innerHTML}`;
+      document.body.appendChild(ov);
+      ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
+      document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { ov.remove(); document.removeEventListener('keydown', esc); } });
+      return ov;
+    }
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
+    function getGoalData() {
+      try { return JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { return {}; }
+    }
+    function calcCorpus(amount, rate, years) {
+      const r = rate / 12;
+      if (r === 0) return amount * 12 * years;
+      return Math.round(amount * ((Math.pow(1 + r, years * 12) - 1) / r));
+    }
+    function riskLabel(risk) {
+      if (risk === 'HIGH') return { badge: 'HIGH RISK', color: '#b02500', text: 'Volatile stock. Not recommended as primary retirement vehicle.' };
+      if (risk === 'LOW') return { badge: 'LOW RISK', color: '#4caf50', text: 'Recommended for retirement SIP allocation.' };
+      return { badge: 'MODERATE RISK', color: '#ff8800', text: 'Established company. Consider as part of a diversified portfolio.' };
+    }
+
+    // ── Quick BUY Modal ───────────────────────────────────────────────────────
+    function openBuyModal(ticker, name, price, change, risk) {
+      const goal = getGoalData();
+      const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
+      const retYear = new Date().getFullYear() + years;
+      const returnRate = 0.12;
+      const r = riskLabel(risk);
+      const score = parseFloat(localStorage.getItem('blindnessScore') || '0.5');
+      const warningBlock = score < 0.5
+        ? `<div style="background:#fff3cd;border:2px solid #ff8800;padding:12px;margin-bottom:16px;">
+           <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#121212;">
+           ⚠️ Your Retirement Awareness Score is ${Math.round(score * 100)}%. Ensure your core SIP is in place first.</p>
+           <button onclick="this.closest('.buy-overlay').remove();window.location.href='dashboard_digital_rebel_desktop.html';"
+             style="margin-top:8px;background:#ff8800;color:#fff;border:none;padding:6px 14px;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;cursor:pointer;letter-spacing:.05em;">
+             FIX MY PLAN FIRST</button></div>`
+        : `<div style="background:#e8f5e9;border:2px solid #4caf50;padding:12px;margin-bottom:16px;">
+           <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#121212;">
+           ✅ Your retirement plan is in good shape. This addition can supplement your portfolio.</p></div>`;
+
+      const ov = createOverlay(`
+      <div class="buy-overlay" style="background:#fff;border:3px solid #121212;box-shadow:8px 8px 0 #121212;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:slideUp .2s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0;">
+          <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:-.02em;">QUICK BUY — ${ticker}</h2>
+          <button onclick="this.closest('.buy-overlay').parentElement.remove()" style="background:none;border:none;font-size:24px;cursor:pointer;font-weight:900;">×</button>
+        </div>
+        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${name} · $${price} · ${change}% today</p>
+        <div style="padding:0 24px 24px;">
+          <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">How much to invest monthly?</label>
+          <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
+            <span style="background:#121212;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;">₹</span>
+            <input id="buy-amount" type="number" min="500" value="1000" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
+          </div>
+          <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: ₹500</p>
+
+          <div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin-bottom:16px;">
+            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Retirement Impact Preview</p>
+            <p id="corpus-preview" style="font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;"></p>
+          </div>
+
+          <div style="display:inline-block;background:${r.color};color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:4px 12px;letter-spacing:.08em;margin-bottom:6px;">${r.badge}</div>
+          <p style="font-family:'Inter',sans-serif;font-size:12px;color:#5a5a5a;margin-bottom:16px;">${r.text}</p>
+
+          ${warningBlock}
+
+          <button id="confirm-buy" style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;margin-bottom:8px;">CONFIRM INVESTMENT</button>
+          <button onclick="this.closest('.buy-overlay').parentElement.remove()" style="width:100%;background:transparent;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:12px;cursor:pointer;">CANCEL</button>
+        </div>
+      </div>`);
+
+      const amountInput = ov.querySelector('#buy-amount');
+      const preview = ov.querySelector('#corpus-preview');
+      function updatePreview() {
+        const amt = parseFloat(amountInput.value) || 0;
+        const corpus = calcCorpus(amt, returnRate, years);
+        preview.textContent = `Adding ₹${amt.toLocaleString('en-IN')}/month would add ₹${corpus.toLocaleString('en-IN')} to your corpus by ${retYear}.`;
+      }
+      updatePreview();
+      amountInput.addEventListener('input', updatePreview);
+
+      ov.querySelector('#confirm-buy').addEventListener('click', () => {
+        const amt = parseFloat(amountInput.value) || 0;
+        if (amt < 500) { showToast('Minimum investment is ₹500', 'error'); return; }
+        const holdings = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
+        holdings.push({ ticker, companyName: name, amount: amt, price, date: new Date().toISOString() });
+        localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
+        ov.remove();
+        showToast(`₹${amt.toLocaleString('en-IN')} added to ${ticker}. Portfolio updated.`);
+      });
+    }
+
+    // ── Leverage Trading Modal ────────────────────────────────────────────────
+    function openLeverageModal() {
+      const score = parseFloat(localStorage.getItem('blindnessScore') || '0.5');
+      createOverlay(`
+      <div style="background:#fff;border:3px solid #121212;box-shadow:8px 8px 0 #121212;width:100%;max-width:600px;max-height:90vh;overflow-y:auto;animation:slideUp .2s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 24px 0;">
+          <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:-.01em;">LEVERAGE TRADING — EDUCATIONAL OVERVIEW</h2>
+          <button onclick="this.closest('div[style]').parentElement.parentElement.remove()" style="background:none;border:none;font-size:28px;cursor:pointer;font-weight:900;line-height:1;">×</button>
+        </div>
+        <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:12px;color:#767777;">This feature is for demonstration purposes only. No real money is involved.</p>
+        <div style="padding:0 24px 24px;display:flex;flex-direction:column;gap:16px;">
+          <div style="border:2px solid #e0e0e0;padding:16px;">
+            <h3 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;margin-bottom:8px;">What is Leverage?</h3>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;">Leverage lets you control a larger investment position with a smaller amount of capital. With 5× leverage, ₹10,000 controls ₹50,000 worth of assets.</p>
+          </div>
+          <div style="border:2px solid #b02500;padding:16px;background:#fff8f7;">
+            <h3 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;margin-bottom:8px;color:#b02500;">⚠ Risk Warning</h3>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;">Leverage amplifies both gains AND losses. A 20% market drop with 5× leverage means a 100% loss of your capital. Retirement funds should <strong>NEVER</strong> use leverage.</p>
+          </div>
+          <div style="border:2px solid #e0e0e0;padding:16px;">
+            <h3 style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;text-transform:uppercase;margin-bottom:8px;">Why This Matters For Retirement</h3>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.6;">Gen Z investors chasing leveraged returns are 3× more likely to have a Retirement Blindness score below 30%. Long-term compounding in index funds outperforms leveraged trading for 94% of retail investors over 20 years.</p>
+          </div>
+          <div style="border:2px solid #cafd00;background:#f9ffe0;padding:16px;">
+            <p style="font-family:'Lexend',sans-serif;font-weight:800;font-size:13px;">YOUR RETIREMENT AWARENESS SCORE: ${Math.round(score * 100)}%</p>
+            <p style="font-family:'Inter',sans-serif;font-size:12px;margin-top:6px;">Recommended action: Increase SIP before exploring leverage.</p>
+          </div>
+          <button onclick="this.closest('div[style]').parentElement.parentElement.remove();window.location.href='dashboard_digital_rebel_desktop.html';"
+            style="background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
+            GO BACK TO MY PROJECTIONS</button>
+        </div>
+      </div>`);
+    }
+
+    // ── Rebel Signals Bottom Sheet ────────────────────────────────────────────
+    function openSignalsSheet() {
+      const sheet = document.createElement('div');
+      sheet.style.cssText = 'position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;background:rgba(18,18,18,.6);';
+      sheet.innerHTML = `
+      <div style="background:#fff;border:3px solid #121212;border-bottom:none;box-shadow:0 -8px 0 #121212;width:100%;max-width:720px;max-height:85vh;overflow-y:auto;padding:24px;animation:slideUp .25s ease;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;text-transform:uppercase;">REBEL SIGNALS — HOW IT WORKS</h2>
+          <button onclick="this.closest('div[style]').parentElement.remove()" style="background:none;border:none;font-size:28px;cursor:pointer;font-weight:900;">×</button>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-size:13px;color:#5a5a5a;margin-bottom:20px;">AI-generated market observations based on price momentum, volume spikes, and sentiment shifts.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+          <div style="border:2px solid #121212;padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="background:#4caf50;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">MOMENTUM UP</span>
+              <span style="background:#e8f5e9;border:1.5px solid #4caf50;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#4caf50;">HIGH CONFIDENCE</span>
+            </div>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;">NVDA showing strong institutional buying. +22.1% in 24h. Volume 3× above 30-day average.</p>
+          </div>
+          <div style="border:2px solid #121212;padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="background:#ff8800;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">CAUTION</span>
+              <span style="background:#fff3cd;border:1.5px solid #ff8800;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#ff8800;">MODERATE CONFIDENCE</span>
+            </div>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;">AAPL declining on low volume. Potential support at $185. Watch for reversal.</p>
+          </div>
+          <div style="border:2px solid #121212;padding:14px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="background:#a400a4;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">RETIREMENT RELEVANCE</span>
+              <span style="background:#fce4fc;border:1.5px solid #a400a4;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#a400a4;">LINKED TO YOUR PLAN</span>
+            </div>
+            <p style="font-family:'Inter',sans-serif;font-size:13px;">Index funds tracking NIFTY 50 up 1.2% this week. Your SIP is benefiting. Projected corpus increased by ₹18,000.</p>
+          </div>
+        </div>
+        <button onclick="this.closest('div[style]').parentElement.remove();window.location.href='dashboard_digital_rebel_desktop.html';"
+          style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;">
+          VIEW MY DASHBOARD</button>
+      </div>`;
+      document.body.appendChild(sheet);
+      sheet.addEventListener('click', e => { if (e.target === sheet) sheet.remove(); });
+      document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { sheet.remove(); document.removeEventListener('keydown', esc); } });
+    }
+
+    // ── Tooltip helper ────────────────────────────────────────────────────────
+    function addTooltip(el, text) {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', e => {
+        e.stopPropagation();
+        document.querySelectorAll('.market-tooltip').forEach(t => t.remove());
+        const tip = document.createElement('div');
+        tip.className = 'market-tooltip';
+        tip.style.cssText = `position:fixed;z-index:500;background:#121212;color:#fff;font-family:'Inter',sans-serif;font-size:12px;padding:10px 14px;border:2px solid #cafd00;max-width:280px;line-height:1.5;`;
+        tip.textContent = text;
+        document.body.appendChild(tip);
+        const r = el.getBoundingClientRect();
+        tip.style.left = Math.min(r.left, window.innerWidth - 300) + 'px';
+        tip.style.top = (r.bottom + 8) + 'px';
+        setTimeout(() => document.addEventListener('click', () => tip.remove(), { once: true }), 10);
+      });
+    }
+
+    // ── Movers / Losers toggle ────────────────────────────────────────────────
+    let moversMode = true;
+    const TICKERS_DATA = [
+      { ticker: 'TSLA', name: 'Tesla Inc.', price: 178.44, change: 12.4, risk: 'HIGH', sparkUp: true },
+      { ticker: 'AAPL', name: 'Apple Inc.', price: 191.04, change: -4.2, risk: 'MODERATE', sparkUp: false },
+      { ticker: 'NVDA', name: 'NVIDIA Corp.', price: 894.52, change: 22.1, risk: 'HIGH', sparkUp: true },
+      { ticker: 'META', name: 'Meta Platforms', price: 485.58, change: 3.8, risk: 'MODERATE', sparkUp: true },
+      { ticker: 'AMZN', name: 'Amazon.com Inc.', price: 175.01, change: -1.5, risk: 'MODERATE', sparkUp: false },
+      { ticker: 'MSFT', name: 'Microsoft', price: 415.50, change: 0.8, risk: 'MODERATE', sparkUp: true },
+      { ticker: 'GOOGL', name: 'Alphabet Inc.', price: 147.60, change: -2.1, risk: 'MODERATE', sparkUp: false },
+      { ticker: 'NFLX', name: 'Netflix Inc.', price: 610.56, change: 6.7, risk: 'MODERATE', sparkUp: true },
+      { ticker: 'AMD', name: 'Advanced Micro Devices', price: 162.33, change: 8.2, risk: 'HIGH', sparkUp: true },
+      { ticker: 'UBER', name: 'Uber Technologies', price: 74.12, change: -0.3, risk: 'MODERATE', sparkUp: false },
+    ];
+
     document.addEventListener('DOMContentLoaded', async () => {
-      // Basic Auth enforcement
       const session = await requireAuth();
       if (!session) return;
+
+      // Banner events
+      document.getElementById('leverage-banner').addEventListener('click', openLeverageModal);
+      document.getElementById('activate-now-btn').addEventListener('click', e => { e.stopPropagation(); openLeverageModal(); });
+      document.getElementById('signals-banner').addEventListener('click', openSignalsSheet);
+      document.getElementById('learn-more-link').addEventListener('click', e => { e.stopPropagation(); openSignalsSheet(); });
+
+      // Tooltips — null-safe selectors
+      const liveFeedEl = document.querySelector('.inline-block.bg-primary');
+      const statsBox = document.querySelector('header .bg-white');
+      const statDivs = statsBox ? statsBox.querySelectorAll(':scope > div') : [];
+      if (liveFeedEl) addTooltip(liveFeedEl, 'Market data refreshes every 30 seconds. All prices are simulated for demonstration purposes.');
+      if (statDivs[0]) addTooltip(statDivs[0], 'Total simulated trading volume across all tracked instruments in the last 24 hours.');
+      if (statDivs[1]) addTooltip(statDivs[1].querySelector('p:last-child') || statDivs[1], 'AGGRESSIVE: Market momentum is strongly bullish. High volume, rising prices. Higher risk of correction.');
+
+      // Movers/Losers toggle
+      document.getElementById('movers-toggle').addEventListener('click', () => {
+        moversMode = !moversMode;
+        document.getElementById('movers-label').textContent = moversMode ? 'TOP 10 MOVERS' : 'TOP 10 LOSERS';
+        const rows = document.querySelectorAll('.stock-row');
+        const sorted = moversMode
+          ? [...TICKERS_DATA].sort((a, b) => b.change - a.change)
+          : [...TICKERS_DATA].sort((a, b) => a.change - b.change);
+        const container = rows[0]?.parentElement;
+        if (!container) return;
+        rows.forEach(r => r.remove());
+        sorted.forEach(d => {
+          const isUp = d.change >= 0;
+          const changeColor = isUp ? '#cafd00' : '#f95630';
+          const sparkColor = isUp ? '#cafd00' : '#b02500';
+          const points = isUp ? '0,35 20,25 40,30 60,10 80,15 100,5' : '0,5 20,15 40,10 60,30 80,25 100,38';
+          const el = document.createElement('div');
+          el.className = 'stock-row bg-white border-2 border-[#121212] p-4 flex flex-wrap items-center gap-6 hover:bg-gray-50 transition-colors cursor-pointer';
+          el.dataset.ticker = d.ticker; el.dataset.name = d.name; el.dataset.price = d.price; el.dataset.change = d.change; el.dataset.risk = d.risk;
+          el.style.boxShadow = '4px 4px 0 #121212';
+          el.innerHTML = `<div style="width:64px;height:64px;background:#121212;display:flex;align-items:center;justify-content:center;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;flex-shrink:0;">${d.ticker}</div>
+          <div style="flex-grow:1;"><p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#767777;">${d.name}</p><p style="font-family:'Lexend',sans-serif;font-weight:900;font-size:28px;line-height:1;">$${d.price}</p></div>
+          <div style="text-align:right;flex-shrink:0;"><p style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;color:${changeColor};">${d.change >= 0 ? '+' : ''}${d.change}%</p><p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#767777;">Last 24h</p></div>
+          <div style="width:128px;height:48px;border:1px dashed #767777;"><svg style="width:100%;height:100%;padding:4px;" viewBox="0 0 100 40"><polyline fill="none" points="${points}" stroke="${sparkColor}" stroke-width="3"></polyline></svg></div>
+          <button data-buy="${d.ticker}" class="buy-btn" style="background:#cafd00;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;padding:12px 28px;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;z-index:10;">BUY</button>`;
+          container.appendChild(el);
+          wireRow(el);
+        });
+      });
+
+      // Wire static rows
+      function wireRow(row) {
+        row.addEventListener('click', e => {
+          if (e.target.classList.contains('buy-btn') || e.target.closest('.buy-btn')) return;
+          window.location.href = `market_detail.html?ticker=${row.dataset.ticker}`;
+        });
+        const btn = row.querySelector('.buy-btn,[data-buy]');
+        if (btn) btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const d = row.dataset;
+          openBuyModal(d.ticker, d.name, d.price, d.change, d.risk);
+        });
+      }
+      document.querySelectorAll('.stock-row').forEach(wireRow);
+
+      // Nav brand
+      document.querySelector('nav span.font-black').style.cursor = 'pointer';
+      document.querySelector('nav span.font-black').addEventListener('click', () => window.location.href = 'dashboard_digital_rebel_desktop.html');
+
+      // Avatar dropdown
+      const avatarWrap = document.querySelector('nav .w-10');
+      avatarWrap.style.cursor = 'pointer';
+      avatarWrap.addEventListener('click', e => {
+        e.stopPropagation();
+        document.querySelector('.avatar-dropdown')?.remove();
+        const dd = document.createElement('div');
+        dd.className = 'avatar-dropdown';
+        dd.style.cssText = 'position:fixed;background:#fff;border:2px solid #121212;box-shadow:4px 4px 0 #121212;z-index:500;min-width:180px;';
+        const r = avatarWrap.getBoundingClientRect();
+        dd.style.top = (r.bottom + 4) + 'px';
+        dd.style.right = (window.innerWidth - r.right) + 'px';
+        [['My Profile', 'settings_digital_rebel_desktop.html'], ['Assets', 'assets_digital_rebel_desktop.html'], ['Dashboard', 'dashboard_digital_rebel_desktop.html']].forEach(([label, href]) => {
+          const a = document.createElement('a');
+          a.href = href; a.textContent = label;
+          a.style.cssText = 'display:block;padding:10px 16px;font-family:Lexend,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.07em;text-decoration:none;color:#121212;border-bottom:1px solid #e0e0e0;';
+          a.onmouseover = () => a.style.background = '#cafd00';
+          a.onmouseout = () => a.style.background = '';
+          dd.appendChild(a);
+        });
+        document.body.appendChild(dd);
+        setTimeout(() => document.addEventListener('click', () => dd.remove(), { once: true }), 10);
+      });
     });
   </script>
 </body>
