@@ -32,7 +32,7 @@ function calculateStreak(lastDate: string | null, currentStreak: number, newDate
 }
 
 router.get('/', async (c) => {
-  const supabase = getSupabase(c.env)
+  const supabase = getSupabase(c.env, c.get('token'))
   const { data, error } = await supabase
     .from('contributions')
     .select('*')
@@ -48,7 +48,7 @@ router.get('/', async (c) => {
 })
 
 router.post('/', zValidator('json', contributionSchema), async (c) => {
-  const supabase = getSupabase(c.env)
+  const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
   const body = c.req.valid('json')
 
@@ -81,12 +81,21 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
   )
   const nextLongest = Math.max(nextCurrent, streakRow?.longest_streak ?? 0)
 
+  let nextLastDate = body.contribution_date
+  if (streakRow?.last_contribution_date) {
+    const last = new Date(`${streakRow.last_contribution_date}T00:00:00Z`)
+    const current = new Date(`${body.contribution_date}T00:00:00Z`)
+    if (current.getTime() < last.getTime()) {
+      nextLastDate = streakRow.last_contribution_date
+    }
+  }
+
   await supabase.from('streaks').upsert(
     {
       user_id: userId,
       current_streak: nextCurrent,
       longest_streak: nextLongest,
-      last_contribution_date: body.contribution_date,
+      last_contribution_date: nextLastDate,
       updated_at: new Date().toISOString()
     },
     { onConflict: 'user_id' }

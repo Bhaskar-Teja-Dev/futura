@@ -15,7 +15,7 @@ const goalsSchema = z.object({
 })
 
 router.get('/', async (c) => {
-  const supabase = getSupabase(c.env)
+  const supabase = getSupabase(c.env, c.get('token'))
   const { data, error } = await supabase
     .from('user_goals')
     .select('*')
@@ -30,7 +30,7 @@ router.get('/', async (c) => {
 })
 
 router.post('/', zValidator('json', goalsSchema), async (c) => {
-  const supabase = getSupabase(c.env)
+  const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
   const body = c.req.valid('json')
 

@@ -1,5 +1,6 @@
 export type Env = {
   SUPABASE_URL: string
+  SUPABASE_ANON_KEY: string
   SUPABASE_SERVICE_ROLE_KEY: string
   REVENUECAT_API_KEY: string
   REVENUECAT_WEBHOOK_SECRET: string
@@ -9,6 +10,7 @@ export type Env = {
 export type Variables = {
   userId: string
   userEmail: string
+  token: string
 }
 
 export type GoalPayload = {

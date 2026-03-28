@@ -5,7 +5,7 @@ import type { Env, Variables } from '../types'
 export const requirePro = createMiddleware<{ Bindings: Env; Variables: Variables }>(
   async (c, next) => {
     const userId = c.get('userId')
-    const supabase = getSupabase(c.env)
+    const supabase = getSupabase(c.env, c.get('token'))
     const { data } = await supabase
       .from('user_subscriptions')
       .select('entitlement, expires_at')

@@ -12,7 +12,7 @@ const profileUpdateSchema = z.object({
 })
 
 router.get('/', async (c) => {
-  const supabase = getSupabase(c.env)
+  const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
 
   const [{ data: profile, error: profileError }, { data: subscription, error: subError }] =
@@ -29,7 +29,7 @@ router.get('/', async (c) => {
 })
 
 router.patch('/', zValidator('json', profileUpdateSchema), async (c) => {
-  const supabase = getSupabase(c.env)
+  const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
   const body = c.req.valid('json')
 

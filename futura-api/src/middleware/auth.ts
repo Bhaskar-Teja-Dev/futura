@@ -10,7 +10,7 @@ export const authMiddleware = createMiddleware<{ Bindings: Env; Variables: Varia
       return c.json({ error: 'unauthorized' }, 401)
     }
 
-    const supabase = getSupabase(c.env)
+    const supabase = getSupabase(c.env, token)
     const {
       data: { user },
       error
@@ -22,6 +22,7 @@ export const authMiddleware = createMiddleware<{ Bindings: Env; Variables: Varia
 
     c.set('userId', user.id)
     c.set('userEmail', user.email ?? '')
+    c.set('token', token)
     await next()
   }
 )

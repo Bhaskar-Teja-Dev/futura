@@ -6,7 +6,7 @@ import type { Env, Variables } from '../types'
 const router = new Hono<{ Bindings: Env; Variables: Variables }>()
 
 router.get('/', requirePro, async (c) => {
-  const supabase = getSupabase(c.env)
+  const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
 
   const { data: goal } = await supabase
