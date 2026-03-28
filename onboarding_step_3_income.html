@@ -260,6 +260,7 @@
             window.location.href = nextBtn.getAttribute('href');
 
           } catch (err) {
+            console.error("Onboarding Save Error:", err);
             let msg = err.message;
             if (msg === "Failed to fetch") {
               msg = "Cannot reach the Rebel API. \n\nTips:\n1. Ensure Wrangler is running (npm run dev)\n2. If testing on local network, use your machine's IP (e.g. 192.168.x.x) instead of 127.0.0.1 in the browser.";

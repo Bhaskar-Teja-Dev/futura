@@ -35,12 +35,11 @@ router.patch('/', zValidator('json', profileUpdateSchema), async (c) => {
   const userId = c.get('userId')
   const body = c.req.valid('json')
 
-  // Use Service Role to ensure we can create/update the profile regardless of RLS
+  // Use Service Role and UPSERT to ensure the row exists (bypass RLS for initialization)
   const supabaseAdmin = getSupabase(c.env)
   const { data, error } = await supabaseAdmin
     .from('profiles')
-    .update(body)
-    .eq('id', userId)
+    .upsert({ id: userId, ...body }, { onConflict: 'id' })
     .select('*')
     .maybeSingle()
 
