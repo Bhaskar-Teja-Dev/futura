@@ -34,6 +34,13 @@ router.get('/', async (c) => {
     return c.json({ error: 'Profile not found' }, 404)
   }
 
+  const { error: refreshErr } = await supabase.rpc('refresh_elite_monthly_streak_tokens', {
+    p_user_id: userId
+  })
+  if (refreshErr) {
+    return c.json({ error: refreshErr.message }, 500)
+  }
+
   const { data: subscription, error: subError } = await supabase
     .from('user_subscriptions')
     .select('*')

@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 import { z } from 'zod'
 import { zValidator } from '@hono/zod-validator'
 import { getSupabase } from '../lib/supabase'
+import { calculateStreak } from '../lib/streak'
 import type { Env, Variables } from '../types'
 
 const router = new Hono<{ Bindings: Env; Variables: Variables }>()
@@ -12,50 +13,6 @@ const contributionSchema = z.object({
   note: z.string().max(200).optional(),
   currency: z.string().length(3).optional()
 })
-
-/**
- * Streak calculation with replenish mechanic:
- * - diffDays === 0  → same day, streak unchanged
- * - diffDays === 1  → consecutive day, streak increments
- * - diffDays === 2  → missed ONE day; check if user also contributed for the
- *                      missed day (replenish). If yes, streak continues (+2).
- *                      If no, streak resets to 1.
- * - diffDays >= 3   → streak resets to 1 (no recovery possible)
- */
-function calculateStreak(
-  lastDate: string | null,
-  currentStreak: number,
-  newDate: string,
-  hasMissedDayContribution: boolean,
-  canUseToken: boolean = false
-): number {
-  if (!lastDate) {
-    return 1
-  }
-
-  const last = new Date(`${lastDate}T00:00:00Z`)
-  const current = new Date(`${newDate}T00:00:00Z`)
-  const diffDays = Math.floor((current.getTime() - last.getTime()) / (1000 * 60 * 60 * 24))
-
-  if (diffDays <= 0) {
-    return currentStreak
-  }
-  if (diffDays === 1) {
-    return currentStreak + 1
-  }
-  // Replenish window: exactly 2 days gap (missed 1 day)
-  if (diffDays === 2) {
-    if (hasMissedDayContribution) {
-      return currentStreak + 2
-    }
-    // Elite Recovery Token Usage
-    if (canUseToken) {
-      return currentStreak + 2 // Treat the missed day as recovered
-    }
-  }
-  // Missed too many days — reset
-  return 1
-}
 
 /** Helper: format a Date into YYYY-MM-DD */
 function toDateStr(d: Date): string {
@@ -75,6 +32,14 @@ router.get('/streak', async (c) => {
 
   if (error) {
     return c.json({ error: error.message }, 500)
+  }
+
+  const { error: refreshErr } = await supabase.rpc('refresh_elite_monthly_streak_tokens', {
+    p_user_id: userId
+  })
+  if (refreshErr) {
+    console.error('refresh_elite_monthly_streak_tokens:', refreshErr.message)
+    return c.json({ error: refreshErr.message }, 500)
   }
 
   const currentStreak = streakRow?.current_streak ?? 0
@@ -142,6 +107,13 @@ router.post('/repair-streak', async (c) => {
   const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
 
+  const { error: refreshErr } = await supabase.rpc('refresh_elite_monthly_streak_tokens', {
+    p_user_id: userId
+  })
+  if (refreshErr) {
+    return c.json({ error: refreshErr.message }, 500)
+  }
+
   // 1. Check eligibility
   const { data: sub } = await supabase
     .from('user_subscriptions')
@@ -172,17 +144,17 @@ router.post('/repair-streak', async (c) => {
 
   const restoreValue = streakRow.previous_streak > 0 ? streakRow.previous_streak : streakRow.current_streak
 
-  // 3. Perform repair
-  // - Decrement tokens
-  // - Restore current_streak
-  // - Update last_contribution_date to "yesterday" so next contribution continues it
+  const tokensBefore = sub.streak_recovery_tokens ?? 0
+  const tokensAfter = Math.max(0, tokensBefore - 1)
+
+  // 3. Perform repair: decrement one fire token (down to 0 when last is used)
   const yesterday = new Date()
   yesterday.setUTCDate(yesterday.getUTCDate() - 1)
   const yesterdayStr = yesterday.toISOString().split('T')[0]
 
   const { error: subErr } = await supabase
     .from('user_subscriptions')
-    .update({ streak_recovery_tokens: sub.streak_recovery_tokens - 1 })
+    .update({ streak_recovery_tokens: tokensAfter })
     .eq('user_id', userId)
 
   if (subErr) return c.json({ error: subErr.message }, 500)
@@ -201,7 +173,8 @@ router.post('/repair-streak', async (c) => {
   return c.json({
     success: true,
     newStreak: restoreValue,
-    tokensLeft: sub.streak_recovery_tokens - 1
+    tokensLeft: tokensAfter,
+    recovery_tokens_remaining: tokensAfter
   })
 })
 
@@ -265,6 +238,13 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     }
   }
 
+  const { error: refreshErr } = await supabase.rpc('refresh_elite_monthly_streak_tokens', {
+    p_user_id: userId
+  })
+  if (refreshErr) {
+    return c.json({ error: refreshErr.message }, 500)
+  }
+
   // Check replenish: if gap is 2, look for a contribution on the missed day
   const lastDateStr = streakRow?.last_contribution_date ?? null
   let hasMissedDayContribution = false
@@ -299,12 +279,11 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     .maybeSingle()
 
   const isElite = sub?.entitlement === 'elite'
-  let tokens = sub?.streak_recovery_tokens ?? 0
-  let usedToken = false
+  const tokensBefore = sub?.streak_recovery_tokens ?? 0
 
   const diffDays = lastDateStr ? Math.floor((new Date(`${body.contribution_date}T00:00:00Z`).getTime() - new Date(`${lastDateStr}T00:00:00Z`).getTime()) / (1000 * 60 * 60 * 24)) : 0
 
-  const canUseToken = isElite && tokens > 0 && diffDays === 2 && !hasMissedDayContribution
+  const canUseToken = isElite && tokensBefore > 0 && diffDays === 2 && !hasMissedDayContribution
 
   const nextCurrent = calculateStreak(
     lastDateStr,
@@ -314,13 +293,17 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     canUseToken
   )
 
+  let recoveryTokensRemaining = tokensBefore
   if (canUseToken) {
-    usedToken = true
-    tokens -= 1
-    await supabase
+    recoveryTokensRemaining = Math.max(0, tokensBefore - 1)
+    const { error: tokErr } = await supabase
       .from('user_subscriptions')
-      .update({ streak_recovery_tokens: tokens })
+      .update({ streak_recovery_tokens: recoveryTokensRemaining })
       .eq('user_id', userId)
+
+    if (tokErr) {
+      return c.json({ error: 'failed_to_update_tokens', details: tokErr.message }, 500)
+    }
   }
   const nextLongest = Math.max(nextCurrent, streakRow?.longest_streak ?? 0)
   streakToReturn = nextCurrent
@@ -342,7 +325,14 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     { onConflict: 'user_id' }
   )
 
-  return c.json({ contribution: data, streak: streakToReturn }, 201)
+  return c.json(
+    {
+      contribution: data,
+      streak: streakToReturn,
+      recovery_tokens_remaining: recoveryTokensRemaining
+    },
+    201
+  )
 })
 
 // ─── DELETE /:id — remove a contribution ────────────────────────────

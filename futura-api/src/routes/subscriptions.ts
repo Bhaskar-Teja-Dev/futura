@@ -44,27 +44,32 @@ router.post('/purchase-elite', zValidator('json', purchaseSchema), async (c) => 
   if (payment.status !== 'captured') return c.json({ error: 'payment_not_captured' }, 400)
   if (payment.amount < ELITE_PRICE_PAISE) return c.json({ error: 'insufficient_payment_amount' }, 400)
 
-  // Successfully paid 199 INR for Elite
-  const supabase = getSupabase(c.env, c.get('token'))
-  
+  // Successfully paid 199 INR for Elite — service role avoids RLS blocking token / entitlement writes
+  const supabaseAdmin = getSupabase(c.env)
+  const nowIso = new Date().toISOString()
+
   console.log('Starting subscription update for user:', userId)
 
-  const { data: profileRow } = await supabase
+  const { data: profileRow } = await supabaseAdmin
     .from('profiles')
     .select('display_name')
     .eq('id', userId)
     .maybeSingle()
 
-  // Step 1: Upsert subscription
-  const { data: subData, error: subError } = await supabase
+  // Upsert: 2 fire tokens on upgrade + last_token_reset so monthly refresh does not double-grant same month
+  const { data: subData, error: subError } = await supabaseAdmin
     .from('user_subscriptions')
-    .upsert({
-      user_id: userId,
-      entitlement: 'elite',
-      streak_recovery_tokens: 2,
-      display_name: profileRow?.display_name ?? null,
-      updated_at: new Date().toISOString()
-    }, { onConflict: 'user_id' })
+    .upsert(
+      {
+        user_id: userId,
+        entitlement: 'elite',
+        streak_recovery_tokens: 2,
+        display_name: profileRow?.display_name ?? null,
+        last_token_reset: nowIso,
+        updated_at: nowIso
+      },
+      { onConflict: 'user_id' }
+    )
     .select()
 
   if (subError) {
@@ -73,14 +78,6 @@ router.post('/purchase-elite', zValidator('json', purchaseSchema), async (c) => 
   }
 
   console.log('Upsert successful:', subData)
-
-  // Step 2: Update tokens via RPC (fallback if upsert didn't set tokens)
-  const { error: rpcError } = await supabase.rpc('increment_streak_tokens', { user_id: userId, amount: 0 })
-  
-  if (rpcError) {
-    console.error('RPC failed:', JSON.stringify(rpcError))
-    // Don't fail the request if RPC fails - tokens were already set in upsert
-  }
 
   return c.json({ success: true, message: 'Welcome to the Elite' })
 })

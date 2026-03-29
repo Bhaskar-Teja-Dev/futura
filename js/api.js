@@ -37,7 +37,8 @@ const futuraApi = {
     list: () => apiFetch('/api/contributions'),
     create: (body) => apiFetch('/api/contributions', { method: 'POST', body: JSON.stringify(body) }),
     delete: (id) => apiFetch(`/api/contributions/${id}`, { method: 'DELETE' }),
-    streak: () => apiFetch('/api/contributions/streak')
+    streak: () => apiFetch('/api/contributions/streak'),
+    repairStreak: () => apiFetch('/api/contributions/repair-streak', { method: 'POST' })
   },
   projection: {
     calculate: (body) => apiFetch('/api/projection', { method: 'POST', body: JSON.stringify(body) }),

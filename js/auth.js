@@ -237,7 +237,20 @@ async function updateNavAuth() {
           const isElite = (sub?.entitlement?.toLowerCase() === 'elite') || (streakData?.streak?.is_elite);
           localStorage.setItem('isElite', isElite ? 'true' : 'false');
 
-          console.log('[Futura] Elite Detection:', { isElite, sub: sub?.entitlement, tokens: streakData?.streak?.recovery_tokens });
+          // Prefer tokens from profile subscription (same row as DB) — streak fetch can fail or return 0 if RPC/migration mismatches
+          const rawSubTokens = profileData?.subscription?.streak_recovery_tokens
+          const hasSubTokens = rawSubTokens !== undefined && rawSubTokens !== null
+          const tokenCount = hasSubTokens
+            ? Number(rawSubTokens)
+            : Number(streakData?.streak?.recovery_tokens ?? 0)
+
+          console.log('[Futura] Elite Detection:', {
+            isElite,
+            sub: sub?.entitlement,
+            tokensFromSub: rawSubTokens,
+            tokensFromStreak: streakData?.streak?.recovery_tokens,
+            tokenCount
+          })
 
           if (isElite) {
             let tokenPill = document.getElementById('nav-tokens-pill');
@@ -275,7 +288,7 @@ async function updateNavAuth() {
               };
             }
             const countEl = document.getElementById('nav-tokens-count');
-            const tokens = streakData?.streak?.recovery_tokens ?? 0;
+            const tokens = Number.isFinite(tokenCount) ? tokenCount : 0
             if (countEl) countEl.textContent = `+${tokens}`;
             tokenPill.style.display = 'flex';
 
