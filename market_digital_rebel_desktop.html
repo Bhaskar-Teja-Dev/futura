@@ -641,6 +641,15 @@
       const session = await requireAuth();
       if (!session) return;
 
+      // Hydrate Elite sidebar (tier label + token count)
+      try {
+        const profileRes = await futuraApi.profile.get().catch(() => null);
+        const sub = profileRes?.subscription;
+        if (sub) await hydrateEliteSidebar(sub);
+      } catch (e) {
+        console.warn('[Market] Elite hydration failed:', e);
+      }
+
       // Remove old modal listeners
 
       // Hydrate Signals dynamically upon load
