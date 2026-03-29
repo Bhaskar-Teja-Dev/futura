@@ -184,15 +184,17 @@ async function updateNavAuth() {
   }
 
   // Avatar Update
-  const avatar = document.getElementById('nav-avatar');
-  if (avatar && session && _profileVerified) {
+  const avatars = [document.getElementById('nav-avatar'), document.getElementById('sidebar-avatar')].filter(Boolean);
+  if (avatars.length > 0 && session && _profileVerified) {
     const photo = session.user?.user_metadata?.avatar_url || session.user?.user_metadata?.picture;
-    if (photo) {
-      avatar.innerHTML = `<img src="${photo}" class="w-full h-full object-cover" alt="User profile">`;
-    } else {
-      const initial = (session.user.email?.[0] || 'R').toUpperCase();
-      avatar.innerHTML = `<div class="bg-[#cafd00] text-[#121212] font-headline font-black w-full h-full flex items-center justify-center text-sm">${initial}</div>`;
-    }
+    avatars.forEach(avatar => {
+      if (photo) {
+        avatar.innerHTML = `<img src="${photo}" class="w-full h-full object-cover" alt="User profile">`;
+      } else {
+        const initial = (session.user.email?.[0] || 'R').toUpperCase();
+        avatar.innerHTML = `<div class="bg-[#cafd00] text-[#121212] font-headline font-black w-full h-full flex items-center justify-center text-sm">${initial}</div>`;
+      }
+    });
   }
 
   // Hero Button: Change to ENTER TERMINAL if signed in

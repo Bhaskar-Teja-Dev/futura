@@ -135,18 +135,15 @@
     <!-- SideNavBar -->
     <aside
       class="fixed left-0 top-0 h-full flex flex-col pt-24 hidden lg:flex bg-[#f6f6f6] dark:bg-[#121212] h-screen w-64 border-r-2 border-[#121212] dark:border-[#f6f6f6]">
-      <div class="px-6 mb-8">
-        <div
-          class="flex items-center gap-3 p-3 border-2 border-inverse-surface bg-surface-container-lowest hard-shadow mb-4">
-          <img alt="User Profile Avatar" class="w-10 h-10 object-cover border-2 border-inverse-surface"
-            data-alt="gritty black and white portrait of a person with cybernetic tattoos and punk aesthetic"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAohQ4kVjaoDiXIB2_ZL4nuRidDByLFFwQJYXm87991IuBvHlgX7CGBe4i0ZLdO7eK0_HWUFyD2TM9EQZCNyIyitazBnnHBDnORiMsI8hygDPTOZS10pGsgT_oCwznpTR6h8xA5WizEoByTTwwG83z_NHbb1tPFaJ3UBndaK4HAvzKFU_pnwLpPPqsnvUlFBz3EDf8VCwocXl0RiThK5jsUsMoObzrHHnay1G8nbXTXL36RXoqn6Gmqz1vUWcK3Yvp2dZoRzUqZ8Of" />
-          <div>
-            <div class="font-headline font-bold uppercase tracking-widest text-xs text-on-surface">Rebel_01</div>
-            <div class="text-[10px] font-headline text-primary">Elite Tier</div>
-          </div>
+      <a href="settings_digital_rebel_desktop.html" class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
+        <div id="sidebar-avatar" class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
+          <img alt="Rebel_01" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
         </div>
-      </div>
+        <div class="overflow-hidden">
+          <h3 id="user-name" class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">Rebel_01</h3>
+          <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
+        </div>
+      </a>
       <nav class="flex flex-col gap-1">
         <a class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 transition-all"
           href="dashboard_digital_rebel_desktop.html">
