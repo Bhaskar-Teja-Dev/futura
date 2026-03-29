@@ -458,11 +458,20 @@
                             </p>
                             <p id="liquid-amount" class="font-headline font-black text-xl skeleton">Z 0</p>
                         </div>
-                        <div class="p-4 border-2 border-inverse-surface bg-surface">
-                            <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Required
-                                SIP
-                            </p>
+                        <div class="p-4 border-2 border-inverse-surface bg-surface relative group/sip">
+                            <div class="flex items-center gap-1.5 mb-1">
+                                <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Required SIP</p>
+                                <span class="material-symbols-outlined text-on-surface-variant cursor-help select-none" style="font-size:14px; line-height:1;">info</span>
+                            </div>
                             <p id="required-amount" class="font-headline font-black text-xl skeleton">Z 0</p>
+                            <!-- Tooltip -->
+                            <div class="pointer-events-none absolute bottom-full left-0 mb-2 z-50 w-64 hidden group-hover/sip:block">
+                                <div class="bg-inverse-surface text-surface border-2 border-inverse-surface p-3 font-body text-[11px] leading-snug shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+                                    <p class="font-headline font-black uppercase tracking-widest text-[9px] text-primary-fixed mb-1">What is this?</p>
+                                    The minimum you need to save every month — starting today — so that after inflation, you'll have enough money to cover your living expenses throughout your entire retirement.
+                                </div>
+                                <div class="w-3 h-3 bg-inverse-surface border-r-2 border-b-2 border-inverse-surface rotate-45 ml-4 -mt-1.5"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1192,7 +1201,36 @@
 
                 const requiredAmountEl = document.getElementById('required-amount');
                 if (requiredAmountEl) {
-                    requiredAmountEl.textContent = 'Z ' + Math.round((data && data.requiredMonthlyInvestment != null) ? data.requiredMonthlyInvestment : 0).toLocaleString();
+                    // Required SIP = minimum monthly savings needed to fund the inflation-adjusted
+                    // retirement corpus over the years remaining until retirement.
+                    // Source: calculator outputs requiredMonthlyInvestment (the extra SIP to close
+                    // any gap) + the base monthlyInvestment already in the payload.
+                    // When not on track: requiredMonthlyInvestment is al the extra needed on top
+                    //   of current contributions — so total minimum = existing + required extra.
+                    // When on track: requiredMonthlyInvestment = 0 but user is already contributing
+                    //   enough; show their current monthly investment as the minimum.
+                    // Fallback: compute directly from corpus if projection API unavailable.
+                    let minSIP = 0;
+                    if (data && data.requiredMonthlyInvestment != null && data.monthsToRetirement != null) {
+                        if (data.requiredMonthlyInvestment > 0) {
+                            // Not on track — total minimum = base investment + extra needed
+                            minSIP = projectionPayload.monthlyInvestment + data.requiredMonthlyInvestment;
+                        } else {
+                            // On track — current monthly investment already covers it
+                            minSIP = projectionPayload.monthlyInvestment;
+                        }
+                    } else if (data && data.corpusNeeded != null && data.monthsToRetirement > 0 && data.r_monthly != null) {
+                        // Direct SIP formula: corpus = SIP * [(1+r)^n - 1] / r
+                        const r = data.r_monthly;
+                        const n = data.monthsToRetirement;
+                        minSIP = r === 0
+                            ? data.corpusNeeded / n
+                            : data.corpusNeeded * r / (Math.pow(1 + r, n) - 1);
+                    } else {
+                        // Graceful fallback using projection inputs
+                        minSIP = projectionPayload.monthlyInvestment;
+                    }
+                    requiredAmountEl.textContent = 'Z ' + Math.round(Math.max(0, minSIP)).toLocaleString();
                     clearSkeleton(requiredAmountEl);
                 }
 

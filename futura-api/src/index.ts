@@ -13,7 +13,7 @@ import type { Env, Variables } from './types'
 const app = new Hono<{ Bindings: Env; Variables: Variables }>()
 
 app.use(
-  'https://digital-rebel.vercel.app/',
+  '*',
   cors({
     origin: (origin) => origin || '*',
     allowHeaders: ['Content-Type', 'Authorization'],
