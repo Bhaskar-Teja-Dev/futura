@@ -1133,6 +1133,25 @@
                   return;
                 }
 
+                // Patch in missing holdings namespace if deployed api.js is stale
+                if (!api.holdings) {
+                  const _t = () => (window.getAccessToken || getAccessToken)();
+                  const _f = async (p, m, b) => {
+                    const token = await _t(); if (!token) throw new Error('Not authenticated');
+                    const o = { method: m || 'GET', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } };
+                    if (b && m && m !== 'GET') o.body = JSON.stringify(b);
+                    const r = await fetch(FUTURA_CONFIG.API_BASE_URL + p, o);
+                    if (!r.ok) throw new Error(await r.text() || 'API error ' + r.status);
+                    return r.json();
+                  };
+                  api.holdings = {
+                    list: () => _f('/api/holdings'),
+                    create: (body) => _f('/api/holdings', 'POST', body),
+                    sell: (id, body) => _f('/api/holdings/' + id + '/sell', 'PATCH', body),
+                    remove: (id) => _f('/api/holdings/' + id, 'DELETE')
+                  };
+                }
+
                 // 1. Enforce Auth
                 const session = await (window.requireAuth || requireAuth)();
                 if (!session) return;

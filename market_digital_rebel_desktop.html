@@ -750,6 +750,20 @@
       });
     }
 
+    // Direct API fetch fallback for cached api.js missing namespaces
+    async function directApiFetch(path, method, body) {
+      const token = await (window.getAccessToken || getAccessToken)();
+      if (!token) throw new Error('Not authenticated');
+      const opts = {
+        method: method || 'GET',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
+      };
+      if (body && method && method !== 'GET') opts.body = JSON.stringify(body);
+      const res = await fetch(FUTURA_CONFIG.API_BASE_URL + path, opts);
+      if (!res.ok) throw new Error(await res.text() || 'API error ' + res.status);
+      return res.json();
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       // Set up local references to globals for production compatibility
       const api = window.futuraApi || futuraApi;
@@ -757,6 +771,17 @@
         console.error('futuraApi is not available');
         alert('API failed to initialize. Please refresh the page.');
         return;
+      }
+
+      // Patch in missing holdings namespace if deployed api.js is stale
+      if (!api.holdings) {
+        console.warn('api.holdings missing on market page — using direct fetch fallback');
+        api.holdings = {
+          list: () => directApiFetch('/api/holdings'),
+          create: (body) => directApiFetch('/api/holdings', 'POST', body),
+          sell: (id, body) => directApiFetch('/api/holdings/' + id + '/sell', 'PATCH', body),
+          remove: (id) => directApiFetch('/api/holdings/' + id, 'DELETE')
+        };
       }
 
       const session = await requireAuth();

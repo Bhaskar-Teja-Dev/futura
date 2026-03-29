@@ -273,12 +273,17 @@
     }
 
     // Direct API fetch fallback — used when api.js is a cached older version missing namespaces
-    async function directApiFetch(path) {
+    async function directApiFetch(path, method, body) {
       const token = await (window.getAccessToken || getAccessToken)();
       if (!token) throw new Error('Not authenticated');
-      const res = await fetch(FUTURA_CONFIG.API_BASE_URL + path, {
+      const opts = {
+        method: method || 'GET',
         headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
-      });
+      };
+      if (body && method && method !== 'GET') {
+        opts.body = JSON.stringify(body);
+      }
+      const res = await fetch(FUTURA_CONFIG.API_BASE_URL + path, opts);
       if (!res.ok) throw new Error(await res.text() || 'API error ' + res.status);
       return res.json();
     }
