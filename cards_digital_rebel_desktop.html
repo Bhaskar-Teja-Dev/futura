@@ -4,6 +4,11 @@
 
 <head>
   <meta charset="utf-8" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="description"
     content="Manage Digital Rebel cards: limits, styles, and security in one brutalist control panel." />
@@ -535,41 +540,13 @@
     <span id="sys-toast-msg">Done</span>
   </div>
 
-  <!-- Footer -->
-  <footer
-    class="w-full lg:w-auto lg:pl-72 border-t-2 border-[#cafd00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
-    <div class="flex flex-col items-center md:items-start gap-1">
-      <span class="text-[#cafd00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
-      <p class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6]">© <span
-          data-year-range></span> DIGITAL REBEL. NO PERMISSION REQUIRED.</p>
-    </div>
-    <div class="flex gap-8 flex-wrap">
-      <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-      <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="settings_digital_rebel_desktop.html">Settings</a>
-      <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="learn_digital_rebel_desktop.html">Learn</a>
-      <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="checkout_digital_rebel_desktop.html">Checkout</a>
-      <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="assets_digital_rebel_desktop.html">Assets</a><a
-        class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="transactions.html">Transactions</a><a
-        class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="market_digital_rebel_desktop.html">Market</a>
-      <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="add_card_digital_rebel.html">Add Card</a>
-      <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
-        href="add_manual_asset_digital_rebel.html">Add Asset</a>
-    </div>
-  </footer>
+  <!-- Old footer removed - standardized footer below -->
   <!-- Elite Hub Modal -->
   <div id="elite-hub-modal"
     class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
     <div
       class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
-      <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')"
+      <button onclick="const m=document.getElementById('elite-hub-modal');m.classList.add('hidden');m.classList.remove('flex')"
         class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
       <header class="mb-4 border-b-2 border-surface-container pb-4">
         <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2"
@@ -667,7 +644,7 @@
       </div>
     </div>
         <!-- Footer -->
-        <footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity">
+        <footer class="lg:ml-64 mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8">
             <div class="flex flex-col items-center md:items-start text-on-surface">
                 <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
                 <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
@@ -736,6 +713,8 @@
   </script>
   <script src="/js/rebel-cards-init.js"></script>
   <script src="/js/cards.js"></script>
+
+<script src="./js/mobile-footer-nav.js"></script>
 </body>
 
 </html>

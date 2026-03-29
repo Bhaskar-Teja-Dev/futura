@@ -4,6 +4,11 @@
 
 <head>
   <meta charset="utf-8" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="description" content="Review your Digital Rebel transaction history and movements in one place." />
 <link rel="stylesheet" href="css/app.css" />
@@ -120,7 +125,7 @@
       </div>
     </aside>
     <!-- Main Content Area -->
-    <main class="lg:ml-64 flex-1 pt-32 pb-24 px-6 max-w-7xl mx-auto w-full">
+    <main class="lg:ml-64 flex-1 pt-20 pb-24 px-4 md:px-6 w-full">
       <!-- Header Section -->
       <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
@@ -265,7 +270,7 @@
     <!-- Elite Hub Modal -->
     <div id="elite-hub-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
         <div class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
-            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')" class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
+            <button onclick="const m=document.getElementById('elite-hub-modal');m.classList.add('hidden');m.classList.remove('flex')" class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
             <header class="mb-4 border-b-2 border-surface-container pb-4">
                 <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2" style="background: linear-gradient(90deg, #ffb300, #ff6f00); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Elite Hub</h2>
                 <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Benefits & Reports</p>
@@ -758,6 +763,7 @@
       }
     });
   </script>
+<script src="./js/mobile-footer-nav.js"></script>
 </body>
 
 </html>

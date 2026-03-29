@@ -115,6 +115,7 @@ function hydrateEliteSidebar(sub) {
         const modal = document.getElementById('elite-hub-modal');
         if (modal) {
           modal.classList.remove('hidden');
+          modal.classList.add('flex');
           // Global hydration of Elite Modal Data
           try {
             const tokenEl = document.getElementById('elite-tokens-count');

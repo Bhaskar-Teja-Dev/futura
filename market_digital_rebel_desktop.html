@@ -4,6 +4,11 @@
 
 <head>
   <meta charset="utf-8" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="description" content="Digital Rebel markets: browse tickers and snapshots. Numbers may be illustrative—verify before trading." />
 <link rel="stylesheet" href="css/app.css" />
@@ -45,7 +50,7 @@
   <!-- TopNavBar -->
   <nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
     <div class="flex items-center gap-3 lg:gap-8">
-      <button type="button" id="mobile-topnav-toggle" class="md:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+      <button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
         <span class="material-symbols-outlined">menu</span>
       </button>
       <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
@@ -133,7 +138,7 @@
           <h1 class="font-headline text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">MARKET_V01
           </h1>
         </div>
-        <div class="bg-white border-2 border-[#121212] p-4 hard-shadow flex gap-8 items-center">
+        <div class="bg-white border-2 border-[#121212] p-4 hard-shadow flex flex-wrap gap-4 items-center">
           <div class="relative group cursor-help">
             <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Global Volume</p>
             <p id="global-volume" class="font-headline font-black text-2xl text-[#121212]">--</p>
@@ -172,7 +177,7 @@
     </header>
     <!-- Markets Grid / Bento Style for Top Movers -->
     <section class="mb-12">
-      <div class="flex items-center gap-4 mb-6 cursor-pointer select-none" id="market-toggle"
+      <div class="flex flex-wrap items-center gap-3 mb-6 cursor-pointer select-none" id="market-toggle"
         title="Toggle Market View">
         <span class="w-12 h-[2px] bg-[#121212]"></span>
         <h2 id="market-label" class="font-headline font-black text-3xl uppercase tracking-tighter">TOP MOVERS</h2>
@@ -215,41 +220,24 @@
       </div>
     </section>
   </main>
+  </div>
   <!-- Footer -->
-  <footer
-    class="w-full border-t-2 border-[#68FD00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
-    <div class="flex items-center gap-4">
-      <span class="text-[#68FD00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
-      <span class="text-[#f6f6f6] font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase">© <span data-year-range></span> DIGITAL
-        REBEL. NO PERMISSION REQUIRED.</span>
-    </div>
-    <div class="flex gap-6 flex-wrap">
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="index.html">Home</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="settings_digital_rebel_desktop.html">Settings</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="learn_digital_rebel_desktop.html">Learn</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="checkout_digital_rebel_desktop.html">Checkout</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="assets_digital_rebel_desktop.html">Assets</a><a
-        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="transactions.html">Transactions</a><a
-        class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="cards_digital_rebel_desktop.html">Cards</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="add_card_digital_rebel.html">Add Card</a>
-      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
-        href="add_manual_asset_digital_rebel.html">Add Asset</a>
-    </div>
+  <footer class="lg:ml-64 mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-4 md:px-8">
+      <div class="flex flex-col items-center md:items-start text-on-surface">
+          <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+          <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+              ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+          </p>
+      </div>
+      <div class="flex items-center gap-6">
+          <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+              href="terms.html">terms.sh</a>
+      </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="./js/config.js"></script>
   <script src="./js/notifications.js"></script>
-  <script src="./js/topnav-mobile.js"></script>
+  <script src="./js/mobile-nav.js"></script>
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script>
@@ -708,5 +696,6 @@
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script src="./js/footer-year.js"></script>
+<script src="./js/mobile-footer-nav.js"></script>
 </body>
 </html>

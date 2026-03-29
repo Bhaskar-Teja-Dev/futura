@@ -4,6 +4,11 @@
 
 <head>
     <meta charset="utf-8" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="description"
         content="Digital Rebel dashboard: ZENS balance, streaks, projections, and your rebel overview in one place." />
@@ -512,36 +517,17 @@
         </main>
     </div>
     <!-- Footer -->
-    <footer
-        class="w-full mt-auto py-12 px-8 lg:pl-72 lg:pr-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
-        <div class="flex flex-col gap-2">
-            <span class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL
-                REBEL</span>
-            <p class="font-Lexend font-black uppercase text-[10px] tracking-[0.3em] text-[#f6f6f6]">©<span
-                    data-year-range></span> DIGITAL REBEL.
-                NO PERMISSION GRANTED.</p>
+    <!-- Footer -->
+    <footer class="lg:ml-64 mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:pl-72 lg:pr-8">
+        <div class="flex flex-col items-center md:items-start text-on-surface">
+            <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+            <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+                ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+            </p>
         </div>
-        <div class="flex flex-wrap justify-center gap-8">
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="index.html">Home</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="settings_digital_rebel_desktop.html">Settings</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="learn_digital_rebel_desktop.html">Learn</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="checkout_digital_rebel_desktop.html">Checkout</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="assets_digital_rebel_desktop.html">Assets</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="market_digital_rebel_desktop.html">Market</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="transactions.html">Transactions</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="cards_digital_rebel_desktop.html">Cards</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="add_card_digital_rebel.html">Add Card</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="add_manual_asset_digital_rebel.html">Add Asset</a>
+        <div class="flex items-center gap-6">
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+                href="terms.html">terms.sh</a>
         </div>
     </footer>
     <!-- Elite Hub Modal -->
@@ -549,7 +535,7 @@
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
         <div
             class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
-            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')"
+            <button onclick="const m=document.getElementById('elite-hub-modal');m.classList.add('hidden');m.classList.remove('flex')"
                 class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
 
             <header class="mb-4 border-b-2 border-surface-container pb-4">
@@ -1163,6 +1149,7 @@
             }
         });
     </script>
+<script src="./js/mobile-footer-nav.js"></script>
 </body>
 
 </html>

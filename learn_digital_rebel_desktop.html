@@ -2,6 +2,11 @@
 <html class="light" lang="en">
 <head>
 <meta charset="utf-8"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta name="description" content="Finance Bites by Digital Rebel: lessons and articles on money, markets, and building wealth without the fluff." />
 <link rel="stylesheet" href="css/app.css" />
@@ -41,7 +46,7 @@
   .plan-card.selected { outline:3px solid #cafd00; outline-offset:-1px; }
 </style>
 </head>
-<body class="bg-surface font-body text-on-surface">
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
 
 <!-- TopNavBar -->
 <header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
@@ -123,7 +128,7 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="lg:ml-64 flex-1 px-6 py-12 max-w-7xl mx-auto w-full">
+  <main class="lg:ml-64 flex-1 px-6 lg:px-8 py-12 w-full min-h-screen bg-surface">
   <header class="mb-16 border-b-4 border-inverse-surface pb-8">
     <div class="flex flex-col md:flex-row justify-between items-end gap-6">
       <div>
@@ -222,23 +227,20 @@
 
   </div>
 </main>
+</div>
 
-<footer class="w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] border-t-4 border-[#cafd00]">
-  <div class="flex flex-col gap-4">
-    <span class="text-4xl font-black text-[#cafd00] font-headline">DIGITAL REBEL</span>
-    <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.</p>
-  </div>
-  <div class="flex flex-wrap justify-center gap-8">
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all underline underline-offset-8 decoration-[#cafd00]" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="settings_digital_rebel_desktop.html">Settings</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="checkout_digital_rebel_desktop.html">Checkout</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="assets_digital_rebel_desktop.html">Assets</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="market_digital_rebel_desktop.html">Market</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="transactions.html">Transactions</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="cards_digital_rebel_desktop.html">Cards</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="add_card_digital_rebel.html">Add Card</a>
-    <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all" href="add_manual_asset_digital_rebel.html">Add Asset</a>
-  </div>
+<!-- Footer -->
+<footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:ml-64">
+    <div class="flex flex-col items-center md:items-start text-on-surface">
+        <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+        <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+            ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+        </p>
+    </div>
+    <div class="flex items-center gap-6">
+        <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+            href="terms.html">terms.sh</a>
+    </div>
 </footer>
 
 <!-- Toast -->
@@ -428,10 +430,12 @@ function animateProgress(id, pct, ms) {
 }
 
 // Wallet Logic Removed
-document.getElementById('btn-notifications').addEventListener('click', ()=>openModal('modal-notifications'));
+const _btnNotif = document.getElementById('btn-notifications') || document.getElementById('notif-bell');
+if (_btnNotif) _btnNotif.addEventListener('click', ()=>openModal('modal-notifications'));
 
 // ── Settings ──────────────────────────────────────────────────────────────────
-document.getElementById('btn-settings').addEventListener('click', (e)=>{ e.preventDefault(); openModal('modal-settings'); });
+const _btnSettings = document.getElementById('btn-settings');
+if (_btnSettings) _btnSettings.addEventListener('click', (e)=>{ e.preventDefault(); openModal('modal-settings'); });
 function setMode(mode) {
   document.documentElement.classList.toggle('dark', mode==='dark');
   document.getElementById('btn-light-mode').className = document.getElementById('btn-light-mode').className.replace(/bg-\S+/,'') + (mode==='light' ? ' bg-primary-fixed text-inverse-surface' : ' bg-surface-container text-on-surface');
@@ -509,6 +513,7 @@ document.getElementById('badge-lessons').addEventListener('click', ()=>{
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script src="js/footer-year.js"></script>
+<script src="./js/mobile-footer-nav.js"></script>
 </body>
 </html>
 

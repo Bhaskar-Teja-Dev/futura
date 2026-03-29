@@ -1,6 +1,36 @@
 // Futura — Supabase Auth module
 // Requires: supabase-js CDN + config.js loaded before this
 
+// ── Instant Sidebar Cache ──────────────────────────────────────────────────
+// Synchronously hydrate sidebar from localStorage before any async work.
+// This eliminates the flash of placeholder avatar/name when navigating pages.
+(function _applyCachedSidebarState() {
+  try {
+    var raw = localStorage.getItem('futura_sidebar_v1');
+    if (!raw) return;
+    var c = JSON.parse(raw);
+    // Username
+    var names = document.querySelectorAll('#user-name, #sidebar-user-name');
+    if (c.username && names.length) names.forEach(function(el){ el.textContent = c.username; });
+    // Avatar
+    if (c.avatarHTML) {
+      var avatars = [document.getElementById('nav-avatar'), document.getElementById('sidebar-avatar')];
+      avatars.forEach(function(a){ if(a) a.innerHTML = c.avatarHTML; });
+    }
+    // Elite tier label
+    if (c.isElite) {
+      var label = document.getElementById('sidebar-tier-label');
+      if (label) { label.textContent = 'Elite Tier'; label.style.color = '#FF6F00'; }
+      // Show Explore Benefits immediately
+      var btn = document.getElementById('sidebar-upgrade-btn');
+      if (btn && c.exploreBenefitsLabel) {
+        btn.textContent = c.exploreBenefitsLabel;
+        btn.removeAttribute('href');
+      }
+    }
+  } catch(e) { /* ignore parse errors */ }
+})();
+
 function _futuraNotify(message, type) {
   type = type === 'success' ? 'success' : 'error';
   var root = document.getElementById('futura-toast-stack');
@@ -284,7 +314,7 @@ async function updateNavAuth() {
               tokenPill.onclick = (e) => {
                 e.preventDefault();
                 const modal = document.getElementById('elite-hub-modal');
-                if (modal) modal.classList.remove('hidden');
+                if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
               };
             }
             const countEl = document.getElementById('nav-tokens-count');
@@ -326,6 +356,19 @@ async function updateNavAuth() {
         avatar.innerHTML = `<div class="bg-[#cafd00] text-[#121212] font-headline font-black w-full h-full flex items-center justify-center text-sm">${initial}</div>`;
       }
     });
+    // Persist sidebar state to cache for instant hydration on next page load
+    try {
+      var cachedAvatar = avatars[0] ? avatars[0].innerHTML : '';
+      var cachedName = username;
+      var cachedElite = localStorage.getItem('isElite') === 'true';
+      var exploreBtn = document.getElementById('sidebar-upgrade-btn');
+      localStorage.setItem('futura_sidebar_v1', JSON.stringify({
+        username: cachedName,
+        avatarHTML: cachedAvatar,
+        isElite: cachedElite,
+        exploreBenefitsLabel: exploreBtn ? exploreBtn.textContent.trim() : ''
+      }));
+    } catch(e) { /* quota errors */ }
   }
 
   // Hero Button: Change to ENTER TERMINAL if signed in

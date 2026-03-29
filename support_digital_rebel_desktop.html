@@ -3,6 +3,11 @@
 
 <head>
     <meta charset="utf-8" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="description" content="Get help with Digital Rebel: support protocol, FAQs, and contact options." />
     <link rel="stylesheet" href="css/app.css" />
@@ -215,7 +220,7 @@
                     <span
                         class="bg-error text-white font-headline font-black text-xs uppercase tracking-widest px-2 py-1 border-2 border-on-surface neo-shadow inline-block mb-4">Urgent
                         Comms Link</span>
-                    <h1 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter leading-none">
+                    <h1 class="font-headline font-black text-3xl sm:text-5xl md:text-7xl uppercase tracking-tighter leading-none break-words">
                         Support_Protocol
                     </h1>
                 </div>
@@ -233,7 +238,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 items-start">
                 <!-- Hacker Terminal Chat -->
                 <div
-                    class="lg:col-span-8 bg-[#121212] border-4 border-[#2d2f2f] neo-shadow-large flex flex-col h-[600px] overflow-hidden self-start">
+                    class="lg:col-span-8 bg-[#121212] border-4 border-[#2d2f2f] neo-shadow-large flex flex-col h-[360px] md:h-[520px] overflow-hidden self-start">
                     <div class="bg-[#2d2f2f] flex justify-between items-center p-3 border-b-2 border-[#121212]">
                         <div class="flex gap-2">
                             <div class="w-4 h-4 bg-error rounded-none border border-[#121212]"></div>
@@ -273,7 +278,7 @@
                     </div>
 
                     <div class="p-4 bg-[#121212] border-t-2 border-[#2d2f2f]">
-                        <form id="chat-form" onsubmit="handleChatSubmit(event)" class="flex gap-4">
+                        <form id="chat-form" onsubmit="handleChatSubmit(event)" class="flex items-center gap-2">
                             <span class="text-[#cafd00] font-mono font-bold text-xl mt-3">></span>
                             <input autocomplete="off" type="text" id="chat-input"
                                 class="flex-1 bg-transparent border-none text-[#cafd00] font-mono text-lg focus:ring-0 placeholder-[#767777]"
@@ -317,7 +322,7 @@
                 </div>
             </div>
             <!-- Footer -->
-            <footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity">
+            <footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8">
                 <div class="flex flex-col items-center md:items-start text-on-surface">
                     <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
                     <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
@@ -332,22 +337,7 @@
         </main>
     </div>
 
-    <!-- Footer -->
-    <footer
-        class="lg:ml-64 w-auto py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 border-t-4 border-[#121212] z-50">
-        <div class="flex flex-col items-center md:items-start text-center md:text-left">
-            <span class="text-2xl font-black text-[#121212] font-headline">Digital Rebel</span>
-            <span class="font-Lexend font-black uppercase text-[10px] tracking-widest mt-1 text-[#767777]">©<span
-                    data-year-range></span> DIGITAL
-                REBEL.</span>
-        </div>
-        <div class="flex flex-wrap justify-center gap-6">
-            <a class="font-Lexend font-black uppercase text-[10px] tracking-widest hover:italic transition-all"
-                href="settings_digital_rebel_desktop.html">Privacy</a>
-            <a class="font-Lexend font-black uppercase text-[10px] tracking-widest hover:italic transition-all"
-                href="settings_digital_rebel_desktop.html">Terms</a>
-        </div>
-    </footer>
+
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="/js/config.js"></script>
@@ -490,6 +480,8 @@
                 .replace(/'/g, "&#039;");
         }
     </script>
+
+<script src="./js/mobile-footer-nav.js"></script>
 </body>
 
 </html>
