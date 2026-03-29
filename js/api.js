@@ -64,7 +64,7 @@ const futuraApi = {
   },
   subscriptions: {
     purchasePro: (razorpay_payment_id) =>
-      apiFetch('/api/subscriptions/purchase-pro', { 
+      apiFetch('/api/subscriptions/purchase-pro', {
         method: 'POST',
         body: JSON.stringify({ razorpay_payment_id })
       })
@@ -90,7 +90,7 @@ async function buyZens(onSuccess) {
   // Create Overlay Menu
   const ov = document.createElement('div');
   ov.style.cssText = 'position:fixed;inset:0;background:rgba(18,18,18,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease;';
-  
+
   const INRD_RATE = 10; // Zens per 1 INR
 
   ov.innerHTML = `
@@ -138,7 +138,7 @@ async function buyZens(onSuccess) {
 
   ov.querySelector('#close-buy-menu').addEventListener('click', () => ov.remove());
   ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
-  
+
   // Wire Buttons
   ov.querySelectorAll('.zens-pack').forEach(btn => {
     btn.addEventListener('click', () => {
