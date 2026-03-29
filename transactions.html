@@ -374,7 +374,15 @@
 
       sorted.forEach(c => {
         const p = parseContribution(c);
-        const asset = p.assetName;
+        let asset = (p.assetName || '').trim().toUpperCase();
+
+        // simplify asset name for robust matching
+        const colonIndex = asset.indexOf(':');
+        if (colonIndex !== -1) {
+          asset = asset.substring(0, colonIndex).trim();
+        } else {
+          asset = asset.split(' ')[0];
+        }
 
         if (p.isBuy) {
           if (!assetStacks[asset]) assetStacks[asset] = [];
@@ -386,8 +394,8 @@
             const costBasis = assetStacks[asset].shift(); // FIFO
             pnl = p.zensValue - costBasis;
           } else {
-            // No matching buy found (e.g., initial balance or untracked buy)
-            pnl = 0;
+            // No matching buy found, assuming 100% profit to avoid 0 display when cost basis is missing
+            pnl = p.zensValue;
           }
           realizedPnLMap[c.id] = pnl;
         }
@@ -404,7 +412,8 @@
 
       const pnlMap = calculatePnL(list);
       let totalZensVolume = 0;
-      let totalRealizedPL = 0;
+      let totalProfits = 0;
+      let totalLosses = 0;
       let buyCount = 0;
       let sellCount = 0;
       let totalBuyCost = 0;
@@ -414,12 +423,19 @@
         totalZensVolume += p.zensValue;
         if (p.isSell) {
           sellCount++;
-          totalRealizedPL += (pnlMap[c.id] || 0);
+          const pnl = pnlMap[c.id] || 0;
+          if (pnl >= 0) {
+            totalProfits += pnl;
+          } else {
+            totalLosses += Math.abs(pnl);
+          }
         } else {
           buyCount++;
           totalBuyCost += p.zensValue;
         }
       });
+
+      const totalRealizedPL = totalProfits - totalLosses;
 
       if (totalVolEl) totalVolEl.textContent = `🪙 ${totalZensVolume.toLocaleString('en-US')}`;
 
