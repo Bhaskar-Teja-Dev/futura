@@ -437,6 +437,10 @@
             userNameEl.textContent = goal.email.split('@')[0];
             handleEl.value = goal.display_name || goal.email.split('@')[0];
           }
+          // Pre-fill bio
+          if (goal.bio) {
+            bioEl.value = goal.bio;
+          }
         }
 
         // Hydrate Elite Sidebar
@@ -451,7 +455,8 @@
           btnSync.style.pointerEvents = 'none';
 
           await futuraApi.profile.update({
-            display_name: handleEl.value
+            display_name: handleEl.value,
+            bio: bioEl.value
           });
 
           btnSync.textContent = 'IDENTITY_SYNCED';

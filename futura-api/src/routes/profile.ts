@@ -8,6 +8,7 @@ const router = new Hono<{ Bindings: Env; Variables: Variables }>()
 
 const profileUpdateSchema = z.object({
   display_name: z.string().min(1).max(120).optional(),
+  bio: z.string().max(500).optional(),
   age: z.number().int().min(10).max(120).optional(),
   retirement_age: z.number().int().min(40).max(90).optional(),
   monthly_income: z.number().positive().optional(),
