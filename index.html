@@ -5,7 +5,15 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Digital Rebel | Own The Revolution</title>
+  <title>Digital Rebel | Own The Revolution — Next-Gen Fintech</title>
+  <meta name="description" content="Digital Rebel is a high-speed, zero-custody fintech platform built for those who never wait. Trade, track, and grow wealth at sub-second speed." />
+  <meta property="og:title" content="Digital Rebel | Own The Revolution" />
+  <meta property="og:description" content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Digital Rebel | Own The Revolution" />
+  <meta name="twitter:description" content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
+  <link rel="canonical" href="https://futura.vercel.app/" />
   <link
     href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
     rel="stylesheet" />
@@ -13,74 +21,7 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "surface-dim": "#d3d5d5",
-            "error": "#b02500",
-            "surface-container-high": "#e1e3e3",
-            "on-primary-fixed": "#3a4a00",
-            "error-dim": "#b92902",
-            "on-surface-variant": "#5a5c5c",
-            "on-secondary-fixed-variant": "#5c5b5b",
-            "on-primary-fixed-variant": "#526900",
-            "tertiary-fixed": "#ff81f5",
-            "primary-fixed": "#cafd00",
-            "surface-container-highest": "#dbdddd",
-            "on-primary": "#e1ff88",
-            "error-container": "#f95630",
-            "on-primary-container": "#4a5e00",
-            "surface-container-lowest": "#ffffff",
-            "secondary-fixed-dim": "#d7d4d3",
-            "surface-variant": "#dbdddd",
-            "surface-tint": "#4e6300",
-            "on-secondary-fixed": "#403f3f",
-            "surface": "#f6f6f6",
-            "inverse-on-surface": "#9c9d9d",
-            "on-tertiary": "#ffeef8",
-            "primary-fixed-dim": "#beee00",
-            "on-surface": "#2d2f2f",
-            "primary": "#4e6300",
-            "on-secondary": "#f5f2f1",
-            "surface-container": "#e7e8e8",
-            "primary-container": "#cafd00",
-            "on-secondary-container": "#525151",
-            "on-background": "#2d2f2f",
-            "on-error-container": "#520c00",
-            "surface-bright": "#f6f6f6",
-            "on-tertiary-fixed-variant": "#6a006a",
-            "inverse-surface": "#0c0f0f",
-            "secondary-container": "#e5e2e1",
-            "tertiary-container": "#ff81f5",
-            "inverse-primary": "#cafd00",
-            "on-tertiary-container": "#5b005b",
-            "tertiary": "#a400a4",
-            "surface-container-low": "#f0f1f1",
-            "secondary-dim": "#504f4f",
-            "tertiary-dim": "#900090",
-            "secondary-fixed": "#e5e2e1",
-            "on-tertiary-fixed": "#320032",
-            "primary-dim": "#435600",
-            "outline": "#767777",
-            "outline-variant": "#acadad",
-            "on-error": "#ffefec",
-            "background": "#f6f6f6",
-            "secondary": "#5c5b5b",
-            "tertiary-fixed-dim": "#ff61f8"
-          },
-          fontFamily: {
-            "headline": ["Lexend"],
-            "body": ["Inter"],
-            "label": ["Inter"]
-          },
-          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-        },
-      },
-    }
-  </script>
+  <script src="js/tailwind.config.js"></script>
   <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -332,8 +273,7 @@
     id="main-footer">
     <div class="flex flex-col items-center md:items-start">
       <a href="index.html" class="text-4xl font-black text-[#cafd00] font-headline no-underline">DIGITAL REBEL</a>
-      <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">Â©2024 DIGITAL REBEL. NO
-        PERMISSION GRANTED.</p>
+      <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.</p>
     </div>
     <div class="flex flex-wrap justify-center gap-8" id="footer-links">
       <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-[#cafd00]"
@@ -362,17 +302,18 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="./js/config.js"></script>
   <script src="./js/notifications.js"></script>
+  <script src="./js/footer-year.js"></script>
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <style>
     /* Auth Guard: Prevents ghost sessions and UI flickering */
-    html.auth-verified #btn-google-signin,
+    html.auth-verified #btn-auth-hero,
     html.auth-verified [id*="connect-wallet"] {
       display: none !important;
     }
     
     /* Optional: Show loading state if session exists but not verified */
-    html.auth-loading #btn-google-signin {
+    html.auth-loading #btn-auth-hero {
       opacity: 0.5;
       pointer-events: none;
     }
@@ -400,13 +341,18 @@
       })();
 
     document.addEventListener('DOMContentLoaded', () => {
-      // Wire Google sign-in button
-      const googleBtn = document.getElementById('btn-google-signin');
+      const googleBtn = document.getElementById('btn-auth-hero');
       if (googleBtn) {
         googleBtn.addEventListener('click', (e) => {
           e.preventDefault();
           signInWithGoogle();
         });
+      }
+      const rebels = document.getElementById('active-rebels-count');
+      if (rebels) {
+        const day = Math.floor(Date.now() / 86400000);
+        const n = 11.8 + (day % 17) / 10;
+        rebels.textContent = '+' + n.toFixed(1) + 'k rebels active now';
       }
     });
   </script>

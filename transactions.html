@@ -13,77 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "on-surface": "#2d2f2f",
-            "on-secondary-fixed": "#403f3f",
-            "surface": "#f6f6f6",
-            "primary": "#4e6300",
-            "on-primary-fixed-variant": "#526900",
-            "tertiary-fixed": "#ff81f5",
-            "error-dim": "#b92902",
-            "inverse-primary": "#cafd00",
-            "on-secondary-fixed-variant": "#5c5b5b",
-            "primary-fixed": "#cafd00",
-            "on-secondary-container": "#525151",
-            "on-secondary": "#f5f2f1",
-            "on-primary-container": "#4a5e00",
-            "surface-container": "#e7e8e8",
-            "surface-container-low": "#f0f1f1",
-            "on-error": "#ffefec",
-            "error-container": "#f95630",
-            "on-tertiary-fixed-variant": "#6a006a",
-            "surface-variant": "#dbdddd",
-            "surface-tint": "#4e6300",
-            "primary-fixed-dim": "#beee00",
-            "outline-variant": "#acadad",
-            "surface-container-lowest": "#ffffff",
-            "inverse-surface": "#0c0f0f",
-            "primary-dim": "#435600",
-            "secondary-fixed": "#e5e2e1",
-            "surface-bright": "#f6f6f6",
-            "error": "#b02500",
-            "on-tertiary-fixed": "#320032",
-            "background": "#f6f6f6",
-            "tertiary-dim": "#900090",
-            "surface-container-high": "#e1e3e3",
-            "on-primary": "#e1ff88",
-            "on-error-container": "#520c00",
-            "secondary-fixed-dim": "#d7d4d3",
-            "surface-container-highest": "#dbdddd",
-            "tertiary-fixed-dim": "#ff61f8",
-            "secondary-container": "#e5e2e1",
-            "on-primary-fixed": "#3a4a00",
-            "on-background": "#2d2f2f",
-            "on-tertiary": "#ffeef8",
-            "secondary": "#5c5b5b",
-            "tertiary-container": "#ff81f5",
-            "on-surface-variant": "#5a5c5c",
-            "primary-container": "#cafd00",
-            "surface-dim": "#d3d5d5",
-            "tertiary": "#a400a4",
-            "inverse-on-surface": "#9c9d9d",
-            "outline": "#767777",
-            "on-tertiary-container": "#5b005b",
-            "secondary-dim": "#504f4f"
-          },
-          fontFamily: {
-            "headline": ["Lexend"],
-            "body": ["Inter"],
-            "label": ["Inter"]
-          },
-          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-        },
-      },
-    }
-  </script>
+  <script src="js/tailwind.config.js"></script>
   <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -113,7 +43,10 @@
 <body class="bg-surface text-on-surface min-h-screen flex flex-col">
   <!-- TopNavBar -->
   <header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
-    <div class="flex items-center gap-8">
+    <div class="flex items-center gap-3 lg:gap-8">
+      <button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
       <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
       <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
         <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
@@ -135,10 +68,11 @@
       </div>
     </div>
   </header>
+  <div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
   <div class="flex flex-1 w-full">
     <!-- SideNavBar -->
-    <aside
-      class="fixed left-0 top-0 h-full w-64 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] hidden lg:flex z-40">
+    <aside id="app-sidebar"
+      class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
       <a href="settings_digital_rebel_desktop.html" class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
         <div id="sidebar-avatar" class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
           <img alt="Rebel_01" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
@@ -167,7 +101,7 @@
         </a>
 
         <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-          href="settings_digital_rebel_desktop.html">
+          href="support_digital_rebel_desktop.html">
           <span class="material-symbols-outlined">help_outline</span> Support
         </a>
       </nav>
@@ -401,6 +335,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="./js/config.js"></script>
   <script src="./js/notifications.js"></script>
+  <script src="./js/mobile-nav.js"></script>
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script>
@@ -797,7 +732,7 @@
           const type = activeBtn ? activeBtn.id.split('-')[1] : 'all';
           let filtered = allContributions;
           if (type === 'stocks') filtered = allContributions.filter(c => parseContribution(c).typeBadge.includes('STOCK'));
-          else if (type === 'assets') filtered = allContributions.filter(c => !parseContribution(c).typadgdes('STOCK'));
+          else if (type === 'assets') filtered = allContributions.filter(c => !parseContribution(c).typeBadge.includes('STOCK'));
 
           renderChart(filtered);
         });

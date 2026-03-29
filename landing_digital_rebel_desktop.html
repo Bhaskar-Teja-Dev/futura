@@ -5,76 +5,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "surface-dim": "#d3d5d5",
-              "error": "#b02500",
-              "surface-container-high": "#e1e3e3",
-              "on-primary-fixed": "#3a4a00",
-              "error-dim": "#b92902",
-              "on-surface-variant": "#5a5c5c",
-              "on-secondary-fixed-variant": "#5c5b5b",
-              "on-primary-fixed-variant": "#526900",
-              "tertiary-fixed": "#ff81f5",
-              "primary-fixed": "#cafd00",
-              "surface-container-highest": "#dbdddd",
-              "on-primary": "#e1ff88",
-              "error-container": "#f95630",
-              "on-primary-container": "#4a5e00",
-              "surface-container-lowest": "#ffffff",
-              "secondary-fixed-dim": "#d7d4d3",
-              "surface-variant": "#dbdddd",
-              "surface-tint": "#4e6300",
-              "on-secondary-fixed": "#403f3f",
-              "surface": "#f6f6f6",
-              "inverse-on-surface": "#9c9d9d",
-              "on-tertiary": "#ffeef8",
-              "primary-fixed-dim": "#beee00",
-              "on-surface": "#2d2f2f",
-              "primary": "#4e6300",
-              "on-secondary": "#f5f2f1",
-              "surface-container": "#e7e8e8",
-              "primary-container": "#cafd00",
-              "on-secondary-container": "#525151",
-              "on-background": "#2d2f2f",
-              "on-error-container": "#520c00",
-              "surface-bright": "#f6f6f6",
-              "on-tertiary-fixed-variant": "#6a006a",
-              "inverse-surface": "#0c0f0f",
-              "secondary-container": "#e5e2e1",
-              "tertiary-container": "#ff81f5",
-              "inverse-primary": "#cafd00",
-              "on-tertiary-container": "#5b005b",
-              "tertiary": "#a400a4",
-              "surface-container-low": "#f0f1f1",
-              "secondary-dim": "#504f4f",
-              "tertiary-dim": "#900090",
-              "secondary-fixed": "#e5e2e1",
-              "on-tertiary-fixed": "#320032",
-              "primary-dim": "#435600",
-              "outline": "#767777",
-              "outline-variant": "#acadad",
-              "on-error": "#ffefec",
-              "background": "#f6f6f6",
-              "secondary": "#5c5b5b",
-              "tertiary-fixed-dim": "#ff61f8"
-            },
-            fontFamily: {
-              "headline": ["Lexend"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
-          },
-        },
-      }
-    </script>
+<script src="js/tailwind.config.js"></script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -292,7 +225,7 @@
 <footer class="bg-[#121212] dark:bg-[#000000] w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 border-t-4 border-[#cafd00]">
 <div class="flex flex-col items-center md:items-start">
 <span class="text-4xl font-black text-[#cafd00] font-headline">DIGITAL REBEL</span>
-<p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©2024 DIGITAL REBEL. NO PERMISSION GRANTED.</p>
+<p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.</p>
 </div>
 <div class="flex flex-wrap justify-center gap-8">
 <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] transition-all underline underline-offset-8 decoration-[#cafd00]" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
@@ -315,5 +248,6 @@
 </div>
 </div>
 </footer>
+<script src="js/footer-year.js"></script>
 </body></html>
 

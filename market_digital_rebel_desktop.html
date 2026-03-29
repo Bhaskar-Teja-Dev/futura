@@ -13,77 +13,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "on-tertiary-fixed": "#320032",
-            "on-error": "#ffefec",
-            "on-surface-variant": "#5a5c5c",
-            "surface-tint": "#4e6300",
-            "surface-bright": "#f6f6f6",
-            "on-secondary-fixed": "#403f3f",
-            "surface-container-low": "#f0f1f1",
-            "secondary-container": "#e5e2e1",
-            "secondary-fixed": "#e5e2e1",
-            "on-primary-container": "#4a5e00",
-            "tertiary-fixed-dim": "#ff61f8",
-            "primary-container": "#cafd00",
-            "on-primary": "#e1ff88",
-            "inverse-on-surface": "#9c9d9d",
-            "primary-fixed": "#cafd00",
-            "secondary": "#5c5b5b",
-            "outline-variant": "#acadad",
-            "secondary-dim": "#504f4f",
-            "surface-dim": "#d3d5d5",
-            "background": "#f6f6f6",
-            "primary-dim": "#435600",
-            "tertiary": "#a400a4",
-            "tertiary-dim": "#900090",
-            "tertiary-container": "#ff81f5",
-            "surface-container-highest": "#dbdddd",
-            "primary-fixed-dim": "#beee00",
-            "error-container": "#f95630",
-            "secondary-fixed-dim": "#d7d4d3",
-            "on-tertiary": "#ffeef8",
-            "on-secondary-fixed-variant": "#5c5b5b",
-            "on-primary-fixed": "#3a4a00",
-            "on-error-container": "#520c00",
-            "on-tertiary-container": "#5b005b",
-            "error": "#b02500",
-            "surface": "#f6f6f6",
-            "outline": "#767777",
-            "on-tertiary-fixed-variant": "#6a006a",
-            "surface-container-high": "#e1e3e3",
-            "on-secondary": "#f5f2f1",
-            "on-background": "#2d2f2f",
-            "on-secondary-container": "#525151",
-            "on-primary-fixed-variant": "#526900",
-            "inverse-surface": "#0c0f0f",
-            "surface-variant": "#dbdddd",
-            "primary": "#4e6300",
-            "surface-container-lowest": "#ffffff",
-            "error-dim": "#b92902",
-            "tertiary-fixed": "#ff81f5",
-            "surface-container": "#e7e8e8",
-            "inverse-primary": "#cafd00",
-            "on-surface": "#2d2f2f"
-          },
-          fontFamily: {
-            "headline": ["Lexend"],
-            "body": ["Inter"],
-            "label": ["Inter"]
-          },
-          borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-        },
-      },
-    }
-  </script>
+  <script src="js/tailwind.config.js"></script>
   <style>
     body {
       background-color: #f6f6f6;
@@ -114,7 +44,10 @@
 <body class="font-body text-on-background min-h-screen flex flex-col">
   <!-- TopNavBar -->
   <nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
-    <div class="flex items-center gap-8">
+    <div class="flex items-center gap-3 lg:gap-8">
+      <button type="button" id="mobile-topnav-toggle" class="md:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
       <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
       <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
         <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
@@ -136,6 +69,16 @@
       </div>
     </div>
   </nav>
+  <div id="mobile-topnav-overlay" class="fixed inset-0 z-40 bg-black/50 md:hidden hidden pointer-events-none"></div>
+  <div id="mobile-topnav-panel" class="fixed top-0 left-0 z-50 flex w-64 max-h-screen flex-col overflow-y-auto bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] pt-20 pb-8 px-4 gap-2 shadow-[8px_8px_0_#121212] hidden md:hidden">
+    <a class="font-headline font-black uppercase text-sm py-2 px-2 hover:bg-[#cafd00]" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+    <a class="font-headline font-black uppercase text-sm py-2 px-2 hover:bg-[#cafd00]" href="market_digital_rebel_desktop.html">Markets</a>
+    <a class="font-headline font-black uppercase text-sm py-2 px-2 hover:bg-[#cafd00]" href="assets_digital_rebel_desktop.html">Assets</a>
+    <a class="font-headline font-black uppercase text-sm py-2 px-2 hover:bg-[#cafd00]" href="projections_digital_rebel_desktop.html">Projections</a>
+    <a class="font-headline font-black uppercase text-sm py-2 px-2 hover:bg-[#cafd00]" href="transactions.html">Transactions</a>
+    <a class="font-headline font-black uppercase text-sm py-2 px-2 hover:bg-[#cafd00]" href="cards_digital_rebel_desktop.html">Cards</a>
+    <a class="font-headline font-black uppercase text-sm py-2 px-2 hover:bg-[#cafd00]" href="support_digital_rebel_desktop.html">Support</a>
+  </div>
   <!-- Main Content -->
   <main class="mt-16 p-8 flex-grow">
     <header class="mb-12">
@@ -234,10 +177,12 @@
     class="w-full border-t-2 border-[#68FD00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
     <div class="flex items-center gap-4">
       <span class="text-[#68FD00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
-      <span class="text-[#f6f6f6] font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase">© 2024 DIGITAL
+      <span class="text-[#f6f6f6] font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase">© <span data-year-range></span> DIGITAL
         REBEL. NO PERMISSION REQUIRED.</span>
     </div>
     <div class="flex gap-6 flex-wrap">
+      <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
+        href="index.html">Home</a>
       <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
         href="dashboard_digital_rebel_desktop.html">Dashboard</a>
       <a class="font-['Lexend'] font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#68FD00] transition-colors"
@@ -261,6 +206,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="./js/config.js"></script>
   <script src="./js/notifications.js"></script>
+  <script src="./js/topnav-mobile.js"></script>
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script>
@@ -684,6 +630,29 @@
       }
 
       // Avatar dropdown handled globally by auth.js
+
+      // ── 30-second auto-refresh (matches tooltip promise) ─────────────────────
+      let countdown = 30;
+      const liveFeedBadge = document.querySelector('.inline-block.bg-primary');
+
+      const tick = setInterval(() => {
+        countdown--;
+        if (liveFeedBadge) liveFeedBadge.textContent = `LIVE_FEED // ${countdown}s`;
+        if (countdown <= 0) {
+          countdown = 30;
+          // Re-simulate prices on the existing snapshot
+          marketDataSnapshot.forEach(t => {
+            const swing = (Math.random() * 20) - 8;
+            t.price = Math.round(t.basePrice * (1 + swing / 100));
+            t.change = parseFloat(swing.toFixed(1));
+          });
+          renderMarketList();
+          if (liveFeedBadge) liveFeedBadge.textContent = 'LIVE_FEED // REFRESHED';
+          setTimeout(() => {
+            if (liveFeedBadge) liveFeedBadge.textContent = 'LIVE_FEED // 30s';
+          }, 1000);
+        }
+      }, 1000);
     });
   </script>
 </body>
