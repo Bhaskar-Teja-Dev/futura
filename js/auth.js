@@ -300,19 +300,74 @@ async function updateNavAuth() {
           });
           const profileData = profileRes.ok ? await profileRes.json() : null;
           const sub = profileData?.subscription;
-          const streakData = await futuraApi.contributions.streak().catch(() => null);
 
-          // Case-insensitive elite check (DB stores 'elite'; also trust streak.is_elite from API)
-          const isElite = (typeof sub?.entitlement === 'string' && sub.entitlement.toLowerCase() === 'elite')
-            || (streakData?.streak?.is_elite === true);
-          localStorage.setItem('isElite', isElite ? 'true' : 'false');
+          function entitlementLooksElite(raw) {
+            if (raw == null || raw === '') return false;
+            const s = String(raw).trim().toLowerCase();
+            return s === 'elite';
+          }
 
-          // Prefer the streak API token count (it runs the monthly refresh RPC first).
-          // Fall back to profile subscription snapshot — both read from user_subscriptions,
-          // so either is authoritative. Never let a failed API call produce 0.
-          const tokenCount = streakData?.streak?.recovery_tokens !== undefined
-            ? Number(streakData.streak.recovery_tokens)
-            : Number(sub?.streak_recovery_tokens ?? 0);
+          function paintSidebarTier(isElite) {
+            localStorage.setItem('isElite', isElite ? 'true' : 'false');
+            var sidebarBtn = document.getElementById('sidebar-upgrade-btn');
+            var sidebarLabel = document.getElementById('sidebar-tier-label');
+            if (sidebarLabel) {
+              sidebarLabel.textContent = isElite ? 'Elite Tier' : 'Basic Tier';
+              sidebarLabel.style.color = isElite ? '#FF6F00' : '#767777';
+            }
+            if (sidebarBtn) {
+              if (isElite) {
+                sidebarBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> Explore Benefits';
+                sidebarBtn.removeAttribute('href');
+                sidebarBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center border-2 border-[#121212]';
+                sidebarBtn.style.cssText = 'background:linear-gradient(90deg,#ffb300,#ff6f00,#ffb300);background-size:200% auto;animation:eliteBtnGlow 3s linear infinite;box-shadow:0 0 15px rgba(255,111,0,0.7);color:#121212!important;cursor:pointer;';
+                if (!document.getElementById('elite-btn-anim')) {
+                  var st = document.createElement('style'); st.id = 'elite-btn-anim';
+                  st.textContent = '@keyframes eliteBtnGlow{0%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}50%{background-position:100% center;box-shadow:0 0 25px rgba(255,215,0,.9)}100%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}}';
+                  document.head.appendChild(st);
+                }
+                sidebarBtn.onclick = function(ev) {
+                  ev.preventDefault();
+                  var m = document.getElementById('elite-hub-modal');
+                  if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+                };
+              } else {
+                sidebarBtn.textContent = 'Upgrade Power';
+                sidebarBtn.href = 'upgrade_digital_rebel_desktop.html';
+                sidebarBtn.style.cssText = '';
+                sidebarBtn.onclick = null;
+              }
+            }
+          }
+
+          // Tier from profile first — do not wait for streak (streak can hang/slow on some hosts).
+          let isElite = entitlementLooksElite(sub?.entitlement);
+          paintSidebarTier(isElite);
+
+          if (typeof window.TierStateManager !== 'undefined' && window.TierStateManager.initializeFromProfile) {
+            try {
+              window.TierStateManager.initializeFromProfile(sub || null);
+            } catch (e) { /* tier-state optional */ }
+          }
+
+          let tokenCount = Number(sub?.streak_recovery_tokens ?? 0);
+
+          let streakData = null;
+          const apiClient = typeof window !== 'undefined' ? window.futuraApi : null;
+          if (apiClient && typeof apiClient.contributions?.streak === 'function') {
+            streakData = await apiClient.contributions.streak().catch(() => null);
+          }
+
+          const streakElite = streakData?.streak?.is_elite === true;
+          if (streakData?.streak?.recovery_tokens !== undefined) {
+            tokenCount = Number(streakData.streak.recovery_tokens);
+          }
+
+          const finalElite = isElite || streakElite;
+          if (finalElite !== isElite) {
+            isElite = finalElite;
+            paintSidebarTier(isElite);
+          }
 
           if (isElite) {
             let tokenPill = document.getElementById('nav-tokens-pill');
@@ -359,36 +414,9 @@ async function updateNavAuth() {
             } else {
               tokenPill.classList.remove('fire-glow');
             }
-          }
-
-          // ── Direct sidebar button + label update ──
-          var sidebarBtn = document.getElementById('sidebar-upgrade-btn');
-          var sidebarLabel = document.getElementById('sidebar-tier-label');
-          if (sidebarLabel) {
-            sidebarLabel.textContent = isElite ? 'Elite Tier' : 'Basic Tier';
-            sidebarLabel.style.color = isElite ? '#FF6F00' : '#767777';
-          }
-          if (sidebarBtn) {
-            if (isElite) {
-              sidebarBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> Explore Benefits';
-              sidebarBtn.removeAttribute('href');
-              sidebarBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center border-2 border-[#121212]';
-              sidebarBtn.style.cssText = 'background:linear-gradient(90deg,#ffb300,#ff6f00,#ffb300);background-size:200% auto;animation:eliteBtnGlow 3s linear infinite;box-shadow:0 0 15px rgba(255,111,0,0.7);color:#121212!important;cursor:pointer;';
-              if (!document.getElementById('elite-btn-anim')) {
-                var st = document.createElement('style'); st.id = 'elite-btn-anim';
-                st.textContent = '@keyframes eliteBtnGlow{0%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}50%{background-position:100% center;box-shadow:0 0 25px rgba(255,215,0,.9)}100%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}}';
-                document.head.appendChild(st);
-              }
-              sidebarBtn.onclick = function(ev) {
-                ev.preventDefault();
-                var m = document.getElementById('elite-hub-modal');
-                if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
-              };
-            } else {
-              sidebarBtn.textContent = 'Upgrade Power';
-              sidebarBtn.href = 'upgrade_digital_rebel_desktop.html';
-              sidebarBtn.style.cssText = '';
-            }
+          } else {
+            const orphanPill = document.getElementById('nav-tokens-pill');
+            if (orphanPill) orphanPill.remove();
           }
 
           // Persist cache
@@ -778,8 +806,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Only check onboarding once session is established
   getSupabase().auth.onAuthStateChange((event, session) => {
     if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') {
-      checkOnboarding();
-      updateNavAuth();
+      // Only checkOnboarding — it ends with updateNavAuth() after _profileVerified is set.
+      // Calling updateNavAuth() here in parallel often ran while _profileVerified was still false,
+      // so the sidebar tier / Explore Benefits block never executed on some hosts.
+      void checkOnboarding();
     } else if (event === 'SIGNED_OUT') {
       document.documentElement.classList.remove('auth-verified', 'auth-loading');
       _profileVerified = true;
