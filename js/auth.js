@@ -63,6 +63,14 @@ let _supabase = null;
 
 function getSupabase() {
   if (!_supabase) {
+    // Ensure supabase library and config are loaded
+    if (typeof supabase === 'undefined') {
+      throw new Error('Supabase library not loaded. Ensure Supabase CDN is included.');
+    }
+    if (!FUTURA_CONFIG || !FUTURA_CONFIG.SUPABASE_URL || !FUTURA_CONFIG.SUPABASE_ANON_KEY) {
+      throw new Error('FUTURA_CONFIG not properly initialized. Check config.js.');
+    }
+    
     _supabase = supabase.createClient(
       FUTURA_CONFIG.SUPABASE_URL,
       FUTURA_CONFIG.SUPABASE_ANON_KEY
