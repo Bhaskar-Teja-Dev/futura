@@ -136,11 +136,11 @@ async function checkOnboarding() {
       document.documentElement.classList.remove('auth-loading');
 
       // If user is on landing or onboarding pages but IS already onboarded, send to dashboard
-      const shouldRedirectToDash = currentPath === '/' || 
-                                   currentPath.includes('index.html') || 
-                                   currentPath.includes('landing_') ||
-                                   currentPath.includes('onboarding_');
-      
+      const shouldRedirectToDash = currentPath === '/' ||
+        currentPath.includes('index.html') ||
+        currentPath.includes('landing_') ||
+        currentPath.includes('onboarding_');
+
       if (shouldRedirectToDash) {
         if (!window.location.search.includes('redirecting')) {
           window.location.href = 'dashboard_digital_rebel_desktop.html?redirecting=true';
@@ -153,7 +153,7 @@ async function checkOnboarding() {
       if (!currentPath.includes('onboarding_')) {
         const protectedPaths = ['dashboard_', 'market_', 'assets_', 'index.html', 'landing_'];
         const isProtected = protectedPaths.some(p => currentPath.includes(p)) || currentPath === '/';
-        
+
         if (isProtected) {
           window.location.href = 'onboarding_step_1_age.html';
           return;
@@ -223,9 +223,57 @@ async function updateNavAuth() {
     if (session && _profileVerified) {
       zensPill.classList.remove('hidden');
       zensPill.classList.add('md:flex');
+
+      // Add Tokens Pill for Elite Users
+      (async () => {
+        try {
+          const profileRes = await fetch(`${FUTURA_CONFIG.API_BASE_URL}/api/profile`, {
+            headers: { 'Authorization': `Bearer ${session.access_token}` }
+          });
+          const profileData = profileRes.ok ? await profileRes.json() : null;
+          const sub = profileData?.subscription;
+          const streakData = await futuraApi.contributions.streak().catch(() => null);
+
+          const isElite = (sub?.entitlement?.toLowerCase() === 'elite') || (streakData?.streak?.is_elite);
+
+          console.log('[Futura] Elite Detection:', { isElite, sub: sub?.entitlement, tokens: streakData?.streak?.recovery_tokens });
+
+          if (isElite) {
+            let tokenPill = document.getElementById('nav-tokens-pill');
+            if (!tokenPill) {
+              tokenPill = document.createElement('div');
+              tokenPill.id = 'nav-tokens-pill';
+              tokenPill.className = 'flex items-center gap-2 bg-[#ff6f00] text-[#121212] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer hover:bg-[#e65100] transition-all mr-2';
+              tokenPill.innerHTML = `
+                <span class="material-symbols-outlined" style="font-size:18px; font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                <span id="nav-tokens-count" style="line-height:1">+0</span>
+              `;
+              zensPill.parentNode.insertBefore(tokenPill, zensPill);
+
+              tokenPill.onclick = (e) => {
+                e.preventDefault();
+                const modal = document.getElementById('elite-hub-modal');
+                if (modal) modal.classList.remove('hidden');
+              };
+            }
+            const countEl = document.getElementById('nav-tokens-count');
+            const tokens = streakData?.streak?.recovery_tokens ?? 0;
+            if (countEl) countEl.textContent = `+${tokens}`;
+            tokenPill.style.display = 'flex';
+          } else {
+            const existing = document.getElementById('nav-tokens-pill');
+            if (existing) existing.style.display = 'none';
+          }
+        } catch (e) {
+          console.warn('[Futura] Failed to hydrate token pill:', e);
+        }
+      })();
+
     } else {
       zensPill.classList.add('hidden');
       zensPill.classList.remove('md:flex');
+      const tokenPill = document.getElementById('nav-tokens-pill');
+      if (tokenPill) tokenPill.remove();
     }
   }
 
@@ -268,7 +316,7 @@ async function updateNavAuth() {
   if (session) {
     const zensPills = document.querySelectorAll('#nav-zens-balance, [id*="zens-balance"]');
     const addMoneyBtns = document.querySelectorAll('#add-money-btn, [onclick*="buyZens"]');
-    
+
     // Standardize ZENS display
     if (zensPills.length > 0) {
       try {
@@ -306,11 +354,11 @@ async function updateNavAuth() {
       if (btn.textContent.trim().toUpperCase() === 'ADD MONEY' || btn.id === 'add-money-btn') {
         btn.onclick = () => {
           if (typeof buyZens === 'function') {
-              buyZens(newBalance => {
-                const formatted = (newBalance || 0).toLocaleString('en-US') + ' ZENS';
-                document.querySelectorAll('#nav-zens-balance').forEach(p => p.textContent = formatted);
-                if (window.showToast) showToast('ZENS Successfully added!');
-              });
+            buyZens(newBalance => {
+              const formatted = (newBalance || 0).toLocaleString('en-US') + ' ZENS';
+              document.querySelectorAll('#nav-zens-balance').forEach(p => p.textContent = formatted);
+              if (window.showToast) showToast('ZENS Successfully added!');
+            });
           }
         };
       }
@@ -319,8 +367,8 @@ async function updateNavAuth() {
 
   // ── Notification Bell Handler ──────────────────────────────────────────
   // Refined selector for the bell icon prioritizing standard ID
-  const bell = document.querySelector('#notif-bell') || 
-               Array.from(document.querySelectorAll('.material-symbols-outlined')).find(el => el.textContent.trim() === 'notifications');
+  const bell = document.querySelector('#notif-bell') ||
+    Array.from(document.querySelectorAll('.material-symbols-outlined')).find(el => el.textContent.trim() === 'notifications');
 
   if (bell && !bell._hasListener) {
     bell.style.position = 'relative';
@@ -330,7 +378,7 @@ async function updateNavAuth() {
     const updateBadge = () => {
       let badge = bell.querySelector('.notif-badge');
       const count = window.RebelNotifications ? RebelNotifications.getUnreadCount() : 0;
-      
+
       if (count > 0) {
         if (!badge) {
           badge = document.createElement('span');
@@ -350,7 +398,7 @@ async function updateNavAuth() {
     bell.addEventListener('click', e => {
       e.stopPropagation();
       document.querySelectorAll('.rebel-dropdown').forEach(d => d.remove());
-      
+
       const dd = document.createElement('div');
       dd.className = 'rebel-dropdown notification-dropdown';
       dd.style.cssText = `
@@ -379,16 +427,16 @@ async function updateNavAuth() {
 
       const list = document.createElement('div');
       list.className = 'max-h-[400px] overflow-y-auto';
-      
+
       const notifs = window.RebelNotifications ? RebelNotifications.getLatest(5) : [];
-      
+
       if (notifs.length === 0) {
         list.innerHTML = `<div class="p-8 text-center font-headline font-bold text-[10px] text-[#767777] uppercase tracking-widest">No active threats or intel detected.</div>`;
       } else {
         notifs.forEach(n => {
           const item = document.createElement('div');
           item.className = `p-4 border-b border-[#e0e0e0] last:border-none hover:bg-surface-container-low transition-colors ${!n.read ? 'bg-[#cafd000a]' : ''}`;
-          
+
           let icon = 'info';
           let color = '#121212';
           if (n.type === 'success') { icon = 'check_circle'; color = '#4e6300'; }
@@ -447,8 +495,8 @@ async function updateNavAuth() {
   if (!window._logoutListenerAttached) {
     document.addEventListener('click', async (e) => {
       const logoutTarget = e.target.closest('#logout-link, .btn-logout, [href*="logout"]');
-      const isLogoutText = e.target.textContent.toLowerCase().includes('logout') && 
-                          (e.target.closest('a') || e.target.closest('button'));
+      const isLogoutText = e.target.textContent.toLowerCase().includes('logout') &&
+        (e.target.closest('a') || e.target.closest('button'));
 
       if (logoutTarget || isLogoutText) {
         e.preventDefault();
@@ -510,7 +558,7 @@ async function updateNavAuth() {
         if (color) a.style.color = color;
 
         a.innerHTML = `<span class="material-symbols-outlined text-sm">${icon}</span> ${label}`;
-        
+
         a.addEventListener('click', async (e) => {
           if (label === 'Logout') {
             e.preventDefault();

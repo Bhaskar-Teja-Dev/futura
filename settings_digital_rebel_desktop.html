@@ -6,16 +6,16 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta name="description" content="Account, security, and preferences for your Digital Rebel profile." />
-<link rel="stylesheet" href="css/app.css" />
+  <link rel="stylesheet" href="css/app.css" />
   <title>Settings | Digital Rebel</title>
-    <link
+  <link
     href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet" />
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
-  
-    <style>
+
+  <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
@@ -40,26 +40,38 @@
 
 <body class="bg-surface font-body text-on-surface">
   <!-- TopNavBar -->
-  <header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
+  <header
+    class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
+    id="main-header">
     <div class="flex items-center gap-8">
-      <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
+      <a href="index.html"
+        class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
+        Rebel</a>
       <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="market_digital_rebel_desktop.html">Markets</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="learn_digital_rebel_desktop.html">Learn</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="assets_digital_rebel_desktop.html">Assets</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="market_digital_rebel_desktop.html">Markets</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="learn_digital_rebel_desktop.html">Learn</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="assets_digital_rebel_desktop.html">Assets</a>
       </div>
     </div>
     <div class="flex items-center gap-4">
       <!-- ZENS Balance Pill -->
-      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#4E6300] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+      <div id="nav-zens-pill"
+        class="hidden md:flex items-center gap-2 bg-[#4E6300] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
         <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
         <span id="nav-zens-balance">0 ZENS</span>
       </div>
       <!-- Notification Bell -->
-      <span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all" id="notif-bell">notifications</span>
+      <span
+        class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all"
+        id="notif-bell">notifications</span>
       <!-- User Avatar / Profile -->
-      <div id="nav-avatar" class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
+      <div id="nav-avatar"
+        class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
         <span class="material-symbols-outlined">account_circle</span>
       </div>
     </div>
@@ -68,13 +80,19 @@
     <!-- SideNavBar -->
     <aside
       class="fixed left-0 top-0 h-full flex flex-col pt-24 hidden lg:flex bg-[#f6f6f6] dark:bg-[#121212] h-screen w-64 border-r-2 border-[#121212] dark:border-[#f6f6f6]">
-      <a href="settings_digital_rebel_desktop.html" class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
-        <div id="sidebar-avatar" class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
-          <img alt="Rebel_01" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+      <a href="settings_digital_rebel_desktop.html"
+        class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
+        <div id="sidebar-avatar"
+          class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
+          <img alt="Rebel_01" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
         </div>
         <div class="overflow-hidden">
-          <h3 id="sidebar-user-name" class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">Rebel_01</h3>
-          <p id="sidebar-tier-label" class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#FF6F00] truncate">Elite Tier</p>
+          <h3 id="sidebar-user-name"
+            class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
+            Rebel_01</h3>
+          <p id="sidebar-tier-label"
+            class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#FF6F00] truncate">Elite Tier</p>
         </div>
       </a>
       <nav class="flex flex-col gap-1">
@@ -104,9 +122,9 @@
         <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
           class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
           Power</a>
-        <a id="logout-link" class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:skew-x-1 hover:translate-x-1 transition-all mt-4"
-          href="index.html"
-          aria-label="Sign out">
+        <a id="logout-link"
+          class="flex items-center gap-4 px-6 py-3 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:skew-x-1 hover:translate-x-1 transition-all mt-4"
+          href="index.html" aria-label="Sign out">
           <span class="material-symbols-outlined">logout</span> Logout
         </a>
       </div>
@@ -285,93 +303,109 @@
       ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
     </div>
   </footer>
-    <!-- Elite Hub Modal -->
-    <div id="elite-hub-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
-            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')" class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
-            <header class="mb-4 border-b-2 border-surface-container pb-4">
-                <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2" style="background: linear-gradient(90deg, #ffb300, #ff6f00); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Elite Hub</h2>
-                <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Benefits & Reports</p>
-            </header>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Streak Tokens -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-[#ffb300]">healing</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Streak Recovery</h4>
-                        </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">2</span> Available</p>
-                    </div>
-                    <p class="text-xs text-on-surface-variant italic">Automatically used if you miss a day. Resets 2/month.</p>
-                </div>
-                <!-- Tax Optimization -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-[#ffb300]">account_balance</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Tax Optimization</h4>
-                        </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Est. Savings: <span id="elite-tax-savings" class="text-[#ffb300] font-black text-lg">Z 0</span>/yr</p>
-                    </div>
-                    <p id="elite-tax-rec" class="text-xs text-on-surface-variant italic">Loading AI recommendations...</p>
-                </div>
-                <!-- Pro Scenarios -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-[#ffb300]">bolt</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Pro Scenarios</h4>
-                        </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">UNLOCKED</span></p>
-                    </div>
-                    <p class="text-xs text-on-surface-variant italic">Unlimited hyper-growth simulations and market volatility testing.</p>
-                </div>
-                <!-- Intelligent Allocation -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-[#ffb300]">analytics</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Smart Allocation</h4>
-                        </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">ACTIVE</span></p>
-                    </div>
-                    <p class="text-xs text-on-surface-variant italic">Advanced breakdown tracking your portfolio health automatically.</p>
-                </div>
-                <!-- Priority Finance Bites -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-[#ffb300]">stars</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Priority Bites</h4>
-                        </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">VIP</span></p>
-                    </div>
-                    <p class="text-xs text-on-surface-variant italic">Full unrestricted access to historical bites and exclusive premium daily insights.</p>
-                </div>
-                <!-- PDF Roadmap -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-primary-fixed/20 relative overflow-hidden group hover:bg-primary-fixed transition-colors">
-                    <div class="absolute -right-4 -bottom-4 opacity-5 bg-white mix-blend-overlay group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-[150px]">picture_as_pdf</span>
-                    </div>
-                    <div class="relative z-10">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-[#121212]">picture_as_pdf</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Retirement Roadmap</h4>
-                        </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold text-[#121212]">PDF Generator</p>
-                    </div>
-                    <div class="mt-auto relative z-10 pt-4">
-                        <button id="btn-print-roadmap" class="w-full bg-[#121212] text-[#cafd00] hover:bg-transparent hover:text-[#121212] border-2 border-[#121212] px-4 py-3 font-black text-[10px] uppercase transition-colors flex justify-center items-center gap-2 neo-shadow">
-                            <span class="material-symbols-outlined">download</span> Download PDF
-                        </button>
-                    </div>
-                </div>
+  <!-- Elite Hub Modal -->
+  <div id="elite-hub-modal"
+    class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+    <div
+      class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
+      <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')"
+        class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
+      <header class="mb-4 border-b-2 border-surface-container pb-4">
+        <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2"
+          style="background: linear-gradient(90deg, #ffb300, #ff6f00); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+          Elite Hub</h2>
+        <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Benefits & Reports</p>
+      </header>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Streak Tokens -->
+        <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-[#ffb300]">healing</span>
+              <h4 class="font-headline font-black text-sm uppercase">Streak Recovery</h4>
             </div>
+            <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span
+                id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">2</span> Available</p>
+          </div>
+          <p class="text-xs text-on-surface-variant italic">Automatically used if you miss a day. Resets 2/month.</p>
         </div>
+        <!-- Tax Optimization -->
+        <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-[#ffb300]">account_balance</span>
+              <h4 class="font-headline font-black text-sm uppercase">Tax Optimization</h4>
+            </div>
+            <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Est. Savings: <span
+                id="elite-tax-savings" class="text-[#ffb300] font-black text-lg">Z 0</span>/yr</p>
+          </div>
+          <p id="elite-tax-rec" class="text-xs text-on-surface-variant italic">Loading AI recommendations...</p>
+        </div>
+        <!-- Pro Scenarios -->
+        <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-[#ffb300]">bolt</span>
+              <h4 class="font-headline font-black text-sm uppercase">Pro Scenarios</h4>
+            </div>
+            <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span
+                class="text-[#ffb300] font-black text-lg">UNLOCKED</span></p>
+          </div>
+          <p class="text-xs text-on-surface-variant italic">Unlimited hyper-growth simulations and market volatility
+            testing.</p>
+        </div>
+        <!-- Intelligent Allocation -->
+        <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-[#ffb300]">analytics</span>
+              <h4 class="font-headline font-black text-sm uppercase">Smart Allocation</h4>
+            </div>
+            <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span
+                class="text-[#ffb300] font-black text-lg">ACTIVE</span></p>
+          </div>
+          <p class="text-xs text-on-surface-variant italic">Advanced breakdown tracking your portfolio health
+            automatically.</p>
+        </div>
+        <!-- Priority Finance Bites -->
+        <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-[#ffb300]">stars</span>
+              <h4 class="font-headline font-black text-sm uppercase">Priority Bites</h4>
+            </div>
+            <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span
+                class="text-[#ffb300] font-black text-lg">VIP</span></p>
+          </div>
+          <p class="text-xs text-on-surface-variant italic">Full unrestricted access to historical bites and exclusive
+            premium daily insights.</p>
+        </div>
+        <!-- PDF Roadmap -->
+        <div
+          class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-primary-fixed/20 relative overflow-hidden group hover:bg-primary-fixed transition-colors">
+          <div
+            class="absolute -right-4 -bottom-4 opacity-5 bg-white mix-blend-overlay group-hover:scale-110 transition-transform">
+            <span class="material-symbols-outlined text-[150px]">picture_as_pdf</span>
+          </div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-[#121212]">picture_as_pdf</span>
+              <h4 class="font-headline font-black text-sm uppercase">Retirement Roadmap</h4>
+            </div>
+            <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold text-[#121212]">PDF Generator</p>
+          </div>
+          <div class="mt-auto relative z-10 pt-4">
+            <button id="btn-print-roadmap"
+              class="w-full bg-[#121212] text-[#cafd00] hover:bg-transparent hover:text-[#121212] border-2 border-[#121212] px-4 py-3 font-black text-[10px] uppercase transition-colors flex justify-center items-center gap-2 neo-shadow">
+              <span class="material-symbols-outlined">download</span> Download PDF
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="./js/config.js"></script>
   <script src="./js/notifications.js"></script>
   <script src="./js/auth.js"></script>
@@ -398,7 +432,7 @@
         const sub = profileResult.subscription;
 
         if (goal) {
-          const userNameEl = document.getElementById('user-name');
+          const userNameEl = document.getElementById('sidebar-user-name');
           if (userNameEl) {
             userNameEl.textContent = goal.email.split('@')[0];
             handleEl.value = goal.display_name || goal.email.split('@')[0];
@@ -406,7 +440,7 @@
         }
 
         // Hydrate Elite Sidebar
-        hydrateEliteSidebar(sub);
+        await hydrateEliteSidebar(sub);
       } catch (e) {
         console.error('Failed to hydrate sidebar:', e);
       }
