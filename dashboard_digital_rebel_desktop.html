@@ -413,13 +413,13 @@
                         <div class="p-4 border-2 border-inverse-surface bg-surface">
                             <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Liquid
                             </p>
-                            <p id="liquid-amount" class="font-headline font-black text-xl skeleton">$0</p>
+                            <p id="liquid-amount" class="font-headline font-black text-xl skeleton">Z 0</p>
                         </div>
                         <div class="p-4 border-2 border-inverse-surface bg-surface">
                             <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Required
                                 SIP
                             </p>
-                            <p id="required-amount" class="font-headline font-black text-xl skeleton">$0</p>
+                            <p id="required-amount" class="font-headline font-black text-xl skeleton">Z 0</p>
                         </div>
                     </div>
                 </div>
@@ -466,7 +466,7 @@
                     </div>
                     <div
                         class="absolute bottom-8 right-8 z-30 border-l-4 border-b-4 border-primary-fixed p-4 bg-inverse-surface text-surface shadow-[4px_4px_0_0_rgba(18,18,18,1)]">
-                        <p id="terminal-value" class="font-headline font-black text-3xl skeleton">+$0</p>
+                        <p id="terminal-value" class="font-headline font-black text-3xl skeleton">+Z 0</p>
                         <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-primary-fixed">
                             ESTIMATED TERMINAL VALUE</p>
                     </div>
@@ -923,14 +923,14 @@
 
                 const requiredAmountEl = document.getElementById('required-amount');
                 if (requiredAmountEl) {
-                    requiredAmountEl.textContent = '$' + Math.round((data && data.requiredMonthlyInvestment != null) ? data.requiredMonthlyInvestment : 0).toLocaleString();
+                    requiredAmountEl.textContent = 'Z ' + Math.round((data && data.requiredMonthlyInvestment != null) ? data.requiredMonthlyInvestment : 0).toLocaleString();
                     clearSkeleton(requiredAmountEl);
                 }
 
                 const terminalValueEl = document.getElementById('terminal-value');
                 if (terminalValueEl) {
                     const val = (data && data.futureSavings != null) ? data.futureSavings : 0;
-                    terminalValueEl.textContent = val >= 1000000 ? '+$' + (val / 1000000).toFixed(1) + 'M' : '+$' + Math.round(val).toLocaleString();
+                    terminalValueEl.textContent = val >= 1000000 ? '+Z ' + (val / 1000000).toFixed(1) + 'M' : '+Z ' + Math.round(val).toLocaleString();
                     clearSkeleton(terminalValueEl);
                 }
 
@@ -969,7 +969,7 @@
                 const totalLiquid = walletZens + manualLiquid;
                 const liquidEl = document.getElementById('liquid-amount');
                 if (liquidEl) {
-                    liquidEl.textContent = '$' + totalLiquid.toLocaleString();
+                    liquidEl.textContent = 'Z ' + totalLiquid.toLocaleString();
                     clearSkeleton(liquidEl);
                 }
 
