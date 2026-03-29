@@ -359,8 +359,23 @@ async function updateNavAuth() {
 
           // Centralize the sidebar hydration call
           if (typeof hydrateEliteSidebar === 'function') {
-            hydrateEliteSidebar(sub, streakData);
+            await hydrateEliteSidebar(sub, streakData);
           }
+
+          // Persist the verified, accurate data to cache immediately without race conditions
+          try {
+            var cachedAvatar = document.getElementById('nav-avatar') ? document.getElementById('nav-avatar').innerHTML : '';
+            var cachedName = (session?.user?.email?.split('@')[0] || 'REBEL').toUpperCase();
+            var cachedElite = isElite;
+            var exploreBtn = document.getElementById('sidebar-upgrade-btn');
+            localStorage.setItem('futura_sidebar_v1', JSON.stringify({
+              username: cachedName,
+              avatarHTML: cachedAvatar,
+              isElite: cachedElite,
+              exploreBenefitsLabel: exploreBtn ? exploreBtn.innerHTML.trim() : ''
+            }));
+          } catch(e) { /* quota limits */ }
+
         } catch (e) {
           console.warn('[Futura] Failed to hydrate token pill/sidebar:', e);
         }
@@ -386,21 +401,23 @@ async function updateNavAuth() {
         avatar.innerHTML = `<div class="bg-[#cafd00] text-[#121212] font-headline font-black w-full h-full flex items-center justify-center text-sm">${initial}</div>`;
       }
     });
-    // Wait for the async tier check to finish before caching to ensure accurate labels
+
+    // Fallback cache write if ZENS pill logic doesn't run, otherwise handled inside the async block below
     setTimeout(() => {
       try {
-        var cachedAvatar = avatars[0] ? avatars[0].innerHTML : '';
-        var cachedName = username;
-        var cachedElite = localStorage.getItem('isElite') === 'true';
-        var exploreBtn = document.getElementById('sidebar-upgrade-btn');
-        localStorage.setItem('futura_sidebar_v1', JSON.stringify({
-          username: cachedName,
-          avatarHTML: cachedAvatar,
-          isElite: cachedElite,
-          exploreBenefitsLabel: exploreBtn ? exploreBtn.textContent.trim() : ''
-        }));
+        if (!document.getElementById('nav-zens-pill')) {
+            var cachedName = username;
+            var cachedElite = localStorage.getItem('isElite') === 'true';
+            var exploreBtn = document.getElementById('sidebar-upgrade-btn');
+            localStorage.setItem('futura_sidebar_v1', JSON.stringify({
+              username: cachedName,
+              avatarHTML: avatars[0] ? avatars[0].innerHTML : '',
+              isElite: cachedElite,
+              exploreBenefitsLabel: exploreBtn ? exploreBtn.innerHTML.trim() : ''
+            }));
+        }
       } catch (e) { /* quota errors */ }
-    }, 500); // 500ms delay ensures the async profile fetch and DOM updates above are completed
+    }, 500);
   }
 
   // Hero Button: Change to ENTER TERMINAL if signed in
