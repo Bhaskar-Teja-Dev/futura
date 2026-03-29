@@ -93,24 +93,28 @@
 </head>
 <body class="bg-surface font-body text-on-surface">
 <!-- TopNavBar -->
-<header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
-<div class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">
-            Digital Rebel
-        </div>
-<nav class="hidden md:flex gap-8 items-center">
-<a class="font-Inter text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-<a class="font-Inter text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="market_digital_rebel_desktop.html">Markets</a>
-<a class="font-Inter text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="assets_digital_rebel_desktop.html">Assets</a>
-</nav>
-<div class="flex items-center gap-4">
-<div class="hidden sm:flex gap-2">
-<span class="material-symbols-outlined p-2 hover:bg-[#cafd00] cursor-pointer border-2 border-transparent hover:border-black">notifications</span>
-<a href="settings_digital_rebel_desktop.html" class="material-symbols-outlined p-2 hover:bg-[#cafd00] cursor-pointer border-2 border-transparent hover:border-black inline-flex items-center justify-center">settings</a>
-</div>
-<button class="bg-primary-container text-on-primary-container font-headline font-black uppercase px-6 py-2 border-2 border-black neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                Connect Wallet
-            </button>
-</div>
+<header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
+  <div class="flex items-center gap-8">
+    <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
+    <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
+      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="market_digital_rebel_desktop.html">Markets</a>
+      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="assets_digital_rebel_desktop.html">Assets</a>
+    </div>
+  </div>
+  <div class="flex items-center gap-4">
+    <!-- ZENS Balance Pill -->
+    <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+      <span>🪙</span>
+      <span id="nav-zens-balance">0 ZENS</span>
+    </div>
+    <!-- Notification Bell -->
+    <span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all" id="notif-bell">notifications</span>
+    <!-- User Avatar / Profile -->
+    <div id="nav-avatar" class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
+      <span class="material-symbols-outlined">account_circle</span>
+    </div>
+  </div>
 </header>
 <main class="max-w-7xl mx-auto px-6 py-12">
 <!-- Hero Section -->
@@ -297,4 +301,10 @@
             ©2024 DIGITAL REBEL. NO PERMISSION GRANTED.
         </div>
 </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/notifications.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
 </body></html>
