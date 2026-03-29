@@ -222,7 +222,7 @@ async function hydrateEliteSidebar(sub, streakRes) {
     }
   } else {
     if (tierLabel) {
-      tierLabel.textContent = 'Free Tier';
+      tierLabel.textContent = 'Basic Tier';
       tierLabel.classList.remove('text-[#ff81f5]', 'animate-pulse');
     }
     if (upgradeBtn) {

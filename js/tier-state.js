@@ -24,7 +24,7 @@ const TierStateManager = (() => {
     // ═══ UPDATE TIER LABEL ═══
     const tierLabel = document.getElementById('sidebar-tier-label');
     if (tierLabel) {
-      tierLabel.textContent = isElite ? 'Elite Tier' : 'Free Tier';
+      tierLabel.textContent = isElite ? 'Elite Tier' : 'Basic Tier';
       tierLabel.style.color = isElite ? '#FF6F00' : '#767777';
     }
 
@@ -163,6 +163,7 @@ const TierStateManager = (() => {
   return {
     updateTierDisplay,
     initializeFromProfile,
+    setupRealtimeListener,
     getCurrentTier,
     isElite,
     cleanup

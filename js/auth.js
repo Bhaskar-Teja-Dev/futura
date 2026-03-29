@@ -27,7 +27,7 @@
         btn.removeAttribute('href');
       }
     } else {
-      if (label) { label.textContent = 'Free Tier'; label.style.color = '#767777'; }
+      if (label) { label.textContent = 'Basic Tier'; label.style.color = '#767777'; }
       if (btn) { btn.textContent = 'Upgrade Power'; btn.href = 'upgrade_digital_rebel_desktop.html'; }
     }
   } catch(e) { /* ignore parse errors */ }
@@ -749,6 +749,5 @@ if (typeof window !== 'undefined') {
   window.getSession = getSession;
   window.getAccessToken = getAccessToken;
   window.requireAuth = requireAuth;
-  window.logout = logout;
-  window.hydrateEliteSidebar = hydrateEliteSidebar;
+  window.signOut = signOut;
 }
