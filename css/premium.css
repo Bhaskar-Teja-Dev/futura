@@ -1,0 +1,57 @@
+/* Digital Rebel Premium Styles — Elite Tier */
+
+@keyframes gold-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px #ff81f5, 0 0 10px #ff81f5, 0 0 20px #ff81f5;
+    background-color: #ff81f5;
+  }
+  50% {
+    box-shadow: 0 0 10px #cafd00, 0 0 20px #cafd00, 0 0 40px #cafd00;
+    background-color: #cafd00;
+  }
+}
+
+.premium-btn-glow {
+  background: linear-gradient(45deg, #ff81f5, #cafd00);
+  color: #121212 !important;
+  border: 2px solid #121212 !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: gold-glow 3s infinite ease-in-out;
+  font-weight: 900 !important;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.premium-btn-glow:hover {
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 6px 6px 0px 0px #121212 !important;
+}
+
+.elite-card {
+  background: linear-gradient(135deg, #121212 0%, #2d2f2f 100%);
+  border: 2px solid #ff81f5;
+  box-shadow: 4px 4px 0px 0px #ff81f5;
+  color: #f6f6f6;
+}
+
+.elite-text-gradient {
+  background: linear-gradient(to right, #ff81f5, #cafd00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+
+/* Modal specific for Elite Hub */
+.elite-hub-modal {
+  background: #f6f6f6;
+  border: 4px solid #121212;
+  box-shadow: 12px 12px 0px 0px #ff81f5;
+}
+
+.dark .elite-hub-modal {
+  background: #121212;
+  border: 4px solid #f6f6f6;
+  box-shadow: 12px 12px 0px 0px #cafd00;
+}

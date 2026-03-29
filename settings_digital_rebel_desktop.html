@@ -393,7 +393,93 @@
       ©2024 DIGITAL REBEL. NO PERMISSION GRANTED.
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <!-- Elite Hub Modal -->
+    <div id="elite-hub-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
+            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')" class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
+            <header class="mb-4 border-b-2 border-surface-container pb-4">
+                <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2" style="background: linear-gradient(90deg, #ffb300, #ff6f00); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Elite Hub</h2>
+                <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Benefits & Reports</p>
+            </header>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Streak Tokens -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">healing</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Streak Recovery</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">2</span> Available</p>
+                    </div>
+                    <p class="text-xs text-on-surface-variant italic">Automatically used if you miss a day. Resets 2/month.</p>
+                </div>
+                <!-- Tax Optimization -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">account_balance</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Tax Optimization</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Est. Savings: <span id="elite-tax-savings" class="text-[#ffb300] font-black text-lg">$0</span>/yr</p>
+                    </div>
+                    <p id="elite-tax-rec" class="text-xs text-on-surface-variant italic">Loading AI recommendations...</p>
+                </div>
+                <!-- Pro Scenarios -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">bolt</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Pro Scenarios</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">UNLOCKED</span></p>
+                    </div>
+                    <p class="text-xs text-on-surface-variant italic">Unlimited hyper-growth simulations and market volatility testing.</p>
+                </div>
+                <!-- Intelligent Allocation -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">analytics</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Smart Allocation</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">ACTIVE</span></p>
+                    </div>
+                    <p class="text-xs text-on-surface-variant italic">Advanced breakdown tracking your portfolio health automatically.</p>
+                </div>
+                <!-- Priority Finance Bites -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">stars</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Priority Bites</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">VIP</span></p>
+                    </div>
+                    <p class="text-xs text-on-surface-variant italic">Full unrestricted access to historical bites and exclusive premium daily insights.</p>
+                </div>
+                <!-- PDF Roadmap -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-primary-fixed/20 relative overflow-hidden group hover:bg-primary-fixed transition-colors">
+                    <div class="absolute -right-4 -bottom-4 opacity-5 bg-white mix-blend-overlay group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-[150px]">picture_as_pdf</span>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#121212]">picture_as_pdf</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Retirement Roadmap</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold text-[#121212]">PDF Generator</p>
+                    </div>
+                    <div class="mt-auto relative z-10 pt-4">
+                        <button id="btn-print-roadmap" class="w-full bg-[#121212] text-[#cafd00] hover:bg-transparent hover:text-[#121212] border-2 border-[#121212] px-4 py-3 font-black text-[10px] uppercase transition-colors flex justify-center items-center gap-2 neo-shadow">
+                            <span class="material-symbols-outlined">download</span> Download PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="./js/config.js"></script>
   <script src="./js/notifications.js"></script>
   <script src="./js/auth.js"></script>

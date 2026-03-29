@@ -545,43 +545,94 @@
     </footer>
     <!-- Elite Hub Modal -->
     <div id="elite-hub-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="elite-hub-modal max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
-            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')" class="absolute top-4 right-4 text-2xl font-black">✕</button>
+        <div class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
+            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')" class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
             
-            <header class="mb-8">
-                <h2 class="text-4xl font-headline font-black uppercase tracking-tighter mb-2 elite-text-gradient">Elite Hub</h2>
+            <header class="mb-4 border-b-2 border-surface-container pb-4">
+                <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2" style="background: linear-gradient(90deg, #ffb300, #ff6f00); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Elite Hub</h2>
                 <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Benefits & Reports</p>
             </header>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Streak Tokens -->
-                <div class="elite-card p-6 flex flex-col justify-between">
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
                     <div>
-                        <h4 class="font-headline font-black text-sm uppercase mb-2">Streak Recovery</h4>
-                        <p class="text-[10px] text-surface-dim uppercase mb-4">Tokens: <span id="elite-tokens-count" class="text-primary-fixed">2</span> Available</p>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">healing</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Streak Recovery</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">2</span> Available</p>
                     </div>
-                    <p class="text-xs text-surface-dim italic">Automatically used if you miss a day. Resets 2/month.</p>
+                    <p class="text-xs text-on-surface-variant italic">Automatically used if you miss a day. Resets 2/month.</p>
                 </div>
 
                 <!-- Tax Optimization -->
-                <div class="elite-card p-6 flex flex-col justify-between border-t-2 border-primary-fixed">
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
                     <div>
-                        <h4 class="font-headline font-black text-sm uppercase mb-2">Tax Optimization</h4>
-                        <p class="text-[10px] text-surface-dim uppercase mb-4">Est. Savings: <span id="elite-tax-savings" class="text-primary-fixed">$0</span>/yr</p>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">account_balance</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Tax Optimization</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Est. Savings: <span id="elite-tax-savings" class="text-[#ffb300] font-black text-lg">$0</span>/yr</p>
                     </div>
-                    <p id="elite-tax-rec" class="text-xs text-surface-dim italic">Loading recommendations...</p>
+                    <p id="elite-tax-rec" class="text-xs text-on-surface-variant italic">Loading AI recommendations...</p>
+                </div>
+
+                <!-- Pro Scenarios -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">bolt</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Pro Scenarios</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">UNLOCKED</span></p>
+                    </div>
+                    <p class="text-xs text-on-surface-variant italic">Unlimited hyper-growth simulations and market volatility testing.</p>
+                </div>
+
+                <!-- Intelligent Allocation -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">analytics</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Smart Allocation</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">ACTIVE</span></p>
+                    </div>
+                    <p class="text-xs text-on-surface-variant italic">Advanced breakdown tracking your portfolio health automatically.</p>
+                </div>
+
+                <!-- Priority Finance Bites -->
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#ffb300]">stars</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Priority Bites</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">VIP</span></p>
+                    </div>
+                    <p class="text-xs text-on-surface-variant italic">Full unrestricted access to historical bites and exclusive premium daily insights.</p>
                 </div>
 
                 <!-- PDF Roadmap -->
-                <div class="md:col-span-2 elite-card p-6 border-l-4 border-tertiary-fixed">
-                    <div class="flex justify-between items-center mb-4">
-                        <h4 class="font-headline font-black text-sm uppercase">Retirement Roadmap</h4>
-                        <button id="btn-print-roadmap" class="bg-primary-fixed text-inverse-surface px-4 py-2 font-black text-[10px] uppercase">Print Summary</button>
+                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-primary-fixed/20 relative overflow-hidden group hover:bg-primary-fixed transition-colors">
+                    <div class="absolute -right-4 -bottom-4 opacity-5 bg-white mix-blend-overlay group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-[150px]">picture_as_pdf</span>
                     </div>
-                    <div id="roadmap-summary" class="space-y-3 text-xs">
-                        <p class="text-surface-dim">Loading your personalized wealth trajectory...</p>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="material-symbols-outlined text-[#121212]">picture_as_pdf</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Retirement Roadmap</h4>
+                        </div>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold text-[#121212]">PDF Generator</p>
+                    </div>
+                    <div class="mt-auto relative z-10 pt-4">
+                        <button id="btn-print-roadmap" class="w-full bg-[#121212] text-[#cafd00] hover:bg-transparent hover:text-[#121212] border-2 border-[#121212] px-4 py-3 font-black text-[10px] uppercase transition-colors flex justify-center items-center gap-2 neo-shadow">
+                            <span class="material-symbols-outlined">download</span> Download PDF
+                        </button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -789,63 +840,16 @@
 
                 // 4. Elite Tier Logic
                 hydrateEliteSidebar(sub);
-                const isElite = sub?.entitlement === 'elite';
-
-                if (isElite) {
-                    // Populate Elite Hub
-                    document.getElementById('elite-tokens-count').textContent = sub.streak_recovery_tokens || 0;
-                    
-                    // Auto-open Elite Hub if hash is present
-                    if (window.location.hash === '#elite-hub') {
-                        document.getElementById('elite-hub-modal').classList.remove('hidden');
+                
+                // Auto-open Elite Hub if hash is present
+                if (window.location.hash === '#elite-hub') {
+                    const upgradeBtn = document.getElementById('sidebar-upgrade-btn');
+                    if (upgradeBtn) {
+                        upgradeBtn.click(); // Triggers global hydration & modal opening from api.js
+                    } else {
+                        const modal = document.getElementById('elite-hub-modal');
+                        if (modal) modal.classList.remove('hidden');
                     }
-                    
-                    // Tax Calculation (Actual Dynamic Feature)
-                    const income = goal.monthly_income * 12 || 0;
-                    const investment = goal.monthly_income * 0.2 * 12 || 0; // estimate 20% investment
-                    
-                    // Simple frontend calculation for the UI
-                    const taxSaved = Math.round(investment * 0.25); // Basic SIPP relief estimation
-                    document.getElementById('elite-tax-savings').textContent = '$' + taxSaved.toLocaleString();
-                    document.getElementById('elite-tax-rec').textContent = income > 50000 
-                        ? "Higher rate tax detected. Focus on SIPP for max relief."
-                        : "Maximize your tax-free ISA allowance first.";
-
-                    // Print Roadmap Listener
-                    const printBtn = document.getElementById('btn-print-roadmap');
-                    if (printBtn) {
-                        printBtn.onclick = async () => {
-                            try {
-                                printBtn.textContent = 'Generating...';
-                                printBtn.disabled = true;
-                                const report = await futuraApi.projection.roadmap();
-                                if (report.summary) {
-                                    // simple window print or alert for now as requested
-                                    const printWin = window.open('', '', 'width=800,height=600');
-                                    printWin.document.write(`
-                                        <html><head><title>Elite Retirement Roadmap</title>
-                                        <style>body{font-family:sans-serif;padding:40px;line-height:1.6;}h1{border-bottom:4px solid #000;padding-bottom:10px;}pre{background:#f4f4f4;padding:20px;white-space:pre-wrap;}</style>
-                                        </head><body>
-                                        <h1>Elite Retirement Roadmap Summary</h1>
-                                        <p><strong>Generated for:</strong> ${goal.email}</p>
-                                        <pre>${report.summary}</pre>
-                                        <script>window.onload = function() { window.print(); window.close(); }<\/script>
-                                        </body></html>
-                                    `);
-                                    printWin.document.close();
-                                }
-                            } catch (e) {
-                                console.error('Print failed:', e);
-                                alert('Failed to generate roadmap report.');
-                            } finally {
-                                printBtn.textContent = 'Print Summary';
-                                printBtn.disabled = false;
-                            }
-                        };
-                    }
-                } else {
-                    if (tierLabel) tierLabel.textContent = 'Free Tier';
-                    if (tierLabel) tierLabel.classList.remove('text-[#ff81f5]');
                 }
 
                 // 5. Execution Projection logic

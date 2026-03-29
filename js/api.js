@@ -84,24 +84,94 @@ function hydrateEliteSidebar(sub) {
   if (isElite) {
     if (tierLabel) {
       tierLabel.textContent = 'Elite Tier';
-      tierLabel.classList.add('text-[#ff81f5]');
+      tierLabel.classList.add('text-[#ff81f5]', 'animate-pulse');
     }
     if (upgradeBtn) {
-      upgradeBtn.textContent = 'Show Benefits';
+      upgradeBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px; animation: premiumPulse 2s infinite;">local_fire_department</span> <span class="relative z-10">Explore Benefits</span>';
       upgradeBtn.href = '#';
-      upgradeBtn.classList.add('premium-btn-glow');
+      // Completely restyle to match the burning premium aesthetic requirement
+      upgradeBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center relative overflow-hidden group border-2 border-[#121212] dark:border-[#f6f6f6]';
+      upgradeBtn.style.cssText = 'background: linear-gradient(90deg, #ffb300, #ff6f00, #ffb300); background-size: 200% auto; animation: premiumFire 3s linear infinite; box-shadow: 0 0 15px rgba(255,111,0,0.7); text-shadow: 1px 1px 0px rgba(255,255,255,0.3); color: #121212 !important;';
+      
+      // Inject global animation styles if not present
+      if (!document.getElementById('rebel-premium-styles')) {
+        const style = document.createElement('style');
+        style.id = 'rebel-premium-styles';
+        style.textContent = `
+          @keyframes premiumFire { 0% { background-position: 0% center; box-shadow: 0 0 15px rgba(255,111,0,0.6); } 50% { background-position: 100% center; box-shadow: 0 0 25px rgba(255,215,0,0.9); } 100% { background-position: 0% center; box-shadow: 0 0 15px rgba(255,111,0,0.6); } }
+          @keyframes premiumPulse { 0% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 10px #fff; } 100% { transform: scale(1); opacity: 0.8; } }
+        `;
+        document.head.appendChild(style);
+      }
       
       // Clean up any existing listeners by cloning (simple way to remove all listeners)
       const newBtn = upgradeBtn.cloneNode(true);
       upgradeBtn.parentNode.replaceChild(newBtn, upgradeBtn);
       
-      newBtn.addEventListener('click', (e) => {
+      newBtn.addEventListener('click', async (e) => {
         e.preventDefault();
         const modal = document.getElementById('elite-hub-modal');
         if (modal) {
           modal.classList.remove('hidden');
+          // Global hydration of Elite Modal Data
+          try {
+            const tokenEl = document.getElementById('elite-tokens-count');
+            if (tokenEl) tokenEl.textContent = sub?.streak_recovery_tokens || 0;
+            
+            const goal = await futuraApi.goal.get();
+            if (goal) {
+              const income = goal.monthly_income * 12 || 0;
+              const investment = goal.monthly_income * 0.2 * 12 || 0; // estimate 20%
+              const taxSaved = Math.round(investment * 0.25);
+              const savingsEl = document.getElementById('elite-tax-savings');
+              const recEl = document.getElementById('elite-tax-rec');
+              
+              if (savingsEl) savingsEl.textContent = '$' + taxSaved.toLocaleString();
+              if (recEl) {
+                recEl.textContent = income > 50000 
+                  ? "Higher rate tax detected. Focus on SIPP for max relief."
+                  : "Maximize your tax-free ISA allowance first.";
+              }
+              
+              const printBtn = document.getElementById('btn-print-roadmap');
+              if (printBtn && !printBtn.hasAttribute('data-bound')) {
+                printBtn.setAttribute('data-bound', 'true');
+                printBtn.onclick = async () => {
+                   try {
+                     printBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Generating...';
+                     printBtn.disabled = true;
+                     const report = await futuraApi.projection.roadmap();
+                     if (report && report.summary) {
+                       const printWin = window.open('', '', 'width=800,height=600');
+                       printWin.document.write(`
+                           <html><head><title>Elite Retirement Roadmap</title>
+                           <style>body{font-family:IBM Plex Mono, sans-serif;padding:40px;line-height:1.6;background:#121212;color:#f6f6f6;}h1{border-bottom:4px solid #cafd00;padding-bottom:10px;text-transform:uppercase;color:#cafd00;}pre{background:#1e1e1e;padding:20px;white-space:pre-wrap;border:2px solid #333;font-size:14px;}</style>
+                           </head><body>
+                           <h1>Elite Retirement Roadmap</h1>
+                           <p><strong>Generated for:</strong> ${goal.email || 'Elite Member'}</p>
+                           <pre>${report.summary}</pre>
+                           <script>window.onload = function() { window.print(); window.setTimeout(window.close, 500); }<\/script>
+                           </body></html>
+                       `);
+                       printWin.document.close();
+                     } else {
+                       alert('Roadmap could not be generated.');
+                     }
+                   } catch (err) {
+                     console.error(err);
+                     alert('Failed to generate roadmap report.');
+                   } finally {
+                     printBtn.innerHTML = '<span class="material-symbols-outlined">download</span> Download PDF';
+                     printBtn.disabled = false;
+                   }
+                };
+              }
+            }
+          } catch(err) {
+            console.error('Error hydrating elite modal globally', err);
+          }
         } else {
-          // If not on dashboard, redirect to dashboard with elite-hub trigger
+          // If not on dashboard and modal missing, redirect to dashboard with elite-hub trigger
           window.location.href = 'dashboard_digital_rebel_desktop.html#elite-hub';
         }
       });
@@ -109,12 +179,14 @@ function hydrateEliteSidebar(sub) {
   } else {
     if (tierLabel) {
       tierLabel.textContent = 'Free Tier';
-      tierLabel.classList.remove('text-[#ff81f5]');
+      tierLabel.classList.remove('text-[#ff81f5]', 'animate-pulse');
     }
     if (upgradeBtn) {
       upgradeBtn.textContent = 'Upgrade Power';
       upgradeBtn.href = 'upgrade_digital_rebel_desktop.html';
-      upgradeBtn.classList.remove('premium-btn-glow');
+      // Reset styles if degraded
+      upgradeBtn.style.cssText = '';
+      upgradeBtn.className = 'w-full py-4 mt-8 border-2 border-primary-fixed bg-surface hover:bg-primary-fixed font-headline font-black uppercase tracking-[0.2em] text-xs transition-colors whitespace-nowrap overflow-hidden text-ellipsis px-2 no-underline appearance-none box-border flex justify-center items-center h-[52px] text-on-surface';
     }
   }
 }
