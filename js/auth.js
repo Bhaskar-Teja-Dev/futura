@@ -235,6 +235,7 @@ async function updateNavAuth() {
           const streakData = await futuraApi.contributions.streak().catch(() => null);
 
           const isElite = (sub?.entitlement?.toLowerCase() === 'elite') || (streakData?.streak?.is_elite);
+          localStorage.setItem('isElite', isElite ? 'true' : 'false');
 
           console.log('[Futura] Elite Detection:', { isElite, sub: sub?.entitlement, tokens: streakData?.streak?.recovery_tokens });
 
@@ -243,11 +244,28 @@ async function updateNavAuth() {
             if (!tokenPill) {
               tokenPill = document.createElement('div');
               tokenPill.id = 'nav-tokens-pill';
+              // Use a vibrant orange background with black icon/text to match user's provided icon
               tokenPill.className = 'flex items-center gap-2 bg-[#ff6f00] text-[#121212] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer hover:bg-[#e65100] transition-all mr-2';
               tokenPill.innerHTML = `
                 <span class="material-symbols-outlined" style="font-size:18px; font-variation-settings: 'FILL' 1;">local_fire_department</span>
                 <span id="nav-tokens-count" style="line-height:1">+0</span>
               `;
+
+              // Add glow style if not exists
+              if (!document.getElementById('fire-glow-style')) {
+                const s = document.createElement('style');
+                s.id = 'fire-glow-style';
+                s.textContent = `
+                  @keyframes fireGlow {
+                    0% { box-shadow: 0 0 5px #ff6f00, 4px 4px 0 #121212; }
+                    50% { box-shadow: 0 0 20px #ffb300, 4px 4px 0 #121212; }
+                    100% { box-shadow: 0 0 5px #ff6f00, 4px 4px 0 #121212; }
+                  }
+                  .fire-glow { animation: fireGlow 2s infinite !important; }
+                `;
+                document.head.appendChild(s);
+              }
+
               zensPill.parentNode.insertBefore(tokenPill, zensPill);
 
               tokenPill.onclick = (e) => {
@@ -260,6 +278,12 @@ async function updateNavAuth() {
             const tokens = streakData?.streak?.recovery_tokens ?? 0;
             if (countEl) countEl.textContent = `+${tokens}`;
             tokenPill.style.display = 'flex';
+
+            if (tokens > 0) {
+              tokenPill.classList.add('fire-glow');
+            } else {
+              tokenPill.classList.remove('fire-glow');
+            }
           } else {
             const existing = document.getElementById('nav-tokens-pill');
             if (existing) existing.style.display = 'none';

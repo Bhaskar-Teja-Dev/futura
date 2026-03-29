@@ -206,6 +206,19 @@ function loadRazorpayScript() {
 
 // Dynamic Zens Purchasing Menu & Razorpay Handler
 async function buyZens(onSuccess) {
+  const isOnboarded = localStorage.getItem('futura_onboarding_complete') === 'true';
+  if (!isOnboarded) {
+    if (typeof showToast === 'function') {
+      showToast('Please complete your financial profile onboarding before adding ZENS.', 'error');
+    } else {
+      alert('Please complete your financial profile onboarding before adding ZENS.');
+    }
+    setTimeout(() => {
+      window.location.href = 'onboarding_step_1_age.html';
+    }, 2000);
+    return;
+  }
+
   await loadRazorpayScript();
 
   // Create Overlay Menu

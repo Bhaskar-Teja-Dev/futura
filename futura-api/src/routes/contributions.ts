@@ -110,14 +110,98 @@ router.get('/streak', async (c) => {
     }
   }
 
+  // Fetch subscription and tokens
+  const { data: sub } = await supabase
+    .from('user_subscriptions')
+    .select('entitlement, streak_recovery_tokens')
+    .eq('user_id', userId)
+    .maybeSingle()
+
+  const { data: streakRow2 } = await supabase
+    .from('streaks')
+    .select('previous_streak')
+    .eq('user_id', userId)
+    .maybeSingle()
+
   return c.json({
     streak: {
       current: liveStreak,
       longest: longestStreak,
+      previous: streakRow2?.previous_streak ?? 0,
       last_contribution_date: lastDate,
       can_replenish: canReplenish,
-      replenish_deadline: replenishDeadline
+      replenish_deadline: replenishDeadline,
+      recovery_tokens: sub?.streak_recovery_tokens ?? 0,
+      is_elite: sub?.entitlement === 'elite'
     }
+  })
+})
+
+// ─── POST /repair-streak — manually use a token to restore a streak ─────
+router.post('/repair-streak', async (c) => {
+  const supabase = getSupabase(c.env, c.get('token'))
+  const userId = c.get('userId')
+
+  // 1. Check eligibility
+  const { data: sub } = await supabase
+    .from('user_subscriptions')
+    .select('entitlement, streak_recovery_tokens')
+    .eq('user_id', userId)
+    .maybeSingle()
+
+  if (sub?.entitlement !== 'elite' || (sub?.streak_recovery_tokens ?? 0) <= 0) {
+    return c.json({ error: 'Not eligible or no tokens available' }, 403)
+  }
+
+  // 2. Fetch current streak data
+  const { data: streakRow } = await supabase
+    .from('streaks')
+    .select('*')
+    .eq('user_id', userId)
+    .maybeSingle()
+
+  if (!streakRow) {
+    return c.json({ error: 'No streak record found' }, 404)
+  }
+
+  // A streak can be repaired if it's currently at 0 BUT we have a previous_streak
+  // OR if it's currently "at risk" (can_replenish would be true in GET)
+
+  // For simplicity, if they have a previous_streak > 0 and current is 0, we allow repair.
+  // Or if it's still alive but they want to "secure" it? Usually it's when it breaks.
+
+  const restoreValue = streakRow.previous_streak > 0 ? streakRow.previous_streak : streakRow.current_streak
+
+  // 3. Perform repair
+  // - Decrement tokens
+  // - Restore current_streak
+  // - Update last_contribution_date to "yesterday" so next contribution continues it
+  const yesterday = new Date()
+  yesterday.setUTCDate(yesterday.getUTCDate() - 1)
+  const yesterdayStr = yesterday.toISOString().split('T')[0]
+
+  const { error: subErr } = await supabase
+    .from('user_subscriptions')
+    .update({ streak_recovery_tokens: sub.streak_recovery_tokens - 1 })
+    .eq('user_id', userId)
+
+  if (subErr) return c.json({ error: subErr.message }, 500)
+
+  const { error: streakErr } = await supabase
+    .from('streaks')
+    .update({
+      current_streak: restoreValue,
+      last_contribution_date: yesterdayStr,
+      updated_at: new Date().toISOString()
+    })
+    .eq('user_id', userId)
+
+  if (streakErr) return c.json({ error: streakErr.message }, 500)
+
+  return c.json({
+    success: true,
+    newStreak: restoreValue,
+    tokensLeft: sub.streak_recovery_tokens - 1
   })
 })
 
@@ -162,7 +246,7 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
 
   const { data: streakRow } = await supabase
     .from('streaks')
-    .select('current_streak, longest_streak, last_contribution_date')
+    .select('current_streak, longest_streak, last_contribution_date, previous_streak')
     .eq('user_id', userId)
     .maybeSingle()
 
@@ -219,7 +303,7 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
   let usedToken = false
 
   const diffDays = lastDateStr ? Math.floor((new Date(`${body.contribution_date}T00:00:00Z`).getTime() - new Date(`${lastDateStr}T00:00:00Z`).getTime()) / (1000 * 60 * 60 * 24)) : 0
-  
+
   const canUseToken = isElite && tokens > 0 && diffDays === 2 && !hasMissedDayContribution
 
   const nextCurrent = calculateStreak(
@@ -241,11 +325,17 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
   const nextLongest = Math.max(nextCurrent, streakRow?.longest_streak ?? 0)
   streakToReturn = nextCurrent
 
+  // If the streak reset to 1, save the old current_streak as previous_streak for potential Elite recovery
+  const finalPrevious = (nextCurrent === 1 && (streakRow?.current_streak ?? 0) > 1)
+    ? (streakRow?.current_streak ?? 0)
+    : (streakRow?.previous_streak ?? 0);
+
   await supabase.from('streaks').upsert(
     {
       user_id: userId,
       current_streak: nextCurrent,
       longest_streak: nextLongest,
+      previous_streak: finalPrevious,
       last_contribution_date: body.contribution_date,
       updated_at: new Date().toISOString()
     },

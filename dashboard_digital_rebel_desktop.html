@@ -5,16 +5,17 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="description" content="Digital Rebel dashboard: ZENS balance, streaks, projections, and your rebel overview in one place." />
-<link rel="stylesheet" href="css/app.css" />
+    <meta name="description"
+        content="Digital Rebel dashboard: ZENS balance, streaks, projections, and your rebel overview in one place." />
+    <link rel="stylesheet" href="css/app.css" />
     <title>Digital Rebel | Dashboard</title>
-        <link
+    <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-        <style>
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -221,24 +222,51 @@
 
         /* ─── Page Entrance Animations ─── */
         @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .anim-enter {
             opacity: 0;
             animation: fadeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
-        .anim-enter-1 { animation-delay: 0.05s; }
-        .anim-enter-2 { animation-delay: 0.15s; }
-        .anim-enter-3 { animation-delay: 0.25s; }
-        .anim-enter-4 { animation-delay: 0.35s; }
+
+        .anim-enter-1 {
+            animation-delay: 0.05s;
+        }
+
+        .anim-enter-2 {
+            animation-delay: 0.15s;
+        }
+
+        .anim-enter-3 {
+            animation-delay: 0.25s;
+        }
+
+        .anim-enter-4 {
+            animation-delay: 0.35s;
+        }
 
         /* ─── Skeleton Pulse ─── */
         @keyframes skeletonPulse {
-            0%, 100% { opacity: 0.4; }
-            50%       { opacity: 0.9; }
+
+            0%,
+            100% {
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 0.9;
+            }
         }
+
         .skeleton {
             background: linear-gradient(90deg, #e7e8e8 25%, #dbdddd 50%, #e7e8e8 75%);
             background-size: 200% 100%;
@@ -257,7 +285,8 @@
     <nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
         id="main-header">
         <div class="flex items-center gap-3 lg:gap-8">
-            <button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+            <button type="button" id="mobile-sidebar-toggle"
+                class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
                 <span class="material-symbols-outlined">menu</span>
             </button>
             <a href="index.html"
@@ -341,8 +370,7 @@
                     Power</a>
                 <a id="logout-link"
                     class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
-                    href="index.html"
-                    aria-label="Sign out">
+                    href="index.html" aria-label="Sign out">
                     <span class="material-symbols-outlined">logout</span> Logout
                 </a>
             </div>
@@ -361,7 +389,8 @@
                         <h1
                             class="font-headline font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter leading-tight mb-4">
                             REBEL_DASHBOARD</h1>
-                        <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory. Portfolio tracking active — stay consistent.</p>
+                        <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory.
+                            Portfolio tracking active — stay consistent.</p>
                     </div>
                 </div>
                 <!-- Gamification Badge -->
@@ -390,16 +419,19 @@
             <!-- Bento Grid Content -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
                 <!-- Portfolio Goal / Progress Bar -->
-                <div class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow anim-enter anim-enter-2">
+                <div
+                    class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow anim-enter anim-enter-2">
                     <div class="flex justify-between items-end mb-6">
                         <div>
                             <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Freedom Age Target
                             </h3>
                             <p id="freedom-subtitle"
-                                class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Target: — · Current: — Years Old</p>
+                                class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Target: — ·
+                                Current: — Years Old</p>
                         </div>
                         <div class="text-right">
-                            <span id="freedom-percent" class="font-headline font-black text-4xl text-primary skeleton">0%</span>
+                            <span id="freedom-percent"
+                                class="font-headline font-black text-4xl text-primary skeleton">0%</span>
                         </div>
                     </div>
                     <div
@@ -428,7 +460,8 @@
                     </div>
                 </div>
                 <!-- Recent Contributions -->
-                <div class="md:col-span-4 bg-surface-container-high border-2 border-inverse-surface p-6 neo-shadow anim-enter anim-enter-3">
+                <div
+                    class="md:col-span-4 bg-surface-container-high border-2 border-inverse-surface p-6 neo-shadow anim-enter anim-enter-3">
                     <h3
                         class="font-headline font-black text-xl uppercase tracking-tight mb-4 border-b-2 border-inverse-surface pb-2">
                         Recent Flow</h3>
@@ -484,7 +517,8 @@
         <div class="flex flex-col gap-2">
             <span class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL
                 REBEL</span>
-            <p class="font-Lexend font-black uppercase text-[10px] tracking-[0.3em] text-[#f6f6f6]">©<span data-year-range></span> DIGITAL REBEL.
+            <p class="font-Lexend font-black uppercase text-[10px] tracking-[0.3em] text-[#f6f6f6]">©<span
+                    data-year-range></span> DIGITAL REBEL.
                 NO PERMISSION GRANTED.</p>
         </div>
         <div class="flex flex-wrap justify-center gap-8">
@@ -511,13 +545,19 @@
         </div>
     </footer>
     <!-- Elite Hub Modal -->
-    <div id="elite-hub-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
-            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')" class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
-            
+    <div id="elite-hub-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div
+            class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
+            <button onclick="document.getElementById('elite-hub-modal').classList.add('hidden')"
+                class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
+
             <header class="mb-4 border-b-2 border-surface-container pb-4">
-                <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2" style="background: linear-gradient(90deg, #ffb300, #ff6f00); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Elite Hub</h2>
-                <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Benefits & Reports</p>
+                <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2"
+                    style="background: linear-gradient(90deg, #ffb300, #ff6f00); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                    Elite Hub</h2>
+                <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Benefits & Reports
+                </p>
             </header>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -528,9 +568,11 @@
                             <span class="material-symbols-outlined text-[#ffb300]">healing</span>
                             <h4 class="font-headline font-black text-sm uppercase">Streak Recovery</h4>
                         </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">2</span> Available</p>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span
+                                id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">2</span> Available</p>
                     </div>
-                    <p class="text-xs text-on-surface-variant italic">Automatically used if you miss a day. Resets 2/month.</p>
+                    <p class="text-xs text-on-surface-variant italic">Automatically used if you miss a day. Resets
+                        2/month.</p>
                 </div>
 
                 <!-- Tax Optimization -->
@@ -540,9 +582,14 @@
                             <span class="material-symbols-outlined text-[#ffb300]">account_balance</span>
                             <h4 class="font-headline font-black text-sm uppercase">Tax Optimization</h4>
                         </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Est. Savings: <span id="elite-tax-savings" class="text-[#ffb300] font-black text-lg">$0</span>/yr</p>
                     </div>
-                    <p id="elite-tax-rec" class="text-xs text-on-surface-variant italic">Loading AI recommendations...</p>
+                    <div class="mt-auto">
+                        <a href="Tax_Optimization_Guide.pdf" download="Tax_Optimization_Guide"
+                            class="w-full bg-[#121212] text-[#ffb300] hover:bg-[#ffb300] hover:text-[#121212] border-2 border-[#121212] px-4 py-2 font-black text-[10px] uppercase transition-colors flex justify-center items-center gap-2 neo-shadow no-underline">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">download</span> Download
+                            Guide
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Pro Scenarios -->
@@ -552,22 +599,28 @@
                             <span class="material-symbols-outlined text-[#ffb300]">bolt</span>
                             <h4 class="font-headline font-black text-sm uppercase">Pro Scenarios</h4>
                         </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">UNLOCKED</span></p>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span
+                                class="text-[#ffb300] font-black text-lg">UNLOCKED</span></p>
                     </div>
-                    <p class="text-xs text-on-surface-variant italic">Unlimited hyper-growth simulations and market volatility testing.</p>
+                    <p class="text-xs text-on-surface-variant italic">Unlimited hyper-growth simulations and market
+                        volatility testing.</p>
                 </div>
 
                 <!-- Intelligent Allocation -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
+                <a href="market_digital_rebel_desktop.html"
+                    class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest hover:bg-surface-container transition-all hover:-translate-y-1 hover:neo-shadow cursor-pointer no-underline group">
                     <div>
                         <div class="flex items-center gap-2 mb-2">
                             <span class="material-symbols-outlined text-[#ffb300]">analytics</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Smart Allocation</h4>
+                            <h4 class="font-headline font-black text-sm uppercase text-on-surface">Smart Allocation</h4>
                         </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">ACTIVE</span></p>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span
+                                class="text-[#ffb300] font-black text-lg">ACTIVE</span></p>
                     </div>
-                    <p class="text-xs text-on-surface-variant italic">Advanced breakdown tracking your portfolio health automatically.</p>
-                </div>
+                    <p class="text-xs text-on-surface-variant italic group-hover:text-on-surface transition-colors">
+                        Strategic terminal for real-time asset redistribution and market access.</p>
+                </a>
+
 
                 <!-- Priority Finance Bites -->
                 <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
@@ -576,27 +629,31 @@
                             <span class="material-symbols-outlined text-[#ffb300]">stars</span>
                             <h4 class="font-headline font-black text-sm uppercase">Priority Bites</h4>
                         </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span class="text-[#ffb300] font-black text-lg">VIP</span></p>
+                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Status: <span
+                                class="text-[#ffb300] font-black text-lg">VIP</span></p>
                     </div>
-                    <p class="text-xs text-on-surface-variant italic">Full unrestricted access to historical bites and exclusive premium daily insights.</p>
+                    <p class="text-xs text-on-surface-variant italic">Full unrestricted access to historical bites and
+                        exclusive premium daily insights.</p>
                 </div>
 
                 <!-- PDF Roadmap -->
-                <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-primary-fixed/20 relative overflow-hidden group hover:bg-primary-fixed transition-colors">
-                    <div class="absolute -right-4 -bottom-4 opacity-5 bg-white mix-blend-overlay group-hover:scale-110 transition-transform">
-                        <span class="material-symbols-outlined text-[150px]">picture_as_pdf</span>
+                <div
+                    class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-[#cafd00] relative overflow-hidden group hover:brightness-105 transition-all neo-shadow">
+                    <div
+                        class="absolute -right-4 -bottom-4 opacity-10 bg-[#121212] group-hover:scale-110 transition-transform p-4 rounded-full">
+                        <span class="material-symbols-outlined text-[100px] text-[#cafd00]">picture_as_pdf</span>
                     </div>
                     <div class="relative z-10">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="material-symbols-outlined text-[#121212]">picture_as_pdf</span>
-                            <h4 class="font-headline font-black text-sm uppercase">Retirement Roadmap</h4>
+                        <div class="flex items-center gap-2 mb-2 text-[#121212]">
+                            <span class="material-symbols-outlined">picture_as_pdf</span>
+                            <h4 class="font-headline font-black text-sm uppercase">Calculator Reference</h4>
                         </div>
-                        <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold text-[#121212]">PDF Generator</p>
                     </div>
                     <div class="mt-auto relative z-10 pt-4">
-                        <button id="btn-print-roadmap" class="w-full bg-[#121212] text-[#cafd00] hover:bg-transparent hover:text-[#121212] border-2 border-[#121212] px-4 py-3 font-black text-[10px] uppercase transition-colors flex justify-center items-center gap-2 neo-shadow">
-                            <span class="material-symbols-outlined">download</span> Download PDF
-                        </button>
+                        <a href="Futura_Calculator_Reference.pdf" download="Futura_Calculator_Reference"
+                            class="w-full bg-[#121212] text-[#cafd00] hover:bg-neutral-800 border-2 border-[#121212] px-4 py-3 font-black text-[10px] uppercase transition-colors flex justify-center items-center gap-2 neo-shadow no-underline">
+                            <span class="material-symbols-outlined">download</span> Download Reference
+                        </a>
                     </div>
                 </div>
 
@@ -661,6 +718,23 @@
             }
         }
 
+        async function handleRepairStreak() {
+            try {
+                const res = await futuraApi.contributions.repairStreak();
+                if (res.success) {
+                    showNotification('STREAK REPAIRED', 'Your progress has been restored!', 'success');
+                    // Re-fetch and re-hydrate
+                    const streakRes = await futuraApi.contributions.streak();
+                    hydrateStreak(streakRes.streak);
+                    // Also update the global header pill
+                    if (typeof updateNavAuth === 'function') updateNavAuth();
+                }
+            } catch (e) {
+                console.warn('Repair failed:', e);
+                showNotification('SYSTEM ERROR', 'Repair protocols failed. Try manual contribution.', 'error');
+            }
+        }
+
         function hydrateStreak(streakData) {
             const badge = document.getElementById('streak-badge');
             const countEl = document.getElementById('streak-count');
@@ -673,6 +747,10 @@
 
             const streak = streakData.current || 0;
             const canReplenish = streakData.can_replenish || false;
+            const previous = streakData.previous || 0;
+            const tokens = streakData.recovery_tokens || 0;
+            const isElite = streakData.is_elite || false;
+
             const tier = getStreakTier(streak);
             const label = getStreakLabel(streak, canReplenish);
 
@@ -689,18 +767,48 @@
             badge.classList.remove('milestone', 'dead', 'replenish',
                 'streak-tier-1', 'streak-tier-2', 'streak-tier-3', 'streak-tier-4', 'streak-tier-5');
 
+            // Reset banner
+            replenishBanner.classList.add('hidden');
+            replenishBanner.innerHTML = '';
+
             if (streak === 0 && !canReplenish) {
                 // Dead streak
                 badge.classList.add('dead');
                 fireIcon.textContent = 'local_fire_department';
                 fireIcon.style.opacity = '0.3';
                 labelEl.style.backgroundColor = '#767777';
+
+                // If they have tokens and a previous streak, prompt them
+                if (isElite && tokens > 0 && previous > 0) {
+                    replenishBanner.classList.remove('hidden');
+                    replenishBanner.innerHTML = `
+                      <button onclick="if(confirm('Use 1 token to restore your ${previous}-day streak?')) handleRepairStreak()" 
+                              class="w-full bg-[#ff6f00] text-white py-2 font-headline font-black text-[10px] uppercase border-2 border-[#121212] neo-shadow hover:translate-y-0.5 transition-all">
+                        REPAIR STREAK (1 TOKEN)
+                      </button>
+                   `;
+                }
             } else if (canReplenish) {
                 // Replenish warning state
                 badge.classList.add('replenish');
                 replenishBanner.classList.remove('hidden');
                 fireIcon.style.color = '#f95630';
                 labelEl.style.backgroundColor = '#f95630';
+
+                if (isElite && tokens > 0) {
+                    replenishBanner.innerHTML = `
+                      <button onclick="if(confirm('Secure your streak now using 1 recovery token?')) handleRepairStreak()" 
+                              class="w-full bg-[#ff6f00] text-white py-2 font-headline font-black text-[10px] uppercase border-2 border-[#121212] neo-shadow hover:translate-y-0.5 transition-all">
+                        SECURE STREAK (1 TOKEN)
+                      </button>
+                   `;
+                } else {
+                    replenishBanner.innerHTML = `
+                      <div class="replenish-banner text-surface-container-lowest px-3 py-2 font-headline font-black text-[10px] uppercase tracking-wider text-center border-2 border-inverse-surface">
+                          ⚠ STREAK AT RISK — SAVE NOW
+                      </div>
+                  `;
+                }
             } else {
                 // Active streak
                 if (tier > 0) {
@@ -867,7 +975,7 @@
 
                 // 4. Elite Tier Logic
                 hydrateEliteSidebar(sub);
-                
+
                 // Auto-open Elite Hub if hash is present
                 if (window.location.hash === '#elite-hub') {
                     const upgradeBtn = document.getElementById('sidebar-upgrade-btn');

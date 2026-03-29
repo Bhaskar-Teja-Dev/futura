@@ -4,9 +4,9 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="stylesheet" href="css/app.css" />
+	<link rel="stylesheet" href="css/app.css" />
 	<title>Stock Detail | DIGITAL REBEL</title>
-		<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Inter:wght@100..900&display=swap"
+	<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Inter:wght@100..900&display=swap"
 		rel="stylesheet" />
 	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
 		rel="stylesheet" />
@@ -73,12 +73,16 @@
 		</div>
 
 		<div class="flex items-center gap-4">
-			<div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-white text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+			<div id="nav-zens-pill"
+				class="hidden md:flex items-center gap-2 bg-white text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
 				<span class="material-symbols-outlined" style="font-size:inherit">toll</span>
 				<span id="nav-zens-balance">--</span>
 			</div>
 			<!-- ADD MONEY BTN -->
-			<button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })" class="hidden md:block bg-[#cafd00] text-[#121212] border-2 border-[#121212] font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors cursor-pointer" style="box-shadow:2px 2px 0 #121212;">
+			<button
+				onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })"
+				class="hidden md:block bg-[#cafd00] text-[#121212] border-2 border-[#121212] font-headline font-black text-xs px-3 py-1.5 uppercase hover:bg-white transition-colors cursor-pointer"
+				style="box-shadow:2px 2px 0 #121212;">
 				ADD MONEY
 			</button>
 
@@ -247,12 +251,20 @@
 		}
 
 		function openBuyModal(ticker, stock) {
+			const isElite = localStorage.getItem('isElite') === 'true';
 			let goal = {};
 			try { goal = JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { }
 			const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
 			const retYear = new Date().getFullYear() + years;
 
 			const currentZensBalance = parseInt(document.getElementById('nav-zens-balance')?.textContent?.replace(/,/g, '') || '0', 10);
+
+			const impactPreviewBlock = isElite
+				? `<div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin:16px 0;">
+            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;margin-bottom:6px;">Retirement Impact</p>
+            <p id="buy-preview" style="font-family:'Lexend',sans-serif;font-weight:900;font-size:13px;"></p>
+          </div>`
+				: '';
 
 			const ov = document.createElement('div');
 			ov.style.cssText = 'position:fixed;inset:0;background:rgba(18,18,18,.7);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;animation:fadeIn .2s ease;';
@@ -277,10 +289,8 @@
           </div>
           <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: 50 ZENS</p>
 
-          <div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin:16px 0;">
-            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;margin-bottom:6px;">Retirement Impact</p>
-            <p id="buy-preview" style="font-family:'Lexend',sans-serif;font-weight:900;font-size:13px;"></p>
-          </div>
+          ${impactPreviewBlock}
+
           <button id="confirm-buy" style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;padding:14px;cursor:pointer;margin-bottom:8px;">CONFIRM INVESTMENT</button>
           <button onclick="this.closest('div[style*=inset]').remove()" style="width:100%;background:transparent;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;padding:12px;cursor:pointer;">CANCEL</button>
         </div>
@@ -288,8 +298,8 @@
 			document.body.appendChild(ov);
 			ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); });
 			document.addEventListener('keydown', function esc(e) { if (e.key === 'Escape') { ov.remove(); document.removeEventListener('keydown', esc); } });
-			
-      const inp = ov.querySelector('#buy-amount');
+
+			const inp = ov.querySelector('#buy-amount');
 			const prev = ov.querySelector('#buy-preview');
 			function upd() {
 				const a = parseFloat(inp.value) || 0;
@@ -297,49 +307,49 @@
 				prev.textContent = `Adding ${a.toLocaleString('en-US')} ZENS/month → ${c.toLocaleString('en-US')} ZENS equivalence to corpus by ${retYear}.`;
 			}
 			upd(); inp.addEventListener('input', upd);
-			
-      const confirmBtn = ov.querySelector('#confirm-buy');
-      confirmBtn.addEventListener('click', async () => {
+
+			const confirmBtn = ov.querySelector('#confirm-buy');
+			confirmBtn.addEventListener('click', async () => {
 				const a = Math.floor(parseFloat(inp.value) || 0);
 				if (a < 50) { showToast('Minimum investment is 50 ZENS', 'error'); return; }
-        if (a > currentZensBalance) { showToast('Insufficient ZENS Balance. Please add money.', 'error'); return; }
+				if (a > currentZensBalance) { showToast('Insufficient ZENS Balance. Please add money.', 'error'); return; }
 
-        confirmBtn.disabled = true;
-        confirmBtn.style.opacity = '0.5';
-        confirmBtn.textContent = 'PROCESSING...';
+				confirmBtn.disabled = true;
+				confirmBtn.style.opacity = '0.5';
+				confirmBtn.textContent = 'PROCESSING...';
 
-        try {
-          const result = await futuraApi.zens.spend(a);
-          
-          if (result.success) {
-            const navBalance = document.getElementById('nav-zens-balance');
-            if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
+				try {
+					const result = await futuraApi.zens.spend(a);
 
-            const h = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
-            h.push({ ticker, companyName: stock.name, amount: a, price: stock.price, date: new Date().toISOString() });
-            localStorage.setItem('portfolioHoldings', JSON.stringify(h));
-            
-            // Log as contribution to increment streak (saving)
-            try {
-              await futuraApi.contributions.create({
-                amount: Math.round(a / 10), // Convert Zens back to USD metric for streak tracking
-                contribution_date: new Date().toISOString().split('T')[0],
-                note: '[MARKET_INVESTMENT] ' + ticker
-              });
-            } catch (e) { console.error('Silent streak log failed', e); }
+					if (result.success) {
+						const navBalance = document.getElementById('nav-zens-balance');
+						if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
 
-            ov.remove();
-            showToast(`${a.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated!`);
-          } else {
-            throw new Error(result.error);
-          }
-        } catch(err) {
-          console.error(err);
-          showToast('Failed to purchase: ' + err.message, 'error');
-          confirmBtn.disabled = false;
-          confirmBtn.style.opacity = '1';
-          confirmBtn.textContent = 'CONFIRM INVESTMENT';
-        }
+						const h = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
+						h.push({ ticker, companyName: stock.name, amount: a, price: stock.price, date: new Date().toISOString() });
+						localStorage.setItem('portfolioHoldings', JSON.stringify(h));
+
+						// Log as contribution to increment streak (saving)
+						try {
+							await futuraApi.contributions.create({
+								amount: Math.round(a / 10), // Convert Zens back to USD metric for streak tracking
+								contribution_date: new Date().toISOString().split('T')[0],
+								note: '[MARKET_INVESTMENT] ' + ticker
+							});
+						} catch (e) { console.error('Silent streak log failed', e); }
+
+						ov.remove();
+						showToast(`${a.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated!`);
+					} else {
+						throw new Error(result.error);
+					}
+				} catch (err) {
+					console.error(err);
+					showToast('Failed to purchase: ' + err.message, 'error');
+					confirmBtn.disabled = false;
+					confirmBtn.style.opacity = '1';
+					confirmBtn.textContent = 'CONFIRM INVESTMENT';
+				}
 			});
 		}
 
@@ -349,17 +359,17 @@
 
 			const params = new URLSearchParams(location.search);
 			const ticker = (params.get('ticker') || '').toUpperCase();
-			
-      // Generate daily swing dynamically matching market
-      const rawStock = STOCK_DATA[ticker];
+
+			// Generate daily swing dynamically matching market
+			const rawStock = STOCK_DATA[ticker];
 			if (!rawStock) {
 				document.querySelector('main').innerHTML = `<div class="text-center py-24"><h1 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:48px;">TICKER NOT FOUND</h1><a href="market_digital_rebel_desktop.html" style="font-family:'Lexend',sans-serif;font-weight:700;text-decoration:underline;">← Back to Markets</a></div>`;
 				return;
 			}
 
-      const swing = (Math.random() * 20) - 8; 
-      const currentPrice = Math.round(rawStock.basePrice * (1 + (swing / 100)));
-      const stock = { ...rawStock, price: currentPrice, change: parseFloat(swing.toFixed(1)) };
+			const swing = (Math.random() * 20) - 8;
+			const currentPrice = Math.round(rawStock.basePrice * (1 + (swing / 100)));
+			const stock = { ...rawStock, price: currentPrice, change: parseFloat(swing.toFixed(1)) };
 
 			const isUp = stock.change >= 0;
 			const r = riskInfo(stock.risk);
@@ -373,20 +383,26 @@
 			const rb = document.getElementById('risk-badge');
 			rb.textContent = r.label;
 			rb.style.background = r.bg; rb.style.color = r.text; rb.style.borderColor = r.border;
-			
-      document.getElementById('stat-open').textContent = `Z ${stock.open.toLocaleString('en-US')}`;
+
+			document.getElementById('stat-open').textContent = `Z ${stock.open.toLocaleString('en-US')}`;
 			document.getElementById('stat-high').textContent = `Z ${stock.high.toLocaleString('en-US')}`;
 			document.getElementById('stat-low').textContent = `Z ${stock.low.toLocaleString('en-US')}`;
 			document.getElementById('stat-vol').textContent = stock.volume;
 
 			// Retirement Relevance
-			let goal = {};
-			try { goal = JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { }
-			const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
-			const corpus = calcCorpus(1000, stock.returnRate, years);
-			const retYear = new Date().getFullYear() + years;
-			document.getElementById('retirement-text').textContent =
-				`If you invested 1,000 ZENS/month in ${ticker} for ${years} years at ${Math.round(stock.returnRate * 100)}% historical return, your corpus contribution would be ${corpus.toLocaleString('en-US')} ZENS equivalence by ${retYear}.`;
+			const isElite = localStorage.getItem('isElite') === 'true';
+			if (!isElite) {
+				const relBox = document.getElementById('retirement-text')?.closest('.card');
+				if (relBox) relBox.style.display = 'none';
+			} else {
+				let goal = {};
+				try { goal = JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { }
+				const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
+				const corpus = calcCorpus(1000, stock.returnRate, years);
+				const retYear = new Date().getFullYear() + years;
+				document.getElementById('retirement-text').textContent =
+					`If you invested 1,000 ZENS/month in ${ticker} for ${years} years at ${Math.round(stock.returnRate * 100)}% historical return, your corpus contribution would be ${corpus.toLocaleString('en-US')} ZENS equivalence by ${retYear}.`;
+			}
 
 			// Chart
 			let activeRange = '24H';
@@ -401,19 +417,20 @@
 			});
 
 			// BUY button
-			document.getElementById('detail-buy-btn').textContent = `BUY ${ticker} (ZENS)`;
-			document.getElementById('detail-buy-btn').addEventListener('click', () => openBuyModal(ticker, stock));
+			const buyBtn = document.getElementById('detail-buy-btn');
+			buyBtn.textContent = `BUY ${ticker} (ZENS)`;
+			buyBtn.addEventListener('click', () => openBuyModal(ticker, stock));
 
-      // Refresh Navigation Pill manually since it's an isolated page
-      try {
-        const balanceResponse = await futuraApi.zens.balance();
-        if (balanceResponse && typeof balanceResponse.zens === 'number') {
-          const pill = document.getElementById('nav-zens-balance');
-          if (pill) pill.textContent = balanceResponse.zens.toLocaleString('en-US') + ' ZENS';
-        }
-      } catch (err) {
-        console.error('Failed to load Zens balance for details page:', err);
-      }
+			// Refresh Navigation Pill manually since it's an isolated page
+			try {
+				const balanceResponse = await futuraApi.zens.balance();
+				if (balanceResponse && typeof balanceResponse.zens === 'number') {
+					const pill = document.getElementById('nav-zens-balance');
+					if (pill) pill.textContent = balanceResponse.zens.toLocaleString('en-US') + ' ZENS';
+				}
+			} catch (err) {
+				console.error('Failed to load Zens balance for details page:', err);
+			}
 		});
 	</script>
 </body>
