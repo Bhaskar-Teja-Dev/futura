@@ -110,28 +110,12 @@
   <header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
     <div class="flex items-center gap-8">
       <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
-      <nav class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html" id="nav-dashboard">Dashboard</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="market_digital_rebel_desktop.html" id="nav-markets">Markets</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="assets_digital_rebel_desktop.html" id="nav-assets">Assets</a>
-      </nav>
     </div>
     <div class="flex items-center gap-4">
-      <!-- ZENS Balance Pill -->
-      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
-        <span>🪙</span>
-        <span id="nav-zens-balance">0 ZENS</span>
-      </div>
       <!-- Connect Wallet (Landing Page Specific) -->
       <a href="onboarding_digital_rebel_desktop.html" class="hidden lg:block bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs px-4 py-2 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] transition-all no-underline" id="btn-connect-wallet">
         Connect Wallet
       </a>
-      <!-- Notification Bell -->
-      <span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all" id="notif-bell">notifications</span>
-      <!-- User Avatar / Profile -->
-      <div id="nav-avatar" class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
-        <span class="material-symbols-outlined">account_circle</span>
-      </div>
     </div>
   </header>
   <main>
@@ -242,7 +226,7 @@
           <div class="mt-8 pt-8 border-t-2 border-surface-container">
             <a href="learn_digital_rebel_desktop.html"
               class="font-headline font-black text-xs uppercase tracking-widest text-primary hover:underline cursor-pointer no-underline">Read
-              the docs →</a>
+              the docs â†’</a>
           </div>
         </div>
         <!-- Zero Custody -->
@@ -259,7 +243,7 @@
           <div class="mt-8 pt-8 border-t-2 border-on-primary-fixed/20">
             <a href="settings_digital_rebel_desktop.html"
               class="font-headline font-black text-xs uppercase tracking-widest text-on-primary-fixed hover:underline cursor-pointer no-underline">Security
-              audit v4 →</a>
+              audit v4 â†’</a>
           </div>
         </div>
         <!-- Ghost Mode -->
@@ -276,7 +260,7 @@
           <div class="mt-8 pt-8 border-t-2 border-on-tertiary-container/20">
             <a href="settings_digital_rebel_desktop.html"
               class="font-headline font-black text-xs uppercase tracking-widest text-on-tertiary-container hover:underline cursor-pointer no-underline">Privacy.exe
-              →</a>
+              â†’</a>
           </div>
         </div>
       </div>
@@ -348,7 +332,7 @@
     id="main-footer">
     <div class="flex flex-col items-center md:items-start">
       <a href="index.html" class="text-4xl font-black text-[#cafd00] font-headline no-underline">DIGITAL REBEL</a>
-      <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©2024 DIGITAL REBEL. NO
+      <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">Â©2024 DIGITAL REBEL. NO
         PERMISSION GRANTED.</p>
     </div>
     <div class="flex flex-wrap justify-center gap-8" id="footer-links">
@@ -376,17 +360,17 @@
   </footer>
   <!-- Supabase + Futura Auth -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="/js/config.js"></script>
-  <script src="/js/notifications.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/api.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/notifications.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/api.js"></script>
   <style>
     /* Auth Guard: Prevents ghost sessions and UI flickering */
     html.auth-verified #btn-google-signin,
     html.auth-verified [id*="connect-wallet"] {
       display: none !important;
     }
-
+    
     /* Optional: Show loading state if session exists but not verified */
     html.auth-loading #btn-google-signin {
       opacity: 0.5;

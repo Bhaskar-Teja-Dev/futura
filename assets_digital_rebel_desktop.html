@@ -137,9 +137,8 @@
     </div>
     <div class="flex items-center gap-4">
       <!-- ZENS Balance Pill -->
-      <div id="nav-zens-pill"
-        class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
-        <span>🪙</span>
+      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+        <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
         <span id="nav-zens-balance">0 ZENS</span>
       </div>
       <!-- Notification Bell -->
@@ -179,7 +178,7 @@
           EQ)</p>
         <div>
           <span id="total-warchest"
-            class="font-headline text-7xl md:text-9xl font-black text-primary-fixed leading-none lime-glow">🪙 0</span>
+            class="font-headline text-7xl md:text-9xl font-black text-primary-fixed leading-none lime-glow">Z 0</span>
           <div class="flex items-center gap-2 mt-4 text-primary-fixed" id="total-change-container">
             <span class="material-symbols-outlined" id="total-change-icon">trending_up</span>
             <span class="font-headline font-bold" id="total-change-text">--% THIS_MONTH</span>
@@ -196,7 +195,7 @@
               class="material-symbols-outlined text-sm cursor-pointer hover:text-primary-fixed transition-colors"
               title="Edit Liquid Cash">edit</button>
           </div>
-          <p id="liquid-cash-val" class="font-headline text-3xl font-black text-inverse-surface">🪙 0</p>
+          <p id="liquid-cash-val" class="font-headline text-3xl font-black text-inverse-surface">Z 0</p>
 
           <!-- Tooltip -->
           <div id="liquid-cash-tooltip"
@@ -268,10 +267,10 @@
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="/js/config.js"></script>
-  <script src="/js/notifications.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/api.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/notifications.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/api.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async () => {
       const session = await requireAuth();
@@ -346,7 +345,7 @@
                 </div>
               </div>
               <div class="flex flex-col md:items-end w-full md:w-auto">
-                <span class="font-headline font-black text-2xl ${isSold ? 'text-outline' : 'text-inverse-surface'}">🪙 ${amountInvested.toLocaleString('en-US')}</span>
+                <span class="font-headline font-black text-2xl ${isSold ? 'text-outline' : 'text-inverse-surface'}">Z ${amountInvested.toLocaleString('en-US')}</span>
                 <span class="${isSold ? 'text-outline' : (isUp ? 'text-primary' : 'text-error')} font-bold text-xs uppercase tracking-widest">${isUp ? '+' : ''}${swing.toFixed(1)}% RETURN</span>
               </div>
               <button ${btnAction} class="${btnClass}">${btnText}</button>
@@ -427,10 +426,10 @@
                 <div class="flex justify-between items-end">
                     <div>
                         <p class="text-xs font-bold text-on-surface-variant uppercase tracking-widest mb-1">Valuation</p>
-                        <p class="font-headline text-3xl font-black text-inverse-surface">🪙 ${zensEqVal.toLocaleString('en-US')}</p>
+                        <p class="font-headline text-3xl font-black text-inverse-surface">Z ${zensEqVal.toLocaleString('en-US')}</p>
                         <p class="text-[10px] text-outline font-bold mt-1 uppercase">Est. $${usdVal.toLocaleString('en-US')}</p>
                     </div>
-                    <button onclick="deleteManualAsset('${c.id}')" class="bg-white border-2 border-inverse-surface p-3 flex items-center justify-center hover:bg-error hover:text-white transition-all">
+                    <button onclick="window.deleteManualAsset('${c.id}', '${assetName.replace(/'/g, "\\'")}')" class="bg-white border-2 border-inverse-surface p-3 flex items-center justify-center hover:bg-error hover:text-white transition-all">
                         <span class="material-symbols-outlined">delete</span>
                     </button>
                 </div>
@@ -448,7 +447,7 @@
       if (isNaN(liquidZens)) liquidZens = 0;
 
       const lcValEl = document.getElementById('liquid-cash-val');
-      if (lcValEl) lcValEl.textContent = '🪙 ' + liquidZens.toLocaleString('en-US');
+      if (lcValEl) lcValEl.textContent = 'Z ' + liquidZens.toLocaleString('en-US');
 
       // 4. Fetch Wallet Balance & Final Computation
       let walletZens = 0;
@@ -477,7 +476,7 @@
         const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
         const currentVal = Math.floor(totalWarchestZens * ease);
 
-        totalEl.textContent = '🪙 ' + currentVal.toLocaleString('en-US');
+        totalEl.textContent = 'Z ' + currentVal.toLocaleString('en-US');
 
         // Scale easing: Up to 1.15 in first 30%, back to 1 over remaining 70%
         if (progress < 0.3) {
@@ -535,7 +534,7 @@
             <p class="font-body text-sm font-bold text-on-surface-variant uppercase tracking-widest mb-6">Input uninvested liquid ZENS</p>
             
             <div class="relative mb-6">
-               <span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-black text-2xl text-[#121212]">🪙</span>
+               <span class="absolute left-4 top-1/2 -translate-y-1/2 font-headline font-black text-2xl text-[#121212]">Z</span>
                <input type="number" id="liquid-input-field" class="w-full bg-surface-container-low border-2 border-[#121212] focus:border-primary-fixed focus:bg-white focus:outline-none p-4 pl-12 font-headline font-black text-3xl text-[#121212] transition-colors" value="${current}" />
             </div>
             
@@ -555,7 +554,7 @@
             if (typeof RebelNotifications !== 'undefined') {
               RebelNotifications.add(
                 'Reserves Updated',
-                `Liquid ZENS reserves manually set to 🪙 ${parseInt(raw, 10).toLocaleString('en-US')}.`,
+                `Liquid ZENS reserves manually set to Z ${parseInt(raw, 10).toLocaleString('en-US')}.`,
                 'system'
               );
             }
@@ -626,7 +625,7 @@
           <div class="grid grid-cols-2 gap-4 mb-8">
              <div class="bg-surface-container-low p-4 border border-surface-container-high">
                <p class="font-headline font-bold text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">PROCEEDS (EST)</p>
-               <p class="font-headline font-black text-2xl text-white">🪙 ${finalProceeds.toLocaleString('en-US')}</p>
+               <p class="font-headline font-black text-2xl text-[#121212]">Z ${finalProceeds.toLocaleString('en-US')}</p>
              </div>
              <div class="p-4" style="background:${colorHex}1a; border: 1px solid ${colorHex}4d;"> 
                <p class="font-headline font-bold text-[10px] uppercase tracking-widest mb-1" style="color:${colorHex}">PNL IMPACT</p>
@@ -683,7 +682,7 @@
           if (typeof RebelNotifications !== 'undefined') {
             RebelNotifications.add(
               'Asset Liquidated',
-              `Sold ${ticker} for 🪙 ${finalProceeds.toLocaleString('en-US')}. ${isProfit ? 'Profit' : 'Loss'} realized.`,
+              `Sold ${ticker} for Z ${finalProceeds.toLocaleString('en-US')}. ${isProfit ? 'Profit' : 'Loss'} realized.`,
               isProfit ? 'success' : 'trend'
             );
           }
@@ -704,7 +703,7 @@
             <div class="grid grid-cols-2 gap-4 mb-8">
                <div class="bg-surface-container-low p-4 border border-surface-container-high">
                  <p class="font-headline font-bold text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">PROCEEDS (ZENS)</p>
-                 <p class="font-headline font-black text-2xl text-white">🪙 ${finalProceeds.toLocaleString('en-US')}</p>
+                 <p class="font-headline font-black text-2xl text-[#121212]">Z ${finalProceeds.toLocaleString('en-US')}</p>
                </div>
                <div class="p-4" style="background:${colorHex}1a; border: 1px solid ${colorHex}4d;"> 
                  <p class="font-headline font-bold text-[10px] uppercase tracking-widest mb-1" style="color:${colorHex}">${labelText}</p>
@@ -722,6 +721,58 @@
           console.error(err);
           alert("System error processing trade. Order aborted.");
           closeModal();
+        }
+      };
+    };
+
+    // Delete Manual Asset
+    window.deleteManualAsset = (id, name) => {
+      const modal = document.createElement('div');
+      modal.id = 'delete-confirm-modal';
+      modal.className = 'fixed inset-0 z-[2000] flex items-center justify-center bg-[#121212]/90 backdrop-blur-md px-4';
+      modal.innerHTML = `
+        <div class="bg-white border-4 border-error p-8 w-full max-w-md shadow-[12px_12px_0px_0px_#f95630] relative">
+          <div class="flex items-center gap-4 mb-6 pb-6 border-b-2 border-inverse-surface">
+            <span class="material-symbols-outlined text-5xl text-error">warning</span>
+            <div>
+              <h2 class="font-headline font-black text-2xl uppercase tracking-tighter text-[#121212]">DELETE ASSET</h2>
+              <p class="font-body text-xs font-bold text-on-surface-variant uppercase tracking-widest">This action cannot be undone</p>
+            </div>
+          </div>
+          <p class="font-body text-sm mb-6 text-on-surface-variant">You are about to permanently remove <strong class="text-inverse-surface">${name}</strong> from your warchest. This will delete the contribution record from your account.</p>
+          <div class="flex gap-4">
+            <button id="cancel-delete-btn" class="flex-1 border-2 border-inverse-surface p-4 font-headline font-black text-xs uppercase tracking-widest hover:bg-surface-container transition-colors">CANCEL</button>
+            <button id="confirm-delete-btn" class="flex-[2] bg-error text-white border-2 border-error p-4 font-headline font-black text-xs uppercase tracking-widest hover:opacity-80 transition-colors shadow-[4px_4px_0px_0px_#121212]">DELETE FOREVER</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+
+      const closeModal = () => modal.remove();
+      document.getElementById('cancel-delete-btn').onclick = closeModal;
+      modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+
+      const escHandler = (e) => { if (e.key === 'Escape') { closeModal(); document.removeEventListener('keydown', escHandler); } };
+      document.addEventListener('keydown', escHandler);
+
+      document.getElementById('confirm-delete-btn').onclick = async () => {
+        const btn = document.getElementById('confirm-delete-btn');
+        btn.innerHTML = '<span class="material-symbols-outlined animate-spin align-middle mr-2 text-sm">sync</span> DELETING';
+        btn.disabled = true;
+
+        try {
+          // Delete directly via Supabase since the API doesn't have a DELETE endpoint
+          const { error } = await getSupabase().from('contributions').delete().eq('id', id);
+          if (error) throw error;
+
+          if (typeof RebelNotifications !== 'undefined') {
+            RebelNotifications.add('Asset Removed', `"${name}" has been permanently removed from your warchest.`, 'system');
+          }
+          setTimeout(() => location.reload(), 500);
+        } catch (err) {
+          console.error('Delete failed:', err);
+          btn.textContent = 'FAILED — TRY AGAIN';
+          btn.disabled = false;
         }
       };
     };

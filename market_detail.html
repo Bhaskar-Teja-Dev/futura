@@ -75,7 +75,7 @@
 		<div class="flex items-center gap-4">
 			<!-- ZENS BALANCE PILL -->
 			<div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm" style="box-shadow:2px 2px 0 #121212;">
-				<span>🪙</span>
+				<span class="material-symbols-outlined" style="font-size:inherit">toll</span>
 				<span id="nav-zens-balance">--</span>
 			</div>
 			<!-- ADD MONEY BTN -->
@@ -268,12 +268,12 @@
 
           <div style="background:#121212;color:#cafd00;border:2px solid #121212;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Available Balance</span>
-            <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">🪙 ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
+            <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">Z ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
           </div>
 
           <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">How many ZENS to invest?</label>
           <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
-            <span style="background:#121212;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;font-size:20px;">🪙</span>
+            <span style="background:#121212;color:#cafd00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;font-size:20px;">Z</span>
             <input id="buy-amount" type="number" min="50" max="${currentZensBalance}" value="100" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
           </div>
           <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: 50 ZENS</p>
@@ -368,16 +368,16 @@
 			document.title = `${ticker} | DIGITAL REBEL`;
 			document.getElementById('ticker-badge').textContent = ticker;
 			document.getElementById('company-name').textContent = stock.name;
-			document.getElementById('stock-price').textContent = `🪙 ${stock.price.toLocaleString('en-US')}`;
+			document.getElementById('stock-price').textContent = `Z ${stock.price.toLocaleString('en-US')}`;
 			document.getElementById('change-badge').textContent = `${isUp ? '+' : ''}${stock.change}%`;
 			document.getElementById('change-badge').style.color = isUp ? '#4caf50' : '#b02500';
 			const rb = document.getElementById('risk-badge');
 			rb.textContent = r.label;
 			rb.style.background = r.bg; rb.style.color = r.text; rb.style.borderColor = r.border;
 			
-      document.getElementById('stat-open').textContent = `🪙 ${stock.open.toLocaleString('en-US')}`;
-			document.getElementById('stat-high').textContent = `🪙 ${stock.high.toLocaleString('en-US')}`;
-			document.getElementById('stat-low').textContent = `🪙 ${stock.low.toLocaleString('en-US')}`;
+      document.getElementById('stat-open').textContent = `Z ${stock.open.toLocaleString('en-US')}`;
+			document.getElementById('stat-high').textContent = `Z ${stock.high.toLocaleString('en-US')}`;
+			document.getElementById('stat-low').textContent = `Z ${stock.low.toLocaleString('en-US')}`;
 			document.getElementById('stat-vol').textContent = stock.volume;
 
 			// Retirement Relevance

@@ -305,7 +305,7 @@
         <div class="flex items-center gap-4">
             <!-- ZENS Balance Pill -->
             <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
-                <span>🪙</span>
+                <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
                 <span id="nav-zens-balance">0 ZENS</span>
             </div>
             <!-- Notification Bell -->
@@ -410,8 +410,8 @@
                         <div>
                             <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Freedom Age Target
                             </h3>
-                            <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Current
-                                Project: 42 Years Old</p>
+                            <p id="freedom-subtitle" class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Current
+                                Project: -- Years Old</p>
                         </div>
                         <div class="text-right">
                             <span id="freedom-percent" class="font-headline font-black text-4xl text-primary">0%</span>
@@ -419,7 +419,7 @@
                     </div>
                     <div
                         class="w-full h-12 bg-surface-container border-2 border-inverse-surface relative overflow-hidden">
-                        <div class="h-full bg-primary-fixed border-r-4 border-inverse-surface" style="width: 68%;">
+                        <div id="freedom-bar" class="h-full bg-primary-fixed border-r-4 border-inverse-surface" style="width: 0%;">
                         </div>
                         <div
                             class="absolute inset-0 flex items-center justify-between px-4 mix-blend-difference text-surface font-headline font-black uppercase text-xs tracking-widest">
@@ -427,12 +427,7 @@
                             <span>FREEDOM</span>
                         </div>
                     </div>
-                    <div class="mt-6 grid grid-cols-3 gap-4">
-                        <div class="p-4 border-2 border-inverse-surface bg-surface">
-                            <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Staked
-                            </p>
-                            <p id="staked-amount" class="font-headline font-black text-xl">$0</p>
-                        </div>
+                    <div class="mt-6 grid grid-cols-2 gap-4">
                         <div class="p-4 border-2 border-inverse-surface bg-surface">
                             <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Liquid
                             </p>
@@ -451,46 +446,12 @@
                     <h3
                         class="font-headline font-black text-xl uppercase tracking-tight mb-4 border-b-2 border-inverse-surface pb-2">
                         Recent Flow</h3>
-                    <div class="space-y-4">
-                        <div
-                            class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
-                            <div class="flex items-center gap-3">
-                                <span
-                                    class="material-symbols-outlined text-primary-fixed bg-inverse-surface p-1">north_east</span>
-                                <div>
-                                    <p class="font-headline font-black text-xs uppercase">Vault Deposit</p>
-                                    <p class="text-[10px] text-on-surface-variant">OCT 24, 2024</p>
-                                </div>
-                            </div>
-                            <span class="font-headline font-black text-sm">+$2,400</span>
-                        </div>
-                        <div
-                            class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-tertiary bg-inverse-surface p-1">bolt</span>
-                                <div>
-                                    <p class="font-headline font-black text-xs uppercase">Yield Harvest</p>
-                                    <p class="text-[10px] text-on-surface-variant">OCT 22, 2024</p>
-                                </div>
-                            </div>
-                            <span class="font-headline font-black text-sm">+$412</span>
-                        </div>
-                        <div
-                            class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">
-                            <div class="flex items-center gap-3">
-                                <span
-                                    class="material-symbols-outlined text-primary-fixed bg-inverse-surface p-1">north_east</span>
-                                <div>
-                                    <p class="font-headline font-black text-xs uppercase">Automated Buy</p>
-                                    <p class="text-[10px] text-on-surface-variant">OCT 20, 2024</p>
-                                </div>
-                            </div>
-                            <span class="font-headline font-black text-sm">+$1,500</span>
-                        </div>
+                    <div id="recent-flow-list" class="space-y-4">
+                        <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest text-center py-8">Loading...</p>
                     </div>
-                    <button
-                        class="w-full mt-6 py-2 border-2 border-inverse-surface font-headline font-bold uppercase text-[10px] tracking-widest hover:bg-inverse-surface hover:text-surface transition-colors">View
-                        All Streams</button>
+                    <a href="transactions.html"
+                        class="w-full mt-6 py-2 border-2 border-inverse-surface font-headline font-bold uppercase text-[10px] tracking-widest hover:bg-inverse-surface hover:text-surface transition-colors block text-center no-underline">View
+                        All Streams</a>
                 </div>
                 <!-- Summary Projection Graph Placeholder -->
                 <div
@@ -578,10 +539,10 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="/js/config.js"></script>
-    <script src="/js/notifications.js"></script>
-    <script src="/js/auth.js"></script>
-    <script src="/js/api.js"></script>
+    <script src="./js/config.js"></script>
+    <script src="./js/notifications.js"></script>
+    <script src="./js/auth.js"></script>
+    <script src="./js/api.js"></script>
     <script>
         // ─── Streak Fire Effect System ───────────────────────────────
         const MILESTONES = [5, 10, 25, 50, 100, 150, 200, 250, 365, 500, 1000];
@@ -740,7 +701,13 @@
                 const projectionRes = await futuraApi.projection.calculate(projectionPayload);
                 const data = projectionRes.result;
 
-                // 5. Bind resulting data to charts/progress bars
+                // 5. Bind Freedom Age Target from goals
+                const freedomSub = document.getElementById('freedom-subtitle');
+                if (freedomSub && goal) {
+                    freedomSub.textContent = 'Target: Age ' + (goal.retirement_age || '--') + ' · Current: ' + (goal.current_age || '--') + ' Years Old';
+                }
+
+                // 6. Bind resulting data to charts/progress bars
                 if (data) {
                     const requiredAmountEl = document.getElementById('required-amount');
                     if (requiredAmountEl) requiredAmountEl.textContent = '$' + Math.round(data.requiredMonthlyInvestment || 0).toLocaleString();
@@ -751,9 +718,96 @@
                     const freedomPercentEl = document.getElementById('freedom-percent');
                     if (freedomPercentEl) freedomPercentEl.textContent = Math.round(data.probability || 0) + '%';
 
-                    const probBar = document.querySelector('.bg-primary-fixed.border-r-4.border-inverse-surface[style*="width"]');
+                    const probBar = document.getElementById('freedom-bar');
                     if (probBar) probBar.style.width = Math.round(data.probability || 0) + '%';
+
+
+
+
+                    // Liquid = ZENS wallet balance (from API) + manual liquid cash
+                    let walletZens = 0;
+                    try {
+                        const balRes = await futuraApi.zens.balance();
+                        walletZens = balRes.zens || 0;
+                    } catch(e) { console.warn('Wallet balance fetch failed:', e); }
+                    const manualLiquid = parseInt(localStorage.getItem('trackedLiquidCash') || '0', 10);
+                    const totalLiquid = walletZens + manualLiquid;
+                    const liquidEl = document.getElementById('liquid-amount');
+                    if (liquidEl) liquidEl.textContent = '$' + totalLiquid.toLocaleString();
                 }
+
+                // 7. Populate Recent Flow from portfolioHoldings + API contributions
+                (async function populateRecentFlow() {
+                    const container = document.getElementById('recent-flow-list');
+                    if (!container) return;
+
+                    // Build transaction list from portfolioHoldings
+                    const holdings = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
+                    const flowItems = [];
+
+                    holdings.forEach(function(h) {
+                        // Buy entry
+                        flowItems.push({
+                            label: 'Buy ' + (h.ticker || h.companyName || 'Asset'),
+                            amount: parseInt(h.amount, 10) || 0,
+                            date: h.date,
+                            isBuy: true
+                        });
+                        // Sell entry if sold
+                        if (h.sold) {
+                            flowItems.push({
+                                label: 'Sell ' + (h.ticker || h.companyName || 'Asset'),
+                                amount: h.sellProceeds || parseInt(h.amount, 10) || 0,
+                                date: h.sellDate || h.date,
+                                isBuy: false
+                            });
+                        }
+                    });
+
+                    // Also try to include API contributions
+                    try {
+                        const res = await futuraApi.contributions.list();
+                        const contribs = res.contributions || [];
+                        contribs.forEach(function(c) {
+                            if (c.note && c.note.startsWith('[MARKET_INVESTMENT]')) return;
+                            let assetName = 'Manual Entry';
+                            if (c.note) {
+                                const match = c.note.match(/^\[(.*?)\]\s*(.*)$/);
+                                assetName = match ? match[2] : c.note;
+                            }
+                            flowItems.push({
+                                label: assetName,
+                                amount: Math.round((parseFloat(c.amount) || 0) * 10),
+                                date: c.contribution_date,
+                                isBuy: true
+                            });
+                        });
+                    } catch(e) { /* API may fail, that's ok */ }
+
+                    if (flowItems.length === 0) {
+                        container.innerHTML = '<p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest text-center py-8">No transactions yet. Start trading to see activity here.</p>';
+                        return;
+                    }
+
+                    // Sort by date descending, show last 4
+                    flowItems.sort(function(a, b) { return new Date(b.date) - new Date(a.date); });
+                    const recent = flowItems.slice(0, 4);
+                    container.innerHTML = recent.map(function(tx) {
+                        const icon = tx.isBuy ? 'south_west' : 'north_east';
+                        const iconColor = tx.isBuy ? 'text-error-container' : 'text-primary-fixed';
+                        const sign = tx.isBuy ? '-' : '+';
+                        const dateStr = tx.date ? new Date(tx.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}).toUpperCase() : '';
+                        return '<div class="flex items-center justify-between p-3 bg-surface border-2 border-inverse-surface hover:translate-x-1 transition-transform cursor-pointer">' +
+                            '<div class="flex items-center gap-3">' +
+                            '<span class="material-symbols-outlined ' + iconColor + ' bg-inverse-surface p-1">' + icon + '</span>' +
+                            '<div>' +
+                            '<p class="font-headline font-black text-xs uppercase">' + tx.label + '</p>' +
+                            '<p class="text-[10px] text-on-surface-variant">' + dateStr + '</p>' +
+                            '</div></div>' +
+                            '<span class="font-headline font-black text-sm">' + sign + '$' + Math.abs(tx.amount).toLocaleString() + '</span>' +
+                            '</div>';
+                    }).join('');
+                })();
 
                 // 6. Hydrate streak (awaited from the early-fired promise)
                 const streakRes = await streakPromise;
