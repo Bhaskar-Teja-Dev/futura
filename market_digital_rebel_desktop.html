@@ -43,17 +43,19 @@
       transform: translate(0px, 0px);
       box-shadow: 0px 0px 0px 0px rgba(18, 18, 18, 1);
     }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 
 <body class="font-body text-on-background min-h-screen flex flex-col">
   <!-- TopNavBar -->
-  <nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
-    <div class="flex items-center gap-3 lg:gap-8">
+  <nav class="flex justify-between items-center w-full px-2 sm:px-6 py-2 sm:py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
+    <div class="flex items-center gap-1 sm:gap-3 lg:gap-8">
       <button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
-        <span class="material-symbols-outlined">menu</span>
+        <span class="material-symbols-outlined text-lg sm:text-xl">menu</span>
       </button>
-      <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
+      <a href="index.html" class="text-sm sm:text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
       <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
         <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
         <a class="hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline text-[#121212] dark:text-[#cafd00] border-b-4 border-[#cafd00]" href="market_digital_rebel_desktop.html">Markets</a>
@@ -222,7 +224,7 @@
   </main>
   </div>
   <!-- Footer -->
-  <footer class="lg:ml-64 mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-4 md:px-8">
+  <footer class="lg:ml-64 mt-20 py-4 sm:py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-6 opacity-70 hover:opacity-100 transition-opacity px-3 sm:px-8">
       <div class="flex flex-col items-center md:items-start text-on-surface">
           <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
           <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
@@ -281,15 +283,77 @@
       return { badge: 'MODERATE RISK', color: '#ff8800', text: 'Established company. Consider as part of a diversified portfolio.' };
     }
 
+    // ── Tier state (set during DOMContentLoaded) ──────────────────────────────
+    let userTier = 'free'; // 'free' | 'elite'
+
+    // ── Elite-only: compute a quick buy/risk signal for a stock ──────────────
+    function computeEliteSignal(ticker, change, risk, zensAmount) {
+      const goal = getGoalData();
+      const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
+      const returnRate = 0.12;
+
+      // Momentum score: 0-100 based on price change (+12% range → 100, -8% → 0)
+      const momentumScore = Math.min(100, Math.max(0, Math.round(((change + 8) / 20) * 100)));
+
+      // Risk penalty (HIGH = -30, MODERATE = -10, LOW = 0)
+      const riskPenalty = risk === 'HIGH' ? 30 : risk === 'LOW' ? 0 : 10;
+
+      // Long-term corpus impact if this amount is invested monthly
+      const amt = zensAmount || 100;
+      const corpus = calcCorpus(amt, returnRate, years);
+
+      // Final probability score
+      const buyProb = Math.min(95, Math.max(5, momentumScore - riskPenalty));
+
+      // Verdict
+      let verdict, verdictColor, verdictBg, rationale;
+      if (buyProb >= 65) {
+        verdict = '⚡ BUY SIGNAL';
+        verdictColor = '#121212';
+        verdictBg = '#cafd00';
+        rationale = `Strong momentum (+${change > 0 ? '' : ''}${change}%) with ${risk.toLowerCase()} volatility. ${years}yr corpus impact: +Z ${corpus.toLocaleString('en-US')}.`;
+      } else if (buyProb >= 40) {
+        verdict = '⚠ CAUTION';
+        verdictColor = '#fff';
+        verdictBg = '#ff8800';
+        rationale = `Mixed signals. ${risk} risk category with ${change >= 0 ? 'flat' : 'negative'} momentum. Consider smaller allocation.`;
+      } else {
+        verdict = '🔴 AVOID NOW';
+        verdictColor = '#fff';
+        verdictBg = '#b02500';
+        rationale = `Weak momentum (${change}%) + ${risk} risk = unfavorable entry. Wait for reversal confirmation.`;
+      }
+
+      return { verdict, verdictColor, verdictBg, rationale, buyProb, corpus };
+    }
+
     // ── Quick BUY Modal ───────────────────────────────────────────────────────
     function openBuyModal(ticker, name, price, change, risk) {
+      const isElite = userTier === 'elite';
       const goal = getGoalData();
       const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));
       const retYear = new Date().getFullYear() + years;
       const returnRate = 0.12;
       const r = riskLabel(risk);
       const score = parseFloat(localStorage.getItem('blindnessScore') || '0.5');
-      const warningBlock = score < 0.5
+
+      const currentZensBalance = parseInt(document.getElementById('nav-zens-balance')?.textContent?.replace(/,/g, '') || '0', 10);
+
+      // ── Elite-only sections ───────────────────────────────────────────────
+      const eliteRetirementBlock = isElite ? `
+        <div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+            <span style="background:#a400a4;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:10px;padding:2px 8px;letter-spacing:.08em;">ELITE</span>
+            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin:0;">Retirement Impact Preview</p>
+          </div>
+          <p id="corpus-preview" style="font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;"></p>
+        </div>` : '';
+
+      const eliteRiskBlock = isElite ? `
+        <div style="display:inline-block;background:${r.color};color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:4px 12px;letter-spacing:.08em;margin-bottom:6px;">${r.badge}</div>
+        <p style="font-family:'Inter',sans-serif;font-size:12px;color:#5a5a5a;margin-bottom:16px;">${r.text}</p>` : '';
+
+      const eliteWarningBlock = isElite ? (score < 0.5
         ? `<div style="background:#fff3cd;border:2px solid #ff8800;padding:12px;margin-bottom:16px;">
            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#121212;">
            ⚠️ Your Retirement Awareness Score is ${Math.round(score * 100)}%. Ensure your core SIP is in place first.</p>
@@ -298,19 +362,19 @@
              FIX MY PLAN FIRST</button></div>`
         : `<div style="background:#e8f5e9;border:2px solid #4caf50;padding:12px;margin-bottom:16px;">
            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#121212;">
-           ✅ Your retirement plan is in good shape. This addition can supplement your portfolio.</p></div>`;
-
-      const currentZensBalance = parseInt(document.getElementById('nav-zens-balance')?.textContent?.replace(/,/g, '') || '0', 10);
+           ✅ Your retirement plan is in good shape. This addition can supplement your portfolio.</p></div>`) : '';
 
       const ov = createOverlay(`
       <div class="buy-overlay" style="background:#fff;border:3px solid #121212;box-shadow:8px 8px 0 #121212;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;animation:slideUp .2s ease;">
         <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 24px 0;">
-          <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:-.02em;">QUICK BUY — ${ticker}</h2>
+          <div>
+            <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:22px;text-transform:uppercase;letter-spacing:-.02em;">QUICK BUY — ${ticker}</h2>
+            ${isElite ? '<span style="background:#121212;color:#ff81f5;font-family:\'Lexend\',sans-serif;font-weight:800;font-size:10px;padding:2px 8px;letter-spacing:.1em;vertical-align:middle;">ELITE MODE</span>' : ''}
+          </div>
           <button onclick="this.closest('.buy-overlay').parentElement.remove()" style="background:none;border:none;font-size:24px;cursor:pointer;font-weight:900;">×</button>
         </div>
         <p style="padding:4px 24px 16px;font-family:'Inter',sans-serif;font-size:13px;color:#767777;">${name} · ${price} ZENS · ${change}% today</p>
         <div style="padding:0 24px 24px;">
-          
           <div style="background:#121212;color:#cafd00;border:2px solid #121212;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Available Balance</span>
             <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">Z ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
@@ -323,15 +387,9 @@
           </div>
           <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: 50 ZENS</p>
 
-          <div style="background:#f8f8f8;border:2px solid #121212;padding:14px;margin-bottom:16px;">
-            <p style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;">Retirement Impact Preview</p>
-            <p id="corpus-preview" style="font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;"></p>
-          </div>
-
-          <div style="display:inline-block;background:${r.color};color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:4px 12px;letter-spacing:.08em;margin-bottom:6px;">${r.badge}</div>
-          <p style="font-family:'Inter',sans-serif;font-size:12px;color:#5a5a5a;margin-bottom:16px;">${r.text}</p>
-
-          ${warningBlock}
+          ${eliteRetirementBlock}
+          ${eliteRiskBlock}
+          ${eliteWarningBlock}
 
           <button id="confirm-buy" style="width:100%;background:#cafd00;border:3px solid #121212;font-family:'Lexend',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;padding:14px;cursor:pointer;margin-bottom:8px;transition:0.2s;position:relative;">CONFIRM INVESTMENT</button>
           <button onclick="this.closest('.buy-overlay').parentElement.remove()" style="width:100%;background:transparent;border:2px solid #121212;font-family:'Lexend',sans-serif;font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:12px;cursor:pointer;">CANCEL</button>
@@ -340,14 +398,16 @@
 
       const amountInput = ov.querySelector('#buy-amount');
       const preview = ov.querySelector('#corpus-preview');
-      function updatePreview() {
-        const amt = parseFloat(amountInput.value) || 0;
-        const equivalentInUSD = amt; // Zens -> USD mapping is 1:1 for simulation
-        const corpus = calcCorpus(equivalentInUSD, returnRate, years);
-        preview.textContent = `Adding ${amt.toLocaleString('en-US')} ZENS/month could add ${corpus.toLocaleString('en-US')} ZENS equivalence to your corpus by ${retYear}.`;
+
+      if (isElite && preview) {
+        function updatePreview() {
+          const amt = parseFloat(amountInput.value) || 0;
+          const corpus = calcCorpus(amt, returnRate, years);
+          preview.textContent = `Adding ${amt.toLocaleString('en-US')} ZENS/month could add ${corpus.toLocaleString('en-US')} ZENS equivalence to your corpus by ${retYear}.`;
+        }
+        updatePreview();
+        amountInput.addEventListener('input', updatePreview);
       }
-      updatePreview();
-      amountInput.addEventListener('input', updatePreview);
 
       const confirmBtn = ov.querySelector('#confirm-buy');
       confirmBtn.addEventListener('click', async () => {
@@ -355,53 +415,27 @@
         if (amt < 50) { showToast('Minimum investment is 50 ZENS', 'error'); return; }
         if (amt > currentZensBalance) { showToast('Insufficient ZENS Balance. Please add money.', 'error'); return; }
 
-        // Disable button to prevent double-click
         confirmBtn.disabled = true;
         confirmBtn.style.opacity = '0.5';
         confirmBtn.textContent = 'PROCESSING...';
 
         try {
           const result = await futuraApi.zens.spend(amt);
-
           if (result.success) {
-            // Update UI Nav Balance immediately
             const navBalance = document.getElementById('nav-zens-balance');
             if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
-
-            // Persist to DB (replaces localStorage)
             try {
-              await futuraApi.holdings.create({
-                ticker: ticker,
-                company_name: name,
-                amount_zens: amt,
-                price_at_purchase: price,
-                purchase_date: new Date().toISOString().split('T')[0]
-              });
+              await futuraApi.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
             } catch (e) { console.error('Holdings DB write failed:', e); }
-
-            // Log as contribution to increment streak (saving)
             try {
-              await futuraApi.contributions.create({
-                amount: Math.round(amt / 10),
-                contribution_date: new Date().toISOString().split('T')[0],
-                note: '[MARKET_INVESTMENT] ' + ticker
-              });
+              await futuraApi.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
             } catch (e) { console.error('Silent streak log failed', e); }
-
-            // Add notification for successful stock purchase
             if (typeof RebelNotifications !== 'undefined') {
-              RebelNotifications.add(
-                'Investment Opened',
-                `Successfully purchased position in ${ticker} for ${amt.toLocaleString('en-US')} ZENS.`,
-                'success'
-              );
+              RebelNotifications.add('Investment Opened', `Successfully purchased position in ${ticker} for ${amt.toLocaleString('en-US')} ZENS.`, 'success');
             }
-
             ov.remove();
             showToast(`${amt.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated.`, 'success');
-          } else {
-            throw new Error(result.error);
-          }
+          } else { throw new Error(result.error); }
         } catch (err) {
           console.error('Buy error:', err);
           showToast('Failed to purchase: ' + err.message, 'error');
@@ -412,6 +446,57 @@
       });
     }
 
+    // ── Elite hover signal tooltip on BUY button ──────────────────────────────
+    function attachEliteBuyTooltip(buyBtn, d) {
+      let tooltipEl = null;
+
+      buyBtn.addEventListener('mouseenter', () => {
+        if (tooltipEl) return;
+        const sig = computeEliteSignal(d.ticker, d.change, d.risk, 100);
+        tooltipEl = document.createElement('div');
+        tooltipEl.style.cssText = `
+          position:fixed;z-index:2000;
+          background:#121212;border:2px solid ${sig.verdictBg};
+          padding:14px 16px;width:260px;
+          font-family:'Lexend',sans-serif;
+          box-shadow:4px 4px 0 ${sig.verdictBg};
+          pointer-events:none;
+          animation:fadeIn .15s ease;
+        `;
+        tooltipEl.innerHTML = `
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+            <span style="background:${sig.verdictBg};color:${sig.verdictColor};font-weight:900;font-size:11px;padding:3px 10px;letter-spacing:.08em;white-space:nowrap;">${sig.verdict}</span>
+            <span style="color:#cafd00;font-weight:700;font-size:10px;letter-spacing:.06em;">ELITE SIGNAL</span>
+          </div>
+          <div style="background:#1a1a1a;padding:8px 10px;margin-bottom:8px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:4px;">
+              <span style="color:#767777;font-size:10px;text-transform:uppercase;letter-spacing:.06em;">Buy Probability</span>
+              <span style="color:#cafd00;font-weight:900;font-size:12px;">${sig.buyProb}%</span>
+            </div>
+            <div style="background:#333;height:4px;border-radius:0;">
+              <div style="background:${sig.verdictBg};height:4px;width:${sig.buyProb}%;transition:width .4s;"></div>
+            </div>
+          </div>
+          <p style="color:#ccc;font-size:11px;line-height:1.5;font-family:'Inter',sans-serif;">${sig.rationale}</p>
+          <p style="color:#555;font-size:9px;margin-top:8px;text-transform:uppercase;letter-spacing:.06em;">Based on momentum + risk model</p>
+        `;
+        document.body.appendChild(tooltipEl);
+
+        // Position near button
+        const rect = buyBtn.getBoundingClientRect();
+        const ttW = 260, ttH = 180;
+        let left = rect.left - ttW - 12;
+        if (left < 8) left = rect.right + 12;
+        let top = rect.top + (rect.height / 2) - (ttH / 2);
+        top = Math.max(8, Math.min(top, window.innerHeight - ttH - 8));
+        tooltipEl.style.left = left + 'px';
+        tooltipEl.style.top = top + 'px';
+      });
+
+      buyBtn.addEventListener('mouseleave', () => {
+        if (tooltipEl) { tooltipEl.remove(); tooltipEl = null; }
+      });
+    }
 
     // Leverage & Signals Modals Removed. Replaced with dynamic hover pipeline.
     async function hydrateSignals() {
@@ -420,43 +505,31 @@
 
       try {
         const topGainer = [...marketDataSnapshot].sort((a, b) => b.change - a.change)[0];
-        const topLoser = [...marketDataSnapshot].sort((a, b) => a.change - b.change)[0];
+        const topLoser  = [...marketDataSnapshot].sort((a, b) => a.change - b.change)[0];
 
         let currentBalance = parseInt(document.getElementById('nav-zens-balance')?.textContent?.replace(/,/g, '') || '0', 10);
         if (isNaN(currentBalance)) currentBalance = 0;
 
         const monthlyInv = Math.max(100, Math.floor(currentBalance * 0.1));
 
-        let cAge = parseInt(localStorage.getItem('userAge'), 10);
-        if (isNaN(cAge) || cAge < 18) cAge = 25;
+        // Use onboarding_data (same source as getGoalData) with safe fallbacks
+        const goal = getGoalData();
+        const cAge = (parseInt(goal.current_age, 10) || 25);
+        const rAge = (parseInt(goal.retirement_age, 10) || 60);
+        const years = Math.max(1, rAge - cAge);
 
-        let rAge = parseInt(localStorage.getItem('userRetirementAge'), 10);
-        if (isNaN(rAge) || rAge < 40) rAge = 60;
+        // Local compound calculation — guaranteed numeric, no API call needed
+        const projectedCorpus = calcCorpus(monthlyInv, 0.15, years);
 
-        const payload = {
-          currentAge: cAge,
-          retirementAge: rAge,
-          monthlyIncome: 50000,
-          monthlyExpense: 20000,
-          currentSavings: currentBalance,
-          monthlyInvestment: monthlyInv,
-          returnRate: 0.15
-        };
-
-        const proj = await futuraApi.projection.calculate(payload);
-
-        let projectionBlock = '';
-        if (proj.result) {
-          projectionBlock = `
-            <div style="border:2px solid #121212;padding:14px;background:#fff;height:100%;">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-                <span style="background:#a400a4;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">COMPOUNDING ALPHA</span>
-                <span style="background:#fce4fc;border:1.5px solid #a400a4;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#a400a4;">LINKED TO YOUR PLAN</span>
-              </div>
-              <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;">If you direct 10% of your current liquid ZENS (${monthlyInv} ZENS/mo) into high-volatility assets like <strong>${topGainer.ticker}</strong> averaging 15% YOY, your corpus could violently scale to <strong>Z ${Math.floor(proj.result.totalCorpus).toLocaleString('en-US')}</strong> by age ${payload.retirementAge}.</p>
+        const projectionBlock = `
+          <div style="border:2px solid #121212;padding:14px;background:#fff;height:100%;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="background:#a400a4;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">COMPOUNDING ALPHA</span>
+              <span style="background:#fce4fc;border:1.5px solid #a400a4;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#a400a4;">LINKED TO YOUR PLAN</span>
             </div>
-          `;
-        }
+            <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;">If you direct 10% of your liquid ZENS (<strong>${monthlyInv.toLocaleString('en-US')} ZENS/mo</strong>) into high-volatility assets like <strong>${topGainer.ticker}</strong> averaging 15% YOY, your corpus could violently scale to <strong>Z ${projectedCorpus.toLocaleString('en-US')}</strong> by age ${rAge}.</p>
+          </div>
+        `;
 
         container.innerHTML = `
           <div style="display:flex;flex-direction:column;gap:12px;">
@@ -485,7 +558,7 @@
         container.innerHTML = `<p class="text-error font-headline font-bold text-sm">Failed to connect to Neural Net: ${err.message || 'Unknown error'}</p>`;
       }
     }
-    // Old signals modal logic fully stripped
+
 
     // ── Tooltip helper ────────────────────────────────────────────────────────
     function addTooltip(el, text) {
@@ -635,6 +708,10 @@
           openBuyModal(d.ticker, d.name, d.price, d.change, d.risk);
         });
 
+        // Elite-only: attach hover signal tooltip to BUY button
+        if (userTier === 'elite') {
+          attachEliteBuyTooltip(el.querySelector('.buy-btn'), d);
+        }
         // Stagger entrance animation
         el.animate([
           { opacity: 0, transform: 'translateY(20px)' },
@@ -647,10 +724,14 @@
       const session = await requireAuth();
       if (!session) return;
 
-      // Hydrate Elite sidebar (tier label + token count)
+      // Hydrate Elite sidebar (tier label + token count) + set userTier
       try {
         const profileRes = await futuraApi.profile.get().catch(() => null);
-        const sub = profileRes?.subscription;
+        const sub = profileRes?.subscription; // Object: { entitlement: 'elite'|'free', ... }
+        const entitlement = sub?.entitlement?.toLowerCase?.() ?? 'free';
+        if (entitlement === 'elite') {
+          userTier = 'elite';
+        }
         if (sub) await hydrateEliteSidebar(sub);
       } catch (e) {
         console.warn('[Market] Elite hydration failed:', e);
