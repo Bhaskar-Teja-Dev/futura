@@ -17,17 +17,16 @@
       var avatars = [document.getElementById('nav-avatar'), document.getElementById('sidebar-avatar')];
       avatars.forEach(function(a){ if(a) a.innerHTML = c.avatarHTML; });
     }
-    // Tier label + upgrade button — dynamic based on cached entitlement
+    // Tier label + button
     var label = document.getElementById('sidebar-tier-label');
     var btn = document.getElementById('sidebar-upgrade-btn');
     if (c.isElite) {
       if (label) { label.textContent = 'Elite Tier'; label.style.color = '#FF6F00'; }
       if (btn) {
-        // Full elite button restoration from cache (matches TierStateManager.updateTierDisplay)
-        btn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> <span class="relative z-10">Explore Benefits</span>';
+        btn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> Explore Benefits';
         btn.removeAttribute('href');
-        btn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center relative overflow-hidden group border-2 border-[#121212] dark:border-[#f6f6f6]';
-        btn.style.cssText = 'background: linear-gradient(90deg, #ffb300, #ff6f00, #ffb300); background-size: 200% auto; box-shadow: 0 0 15px rgba(255,111,0,0.7); color: #121212 !important;';
+        btn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center border-2 border-[#121212]';
+        btn.style.cssText = 'background:linear-gradient(90deg,#ffb300,#ff6f00,#ffb300);background-size:200% auto;box-shadow:0 0 15px rgba(255,111,0,0.7);color:#121212!important;cursor:pointer;';
         btn.onclick = function(e) {
           e.preventDefault();
           var modal = document.getElementById('elite-hub-modal');
@@ -38,7 +37,7 @@
       if (label) { label.textContent = 'Basic Tier'; label.style.color = '#767777'; }
       if (btn) { btn.textContent = 'Upgrade Power'; btn.href = 'upgrade_digital_rebel_desktop.html'; }
     }
-  } catch(e) { /* ignore parse errors */ }
+  } catch(e) {}
 })();
 
 function _futuraNotify(message, type) {
@@ -362,32 +361,44 @@ async function updateNavAuth() {
             }
           }
 
-          // Initialize TierStateManager with subscription data (includes Realtime setup)
-          console.log('[Auth] Subscription data received:', sub);
-          if (typeof TierStateManager !== 'undefined' && TierStateManager.updateTierDisplay) {
-            console.log('[Auth] Calling TierStateManager.updateTierDisplay()...');
-            TierStateManager.updateTierDisplay(sub);
-            TierStateManager.setupRealtimeListener();
-          } else if (typeof hydrateEliteSidebar === 'function') {
-            console.log('[Auth] Fallback: Using hydrateEliteSidebar()...');
-            await hydrateEliteSidebar(sub, streakData);
-          } else {
-            console.warn('[Auth] Neither TierStateManager nor hydrateEliteSidebar available!');
+          // ── Direct sidebar button + label update ──
+          var sidebarBtn = document.getElementById('sidebar-upgrade-btn');
+          var sidebarLabel = document.getElementById('sidebar-tier-label');
+          if (sidebarLabel) {
+            sidebarLabel.textContent = isElite ? 'Elite Tier' : 'Basic Tier';
+            sidebarLabel.style.color = isElite ? '#FF6F00' : '#767777';
+          }
+          if (sidebarBtn) {
+            if (isElite) {
+              sidebarBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> Explore Benefits';
+              sidebarBtn.removeAttribute('href');
+              sidebarBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center border-2 border-[#121212]';
+              sidebarBtn.style.cssText = 'background:linear-gradient(90deg,#ffb300,#ff6f00,#ffb300);background-size:200% auto;animation:eliteBtnGlow 3s linear infinite;box-shadow:0 0 15px rgba(255,111,0,0.7);color:#121212!important;cursor:pointer;';
+              if (!document.getElementById('elite-btn-anim')) {
+                var st = document.createElement('style'); st.id = 'elite-btn-anim';
+                st.textContent = '@keyframes eliteBtnGlow{0%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}50%{background-position:100% center;box-shadow:0 0 25px rgba(255,215,0,.9)}100%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}}';
+                document.head.appendChild(st);
+              }
+              sidebarBtn.onclick = function(ev) {
+                ev.preventDefault();
+                var m = document.getElementById('elite-hub-modal');
+                if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+              };
+            } else {
+              sidebarBtn.textContent = 'Upgrade Power';
+              sidebarBtn.href = 'upgrade_digital_rebel_desktop.html';
+              sidebarBtn.style.cssText = '';
+            }
           }
 
-          // Persist the verified, accurate data to cache immediately without race conditions
+          // Persist cache
           try {
-            var cachedAvatar = document.getElementById('nav-avatar') ? document.getElementById('nav-avatar').innerHTML : '';
-            var cachedName = (session?.user?.email?.split('@')[0] || 'REBEL').toUpperCase();
-            var cachedElite = isElite;
-            var exploreBtn = document.getElementById('sidebar-upgrade-btn');
             localStorage.setItem('futura_sidebar_v1', JSON.stringify({
-              username: cachedName,
-              avatarHTML: cachedAvatar,
-              isElite: cachedElite,
-              exploreBenefitsLabel: exploreBtn ? exploreBtn.innerHTML.trim() : ''
+              username: (session?.user?.email?.split('@')[0] || 'REBEL').toUpperCase(),
+              avatarHTML: document.getElementById('nav-avatar')?.innerHTML || '',
+              isElite: isElite
             }));
-          } catch(e) { /* quota limits */ }
+          } catch(e) {}
 
         } catch (e) {
           console.warn('[Futura] Failed to hydrate token pill/sidebar:', e);
@@ -414,23 +425,6 @@ async function updateNavAuth() {
         avatar.innerHTML = `<div class="bg-[#cafd00] text-[#121212] font-headline font-black w-full h-full flex items-center justify-center text-sm">${initial}</div>`;
       }
     });
-
-    // Fallback cache write if ZENS pill logic doesn't run, otherwise handled inside the async block below
-    setTimeout(() => {
-      try {
-        if (!document.getElementById('nav-zens-pill')) {
-            var cachedName = username;
-            var cachedElite = localStorage.getItem('isElite') === 'true';
-            var exploreBtn = document.getElementById('sidebar-upgrade-btn');
-            localStorage.setItem('futura_sidebar_v1', JSON.stringify({
-              username: cachedName,
-              avatarHTML: avatars[0] ? avatars[0].innerHTML : '',
-              isElite: cachedElite,
-              exploreBenefitsLabel: exploreBtn ? exploreBtn.innerHTML.trim() : ''
-            }));
-        }
-      } catch (e) { /* quota errors */ }
-    }, 500);
   }
 
   // Hero Button: Change to ENTER TERMINAL if signed in
