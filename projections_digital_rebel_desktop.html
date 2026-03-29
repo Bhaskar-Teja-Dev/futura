@@ -5,10 +5,10 @@
 <head>
     <meta charset="utf-8" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://cdn.jsdelivr.net" />
-<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="description"
         content="Model future net worth and scenarios in Digital Rebel. Illustrative projections—not a guarantee of results." />
@@ -173,7 +173,8 @@
                     class="inline-block bg-on-surface text-surface px-2 py-1 font-headline font-black uppercase text-[10px] tracking-widest mb-4">
                     EST_WEALTH_ACCUMULATION_v4.2
                 </div>
-                <h2 class="text-4xl md:text-6xl font-headline font-black uppercase tracking-tighter text-on-surface leading-tight">
+                <h2
+                    class="text-4xl md:text-6xl font-headline font-black uppercase tracking-tighter text-on-surface leading-tight">
                     Future<br /><span class="text-primary">Projections</span></h2>
             </div>
             <!-- Bento Layout -->
@@ -401,24 +402,26 @@
         </main>
     </div>
     <!-- Footer -->
-        <footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:ml-64">
-            <div class="flex flex-col items-center md:items-start text-on-surface">
-                <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
-                <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
-                    ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
-                </p>
-            </div>
-            <div class="flex items-center gap-6">
-                <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
-                    href="terms.html">terms.sh</a>
-            </div>
-        </footer>
+    <footer
+        class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:ml-64">
+        <div class="flex flex-col items-center md:items-start text-on-surface">
+            <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+            <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+                ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+            </p>
+        </div>
+        <div class="flex items-center gap-6">
+            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+                href="terms.html">terms.sh</a>
+        </div>
+    </footer>
     <!-- Elite Hub Modal -->
     <div id="elite-hub-modal"
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
         <div
             class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
-            <button onclick="const m=document.getElementById('elite-hub-modal');m.classList.add('hidden');m.classList.remove('flex')"
+            <button
+                onclick="const m=document.getElementById('elite-hub-modal');m.classList.add('hidden');m.classList.remove('flex')"
                 class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
             <header class="mb-4 border-b-2 border-surface-container pb-4">
                 <h2 class="text-4xl md:text-5xl font-headline font-black uppercase tracking-tighter mb-2"
@@ -541,6 +544,8 @@
             // 2. Elements
             const volSlider = document.getElementById('volatility-slider');
             const infSlider = document.getElementById('inflation-slider');
+            const depSlider = document.getElementById('deposit-slider');
+            const btnRecalc = document.getElementById('btn-recalculate');
             if (goal) {
                 const userNameEl = document.getElementById('sidebar-user-name');
                 if (userNameEl) userNameEl.textContent = goal.email.split('@')[0];
@@ -794,7 +799,7 @@
             recalculate();
         });
     </script>
-<script src="./js/mobile-footer-nav.js"></script>
+    <script src="./js/mobile-footer-nav.js"></script>
 </body>
 
 </html>
