@@ -34,12 +34,13 @@ router.get('/streak', async (c) => {
     return c.json({ error: error.message }, 500)
   }
 
+  // Best-effort monthly token refresh — non-fatal if RPC fails
   const { error: refreshErr } = await supabase.rpc('refresh_elite_monthly_streak_tokens', {
     p_user_id: userId
   })
   if (refreshErr) {
-    console.error('refresh_elite_monthly_streak_tokens:', refreshErr.message)
-    return c.json({ error: refreshErr.message }, 500)
+    console.warn('[streak] refresh RPC failed (non-fatal):', refreshErr.message)
+    // Do not return 500 — still return the current streak and token data from DB
   }
 
   const currentStreak = streakRow?.current_streak ?? 0
@@ -107,11 +108,12 @@ router.post('/repair-streak', async (c) => {
   const supabase = getSupabase(c.env, c.get('token'))
   const userId = c.get('userId')
 
+  // Best-effort monthly token refresh — non-fatal if RPC fails
   const { error: refreshErr } = await supabase.rpc('refresh_elite_monthly_streak_tokens', {
     p_user_id: userId
   })
   if (refreshErr) {
-    return c.json({ error: refreshErr.message }, 500)
+    console.warn('[repair-streak] refresh RPC failed (non-fatal):', refreshErr.message)
   }
 
   // 1. Check eligibility

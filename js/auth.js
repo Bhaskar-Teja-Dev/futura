@@ -255,14 +255,17 @@ async function updateNavAuth() {
           const sub = profileData?.subscription;
           const streakData = await futuraApi.contributions.streak().catch(() => null);
 
-          const isElite = (sub?.entitlement?.toLowerCase() === 'elite') || (streakData?.streak?.is_elite);
+          // Case-insensitive elite check (DB stores 'elite'; also trust streak.is_elite from API)
+          const isElite = (typeof sub?.entitlement === 'string' && sub.entitlement.toLowerCase() === 'elite')
+            || (streakData?.streak?.is_elite === true);
           localStorage.setItem('isElite', isElite ? 'true' : 'false');
 
-          // Same source as Elite Hub: only trust GET /contributions/streak for the number.
-          // If streak fails, do not fall back to profile (profile row can disagree after refresh RPC ordering).
-          const tokenCount = streakData?.streak
-            ? Number(streakData.streak.recovery_tokens ?? 0)
-            : 0
+          // Prefer the streak API token count (it runs the monthly refresh RPC first).
+          // Fall back to profile subscription snapshot — both read from user_subscriptions,
+          // so either is authoritative. Never let a failed API call produce 0.
+          const tokenCount = streakData?.streak?.recovery_tokens !== undefined
+            ? Number(streakData.streak.recovery_tokens)
+            : Number(sub?.streak_recovery_tokens ?? 0);
 
           if (isElite) {
             let tokenPill = document.getElementById('nav-tokens-pill');

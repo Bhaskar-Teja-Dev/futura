@@ -76,29 +76,40 @@ const futuraApi = {
 
 /**
  * Recovery tokens: streak GET runs monthly refresh RPC — prefer it over profile snapshot.
+ * Case-insensitive elite check: DB stores 'elite', but defensive guard added for future-proofing.
  * @param {Object} sub - User subscription data
- * @param {Object} [streakRes] - Result of futuraApi.contributions.streak() (optional; fetched if elite and missing)
+ * @param {Object} [streakRes] - Result of futuraApi.contributions.streak() (optional)
  */
 async function hydrateEliteSidebar(sub, streakRes) {
-  const isElite = sub?.entitlement === 'elite';
+  // Case-insensitive comparison in case DB value has different casing
+  const isElite = typeof sub?.entitlement === 'string' && sub.entitlement.toLowerCase() === 'elite';
   let streakPayload = streakRes;
-  if (isElite && (streakPayload?.streak?.recovery_tokens === undefined || streakPayload?.streak?.recovery_tokens === null)) {
+
+  // Always try to get fresh streak data for Elite users — streak GET runs the monthly refresh RPC.
+  // Only skip re-fetching if we already have valid data with a defined token count.
+  const hasValidTokens = streakPayload?.streak?.recovery_tokens !== undefined
+    && streakPayload?.streak?.recovery_tokens !== null;
+
+  if (isElite && !hasValidTokens) {
     try {
       streakPayload = await futuraApi.contributions.streak();
     } catch (_) {
       streakPayload = null;
     }
   }
+
+  // Resolve token count: prefer streak API (authoritative), then fall back to sub snapshot
+  const tokenCount = isElite
+    ? Number(
+      streakPayload?.streak?.recovery_tokens !== undefined && streakPayload?.streak?.recovery_tokens !== null
+        ? streakPayload.streak.recovery_tokens
+        : (sub?.streak_recovery_tokens ?? 0)
+    )
+    : 0;
+
   const tokenCountEl = document.getElementById('elite-tokens-count');
   if (tokenCountEl) {
-    const n = isElite
-      ? Number(
-          streakPayload?.streak?.recovery_tokens !== undefined && streakPayload?.streak?.recovery_tokens !== null
-            ? streakPayload.streak.recovery_tokens
-            : (sub?.streak_recovery_tokens ?? 0)
-        )
-      : 0;
-    tokenCountEl.textContent = n;
+    tokenCountEl.textContent = tokenCount;
   }
   const tierLabel = document.getElementById('sidebar-tier-label');
   const upgradeBtn = document.getElementById('sidebar-upgrade-btn');
@@ -114,7 +125,7 @@ async function hydrateEliteSidebar(sub, streakRes) {
       // Completely restyle to match the burning premium aesthetic requirement
       upgradeBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center relative overflow-hidden group border-2 border-[#121212] dark:border-[#f6f6f6]';
       upgradeBtn.style.cssText = 'background: linear-gradient(90deg, #ffb300, #ff6f00, #ffb300); background-size: 200% auto; animation: premiumFire 3s linear infinite; box-shadow: 0 0 15px rgba(255,111,0,0.7); text-shadow: 1px 1px 0px rgba(255,255,255,0.3); color: #121212 !important;';
-      
+
       // Inject global animation styles if not present
       if (!document.getElementById('rebel-premium-styles')) {
         const style = document.createElement('style');
@@ -125,11 +136,11 @@ async function hydrateEliteSidebar(sub, streakRes) {
         `;
         document.head.appendChild(style);
       }
-      
+
       // Clean up any existing listeners by cloning (simple way to remove all listeners)
       const newBtn = upgradeBtn.cloneNode(true);
       upgradeBtn.parentNode.replaceChild(newBtn, upgradeBtn);
-      
+
       newBtn.addEventListener('click', async (e) => {
         e.preventDefault();
         const modal = document.getElementById('elite-hub-modal');
@@ -151,25 +162,25 @@ async function hydrateEliteSidebar(sub, streakRes) {
               const taxSaved = Math.round(investment * 0.25);
               const savingsEl = document.getElementById('elite-tax-savings');
               const recEl = document.getElementById('elite-tax-rec');
-              
+
               if (savingsEl) savingsEl.textContent = '$' + taxSaved.toLocaleString();
               if (recEl) {
-                recEl.textContent = income > 50000 
+                recEl.textContent = income > 50000
                   ? "Higher rate tax detected. Focus on SIPP for max relief."
                   : "Maximize your tax-free ISA allowance first.";
               }
-              
+
               const printBtn = document.getElementById('btn-print-roadmap');
               if (printBtn && !printBtn.hasAttribute('data-bound')) {
                 printBtn.setAttribute('data-bound', 'true');
                 printBtn.onclick = async () => {
-                   try {
-                     printBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Generating...';
-                     printBtn.disabled = true;
-                     const report = await futuraApi.projection.roadmap();
-                     if (report && report.summary) {
-                       const printWin = window.open('', '', 'width=800,height=600');
-                       printWin.document.write(`
+                  try {
+                    printBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Generating...';
+                    printBtn.disabled = true;
+                    const report = await futuraApi.projection.roadmap();
+                    if (report && report.summary) {
+                      const printWin = window.open('', '', 'width=800,height=600');
+                      printWin.document.write(`
                            <html><head><title>Elite Retirement Roadmap</title>
                            <style>body{font-family:IBM Plex Mono, sans-serif;padding:40px;line-height:1.6;background:#121212;color:#f6f6f6;}h1{border-bottom:4px solid #cafd00;padding-bottom:10px;text-transform:uppercase;color:#cafd00;}pre{background:#1e1e1e;padding:20px;white-space:pre-wrap;border:2px solid #333;font-size:14px;}</style>
                            </head><body>
@@ -179,21 +190,21 @@ async function hydrateEliteSidebar(sub, streakRes) {
                            <script>window.onload = function() { window.print(); window.setTimeout(window.close, 500); }<\/script>
                            </body></html>
                        `);
-                       printWin.document.close();
-                     } else {
-                       alert('Roadmap could not be generated.');
-                     }
-                   } catch (err) {
-                     console.error(err);
-                     alert('Failed to generate roadmap report.');
-                   } finally {
-                     printBtn.innerHTML = '<span class="material-symbols-outlined">download</span> Download PDF';
-                     printBtn.disabled = false;
-                   }
+                      printWin.document.close();
+                    } else {
+                      alert('Roadmap could not be generated.');
+                    }
+                  } catch (err) {
+                    console.error(err);
+                    alert('Failed to generate roadmap report.');
+                  } finally {
+                    printBtn.innerHTML = '<span class="material-symbols-outlined">download</span> Download PDF';
+                    printBtn.disabled = false;
+                  }
                 };
               }
             }
-          } catch(err) {
+          } catch (err) {
             console.error('Error hydrating elite modal globally', err);
           }
         } else {

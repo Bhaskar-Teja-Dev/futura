@@ -295,10 +295,12 @@
 
 <body class="bg-surface font-body text-on-background min-h-screen flex flex-col">
   <!-- TopNavBar -->
-  <nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
+  <nav
+    class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
     id="main-header">
     <div class="flex items-center gap-3 lg:gap-8">
-      <button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+      <button type="button" id="mobile-sidebar-toggle"
+        class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
         <span class="material-symbols-outlined">menu</span>
       </button>
       <a href="index.html"
@@ -347,7 +349,8 @@
         </div>
         <div>
           <h3 id="sidebar-user-name" class="font-Lexend font-black uppercase tracking-widest text-xs">Rebel_01</h3>
-          <p id="sidebar-tier-label" class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-tertiary">
+          <p id="sidebar-tier-label"
+            class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">
             Elite Tier</p>
         </div>
       </div>
@@ -541,7 +544,7 @@
     <div class="flex flex-col items-center md:items-start gap-1">
       <span class="text-[#cafd00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
       <p class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6]">© <span
-          data-year-range></span> DIGITAL REBEL. NO PERMISSION REQUIRED.</p>
+          data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.</p>
     </div>
     <div class="flex gap-8 flex-wrap">
       <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors"
@@ -588,7 +591,8 @@
             <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span
                 id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">0</span> Available</p>
           </div>
-          <p class="text-xs text-on-surface-variant italic">Not used automatically — confirm on your streak card (Repair) when you want to spend one. Up to 2 refill per calendar month.</p>
+          <p class="text-xs text-on-surface-variant italic">Not used automatically — confirm on your streak card
+            (Repair) when you want to spend one. Up to 2 refill per calendar month.</p>
         </div>
         <!-- Tax Optimization -->
         <div class="p-6 border-2 border-[#121212] flex flex-col justify-between bg-surface-container-lowest">
@@ -666,19 +670,20 @@
         </div>
       </div>
     </div>
-        <!-- Footer -->
-        <footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity">
-            <div class="flex flex-col items-center md:items-start text-on-surface">
-                <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
-                <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
-                    ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
-                </p>
-            </div>
-            <div class="flex items-center gap-6">
-                <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
-                    href="terms.html">terms.sh</a>
-            </div>
-        </footer>
+    <!-- Footer -->
+    <footer
+      class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity">
+      <div class="flex flex-col items-center md:items-start text-on-surface">
+        <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+        <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+          ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+        </p>
+      </div>
+      <div class="flex items-center gap-6">
+        <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+          href="terms.html">terms.sh</a>
+      </div>
+    </footer>
     </main>
   </div>
 

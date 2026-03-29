@@ -50,502 +50,519 @@
 
 <body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-inverse-surface">
     <!-- TopAppBar from JSON Logic -->
-  <header
-    class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
-    id="main-header">
-    <div class="flex items-center gap-3 lg:gap-8">
-      <button type="button" id="mobile-sidebar-toggle"
-        class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
-        <span class="material-symbols-outlined">menu</span>
-      </button>
-      <a href="index.html"
-        class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
-        Rebel</a>
-      <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-          href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-          href="market_digital_rebel_desktop.html">Markets</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-          href="assets_digital_rebel_desktop.html">Assets</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-          href="learn_digital_rebel_desktop.html">Learn</a>
-      </div>
-    </div>
-    <div class="flex items-center gap-4">
-      <div id="nav-zens-pill"
-        class="hidden md:flex items-center gap-2 bg-white text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
-        <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
-        <span id="nav-zens-balance">0 ZENS</span>
-      </div>
-      <span
-        class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all"
-        id="notif-bell">notifications</span>
-      <div id="nav-avatar"
-        class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
-        <span class="material-symbols-outlined">account_circle</span>
-      </div>
-    </div>
-  </header>
-
-  <div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
-  <div class="flex flex-1 w-full">
-    <!-- SideNavBar -->
-    <aside id="app-sidebar"
-      class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
-      <a href="settings_digital_rebel_desktop.html"
-        class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
-        <div id="sidebar-avatar"
-          class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
-          <img alt="Rebel_01" class="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
-        </div>
-        <div class="overflow-hidden">
-          <h3 id="sidebar-user-name"
-            class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
-            Rebel_01</h3>
-          <p id="sidebar-tier-label"
-            class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
-        </div>
-      </a>
-      <nav class="flex-1 space-y-1">
-        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-          href="dashboard_digital_rebel_desktop.html">
-          <span class="material-symbols-outlined">grid_view</span> Overview
-        </a>
-        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-          href="projections_digital_rebel_desktop.html">
-          <span class="material-symbols-outlined">trending_up</span> Projections
-        </a>
-        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-          href="transactions.html">
-          <span class="material-symbols-outlined">swap_horiz</span> Transactions
-        </a>
-        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-          href="cards_digital_rebel_desktop.html">
-          <span class="material-symbols-outlined">credit_card</span> Cards
-        </a>
-
-        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-          href="support_digital_rebel_desktop.html">
-          <span class="material-symbols-outlined">help_outline</span> Support
-        </a>
-      </nav>
-      <div class="p-4 border-t-2 border-inverse-surface mt-auto">
-        <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
-          class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
-          Power</a>
-        <a id="logout-link"
-          class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
-          href="index.html" aria-label="Sign out">
-          <span class="material-symbols-outlined">logout</span> Logout
-        </a>
-      </div>
-    </aside>
-    <main class="lg:ml-64 flex-1 px-4 py-12 md:py-20 max-w-7xl mx-auto w-full">
-        <!-- Page Header -->
-        <div class="mb-12 border-l-8 border-primary-fixed pl-6">
-            <h1 class="font-headline font-black text-6xl md:text-8xl tracking-tighter uppercase leading-none">
-                REBEL_CHECKOUT
-            </h1>
-            <p class="font-headline text-xl mt-2 text-secondary font-bold uppercase tracking-widest">Secure Transmission
-                Protocol Active</p>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <!-- Left Column: Payment Details -->
-            <div class="lg:col-span-7 space-y-12">
-                <!-- Payment Method Section — matches add_card_digital_rebel.html -->
-                <section class="bg-surface-container-lowest border-4 border-black p-8 hard-shadow">
-                    <h2
-                        class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3 tracking-tighter">
-                        <span class="material-symbols-outlined text-4xl">payments</span>
-                        01. PAYMENT_METHOD
-                    </h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8" id="payment-method-tabs" role="tablist">
-                        <button type="button" role="tab" aria-selected="true" id="tab-card" data-panel="panel-card"
-                            class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-primary-fixed text-black font-headline font-black uppercase tracking-tight text-sm">
-                            <span class="material-symbols-outlined shrink-0">credit_card</span>
-                            <span class="text-center leading-tight">CREDIT / DEBIT</span>
-                        </button>
-                        <button type="button" role="tab" aria-selected="false" id="tab-crypto" data-panel="panel-crypto"
-                            class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight text-sm">
-                            <span class="material-symbols-outlined shrink-0">currency_bitcoin</span>
-                            <span class="text-center leading-tight">PAY WITH CRYPTO</span>
-                        </button>
-                        <button type="button" role="tab" aria-selected="false" id="tab-saved" data-panel="panel-saved"
-                            class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight text-sm">
-                            <span class="material-symbols-outlined shrink-0">wallet</span>
-                            <span class="text-center leading-tight">SAVED CARDS</span>
-                        </button>
-                    </div>
-
-                    <!-- New card — same field classes as add_card_digital_rebel.html -->
-                    <div id="panel-card" class="payment-panel space-y-8" role="tabpanel">
-                        <div>
-                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
-                                for="checkout-cardholder-name">CARDHOLDER_NAME</label>
-                            <input id="checkout-cardholder-name"
-                                class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
-                                placeholder="ENTER FULL NAME" type="text" autocomplete="cc-name" />
-                        </div>
-                        <div>
-                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
-                                for="checkout-card-number">CARD_NUMBER</label>
-                            <div class="relative">
-                                <input id="checkout-card-number"
-                                    class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold text-xl tracking-[0.2em] focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
-                                    placeholder="0000 0000 0000 0000" type="text" inputmode="numeric"
-                                    autocomplete="cc-number" maxlength="19" />
-                                <span
-                                    class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-3xl pointer-events-none">credit_card</span>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-8">
-                            <div>
-                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
-                                    for="checkout-expiry">EXPIRY_DATE</label>
-                                <input id="checkout-expiry"
-                                    class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
-                                    placeholder="MM / YY" type="text" inputmode="numeric" autocomplete="cc-exp"
-                                    maxlength="7" />
-                            </div>
-                            <div>
-                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
-                                    for="checkout-cvv">CVV_CODE</label>
-                                <input id="checkout-cvv"
-                                    class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
-                                    placeholder="***" type="password" inputmode="numeric" autocomplete="cc-csc"
-                                    maxlength="3" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="panel-crypto"
-                        class="payment-panel hidden border-2 border-black border-dashed p-8 bg-surface-container-low"
-                        role="tabpanel">
-                        <p class="font-headline font-black uppercase text-sm tracking-widest mb-2">CRYPTO_RAIL</p>
-                        <p class="text-sm font-bold text-on-surface-variant uppercase tracking-wide leading-relaxed">
-                            Crypto checkout opens on execute. Wallet connection and chain selection happen in the next
-                            step.</p>
-                    </div>
-
-                    <div id="panel-saved" class="payment-panel hidden" role="tabpanel">
-                        <p
-                            class="font-headline font-black uppercase text-xs tracking-widest mb-4 text-on-surface-variant">
-                            SELECT_A_SAVED_CARD</p>
-                        <div id="saved-cards-list" class="space-y-3"></div>
-                        <p id="saved-cards-empty"
-                            class="hidden font-headline font-bold uppercase text-sm tracking-wide border-2 border-black border-dashed p-6 text-center text-on-surface-variant">
-                            No saved cards yet. <a href="add_card_digital_rebel.html"
-                                class="text-black underline underline-offset-4 decoration-primary-fixed">ADD_CARD</a>
-                            first.
-                        </p>
-                        <p id="saved-card-selected-hint"
-                            class="mt-4 font-headline font-black text-xs uppercase tracking-widest text-on-surface-variant hidden">
-                        </p>
-                    </div>
-                </section>
-                <!-- Billing Address Mock -->
-                <section class="bg-surface-container-lowest border-2 border-on-background neo-shadow p-8">
-                    <h2 class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-4xl">location_on</span>
-                        02. Billing Address
-                    </h2>
-                    <div class="space-y-6">
-                        <input id="checkout-address"
-                            class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
-                            placeholder="STREET ADDRESS" type="text" />
-                        <div class="grid grid-cols-2 gap-6">
-                            <input id="checkout-city"
-                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
-                                placeholder="CITY" type="text" />
-                            <input id="checkout-postal"
-                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
-                                placeholder="POSTAL CODE" type="text" />
-                        </div>
-                    </div>
-                </section>
-                <!-- Trust Signals -->
-                <div class="flex flex-wrap gap-4">
-                    <div class="bg-primary-fixed-dim border-2 border-on-background px-4 py-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-xl">verified_user</span>
-                        <span class="font-headline font-black text-xs uppercase tracking-tighter">SECURED BY
-                            REBEL_SHIELD</span>
-                    </div>
-                    <div class="bg-on-background text-surface px-4 py-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-xl">enhanced_encryption</span>
-                        <span class="font-headline font-black text-xs uppercase tracking-tighter">AES-256
-                            ENCRYPTION</span>
-                    </div>
-                    <div
-                        class="bg-surface-container-high border-2 border-on-background px-4 py-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-xl">workspace_premium</span>
-                        <span class="font-headline font-black text-xs uppercase tracking-tighter">PCI DSS
-                            COMPLIANT</span>
-                    </div>
-                </div>
+    <header
+        class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
+        id="main-header">
+        <div class="flex items-center gap-3 lg:gap-8">
+            <button type="button" id="mobile-sidebar-toggle"
+                class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <a href="index.html"
+                class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
+                Rebel</a>
+            <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="dashboard_digital_rebel_desktop.html">Overview</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="market_digital_rebel_desktop.html">Markets</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="assets_digital_rebel_desktop.html">Assets</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="learn_digital_rebel_desktop.html">Learn</a>
             </div>
-            <!-- Right Column: Order Summary -->
-            <div class="lg:col-span-5">
-                <div class="sticky top-28 space-y-8">
-                    <!-- Summary Card -->
-                    <section
-                        class="bg-inverse-surface text-surface border-2 border-on-background neo-shadow-lg p-8 relative overflow-hidden">
-                        <!-- Design Decoration -->
-                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary-fixed opacity-10 rotate-12"></div>
-                        <h2 class="font-headline font-black text-4xl uppercase mb-8 relative z-10">ORDER SUMMARY</h2>
-                        <div class="space-y-6 relative z-10">
-                            <div class="flex justify-between items-start border-b-2 border-surface/20 pb-6">
-                                <div>
-                                    <h3
-                                        class="font-headline font-black text-2xl uppercase text-primary-fixed tracking-tight">
-                                        Rebel Pro / Elite</h3>
-                                    <p class="font-body text-surface/70 text-sm mt-1 uppercase tracking-widest">Monthly
-                                        Access</p>
-                                </div>
-                                <span class="font-headline font-black text-2xl">₹199</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <div id="nav-zens-pill"
+                class="hidden md:flex items-center gap-2 bg-white text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+                <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
+                <span id="nav-zens-balance">0 ZENS</span>
+            </div>
+            <span
+                class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all"
+                id="notif-bell">notifications</span>
+            <div id="nav-avatar"
+                class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
+    <div class="flex flex-1 w-full">
+        <!-- SideNavBar -->
+        <aside id="app-sidebar"
+            class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
+            <a href="settings_digital_rebel_desktop.html"
+                class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
+                <div id="sidebar-avatar"
+                    class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
+                    <img alt="Rebel_01" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+                </div>
+                <div class="overflow-hidden">
+                    <h3 id="sidebar-user-name"
+                        class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
+                        Rebel_01</h3>
+                    <p id="sidebar-tier-label"
+                        class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">
+                        Elite Tier</p>
+                </div>
+            </a>
+            <nav class="flex-1 space-y-1">
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="dashboard_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">grid_view</span> Overview
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="projections_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">trending_up</span> Projections
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="transactions.html">
+                    <span class="material-symbols-outlined">swap_horiz</span> Transactions
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="cards_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">credit_card</span> Cards
+                </a>
+
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="support_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">help_outline</span> Support
+                </a>
+            </nav>
+            <div class="p-4 border-t-2 border-inverse-surface mt-auto">
+                <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
+                    class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
+                    Power</a>
+                <a id="logout-link"
+                    class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
+                    href="index.html" aria-label="Sign out">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+        <main class="lg:ml-64 flex-1 px-4 py-12 md:py-20 max-w-7xl mx-auto w-full">
+            <!-- Page Header -->
+            <div class="mb-12 border-l-8 border-primary-fixed pl-6">
+                <h1 class="font-headline font-black text-6xl md:text-8xl tracking-tighter uppercase leading-none">
+                    REBEL_CHECKOUT
+                </h1>
+                <p class="font-headline text-xl mt-2 text-secondary font-bold uppercase tracking-widest">Secure
+                    Transmission
+                    Protocol Active</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Left Column: Payment Details -->
+                <div class="lg:col-span-7 space-y-12">
+                    <!-- Payment Method Section — matches add_card_digital_rebel.html -->
+                    <section class="bg-surface-container-lowest border-4 border-black p-8 hard-shadow">
+                        <h2
+                            class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3 tracking-tighter">
+                            <span class="material-symbols-outlined text-4xl">payments</span>
+                            01. PAYMENT_METHOD
+                        </h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8" id="payment-method-tabs" role="tablist">
+                            <button type="button" role="tab" aria-selected="true" id="tab-card" data-panel="panel-card"
+                                class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-primary-fixed text-black font-headline font-black uppercase tracking-tight text-sm">
+                                <span class="material-symbols-outlined shrink-0">credit_card</span>
+                                <span class="text-center leading-tight">CREDIT / DEBIT</span>
+                            </button>
+                            <button type="button" role="tab" aria-selected="false" id="tab-crypto"
+                                data-panel="panel-crypto"
+                                class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight text-sm">
+                                <span class="material-symbols-outlined shrink-0">currency_bitcoin</span>
+                                <span class="text-center leading-tight">PAY WITH CRYPTO</span>
+                            </button>
+                            <button type="button" role="tab" aria-selected="false" id="tab-saved"
+                                data-panel="panel-saved"
+                                class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight text-sm">
+                                <span class="material-symbols-outlined shrink-0">wallet</span>
+                                <span class="text-center leading-tight">SAVED CARDS</span>
+                            </button>
+                        </div>
+
+                        <!-- New card — same field classes as add_card_digital_rebel.html -->
+                        <div id="panel-card" class="payment-panel space-y-8" role="tabpanel">
+                            <div>
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                    for="checkout-cardholder-name">CARDHOLDER_NAME</label>
+                                <input id="checkout-cardholder-name"
+                                    class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                    placeholder="ENTER FULL NAME" type="text" autocomplete="cc-name" />
                             </div>
-                            <div class="space-y-4">
-                                <div
-                                    class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
-                                    <span>Subtotal</span>
-                                    <span>₹199</span>
-                                </div>
-                                <div
-                                    class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
-                                    <span>Rebel Tax (0%)</span>
-                                    <span>₹0</span>
-                                </div>
-                            </div>
-                            <div class="pt-6 border-t-4 border-primary-fixed flex justify-between items-center">
-                                <span class="font-headline font-black text-3xl uppercase">Total</span>
-                                <div class="text-right">
+                            <div>
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                    for="checkout-card-number">CARD_NUMBER</label>
+                                <div class="relative">
+                                    <input id="checkout-card-number"
+                                        class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold text-xl tracking-[0.2em] focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                        placeholder="0000 0000 0000 0000" type="text" inputmode="numeric"
+                                        autocomplete="cc-number" maxlength="19" />
                                     <span
-                                        class="block font-headline font-black text-4xl text-primary-fixed leading-none">₹199</span>
-                                    <span class="text-[10px] font-bold uppercase text-surface/50 tracking-widest">Billed
-                                        Monthly</span>
+                                        class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-3xl pointer-events-none">credit_card</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-8">
+                                <div>
+                                    <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                        for="checkout-expiry">EXPIRY_DATE</label>
+                                    <input id="checkout-expiry"
+                                        class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                        placeholder="MM / YY" type="text" inputmode="numeric" autocomplete="cc-exp"
+                                        maxlength="7" />
+                                </div>
+                                <div>
+                                    <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                        for="checkout-cvv">CVV_CODE</label>
+                                    <input id="checkout-cvv"
+                                        class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                        placeholder="***" type="password" inputmode="numeric" autocomplete="cc-csc"
+                                        maxlength="3" />
                                 </div>
                             </div>
                         </div>
-                        <!-- Benefit Badges -->
-                        <div class="mt-8 grid grid-cols-2 gap-2">
-                            <div class="bg-surface/10 p-3 border border-surface/20">
-                                <span class="material-symbols-outlined text-primary-fixed block mb-1">bolt</span>
-                                <span
-                                    class="font-headline font-bold text-[10px] uppercase block tracking-tighter">Unlimited
-                                    Pro Scenarios</span>
-                            </div>
-                            <div class="bg-surface/10 p-3 border border-surface/20">
-                                <span
-                                    class="material-symbols-outlined text-primary-fixed block mb-1">account_balance</span>
-                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">AI
-                                    Tax Optimization</span>
-                            </div>
-                            <div class="bg-surface/10 p-3 border border-surface/20">
-                                <span
-                                    class="material-symbols-outlined text-primary-fixed block mb-1">picture_as_pdf</span>
-                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">PDF
-                                    Roadmaps</span>
-                            </div>
-                            <div class="bg-surface/10 p-3 border border-surface/20">
-                                <span class="material-symbols-outlined text-primary-fixed block mb-1">healing</span>
-                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">2x/Mo
-                                    Streak Tokens</span>
+
+                        <div id="panel-crypto"
+                            class="payment-panel hidden border-2 border-black border-dashed p-8 bg-surface-container-low"
+                            role="tabpanel">
+                            <p class="font-headline font-black uppercase text-sm tracking-widest mb-2">CRYPTO_RAIL</p>
+                            <p
+                                class="text-sm font-bold text-on-surface-variant uppercase tracking-wide leading-relaxed">
+                                Crypto checkout opens on execute. Wallet connection and chain selection happen in the
+                                next
+                                step.</p>
+                        </div>
+
+                        <div id="panel-saved" class="payment-panel hidden" role="tabpanel">
+                            <p
+                                class="font-headline font-black uppercase text-xs tracking-widest mb-4 text-on-surface-variant">
+                                SELECT_A_SAVED_CARD</p>
+                            <div id="saved-cards-list" class="space-y-3"></div>
+                            <p id="saved-cards-empty"
+                                class="hidden font-headline font-bold uppercase text-sm tracking-wide border-2 border-black border-dashed p-6 text-center text-on-surface-variant">
+                                No saved cards yet. <a href="add_card_digital_rebel.html"
+                                    class="text-black underline underline-offset-4 decoration-primary-fixed">ADD_CARD</a>
+                                first.
+                            </p>
+                            <p id="saved-card-selected-hint"
+                                class="mt-4 font-headline font-black text-xs uppercase tracking-widest text-on-surface-variant hidden">
+                            </p>
+                        </div>
+                    </section>
+                    <!-- Billing Address Mock -->
+                    <section class="bg-surface-container-lowest border-2 border-on-background neo-shadow p-8">
+                        <h2 class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-4xl">location_on</span>
+                            02. Billing Address
+                        </h2>
+                        <div class="space-y-6">
+                            <input id="checkout-address"
+                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                placeholder="STREET ADDRESS" type="text" />
+                            <div class="grid grid-cols-2 gap-6">
+                                <input id="checkout-city"
+                                    class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                    placeholder="CITY" type="text" />
+                                <input id="checkout-postal"
+                                    class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                    placeholder="POSTAL CODE" type="text" />
                             </div>
                         </div>
                     </section>
-                    <!-- Execute Button -->
-                    <button id="btn-checkout"
-                        class="w-full bg-primary-fixed text-on-surface border-2 border-on-background p-8 font-headline font-black text-3xl uppercase tracking-tighter neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-100 flex items-center justify-center gap-4 group">
-                        EXECUTE PAYMENT
-                        <span
-                            class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
-                    </button>
-                    <!-- Confirmation Notice -->
-                    <div
-                        class="p-6 bg-surface-container border-2 border-on-background text-xs font-bold uppercase leading-relaxed tracking-wider text-secondary">
-                        By clicking "EXECUTE PAYMENT", you authorize Digital Rebel to charge your payment method for the
-                        amount shown above. Subscriptions auto-renew unless canceled 24h before period end. No refunds
-                        for partial months.
-                    </div>
-                    <!-- Side Image / Illustration Space -->
-                    <div class="relative h-64 border-2 border-on-background overflow-hidden grayscale contrast-150">
-                        <img alt="Abstract digital encryption grid" class="w-full h-full object-cover"
-                            data-alt="Abstract futuristic digital grid with glowing green matrix code elements, sharp perspective, dark background, high contrast neo-brutalist style."
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8RHsGAaDx-qpMiRPY38KEM-AbVSneuZdAWHfawzR32GwS8zS6n2VJ4EGtgHghhYxZzz-JaGeVQdIjiAOLwya6eQVjmetLM97xUowLsZCIzNReTIjJhiLvqFUWdaMk0ZDEil_OkhSb6qgZ4CcmkPPaqCXSqq-D3WdXaDA1xDRGqBB5pi5dnMWotKK81hZLrS2tIAKvDSIY6K6uT_aTAJgegOsbG-qfWOYo4DltIR5HKq2FHOeDqFU_q2kQDpQODjXba9_ebYX9HN6s" />
-                        <div class="absolute inset-0 bg-primary-fixed/20 mix-blend-multiply"></div>
+                    <!-- Trust Signals -->
+                    <div class="flex flex-wrap gap-4">
                         <div
-                            class="absolute bottom-4 left-4 bg-on-background text-surface px-3 py-1 font-headline font-black text-sm uppercase">
-                            NODE_ID: 77-RX2
+                            class="bg-primary-fixed-dim border-2 border-on-background px-4 py-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-xl">verified_user</span>
+                            <span class="font-headline font-black text-xs uppercase tracking-tighter">SECURED BY
+                                REBEL_SHIELD</span>
+                        </div>
+                        <div class="bg-on-background text-surface px-4 py-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-xl">enhanced_encryption</span>
+                            <span class="font-headline font-black text-xs uppercase tracking-tighter">AES-256
+                                ENCRYPTION</span>
+                        </div>
+                        <div
+                            class="bg-surface-container-high border-2 border-on-background px-4 py-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-xl">workspace_premium</span>
+                            <span class="font-headline font-black text-xs uppercase tracking-tighter">PCI DSS
+                                COMPLIANT</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Order Summary -->
+                <div class="lg:col-span-5">
+                    <div class="sticky top-28 space-y-8">
+                        <!-- Summary Card -->
+                        <section
+                            class="bg-inverse-surface text-surface border-2 border-on-background neo-shadow-lg p-8 relative overflow-hidden">
+                            <!-- Design Decoration -->
+                            <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary-fixed opacity-10 rotate-12">
+                            </div>
+                            <h2 class="font-headline font-black text-4xl uppercase mb-8 relative z-10">ORDER SUMMARY
+                            </h2>
+                            <div class="space-y-6 relative z-10">
+                                <div class="flex justify-between items-start border-b-2 border-surface/20 pb-6">
+                                    <div>
+                                        <h3
+                                            class="font-headline font-black text-2xl uppercase text-primary-fixed tracking-tight">
+                                            Rebel Pro / Elite</h3>
+                                        <p class="font-body text-surface/70 text-sm mt-1 uppercase tracking-widest">
+                                            Monthly
+                                            Access</p>
+                                    </div>
+                                    <span class="font-headline font-black text-2xl">₹199</span>
+                                </div>
+                                <div class="space-y-4">
+                                    <div
+                                        class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
+                                        <span>Subtotal</span>
+                                        <span>₹199</span>
+                                    </div>
+                                    <div
+                                        class="flex justify-between font-headline font-bold uppercase tracking-widest text-sm">
+                                        <span>Rebel Tax (0%)</span>
+                                        <span>₹0</span>
+                                    </div>
+                                </div>
+                                <div class="pt-6 border-t-4 border-primary-fixed flex justify-between items-center">
+                                    <span class="font-headline font-black text-3xl uppercase">Total</span>
+                                    <div class="text-right">
+                                        <span
+                                            class="block font-headline font-black text-4xl text-primary-fixed leading-none">₹199</span>
+                                        <span
+                                            class="text-[10px] font-bold uppercase text-surface/50 tracking-widest">Billed
+                                            Monthly</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Benefit Badges -->
+                            <div class="mt-8 grid grid-cols-2 gap-2">
+                                <div class="bg-surface/10 p-3 border border-surface/20">
+                                    <span class="material-symbols-outlined text-primary-fixed block mb-1">bolt</span>
+                                    <span
+                                        class="font-headline font-bold text-[10px] uppercase block tracking-tighter">Unlimited
+                                        Pro Scenarios</span>
+                                </div>
+                                <div class="bg-surface/10 p-3 border border-surface/20">
+                                    <span
+                                        class="material-symbols-outlined text-primary-fixed block mb-1">account_balance</span>
+                                    <span
+                                        class="font-headline font-bold text-[10px] uppercase block tracking-tighter">AI
+                                        Tax Optimization</span>
+                                </div>
+                                <div class="bg-surface/10 p-3 border border-surface/20">
+                                    <span
+                                        class="material-symbols-outlined text-primary-fixed block mb-1">picture_as_pdf</span>
+                                    <span
+                                        class="font-headline font-bold text-[10px] uppercase block tracking-tighter">PDF
+                                        Roadmaps</span>
+                                </div>
+                                <div class="bg-surface/10 p-3 border border-surface/20">
+                                    <span class="material-symbols-outlined text-primary-fixed block mb-1">healing</span>
+                                    <span
+                                        class="font-headline font-bold text-[10px] uppercase block tracking-tighter">2x/Mo
+                                        Streak Tokens</span>
+                                </div>
+                            </div>
+                        </section>
+                        <!-- Execute Button -->
+                        <button id="btn-checkout"
+                            class="w-full bg-primary-fixed text-on-surface border-2 border-on-background p-8 font-headline font-black text-3xl uppercase tracking-tighter neo-shadow hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-100 flex items-center justify-center gap-4 group">
+                            EXECUTE PAYMENT
+                            <span
+                                class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                        </button>
+                        <!-- Confirmation Notice -->
+                        <div
+                            class="p-6 bg-surface-container border-2 border-on-background text-xs font-bold uppercase leading-relaxed tracking-wider text-secondary">
+                            By clicking "EXECUTE PAYMENT", you authorize Digital Rebel to charge your payment method for
+                            the
+                            amount shown above. Subscriptions auto-renew unless canceled 24h before period end. No
+                            refunds
+                            for partial months.
+                        </div>
+                        <!-- Side Image / Illustration Space -->
+                        <div class="relative h-64 border-2 border-on-background overflow-hidden grayscale contrast-150">
+                            <img alt="Abstract digital encryption grid" class="w-full h-full object-cover"
+                                data-alt="Abstract futuristic digital grid with glowing green matrix code elements, sharp perspective, dark background, high contrast neo-brutalist style."
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8RHsGAaDx-qpMiRPY38KEM-AbVSneuZdAWHfawzR32GwS8zS6n2VJ4EGtgHghhYxZzz-JaGeVQdIjiAOLwya6eQVjmetLM97xUowLsZCIzNReTIjJhiLvqFUWdaMk0ZDEil_OkhSb6qgZ4CcmkPPaqCXSqq-D3WdXaDA1xDRGqBB5pi5dnMWotKK81hZLrS2tIAKvDSIY6K6uT_aTAJgegOsbG-qfWOYo4DltIR5HKq2FHOeDqFU_q2kQDpQODjXba9_ebYX9HN6s" />
+                            <div class="absolute inset-0 bg-primary-fixed/20 mix-blend-multiply"></div>
+                            <div
+                                class="absolute bottom-4 left-4 bg-on-background text-surface px-3 py-1 font-headline font-black text-sm uppercase">
+                                NODE_ID: 77-RX2
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <!-- Footer Space -->
-    <!-- Footer -->
-    <footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity">
-        <div class="flex flex-col items-center md:items-start text-on-surface">
-            <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
-            <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
-                ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
-            </p>
-        </div>
-        <div class="flex items-center gap-6">
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
-                href="terms.html">terms.sh</a>
-        </div>
-    </footer>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="/js/config.js"></script>
-    <script src="/js/notifications.js"></script>
-    <script src="/js/mobile-nav.js"></script>
-    <script src="/js/auth.js"></script>
-    <script src="/js/api.js"></script>
-    <script src="js/footer-year.js"></script>
-    <script src="./js/rebel-cards-init.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            if (typeof ensureRebelCardsSeeded === 'function') ensureRebelCardsSeeded();
+        </main>
+        <!-- Footer Space -->
+        <!-- Footer -->
+        <footer
+            class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="flex flex-col items-center md:items-start text-on-surface">
+                <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+                <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+                    ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+                </p>
+            </div>
+            <div class="flex items-center gap-6">
+                <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+                    href="terms.html">terms.sh</a>
+            </div>
+        </footer>
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+        <script src="/js/config.js"></script>
+        <script src="/js/notifications.js"></script>
+        <script src="/js/mobile-nav.js"></script>
+        <script src="/js/auth.js"></script>
+        <script src="/js/api.js"></script>
+        <script src="js/footer-year.js"></script>
+        <script src="./js/rebel-cards-init.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', async () => {
+                if (typeof ensureRebelCardsSeeded === 'function') ensureRebelCardsSeeded();
 
-            const session = await requireAuth();
-            if (!session) return;
+                const session = await requireAuth();
+                if (!session) return;
 
-            const btnCheckout = document.getElementById('btn-checkout');
-            let selectedSavedCardId = null;
-            let activePaymentMode = 'card';
+                const btnCheckout = document.getElementById('btn-checkout');
+                let selectedSavedCardId = null;
+                let activePaymentMode = 'card';
 
-            const cardNumberInput = document.getElementById('checkout-card-number');
-            const nameInput = document.getElementById('checkout-cardholder-name');
-            const expiryInput = document.getElementById('checkout-expiry');
-            const cvvInput = document.getElementById('checkout-cvv');
-            const savedListEl = document.getElementById('saved-cards-list');
-            const savedEmptyEl = document.getElementById('saved-cards-empty');
-            const savedHintEl = document.getElementById('saved-card-selected-hint');
+                const cardNumberInput = document.getElementById('checkout-card-number');
+                const nameInput = document.getElementById('checkout-cardholder-name');
+                const expiryInput = document.getElementById('checkout-expiry');
+                const cvvInput = document.getElementById('checkout-cvv');
+                const savedListEl = document.getElementById('saved-cards-list');
+                const savedEmptyEl = document.getElementById('saved-cards-empty');
+                const savedHintEl = document.getElementById('saved-card-selected-hint');
 
-            function getSavedCards() {
-                try {
-                    return JSON.parse(localStorage.getItem('rebel_cards') || '[]');
-                } catch {
-                    return [];
-                }
-            }
-
-            function inferCardBrand(pan) {
-                const d = String(pan || '').replace(/\D/g, '')[0];
-                if (d === '4') return 'VISA';
-                if (d === '5') return 'MASTERCARD';
-                if (d === '3') return 'AMEX';
-                if (d === '6') return 'DISCOVER';
-                return 'CARD';
-            }
-
-            function renderSavedCards() {
-                const cards = getSavedCards();
-                savedListEl.innerHTML = '';
-                selectedSavedCardId = null;
-                savedHintEl.classList.add('hidden');
-
-                if (!cards.length) {
-                    savedEmptyEl.classList.remove('hidden');
-                    return;
-                }
-                savedEmptyEl.classList.add('hidden');
-
-                cards.forEach((c) => {
-                    const last = c.lastFour || (c.number && String(c.number).slice(-4)) || '????';
-                    const masked = '**** **** **** ' + last;
-                    const brand = inferCardBrand(c.number);
-                    const row = document.createElement('button');
-                    row.type = 'button';
-                    row.className =
-                        'saved-card-row w-full flex items-center justify-between gap-3 p-4 bg-surface-container-low border-2 border-black font-headline font-bold uppercase tracking-widest text-left hover:bg-white transition-colors';
-                    row.dataset.cardId = String(c.id);
-                    row.innerHTML =
-                        '<span class="flex items-center gap-3 min-w-0">' +
-                        '<span class="material-symbols-outlined shrink-0 text-3xl">credit_card</span>' +
-                        '<span class="truncate text-sm md:text-base">' + masked + '</span>' +
-                        '</span>' +
-                        '<span class="shrink-0 text-[10px] font-black bg-black text-white px-2 py-1 border border-black">' +
-                        brand +
-                        '</span>';
-                    row.addEventListener('click', () => {
-                        document.querySelectorAll('.saved-card-row').forEach((el) => {
-                            el.classList.remove('ring-2', 'ring-primary-fixed', 'ring-offset-2', 'bg-primary-fixed/10');
-                        });
-                        row.classList.add('ring-2', 'ring-primary-fixed', 'ring-offset-2', 'bg-primary-fixed/10');
-                        selectedSavedCardId = c.id;
-                        savedHintEl.textContent = 'ELITE_CHARGE_VIA •••• ' + last;
-                        savedHintEl.classList.remove('hidden');
-                    });
-                    savedListEl.appendChild(row);
-                });
-            }
-
-            function setActiveTab(mode) {
-                activePaymentMode = mode;
-                document.querySelectorAll('.payment-tab').forEach((btn) => {
-                    const isActive = btn.dataset.panel === 'panel-' + mode;
-                    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-                    if (isActive) {
-                        btn.classList.add('bg-primary-fixed', 'text-black');
-                        btn.classList.remove('bg-surface', 'hover:bg-surface-container-high');
-                    } else {
-                        btn.classList.remove('bg-primary-fixed', 'text-black');
-                        btn.classList.add('bg-surface', 'hover:bg-surface-container-high');
+                function getSavedCards() {
+                    try {
+                        return JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+                    } catch {
+                        return [];
                     }
+                }
+
+                function inferCardBrand(pan) {
+                    const d = String(pan || '').replace(/\D/g, '')[0];
+                    if (d === '4') return 'VISA';
+                    if (d === '5') return 'MASTERCARD';
+                    if (d === '3') return 'AMEX';
+                    if (d === '6') return 'DISCOVER';
+                    return 'CARD';
+                }
+
+                function renderSavedCards() {
+                    const cards = getSavedCards();
+                    savedListEl.innerHTML = '';
+                    selectedSavedCardId = null;
+                    savedHintEl.classList.add('hidden');
+
+                    if (!cards.length) {
+                        savedEmptyEl.classList.remove('hidden');
+                        return;
+                    }
+                    savedEmptyEl.classList.add('hidden');
+
+                    cards.forEach((c) => {
+                        const last = c.lastFour || (c.number && String(c.number).slice(-4)) || '????';
+                        const masked = '**** **** **** ' + last;
+                        const brand = inferCardBrand(c.number);
+                        const row = document.createElement('button');
+                        row.type = 'button';
+                        row.className =
+                            'saved-card-row w-full flex items-center justify-between gap-3 p-4 bg-surface-container-low border-2 border-black font-headline font-bold uppercase tracking-widest text-left hover:bg-white transition-colors';
+                        row.dataset.cardId = String(c.id);
+                        row.innerHTML =
+                            '<span class="flex items-center gap-3 min-w-0">' +
+                            '<span class="material-symbols-outlined shrink-0 text-3xl">credit_card</span>' +
+                            '<span class="truncate text-sm md:text-base">' + masked + '</span>' +
+                            '</span>' +
+                            '<span class="shrink-0 text-[10px] font-black bg-black text-white px-2 py-1 border border-black">' +
+                            brand +
+                            '</span>';
+                        row.addEventListener('click', () => {
+                            document.querySelectorAll('.saved-card-row').forEach((el) => {
+                                el.classList.remove('ring-2', 'ring-primary-fixed', 'ring-offset-2', 'bg-primary-fixed/10');
+                            });
+                            row.classList.add('ring-2', 'ring-primary-fixed', 'ring-offset-2', 'bg-primary-fixed/10');
+                            selectedSavedCardId = c.id;
+                            savedHintEl.textContent = 'ELITE_CHARGE_VIA •••• ' + last;
+                            savedHintEl.classList.remove('hidden');
+                        });
+                        savedListEl.appendChild(row);
+                    });
+                }
+
+                function setActiveTab(mode) {
+                    activePaymentMode = mode;
+                    document.querySelectorAll('.payment-tab').forEach((btn) => {
+                        const isActive = btn.dataset.panel === 'panel-' + mode;
+                        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                        if (isActive) {
+                            btn.classList.add('bg-primary-fixed', 'text-black');
+                            btn.classList.remove('bg-surface', 'hover:bg-surface-container-high');
+                        } else {
+                            btn.classList.remove('bg-primary-fixed', 'text-black');
+                            btn.classList.add('bg-surface', 'hover:bg-surface-container-high');
+                        }
+                    });
+
+                    const panels = {
+                        card: document.getElementById('panel-card'),
+                        crypto: document.getElementById('panel-crypto'),
+                        saved: document.getElementById('panel-saved')
+                    };
+                    Object.keys(panels).forEach((key) => {
+                        const show = key === mode;
+                        const el = panels[key];
+                        el.classList.toggle('hidden', !show);
+                        el.hidden = !show;
+                    });
+
+                    if (mode === 'saved') renderSavedCards();
+                }
+
+                document.querySelectorAll('.payment-tab').forEach((btn) => {
+                    btn.addEventListener('click', () => {
+                        const id = btn.id.replace('tab-', '');
+                        setActiveTab(id);
+                    });
                 });
 
-                const panels = {
-                    card: document.getElementById('panel-card'),
-                    crypto: document.getElementById('panel-crypto'),
-                    saved: document.getElementById('panel-saved')
-                };
-                Object.keys(panels).forEach((key) => {
-                    const show = key === mode;
-                    const el = panels[key];
-                    el.classList.toggle('hidden', !show);
-                    el.hidden = !show;
-                });
+                if (cardNumberInput) {
+                    cardNumberInput.addEventListener('input', function () {
+                        let raw = this.value.replace(/\D/g, '').slice(0, 16);
+                        this.value = raw.match(/.{1,4}/g)?.join(' ') || '';
+                    });
+                }
+                if (expiryInput) {
+                    expiryInput.addEventListener('input', function () {
+                        let raw = this.value.replace(/\D/g, '').slice(0, 4);
+                        let formatted = raw;
+                        if (raw.length >= 3) formatted = raw.slice(0, 2) + ' / ' + raw.slice(2);
+                        else if (raw.length === 2 && !this.value.includes('/')) formatted = raw + ' / ';
+                        this.value = formatted;
+                    });
+                }
+                if (cvvInput) {
+                    cvvInput.addEventListener('input', function () {
+                        this.value = this.value.replace(/\D/g, '').slice(0, 3);
+                    });
+                }
 
-                if (mode === 'saved') renderSavedCards();
-            }
-
-            document.querySelectorAll('.payment-tab').forEach((btn) => {
-                btn.addEventListener('click', () => {
-                    const id = btn.id.replace('tab-', '');
-                    setActiveTab(id);
-                });
-            });
-
-            if (cardNumberInput) {
-                cardNumberInput.addEventListener('input', function () {
-                    let raw = this.value.replace(/\D/g, '').slice(0, 16);
-                    this.value = raw.match(/.{1,4}/g)?.join(' ') || '';
-                });
-            }
-            if (expiryInput) {
-                expiryInput.addEventListener('input', function () {
-                    let raw = this.value.replace(/\D/g, '').slice(0, 4);
-                    let formatted = raw;
-                    if (raw.length >= 3) formatted = raw.slice(0, 2) + ' / ' + raw.slice(2);
-                    else if (raw.length === 2 && !this.value.includes('/')) formatted = raw + ' / ';
-                    this.value = formatted;
-                });
-            }
-            if (cvvInput) {
-                cvvInput.addEventListener('input', function () {
-                    this.value = this.value.replace(/\D/g, '').slice(0, 3);
-                });
-            }
-
-            function showRebelError(title, message) {
-                const modal = document.createElement('div');
-                modal.id = 'rebel-error-modal';
-                modal.className = 'fixed inset-0 z-[3000] flex items-center justify-center bg-[#121212]/80 backdrop-blur-sm px-4';
-                modal.innerHTML = `
+                function showRebelError(title, message) {
+                    const modal = document.createElement('div');
+                    modal.id = 'rebel-error-modal';
+                    modal.className = 'fixed inset-0 z-[3000] flex items-center justify-center bg-[#121212]/80 backdrop-blur-sm px-4';
+                    modal.innerHTML = `
                     <div class="bg-white border-4 border-[#121212] p-6 w-[360px] shadow-[8px_8px_0px_0px_#f95630] relative animate-slideUp">
                         <button onclick="document.getElementById('rebel-error-modal').remove()" class="absolute top-4 right-4 material-symbols-outlined text-xl font-black hover:text-error transition-colors">close</button>
                         <div class="flex items-center gap-3 mb-4">
@@ -556,113 +573,113 @@
                         <button onclick="document.getElementById('rebel-error-modal').remove()" class="w-full bg-[#121212] text-white p-4 font-headline font-black text-sm uppercase tracking-widest hover:bg-error transition-colors shadow-[4px_4px_0px_0px_#f95630] active:translate-y-1 active:shadow-none">ACKNOWLEDGE_DEEDS</button>
                     </div>
                 `;
-                document.body.appendChild(modal);
+                    document.body.appendChild(modal);
 
-                // Close on ESC
-                const esc = (e) => { if (e.key === 'Escape') { modal.remove(); document.removeEventListener('keydown', esc); } };
-                document.addEventListener('keydown', esc);
-            }
-
-            btnCheckout.addEventListener('click', async (e) => {
-                e.preventDefault();
-
-                // 1. Validate Billing Address (Common to all modes)
-                const addr = document.getElementById('checkout-address')?.value?.trim();
-                const city = document.getElementById('checkout-city')?.value?.trim();
-                const post = document.getElementById('checkout-postal')?.value?.trim();
-                if (!addr || !city || !post) {
-                    showRebelError('EXECUTION_BLOCKED', 'Billing details incomplete. Cannot be allowed to execute payment.');
-                    return;
+                    // Close on ESC
+                    const esc = (e) => { if (e.key === 'Escape') { modal.remove(); document.removeEventListener('keydown', esc); } };
+                    document.addEventListener('keydown', esc);
                 }
 
-                // 2. Validate Payment Sections
-                if (activePaymentMode === 'card') {
-                    const cardNum = cardNumberInput?.value?.replace(/\s/g, '');
-                    const holder = nameInput?.value?.trim();
-                    const exp = expiryInput?.value?.trim();
-                    const cvv = cvvInput?.value?.trim();
+                btnCheckout.addEventListener('click', async (e) => {
+                    e.preventDefault();
 
-                    if (!cardNum || cardNum.length < 16 || !holder || !exp || !cvv) {
-                        showRebelError('EXECUTION_BLOCKED', 'Payment details incomplete. Cannot be allowed to execute payment.');
+                    // 1. Validate Billing Address (Common to all modes)
+                    const addr = document.getElementById('checkout-address')?.value?.trim();
+                    const city = document.getElementById('checkout-city')?.value?.trim();
+                    const post = document.getElementById('checkout-postal')?.value?.trim();
+                    if (!addr || !city || !post) {
+                        showRebelError('EXECUTION_BLOCKED', 'Billing details incomplete. Cannot be allowed to execute payment.');
                         return;
                     }
-                } else if (activePaymentMode === 'saved') {
-                    const cards = getSavedCards();
-                    if (cards.length && !selectedSavedCardId) {
-                        showRebelError('EXECUTION_BLOCKED', 'No card selected. Cannot be allowed to execute payment.');
-                        return;
-                    }
-                    if (!cards.length) {
-                        showRebelError('EXECUTION_BLOCKED', 'No saved cards available. Cannot be allowed to execute payment.');
-                        return;
-                    }
-                } else if (activePaymentMode === 'crypto') {
-                    // Crypto usually connects on the next step, but let's confirm intent
-                    if (!confirm('Redirect to secure Crypto Payment Gateway?')) return;
-                }
 
-                const selectedCard = getSavedCards().find(
-                    (c) => String(c.id) === String(selectedSavedCardId)
-                );
-                const prefillName =
-                    activePaymentMode === 'saved' && selectedCard?.name
-                        ? selectedCard.name
-                        : nameInput?.value?.trim() || '';
+                    // 2. Validate Payment Sections
+                    if (activePaymentMode === 'card') {
+                        const cardNum = cardNumberInput?.value?.replace(/\s/g, '');
+                        const holder = nameInput?.value?.trim();
+                        const exp = expiryInput?.value?.trim();
+                        const cvv = cvvInput?.value?.trim();
 
-                try {
-                    btnCheckout.innerHTML = 'CONNECTING_TO_NODE...';
-                    btnCheckout.style.pointerEvents = 'none';
-
-                    const options = {
-                        key: FUTURA_CONFIG.RAZORPAY_KEY_ID,
-                        amount: 19900,
-                        currency: 'INR',
-                        name: 'Digital Rebel',
-                        description: 'Rebel Pro - Elite Monthly Access',
-                        handler: async function (response) {
-                            try {
-                                btnCheckout.innerHTML = 'VERIFYING_CRYPTOGRAPHIC_SEAL...';
-                                const verifyRes = await futuraApi.subscriptions.purchaseElite(response.razorpay_payment_id);
-                                if (verifyRes.error) throw new Error(verifyRes.error);
-                                btnCheckout.innerHTML = 'WELCOME_TO_THE_ELITE';
-                                btnCheckout.classList.add('bg-black', 'text-primary-fixed');
-                                setTimeout(() => {
-                                    window.location.href = 'dashboard_digital_rebel_desktop.html#elite-hub';
-                                }, 1500);
-                            } catch (err) {
-                                console.error('Verification Error:', err);
-                                alert('Payment verification failed. ' + err.message);
-                                resetButton();
-                            }
-                        },
-                        prefill: {
-                            email: session.user?.email || '',
-                            name: prefillName
-                        },
-                        theme: { color: '#cafd00' },
-                        modal: {
-                            ondismiss: function () {
-                                resetButton();
-                            }
+                        if (!cardNum || cardNum.length < 16 || !holder || !exp || !cvv) {
+                            showRebelError('EXECUTION_BLOCKED', 'Payment details incomplete. Cannot be allowed to execute payment.');
+                            return;
                         }
-                    };
+                    } else if (activePaymentMode === 'saved') {
+                        const cards = getSavedCards();
+                        if (cards.length && !selectedSavedCardId) {
+                            showRebelError('EXECUTION_BLOCKED', 'No card selected. Cannot be allowed to execute payment.');
+                            return;
+                        }
+                        if (!cards.length) {
+                            showRebelError('EXECUTION_BLOCKED', 'No saved cards available. Cannot be allowed to execute payment.');
+                            return;
+                        }
+                    } else if (activePaymentMode === 'crypto') {
+                        // Crypto usually connects on the next step, but let's confirm intent
+                        if (!confirm('Redirect to secure Crypto Payment Gateway?')) return;
+                    }
 
-                    const rzp = new window.Razorpay(options);
-                    rzp.open();
-                } catch (err) {
-                    console.error('Checkout Error:', err);
-                    alert('Failed to initialize connection. ' + err.message);
-                    resetButton();
+                    const selectedCard = getSavedCards().find(
+                        (c) => String(c.id) === String(selectedSavedCardId)
+                    );
+                    const prefillName =
+                        activePaymentMode === 'saved' && selectedCard?.name
+                            ? selectedCard.name
+                            : nameInput?.value?.trim() || '';
+
+                    try {
+                        btnCheckout.innerHTML = 'CONNECTING_TO_NODE...';
+                        btnCheckout.style.pointerEvents = 'none';
+
+                        const options = {
+                            key: FUTURA_CONFIG.RAZORPAY_KEY_ID,
+                            amount: 19900,
+                            currency: 'INR',
+                            name: 'Digital Rebel',
+                            description: 'Rebel Pro - Elite Monthly Access',
+                            handler: async function (response) {
+                                try {
+                                    btnCheckout.innerHTML = 'VERIFYING_CRYPTOGRAPHIC_SEAL...';
+                                    const verifyRes = await futuraApi.subscriptions.purchaseElite(response.razorpay_payment_id);
+                                    if (verifyRes.error) throw new Error(verifyRes.error);
+                                    btnCheckout.innerHTML = 'WELCOME_TO_THE_ELITE';
+                                    btnCheckout.classList.add('bg-black', 'text-primary-fixed');
+                                    setTimeout(() => {
+                                        window.location.href = 'dashboard_digital_rebel_desktop.html#elite-hub';
+                                    }, 1500);
+                                } catch (err) {
+                                    console.error('Verification Error:', err);
+                                    alert('Payment verification failed. ' + err.message);
+                                    resetButton();
+                                }
+                            },
+                            prefill: {
+                                email: session.user?.email || '',
+                                name: prefillName
+                            },
+                            theme: { color: '#cafd00' },
+                            modal: {
+                                ondismiss: function () {
+                                    resetButton();
+                                }
+                            }
+                        };
+
+                        const rzp = new window.Razorpay(options);
+                        rzp.open();
+                    } catch (err) {
+                        console.error('Checkout Error:', err);
+                        alert('Failed to initialize connection. ' + err.message);
+                        resetButton();
+                    }
+                });
+
+                function resetButton() {
+                    btnCheckout.innerHTML =
+                        'EXECUTE PAYMENT <span class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>';
+                    btnCheckout.style.pointerEvents = 'auto';
                 }
             });
-
-            function resetButton() {
-                btnCheckout.innerHTML =
-                    'EXECUTE PAYMENT <span class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>';
-                btnCheckout.style.pointerEvents = 'auto';
-            }
-        });
-    </script>
+        </script>
 </body>
 
 </html>

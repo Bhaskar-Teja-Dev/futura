@@ -34,11 +34,13 @@ router.get('/', async (c) => {
     return c.json({ error: 'Profile not found' }, 404)
   }
 
+  // Best-effort monthly token refresh — non-fatal if RPC fails
   const { error: refreshErr } = await supabase.rpc('refresh_elite_monthly_streak_tokens', {
     p_user_id: userId
   })
   if (refreshErr) {
-    return c.json({ error: refreshErr.message }, 500)
+    console.warn('[profile] refresh_elite_monthly_streak_tokens failed (non-fatal):', refreshErr.message)
+    // Do not return 500 — continue to return the profile and current subscription data
   }
 
   const { data: subscription, error: subError } = await supabase
