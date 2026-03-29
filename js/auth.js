@@ -152,7 +152,7 @@ async function updateNavAuth() {
   const headerBtn = document.getElementById('btn-auth-header');
   const nameLabel = document.getElementById('user-name-header');
   const displayName = document.getElementById('user-display-name');
-  const sidebarName = document.getElementById('user-name');
+  const sidebarNames = document.querySelectorAll('#user-name, #sidebar-user-name');
 
   const username = (session?.user?.email?.split('@')[0] || 'REBEL').toUpperCase();
 
@@ -162,7 +162,7 @@ async function updateNavAuth() {
       nameLabel.classList.remove('hidden');
       if (displayName) displayName.textContent = username;
     }
-    if (sidebarName) sidebarName.textContent = username;
+    sidebarNames.forEach(el => el.textContent = username);
   } else {
     if (headerBtn) {
       headerBtn.style.display = 'flex';
@@ -215,25 +215,7 @@ async function updateNavAuth() {
     }
   }
 
-  // Legacy/General Buttons (Connect Wallet etc)
-  const otherAuthButtons = document.querySelectorAll(
-    '#btn-connect-wallet, #connect-wallet-btn, [id*="connect-wallet"]'
-  );
-
-  otherAuthButtons.forEach(btn => {
-    if (session && _profileVerified) {
-      btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
-      btn.onclick = (e) => {
-        e.preventDefault();
-        window.location.href = 'dashboard_digital_rebel_desktop.html';
-      };
-    } else {
-      btn.onclick = (e) => {
-        e.preventDefault();
-        signInWithGoogle();
-      };
-    }
-  });
+  // Connect Wallet logic removed
 
   // Populate Zens Balance in Nav if applicable
   // Populate Zens Balance in Nav if applicable
@@ -246,7 +228,28 @@ async function updateNavAuth() {
       try {
         const { zens } = await futuraApi.zens.balance();
         const formatted = (zens || 0).toLocaleString('en-US') + ' ZENS';
-        zensPills.forEach(p => p.textContent = formatted);
+        zensPills.forEach(p => {
+          p.textContent = formatted;
+          // Make the parent container clickable for the Razorpay flow
+          const container = p.closest('.bg-surface-container') || p.closest('#nav-zens-pill') || p.parentElement;
+          if (container && !container._hasZensClickListener) {
+            container.style.cursor = 'pointer';
+            container.classList.add('hover:bg-[#cafd00]', 'hover:text-[#121212]', 'transition-all');
+            // Remove text color utility so hover applies smoothly
+            container.classList.remove('text-primary-fixed', 'text-[#cafd00]');
+            container.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (typeof buyZens === 'function') {
+                buyZens(newBalance => {
+                  const fmt = (newBalance || 0).toLocaleString('en-US') + ' ZENS';
+                  document.querySelectorAll('#nav-zens-balance, [id*="zens-balance"]').forEach(el => el.textContent = fmt);
+                  if (window.showToast) showToast('ZENS Successfully added!');
+                });
+              }
+            });
+            container._hasZensClickListener = true;
+          }
+        });
       } catch (err) {
         console.error("Failed to load Zens balance:", err);
       }
@@ -257,12 +260,11 @@ async function updateNavAuth() {
       if (btn.textContent.trim().toUpperCase() === 'ADD MONEY' || btn.id === 'add-money-btn') {
         btn.onclick = () => {
           if (typeof buyZens === 'function') {
-            buyZens(newBalance => {
-              const formatted = (newBalance || 0).toLocaleString('en-US') + ' ZENS';
-              document.querySelectorAll('#nav-zens-balance').forEach(p => p.textContent = formatted);
-              if (window.showToast) showToast('ZENS Successfully added!');
-              if (window.RebelNotifications) RebelNotifications.add('ZENS ACQUIRED', `Successfully added ${newBalance.toLocaleString()} ZENS to your vault.`, 'success');
-            });
+              buyZens(newBalance => {
+                const formatted = (newBalance || 0).toLocaleString('en-US') + ' ZENS';
+                document.querySelectorAll('#nav-zens-balance').forEach(p => p.textContent = formatted);
+                if (window.showToast) showToast('ZENS Successfully added!');
+              });
           }
         };
       }

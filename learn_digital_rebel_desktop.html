@@ -84,7 +84,7 @@
   </div>
   <div class="flex items-center gap-4">
     <!-- ZENS Balance Pill -->
-    <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+    <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[ #FFFFFF] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
       <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
       <span id="nav-zens-balance">0 ZENS</span>
     </div>
@@ -218,26 +218,7 @@
 <!-- Toast -->
 <div id="toast"></div>
 
-<!-- ── WALLET MODAL ──────────────────────────────────────────────── -->
-<div id="modal-wallet" class="modal-overlay">
-  <div class="modal-box" style="max-width:460px">
-    <button class="modal-close" onclick="closeModal('modal-wallet')">✕</button>
-    <div class="p-8">
-      <p class="font-headline font-bold text-xs tracking-widest uppercase text-outline mb-2">Web3</p>
-      <h2 class="text-3xl font-headline font-black uppercase mb-1">Connect Wallet</h2>
-      <p class="text-sm text-on-surface-variant mb-6">Choose a provider to connect to Digital Rebel.</p>
-      <div class="flex flex-col gap-3 mb-6">
-        <button class="wallet-btn" onclick="connectWallet('MetaMask')"><span style="font-size:1.4rem">🦊</span><span>MetaMask</span><span class="ml-auto text-xs text-outline font-headline uppercase">Popular</span></button>
-        <button class="wallet-btn" onclick="connectWallet('WalletConnect')"><span style="font-size:1.4rem">🔵</span><span>WalletConnect</span></button>
-        <button class="wallet-btn" onclick="connectWallet('Coinbase Wallet')"><span style="font-size:1.4rem">🔷</span><span>Coinbase Wallet</span></button>
-        <button class="wallet-btn" onclick="connectWallet('Phantom')"><span style="font-size:1.4rem">👻</span><span>Phantom</span><span class="ml-auto text-xs text-outline font-headline uppercase">Solana</span></button>
-      </div>
-      <p class="text-xs text-on-surface-variant text-center font-headline">By connecting you agree to our terms and privacy policy.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ── NOTIFICATIONS MODAL ──────────────────────────────────────── -->
+<!-- WALLET MODAL REMOVED -->
 <div id="modal-notifications" class="modal-overlay">
   <div class="modal-box" style="max-width:420px">
     <button class="modal-close" onclick="closeModal('modal-notifications')">✕</button>
@@ -420,15 +401,7 @@ function animateProgress(id, pct, ms) {
   let s=null; requestAnimationFrame(function step(ts){ if(!s)s=ts; el.style.width=Math.min((ts-s)/ms,1)*pct+'%'; if((ts-s)<ms)requestAnimationFrame(step); });
 }
 
-// ── Wallet ────────────────────────────────────────────────────────────────────
-document.getElementById('btn-connect-wallet').addEventListener('click', ()=>openModal('modal-wallet'));
-function connectWallet(name) {
-  const btn = document.getElementById('btn-connect-wallet');
-  btn.textContent = name+' ✓'; btn.style.background='#cafd00';
-  closeModal('modal-wallet'); showToast(name+' connected successfully');
-}
-
-// ── Notifications ─────────────────────────────────────────────────────────────
+// Wallet Logic Removed
 document.getElementById('btn-notifications').addEventListener('click', ()=>openModal('modal-notifications'));
 
 // ── Settings ──────────────────────────────────────────────────────────────────
