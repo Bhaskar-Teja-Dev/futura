@@ -827,7 +827,9 @@
         // ─── Handle Repair API Call ────────────────────────────────────────
         async function handleRepairStreak(modal, btn) {
             try {
-                const res = await futuraApi.contributions.repairStreak();
+                const API = window.futuraApi;
+                if (!API || !API.contributions) throw new Error('Contributions API not available');
+                const res = await API.contributions.repairStreak();
                 if (res.success) {
                     // Close modal
                     if (modal) {
@@ -836,7 +838,9 @@
                     }
 
                     // Re-fetch fresh streak (this also runs the monthly token refresh RPC)
-                    const streakRes = await futuraApi.contributions.streak();
+                    const API2 = window.futuraApi;
+                    if (!API2 || !API2.contributions) throw new Error('Contributions API not available');
+                    const streakRes = await API2.contributions.streak();
                     const streak = streakRes?.streak;
 
                     // Update the streak card
@@ -1133,14 +1137,18 @@
                 if (userNameEl) userNameEl.textContent = email.split('@')[0];
 
                 // 2. Fetch early promises
-                const streakPromise = futuraApi.contributions.streak().catch(err => {
+                const API = window.futuraApi;
+                if (!API || !API.contributions) throw new Error('Contributions API not available');
+                const streakPromise = API.contributions.streak().catch(err => {
                     console.warn('Streak fetch failed:', err);
                     // Return a safe fallback — recovery_tokens will be patched from sub after profile loads
                     return { streak: { current: 0, longest: 0, can_replenish: false, recovery_tokens: null, is_elite: null } };
                 });
 
                 // 3. Fetch Profile & Goals
-                const profileResult = await futuraApi.profile.get();
+                const API2 = window.futuraApi;
+                if (!API2 || !API2.profile) throw new Error('Profile API not available');
+                const profileResult = await API2.profile.get();
                 const goal = profileResult.profile; // profiles table synced data
                 const sub = profileResult.subscription;
 
@@ -1183,7 +1191,9 @@
 
                 let projectionData = null;
                 try {
-                    const projectionRes = await futuraApi.projection.calculate(projectionPayload);
+                    const API3 = window.futuraApi;
+                    if (!API3 || !API3.projection) throw new Error('Projection API not available');
+                    const projectionRes = await API3.projection.calculate(projectionPayload);
                     if (projectionRes && typeof projectionRes.result === 'object' && projectionRes.result !== null) {
                         projectionData = projectionRes.result;
                     } else if (projectionRes && typeof projectionRes === 'object' &&
@@ -1281,7 +1291,9 @@
                 // 7. Liquid Assets — read from DB profile (liquid_cash column)
                 let walletZens = 0;
                 try {
-                    const balRes = await futuraApi.zens.balance();
+                    const API4 = window.futuraApi;
+                    if (!API4 || !API4.zens) throw new Error('ZENS API not available');
+                    const balRes = await API4.zens.balance();
                     walletZens = (balRes && balRes.zens != null) ? balRes.zens : 0;
                 } catch (e) { console.warn('Wallet balance fetch failed:', e); }
                 const liquidCash = parseInt(goal.liquid_cash || '0', 10) || 0;
@@ -1316,10 +1328,11 @@
 
                     // Load stock holdings from DB
                     try {
-                        if (!futuraApi || !futuraApi.holdings) {
+                        const API5 = window.futuraApi;
+                        if (!API5 || !API5.holdings) {
                             throw new Error('Holdings API not initialized');
                         }
-                        const holdRes = await futuraApi.holdings.list();
+                        const holdRes = await API5.holdings.list();
                         const holdings = holdRes.holdings || holdRes || [];
                         holdings.forEach(function (h) {
                             flowItems.push({
@@ -1340,7 +1353,9 @@
                     } catch (e) { console.warn('Holdings flow fetch failed:', e); }
 
                     try {
-                        const res = await futuraApi.contributions.list();
+                        const API6 = window.futuraApi;
+                        if (!API6 || !API6.contributions) throw new Error('Contributions API not available');
+                        const res = await API6.contributions.list();
                         const contribs = res.contributions || [];
                         contribs.forEach(function (c) {
                             if (c.note && c.note.startsWith('[MARKET_INVESTMENT]')) return;

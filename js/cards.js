@@ -12,8 +12,9 @@ var spentToday  = 1240;
 try {
   if (typeof requireAuth !== 'undefined') {
     var session = await requireAuth();
-    if (session && typeof futuraApi !== 'undefined') {
-      var goalsResult = await futuraApi.goals.get();
+    const API = window.futuraApi;
+    if (session && API && API.goals) {
+      var goalsResult = await API.goals.get();
       var goal = goalsResult.goal;
       if (goal && goal.target_monthly_income) {
         var mi = goal.target_monthly_income;

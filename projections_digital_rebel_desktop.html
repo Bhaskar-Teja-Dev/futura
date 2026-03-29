@@ -537,7 +537,9 @@
             if (!session) return;
 
             // 1. Fetch Profile & Subscription
-            const profileResult = await futuraApi.profile.get();
+            const API = window.futuraApi;
+            if (!API || !API.profile) throw new Error('Profile API not available');
+            const profileResult = await API.profile.get();
             const goal = profileResult.profile;
             const sub = profileResult.subscription;
 
@@ -598,7 +600,9 @@
             };
 
             try {
-                const gRes = await futuraApi.goals.get();
+                const API2 = window.futuraApi;
+                if (!API2 || !API2.goals) throw new Error('Goals API not available');
+                const gRes = await API2.goals.get();
                 if (gRes.goal) {
                     basePayload.currentAge = gRes.goal.current_age || gRes.goal.age || 25;
                     basePayload.retirementAge = gRes.goal.retirement_age || 65;
@@ -740,7 +744,9 @@
                     btnRecalc.textContent = 'CALCULATING...';
                     btnRecalc.style.pointerEvents = 'none';
 
-                    const res = await futuraApi.projection.calculate(payload);
+                    const API3 = window.futuraApi;
+                    if (!API3 || !API3.projection) throw new Error('Projection API not available');
+                    const res = await API3.projection.calculate(payload);
                     if (res.result && totalEl) {
                         const futureVal = res.result.futureSavings;
                         totalEl.textContent = 'Z ' + Math.round(futureVal).toLocaleString();

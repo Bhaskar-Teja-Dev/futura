@@ -427,7 +427,9 @@
       }
 
       try {
-        const profileResult = await futuraApi.profile.get();
+        const API = window.futuraApi;
+        if (!API || !API.profile) throw new Error('Profile API not available');
+        const profileResult = await API.profile.get();
         const goal = profileResult.profile;
         const sub = profileResult.subscription;
 
@@ -454,7 +456,9 @@
           btnSync.textContent = 'SYNCING...';
           btnSync.style.pointerEvents = 'none';
 
-          await futuraApi.profile.update({
+          const API = window.futuraApi;
+          if (!API || !API.profile) throw new Error('Profile API not available');
+          await API.profile.update({
             display_name: handleEl.value,
             bio: bioEl.value
           });

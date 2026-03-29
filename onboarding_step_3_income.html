@@ -189,7 +189,9 @@
 
           try {
             // 1. Upsert goals (This also initializes the profile and Zens balance in the backend)
-            await futuraApi.goals.upsert({
+            const API = window.futuraApi;
+            if (!API || !API.goals) throw new Error('Goals API not available');
+            await API.goals.upsert({
               current_age: parseInt(currentData.current_age, 10) || 0,
               retirement_age: parseInt(currentData.retirement_age, 10) || 0,
               target_monthly_income: currentData.target_monthly_income

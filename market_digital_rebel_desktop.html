@@ -420,18 +420,22 @@
         confirmBtn.textContent = 'PROCESSING...';
 
         try {
-          const result = await futuraApi.zens.spend(amt);
+          const API = window.futuraApi;
+          if (!API || !API.zens) throw new Error('ZENS API not available');
+          const result = await API.zens.spend(amt);
           if (result.success) {
             const navBalance = document.getElementById('nav-zens-balance');
             if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
             try {
-              if (futuraApi && futuraApi.holdings) {
-                await futuraApi.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
+              const API2 = window.futuraApi;
+              if (API2 && API2.holdings) {
+                await API2.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
               }
             } catch (e) { console.error('Holdings DB write failed:', e); }
             try {
-              if (futuraApi && futuraApi.contributions) {
-                await futuraApi.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
+              const API3 = window.futuraApi;
+              if (API3 && API3.contributions) {
+                await API3.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
               }
             } catch (e) { console.error('Silent streak log failed', e); }
             if (typeof RebelNotifications !== 'undefined') {
@@ -730,7 +734,9 @@
 
       // Hydrate Elite sidebar (tier label + token count) + set userTier
       try {
-        const profileRes = await futuraApi.profile.get().catch(() => null);
+        const API = window.futuraApi;
+        if (!API || !API.profile) throw new Error('Profile API not available');
+        const profileRes = await API.profile.get().catch(() => null);
         const sub = profileRes?.subscription; // Object: { entitlement: 'elite'|'free', ... }
         const entitlement = sub?.entitlement?.toLowerCase?.() ?? 'free';
         if (entitlement === 'elite') {

@@ -290,7 +290,9 @@
                     btnSubmit.innerHTML = 'UPDATING_LEDGER...';
                     btnSubmit.style.pointerEvents = 'none';
 
-                    const req = await futuraApi.contributions.create({
+                    const API = window.futuraApi;
+                    if (!API || !API.contributions) throw new Error('Contributions API not available');
+                    const req = await API.contributions.create({
                         amount: amount,
                         contribution_date: dateStr,
                         note: note
@@ -323,9 +325,12 @@
             });
 
             // Populate user profile info (optional flair)
-            futuraApi.profile.get().then(res => {
-                // You can bind to header profile logic here if generalized
-            });
+            const API = window.futuraApi;
+            if (API && API.profile) {
+              API.profile.get().then(res => {
+                  // You can bind to header profile logic here if generalized
+              });
+            }
         });
     </script>
 </body>

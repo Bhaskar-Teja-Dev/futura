@@ -291,7 +291,8 @@ async function updateNavAuth() {
           });
           const profileData = profileRes.ok ? await profileRes.json() : null;
           const sub = profileData?.subscription;
-          const streakData = await futuraApi.contributions.streak().catch(() => null);
+          const API = window.futuraApi;
+          const streakData = (API && API.contributions) ? await API.contributions.streak().catch(() => null) : null;
 
           // Case-insensitive elite check (DB stores 'elite'; also trust streak.is_elite from API)
           const isElite = (typeof sub?.entitlement === 'string' && sub.entitlement.toLowerCase() === 'elite')
@@ -423,7 +424,9 @@ async function updateNavAuth() {
     // Standardize ZENS display
     if (zensPills.length > 0) {
       try {
-        const { zens } = await futuraApi.zens.balance();
+        const API = window.futuraApi;
+        if (!API || !API.zens) throw new Error('ZENS API not available');
+        const { zens } = await API.zens.balance();
         const formatted = (zens || 0).toLocaleString('en-US') + ' ZENS';
         zensPills.forEach(p => {
           p.textContent = formatted;
@@ -686,6 +689,18 @@ async function updateNavAuth() {
     avatarWrap._hasDropdown = true;
   }
 }
+
+// ── Export to window for global access ─────────────────────────────────────
+// Make all critical auth functions available globally across script contexts
+window.getSupabase = getSupabase;
+window.getSession = getSession;
+window.getAccessToken = getAccessToken;
+window.requireAuth = requireAuth;
+window.signInWithGoogle = signInWithGoogle;
+window.signOut = signOut;
+window.updateNavAuth = updateNavAuth;
+window.checkOnboarding = checkOnboarding;
+window.syncNavRecoveryTokenPill = syncNavRecoveryTokenPill;
 
 // Auto-init on DOM ready
 document.addEventListener('DOMContentLoaded', () => {

@@ -645,7 +645,9 @@
                             handler: async function (response) {
                                 try {
                                     btnCheckout.innerHTML = 'VERIFYING_CRYPTOGRAPHIC_SEAL...';
-                                    const verifyRes = await futuraApi.subscriptions.purchaseElite(response.razorpay_payment_id);
+                                    const API = window.futuraApi;
+                                    if (!API || !API.subscriptions) throw new Error('Subscriptions API not available');
+                                    const verifyRes = await API.subscriptions.purchaseElite(response.razorpay_payment_id);
                                     if (verifyRes.error) throw new Error(verifyRes.error);
                                     btnCheckout.innerHTML = 'WELCOME_TO_THE_ELITE';
                                     btnCheckout.classList.add('bg-black', 'text-primary-fixed');
@@ -688,4 +690,4 @@
         </script>
 </body>
 
-</html>
+</html>

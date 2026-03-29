@@ -332,7 +332,9 @@
 				confirmBtn.textContent = 'PROCESSING...';
 
 				try {
-					const result = await futuraApi.zens.spend(a);
+					const API = window.futuraApi;
+					if (!API || !API.zens) throw new Error('ZENS API not available');
+					const result = await API.zens.spend(a);
 
 					if (result.success) {
 						const navBalance = document.getElementById('nav-zens-balance');
@@ -344,7 +346,9 @@
 
 						// Log as contribution to increment streak (saving)
 						try {
-							await futuraApi.contributions.create({
+							const API2 = window.futuraApi;
+							if (!API2 || !API2.contributions) throw new Error('Contributions API not available');
+							await API2.contributions.create({
 								amount: Math.round(a / 10), // Convert Zens back to USD metric for streak tracking
 								contribution_date: new Date().toISOString().split('T')[0],
 								note: '[MARKET_INVESTMENT] ' + ticker
@@ -436,7 +440,9 @@
 
 			// Refresh Navigation Pill manually since it's an isolated page
 			try {
-				const balanceResponse = await futuraApi.zens.balance();
+				const API = window.futuraApi;
+			if (!API || !API.zens) throw new Error('ZENS API not available');
+			const balanceResponse = await API.zens.balance();
 				if (balanceResponse && typeof balanceResponse.zens === 'number') {
 					const pill = document.getElementById('nav-zens-balance');
 					if (pill) pill.textContent = balanceResponse.zens.toLocaleString('en-US') + ' ZENS';
