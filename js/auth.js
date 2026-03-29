@@ -357,8 +357,12 @@ async function updateNavAuth() {
             if (existing) existing.style.display = 'none';
           }
 
-          // Centralize the sidebar hydration call
-          if (typeof hydrateEliteSidebar === 'function') {
+          // Initialize TierStateManager with subscription data (includes Realtime setup)
+          // This ensures tier changes are reflected instantly across all pages
+          if (typeof TierStateManager !== 'undefined') {
+            await TierStateManager.initializeFromProfile(sub);
+          } else if (typeof hydrateEliteSidebar === 'function') {
+            // Fallback for pages that don't have tier-state.js loaded
             await hydrateEliteSidebar(sub, streakData);
           }
 
