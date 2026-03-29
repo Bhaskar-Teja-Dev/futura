@@ -19,7 +19,7 @@ const TierStateManager = (() => {
     _currentTier = isElite ? 'elite' : 'free';
     _subscription = subscription;
 
-    console.log('[TierStateManager] Updating tier display:', isElite ? 'ELITE' : 'FREE');
+    console.log('[TierStateManager] Updating tier display:', isElite ? 'ELITE' : 'FREE', 'subscription:', subscription);
 
     // ═══ UPDATE TIER LABEL ═══
     const tierLabel = document.getElementById('sidebar-tier-label');
@@ -30,8 +30,10 @@ const TierStateManager = (() => {
 
     // ═══ UPDATE BUTTON ═══
     const upgradeBtn = document.getElementById('sidebar-upgrade-btn');
+    console.log('[TierStateManager] Button found:', !!upgradeBtn, 'isElite:', isElite);
     if (upgradeBtn) {
       if (isElite) {
+        console.log('[TierStateManager] Applying ELITE button styling...');
         // ELITE: Fire button
         upgradeBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px; animation: premiumPulse 2s infinite;">local_fire_department</span> <span class="relative z-10">Explore Benefits</span>';
         upgradeBtn.href = '#';

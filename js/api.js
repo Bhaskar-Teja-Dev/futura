@@ -24,7 +24,7 @@ async function apiFetch(path, options = {}) {
   return res.json();
 }
 
-const futuraApi = {
+var futuraApi = {
   profile: {
     get: () => apiFetch('/api/profile'),
     update: (body) => apiFetch('/api/profile', { method: 'PATCH', body: JSON.stringify(body) })
