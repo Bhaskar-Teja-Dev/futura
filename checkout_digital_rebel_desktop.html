@@ -385,7 +385,7 @@
                                 btnCheckout.innerHTML = 'VERIFYING_CRYPTOGRAPHIC_SEAL...';
 
                                 // 2. Verify on the backend
-                                const verifyRes = await futuraApi.subscriptions.purchasePro(response.razorpay_payment_id);
+                                const verifyRes = await futuraApi.subscriptions.purchaseElite(response.razorpay_payment_id);
 
                                 if (verifyRes.error) throw new Error(verifyRes.error);
 

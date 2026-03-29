@@ -26,7 +26,8 @@ function calculateStreak(
   lastDate: string | null,
   currentStreak: number,
   newDate: string,
-  hasMissedDayContribution: boolean
+  hasMissedDayContribution: boolean,
+  canUseToken: boolean = false
 ): number {
   if (!lastDate) {
     return 1
@@ -43,8 +44,14 @@ function calculateStreak(
     return currentStreak + 1
   }
   // Replenish window: exactly 2 days gap (missed 1 day)
-  if (diffDays === 2 && hasMissedDayContribution) {
-    return currentStreak + 2
+  if (diffDays === 2) {
+    if (hasMissedDayContribution) {
+      return currentStreak + 2
+    }
+    // Elite Recovery Token Usage
+    if (canUseToken) {
+      return currentStreak + 2 // Treat the missed day as recovered
+    }
   }
   // Missed too many days — reset
   return 1
@@ -200,12 +207,37 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     }
   }
 
+  // Fetch subscription and tokens
+  const { data: sub } = await supabase
+    .from('user_subscriptions')
+    .select('entitlement, streak_recovery_tokens')
+    .eq('user_id', userId)
+    .maybeSingle()
+
+  const isElite = sub?.entitlement === 'elite'
+  let tokens = sub?.streak_recovery_tokens ?? 0
+  let usedToken = false
+
+  const diffDays = lastDateStr ? Math.floor((new Date(`${body.contribution_date}T00:00:00Z`).getTime() - new Date(`${lastDateStr}T00:00:00Z`).getTime()) / (1000 * 60 * 60 * 24)) : 0
+  
+  const canUseToken = isElite && tokens > 0 && diffDays === 2 && !hasMissedDayContribution
+
   const nextCurrent = calculateStreak(
     lastDateStr,
     streakRow?.current_streak ?? 0,
     body.contribution_date,
-    hasMissedDayContribution
+    hasMissedDayContribution,
+    canUseToken
   )
+
+  if (canUseToken) {
+    usedToken = true
+    tokens -= 1
+    await supabase
+      .from('user_subscriptions')
+      .update({ streak_recovery_tokens: tokens })
+      .eq('user_id', userId)
+  }
   const nextLongest = Math.max(nextCurrent, streakRow?.longest_streak ?? 0)
   streakToReturn = nextCurrent
 

@@ -10,9 +10,9 @@ const purchaseSchema = z.object({
   razorpay_payment_id: z.string().min(1)
 })
 
-const PRO_PRICE_PAISE = 19900 // 199 INR
+const ELITE_PRICE_PAISE = 19900 // 199 INR
 
-router.post('/purchase-pro', zValidator('json', purchaseSchema), async (c) => {
+router.post('/purchase-elite', zValidator('json', purchaseSchema), async (c) => {
   const userId = c.get('userId')
   const { razorpay_payment_id } = c.req.valid('json')
 
@@ -42,9 +42,39 @@ router.post('/purchase-pro', zValidator('json', purchaseSchema), async (c) => {
   }
 
   if (payment.status !== 'captured') return c.json({ error: 'payment_not_captured' }, 400)
-  if (payment.amount < PRO_PRICE_PAISE) return c.json({ error: 'insufficient_payment_amount' }, 400)
+  if (payment.amount < ELITE_PRICE_PAISE) return c.json({ error: 'insufficient_payment_amount' }, 400)
 
-  // Successfully paid 199 INR for Elite Pro
+  // Successfully paid 199 INR for Elite
+  const supabase = getSupabase(c.env, c.get('token'))
+  
+  console.log('Starting subscription update for user:', userId)
+  
+  // Step 1: Upsert subscription
+  const { data: subData, error: subError } = await supabase
+    .from('user_subscriptions')
+    .upsert({
+      user_id: userId,
+      entitlement: 'elite',
+      streak_recovery_tokens: 2,
+      updated_at: new Date().toISOString()
+    }, { onConflict: 'user_id' })
+    .select()
+
+  if (subError) {
+    console.error('Upsert failed:', JSON.stringify(subError))
+    return c.json({ error: 'subscription_update_failed', details: subError.message }, 500)
+  }
+
+  console.log('Upsert successful:', subData)
+
+  // Step 2: Update tokens via RPC (fallback if upsert didn't set tokens)
+  const { error: rpcError } = await supabase.rpc('increment_streak_tokens', { user_id: userId, amount: 0 })
+  
+  if (rpcError) {
+    console.error('RPC failed:', JSON.stringify(rpcError))
+    // Don't fail the request if RPC fails - tokens were already set in upsert
+  }
+
   return c.json({ success: true, message: 'Welcome to the Elite' })
 })
 
