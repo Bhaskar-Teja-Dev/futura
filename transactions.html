@@ -123,7 +123,7 @@
     <div class="flex items-center gap-4">
       <!-- ZENS Balance Pill -->
       <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
-        <span>🪙</span>
+        <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
         <span id="nav-zens-balance">0 ZENS</span>
       </div>
       <!-- Notification Bell -->
@@ -315,10 +315,10 @@
     </a>
   </nav>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="/js/config.js"></script>
-  <script src="/js/notifications.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/api.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/notifications.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/api.js"></script>
   <script>
     let allContributions = [];
 
@@ -444,7 +444,7 @@
 
       const totalRealizedPL = totalProfits - totalLosses;
 
-      if (totalVolEl) totalVolEl.textContent = `🪙 ${totalZensVolume.toLocaleString('en-US')}`;
+      if (totalVolEl) totalVolEl.textContent = `Z ${totalZensVolume.toLocaleString('en-US')}`;
 
       const totalTrades = buyCount + sellCount;
       if (totalTrades > 0) {
@@ -455,7 +455,7 @@
       }
 
       if (plSnapshotEl) {
-        const prefix = totalRealizedPL >= 0 ? '+🪙 ' : '-🪙 ';
+        const prefix = totalRealizedPL >= 0 ? '+Z ' : '-Z ';
         const absVal = Math.abs(totalRealizedPL);
         plSnapshotEl.textContent = `${prefix}${absVal.toLocaleString('en-US')}`;
 
@@ -517,7 +517,7 @@
         let pnlDisplay = '--';
         let pnlColor = 'text-outline';
         if (pnl !== undefined && pnl !== null) {
-          pnlDisplay = (pnl >= 0 ? '+' : '-') + '🪙 ' + Math.abs(pnl).toLocaleString('en-US');
+          pnlDisplay = (pnl >= 0 ? '+' : '-') + 'Z ' + Math.abs(pnl).toLocaleString('en-US');
           pnlColor = pnl >= 0 ? 'text-primary-fixed-variant' : 'text-error';
         }
 
@@ -540,7 +540,7 @@
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
     <p class="text-xs font-bold text-outline lg:hidden">ZENS_VALUE</p>
-    <p class="font-headline font-bold text-lg">${parsed.isSell ? '+' : '-'}🪙 ${parsed.zensValue.toLocaleString('en-US')}</p>
+    <p class="font-headline font-bold text-lg">${parsed.isSell ? '+' : '-'}Z ${parsed.zensValue.toLocaleString('en-US')}</p>
 </div>
 <div class="col-span-6 lg:col-span-2 text-right">
     <p class="text-xs font-bold text-outline lg:hidden">P/L_IMPACT</p>
@@ -596,7 +596,7 @@
 
         bar.innerHTML = `
           <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-on-surface text-surface text-[10px] px-2 py-1 hidden group-hover:block neo-shadow z-20 whitespace-nowrap">
-            REALIZED_PNL: ${isProfit ? '+' : ''}🪙 ${Math.round(netVal)}
+            REALIZED_PNL: ${isProfit ? '+' : ''}Z ${Math.round(netVal)}
           </div>
           <div class="w-full ${isProfit ? 'bg-primary-fixed' : 'bg-error'} border-2 border-on-surface neo-shadow transition-all duration-500 ease-out" 
                style="height: 0%"></div>

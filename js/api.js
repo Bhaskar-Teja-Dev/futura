@@ -36,6 +36,7 @@ const futuraApi = {
   contributions: {
     list: () => apiFetch('/api/contributions'),
     create: (body) => apiFetch('/api/contributions', { method: 'POST', body: JSON.stringify(body) }),
+    delete: (id) => apiFetch(`/api/contributions/${id}`, { method: 'DELETE' }),
     streak: () => apiFetch('/api/contributions/streak')
   },
   projection: {
@@ -97,7 +98,7 @@ async function buyZens(onSuccess) {
     <style>@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}</style>
     <div style="background:#fff;border:3px solid #121212;box-shadow:8px 8px 0 #121212;width:100%;max-width:480px;animation:slideUp .2s ease;display:flex;flex-direction:column;">
       <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 24px 16px;border-bottom:2px solid #121212;">
-        <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:24px;text-transform:uppercase;letter-spacing:-.02em;">ADD ZENS 🪙</h2>
+        <h2 style="font-family:'Lexend',sans-serif;font-weight:900;font-size:24px;text-transform:uppercase;letter-spacing:-.02em;">ADD ZENS Z</h2>
         <button id="close-buy-menu" style="background:none;border:none;font-size:32px;cursor:pointer;font-weight:900;line-height:1;margin-top:-8px;">×</button>
       </div>
       
@@ -107,7 +108,7 @@ async function buyZens(onSuccess) {
         <!-- Package 1 -->
         <button data-amount="50" data-zens="500" class="zens-pack" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:3px solid #121212;background:#f8f8f8;cursor:pointer;transition:all 0.1s;">
           <div style="text-align:left;">
-            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;">🪙 500 <span style="font-size:12px;color:#767777;">ZENS</span></div>
+            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;">Z 500 <span style="font-size:12px;color:#767777;">ZENS</span></div>
             <div style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#000000;margin-top:4px;">STARTER PACK</div>
           </div>
           <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;">₹50</div>
@@ -117,7 +118,7 @@ async function buyZens(onSuccess) {
         <button data-amount="200" data-zens="2000" class="zens-pack" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:3px solid #121212;background:#cafd00;cursor:pointer;transition:all 0.1s;position:relative;box-shadow:4px 4px 0 #121212;">
           <div style="position:absolute;top:-12px;right:-12px;background:#121212;color:#fff;font-family:'Lexend',sans-serif;font-weight:900;font-size:10px;padding:4px 8px;border:2px solid #fff;transform:rotate(4deg);">MOST POPULAR</div>
           <div style="text-align:left;">
-            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;color:#121212;">🪙 2,000 <span style="font-size:12px;color:#121212;opacity:0.8;">ZENS</span></div>
+            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;color:#121212;">Z 2,000 <span style="font-size:12px;color:#121212;opacity:0.8;">ZENS</span></div>
             <div style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#121212;margin-top:4px;">PREMIUM PACK</div>
           </div>
           <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;color:#121212;">₹200</div>
@@ -126,7 +127,7 @@ async function buyZens(onSuccess) {
         <!-- Package 3 -->
         <button data-amount="1000" data-zens="10000" class="zens-pack" style="display:flex;justify-content:space-between;align-items:center;padding:16px;border:3px solid #121212;background:#121212;color:#fff;cursor:pointer;transition:all 0.1s;">
           <div style="text-align:left;">
-            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;color:#cafd00;">🪙 10,000 <span style="font-size:12px;color:#fff;opacity:0.7;">ZENS</span></div>
+            <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:20px;color:#cafd00;">Z 10,000 <span style="font-size:12px;color:#fff;opacity:0.7;">ZENS</span></div>
             <div style="font-family:'Lexend',sans-serif;font-weight:700;font-size:12px;color:#fff;opacity:0.9;margin-top:4px;">WHALE PACK</div>
           </div>
           <div style="font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;">₹1000</div>

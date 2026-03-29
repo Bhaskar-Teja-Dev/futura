@@ -125,7 +125,7 @@
     <div class="flex items-center gap-4">
       <!-- ZENS Balance Pill -->
       <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
-        <span>🪙</span>
+        <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
         <span id="nav-zens-balance">0 ZENS</span>
       </div>
       <!-- Notification Bell -->
@@ -259,10 +259,10 @@
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="/js/config.js"></script>
-  <script src="/js/notifications.js"></script>
-  <script src="/js/auth.js"></script>
-  <script src="/js/api.js"></script>
+  <script src="./js/config.js"></script>
+  <script src="./js/notifications.js"></script>
+  <script src="./js/auth.js"></script>
+  <script src="./js/api.js"></script>
   <script>
     // ── Toast System ──────────────────────────────────────────────────────────
     function showToast(msg, type = 'success') {
@@ -336,12 +336,12 @@
           
           <div style="background:#121212;color:#cafd00;border:2px solid #121212;padding:12px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Available Balance</span>
-            <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">🪙 ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
+            <span style="font-family:'Lexend',sans-serif;font-weight:900;font-size:16px;">Z ${currentZensBalance.toLocaleString('en-US')} ZENS</span>
           </div>
 
           <label style="display:block;font-family:'Lexend',sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;">How many ZENS to invest?</label>
           <div style="display:flex;border:3px solid #121212;overflow:hidden;margin-bottom:6px;">
-            <span style="background:#121212;color:#68FD00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;font-size:20px;">🪙</span>
+            <span style="background:#121212;color:#68FD00;font-family:'Lexend',sans-serif;font-weight:900;padding:10px 14px;font-size:20px;">Z</span>
             <input id="buy-amount" type="number" min="50" max="${currentZensBalance}" value="100" style="flex:1;border:none;outline:none;font-family:'Lexend',sans-serif;font-weight:900;font-size:18px;padding:10px 14px;">
           </div>
           <p style="font-family:'Inter',sans-serif;font-size:11px;color:#767777;margin-bottom:20px;">Minimum investment: 50 ZENS</p>
@@ -470,7 +470,7 @@
                 <span style="background:#a400a4;color:#fff;font-family:'Lexend',sans-serif;font-weight:800;font-size:11px;padding:3px 10px;">COMPOUNDING ALPHA</span>
                 <span style="background:#fce4fc;border:1.5px solid #a400a4;font-family:'Lexend',sans-serif;font-weight:700;font-size:10px;padding:2px 8px;color:#a400a4;">LINKED TO YOUR PLAN</span>
               </div>
-              <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;">If you direct 10% of your current liquid ZENS (${monthlyInv} ZENS/mo) into high-volatility assets like <strong>${topGainer.ticker}</strong> averaging 15% YOY, your corpus could violently scale to <strong>🪙 ${Math.floor(proj.result.totalCorpus).toLocaleString('en-US')}</strong> by age ${payload.retirementAge}.</p>
+              <p style="font-family:'Inter',sans-serif;font-size:13px;line-height:1.5;">If you direct 10% of your current liquid ZENS (${monthlyInv} ZENS/mo) into high-volatility assets like <strong>${topGainer.ticker}</strong> averaging 15% YOY, your corpus could violently scale to <strong>Z ${Math.floor(proj.result.totalCorpus).toLocaleString('en-US')}</strong> by age ${payload.retirementAge}.</p>
             </div>
           `;
         }
@@ -564,7 +564,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('market-sentiment').textContent = sentimentText;
       document.getElementById('market-sentiment').className = `font-headline font-black text-2xl uppercase ${sentimentColor}`;
-      document.getElementById('global-volume').textContent = `🪙 ${currentVol}M`;
+      document.getElementById('global-volume').textContent = `Z ${currentVol}M`;
     });
 
     let currentMarketMode = 'movers'; // movers | gainers | losers
@@ -622,7 +622,7 @@
           </div>
           <div class="flex-grow">
             <p class="font-headline font-bold text-xs uppercase tracking-widest text-[#767777]">${d.name}</p>
-            <p class="font-headline font-black text-3xl leading-none">🪙 ${d.price.toLocaleString('en-US')}</p>
+            <p class="font-headline font-black text-3xl leading-none">Z ${d.price.toLocaleString('en-US')}</p>
           </div>
           <div class="text-right shrink-0">
             <p class="font-headline font-black text-xl ${changeColor}">${isUp ? '+' : ''}${d.change}%</p>
