@@ -109,7 +109,7 @@
   </style>
 </head>
 
-<body class="bg-surface text-on-surface min-h-screen">
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
   <!-- TopNavBar -->
   <nav
     class="fixed top-0 w-full border-b-2 border-[#121212] z-50 bg-[#f6f6f6] dark:bg-[#121212] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex justify-between items-center px-6 h-20 w-full mx-auto">
@@ -125,7 +125,7 @@
         <a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all"
           href="assets_digital_rebel_desktop.html">Assets</a>
         <a class="font-['Lexend'] font-black uppercase tracking-tighter text-[#767777] hover:text-[#121212] dark:hover:text-[#f6f6f6] transition-all"
-          href="vault_digital_rebel_desktop.html" id="nav-vault">Vault</a>
+          href="learn_digital_rebel_desktop.html" id="nav-learn">Learn</a>
       </div>
     </div>
     <div class="flex items-center gap-4">
@@ -146,8 +146,60 @@
       </div>
     </div>
   </nav>
+  <div class="flex flex-1 w-full">
+      <!-- SideNavBar -->
+      <aside
+          class="fixed left-0 top-0 h-full w-64 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] hidden lg:flex z-40">
+          <div class="px-6 mb-8 flex items-center gap-3">
+              <div
+                  class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden">
+                  <img alt="Rebel_01" class="w-full h-full object-cover"
+                      data-alt="Cyberpunk style profile avatar with neon accents and high contrast lighting in a brutalist frame"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+              </div>
+              <div>
+                  <h3 id="user-name" class="font-Lexend font-black uppercase tracking-widest text-xs">Rebel_01</h3>
+                  <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-tertiary">Elite Tier</p>
+              </div>
+          </div>
+          <nav class="flex-1 space-y-1">
+              <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                  href="dashboard_digital_rebel_desktop.html">
+                  <span class="material-symbols-outlined">grid_view</span> Overview
+              </a>
+              <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                  href="projections_digital_rebel_desktop.html">
+                  <span class="material-symbols-outlined">trending_up</span> Projections
+              </a>
+              <a class="flex items-center gap-4 py-3 px-6 bg-[#cafd00] text-[#121212] border-2 border-[#121212] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs active:scale-95 transition-all"
+                  href="transactions.html">
+                  <span class="material-symbols-outlined">swap_horiz</span> Transactions
+              </a>
+              <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                  href="cards_digital_rebel_desktop.html">
+                  <span class="material-symbols-outlined">credit_card</span> Cards
+              </a>
+              <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                  href="#">
+                  <span class="material-symbols-outlined">bolt</span> Staking
+              </a>
+              <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                  href="settings_digital_rebel_desktop.html">
+                  <span class="material-symbols-outlined">help_outline</span> Support
+              </a>
+          </nav>
+          <div class="p-4 border-t-2 border-inverse-surface mt-auto">
+              <a href="upgrade_digital_rebel_desktop.html"
+                  class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
+                  Power</a>
+              <a class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
+                  href="#">
+                  <span class="material-symbols-outlined">logout</span> Logout
+              </a>
+          </div>
+      </aside>
   <!-- Main Content Area -->
-  <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto">
+  <main class="lg:ml-64 flex-1 pt-32 pb-24 px-6 max-w-7xl mx-auto w-full">
     <!-- Header Section -->
     <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
       <div>
@@ -250,6 +302,7 @@
       </div>
     </div>
   </main>
+  </div>
   <!-- BottomNavBar (Mobile Only) -->
   <nav
     class="md:hidden fixed bottom-0 left-0 w-full h-16 flex justify-around items-stretch bg-[#cafd00] border-t-4 border-[#121212] z-50">
@@ -273,7 +326,6 @@
       <span class="material-symbols-outlined">history</span>
       <span class="font-['Lexend'] font-bold text-[10px] uppercase">History</span>
     </a>
-  </nav>
   </nav>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="/js/config.js"></script>
