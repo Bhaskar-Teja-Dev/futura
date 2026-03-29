@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="description" content="Terms of use for Digital Rebel: protocol rules, zero-custody security, risk disclaimers, and subscription tiers." />
+    <meta name="description"
+        content="Terms of use for Digital Rebel (Futura): Google OAuth, Supabase, RevenueCat, projections disclaimer, Free vs Pro, and third-party services." />
     <link rel="canonical" href="https://futura.vercel.app/terms.html" />
     <script src="./js/config.js"></script>
     <script src="./js/site-meta.js"></script>
     <link rel="stylesheet" href="css/app.css" />
-    <title>Digital Rebel | Terms.sh — The Protocol Rules</title>
+    <title>Digital Rebel | terms.sh — Terms of Use</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet" />
@@ -17,22 +18,27 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <style>
-        .neo-shadow {
-            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
-        }
         .neo-shadow-large {
             box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
         }
+
         .rebel-grid {
             background-image: radial-gradient(#d3d5d5 1px, transparent 1px);
             background-size: 20px 20px;
+        }
+
+        .terms-muted {
+            color: var(--color-on-surface-variant, #5c5c5c);
         }
     </style>
 </head>
 
 <body class="bg-surface font-body text-on-surface rebel-grid">
-    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:px-4 focus:py-3 focus:bg-primary-fixed focus:text-on-primary-fixed focus:border-2 focus:border-on-surface">Skip to main content</a>
-    <div class="sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-2 border-on-surface dark:border-surface shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+    <a href="#main-content"
+        class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:px-4 focus:py-3 focus:bg-primary-fixed focus:text-on-primary-fixed focus:border-2 focus:border-on-surface">Skip
+        to main content</a>
+    <div
+        class="sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-2 border-on-surface dark:border-surface shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
         <header class="flex justify-between items-center w-full px-4 sm:px-6 py-4" id="main-header">
             <div class="flex items-center min-w-0 flex-1">
                 <a href="index.html"
@@ -48,94 +54,184 @@
         </header>
     </div>
 
-    <main id="main-content" class="max-w-4xl mx-auto px-6 py-20">
+    <main id="main-content" class="max-w-4xl mx-auto px-6 py-20 pb-24">
         <div class="mb-16 border-l-8 border-primary-fixed pl-8">
-            <h1 class="font-headline font-black text-6xl md:text-8xl uppercase tracking-tighter leading-none mb-4">
-                TERMS.SH
+            <h1 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter leading-none mb-4">
+                terms.sh
             </h1>
-            <p class="font-headline font-bold text-xl uppercase tracking-widest text-secondary">The Rules of the Protocol</p>
+            <p class="font-headline font-bold text-lg md:text-xl uppercase tracking-widest text-on-surface-variant">
+                Terms of use — aligned with the Futura product specification
+            </p>
+            <p class="mt-4 text-sm font-body terms-muted max-w-2xl normal-case tracking-normal">
+                These terms describe how you may use Digital Rebel (the public-facing experience for the Futura stack):
+                retirement planning tools, projections, optional paid features, and integrations described in the
+                product requirements and technical handoff (Google OAuth, Supabase, RevenueCat).
+            </p>
         </div>
 
         <div class="space-y-12">
-            <!-- 01. Protocol Agreement -->
             <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
-                <h2 class="font-headline font-black text-3xl uppercase mb-6 flex items-center gap-3">
-                    <span class="text-primary-fixed">01.</span> PROTOCOL_AGREEMENT
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">01.</span> Agreement
                 </h2>
-                <div class="font-body text-on-surface-variant space-y-4 text-lg">
-                    <p>By accessing Digital Rebel, you agree to operate within the defined limits of the protocol. This is a non-negotiable handshake between you and the system.</p>
-                    <p>We provide the tools; you provide the discipline. Any attempt to exploit system vulnerabilities or bypass authentication layers will result in immediate termination of your access token.</p>
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>By accessing or using Digital Rebel, you agree to these terms. If you do not agree, do not use the
+                        service.</p>
+                    <p>The service is provided for personal, non-commercial use unless we agree otherwise in writing.
+                        We may suspend or terminate access for conduct that risks the platform, other users, or
+                        applicable law.</p>
                 </div>
             </section>
 
-            <!-- 02. Data & Security -->
             <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
-                <h2 class="font-headline font-black text-3xl uppercase mb-6 flex items-center gap-3">
-                    <span class="text-primary-fixed">02.</span> ZERO_CUSTODY_SECURITY
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">02.</span> Description of service
                 </h2>
-                <div class="font-body text-on-surface-variant space-y-4 text-lg">
-                    <p>Identity is managed via <span class="text-on-surface font-bold">Google OAuth</span> and <span class="text-on-surface font-bold">Supabase</span>. We do not store your passwords. We do not see your private keys.</p>
-                    <p>Row Level Security (RLS) is active on all data clusters. You only see what you own. You own what you build.</p>
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>Digital Rebel / Futura is a web application oriented toward long-horizon savings and retirement
+                        planning for adults (including Gen Z–aged users). Core capabilities include: sign-in with Google,
+                        onboarding and goal capture, dashboards, manual contribution logging, educational &ldquo;Finance
+                        Bite&rdquo; style content, and projection tooling.</p>
+                    <p><span class="text-on-surface font-bold">Explicitly out of scope for v1</span> (per product spec):
+                        direct broker integrations; Open Banking / PSD2 sync; regulated personal financial advice; native
+                        mobile apps; social comparison features; employer pension sync; multi-currency trading engines;
+                        and automated portfolio rebalancing. Availability of any feature on the live site is subject to
+                        what we actually ship.</p>
                 </div>
             </section>
 
-            <!-- 03. Risk Disclaimer -->
+            <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">03.</span> Accounts &amp; authentication
+                </h2>
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>Accounts are created through <span class="text-on-surface font-bold">Google OAuth</span> via
+                        <span class="text-on-surface font-bold">Supabase Auth</span>. You must provide accurate
+                        information allowed by your identity provider and keep your account secure. You are responsible
+                        for activity under your session.</p>
+                    <p>We do not operate a traditional password store for Google sign-in: session and token handling
+                        follow Supabase and your provider&rsquo;s rules. Row Level Security (RLS) in our database layer
+                        is designed so user-scoped data is only accessible under your authenticated identity.</p>
+                </div>
+            </section>
+
             <section class="bg-primary-fixed text-on-primary-fixed border-4 border-on-surface p-8 neo-shadow-large">
-                <h2 class="font-headline font-black text-3xl uppercase mb-6 flex items-center gap-3">
-                    <span class="text-on-surface">03.</span> HIGH_VOLATILITY_WARNING
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-on-surface">04.</span> Projections &amp; no advice
                 </h2>
-                <div class="font-body space-y-4 text-lg">
-                    <p class="font-black italic underline decoration-on-surface">ALL PROJECTIONS ARE ILLUSTRATIVE SNAPSHOTS.</p>
-                    <p>The projection engine uses long-run global equities estimate (defaulting to 7% annual growth based on MSCI World historical data). This is not financial advice. Markets are aggressive; your portfolio may face significant drawdown.</p>
-                    <p>Digital Rebel is a planning tool, not a regulated financial advisor. Consult with a professional before executing high-risk trades.</p>
-                </div>
-                <div class="mt-8 flex gap-4">
-                    <div class="bg-on-surface text-surface px-4 py-2 font-headline font-black text-xs uppercase tracking-widest">v0.4_Aggressive_Alpha</div>
+                <div class="font-body space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p class="font-black underline decoration-on-surface decoration-2">Projections are illustrative only.
+                        They are not live market quotes, promises, or personal financial advice.</p>
+                    <p>Example engines may use long-run global equities assumptions (for instance ~7% annual growth
+                        informed by broad index history such as MSCI World over multi-decade samples). Actual returns
+                        vary; you may lose principal. Markets are volatile.</p>
+                    <p>Digital Rebel is a planning and education tool, not a bank, broker, or regulated adviser in any
+                        jurisdiction. Consult a qualified professional before making investment or tax decisions.</p>
                 </div>
             </section>
 
-            <!-- 04. Subscriptions & Elite Tier -->
             <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
-                <h2 class="font-headline font-black text-3xl uppercase mb-6 flex items-center gap-3">
-                    <span class="text-primary-fixed">04.</span> ENTITLEMENT_SYSTEM
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">05.</span> Subscriptions &amp; billing
                 </h2>
-                <div class="table-wrap overflow-hidden">
-                    <table class="w-full text-left border-collapse">
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>Free and paid tiers may be offered. Paid entitlements can be managed through <span
+                            class="text-on-surface font-bold">RevenueCat</span> (with payment processing such as
+                        Stripe under the hood for web billing, per integration design). Fees, renewal, cancellation, and
+                        refunds follow the checkout and provider terms presented at purchase and applicable law.</p>
+                    <p>Entitlement status may be mirrored in our database (for example a <code
+                            class="text-sm bg-surface px-1 border border-on-surface">user_subscriptions</code>-style
+                        record) and updated via RevenueCat webhooks. If a webhook or sync fails, access to Pro features
+                        may be delayed until resolved.</p>
+                </div>
+                <div class="mt-8 overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm md:text-base">
                         <thead>
                             <tr class="border-b-2 border-on-surface">
-                                <th class="p-4 font-headline font-black uppercase text-sm">Tier</th>
-                                <th class="p-4 font-headline font-black uppercase text-sm">Access Status</th>
+                                <th class="py-3 pr-4 font-headline font-black uppercase">Tier</th>
+                                <th class="py-3 font-headline font-black uppercase">Summary (from product spec)</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b-2 border-on-surface border-dashed">
-                                <td class="p-4 font-bold">FREE_PROTO</td>
-                                <td class="p-4 text-on-surface-variant">Basic projections, daily bites, manual logging.</td>
+                        <tbody class="text-on-surface-variant">
+                            <tr class="border-b border-dashed border-on-surface/30">
+                                <td class="py-3 pr-4 font-bold text-on-surface">Free</td>
+                                <td class="py-3">Google sign-up, goal wizard, basic projection dashboard, contribution
+                                    logging and streaks, limited daily educational content.</td>
                             </tr>
                             <tr>
-                                <td class="p-4 font-black text-primary-fixed drop-shadow-[1px_1px_0px_#121212]">ELITE_REBEL</td>
-                                <td class="p-4 text-on-surface-variant">Unlimited scenarios, PDF roadmaps, Tax optimization, Priority support.</td>
+                                <td class="py-3 pr-4 font-black text-primary-fixed">Pro</td>
+                                <td class="py-3">Scenario modelling, asset allocation views, PDF-style roadmap exports
+                                    where implemented, expanded content, and other Pro-gated capabilities.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <p class="mt-6 font-body text-xs text-on-surface-variant uppercase tracking-widest">Subscriptions are managed via RevenueCat. All payments are final. Pro-rating applies on transitions.</p>
+            </section>
+
+            <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">06.</span> Third-party services
+                </h2>
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>The service relies on subprocessors and integrations such as Supabase (database, auth, edge
+                        functions), Google (identity), RevenueCat (subscriptions), hosting (for example Vercel or similar),
+                        and optional analytics or error reporting. Their terms and privacy notices apply to their
+                        processing.</p>
+                    <p>We may send operational email (for example summaries or security notices) using providers
+                        described in the technical design. You can control marketing communications where required by
+                        law.</p>
+                </div>
+            </section>
+
+            <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">07.</span> Acceptable use
+                </h2>
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>You will not probe, attack, or misuse the service; scrape at unreasonable rates; attempt to bypass
+                        entitlements; upload malware; or use the service to violate law or third-party rights. We may
+                        investigate and cooperate with authorities where required.</p>
+                </div>
+            </section>
+
+            <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">08.</span> Disclaimers &amp; limitation of liability
+                </h2>
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>The service is provided <span class="text-on-surface font-bold">&ldquo;as is&rdquo;</span> and
+                        <span class="text-on-surface font-bold">&ldquo;as available.&rdquo;</span> We disclaim warranties
+                        to the fullest extent permitted by law, including implied warranties of merchantability or
+                        fitness for a particular purpose.</p>
+                    <p>To the extent permitted by law, we are not liable for indirect, incidental, special,
+                        consequential, or punitive damages, or for loss of profits, data, or goodwill, arising from your
+                        use of the service. Our aggregate liability for claims relating to the service is limited to the
+                        greater of (a) amounts you paid us for the service in the twelve months before the claim or (b)
+                        one hundred currency units (or the minimum enforceable cap in your jurisdiction).</p>
+                    <p>Some jurisdictions do not allow certain limitations; in those cases our liability is limited to
+                        the maximum permitted.</p>
+                </div>
+            </section>
+
+            <section class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large">
+                <h2 class="font-headline font-black text-2xl md:text-3xl uppercase mb-6 flex items-center gap-3">
+                    <span class="text-primary-fixed">09.</span> Changes &amp; contact
+                </h2>
+                <div class="font-body text-on-surface-variant space-y-4 text-base md:text-lg normal-case tracking-normal">
+                    <p>We may update these terms. Material changes will be indicated by posting the revised terms with a
+                        new effective date and, where required, additional notice. Continued use after the effective date
+                        constitutes acceptance.</p>
+                    <p>For questions about these terms, use the contact options published on the Digital Rebel support
+                        or marketing pages, or the channel we designate for legal notices.</p>
+                </div>
             </section>
         </div>
 
-        <div class="mt-20 text-center">
-            <p class="font-headline font-black uppercase text-sm tracking-widest opacity-40">System_Clock: 2026_03_29 // Protocol_V1.0</p>
+        <div class="mt-20 text-center border-t-4 border-[#cafd00] pt-12">
+            <p class="font-headline font-black uppercase text-xs tracking-widest text-on-surface-variant">Protocol
+                reference · Futura PRD / Design / Tech handoff · Digital Rebel</p>
         </div>
     </main>
-    <footer class="border-t-2 border-primary-fixed bg-inverse-surface text-surface px-6 py-8">
-        <div class="max-w-4xl mx-auto flex flex-wrap gap-6 justify-between items-center font-headline font-black uppercase text-xs tracking-widest">
-            <span>© <span data-year-range></span> Digital Rebel</span>
-            <div class="flex gap-6">
-                <a class="text-surface hover:text-primary-fixed no-underline" href="privacy.html">Privacy</a>
-                <a class="text-surface hover:text-primary-fixed no-underline" href="index.html">Home</a>
-            </div>
-        </div>
-    </footer>
-    <script src="./js/footer-year.js"></script>
 </body>
+
 </html>

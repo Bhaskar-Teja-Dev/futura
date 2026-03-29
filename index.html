@@ -48,50 +48,19 @@
     to main content</a>
   <div class="sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-2 border-on-surface dark:border-surface shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
     <header class="flex flex-wrap justify-between items-center w-full gap-4 px-4 sm:px-6 py-4" id="main-header">
-      <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
-        <button type="button"
-          class="lg:hidden shrink-0 inline-flex items-center justify-center min-w-[44px] min-h-[44px] border-2 border-on-surface bg-surface text-on-surface hover:bg-surface-container transition-colors"
-          id="nav-mobile-toggle" aria-expanded="false" aria-controls="mobile-nav-panel">
-          <span class="sr-only">Open main menu</span>
-          <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
-        </button>
+      <div class="flex items-center min-w-0 flex-1">
         <a href="index.html"
           class="text-xl sm:text-2xl font-black uppercase tracking-tighter text-on-surface dark:text-surface font-headline no-underline truncate">Digital
           Rebel</a>
       </div>
-      <nav class="hidden lg:flex items-center gap-8 font-headline font-black uppercase text-xs tracking-widest"
-        aria-label="Main">
-        <a class="text-on-surface hover:text-primary-fixed no-underline" href="market_digital_rebel_desktop.html">Marketplace</a>
-        <a class="text-on-surface hover:text-primary-fixed no-underline" href="learn_digital_rebel_desktop.html">Learn</a>
-        <a class="text-on-surface hover:text-primary-fixed no-underline" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-        <a class="text-on-surface hover:text-primary-fixed no-underline" href="support_digital_rebel_desktop.html">Support</a>
-      </nav>
       <div class="flex items-center gap-4 shrink-0">
         <a href="onboarding_digital_rebel_desktop.html"
-          class="hidden lg:inline-flex items-center justify-center min-h-[44px] px-4 bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none no-underline"
+          class="inline-flex items-center justify-center min-h-[44px] px-4 bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none no-underline"
           id="btn-connect-wallet">
           Connect Wallet
         </a>
       </div>
     </header>
-    <div id="mobile-nav-panel"
-      class="lg:hidden absolute left-0 right-0 top-full border-b-2 border-on-surface bg-surface p-6 shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] hidden"
-      aria-hidden="true">
-      <h2 id="mobile-nav-heading" class="sr-only">Site navigation</h2>
-      <nav class="flex flex-col gap-4 font-headline font-black uppercase text-sm tracking-widest" aria-label="Mobile">
-        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
-          href="market_digital_rebel_desktop.html">Marketplace</a>
-        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
-          href="learn_digital_rebel_desktop.html">Learn</a>
-        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
-          href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
-          href="support_digital_rebel_desktop.html">Support</a>
-        <a href="onboarding_digital_rebel_desktop.html"
-          class="inline-flex items-center justify-center min-h-[44px] px-4 mt-2 bg-primary-fixed text-on-primary-fixed border-2 border-on-surface text-xs tracking-widest text-center no-underline active:translate-x-[2px] active:translate-y-[2px]"
-          id="btn-connect-wallet-mobile">Connect Wallet</a>
-      </nav>
-    </div>
   </div>
   <main id="main-content">
     <!-- Hero Section -->
@@ -122,15 +91,10 @@
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbSlYWQx7duriQ_rj1NkH12h0GPa6HXIDIMazPgvscwHaU0LrccorkuzuIhtDpMuUMIEvQc27qUB_AaYDxuJNz7VeElyUlxaHNGnABnsN5QMzTBTDVSGsx05jIxorxhKmdzR_IiiffekEIQR4xadI5EnXGV8YwxwVHVVo88rn9uq2i-uyNK-W1jaVVwvyb9vqadxunjI4sluWlaRmjOGa0sqxde0pAYhzni0eKL2qxhiuPvpW56hqN44MwRReBRJzNUdWS-P6qOwh" />
             Sign in with Google
           </a>
-          <a href="dashboard_digital_rebel_desktop.html"
-            class="bg-surface-container-lowest text-on-surface px-8 py-4 min-h-[44px] border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter neo-shadow hover:bg-on-surface hover:text-surface transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none no-underline"
-            id="btn-view-live-feed">
-            View Live Feed
-          </a>
         </div>
         <p class="mt-4 max-w-xl text-sm font-body font-medium text-on-surface-variant normal-case tracking-normal">
-          Sign in with Google to link your account. View Live Feed opens the dashboard preview without signing in.
-          OAuth is handled by your provider; we only use account data to operate your vault.
+          Sign in with Google to link your account. OAuth is handled by your provider; we only use account data to
+          operate your vault.
         </p>
         <div class="mt-16 flex items-center gap-4">
           <div class="flex -space-x-3" aria-hidden="true">
@@ -241,8 +205,8 @@
           </p>
           <div class="mt-8 pt-8 border-t-2 border-on-tertiary-container/20">
             <a href="settings_digital_rebel_desktop.html"
-              class="font-headline font-black text-xs uppercase tracking-widest text-on-tertiary-container hover:underline cursor-pointer no-underline">Privacy.exe
-              →</a>
+              class="font-headline font-black text-xs uppercase tracking-widest text-on-tertiary-container hover:underline cursor-pointer no-underline">Ghost
+              settings →</a>
           </div>
         </div>
       </div>
@@ -290,10 +254,11 @@
               </div>
             </div>
           </div>
-          <a href="market_digital_rebel_desktop.html"
-            class="mt-12 w-full lg:w-fit min-h-[52px] px-12 py-5 inline-flex items-center justify-center bg-on-surface text-surface font-headline font-black uppercase text-xl neo-shadow hover:bg-primary-fixed hover:text-on-surface transition-colors text-center no-underline active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-            id="btn-enter-marketplace">
-            Enter Marketplace
+          <a href="onboarding_digital_rebel_desktop.html"
+            class="mt-12 w-full lg:w-fit min-h-[52px] px-12 py-5 inline-flex flex-col items-center justify-center gap-1 bg-on-surface text-surface font-headline font-black uppercase text-xl neo-shadow hover:bg-primary-fixed hover:text-on-surface transition-colors text-center no-underline active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+            id="btn-continue-signin-market">
+            <span>Continue to Sign In</span>
+  
           </a>
           <p class="mt-4 max-w-md text-xs font-body font-medium text-on-surface-variant normal-case tracking-normal">
             Prices shown are illustrative snapshots, not live quotes. Not investment advice.
@@ -323,29 +288,23 @@
       <a href="index.html" class="text-4xl font-black text-[#cafd00] font-headline no-underline">DIGITAL REBEL</a>
       <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.</p>
     </div>
-    <div class="flex flex-wrap justify-center gap-8" id="footer-links">
+    <div class="flex flex-wrap items-center justify-center md:justify-end gap-6 md:ml-auto" id="footer-terms-and-decor">
       <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-[#cafd00]"
-        href="index.html">Manifesto</a>
-      <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-        href="privacy.html">Privacy</a>
-      <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-        href="terms.html">Terms</a>
-      <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-        href="settings_digital_rebel_desktop.html">Security</a>
-      <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-        href="projections_digital_rebel_desktop.html">API</a>
-    </div>
-    <div class="flex gap-4" id="footer-social-actions">
-      <button type="button"
-        class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all bg-transparent"
-        aria-label="Developer terminal (coming soon)">
-        <span class="material-symbols-outlined font-black" aria-hidden="true">terminal</span>
-      </button>
-      <button type="button"
-        class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all bg-transparent"
-        aria-label="Community hub (coming soon)">
-        <span class="material-symbols-outlined font-black" aria-hidden="true">hub</span>
-      </button>
+        href="terms.html">terms.sh</a>
+      <div class="flex gap-4" id="footer-social-actions" aria-hidden="true">
+        <div
+          class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] transition-all bg-transparent select-none cursor-default"
+          tabindex="-1"
+          title="Developer terminal (decorative)">
+          <span class="material-symbols-outlined font-black" aria-hidden="true">terminal</span>
+        </div>
+        <div
+          class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] transition-all bg-transparent select-none cursor-default"
+          tabindex="-1"
+          title="Network hub (decorative)">
+          <span class="material-symbols-outlined font-black" aria-hidden="true">hub</span>
+        </div>
+      </div>
     </div>
   </footer>
   <!-- Supabase + Futura Auth -->
@@ -357,6 +316,7 @@
   <style>
     /* Auth Guard: Prevents ghost sessions and UI flickering */
     html.auth-verified #btn-auth-hero,
+    html.auth-verified #btn-continue-signin-market,
     html.auth-verified [id*="connect-wallet"] {
       display: none !important;
     }
@@ -397,6 +357,13 @@
           signInWithGoogle();
         });
       }
+      const continueSignInMarket = document.getElementById('btn-continue-signin-market');
+      if (continueSignInMarket) {
+        continueSignInMarket.addEventListener('click', (e) => {
+          e.preventDefault();
+          signInWithGoogle();
+        });
+      }
       const rebels = document.getElementById('active-rebels-count');
       if (rebels) {
         const day = Math.floor(Date.now() / 86400000);
@@ -411,30 +378,6 @@
           t.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) +
           ' (illustrative)';
       }
-      const navToggle = document.getElementById('nav-mobile-toggle');
-      const navPanel = document.getElementById('mobile-nav-panel');
-      const navToggleLabel = navToggle?.querySelector('.sr-only');
-      function setMobileNavOpen(open) {
-        if (!navPanel || !navToggle) return;
-        navPanel.classList.toggle('hidden', !open);
-        navToggle.setAttribute('aria-expanded', String(open));
-        navPanel.setAttribute('aria-hidden', String(!open));
-        if (navToggleLabel) {
-          navToggleLabel.textContent = open ? 'Close main menu' : 'Open main menu';
-        }
-      }
-      navToggle?.addEventListener('click', () => {
-        if (!navPanel) return;
-        setMobileNavOpen(navPanel.classList.contains('hidden'));
-      });
-      navPanel?.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => setMobileNavOpen(false));
-      });
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && navPanel && !navPanel.classList.contains('hidden')) {
-          setMobileNavOpen(false);
-        }
-      });
     });
   </script>
 </body>
