@@ -17,16 +17,18 @@
       var avatars = [document.getElementById('nav-avatar'), document.getElementById('sidebar-avatar')];
       avatars.forEach(function(a){ if(a) a.innerHTML = c.avatarHTML; });
     }
-    // Elite tier label
+    // Tier label + upgrade button — dynamic based on cached entitlement
+    var label = document.getElementById('sidebar-tier-label');
+    var btn = document.getElementById('sidebar-upgrade-btn');
     if (c.isElite) {
-      var label = document.getElementById('sidebar-tier-label');
       if (label) { label.textContent = 'Elite Tier'; label.style.color = '#FF6F00'; }
-      // Show Explore Benefits immediately
-      var btn = document.getElementById('sidebar-upgrade-btn');
       if (btn && c.exploreBenefitsLabel) {
         btn.textContent = c.exploreBenefitsLabel;
         btn.removeAttribute('href');
       }
+    } else {
+      if (label) { label.textContent = 'Free Tier'; label.style.color = '#767777'; }
+      if (btn) { btn.textContent = 'Upgrade Power'; btn.href = 'upgrade_digital_rebel_desktop.html'; }
     }
   } catch(e) { /* ignore parse errors */ }
 })();
@@ -354,8 +356,13 @@ async function updateNavAuth() {
             const existing = document.getElementById('nav-tokens-pill');
             if (existing) existing.style.display = 'none';
           }
+
+          // Centralize the sidebar hydration call
+          if (typeof hydrateEliteSidebar === 'function') {
+            hydrateEliteSidebar(sub, streakData);
+          }
         } catch (e) {
-          console.warn('[Futura] Failed to hydrate token pill:', e);
+          console.warn('[Futura] Failed to hydrate token pill/sidebar:', e);
         }
       })();
 
@@ -379,19 +386,21 @@ async function updateNavAuth() {
         avatar.innerHTML = `<div class="bg-[#cafd00] text-[#121212] font-headline font-black w-full h-full flex items-center justify-center text-sm">${initial}</div>`;
       }
     });
-    // Persist sidebar state to cache for instant hydration on next page load
-    try {
-      var cachedAvatar = avatars[0] ? avatars[0].innerHTML : '';
-      var cachedName = username;
-      var cachedElite = localStorage.getItem('isElite') === 'true';
-      var exploreBtn = document.getElementById('sidebar-upgrade-btn');
-      localStorage.setItem('futura_sidebar_v1', JSON.stringify({
-        username: cachedName,
-        avatarHTML: cachedAvatar,
-        isElite: cachedElite,
-        exploreBenefitsLabel: exploreBtn ? exploreBtn.textContent.trim() : ''
-      }));
-    } catch(e) { /* quota errors */ }
+    // Wait for the async tier check to finish before caching to ensure accurate labels
+    setTimeout(() => {
+      try {
+        var cachedAvatar = avatars[0] ? avatars[0].innerHTML : '';
+        var cachedName = username;
+        var cachedElite = localStorage.getItem('isElite') === 'true';
+        var exploreBtn = document.getElementById('sidebar-upgrade-btn');
+        localStorage.setItem('futura_sidebar_v1', JSON.stringify({
+          username: cachedName,
+          avatarHTML: cachedAvatar,
+          isElite: cachedElite,
+          exploreBenefitsLabel: exploreBtn ? exploreBtn.textContent.trim() : ''
+        }));
+      } catch (e) { /* quota errors */ }
+    }, 500); // 500ms delay ensures the async profile fetch and DOM updates above are completed
   }
 
   // Hero Button: Change to ENTER TERMINAL if signed in
