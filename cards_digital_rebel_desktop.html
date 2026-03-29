@@ -197,12 +197,9 @@
                   href="cards_digital_rebel_desktop.html">
                   <span class="material-symbols-outlined">credit_card</span> Cards
               </a>
+
               <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-                  href="#">
-                  <span class="material-symbols-outlined">bolt</span> Staking
-              </a>
-              <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-                  href="settings_digital_rebel_desktop.html">
+                  href="support_digital_rebel_desktop.html">
                   <span class="material-symbols-outlined">help_outline</span> Support
               </a>
           </nav>
@@ -235,17 +232,23 @@
 <h2 class="font-headline font-black text-2xl uppercase tracking-tighter bg-[#121212] text-[#f6f6f6] px-4 py-1">ACTIVE_REBEL_CARDS</h2>
 <div class="flex-1 h-1 bg-[#121212]"></div>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8" id="cards-grid">
-<!-- Card Details/Stats (Bento style) -->
-<div class="border-4 border-[#121212] bg-[#cafd00] p-6 hard-shadow-lg flex flex-col justify-center gap-4">
-<p class="font-headline font-black text-4xl uppercase leading-tight">Total Liquidity<br/>Across Cards</p>
-<div class="flex items-baseline gap-2">
-  <span id="liquidity-amount" class="text-6xl font-black font-headline tracking-tighter">$142.8K</span>
-</div>
-<div class="bg-[#121212] text-white p-4 flex items-center justify-between">
-  <p id="liquidity-change" class="font-headline font-bold uppercase tracking-widest text-xs">+12.4% THIS MONTH</p>
-  <p id="liquidity-cards" class="font-headline font-bold uppercase tracking-widest text-xs opacity-60">2 CARDS ACTIVE</p>
-</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 items-stretch" id="cards-grid">
+<!-- Stats Bento — same card-slot size as user cards -->
+<div style="aspect-ratio:1.586;min-height:0" class="border-4 border-[#121212] bg-[#cafd00] hard-shadow-lg flex flex-col justify-between p-6 overflow-hidden relative">
+  <div>
+    <p class="font-headline font-black text-xs uppercase tracking-[0.25em] opacity-60 mb-1">Portfolio Snapshot</p>
+    <p class="font-headline font-black text-3xl uppercase leading-tight tracking-tighter">Total<br/>Liquidity</p>
+  </div>
+  <div>
+    <span id="liquidity-amount" class="text-5xl font-black font-headline tracking-tighter block mb-3">$142.8K</span>
+    <div class="bg-[#121212] text-white px-4 py-3 flex items-center justify-between">
+      <p id="liquidity-change" class="font-headline font-bold uppercase tracking-widest text-[10px]">+12.4% THIS MONTH</p>
+      <p id="liquidity-cards" class="font-headline font-bold uppercase tracking-widest text-[10px] opacity-60">2 ACTIVE</p>
+    </div>
+  </div>
+  <div class="absolute -bottom-6 -right-6 text-[#121212] opacity-10">
+    <span class="material-symbols-outlined" style="font-size:9rem">credit_card</span>
+  </div>
 </div>
 </div>
 </section>
@@ -369,9 +372,9 @@
 </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/js/config.js"></script>
-<script src="/js/auth.js"></script>
-<script src="/js/api.js"></script>
+<script src="./js/config.js"></script>
+<script src="./js/auth.js"></script>
+<script src="./js/api.js"></script>
 <script>
 (async function () {
 
@@ -446,13 +449,14 @@
     wrap.className = 'user-card-wrap';
     wrap.style.cssText = [
       'border:4px solid #121212',
-      'padding:2rem',
+      'padding:1.4rem 1.6rem',
       'display:flex',
       'flex-direction:column',
       'justify-content:space-between',
       'position:relative',
       'overflow:hidden',
       'aspect-ratio:1.586',
+      'width:100%',
       'box-shadow:8px 8px 0 #121212',
       'background-color:' + p.bg,
       'background-image:' + p.pattern,
@@ -486,21 +490,21 @@
 
     wrap.innerHTML = frozenHtml + actionsHtml +
       '<div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:10">' +
-        '<span class="material-symbols-outlined" style="font-size:3rem;color:' + p.fg + '">' + (card.icon || 'credit_card') + '</span>' +
-        '<span style="font-family:Lexend,sans-serif;font-weight:900;font-style:italic;font-size:1rem;color:' + p.fg + '">' + (card.title || 'REBEL_CARD') + '</span>' +
+        '<span class="material-symbols-outlined" style="font-size:2.4rem;color:' + p.fg + '">' + (card.icon || 'credit_card') + '</span>' +
+        '<span style="font-family:Lexend,sans-serif;font-weight:900;font-style:italic;font-size:0.75rem;color:' + p.fg + ';letter-spacing:0.08em;text-transform:uppercase;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right">' + (card.title || 'REBEL_CARD') + '</span>' +
       '</div>' +
       '<div style="position:relative;z-index:10">' +
-        '<p style="font-family:monospace;font-size:1.25rem;letter-spacing:0.04em;margin-bottom:0.75rem;color:' + p.fg + '">' + masked + '</p>' +
-        '<div style="display:flex;justify-content:space-between;align-items:flex-end">' +
-          '<div>' +
-            '<p style="font-family:Lexend,sans-serif;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.65;color:' + p.fg + '">Card Holder</p>' +
-            '<p style="font-family:Lexend,sans-serif;font-weight:900;text-transform:uppercase;font-size:0.85rem;color:' + p.fg + '">' + card.name + '</p>' +
+        '<p style="font-family:monospace;font-size:clamp(0.75rem,1.6vw,1.1rem);letter-spacing:0.06em;margin-bottom:0.6rem;color:' + p.fg + ';white-space:nowrap;overflow:hidden">' + masked + '</p>' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:8px">' +
+          '<div style="min-width:0;flex:1">' +
+            '<p style="font-family:Lexend,sans-serif;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.65;color:' + p.fg + ';margin-bottom:2px">Card Holder</p>' +
+            '<p style="font-family:Lexend,sans-serif;font-weight:900;text-transform:uppercase;font-size:0.7rem;color:' + p.fg + ';overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + card.name + '</p>' +
           '</div>' +
-          '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">' +
-            '<p style="font-family:Lexend,sans-serif;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.65;color:' + p.fg + '">Expires</p>' +
-            '<p style="font-family:Lexend,sans-serif;font-weight:700;font-size:0.8rem;color:' + p.fg + '">' + (card.expiry || '--/--') + '</p>' +
+          '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0">' +
+            '<p style="font-family:Lexend,sans-serif;font-size:0.5rem;text-transform:uppercase;letter-spacing:0.12em;opacity:0.65;color:' + p.fg + '">Expires</p>' +
+            '<p style="font-family:Lexend,sans-serif;font-weight:700;font-size:0.75rem;color:' + p.fg + '">' + (card.expiry || '--/--') + '</p>' +
           '</div>' +
-          '<span style="font-family:Lexend,sans-serif;font-weight:900;font-size:0.75rem;background:' + badgeBg + ';color:' + badgeFg + ';padding:3px 14px;border:2px solid #121212;transform:rotate(2deg);display:inline-block">' + badgeTxt + '</span>' +
+          '<span style="font-family:Lexend,sans-serif;font-weight:900;font-size:0.6rem;background:' + badgeBg + ';color:' + badgeFg + ';padding:3px 10px;border:2px solid #121212;transform:rotate(2deg);display:inline-block;flex-shrink:0;letter-spacing:0.08em">' + badgeTxt + '</span>' +
         '</div>' +
       '</div>';
 

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Digital Rebel | Vault</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-fixed": "#cafd00",
+                        "on-primary-fixed": "#3a4a00",
+                        "inverse-surface": "#0c0f0f",
+                        "surface": "#f6f6f6",
+                        "on-surface": "#2d2f2f",
+                        "tertiary-fixed": "#ff81f5"
+                    },
+                    fontFamily: {
+                        "headline": ["Lexend"],
+                        "body": ["Inter"],
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .neo-shadow {
+            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+        }
+
+        .neo-shadow-large {
+            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+        }
+
+        .rebel-grid {
+            background-image: radial-gradient(#d3d5d5 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        @keyframes pulseYield {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .yield-blinker {
+            animation: pulseYield 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+        
+        .glitch-text {
+            position: relative;
+        }
+        .glitch-text::before, .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #cafd00;
+        }
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -1px 0 red;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -1px 0 blue;
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(20px, 9999px, 85px, 0); }
+            20% { clip: rect(4px, 9999px, 60px, 0); }
+            40% { clip: rect(98px, 9999px, 8px, 0); }
+            60% { clip: rect(54px, 9999px, 12px, 0); }
+            80% { clip: rect(12px, 9999px, 76px, 0); }
+            100% { clip: rect(82px, 9999px, 23px, 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(10px, 9999px, 100px, 0); }
+            20% { clip: rect(65px, 9999px, 18px, 0); }
+            40% { clip: rect(45px, 9999px, 83px, 0); }
+            60% { clip: rect(89px, 9999px, 55px, 0); }
+            80% { clip: rect(32px, 9999px, 94px, 0); }
+            100% { clip: rect(11px, 9999px, 34px, 0); }
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body text-on-surface rebel-grid min-h-screen flex flex-col">
+    <!-- TopNavBar -->
+    <nav
+        class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+        <div class="flex items-center gap-8">
+            <span
+                class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">Digital
+                Rebel</span>
+            <div class="hidden md:flex gap-6">
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
+                    href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
+                    href="market_digital_rebel_desktop.html">Markets</a>
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
+                    href="assets_digital_rebel_desktop.html">Assets</a>
+                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
+                    href="learn_digital_rebel_desktop.html">Learn</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="hidden lg:flex relative">
+                <input
+                    class="bg-surface border-2 border-inverse-surface px-4 py-1 font-headline font-bold text-xs uppercase tracking-widest focus:ring-0 focus:border-primary-fixed outline-none"
+                    placeholder="SEARCH_YIELD..." type="text" />
+            </div>
+            <span
+                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all">notifications</span>
+            <a href="settings_digital_rebel_desktop.html"
+                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all inline-flex items-center justify-center">settings</a>
+            
+            <button onclick="window.location.href='checkout_digital_rebel_desktop.html'"
+                class="bg-primary-fixed text-inverse-surface border-2 border-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-tighter neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">Add Money</button>
+        </div>
+    </nav>
+    <div class="flex flex-1 w-full relative">
+        <!-- SideNavBar -->
+        <aside
+            class="hidden lg:flex fixed left-0 top-0 h-full w-64 flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] z-40">
+            <div class="px-6 mb-8 flex items-center gap-3">
+                <div
+                    class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface overflow-hidden">
+                    <img alt="Rebel_01" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+                </div>
+                <div>
+                    <h3 id="user-name" class="font-Lexend font-black uppercase tracking-widest text-xs">Rebel_01</h3>
+                    <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5]">Elite Tier</p>
+                </div>
+            </div>
+            <nav class="flex-1 space-y-1">
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="dashboard_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">grid_view</span> Overview
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="projections_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">trending_up</span> Projections
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="transactions.html">
+                    <span class="material-symbols-outlined">swap_horiz</span> Transactions
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="cards_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">credit_card</span> Cards
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 bg-[#cafd00] text-[#121212] border-2 border-[#121212] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs active:scale-95 transition-all"
+                    href="staking_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">lock</span> Vault
+                </a>
+                <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+                    href="support_digital_rebel_desktop.html">
+                    <span class="material-symbols-outlined">help_outline</span> Support
+                </a>
+            </nav>
+            <div class="p-4 border-t-2 border-inverse-surface mt-auto">
+                <a href="upgrade_digital_rebel_desktop.html"
+                    class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
+                    Power</a>
+                <a class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
+                    href="#">
+                    <span class="material-symbols-outlined">logout</span> Logout
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="lg:ml-64 flex-1 z-10">
+            <!-- Glitch Marquee Banner -->
+            <div class="w-full bg-[#121212] text-[#ff81f5] border-b-4 border-on-surface py-2 marquee-container">
+                <div class="animate-marquee font-headline font-black uppercase tracking-[0.3em] text-[10px] md:text-sm">
+                    <span class="px-8">THE HOUSE ALWAYS WINS <span class="text-[#cafd00]">///</span> DON'T GAMBLE YOUR FUTURE</span>
+                    <span class="px-8">CASINOS ARE FOR LOSERS <span class="text-[#cafd00]">///</span> BUILD A DETERMINISTIC LIFE</span>
+                    <span class="px-8 text-surface">ROULETTE IS A TAX ON BAD MATH <span class="text-[#cafd00]">///</span> SECURE THE VAULT</span>
+                    
+                    <!-- Duplicated for seamless loop -->
+                    <span class="px-8">THE HOUSE ALWAYS WINS <span class="text-[#cafd00]">///</span> DON'T GAMBLE YOUR FUTURE</span>
+                    <span class="px-8">CASINOS ARE FOR LOSERS <span class="text-[#cafd00]">///</span> BUILD A DETERMINISTIC LIFE</span>
+                    <span class="px-8 text-surface">ROULETTE IS A TAX ON BAD MATH <span class="text-[#cafd00]">///</span> SECURE THE VAULT</span>
+                </div>
+            </div>
+
+            <div class="p-6 md:p-10">
+                <!-- Header -->
+                <div class="mb-10 flex flex-col md:flex-row justify-between md:items-end gap-6 border-b-4 border-on-surface pb-6">
+                    <div>
+                        <span class="bg-[#121212] text-white font-headline font-black text-xs uppercase tracking-widest px-2 py-1 border-2 border-on-surface neo-shadow inline-block mb-4 hover:-rotate-6 transition-transform cursor-crosshair">ANTI-GAMBLING INITIATIVE</span>
+                        <h1 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter leading-none text-on-surface">
+                            <span class="glitch-text inline-block hover:scale-105 transition-transform" data-text="RETIREMENT">RETIREMENT</span><br/>PROTOCOL
+                        </h1>
+                    </div>
+                    <div class="bg-[#cafd00] text-[#121212] px-6 py-4 border-2 border-[#121212] neo-shadow flex items-center gap-6 group hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all cursor-crosshair">
+                        <div>
+                            <p class="font-headline font-bold text-[10px] uppercase tracking-widest mb-1 group-hover:underline">Deterministic Multiplier</p>
+                            <p class="font-headline font-black text-2xl">10.5x <span class="text-[#121212] opacity-70 text-sm">AT AGE 65</span></p>
+                        </div>
+                        <div class="h-10 w-1 bg-[#121212]"></div>
+                        <div>
+                            <p class="font-headline font-bold text-[10px] uppercase tracking-widest mb-1 yield-blinker text-error">Days to Freedom</p>
+                            <p class="font-headline font-black text-2xl">8,405</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+                    <!-- The Vault Card -->
+                    <div class="lg:col-span-1 bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow-large flex flex-col justify-between group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <p class="font-headline font-black text-lg uppercase tracking-tight group-hover:text-[#ff81f5] transition-colors">Retirement Vault</p>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined text-[#121212] text-5xl absolute -top-1 -left-1 opacity-20 group-hover:animate-ping">casino</span>
+                                    <span class="material-symbols-outlined text-[#cafd00] text-4xl relative z-10 drop-shadow-md">lock</span>
+                                </div>
+                            </div>
+                            <p class="text-sm font-bold uppercase tracking-widest text-[#767777] mb-2">Locked For Life</p>
+                            <p class="text-6xl font-headline font-black tracking-tighter" id="tvs-val">$142,500</p>
+                        </div>
+                        <div class="mt-8 border-t-2 border-on-surface pt-4">
+                            <p class="font-headline font-bold text-[10px] uppercase tracking-widest text-[#767777]">Projected Age 65 Value</p>
+                            <p class="font-headline font-black text-2xl text-[#121212]">+ $1,500,240.00</p>
+                        </div>
+                    </div>
+
+                    <!-- Commitment Module -->
+                    <div class="lg:col-span-2 bg-[#121212] border-4 border-inverse-surface p-8 neo-shadow-large text-surface relative overflow-hidden group">
+                        <div class="absolute -right-10 -top-10 opacity-5 group-hover:rotate-12 group-hover:opacity-10 transition-all duration-700 pointer-events-none">
+                            <span class="material-symbols-outlined text-[20rem]">diversity_1</span>
+                        </div>
+                        <h2 class="font-headline font-black text-2xl uppercase tracking-widest mb-6 border-b-2 border-surface/20 pb-4 inline-block text-[#cafd00]">Commit to the Long Game</h2>
+                        
+                        <div class="flex flex-col md:flex-row gap-6 relative z-10">
+                            <div class="flex-1 space-y-4">
+                                <div>
+                                    <label class="block font-headline font-bold text-[10px] uppercase tracking-widest mb-2 text-[#ff81f5]">Fund Allocation</label>
+                                    <select class="w-full bg-[#121212] border-2 border-surface p-4 font-headline font-black text-lg focus:outline-none focus:border-[#cafd00] text-surface hover:bg-[#2d2f2f] cursor-pointer">
+                                        <option value="s_p500">S&P 500 Index (Slow & Steady)</option>
+                                        <option value="bonds">Treasury Bonds (Safest)</option>
+                                        <option value="btc_cold">Cold Storage BTC</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block font-headline font-bold text-[10px] uppercase tracking-widest mb-2 text-[#ff81f5]">Amount NOT Gambled</label>
+                                    <input type="number" class="w-full bg-[#121212] border-2 border-surface p-4 font-headline font-black text-2xl focus:outline-none focus:border-[#cafd00] text-surface placeholder:text-[#2d2f2f]" placeholder="$ 0.00">
+                                </div>
+                            </div>
+                            <div class="flex-1 space-y-4">
+                                <div>
+                                    <label class="block font-headline font-bold text-[10px] uppercase tracking-widest mb-2 text-[#ff81f5]">Lock Period (Multiplier)</label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                        <button class="bg-[#121212] border-2 border-surface p-3 font-headline font-bold hover:bg-[#cafd00] hover:text-[#121212] transition-colors focus:bg-[#cafd00] focus:text-[#121212] group/btn">
+                                            Decade Lock <br><span class="text-[10px] opacity-70 group-hover/btn:opacity-100">10 Years</span>
+                                        </button>
+                                        <button class="bg-[#121212] border-2 border-surface p-3 font-headline font-bold hover:bg-[#cafd00] hover:text-[#121212] transition-colors focus:bg-[#cafd00] focus:text-[#121212] group/btn">
+                                            Boomer Mode <br><span class="text-[10px] opacity-70 group-hover/btn:opacity-100">20 Years</span>
+                                        </button>
+                                        <button class="bg-[#121212] border-2 border-surface p-3 font-headline font-bold hover:bg-[#cafd00] hover:text-[#121212] transition-colors focus:bg-[#cafd00] focus:text-[#121212] group/btn sm:col-span-2">
+                                            Diamond Hands <br><span class="text-[10px] opacity-70 group-hover/btn:opacity-100">Locked For Life (Max APY)</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-8 bg-[#ff81f5] text-[#121212] font-headline font-black text-xl uppercase tracking-widest py-5 border-2 border-[#121212] hover:bg-[#cafd00] hover:text-[#121212] transition-colors shadow-[6px_6px_0px_0px_rgba(246,246,246,1)] active:translate-y-1 active:translate-x-1 active:shadow-none relative overflow-hidden group/submit">
+                            <span class="relative z-10 transition-transform group-hover/submit:tracking-[0.5em] duration-300">SECURE YOUR FUTURE</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Anti-Gambling Tracker -->
+                <div class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow overflow-hidden group">
+                    <div class="flex items-center justify-between mb-8 border-b-4 border-on-surface pb-4">
+                        <h2 class="font-headline font-black text-2xl uppercase tracking-tighter group-hover:tracking-widest transition-all">Generational Wealth Protocols</h2>
+                        <button class="font-headline font-bold text-[10px] md:text-xs uppercase tracking-widest border-2 border-on-surface px-4 py-2 hover:bg-[#121212] hover:text-[#cafd00] transition-colors bg-white">View Will & Testament</button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left font-body">
+                            <thead>
+                                <tr class="border-b-2 border-[#2d2f2f] uppercase text-xs font-headline font-black tracking-widest">
+                                    <th class="pb-3 px-4">Asset</th>
+                                    <th class="pb-3 px-4">Secured Amount</th>
+                                    <th class="pb-3 px-4">Age 65 Projection</th>
+                                    <th class="pb-3 px-4">Growth %</th>
+                                    <th class="pb-3 px-4">Risk Level</th>
+                                    <th class="pb-3 px-4 text-right">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y-2 divide-surface border-b-2 border-on-surface">
+                                <tr class="hover:bg-surface-container transition-colors">
+                                    <td class="py-4 px-4 font-headline font-bold text-sm">S&P 500 Legacy</td>
+                                    <td class="py-4 px-4 font-mono font-bold text-xl">$45,000</td>
+                                    <td class="py-4 px-4 font-headline font-black text-[#121212] text-xl">$890,400</td>
+                                    <td class="py-4 px-4 font-mono font-bold text-[#cafd00] bg-[#121212] inline-block px-2 py-1 mt-2 text-xs">+1,878%</td>
+                                    <td class="py-4 px-4"><span class="text-[#2d2f2f] text-[10px] uppercase font-bold border-b border-[#2d2f2f]">Calculated</span></td>
+                                    <td class="py-4 px-4 text-right">
+                                        <button class="font-headline font-black text-xs uppercase bg-[#121212] text-surface px-4 py-2 hover:bg-[#cafd00] hover:text-[#121212] transition-colors border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(18,18,18,1)]">Untouchable</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-surface-container transition-colors opacity-90">
+                                    <td class="py-4 px-4 font-headline font-bold text-sm">Real Estate REIT</td>
+                                    <td class="py-4 px-4 font-mono font-bold text-xl">$20,000</td>
+                                    <td class="py-4 px-4 font-headline font-black text-[#121212] text-xl">$140,000</td>
+                                    <td class="py-4 px-4 font-mono font-bold text-[#cafd00] bg-[#121212] inline-block px-2 py-1 mt-2 text-xs">+600%</td>
+                                    <td class="py-4 px-4"><span class="text-[#2d2f2f] text-[10px] uppercase font-bold border-b border-[#2d2f2f]">Low</span></td>
+                                    <td class="py-4 px-4 text-right">
+                                        <button class="font-headline font-black text-xs uppercase bg-[#121212] text-surface px-4 py-2 hover:bg-[#cafd00] hover:text-[#121212] transition-colors border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(18,18,18,1)]">Untouchable</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer
+        class="lg:pl-72 w-full py-12 px-8 flex flex-col md:flex-row justify-between items-center gap-8 border-t-4 border-[#121212] z-50">
+        <div class="flex flex-col items-center md:items-start text-center md:text-left">
+            <span class="text-2xl font-black text-[#121212] font-headline">Digital Rebel</span>
+            <span class="font-Lexend font-black uppercase text-[10px] tracking-widest mt-1 text-[#767777]">©2024 DIGITAL
+                REBEL.</span>
+        </div>
+        <div class="flex flex-wrap justify-center gap-6">
+            <a class="font-Lexend font-black uppercase text-[10px] tracking-widest hover:italic transition-all"
+                href="settings_digital_rebel_desktop.html">Privacy</a>
+            <a class="font-Lexend font-black uppercase text-[10px] tracking-widest hover:italic transition-all"
+                href="settings_digital_rebel_desktop.html">Terms</a>
+        </div>
+    </footer>
+
+    <script>
+        // Fake countdown logic
+        setInterval(() => {
+            const timer = document.getElementById('countdown-timer');
+            if(timer) {
+                let parts = timer.innerText.split(':');
+                let h = parseInt(parts[0]), m = parseInt(parts[1]), s = parseInt(parts[2]);
+                s--;
+                if(s < 0) { s = 59; m--; }
+                if(m < 0) { m = 59; h--; }
+                if(h < 0) { h = 0; m = 0; s = 0; }
+                timer.innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

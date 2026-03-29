@@ -30,7 +30,7 @@ async function signInWithGoogle() {
   const { error } = await getSupabase().auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: window.location.origin + '/index.html?auth_callback=true'
+      redirectTo: window.location.origin + window.location.pathname + '?auth_callback=true'
     }
   });
   if (error) {
@@ -42,7 +42,7 @@ async function signInWithGoogle() {
 // Sign out
 async function signOut() {
   await getSupabase().auth.signOut();
-  window.location.href = '/index.html';
+  window.location.href = 'index.html';
 }
 
 let _profileVerified = false;
@@ -70,7 +70,7 @@ async function checkOnboarding() {
 
       if (isNewLogin || isOnboardingPage) {
         if (!isOnboardingPage) {
-          window.location.href = '/onboarding_step_1_age.html';
+          window.location.href = 'onboarding_step_1_age.html';
         }
         return;
       } else {
@@ -102,7 +102,7 @@ async function checkOnboarding() {
       
       if (shouldRedirectToDash) {
         if (!window.location.search.includes('redirecting')) {
-          window.location.href = '/dashboard_digital_rebel_desktop.html?redirecting=true';
+          window.location.href = 'dashboard_digital_rebel_desktop.html?redirecting=true';
           return;
         }
       }
@@ -114,7 +114,7 @@ async function checkOnboarding() {
         const isProtected = protectedPaths.some(p => currentPath.includes(p)) || currentPath === '/';
         
         if (isProtected) {
-          window.location.href = '/onboarding_step_1_age.html';
+          window.location.href = 'onboarding_step_1_age.html';
           return;
         }
       }
@@ -136,7 +136,7 @@ async function checkOnboarding() {
 async function requireAuth() {
   const session = await getSession();
   if (!session) {
-    window.location.href = '/index.html';
+    window.location.href = 'index.html';
     return null;
   }
   return session;
@@ -172,7 +172,7 @@ async function updateNavAuth() {
       heroBtn.innerHTML = '<span class="material-symbols-outlined">terminal</span> ENTER TERMINAL';
       heroBtn.onclick = (e) => {
         e.preventDefault();
-        window.location.href = '/dashboard_digital_rebel_desktop.html';
+        window.location.href = 'dashboard_digital_rebel_desktop.html';
       };
     } else {
       heroBtn.innerHTML = `
@@ -193,7 +193,7 @@ async function updateNavAuth() {
       btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
       btn.onclick = (e) => {
         e.preventDefault();
-        window.location.href = '/dashboard_digital_rebel_desktop.html';
+        window.location.href = 'dashboard_digital_rebel_desktop.html';
       };
     } else {
       btn.onclick = (e) => {
