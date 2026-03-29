@@ -352,18 +352,19 @@ async function updateNavAuth() {
             } else {
               tokenPill.classList.remove('fire-glow');
             }
-          } else {
-            const existing = document.getElementById('nav-tokens-pill');
-            if (existing) existing.style.display = 'none';
           }
 
           // Initialize TierStateManager with subscription data (includes Realtime setup)
-          // This ensures tier changes are reflected instantly across all pages
-          if (typeof TierStateManager !== 'undefined') {
-            await TierStateManager.initializeFromProfile(sub);
+          console.log('[Auth] Subscription data received:', sub);
+          if (typeof TierStateManager !== 'undefined' && TierStateManager.updateTierDisplay) {
+            console.log('[Auth] Calling TierStateManager.updateTierDisplay()...');
+            TierStateManager.updateTierDisplay(sub);
+            TierStateManager.setupRealtimeListener();
           } else if (typeof hydrateEliteSidebar === 'function') {
-            // Fallback for pages that don't have tier-state.js loaded
+            console.log('[Auth] Fallback: Using hydrateEliteSidebar()...');
             await hydrateEliteSidebar(sub, streakData);
+          } else {
+            console.warn('[Auth] Neither TierStateManager nor hydrateEliteSidebar available!');
           }
 
           // Persist the verified, accurate data to cache immediately without race conditions
