@@ -693,31 +693,7 @@
         brand.addEventListener('click', () => window.location.href = 'dashboard_digital_rebel_desktop.html');
       }
 
-      // Avatar dropdown
-      const avatarWrap = document.querySelector('#nav-avatar') || document.querySelector('nav .w-10');
-      if (avatarWrap) {
-        avatarWrap.style.cursor = 'pointer';
-        avatarWrap.addEventListener('click', e => {
-          e.stopPropagation();
-          document.querySelector('.avatar-dropdown')?.remove();
-          const dd = document.createElement('div');
-          dd.className = 'avatar-dropdown';
-          dd.style.cssText = 'position:fixed;background:#fff;border:2px solid #121212;box-shadow:4px 4px 0 #121212;z-index:500;min-width:180px;';
-          const r = avatarWrap.getBoundingClientRect();
-          dd.style.top = (r.bottom + 4) + 'px';
-          dd.style.right = (window.innerWidth - r.right) + 'px';
-          [['My Profile', 'settings_digital_rebel_desktop.html'], ['Assets', 'assets_digital_rebel_desktop.html'], ['Dashboard', 'dashboard_digital_rebel_desktop.html']].forEach(([label, href]) => {
-            const a = document.createElement('a');
-            a.href = href; a.textContent = label;
-            a.style.cssText = 'display:block;padding:10px 16px;font-family:Lexend,sans-serif;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.07em;text-decoration:none;color:#121212;border-bottom:1px solid #e0e0e0;';
-            a.onmouseover = () => a.style.background = '#cafd00';
-            a.onmouseout = () => a.style.background = '';
-            dd.appendChild(a);
-          });
-          document.body.appendChild(dd);
-          setTimeout(() => document.addEventListener('click', () => dd.remove(), { once: true }), 10);
-        });
-      }
+      // Avatar dropdown handled globally by auth.js
     });
   </script>
 </body>

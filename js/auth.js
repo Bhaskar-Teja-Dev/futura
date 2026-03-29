@@ -216,14 +216,99 @@ async function updateNavAuth() {
     }
   }
 
-  // Find logout links
-  const logoutLinks = document.querySelectorAll('#logout-link, [href*="index.html"]:has(.material-symbols-outlined), .btn-logout');
-  logoutLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      signOut();
+  // ── Logout Listener (Event Delegation) ───────────────────────────────────
+  // Using delegation so that dynamically injected elements (like dropdowns) 
+  // also get the logout functionality automatically.
+  if (!window._logoutListenerAttached) {
+    document.addEventListener('click', async (e) => {
+      const logoutTarget = e.target.closest('#logout-link, .btn-logout, [href*="logout"]');
+      const isLogoutText = e.target.textContent.toLowerCase().includes('logout') && 
+                          (e.target.closest('a') || e.target.closest('button'));
+
+      if (logoutTarget || isLogoutText) {
+        e.preventDefault();
+        console.log('Logout triggered');
+        await signOut();
+      }
     });
-  });
+    window._logoutListenerAttached = true;
+  }
+
+  // ── Global Avatar Dropdown ────────────────────────────────────────────────
+  // Attaches a consistent dropdown to any #nav-avatar element
+  const avatarWrap = document.getElementById('nav-avatar');
+  if (avatarWrap && !avatarWrap._hasDropdown) {
+    avatarWrap.style.cursor = 'pointer';
+    avatarWrap.addEventListener('click', e => {
+      e.stopPropagation();
+      // Remove any existing dropdowns
+      document.querySelectorAll('.avatar-dropdown').forEach(d => d.remove());
+
+      const dd = document.createElement('div');
+      dd.className = 'avatar-dropdown';
+      dd.id = 'dynamic-avatar-dropdown';
+      dd.style.cssText = `
+        position: fixed;
+        background: #fff;
+        border: 2px solid #121212;
+        box-shadow: 4px 4px 0 #121212;
+        z-index: 9999;
+        min-width: 200px;
+        animation: slideIn 0.1s ease-out;
+      `;
+
+      // Simple slide-in animation
+      const style = document.createElement('style');
+      style.textContent = `@keyframes slideIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }`;
+      if (!document.getElementById('dropdown-styles')) {
+        style.id = 'dropdown-styles';
+        document.head.appendChild(style);
+      }
+
+      const rect = avatarWrap.getBoundingClientRect();
+      dd.style.top = (rect.bottom + 8) + 'px';
+      dd.style.right = (window.innerWidth - rect.right) + 'px';
+
+      const links = [
+        { label: 'My Dashboard', href: 'dashboard_digital_rebel_desktop.html', icon: 'grid_view' },
+        { label: 'My Settings', href: 'settings_digital_rebel_desktop.html', icon: 'settings' },
+        { label: 'Assets', href: 'assets_digital_rebel_desktop.html', icon: 'account_balance_wallet' },
+        { label: 'Logout', href: '#', icon: 'logout', id: 'logout-link', color: '#b02500' }
+      ];
+
+      links.forEach(({ label, href, icon, id, color }) => {
+        const a = document.createElement('a');
+        a.href = href;
+        if (id) a.id = id;
+        a.className = 'flex items-center gap-3 px-4 py-3 font-headline font-black text-xs uppercase tracking-widest text-[#121212] hover:bg-[#cafd00] transition-colors border-b border-[#e0e0e0] last:border-none';
+        a.style.textDecoration = 'none';
+        if (color) a.style.color = color;
+
+        a.innerHTML = `<span class="material-symbols-outlined text-sm">${icon}</span> ${label}`;
+        
+        a.addEventListener('click', async (e) => {
+          if (label === 'Logout') {
+            e.preventDefault();
+            await signOut();
+          }
+        });
+
+        dd.appendChild(a);
+      });
+
+      document.body.appendChild(dd);
+
+      // Close when clicking outside
+      const closeDropdown = (event) => {
+        if (!dd.contains(event.target) && event.target !== avatarWrap) {
+          dd.remove();
+          document.removeEventListener('click', closeDropdown);
+        }
+      };
+      setTimeout(() => document.addEventListener('click', closeDropdown), 10);
+    });
+    avatarWrap._hasDropdown = true;
+  }
 }
 
 // Auto-init on DOM ready
