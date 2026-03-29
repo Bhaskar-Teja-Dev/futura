@@ -244,7 +244,8 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     p_user_id: userId
   })
   if (refreshErr) {
-    return c.json({ error: refreshErr.message }, 500)
+    console.warn('[contributions POST] refresh RPC failed (non-fatal):', refreshErr.message)
+    // Non-fatal — continue streak update even if token refresh fails
   }
 
   // Check replenish: if gap is 2, look for a contribution on the missed day
