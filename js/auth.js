@@ -66,14 +66,15 @@ async function checkOnboarding() {
     if (res.status === 404) {
       const urlParams = new URLSearchParams(window.location.search);
       const isNewLogin = urlParams.has('auth_callback') || window.location.hash.includes('access_token');
+      const isOnboardingPage = currentPath.includes('onboarding_');
 
-      if (isNewLogin) {
-        if (!currentPath.includes('onboarding_')) {
+      if (isNewLogin || isOnboardingPage) {
+        if (!isOnboardingPage) {
           window.location.href = '/onboarding_step_1_age.html';
         }
         return;
       } else {
-        console.warn('Profile missing. Aggressive logout.');
+        console.warn('Profile missing and not onboarding. Aggressive logout.');
         document.documentElement.classList.remove('auth-verified', 'auth-loading');
         localStorage.clear();
         sessionStorage.clear();
@@ -87,25 +88,32 @@ async function checkOnboarding() {
     _profileVerified = true;
 
     const isOnboarded = profile && profile.onboarding_complete;
+    localStorage.setItem('futura_onboarding_complete', isOnboarded ? 'true' : 'false');
 
     if (isOnboarded) {
-      localStorage.setItem('futura_onboarding_complete', 'true');
       document.documentElement.classList.add('auth-verified');
       document.documentElement.classList.remove('auth-loading');
-      const googleBtn = document.getElementById('btn-google-signin');
-      if (googleBtn) googleBtn.style.display = 'none';
 
-      if (currentPath === '/' || currentPath.includes('index.html') || currentPath.includes('onboarding_')) {
+      // If user is on landing or onboarding pages but IS already onboarded, send to dashboard
+      const shouldRedirectToDash = currentPath === '/' || 
+                                   currentPath.includes('index.html') || 
+                                   currentPath.includes('landing_') ||
+                                   currentPath.includes('onboarding_');
+      
+      if (shouldRedirectToDash) {
         if (!window.location.search.includes('redirecting')) {
-          window.location.href = '/dashboard_digital_rebel_desktop.html';
+          window.location.href = '/dashboard_digital_rebel_desktop.html?redirecting=true';
           return;
         }
       }
     } else {
-      localStorage.removeItem('futura_onboarding_complete');
       document.documentElement.classList.remove('auth-verified', 'auth-loading');
+      // If NOT onboarded and NOT already on an onboarding page, send to Step 1
       if (!currentPath.includes('onboarding_')) {
-        if (currentPath.includes('dashboard_') || currentPath.includes('market_') || currentPath.includes('assets_') || currentPath.includes('index.html') || currentPath === '/') {
+        const protectedPaths = ['dashboard_', 'market_', 'assets_', 'index.html', 'landing_'];
+        const isProtected = protectedPaths.some(p => currentPath.includes(p)) || currentPath === '/';
+        
+        if (isProtected) {
           window.location.href = '/onboarding_step_1_age.html';
           return;
         }
@@ -138,28 +146,60 @@ async function requireAuth() {
 async function updateNavAuth() {
   const session = await getSession();
 
-  // Find "Connect Wallet" and Hero Sign-In buttons
-  const authButtons = document.querySelectorAll(
-    '#btn-connect-wallet, #connect-wallet-btn, #btn-google-signin, [id*="connect-wallet"]'
+  // Header Button: Hide if signed in, show name instead
+  const headerBtn = document.getElementById('btn-auth-header');
+  const nameLabel = document.getElementById('user-name-header');
+  const displayName = document.getElementById('user-display-name');
+
+  if (session && _profileVerified) {
+    if (headerBtn) headerBtn.style.display = 'none';
+    if (nameLabel) {
+      nameLabel.classList.remove('hidden');
+      if (displayName) displayName.textContent = (session.user.email?.split('@')[0] || 'REBEL').toUpperCase();
+    }
+  } else {
+    if (headerBtn) {
+      headerBtn.style.display = 'flex';
+      headerBtn.onclick = (e) => { e.preventDefault(); signInWithGoogle(); };
+    }
+    if (nameLabel) nameLabel.classList.add('hidden');
+  }
+
+  // Hero Button: Change to ENTER TERMINAL if signed in
+  const heroBtn = document.getElementById('btn-auth-hero');
+  if (heroBtn) {
+    if (session && _profileVerified) {
+      heroBtn.innerHTML = '<span class="material-symbols-outlined">terminal</span> ENTER TERMINAL';
+      heroBtn.onclick = (e) => {
+        e.preventDefault();
+        window.location.href = '/dashboard_digital_rebel_desktop.html';
+      };
+    } else {
+      heroBtn.innerHTML = `
+        <img alt="G" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbSlYWQx7duriQ_rj1NkH12h0GPa6HXIDIMazPgvscwHaU0LrccorkuzuIhtDpMuUMIEvQc27qUB_AaYDxuJNz7VeElyUlxaHNGnABnsN5QMzTBTDVSGsx05jIxorxhKmdzR_IiiffekEIQR4xadI5EnXGV8YwxwVHVVo88rn9uq2i-uyNK-W1jaVVwvyb9vqadxunjI4sluWlaRmjOGa0sqxde0pAYhzni0eKL2qxhiuPvpW56hqN44MwRReBRJzNUdWS-P6qOwh" />
+        Sign in with Google
+      `;
+      heroBtn.onclick = (e) => { e.preventDefault(); signInWithGoogle(); };
+    }
+  }
+
+  // Legacy/General Buttons (Connect Wallet etc)
+  const otherAuthButtons = document.querySelectorAll(
+    '#btn-connect-wallet, #connect-wallet-btn, [id*="connect-wallet"]'
   );
 
-  authButtons.forEach(btn => {
+  otherAuthButtons.forEach(btn => {
     if (session && _profileVerified) {
-      if (btn.id === 'btn-google-signin') {
-        btn.innerHTML = '<span class="material-symbols-outlined">terminal</span> ENTER TERMINAL';
-      } else {
-        btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
-      }
-
+      btn.textContent = (session.user.email?.split('@')[0] || 'Rebel').toUpperCase();
       btn.onclick = (e) => {
         e.preventDefault();
         window.location.href = '/dashboard_digital_rebel_desktop.html';
       };
     } else {
-      btn.addEventListener('click', (e) => {
+      btn.onclick = (e) => {
         e.preventDefault();
         signInWithGoogle();
-      });
+      };
     }
   });
 
