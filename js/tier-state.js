@@ -29,50 +29,24 @@ const TierStateManager = (() => {
     }
 
     // ═══ UPDATE BUTTON ═══
-    const upgradeBtn = document.getElementById('sidebar-upgrade-btn');
-    console.log('[TierStateManager] Button found:', !!upgradeBtn, 'isElite:', isElite);
+    var upgradeBtn = document.getElementById('sidebar-upgrade-btn');
     if (upgradeBtn) {
       if (isElite) {
-        console.log('[TierStateManager] Applying ELITE button styling...');
-        // ELITE: Fire button
-        upgradeBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px; animation: premiumPulse 2s infinite;">local_fire_department</span> <span class="relative z-10">Explore Benefits</span>';
-        upgradeBtn.href = '#';
-        upgradeBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center relative overflow-hidden group border-2 border-[#121212] dark:border-[#f6f6f6]';
-        upgradeBtn.style.cssText = 'background: linear-gradient(90deg, #ffb300, #ff6f00, #ffb300); background-size: 200% auto; animation: premiumFire 3s linear infinite; box-shadow: 0 0 15px rgba(255,111,0,0.7); text-shadow: 1px 1px 0px rgba(255,255,255,0.3); color: #121212 !important;';
-
-        // Add animations
-        if (!document.getElementById('rebel-premium-styles')) {
-          const style = document.createElement('style');
-          style.id = 'rebel-premium-styles';
-          style.textContent = `
-            @keyframes premiumFire { 
-              0% { background-position: 0% center; box-shadow: 0 0 15px rgba(255,111,0,0.6); } 
-              50% { background-position: 100% center; box-shadow: 0 0 25px rgba(255,215,0,0.9); } 
-              100% { background-position: 0% center; box-shadow: 0 0 15px rgba(255,111,0,0.6); } 
-            }
-            @keyframes premiumPulse { 
-              0% { transform: scale(1); opacity: 0.8; } 
-              50% { transform: scale(1.2); opacity: 1; text-shadow: 0 0 10px #fff; } 
-              100% { transform: scale(1); opacity: 0.8; } 
-            }
-          `;
-          document.head.appendChild(style);
+        upgradeBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> Explore Benefits';
+        upgradeBtn.removeAttribute('href');
+        upgradeBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center border-2 border-[#121212]';
+        upgradeBtn.style.cssText = 'background:linear-gradient(90deg,#ffb300,#ff6f00,#ffb300);background-size:200% auto;animation:eliteBtnGlow 3s linear infinite;box-shadow:0 0 18px rgba(255,111,0,0.8);color:#121212!important;cursor:pointer;';
+        if (!document.getElementById('elite-btn-anim')) {
+          var s = document.createElement('style'); s.id = 'elite-btn-anim';
+          s.textContent = '@keyframes eliteBtnGlow{0%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}50%{background-position:100% center;box-shadow:0 0 25px rgba(255,215,0,.9)}100%{background-position:0% center;box-shadow:0 0 15px rgba(255,111,0,.6)}}';
+          document.head.appendChild(s);
         }
-
-        // Clone to remove old listeners
-        const newBtn = upgradeBtn.cloneNode(true);
-        upgradeBtn.parentNode.replaceChild(newBtn, upgradeBtn);
-
-        newBtn.addEventListener('click', (e) => {
+        upgradeBtn.onclick = function(e) {
           e.preventDefault();
-          const modal = document.getElementById('elite-hub-modal');
-          if (modal) {
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-          }
-        });
+          var modal = document.getElementById('elite-hub-modal');
+          if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+        };
       } else {
-        // FREE: Upgrade button
         upgradeBtn.innerHTML = 'Upgrade Power';
         upgradeBtn.href = 'upgrade_digital_rebel_desktop.html';
         upgradeBtn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs bg-primary-fixed text-on-primary-fixed border-2 border-[#121212] transition-all hover:bg-[#d4af37] neo-shadow';
@@ -80,15 +54,33 @@ const TierStateManager = (() => {
       }
     }
 
+    // Re-enforce after 800ms to beat any race condition from async scripts
+    if (isElite) {
+      setTimeout(function() {
+        var b = document.getElementById('sidebar-upgrade-btn');
+        var l = document.getElementById('sidebar-tier-label');
+        if (l) { l.textContent = 'Elite Tier'; l.style.color = '#FF6F00'; }
+        if (b && !b.innerHTML.toLowerCase().includes('explore')) {
+          b.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> Explore Benefits';
+          b.removeAttribute('href');
+          b.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center border-2 border-[#121212]';
+          b.style.cssText = 'background:linear-gradient(90deg,#ffb300,#ff6f00,#ffb300);background-size:200% auto;animation:eliteBtnGlow 3s linear infinite;box-shadow:0 0 18px rgba(255,111,0,0.8);color:#121212!important;cursor:pointer;';
+          b.onclick = function(ev) {
+            ev.preventDefault();
+            var m = document.getElementById('elite-hub-modal');
+            if (m) { m.classList.remove('hidden'); m.classList.add('flex'); }
+          };
+        }
+      }, 800);
+    }
+
     // ═══ UPDATE CACHE ═══
     try {
       localStorage.setItem('futura_sidebar_v1', JSON.stringify({
-        isElite,
+        isElite: isElite,
         exploreBenefitsLabel: isElite ? 'Explore Benefits' : 'Upgrade Power'
       }));
-    } catch (e) {
-      // ignore
-    }
+    } catch (e) {}
 
     return isElite;
   }
