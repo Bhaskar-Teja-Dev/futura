@@ -425,10 +425,14 @@
             const navBalance = document.getElementById('nav-zens-balance');
             if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
             try {
-              await futuraApi.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
+              if (futuraApi && futuraApi.holdings) {
+                await futuraApi.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
+              }
             } catch (e) { console.error('Holdings DB write failed:', e); }
             try {
-              await futuraApi.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
+              if (futuraApi && futuraApi.contributions) {
+                await futuraApi.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
+              }
             } catch (e) { console.error('Silent streak log failed', e); }
             if (typeof RebelNotifications !== 'undefined') {
               RebelNotifications.add('Investment Opened', `Successfully purchased position in ${ticker} for ${amt.toLocaleString('en-US')} ZENS.`, 'success');

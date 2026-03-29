@@ -1316,8 +1316,11 @@
 
                     // Load stock holdings from DB
                     try {
+                        if (!futuraApi || !futuraApi.holdings) {
+                            throw new Error('Holdings API not initialized');
+                        }
                         const holdRes = await futuraApi.holdings.list();
-                        const holdings = holdRes.holdings || [];
+                        const holdings = holdRes.holdings || holdRes || [];
                         holdings.forEach(function (h) {
                             flowItems.push({
                                 label: 'Buy ' + h.ticker,

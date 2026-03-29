@@ -272,8 +272,13 @@
       let totalWeightedReturn = 0;
 
       try {
+        // Ensure futuraApi is available
+        if (!futuraApi || !futuraApi.holdings) {
+          throw new Error('API not initialized. Please refresh the page.');
+        }
+        
         const holdingsRes = await futuraApi.holdings.list();
-        const holdings = holdingsRes.holdings || [];
+        const holdings = holdingsRes.holdings || holdingsRes || [];
         loadedHoldings = holdings;
 
         assetUnitsCount += holdings.length;
@@ -351,6 +356,11 @@
       // 2. Load API Manual Contributions
       let manualZensSubtotal = 0;
       try {
+        // Ensure futuraApi is available
+        if (!futuraApi || !futuraApi.contributions) {
+          throw new Error('Contributions API not initialized. Please refresh the page.');
+        }
+        
         const res = await futuraApi.contributions.list();
         if (res.error) throw new Error(res.error);
 
@@ -628,6 +638,11 @@
         modal.onclick = null;
 
         try {
+          // Ensure futuraApi is available
+          if (!futuraApi || !futuraApi.zens || !futuraApi.holdings) {
+            throw new Error('API not initialized. Please refresh the page.');
+          }
+          
           // 1. Credit ZENS
           const res = await futuraApi.zens.add(finalProceeds);
           if (res.error) throw new Error(res.error);
