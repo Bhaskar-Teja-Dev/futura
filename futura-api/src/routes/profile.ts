@@ -64,6 +64,13 @@ router.patch('/', zValidator('json', profileUpdateSchema), async (c) => {
     return c.json({ error: error.message }, 500)
   }
 
+  if (body.display_name !== undefined) {
+    await supabaseAdmin
+      .from('user_subscriptions')
+      .update({ display_name: body.display_name })
+      .eq('user_id', userId)
+  }
+
   return c.json({ profile: data })
 })
 

@@ -48,7 +48,13 @@ router.post('/purchase-elite', zValidator('json', purchaseSchema), async (c) => 
   const supabase = getSupabase(c.env, c.get('token'))
   
   console.log('Starting subscription update for user:', userId)
-  
+
+  const { data: profileRow } = await supabase
+    .from('profiles')
+    .select('display_name')
+    .eq('id', userId)
+    .maybeSingle()
+
   // Step 1: Upsert subscription
   const { data: subData, error: subError } = await supabase
     .from('user_subscriptions')
@@ -56,6 +62,7 @@ router.post('/purchase-elite', zValidator('json', purchaseSchema), async (c) => 
       user_id: userId,
       entitlement: 'elite',
       streak_recovery_tokens: 2,
+      display_name: profileRow?.display_name ?? null,
       updated_at: new Date().toISOString()
     }, { onConflict: 'user_id' })
     .select()
