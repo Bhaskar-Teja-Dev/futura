@@ -22,9 +22,17 @@
     var btn = document.getElementById('sidebar-upgrade-btn');
     if (c.isElite) {
       if (label) { label.textContent = 'Elite Tier'; label.style.color = '#FF6F00'; }
-      if (btn && c.exploreBenefitsLabel) {
-        btn.textContent = c.exploreBenefitsLabel;
+      if (btn) {
+        // Full elite button restoration from cache (matches TierStateManager.updateTierDisplay)
+        btn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> <span class="relative z-10">Explore Benefits</span>';
         btn.removeAttribute('href');
+        btn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center relative overflow-hidden group border-2 border-[#121212] dark:border-[#f6f6f6]';
+        btn.style.cssText = 'background: linear-gradient(90deg, #ffb300, #ff6f00, #ffb300); background-size: 200% auto; box-shadow: 0 0 15px rgba(255,111,0,0.7); color: #121212 !important;';
+        btn.onclick = function(e) {
+          e.preventDefault();
+          var modal = document.getElementById('elite-hub-modal');
+          if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
+        };
       }
     } else {
       if (label) { label.textContent = 'Basic Tier'; label.style.color = '#767777'; }
