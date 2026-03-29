@@ -281,6 +281,28 @@
             min-width: 60px;
             display: inline-block;
         }
+
+        /* Elite hero CTA — orange gradient + glow (opens Elite Hub) */
+        @keyframes dashboardEliteCtaGlow {
+
+            0%,
+            100% {
+                background-position: 0% center;
+                box-shadow: 0 0 14px rgba(255, 111, 0, 0.65), 4px 4px 0 #121212;
+            }
+
+            50% {
+                background-position: 100% center;
+                box-shadow: 0 0 28px rgba(255, 179, 0, 0.9), 0 0 36px rgba(255, 111, 0, 0.45), 4px 4px 0 #121212;
+            }
+        }
+
+        .dashboard-elite-explore-cta {
+            background: linear-gradient(90deg, #ffb300, #ff6f00, #ffb300);
+            background-size: 200% auto;
+            animation: dashboardEliteCtaGlow 3s linear infinite;
+            color: #121212 !important;
+        }
     </style>
     <link href="/css/premium.css" rel="stylesheet" />
 </head>
@@ -398,6 +420,19 @@
                             REBEL_DASHBOARD</h1>
                         <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory.
                             Portfolio tracking active — stay consistent.</p>
+                        <div id="dashboard-hero-tier-cta" class="mt-6 flex flex-wrap items-center gap-3">
+                            <a id="dashboard-hero-upgrade-link" href="upgrade_digital_rebel_desktop.html"
+                                class="inline-flex items-center justify-center gap-2 px-6 py-3 font-headline font-black uppercase tracking-[0.15em] text-[10px] sm:text-xs border-2 border-[#cafd00] bg-[#cafd00] text-[#121212] neo-shadow hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all no-underline">
+                                Upgrade now
+                            </a>
+                            <button type="button" id="dashboard-hero-explore-btn"
+                                class="inline-flex items-center justify-center gap-2 px-6 py-3 font-headline font-black uppercase tracking-[0.15em] text-[10px] sm:text-xs border-2 border-[#121212] dashboard-elite-explore-cta neo-shadow hover:translate-x-0.5 hover:translate-y-0.5 transition-all cursor-pointer"
+                                style="display:none" aria-haspopup="dialog">
+                                <span class="material-symbols-outlined shrink-0"
+                                    style="font-size:18px;font-variation-settings:'FILL' 1;">local_fire_department</span>
+                                Explore benefits
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <!-- Gamification Badge -->
@@ -874,6 +909,27 @@
             }
         }
 
+        function syncDashboardHeroTierCta(isElite) {
+            const upgradeLink = document.getElementById('dashboard-hero-upgrade-link');
+            const exploreBtn = document.getElementById('dashboard-hero-explore-btn');
+            if (!upgradeLink || !exploreBtn) return;
+            if (isElite) {
+                upgradeLink.style.display = 'none';
+                exploreBtn.style.display = 'inline-flex';
+            } else {
+                upgradeLink.style.display = 'inline-flex';
+                exploreBtn.style.display = 'none';
+            }
+        }
+
+        function openEliteHubModal() {
+            const modal = document.getElementById('elite-hub-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+            }
+        }
+
         function hydrateStreak(streakData) {
             const badge = document.getElementById('streak-badge');
             const countEl = document.getElementById('streak-count');
@@ -1009,6 +1065,8 @@
                     }
                 }
             }
+
+            syncDashboardHeroTierCta(!!streakData.is_elite);
         }
 
 
@@ -1125,6 +1183,11 @@
 
         // ─── Main Dashboard Init ─────────────────────────────────────
         document.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById('dashboard-hero-explore-btn')?.addEventListener('click', function (e) {
+                e.preventDefault();
+                openEliteHubModal();
+            });
+
             try {
                 // Set up local references to globals for production compatibility
                 const api = window.futuraApi || futuraApi;
@@ -1172,6 +1235,9 @@
                 const profileResult = await api.profile.get();
                 const goal = profileResult.profile; // profiles table synced data
                 const sub = profileResult.subscription;
+                const isEliteFromSub = typeof sub?.entitlement === 'string'
+                    && sub.entitlement.toLowerCase() === 'elite';
+                syncDashboardHeroTierCta(isEliteFromSub);
 
                 if (!goal || !goal.onboarding_complete) {
                     window.location.href = 'onboarding_step_1_age.html';
