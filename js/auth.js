@@ -42,7 +42,9 @@ async function signInWithGoogle() {
 // Sign out
 async function signOut() {
   await getSupabase().auth.signOut();
-  window.location.href = 'index.html';
+  localStorage.clear();
+  sessionStorage.clear();
+  window.location.href = '/index.html';
 }
 
 let _profileVerified = false;
@@ -150,19 +152,47 @@ async function updateNavAuth() {
   const headerBtn = document.getElementById('btn-auth-header');
   const nameLabel = document.getElementById('user-name-header');
   const displayName = document.getElementById('user-display-name');
+  const sidebarName = document.getElementById('user-name');
+
+  const username = (session?.user?.email?.split('@')[0] || 'REBEL').toUpperCase();
 
   if (session && _profileVerified) {
     if (headerBtn) headerBtn.style.display = 'none';
     if (nameLabel) {
       nameLabel.classList.remove('hidden');
-      if (displayName) displayName.textContent = (session.user.email?.split('@')[0] || 'REBEL').toUpperCase();
+      if (displayName) displayName.textContent = username;
     }
+    if (sidebarName) sidebarName.textContent = username;
   } else {
     if (headerBtn) {
       headerBtn.style.display = 'flex';
       headerBtn.onclick = (e) => { e.preventDefault(); signInWithGoogle(); };
     }
     if (nameLabel) nameLabel.classList.add('hidden');
+  }
+
+  // ZENS Pill Visibility
+  const zensPill = document.getElementById('nav-zens-pill');
+  if (zensPill) {
+    if (session && _profileVerified) {
+      zensPill.classList.remove('hidden');
+      zensPill.classList.add('md:flex');
+    } else {
+      zensPill.classList.add('hidden');
+      zensPill.classList.remove('md:flex');
+    }
+  }
+
+  // Avatar Update
+  const avatar = document.getElementById('nav-avatar');
+  if (avatar && session && _profileVerified) {
+    const photo = session.user?.user_metadata?.avatar_url || session.user?.user_metadata?.picture;
+    if (photo) {
+      avatar.innerHTML = `<img src="${photo}" class="w-full h-full object-cover" alt="User profile">`;
+    } else {
+      const initial = (session.user.email?.[0] || 'R').toUpperCase();
+      avatar.innerHTML = `<div class="bg-[#cafd00] text-[#121212] font-headline font-black w-full h-full flex items-center justify-center text-sm">${initial}</div>`;
+    }
   }
 
   // Hero Button: Change to ENTER TERMINAL if signed in
@@ -204,16 +234,161 @@ async function updateNavAuth() {
   });
 
   // Populate Zens Balance in Nav if applicable
+  // Populate Zens Balance in Nav if applicable
   if (session) {
-    const zensPill = document.getElementById('nav-zens-balance');
-    if (zensPill) {
+    const zensPills = document.querySelectorAll('#nav-zens-balance, [id*="zens-balance"]');
+    const addMoneyBtns = document.querySelectorAll('#add-money-btn, [onclick*="buyZens"]');
+    
+    // Standardize ZENS display
+    if (zensPills.length > 0) {
       try {
         const { zens } = await futuraApi.zens.balance();
-        zensPill.textContent = (zens || 0).toLocaleString('en-US') + ' ZENS';
+        const formatted = (zens || 0).toLocaleString('en-US') + ' ZENS';
+        zensPills.forEach(p => p.textContent = formatted);
       } catch (err) {
         console.error("Failed to load Zens balance:", err);
       }
     }
+
+    // Standardize Add Money Buttons
+    document.querySelectorAll('button').forEach(btn => {
+      if (btn.textContent.trim().toUpperCase() === 'ADD MONEY' || btn.id === 'add-money-btn') {
+        btn.onclick = () => {
+          if (typeof buyZens === 'function') {
+            buyZens(newBalance => {
+              const formatted = (newBalance || 0).toLocaleString('en-US') + ' ZENS';
+              document.querySelectorAll('#nav-zens-balance').forEach(p => p.textContent = formatted);
+              if (window.showToast) showToast('ZENS Successfully added!');
+              if (window.RebelNotifications) RebelNotifications.add('ZENS ACQUIRED', `Successfully added ${newBalance.toLocaleString()} ZENS to your vault.`, 'success');
+            });
+          }
+        };
+      }
+    });
+  }
+
+  // ── Notification Bell Handler ──────────────────────────────────────────
+  // Refined selector for the bell icon prioritizing standard ID
+  const bell = document.querySelector('#notif-bell') || 
+               Array.from(document.querySelectorAll('.material-symbols-outlined')).find(el => el.textContent.trim() === 'notifications');
+
+  if (bell && !bell._hasListener) {
+    bell.style.position = 'relative';
+    bell.style.cursor = 'pointer';
+
+    // Create/Update Badge
+    const updateBadge = () => {
+      let badge = bell.querySelector('.notif-badge');
+      const count = window.RebelNotifications ? RebelNotifications.getUnreadCount() : 0;
+      
+      if (count > 0) {
+        if (!badge) {
+          badge = document.createElement('span');
+          badge.className = 'notif-badge';
+          badge.style.cssText = 'position:absolute;top:-2px;right:-2px;width:12px;height:12px;background:#b02500;border:1px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;color:#fff;font-weight:900;';
+          bell.appendChild(badge);
+        }
+        badge.textContent = count > 9 ? '9+' : count;
+      } else if (badge) {
+        badge.remove();
+      }
+    };
+
+    updateBadge();
+    window.addEventListener('notifications-updated', updateBadge);
+
+    bell.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.rebel-dropdown').forEach(d => d.remove());
+      
+      const dd = document.createElement('div');
+      dd.className = 'rebel-dropdown notification-dropdown';
+      dd.style.cssText = `
+        position: fixed;
+        background: #fff;
+        border: 2px solid #121212;
+        box-shadow: 4px 4px 0 #121212;
+        z-index: 9999;
+        min-width: 320px;
+        max-width: 360px;
+        animation: slideIn 0.1s ease-out;
+      `;
+
+      const rect = bell.getBoundingClientRect();
+      dd.style.top = (rect.bottom + 12) + 'px';
+      dd.style.right = (window.innerWidth - rect.right) + 'px';
+
+      // Header
+      const header = document.createElement('div');
+      header.className = 'p-4 border-b-2 border-[#121212] bg-[#f6f6f6] flex justify-between items-center';
+      header.innerHTML = `
+        <span class="font-headline font-black text-xs uppercase tracking-widest">Incoming Intel</span>
+        <button id="clear-all-notifs" class="font-headline font-black text-[10px] uppercase text-[#b02500] hover:underline">Clear All</button>
+      `;
+      dd.appendChild(header);
+
+      const list = document.createElement('div');
+      list.className = 'max-h-[400px] overflow-y-auto';
+      
+      const notifs = window.RebelNotifications ? RebelNotifications.getLatest(5) : [];
+      
+      if (notifs.length === 0) {
+        list.innerHTML = `<div class="p-8 text-center font-headline font-bold text-[10px] text-[#767777] uppercase tracking-widest">No active threats or intel detected.</div>`;
+      } else {
+        notifs.forEach(n => {
+          const item = document.createElement('div');
+          item.className = `p-4 border-b border-[#e0e0e0] last:border-none hover:bg-surface-container-low transition-colors ${!n.read ? 'bg-[#cafd000a]' : ''}`;
+          
+          let icon = 'info';
+          let color = '#121212';
+          if (n.type === 'success') { icon = 'check_circle'; color = '#4e6300'; }
+          if (n.type === 'error') { icon = 'warning'; color = '#b02500'; }
+          if (n.type === 'trend') { icon = 'trending_up'; color = '#a400a4'; }
+          if (n.type === 'system') { icon = 'terminal'; color = '#121212'; }
+
+          item.innerHTML = `
+            <div class="flex gap-3">
+              <span class="material-symbols-outlined text-sm" style="color:${color}">${icon}</span>
+              <div class="flex-1">
+                <div class="font-headline font-black text-[10px] uppercase tracking-tighter mb-1">${n.title}</div>
+                <div class="font-body text-[11px] leading-tight text-on-surface-variant font-medium">${n.message}</div>
+                <div class="font-body text-[8px] uppercase mt-2 opacity-50 font-bold">${new Date(n.timestamp).toLocaleTimeString()}</div>
+              </div>
+            </div>
+          `;
+          list.appendChild(item);
+        });
+      }
+      dd.appendChild(list);
+
+      document.body.appendChild(dd);
+
+      // Actions
+      const clearBtn = dd.querySelector('#clear-all-notifs');
+      if (clearBtn) {
+        clearBtn.onclick = (ex) => {
+          ex.stopPropagation();
+          if (window.RebelNotifications) {
+            RebelNotifications.clearAll();
+            dd.remove();
+          }
+        };
+      }
+
+      // Mark all as read when opening
+      if (window.RebelNotifications) RebelNotifications.markAsAllRead();
+
+      // Close Logic
+      const closeDropdown = (event) => {
+        if (!dd.contains(event.target) && event.target !== bell) {
+          dd.remove();
+          document.removeEventListener('click', closeDropdown);
+        }
+      };
+      setTimeout(() => document.addEventListener('click', closeDropdown), 10);
+    });
+
+    bell._hasListener = true;
   }
 
   // ── Logout Listener (Event Delegation) ───────────────────────────────────

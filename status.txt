@@ -1,0 +1,33 @@
+﻿On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   add_card_digital_rebel.html
+	modified:   add_manual_asset_digital_rebel.html
+	modified:   assets_digital_rebel_desktop.html
+	modified:   cards_digital_rebel_desktop.html
+	modified:   dashboard_digital_rebel_desktop.html
+	modified:   index.html
+	modified:   js/api.js
+	modified:   js/auth.js
+	modified:   learn_digital_rebel_desktop.html
+	modified:   market_digital_rebel_desktop.html
+	modified:   onboarding_digital_rebel_desktop.html
+	modified:   onboarding_step_1_age.html
+	modified:   onboarding_step_2_retirement.html
+	modified:   onboarding_step_3_income.html
+	modified:   projections_digital_rebel_desktop.html
+	modified:   settings_digital_rebel_desktop.html
+	modified:   transactions.html
+	modified:   upgrade_digital_rebel_desktop.html
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	js/notifications.js
+	status-check.txt
+	status.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")

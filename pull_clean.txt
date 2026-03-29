@@ -1,0 +1,17 @@
+error: Your local changes to the following files would be overwritten by merge:
+	add_manual_asset_digital_rebel.html
+	assets_digital_rebel_desktop.html
+	cards_digital_rebel_desktop.html
+	dashboard_digital_rebel_desktop.html
+	index.html
+	js/auth.js
+	market_digital_rebel_desktop.html
+	onboarding_step_1_age.html
+	onboarding_step_2_retirement.html
+	onboarding_step_3_income.html
+	projections_digital_rebel_desktop.html
+	settings_digital_rebel_desktop.html
+	transactions.html
+Please commit your changes or stash them before you merge.
+Updating 95569c8..4fd717a
+Aborting

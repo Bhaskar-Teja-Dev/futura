@@ -201,42 +201,27 @@
 
 <body class="bg-surface font-body text-on-surface rebel-grid min-h-screen flex flex-col">
     <!-- TopNavBar -->
-    <nav
-        class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+    <nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
         <div class="flex items-center gap-8">
-            <span
-                class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">Digital
-                Rebel</span>
-            <div class="hidden md:flex gap-6">
-                <a class="font-Lexend font-black tracking-tighter uppercase text-[#121212] dark:text-[#cafd00] border-b-4 border-[#cafd00]"
-                    href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
-                    href="market_digital_rebel_desktop.html">Markets</a>
-                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
-                    href="assets_digital_rebel_desktop.html">Assets</a>
-                <a class="font-Lexend font-black tracking-tighter uppercase text-[#767777] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100"
-                    href="learn_digital_rebel_desktop.html">Learn</a>
+            <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
+            <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
+                <a class="hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline text-[#121212] dark:text-[#cafd00] border-b-4 border-[#cafd00]" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="market_digital_rebel_desktop.html">Markets</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="assets_digital_rebel_desktop.html">Assets</a>
             </div>
         </div>
         <div class="flex items-center gap-4">
-            <div class="hidden lg:flex relative">
-                <input
-                    class="bg-surface-container border-2 border-inverse-surface px-4 py-1 font-headline font-bold text-xs uppercase tracking-widest focus:ring-0 focus:border-primary-fixed outline-none"
-                    placeholder="SEARCH_VAULT..." type="text" />
-            </div>
-            <span
-                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all">notifications</span>
-            <a href="settings_digital_rebel_desktop.html"
-                class="material-symbols-outlined cursor-pointer hover:bg-primary-fixed p-1 border-2 border-transparent hover:border-inverse-surface transition-all inline-flex items-center justify-center">settings</a>
-            
-            <!-- ZENS BALANCE PILL -->
-            <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow">
+            <!-- ZENS Balance Pill -->
+            <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
                 <span>🪙</span>
-                <span id="nav-zens-balance">--</span>
+                <span id="nav-zens-balance">0 ZENS</span>
             </div>
-            <!-- ADD MONEY BTN -->
-            <button onclick="buyZens(newBalance => { document.getElementById('nav-zens-balance').textContent = newBalance.toLocaleString('en-US') + ' ZENS'; showToast('ZENS Successfully added!'); })"
-                class="bg-primary-fixed text-inverse-surface border-2 border-inverse-surface px-4 py-2 font-headline font-black uppercase tracking-tighter neo-shadow active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all">Add Money</button>
+            <!-- Notification Bell -->
+            <span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all" id="notif-bell">notifications</span>
+            <!-- User Avatar / Profile -->
+            <div id="nav-avatar" class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
+                <span class="material-symbols-outlined">account_circle</span>
+            </div>
         </div>
     </nav>
     <div class="flex flex-1 w-full">
@@ -501,9 +486,10 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-    <script src="./js/config.js"></script>
-    <script src="./js/auth.js"></script>
-    <script src="./js/api.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
     <script>
         // ─── Streak Fire Effect System ───────────────────────────────
         const MILESTONES = [5, 10, 25, 50, 100, 150, 200, 250, 365, 500, 1000];

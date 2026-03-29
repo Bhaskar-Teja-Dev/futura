@@ -160,6 +160,16 @@ function initiateRazorpayPurchase(amountINR, zensExpected, onSuccess) {
     handler: async (response) => {
       try {
         const result = await futuraApi.zens.purchase(response.razorpay_payment_id);
+        
+        // Add notification for successful purchase
+        if (typeof RebelNotifications !== 'undefined') {
+          RebelNotifications.add(
+            'ZENS Credited',
+            `Successfully added ${zensExpected.toLocaleString('en-US')} ZENS to your warchest.`,
+            'success'
+          );
+        }
+
         if (onSuccess) onSuccess(result.newBalance || result.zens); // Pass new balance
       } catch (err) {
         console.error('Zens credit failed:', err);

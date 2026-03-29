@@ -107,51 +107,30 @@
 
 <body class="bg-surface font-body text-on-surface">
   <!-- TopAppBar -->
-  <header
-    class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
-    id="main-header">
+  <header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
     <div class="flex items-center gap-8">
-      <a href="index.html"
-        class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
-        Rebel</a>
+      <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
       <nav class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1"
-          href="dashboard_digital_rebel_desktop.html" id="nav-dashboard">Dashboard</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1"
-          href="market_digital_rebel_desktop.html" id="nav-markets">Markets</a>
-        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1"
-          href="assets_digital_rebel_desktop.html" id="nav-assets">Assets</a>
-
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html" id="nav-dashboard">Dashboard</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="market_digital_rebel_desktop.html" id="nav-markets">Markets</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="assets_digital_rebel_desktop.html" id="nav-assets">Assets</a>
       </nav>
     </div>
     <div class="flex items-center gap-4">
-      <div class="hidden lg:flex items-center bg-surface-container border-2 border-on-surface px-3 py-1 neo-shadow"
-        id="search-container">
-        <span class="material-symbols-outlined text-on-surface-variant text-sm pr-2">search</span>
-        <input class="bg-transparent border-none focus:ring-0 text-xs font-headline uppercase tracking-widest w-32"
-          placeholder="Search Markets" type="text" />
+      <!-- ZENS Balance Pill -->
+      <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+        <span>🪙</span>
+        <span id="nav-zens-balance">0 ZENS</span>
       </div>
-      <a href="onboarding_digital_rebel_desktop.html"
-        class="bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs px-4 py-2 hover-lift transition-all no-underline"
-        id="btn-connect-wallet">
+      <!-- Connect Wallet (Landing Page Specific) -->
+      <a href="onboarding_digital_rebel_desktop.html" class="hidden lg:block bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs px-4 py-2 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] transition-all no-underline" id="btn-connect-wallet">
         Connect Wallet
       </a>
-      <a href="#"
-        class="flex items-center gap-2 bg-surface text-on-surface border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs px-4 py-2 hover-lift transition-all no-underline"
-        id="btn-auth-header">
-        <span class="material-symbols-outlined text-sm">login</span>
-        Sign in with Google
-      </a>
-      <!-- Signed-in User Name -->
-      <div id="user-name-header" class="hidden font-headline font-black uppercase tracking-widest text-xs px-4 py-2 border-2 border-on-surface bg-primary-fixed neo-shadow flex items-center gap-2">
-        <span class="material-symbols-outlined text-sm">account_circle</span>
-        <span id="user-display-name">REBEL</span>
-      </div>
-      <div class="flex gap-2">
-        <a href="dashboard_digital_rebel_desktop.html"><span
-            class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all">notifications</span></a>
-        <a href="settings_digital_rebel_desktop.html"><span
-            class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all">settings</span></a>
+      <!-- Notification Bell -->
+      <span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all" id="notif-bell">notifications</span>
+      <!-- User Avatar / Profile -->
+      <div id="nav-avatar" class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
+        <span class="material-symbols-outlined">account_circle</span>
       </div>
     </div>
   </header>
@@ -397,9 +376,10 @@
   </footer>
   <!-- Supabase + Futura Auth -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="./js/config.js"></script>
-  <script src="./js/auth.js"></script>
-  <script src="./js/api.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/notifications.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
   <style>
     /* Auth Guard: Prevents ghost sessions and UI flickering */
     html.auth-verified #btn-google-signin,
