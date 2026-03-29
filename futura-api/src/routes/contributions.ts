@@ -271,40 +271,24 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     }
   }
 
-  // Fetch subscription and tokens
   const { data: sub } = await supabase
     .from('user_subscriptions')
-    .select('entitlement, streak_recovery_tokens')
+    .select('streak_recovery_tokens')
     .eq('user_id', userId)
     .maybeSingle()
 
-  const isElite = sub?.entitlement === 'elite'
   const tokensBefore = sub?.streak_recovery_tokens ?? 0
 
-  const diffDays = lastDateStr ? Math.floor((new Date(`${body.contribution_date}T00:00:00Z`).getTime() - new Date(`${lastDateStr}T00:00:00Z`).getTime()) / (1000 * 60 * 60 * 24)) : 0
-
-  const canUseToken = isElite && tokensBefore > 0 && diffDays === 2 && !hasMissedDayContribution
-
+  // Elite recovery tokens are never spent on contribution POST — user must confirm via Repair (POST /repair-streak).
   const nextCurrent = calculateStreak(
     lastDateStr,
     streakRow?.current_streak ?? 0,
     body.contribution_date,
     hasMissedDayContribution,
-    canUseToken
+    false
   )
 
-  let recoveryTokensRemaining = tokensBefore
-  if (canUseToken) {
-    recoveryTokensRemaining = Math.max(0, tokensBefore - 1)
-    const { error: tokErr } = await supabase
-      .from('user_subscriptions')
-      .update({ streak_recovery_tokens: recoveryTokensRemaining })
-      .eq('user_id', userId)
-
-    if (tokErr) {
-      return c.json({ error: 'failed_to_update_tokens', details: tokErr.message }, 500)
-    }
-  }
+  const recoveryTokensRemaining = tokensBefore
   const nextLongest = Math.max(nextCurrent, streakRow?.longest_streak ?? 0)
   streakToReturn = nextCurrent
 

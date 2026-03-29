@@ -190,6 +190,27 @@ async function requireAuth() {
   return session;
 }
 
+/**
+ * Keep the header fire token pill aligned with GET /contributions/streak (same source as Elite Hub).
+ * Call after streak data is loaded on the dashboard overview.
+ * @param { { recovery_tokens?: number } } streakPayload - streak object from API
+ */
+function syncNavRecoveryTokenPill(streakPayload) {
+  if (!streakPayload || typeof streakPayload !== 'object') return;
+  const raw = streakPayload.recovery_tokens;
+  if (raw === undefined || raw === null) return;
+  const count = Number(raw);
+  if (!Number.isFinite(count)) return;
+  const countEl = document.getElementById('nav-tokens-count');
+  const pill = document.getElementById('nav-tokens-pill');
+  if (countEl) countEl.textContent = '+' + count;
+  if (pill) {
+    pill.style.display = 'flex';
+    if (count > 0) pill.classList.add('fire-glow');
+    else pill.classList.remove('fire-glow');
+  }
+}
+
 // Update nav UI based on auth state
 async function updateNavAuth() {
   const session = await getSession();
@@ -237,20 +258,11 @@ async function updateNavAuth() {
           const isElite = (sub?.entitlement?.toLowerCase() === 'elite') || (streakData?.streak?.is_elite);
           localStorage.setItem('isElite', isElite ? 'true' : 'false');
 
-          // Prefer tokens from profile subscription (same row as DB) — streak fetch can fail or return 0 if RPC/migration mismatches
-          const rawSubTokens = profileData?.subscription?.streak_recovery_tokens
-          const hasSubTokens = rawSubTokens !== undefined && rawSubTokens !== null
-          const tokenCount = hasSubTokens
-            ? Number(rawSubTokens)
-            : Number(streakData?.streak?.recovery_tokens ?? 0)
-
-          console.log('[Futura] Elite Detection:', {
-            isElite,
-            sub: sub?.entitlement,
-            tokensFromSub: rawSubTokens,
-            tokensFromStreak: streakData?.streak?.recovery_tokens,
-            tokenCount
-          })
+          // Same source as Elite Hub: only trust GET /contributions/streak for the number.
+          // If streak fails, do not fall back to profile (profile row can disagree after refresh RPC ordering).
+          const tokenCount = streakData?.streak
+            ? Number(streakData.streak.recovery_tokens ?? 0)
+            : 0
 
           if (isElite) {
             let tokenPill = document.getElementById('nav-tokens-pill');

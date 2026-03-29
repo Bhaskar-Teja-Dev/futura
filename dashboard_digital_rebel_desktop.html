@@ -569,10 +569,10 @@
                             <h4 class="font-headline font-black text-sm uppercase">Streak Recovery</h4>
                         </div>
                         <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span
-                                id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">2</span> Available</p>
+                                id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">0</span> Available</p>
                     </div>
-                    <p class="text-xs text-on-surface-variant italic">Automatically used if you miss a day. Resets
-                        2/month.</p>
+                    <p class="text-xs text-on-surface-variant italic">Not used automatically — confirm on your streak
+                        card (Repair) when you want to spend one. Up to 2 refill per calendar month.</p>
                 </div>
 
                 <!-- Tax Optimization -->
@@ -833,6 +833,14 @@
                 fireIcon.className = fireIcon.className.replace(/text-\d+xl/g, '');
                 fireIcon.classList.add(sizes[tier] || 'text-6xl');
             }
+
+            const tokenCountEl = document.getElementById('elite-tokens-count');
+            if (tokenCountEl) {
+                tokenCountEl.textContent = String(isElite ? tokens : 0);
+            }
+            if (typeof syncNavRecoveryTokenPill === 'function') {
+                syncNavRecoveryTokenPill({ recovery_tokens: isElite ? tokens : 0 });
+            }
         }
 
         function clearSkeleton(el) {
@@ -973,8 +981,10 @@
                     return;
                 }
 
-                // 4. Elite Tier Logic
-                hydrateEliteSidebar(sub);
+                const streakRes = await streakPromise;
+
+                // 4. Elite Tier Logic (streak GET runs monthly token refresh — same source as nav + streak card)
+                await hydrateEliteSidebar(sub, streakRes);
 
                 // Auto-open Elite Hub if hash is present
                 if (window.location.hash === '#elite-hub') {
@@ -1085,8 +1095,7 @@
                     clearSkeleton(liquidEl);
                 }
 
-                // 8. Streak Finalization
-                const streakRes = await streakPromise;
+                // 8. Streak Finalization (streakRes resolved earlier for sidebar + tokens)
                 if (typeof hydrateStreak === 'function') hydrateStreak(streakRes.streak);
                 if (typeof updateNavAuth === 'function') updateNavAuth();
 

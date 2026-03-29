@@ -75,11 +75,31 @@ const futuraApi = {
 };
 
 /**
- * Global helper to hydrate the Elite Sidebar across all pages.
+ * Recovery tokens: streak GET runs monthly refresh RPC — prefer it over profile snapshot.
  * @param {Object} sub - User subscription data
+ * @param {Object} [streakRes] - Result of futuraApi.contributions.streak() (optional; fetched if elite and missing)
  */
-function hydrateEliteSidebar(sub) {
+async function hydrateEliteSidebar(sub, streakRes) {
   const isElite = sub?.entitlement === 'elite';
+  let streakPayload = streakRes;
+  if (isElite && (streakPayload?.streak?.recovery_tokens === undefined || streakPayload?.streak?.recovery_tokens === null)) {
+    try {
+      streakPayload = await futuraApi.contributions.streak();
+    } catch (_) {
+      streakPayload = null;
+    }
+  }
+  const tokenCountEl = document.getElementById('elite-tokens-count');
+  if (tokenCountEl) {
+    const n = isElite
+      ? Number(
+          streakPayload?.streak?.recovery_tokens !== undefined && streakPayload?.streak?.recovery_tokens !== null
+            ? streakPayload.streak.recovery_tokens
+            : (sub?.streak_recovery_tokens ?? 0)
+        )
+      : 0;
+    tokenCountEl.textContent = n;
+  }
   const tierLabel = document.getElementById('sidebar-tier-label');
   const upgradeBtn = document.getElementById('sidebar-upgrade-btn');
 
@@ -118,12 +138,16 @@ function hydrateEliteSidebar(sub) {
           // Global hydration of Elite Modal Data
           try {
             const tokenEl = document.getElementById('elite-tokens-count');
-            if (tokenEl) tokenEl.textContent = sub?.streak_recovery_tokens || 0;
-            
-            const goal = await futuraApi.goal.get();
+            if (tokenEl) {
+              const sr = await futuraApi.contributions.streak().catch(() => null);
+              tokenEl.textContent = String(sr?.streak?.recovery_tokens ?? sub?.streak_recovery_tokens ?? 0);
+            }
+
+            const goalsRes = await futuraApi.goals.get();
+            const goal = goalsRes?.goal;
             if (goal) {
-              const income = goal.monthly_income * 12 || 0;
-              const investment = goal.monthly_income * 0.2 * 12 || 0; // estimate 20%
+              const income = (goal.target_monthly_income || 0) * 12;
+              const investment = (goal.target_monthly_income || 0) * 0.2 * 12;
               const taxSaved = Math.round(investment * 0.25);
               const savingsEl = document.getElementById('elite-tax-savings');
               const recEl = document.getElementById('elite-tax-rec');
