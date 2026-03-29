@@ -247,9 +247,8 @@
       const startTime = Date.now();
       while (Date.now() - startTime < timeout) {
         const api = (typeof futuraApi !== 'undefined' && futuraApi !== null) ? futuraApi : window.futuraApi;
-        // Verify api is a fully-loaded object with critical namespaces (holdings, zens, etc.)
-        if (api && typeof api === 'object' && typeof api.holdings === 'object' && typeof api.zens === 'object') {
-          // Expose to local scope if found on window
+        // Accept any valid API object (don't require specific namespaces — they may be missing in older cached versions)
+        if (api && typeof api === 'object' && typeof api.profile === 'object') {
           if (typeof futuraApi === 'undefined') {
             window.futuraApi = api;
           }
@@ -257,10 +256,7 @@
         }
         await new Promise(resolve => setTimeout(resolve, 100));
       }
-      const partialApi = window.futuraApi || (typeof futuraApi !== 'undefined' ? futuraApi : null);
-      console.error('futuraApi not fully available after', timeout, 'ms');
-      console.error('Partial api keys:', partialApi ? Object.keys(partialApi) : 'none');
-      console.error('Available on window:', Object.keys(window).filter(k => k.includes('futura') || k.includes('Api')));
+      console.error('futuraApi not available after', timeout, 'ms');
       throw new Error('futuraApi failed to initialize after ' + timeout + 'ms. Check that api.js is loaded correctly.');
     }
 
@@ -274,6 +270,17 @@
         await new Promise(resolve => setTimeout(resolve, 100));
       }
       throw new Error('Auth functions not available after ' + timeout + 'ms. Check that auth.js is loaded correctly.');
+    }
+
+    // Direct API fetch fallback — used when api.js is a cached older version missing namespaces
+    async function directApiFetch(path) {
+      const token = await (window.getAccessToken || getAccessToken)();
+      if (!token) throw new Error('Not authenticated');
+      const res = await fetch(FUTURA_CONFIG.API_BASE_URL + path, {
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token }
+      });
+      if (!res.ok) throw new Error(await res.text() || 'API error ' + res.status);
+      return res.json();
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
@@ -291,13 +298,20 @@
 
       // Set up local references to globals for better compatibility
       const api = window.futuraApi || futuraApi;
-      console.log('DEBUG: api object:', api);
-      console.log('DEBUG: api.holdings exists?', !!api?.holdings);
-      console.log('DEBUG: window.futuraApi:', window.futuraApi);
       if (!api) {
-        console.error('futuraApi is still not available');
         alert('API failed to initialize. Please refresh the page.');
         return;
+      }
+
+      // Patch in missing namespaces if deployed api.js is an older cached version
+      if (!api.holdings) {
+        console.warn('api.holdings missing — using direct fetch fallback');
+        api.holdings = {
+          list: () => directApiFetch('/api/holdings'),
+          create: (body) => directApiFetch('/api/holdings', 'POST', body),
+          sell: (id, body) => directApiFetch('/api/holdings/' + id + '/sell', 'PATCH', body),
+          remove: (id) => directApiFetch('/api/holdings/' + id, 'DELETE')
+        };
       }
 
       const session = await (window.requireAuth || requireAuth)();
@@ -329,9 +343,6 @@
       let totalWeightedReturn = 0;
 
       try {
-        if (!api.holdings || typeof api.holdings.list !== 'function') {
-          throw new Error('api.holdings is not available. API keys present: ' + Object.keys(api).join(', '));
-        }
         const holdingsRes = await api.holdings.list();
         const holdings = holdingsRes.holdings || holdingsRes || [];
         loadedHoldings = holdings;
