@@ -5,17 +5,16 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link rel="stylesheet" href="css/app.css" />
   <title>Settings | Digital Rebel</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link
+    <link
     href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet" />
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
   
-  <script src="js/tailwind.config.js"></script>
-  <style>
+    <style>
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
@@ -213,45 +212,8 @@
             </div>
           </div>
         </section>
-        <!-- Security & Danger Zone Section -->
+        <!-- Support & Danger Zone Section -->
         <section class="xl:col-span-5 space-y-8">
-          <!-- Security (Bento Block) -->
-          <div class="bg-surface-container-lowest border-2 border-inverse-surface p-8 hard-shadow">
-            <h2
-              class="font-headline font-black text-2xl uppercase tracking-widest mb-8 border-b-4 border-tertiary-fixed inline-block">
-              Security Layer</h2>
-            <div class="space-y-6">
-              <div class="p-6 border-2 border-inverse-surface bg-surface-container-high relative overflow-hidden">
-                <div class="absolute top-2 right-2 flex gap-1">
-                  <div class="w-2 h-2 bg-primary-fixed"></div>
-                  <div class="w-2 h-2 bg-primary-fixed"></div>
-                </div>
-                <div class="flex items-start gap-4">
-                  <span class="material-symbols-outlined text-3xl">key</span>
-                  <div>
-                    <h3 class="font-headline font-bold uppercase text-sm tracking-widest mb-1">Two-Factor (2FA)</h3>
-                    <p class="font-body text-xs text-on-surface-variant mb-4">Authenticator app or SMS backup codes.</p>
-                    <button
-                      class="text-xs font-headline font-black uppercase text-on-surface border-b-2 border-on-surface hover:text-primary transition-colors">Configure
-                      2FA</button>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="p-6 border-2 border-inverse-surface bg-surface-container-high hover:bg-primary-fixed/10 transition-colors">
-                <div class="flex items-start gap-4">
-                  <span class="material-symbols-outlined text-3xl">memory</span>
-                  <div>
-                    <h3 class="font-headline font-bold uppercase text-sm tracking-widest mb-1">Hardware Keys</h3>
-                    <p class="font-body text-xs text-on-surface-variant mb-4">Register YubiKey or Ledger devices.</p>
-                    <button
-                      class="bg-inverse-surface text-surface font-headline font-black uppercase text-[10px] tracking-widest px-4 py-2 border-2 border-inverse-surface hover:bg-transparent hover:text-inverse-surface transition-all">Add
-                      Hardware Key</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <!-- Support Card (Asymmetric) -->
           <div class="bg-[#e1ff88] p-8 border-2 border-inverse-surface hard-shadow rotate-1">
             <div class="flex justify-between items-start mb-4">
@@ -260,9 +222,9 @@
             </div>
             <p class="font-body text-sm mb-6 leading-relaxed">Our support cell is active 24/7 for Elite Tier members.
               Standard response within 128ms.</p>
-            <button
-              class="w-full bg-inverse-surface text-[#cafd00] font-headline font-black uppercase tracking-widest py-3 border-2 border-inverse-surface hover:bg-transparent hover:text-inverse-surface transition-all">Open
-              Comms</button>
+            <a href="support_digital_rebel_desktop.html"
+              class="block w-full text-center no-underline bg-inverse-surface text-[#cafd00] font-headline font-black uppercase tracking-widest py-3 border-2 border-inverse-surface hover:bg-transparent hover:text-inverse-surface transition-all">Open
+              Comms</a>
           </div>
           <!-- Danger Zone Section -->
           <div class="bg-error-container p-8 border-2 border-inverse-surface hard-shadow relative">
@@ -276,16 +238,12 @@
               <p class="font-headline font-bold uppercase text-xs tracking-widest text-on-error-container/80">Permanent
                 Actions</p>
               <div class="flex flex-col gap-4">
-                <button id="logout-link"
-                  class="w-full bg-surface text-error font-headline font-black uppercase py-4 border-2 border-inverse-surface hard-shadow hover:bg-error hover:text-on-error transition-all group">
+                <button type="button"
+                  class="btn-logout w-full bg-surface text-error font-headline font-black uppercase py-4 border-2 border-inverse-surface hard-shadow hover:bg-error hover:text-on-error transition-all group">
                   <span class="flex items-center justify-center gap-2">
                     <span class="material-symbols-outlined group-hover:animate-pulse">logout</span>
                     Log Out Everywhere
                   </span>
-                </button>
-                <button
-                  class="text-on-error-container font-headline font-bold uppercase text-[10px] tracking-widest underline underline-offset-4 decoration-2 hover:text-error transition-colors">
-                  Deactivate Digital Core
                 </button>
               </div>
             </div>

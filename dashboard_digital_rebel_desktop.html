@@ -5,16 +5,15 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link rel="stylesheet" href="css/app.css" />
     <title>Digital Rebel | Dashboard</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
+        <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    <script src="js/tailwind.config.js"></script>
-    <style>
+        <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -349,14 +348,17 @@
             <!-- Hero Header Section -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 anim-enter anim-enter-1">
                 <div
-                    class="md:col-span-2 flex flex-col justify-end bg-inverse-surface text-surface p-8 neo-shadow-large relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4">
+                    class="md:col-span-2 flex flex-col justify-between gap-6 min-h-[12rem] bg-inverse-surface text-surface p-8 neo-shadow-large">
+                    <div class="flex justify-end shrink-0">
                         <span
                             class="bg-primary-fixed text-inverse-surface px-3 py-1 font-headline font-black text-xs uppercase tracking-tighter -rotate-2 inline-block border border-inverse-surface">SYSTEM_LIVE</span>
                     </div>
-                    <h1 class="font-headline font-black text-6xl uppercase tracking-tighter leading-none mb-4">
-                        REBEL_DASHBOARD</h1>
-                    <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory. Portfolio tracking active — stay consistent.</p>
+                    <div class="min-w-0">
+                        <h1
+                            class="font-headline font-black text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter leading-tight mb-4">
+                            REBEL_DASHBOARD</h1>
+                        <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory. Portfolio tracking active — stay consistent.</p>
+                    </div>
                 </div>
                 <!-- Gamification Badge -->
                 <div id="streak-badge"
@@ -390,8 +392,7 @@
                             <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Freedom Age Target
                             </h3>
                             <p id="freedom-subtitle"
-                                class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Current
-                                Project: -- Years Old</p>
+                                class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Target: — · Current: — Years Old</p>
                         </div>
                         <div class="text-right">
                             <span id="freedom-percent" class="font-headline font-black text-4xl text-primary skeleton">0%</span>
@@ -437,25 +438,25 @@
                 </div>
                 <!-- Summary Projection Graph Placeholder -->
                 <div
-                    class="md:col-span-12 bg-surface border-2 border-inverse-surface p-8 neo-shadow relative overflow-hidden anim-enter anim-enter-4">
-                    <div class="flex justify-between items-start mb-10">
-                        <div>
+                    class="md:col-span-12 bg-surface border-2 border-inverse-surface p-8 neo-shadow relative overflow-visible anim-enter anim-enter-4">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-10">
+                        <div class="min-w-0 flex-1">
                             <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Wealth Projection
                             </h3>
                             <p class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Scenario:
                                 Hyper-Growth Mode (Alpha)</p>
                         </div>
-                        <div class="flex gap-2">
-                            <button
-                                class="px-3 py-1 bg-primary-fixed border-2 border-inverse-surface font-headline font-black text-[10px] uppercase">1Y</button>
-                            <button
-                                class="px-3 py-1 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase">5Y</button>
-                            <button
-                                class="px-3 py-1 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase underline">MAX</button>
+                        <div class="flex gap-2 shrink-0 items-center" role="group" aria-label="Projection horizon">
+                            <button type="button" id="btn-wp-1y" data-horizon="1Y"
+                                class="wp-horizon-btn px-3 py-1.5 bg-primary-fixed border-2 border-inverse-surface font-headline font-black text-[10px] uppercase transition-colors">1Y</button>
+                            <button type="button" id="btn-wp-5y" data-horizon="5Y"
+                                class="wp-horizon-btn px-3 py-1.5 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase transition-colors">5Y</button>
+                            <button type="button" id="btn-wp-max" data-horizon="MAX"
+                                class="wp-horizon-btn px-3 py-1.5 bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase transition-colors">MAX</button>
                         </div>
                     </div>
                     <div id="overview-chart-container"
-                        class="h-64 w-full flex items-end gap-1 relative overflow-visible mt-12">
+                        class="w-full relative overflow-visible mt-12 min-h-[16rem] flex flex-col justify-end gap-1">
                         <!-- Background Grid -->
                         <div class="absolute inset-0 bg-surface-container opacity-20 rebel-grid pointer-events-none">
                         </div>
@@ -464,7 +465,7 @@
                             Calculating Trajectory...</p>
                     </div>
                     <div
-                        class="absolute bottom-8 right-8 border-l-4 border-b-4 border-primary-fixed p-4 bg-inverse-surface text-surface">
+                        class="absolute bottom-8 right-8 z-30 border-l-4 border-b-4 border-primary-fixed p-4 bg-inverse-surface text-surface shadow-[4px_4px_0_0_rgba(18,18,18,1)]">
                         <p id="terminal-value" class="font-headline font-black text-3xl skeleton">+$0</p>
                         <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-primary-fixed">
                             ESTIMATED TERMINAL VALUE</p>
@@ -726,43 +727,91 @@
             if (el) el.classList.remove('skeleton');
         }
 
-        const renderOverviewChart = (data) => {
+        const WP_HORIZON_ACTIVE = 'bg-primary-fixed border-2 border-inverse-surface font-headline font-black text-[10px] uppercase transition-colors';
+        const WP_HORIZON_IDLE = 'bg-surface border-2 border-inverse-surface font-headline font-black text-[10px] uppercase transition-colors';
+
+        function resolveProfileAge(goal) {
+            let raw = goal && (goal.age != null ? goal.age : goal.current_age);
+            if (raw == null || raw === '') {
+                try {
+                    const od = JSON.parse(localStorage.getItem('onboarding_data') || '{}');
+                    if (od.current_age != null) raw = od.current_age;
+                } catch (e) { /* ignore */ }
+            }
+            const a = typeof raw === 'string' ? parseInt(raw, 10) : Number(raw);
+            return typeof a === 'number' && !Number.isNaN(a) ? a : null;
+        }
+
+        function setWealthHorizonButtons(activeHorizon) {
+            ['1Y', '5Y', 'MAX'].forEach(function (h) {
+                const btn = document.querySelector('.wp-horizon-btn[data-horizon="' + h + '"]');
+                if (!btn) return;
+                btn.className = 'wp-horizon-btn px-3 py-1.5 ' + (h === activeHorizon ? WP_HORIZON_ACTIVE : WP_HORIZON_IDLE);
+            });
+        }
+
+        const renderOverviewChart = (data, opts) => {
             const container = document.getElementById('overview-chart-container');
             if (!container) return;
 
-            container.innerHTML = '<div class="absolute inset-0 bg-surface-container opacity-20 rebel-grid pointer-events-none"></div>';
+            const horizon = (opts && opts.horizon) || '1Y';
+            const currentAge = (opts && opts.currentAge != null) ? opts.currentAge : 25;
+            const retirementAge = (opts && opts.retirementAge != null) ? opts.retirementAge : 65;
+            const yearsToRet = Math.max(1, retirementAge - currentAge);
+
+            let horizonYears = 1;
+            if (horizon === '5Y') horizonYears = Math.min(5, yearsToRet);
+            else if (horizon === 'MAX') horizonYears = yearsToRet;
+
+            container.innerHTML = '';
+            const gridBg = document.createElement('div');
+            gridBg.className = 'absolute inset-0 z-0 bg-surface-container opacity-20 rebel-grid pointer-events-none';
+            container.appendChild(gridBg);
+
+            const inner = document.createElement('div');
+            inner.className = 'relative z-[1] isolate flex flex-col gap-1 w-full';
+            const barsRow = document.createElement('div');
+            barsRow.className = 'flex items-end gap-1 h-64 w-full overflow-visible';
+            const labelsRow = document.createElement('div');
+            labelsRow.className = 'flex gap-1 w-full';
+            inner.appendChild(barsRow);
+            inner.appendChild(labelsRow);
+            container.appendChild(inner);
 
             const steps = 12;
-            // Ensure non-zero values for math
             const startVal = Math.max(1000, data.currentSavings || 0);
             const endVal = Math.max(50000, data.futureSavings || 0);
-            const maxVal = endVal * 1.1;
 
-            // Generate growth points (Exponential)
             const points = [];
             for (let i = 0; i < steps; i++) {
-                const ratio = i / (steps - 1);
-                const val = startVal * Math.pow(endVal / startVal, ratio);
-                points.push(val);
+                const yearOffset = (i / (steps - 1)) * horizonYears;
+                const progress = Math.min(1, yearOffset / yearsToRet);
+                const val = startVal * Math.pow(endVal / startVal, progress);
+                const ageLabel = Math.round(currentAge + yearOffset);
+                points.push({ val, ageLabel });
             }
 
-            points.forEach((val, idx) => {
-                const heightPercent = (val / maxVal) * 100;
+            const scaleMax = Math.max.apply(null, points.map(function (p) { return p.val; })) * 1.1;
+
+            points.forEach(function (p, idx) {
+                const val = p.val;
+                const heightPercent = (val / scaleMax) * 100;
                 const bar = document.createElement('div');
 
-                // Styling
                 const isFreedom = idx >= steps * 0.6;
-                bar.className = `flex-1 transition-all duration-700 border-t-2 border-on-surface relative group/bar ${isFreedom ? 'bg-primary-fixed' : 'bg-inverse-surface'}`;
-                bar.style.transitionDelay = `${idx * 50}ms`;
-                bar.style.height = '0%'; // Start at 0 for animation
+                bar.className = 'flex-1 min-w-0 transition-all duration-700 border-t-2 border-on-surface relative group/bar ' + (isFreedom ? 'bg-primary-fixed' : 'bg-inverse-surface');
+                bar.style.transitionDelay = idx * 50 + 'ms';
+                bar.style.height = '0%';
+                bar.style.zIndex = String(idx + 1);
 
                 if (idx === steps - 1) {
+                    bar.style.zIndex = String(steps + 10);
                     bar.innerHTML = `
-                        <div class="absolute -top-10 left-1/2 -translate-x-1/2 z-40 group/target cursor-help">
-                            <div class="bg-on-surface text-surface font-headline font-black text-[8px] px-1 py-0.5 transform -rotate-2 whitespace-nowrap border-2 border-surface shadow-sm">
+                        <div class="absolute -top-10 left-1/2 -translate-x-1/2 z-[100] group/target cursor-help pointer-events-auto">
+                            <div class="bg-on-surface text-surface font-headline font-black text-[8px] px-1 py-0.5 transform -rotate-2 whitespace-nowrap border-2 border-surface shadow-sm relative z-[101]">
                                 TARGET_X
                             </div>
-                            <div class="absolute right-full top-0 mr-2 w-48 bg-surface text-on-surface p-3 shadow-neo text-[9px] font-bold uppercase leading-tight text-left hidden group-hover/target:block z-50 pointer-events-none border-2 border-on-surface shadow-neo">
+                            <div class="absolute right-full top-0 mr-2 w-48 bg-surface text-on-surface p-3 shadow-neo text-[9px] font-bold uppercase leading-tight text-left hidden group-hover/target:block z-[102] pointer-events-none border-2 border-on-surface shadow-neo">
                                 <div class="text-primary-fixed mb-1 underline">Freedom Target</div>
                                 Projected wealth at retirement age.
                             </div>
@@ -770,13 +819,19 @@
                     `;
                 }
 
-                container.appendChild(bar);
+                barsRow.appendChild(bar);
 
-                // Trigger animation
-                setTimeout(() => {
-                    bar.style.height = `${Math.max(5, heightPercent)}%`;
+                setTimeout(function () {
+                    bar.style.height = Math.max(5, heightPercent) + '%';
                 }, 100);
+
+                const lab = document.createElement('div');
+                lab.className = 'flex-1 min-w-0 text-center text-[8px] leading-tight font-headline font-black text-on-surface-variant uppercase tracking-tighter';
+                lab.textContent = idx === 0 ? 'Age ' + p.ageLabel : String(p.ageLabel);
+                labelsRow.appendChild(lab);
             });
+
+            setWealthHorizonButtons(horizon);
         };
 
         // ─── Main Dashboard Init ─────────────────────────────────────
@@ -820,10 +875,13 @@
                     }
                 }
 
+                const resolvedAge = resolveProfileAge(goal);
+                const resolvedRetirement = (goal.retirement_age != null) ? goal.retirement_age : 65;
+
                 // 5. Execution Projection logic
                 const projectionPayload = {
-                    currentAge: goal.age || 25,
-                    retirementAge: goal.retirement_age || 65,
+                    currentAge: resolvedAge != null ? resolvedAge : 25,
+                    retirementAge: resolvedRetirement,
                     monthlyIncome: goal.target_monthly_income || 50000,
                     monthlyExpense: (goal.target_monthly_income || 50000) * 0.6,
                     currentSavings: 1000, // Small seed for visualization
@@ -849,7 +907,9 @@
                 // 5. Bind Freedom Age Target
                 const freedomSub = document.getElementById('freedom-subtitle');
                 if (freedomSub && goal) {
-                    freedomSub.textContent = 'Target: Age ' + (goal.retirement_age || '--') + ' · Current: ' + (goal.current_age || '--') + ' Years Old';
+                    const cur = resolvedAge != null ? resolvedAge : '--';
+                    const tgt = goal.retirement_age != null ? goal.retirement_age : '--';
+                    freedomSub.textContent = 'Target: Age ' + tgt + ' · Current: ' + cur + ' Years Old';
                 }
 
                 // 6. Bind resulting data (strip .skeleton so values are visible — skeleton uses color: transparent)
@@ -883,7 +943,21 @@
                 const probBar = document.getElementById('freedom-bar');
                 if (probBar) probBar.style.width = Math.round((data && data.probability != null) ? data.probability : 0) + '%';
 
-                renderOverviewChart(chartSource);
+                const chartOpts = {
+                    horizon: '1Y',
+                    currentAge: resolvedAge != null ? resolvedAge : 25,
+                    retirementAge: resolvedRetirement
+                };
+                renderOverviewChart(chartSource, chartOpts);
+
+                document.querySelectorAll('.wp-horizon-btn').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        const h = btn.getAttribute('data-horizon');
+                        if (!h) return;
+                        chartOpts.horizon = h;
+                        renderOverviewChart(chartSource, chartOpts);
+                    });
+                });
 
                 // 7. Liquid Assets
                 let walletZens = 0;
