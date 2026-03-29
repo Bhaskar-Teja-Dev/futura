@@ -13,77 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "surface-dim": "#d3d5d5",
-                        "error": "#b02500",
-                        "surface-container-high": "#e1e3e3",
-                        "on-primary-fixed": "#3a4a00",
-                        "error-dim": "#b92902",
-                        "on-surface-variant": "#5a5c5c",
-                        "on-secondary-fixed-variant": "#5c5b5b",
-                        "on-primary-fixed-variant": "#526900",
-                        "tertiary-fixed": "#ff81f5",
-                        "primary-fixed": "#cafd00",
-                        "surface-container-highest": "#dbdddd",
-                        "on-primary": "#e1ff88",
-                        "error-container": "#f95630",
-                        "on-primary-container": "#4a5e00",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-fixed-dim": "#d7d4d3",
-                        "surface-variant": "#dbdddd",
-                        "surface-tint": "#4e6300",
-                        "on-secondary-fixed": "#403f3f",
-                        "surface": "#f6f6f6",
-                        "inverse-on-surface": "#9c9d9d",
-                        "on-tertiary": "#ffeef8",
-                        "primary-fixed-dim": "#beee00",
-                        "on-surface": "#2d2f2f",
-                        "primary": "#4e6300",
-                        "on-secondary": "#f5f2f1",
-                        "surface-container": "#e7e8e8",
-                        "primary-container": "#cafd00",
-                        "on-secondary-container": "#525151",
-                        "on-background": "#2d2f2f",
-                        "on-error-container": "#520c00",
-                        "surface-bright": "#f6f6f6",
-                        "on-tertiary-fixed-variant": "#6a006a",
-                        "inverse-surface": "#0c0f0f",
-                        "secondary-container": "#e5e2e1",
-                        "tertiary-container": "#ff81f5",
-                        "inverse-primary": "#cafd00",
-                        "on-tertiary-container": "#5b005b",
-                        "tertiary": "#a400a4",
-                        "surface-container-low": "#f0f1f1",
-                        "secondary-dim": "#504f4f",
-                        "tertiary-dim": "#900090",
-                        "secondary-fixed": "#e5e2e1",
-                        "on-tertiary-fixed": "#320032",
-                        "primary-dim": "#435600",
-                        "outline": "#767777",
-                        "outline-variant": "#acadad",
-                        "on-error": "#ffefec",
-                        "background": "#f6f6f6",
-                        "secondary": "#5c5b5b",
-                        "tertiary-fixed-dim": "#ff61f8"
-                    },
-                    fontFamily: {
-                        "headline": ["Lexend"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    },
-                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-                },
-            },
-        }
-    </script>
+    <script src="js/tailwind.config.js"></script>
     <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -133,7 +63,10 @@
     <header
         class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
         id="main-header">
-        <div class="flex items-center gap-8">
+        <div class="flex items-center gap-3 lg:gap-8">
+            <button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
             <a href="index.html"
                 class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
                 Rebel</a>
@@ -149,7 +82,7 @@
         <div class="flex items-center gap-4">
             <!-- ZENS Balance Pill -->
             <div id="nav-zens-pill"
-                class="hidden md:flex items-center gap-2 bg-[ #FFFFFF] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+                class="hidden md:flex items-center gap-2 bg-white text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
                 <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
                 <span id="nav-zens-balance">0 ZENS</span>
             </div>
@@ -164,10 +97,11 @@
             </div>
         </div>
     </header>
+    <div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
     <div class="flex flex-1 w-full">
         <!-- SideNavBar -->
-        <aside
-            class="fixed left-0 top-0 h-full flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] h-screen w-64 border-r-2 border-[#121212] dark:border-[#f6f6f6] z-40">
+        <aside id="app-sidebar"
+            class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] h-screen w-64 border-r-2 border-[#121212] dark:border-[#f6f6f6] -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
             <a href="settings_digital_rebel_desktop.html"
                 class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
                 <div id="sidebar-avatar"
@@ -215,7 +149,7 @@
             </div>
         </aside>
         <!-- Main Content Area -->
-        <main class="flex-1 ml-64 p-8 min-h-screen bg-surface">
+        <main class="flex-1 lg:ml-64 p-8 min-h-screen bg-surface">
             <!-- Breadcrumbs & Header -->
             <div class="mb-12">
                 <div
@@ -274,7 +208,7 @@
                                 <div class="border-r border-b border-on-surface"></div>
                             </div>
                             <!-- Bar Visuals -->
-                            <div id="chart-bars-container"
+                            <div id="chart-bars-inner"
                                 class="flex-1 flex items-end justify-between px-4 gap-2 h-full z-10">
                                 <!-- Dynamic bars will be injected here -->
                             </div>
@@ -446,12 +380,12 @@
         class="w-full mt-auto py-12 px-8 lg:pl-72 lg:pr-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
         <div class="flex flex-col items-center md:items-start gap-4">
             <h2 class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL REBEL</h2>
-            <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©2024 DIGITAL REBEL. NO
+            <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©<span data-year-range></span> DIGITAL REBEL. NO
                 PERMISSION GRANTED.</p>
         </div>
         <div class="flex gap-8 flex-wrap justify-center">
             <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="landing_digital_rebel_desktop.html">Home</a>
+                href="index.html">Home</a>
             <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
                 href="dashboard_digital_rebel_desktop.html">Dashboard</a>
             <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
@@ -559,6 +493,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/notifications.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/footer-year.js"></script>
     <script src="./js/auth.js"></script>
     <script src="./js/api.js"></script>
     <script>
@@ -634,7 +570,7 @@
             } catch (e) { }
 
             const renderChart = (inputs, finalValue, targetValue) => {
-                const container = document.getElementById('chart-bars-container');
+                const container = document.getElementById('chart-bars-inner');
                 const timeline = document.getElementById('timeline-label');
                 if (!container) return;
 

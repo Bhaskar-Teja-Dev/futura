@@ -13,77 +13,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "surface-dim": "#d3d5d5",
-                        "error": "#b02500",
-                        "surface-container-high": "#e1e3e3",
-                        "on-primary-fixed": "#3a4a00",
-                        "error-dim": "#b92902",
-                        "on-surface-variant": "#5a5c5c",
-                        "on-secondary-fixed-variant": "#5c5b5b",
-                        "on-primary-fixed-variant": "#526900",
-                        "tertiary-fixed": "#ff81f5",
-                        "primary-fixed": "#cafd00",
-                        "surface-container-highest": "#dbdddd",
-                        "on-primary": "#e1ff88",
-                        "error-container": "#f95630",
-                        "on-primary-container": "#4a5e00",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-fixed-dim": "#d7d4d3",
-                        "surface-variant": "#dbdddd",
-                        "surface-tint": "#4e6300",
-                        "on-secondary-fixed": "#403f3f",
-                        "surface": "#f6f6f6",
-                        "inverse-on-surface": "#9c9d9d",
-                        "on-tertiary": "#ffeef8",
-                        "primary-fixed-dim": "#beee00",
-                        "on-surface": "#2d2f2f",
-                        "primary": "#4e6300",
-                        "on-secondary": "#f5f2f1",
-                        "surface-container": "#e7e8e8",
-                        "primary-container": "#cafd00",
-                        "on-secondary-container": "#525151",
-                        "on-background": "#2d2f2f",
-                        "on-error-container": "#520c00",
-                        "surface-bright": "#f6f6f6",
-                        "on-tertiary-fixed-variant": "#6a006a",
-                        "inverse-surface": "#0c0f0f",
-                        "secondary-container": "#e5e2e1",
-                        "tertiary-container": "#ff81f5",
-                        "inverse-primary": "#cafd00",
-                        "on-tertiary-container": "#5b005b",
-                        "tertiary": "#a400a4",
-                        "surface-container-low": "#f0f1f1",
-                        "secondary-dim": "#504f4f",
-                        "tertiary-dim": "#900090",
-                        "secondary-fixed": "#e5e2e1",
-                        "on-tertiary-fixed": "#320032",
-                        "primary-dim": "#435600",
-                        "outline": "#767777",
-                        "outline-variant": "#acadad",
-                        "on-error": "#ffefec",
-                        "background": "#f6f6f6",
-                        "secondary": "#5c5b5b",
-                        "tertiary-fixed-dim": "#ff61f8"
-                    },
-                    fontFamily: {
-                        "headline": ["Lexend"],
-                        "body": ["Inter"],
-                        "label": ["Inter"]
-                    },
-                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
-                },
-            },
-        }
-    </script>
+    <script src="js/tailwind.config.js"></script>
     <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -288,6 +218,36 @@
         .streak-tier-5 .fire-icon {
             color: var(--streak-accent) !important;
         }
+
+        /* ─── Page Entrance Animations ─── */
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .anim-enter {
+            opacity: 0;
+            animation: fadeSlideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .anim-enter-1 { animation-delay: 0.05s; }
+        .anim-enter-2 { animation-delay: 0.15s; }
+        .anim-enter-3 { animation-delay: 0.25s; }
+        .anim-enter-4 { animation-delay: 0.35s; }
+
+        /* ─── Skeleton Pulse ─── */
+        @keyframes skeletonPulse {
+            0%, 100% { opacity: 0.4; }
+            50%       { opacity: 0.9; }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, #e7e8e8 25%, #dbdddd 50%, #e7e8e8 75%);
+            background-size: 200% 100%;
+            animation: skeletonPulse 1.4s ease-in-out infinite;
+            color: transparent !important;
+            border-radius: 2px;
+            min-width: 60px;
+            display: inline-block;
+        }
     </style>
     <link href="/css/premium.css" rel="stylesheet" />
 </head>
@@ -296,7 +256,10 @@
     <!-- TopNavBar -->
     <nav class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
         id="main-header">
-        <div class="flex items-center gap-8">
+        <div class="flex items-center gap-3 lg:gap-8">
+            <button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
             <a href="index.html"
                 class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
                 Rebel</a>
@@ -327,10 +290,11 @@
             </div>
         </div>
     </nav>
+    <div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
     <div class="flex flex-1 w-full">
         <!-- SideNavBar -->
-        <aside
-            class="fixed left-0 top-0 h-full w-64 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] hidden lg:flex z-40">
+        <aside id="app-sidebar"
+            class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
             <a href="settings_digital_rebel_desktop.html"
                 class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
                 <div id="sidebar-avatar"
@@ -383,7 +347,7 @@
         <!-- Main Content Canvas -->
         <main class="lg:ml-64 flex-1 p-6 md:p-10">
             <!-- Hero Header Section -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 anim-enter anim-enter-1">
                 <div
                     class="md:col-span-2 flex flex-col justify-end bg-inverse-surface text-surface p-8 neo-shadow-large relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-4">
@@ -392,9 +356,7 @@
                     </div>
                     <h1 class="font-headline font-black text-6xl uppercase tracking-tighter leading-none mb-4">
                         REBEL_DASHBOARD</h1>
-                    <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory. You are
-                        currently operating at <span class="text-primary-fixed font-bold">142% efficiency</span>
-                        compared to last cycle.</p>
+                    <p class="font-body text-surface-dim max-w-md">Freedom is not a metric, it's a trajectory. Portfolio tracking active — stay consistent.</p>
                 </div>
                 <!-- Gamification Badge -->
                 <div id="streak-badge"
@@ -422,7 +384,7 @@
             <!-- Bento Grid Content -->
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
                 <!-- Portfolio Goal / Progress Bar -->
-                <div class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow">
+                <div class="md:col-span-8 bg-surface-container-lowest border-2 border-inverse-surface p-8 neo-shadow anim-enter anim-enter-2">
                     <div class="flex justify-between items-end mb-6">
                         <div>
                             <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Freedom Age Target
@@ -432,7 +394,7 @@
                                 Project: -- Years Old</p>
                         </div>
                         <div class="text-right">
-                            <span id="freedom-percent" class="font-headline font-black text-4xl text-primary">0%</span>
+                            <span id="freedom-percent" class="font-headline font-black text-4xl text-primary skeleton">0%</span>
                         </div>
                     </div>
                     <div
@@ -450,18 +412,18 @@
                         <div class="p-4 border-2 border-inverse-surface bg-surface">
                             <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Liquid
                             </p>
-                            <p id="liquid-amount" class="font-headline font-black text-xl">$0</p>
+                            <p id="liquid-amount" class="font-headline font-black text-xl skeleton">$0</p>
                         </div>
                         <div class="p-4 border-2 border-inverse-surface bg-surface">
                             <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Required
                                 SIP
                             </p>
-                            <p id="required-amount" class="font-headline font-black text-xl">$0</p>
+                            <p id="required-amount" class="font-headline font-black text-xl skeleton">$0</p>
                         </div>
                     </div>
                 </div>
                 <!-- Recent Contributions -->
-                <div class="md:col-span-4 bg-surface-container-high border-2 border-inverse-surface p-6 neo-shadow">
+                <div class="md:col-span-4 bg-surface-container-high border-2 border-inverse-surface p-6 neo-shadow anim-enter anim-enter-3">
                     <h3
                         class="font-headline font-black text-xl uppercase tracking-tight mb-4 border-b-2 border-inverse-surface pb-2">
                         Recent Flow</h3>
@@ -475,7 +437,7 @@
                 </div>
                 <!-- Summary Projection Graph Placeholder -->
                 <div
-                    class="md:col-span-12 bg-surface border-2 border-inverse-surface p-8 neo-shadow relative overflow-hidden">
+                    class="md:col-span-12 bg-surface border-2 border-inverse-surface p-8 neo-shadow relative overflow-hidden anim-enter anim-enter-4">
                     <div class="flex justify-between items-start mb-10">
                         <div>
                             <h3 class="font-headline font-black text-2xl uppercase tracking-tight">Wealth Projection
@@ -503,7 +465,7 @@
                     </div>
                     <div
                         class="absolute bottom-8 right-8 border-l-4 border-b-4 border-primary-fixed p-4 bg-inverse-surface text-surface">
-                        <p id="terminal-value" class="font-headline font-black text-3xl">+$0</p>
+                        <p id="terminal-value" class="font-headline font-black text-3xl skeleton">+$0</p>
                         <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-primary-fixed">
                             ESTIMATED TERMINAL VALUE</p>
                     </div>
@@ -517,12 +479,12 @@
         <div class="flex flex-col gap-2">
             <span class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL
                 REBEL</span>
-            <p class="font-Lexend font-black uppercase text-[10px] tracking-[0.3em] text-[#f6f6f6]">©2024 DIGITAL REBEL.
+            <p class="font-Lexend font-black uppercase text-[10px] tracking-[0.3em] text-[#f6f6f6]">©<span data-year-range></span> DIGITAL REBEL.
                 NO PERMISSION GRANTED.</p>
         </div>
         <div class="flex flex-wrap justify-center gap-8">
             <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="landing_digital_rebel_desktop.html">Home</a>
+                href="index.html">Home</a>
             <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
                 href="settings_digital_rebel_desktop.html">Settings</a>
             <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
@@ -640,6 +602,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/notifications.js"></script>
+    <script src="./js/mobile-nav.js"></script>
+    <script src="./js/footer-year.js"></script>
     <script src="./js/auth.js"></script>
     <script src="./js/api.js"></script>
     <script>
@@ -758,6 +722,10 @@
             }
         }
 
+        function clearSkeleton(el) {
+            if (el) el.classList.remove('skeleton');
+        }
+
         const renderOverviewChart = (data) => {
             const container = document.getElementById('overview-chart-container');
             if (!container) return;
@@ -865,8 +833,18 @@
                     simulations: 1000
                 };
 
-                const projectionRes = await futuraApi.projection.calculate(projectionPayload);
-                const data = projectionRes.result;
+                let projectionData = null;
+                try {
+                    const projectionRes = await futuraApi.projection.calculate(projectionPayload);
+                    if (projectionRes && typeof projectionRes.result === 'object' && projectionRes.result !== null) {
+                        projectionData = projectionRes.result;
+                    } else if (projectionRes && typeof projectionRes === 'object' &&
+                        (projectionRes.futureSavings != null || projectionRes.probability != null || projectionRes.requiredMonthlyInvestment != null)) {
+                        projectionData = projectionRes;
+                    }
+                } catch (projErr) {
+                    console.warn('Projection calculate failed:', projErr);
+                }
 
                 // 5. Bind Freedom Age Target
                 const freedomSub = document.getElementById('freedom-subtitle');
@@ -874,37 +852,52 @@
                     freedomSub.textContent = 'Target: Age ' + (goal.retirement_age || '--') + ' · Current: ' + (goal.current_age || '--') + ' Years Old';
                 }
 
-                // 6. Bind resulting data
-                if (data) {
-                    const requiredAmountEl = document.getElementById('required-amount');
-                    if (requiredAmountEl) requiredAmountEl.textContent = '$' + Math.round(data.requiredMonthlyInvestment || 0).toLocaleString();
+                // 6. Bind resulting data (strip .skeleton so values are visible — skeleton uses color: transparent)
+                const data = projectionData && typeof projectionData === 'object' ? projectionData : null;
+                const chartSource = data || {
+                    probability: 0,
+                    requiredMonthlyInvestment: 0,
+                    futureSavings: 0,
+                    currentSavings: projectionPayload.currentSavings
+                };
 
-                    const terminalValueEl = document.getElementById('terminal-value');
-                    if (terminalValueEl && data.futureSavings) {
-                        const val = data.futureSavings;
-                        terminalValueEl.textContent = val >= 1000000 ? '+$' + (val / 1000000).toFixed(1) + 'M' : '+$' + Math.round(val).toLocaleString();
-                    }
-
-                    const freedomPercentEl = document.getElementById('freedom-percent');
-                    if (freedomPercentEl) freedomPercentEl.textContent = Math.round(data.probability || 0) + '%';
-
-                    const probBar = document.getElementById('freedom-bar');
-                    if (probBar) probBar.style.width = Math.round(data.probability || 0) + '%';
-
-                    // Render Dashboard Chart
-                    renderOverviewChart(data);
+                const requiredAmountEl = document.getElementById('required-amount');
+                if (requiredAmountEl) {
+                    requiredAmountEl.textContent = '$' + Math.round((data && data.requiredMonthlyInvestment != null) ? data.requiredMonthlyInvestment : 0).toLocaleString();
+                    clearSkeleton(requiredAmountEl);
                 }
+
+                const terminalValueEl = document.getElementById('terminal-value');
+                if (terminalValueEl) {
+                    const val = (data && data.futureSavings != null) ? data.futureSavings : 0;
+                    terminalValueEl.textContent = val >= 1000000 ? '+$' + (val / 1000000).toFixed(1) + 'M' : '+$' + Math.round(val).toLocaleString();
+                    clearSkeleton(terminalValueEl);
+                }
+
+                const freedomPercentEl = document.getElementById('freedom-percent');
+                if (freedomPercentEl) {
+                    freedomPercentEl.textContent = Math.round((data && data.probability != null) ? data.probability : 0) + '%';
+                    clearSkeleton(freedomPercentEl);
+                }
+
+                const probBar = document.getElementById('freedom-bar');
+                if (probBar) probBar.style.width = Math.round((data && data.probability != null) ? data.probability : 0) + '%';
+
+                renderOverviewChart(chartSource);
 
                 // 7. Liquid Assets
                 let walletZens = 0;
                 try {
                     const balRes = await futuraApi.zens.balance();
-                    walletZens = balRes.zens || 0;
+                    walletZens = (balRes && balRes.zens != null) ? balRes.zens : 0;
                 } catch (e) { console.warn('Wallet balance fetch failed:', e); }
                 const manualLiquid = parseInt(localStorage.getItem('trackedLiquidCash') || '0', 10);
                 const totalLiquid = walletZens + manualLiquid;
                 const liquidEl = document.getElementById('liquid-amount');
-                if (liquidEl) liquidEl.textContent = '$' + totalLiquid.toLocaleString();
+                if (liquidEl) {
+                    liquidEl.textContent = '$' + totalLiquid.toLocaleString();
+                    clearSkeleton(liquidEl);
+                }
 
                 // 8. Streak Finalization
                 const streakRes = await streakPromise;

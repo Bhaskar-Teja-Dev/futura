@@ -40,7 +40,8 @@ const futuraApi = {
     streak: () => apiFetch('/api/contributions/streak')
   },
   projection: {
-    calculate: (body) => apiFetch('/api/projection', { method: 'POST', body: JSON.stringify(body) })
+    calculate: (body) => apiFetch('/api/projection', { method: 'POST', body: JSON.stringify(body) }),
+    roadmap: () => apiFetch('/api/projection/roadmap')
   },
   allocation: {
     get: () => apiFetch('/api/allocation')

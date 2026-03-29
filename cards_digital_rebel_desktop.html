@@ -7,75 +7,8 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              colors: {
-                "on-tertiary-fixed": "#320032",
-                "on-error": "#ffefec",
-                "on-surface-variant": "#5a5c5c",
-                "surface-tint": "#4e6300",
-                "surface-bright": "#f6f6f6",
-                "on-secondary-fixed": "#403f3f",
-                "surface-container-low": "#f0f1f1",
-                "secondary-container": "#e5e2e1",
-                "secondary-fixed": "#e5e2e1",
-                "on-primary-container": "#4a5e00",
-                "tertiary-fixed-dim": "#ff61f8",
-                "primary-container": "#cafd00",
-                "on-primary": "#e1ff88",
-                "inverse-on-surface": "#9c9d9d",
-                "primary-fixed": "#cafd00",
-                "secondary": "#5c5b5b",
-                "outline-variant": "#acadad",
-                "secondary-dim": "#504f4f",
-                "surface-dim": "#d3d5d5",
-                "background": "#f6f6f6",
-                "primary-dim": "#435600",
-                "tertiary": "#a400a4",
-                "tertiary-dim": "#900090",
-                "tertiary-container": "#ff81f5",
-                "surface-container-highest": "#dbdddd",
-                "primary-fixed-dim": "#beee00",
-                "error-container": "#f95630",
-                "secondary-fixed-dim": "#d7d4d3",
-                "on-tertiary": "#ffeef8",
-                "on-secondary-fixed-variant": "#5c5b5b",
-                "on-primary-fixed": "#3a4a00",
-                "on-error-container": "#520c00",
-                "on-tertiary-container": "#5b005b",
-                "error": "#b02500",
-                "surface": "#f6f6f6",
-                "outline": "#767777",
-                "on-tertiary-fixed-variant": "#6a006a",
-                "surface-container-high": "#e1e3e3",
-                "on-secondary": "#f5f2f1",
-                "on-background": "#2d2f2f",
-                "on-secondary-container": "#525151",
-                "on-primary-fixed-variant": "#526900",
-                "inverse-surface": "#0c0f0f",
-                "surface-variant": "#dbdddd",
-                "primary": "#4e6300",
-                "surface-container-lowest": "#ffffff",
-                "error-dim": "#b92902",
-                "tertiary-fixed": "#ff81f5",
-                "surface-container": "#e7e8e8",
-                "inverse-primary": "#cafd00",
-                "on-surface": "#2d2f2f"
-              },
-              fontFamily: {
-                "headline": ["Lexend"],
-                "body": ["Inter"],
-                "label": ["Inter"]
-              },
-              borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
-            },
-          },
-        }
-    </script>
+
+<script src="js/tailwind.config.js"></script>
 <style>
         .material-symbols-outlined { font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24; vertical-align:middle; }
         .hard-shadow  { box-shadow: 4px 4px 0px 0px #121212; }
@@ -118,7 +51,10 @@
 <body class="bg-surface font-body text-on-background min-h-screen flex flex-col">
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 border-b-2 border-[#121212] bg-white flex justify-between items-center px-6 h-16 shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
-<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 lg:gap-8">
+<button type="button" id="mobile-sidebar-toggle" class="lg:hidden p-2 border-2 border-[#121212] bg-white" aria-label="Open menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
 <span class="text-2xl font-black text-[#121212] tracking-tighter font-headline italic">DIGITAL REBEL</span>
 <div class="hidden md:flex gap-6 items-center">
 <a class="font-headline font-black uppercase tracking-tighter text-[#767777] pb-1 hover:bg-[#cafd00] hover:text-[#121212] transition-colors duration-100" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
@@ -135,10 +71,11 @@
 </div>
 </div>
 </nav>
+<div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
 <!-- Sidebar & Main Content -->
 <div class="flex pt-16 flex-1 w-full">
-      <aside
-          class="fixed left-0 top-0 h-full w-64 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] hidden lg:flex z-40">
+      <aside id="app-sidebar"
+          class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
           <div class="px-6 mb-8 flex items-center gap-3">
               <div id="sidebar-avatar"
                   class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
@@ -185,7 +122,7 @@
           </div>
       </aside>
 <!-- Main Canvas -->
-<main class="lg:ml-64 flex-1 p-8 space-y-8 overflow-hidden">
+<main class="lg:ml-64 flex-1 p-8 pb-24 md:pb-8 space-y-8 overflow-hidden">
 <header class="flex justify-between items-end border-b-4 border-[#121212] pb-4">
 <div>
 <h1 class="font-headline font-black text-6xl tracking-tighter uppercase leading-none">Cards Management</h1>
@@ -310,7 +247,7 @@
 <footer class="w-full lg:w-auto lg:pl-72 border-t-2 border-[#cafd00] mt-auto bg-[#121212] flex flex-col md:flex-row justify-between items-center px-8 py-6 gap-4">
 <div class="flex flex-col items-center md:items-start gap-1">
 <span class="text-[#cafd00] font-black font-headline tracking-tighter">DIGITAL REBEL</span>
-<p class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6]">© 2024 DIGITAL REBEL. NO PERMISSION REQUIRED.</p>
+<p class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6]">© <span data-year-range></span> DIGITAL REBEL. NO PERMISSION REQUIRED.</p>
 </div>
 <div class="flex gap-8 flex-wrap">
 <a class="font-headline font-medium text-[10px] tracking-[0.2em] uppercase text-[#f6f6f6] hover:text-[#cafd00] transition-colors" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
@@ -408,9 +345,29 @@
         </div>
     </div>
 
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 flex justify-around items-stretch bg-[#cafd00] border-t-4 border-[#121212] z-50">
+<a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95" href="dashboard_digital_rebel_desktop.html">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Lexend'] font-bold text-[10px] uppercase">Home</span>
+</a>
+<a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95" href="assets_digital_rebel_desktop.html">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-['Lexend'] font-bold text-[10px] uppercase">Wallet</span>
+</a>
+<a class="text-[#121212] flex flex-col items-center justify-center h-full w-full border-r-2 border-[#121212] hover:invert transition-all active:scale-95" href="market_digital_rebel_desktop.html">
+<span class="material-symbols-outlined">show_chart</span>
+<span class="font-['Lexend'] font-bold text-[10px] uppercase">Markets</span>
+</a>
+<a class="bg-[#121212] text-[#cafd00] flex flex-col items-center justify-center h-full w-full hover:invert transition-all active:scale-95" href="cards_digital_rebel_desktop.html">
+<span class="material-symbols-outlined">credit_card</span>
+<span class="font-['Lexend'] font-bold text-[10px] uppercase">Cards</span>
+</a>
+</nav>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="/js/config.js"></script>
     <script src="/js/notifications.js"></script>
+    <script src="/js/mobile-nav.js"></script>
+    <script src="/js/footer-year.js"></script>
     <script src="/js/auth.js"></script>
     <script src="/js/api.js"></script>
     <script>
