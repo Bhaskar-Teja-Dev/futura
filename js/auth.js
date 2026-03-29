@@ -1,6 +1,34 @@
 // Futura — Supabase Auth module
 // Requires: supabase-js CDN + config.js loaded before this
 
+function _futuraNotify(message, type) {
+  type = type === 'success' ? 'success' : 'error';
+  var root = document.getElementById('futura-toast-stack');
+  if (!root) {
+    root = document.createElement('div');
+    root.id = 'futura-toast-stack';
+    root.setAttribute('aria-live', 'polite');
+    root.className =
+      'fixed bottom-4 right-4 z-[10000] flex max-w-md flex-col gap-2 p-0 pointer-events-none';
+    document.body.appendChild(root);
+  }
+  var el = document.createElement('div');
+  el.setAttribute('role', 'status');
+  el.className =
+    'pointer-events-auto border-2 border-on-surface px-4 py-3 font-headline font-black uppercase text-xs tracking-widest neo-shadow ' +
+    (type === 'success' ? 'bg-primary-fixed text-on-primary-fixed' : 'bg-error-container text-on-error-container');
+  el.textContent = message;
+  root.appendChild(el);
+  setTimeout(function () {
+    el.remove();
+  }, 6500);
+}
+
+/** Optional global for other scripts */
+window.showFuturaToast = function (message, opts) {
+  _futuraNotify(message, (opts && opts.type) || 'error');
+};
+
 let _supabase = null;
 
 function getSupabase() {
@@ -45,7 +73,7 @@ async function signInWithGoogle() {
   });
   if (error) {
     console.error('Google sign-in error:', error.message);
-    alert('Sign-in failed: ' + error.message);
+    _futuraNotify('Sign-in failed: ' + error.message, 'error');
   }
 }
 
@@ -142,6 +170,13 @@ async function checkOnboarding() {
     _profileVerified = true;
     updateNavAuth();
     document.body.style.opacity = '1';
+    var msg = err && err.message ? String(err.message) : '';
+    if (/network|fetch|failed to load|load failed|aborted/i.test(msg) || (err && err.name === 'TypeError')) {
+      _futuraNotify(
+        'Could not connect to verify your session. Check your connection and try again.',
+        'error'
+      );
+    }
   }
 }
 
@@ -463,7 +498,7 @@ async function updateNavAuth() {
         { label: 'My Dashboard', href: 'dashboard_digital_rebel_desktop.html', icon: 'grid_view' },
         { label: 'My Settings', href: 'settings_digital_rebel_desktop.html', icon: 'settings' },
         { label: 'Assets', href: 'assets_digital_rebel_desktop.html', icon: 'account_balance_wallet' },
-        { label: 'Logout', href: '#', icon: 'logout', id: 'logout-link', color: '#b02500' }
+        { label: 'Logout', href: 'index.html', icon: 'logout', id: 'logout-link', color: '#b02500' }
       ];
 
       links.forEach(({ label, href, icon, id, color }) => {

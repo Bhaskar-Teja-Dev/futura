@@ -27,21 +27,22 @@
         }
     </style>
 </head>
-<body class="bg-surface font-body text-on-surface">
+<body class="bg-surface font-body text-on-surface landing-page">
 <!-- TopAppBar -->
-<header class="bg-[#f6f6f6] dark:bg-[#121212] flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+<header class="bg-surface dark:bg-inverse-surface flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 border-b-2 border-on-surface dark:border-surface shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
 <div class="flex items-center gap-8">
-<span class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline">Digital Rebel</span>
+<span class="text-2xl font-black uppercase tracking-tighter text-on-surface dark:text-surface font-headline">Digital Rebel</span>
 <nav class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm">
 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="market_digital_rebel_desktop.html">Markets</a>
+<a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="learn_digital_rebel_desktop.html">Learn</a>
 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1" href="assets_digital_rebel_desktop.html">Assets</a>
 </nav>
 </div>
 <div class="flex items-center gap-4">
 <div class="hidden lg:flex items-center bg-surface-container border-2 border-on-surface px-3 py-1 neo-shadow">
 <span class="material-symbols-outlined text-on-surface-variant text-sm pr-2">search</span>
-<input class="bg-transparent border-none focus:ring-0 text-xs font-headline uppercase tracking-widest w-32" placeholder="Search Markets" type="text"/>
+<input class="bg-transparent border-none focus:ring-0 text-xs font-headline uppercase tracking-widest w-32" placeholder="Search Markets" type="search" autocomplete="off" aria-label="Search markets"/>
 </div>
 <!-- Connect Wallet Removed -->
 <div class="flex gap-2">
@@ -60,16 +61,17 @@
 <h1 class="font-headline font-black text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter uppercase text-on-surface mb-8">
                     OWN THE <br/><span class="text-primary-fixed drop-shadow-[4px_4px_0px_#121212]">REVOLUTION</span>
 </h1>
-<p class="font-headline text-xl md:text-2xl uppercase font-bold tracking-tight text-on-surface-variant max-w-xl mb-12">
+<p class="font-headline text-xl md:text-2xl font-bold tracking-tight text-on-surface-variant max-w-xl mb-12 normal-case">
                     Traditional finance is a dead protocol. High-speed, zero-custody, total transparency. The stack built for those who never wait.
                 </p>
-<a href="#" class="bg-primary-fixed text-on-primary-fixed px-8 py-4 border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter flex items-center justify-center gap-3 neo-shadow-large hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(18,18,18,1)] transition-all group inline-flex document-auth-btn" id="btn-auth-hero">
+<div class="flex flex-col sm:flex-row gap-6">
+<a href="onboarding_digital_rebel_desktop.html" class="bg-primary-fixed text-on-primary-fixed px-8 py-4 min-h-[44px] border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter flex items-center justify-center gap-3 neo-shadow-large hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(18,18,18,1)] transition-all group inline-flex document-auth-btn" id="btn-auth-hero">
 <img alt="G" class="w-6 h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbSlYWQx7duriQ_rj1NkH12h0GPa6HXIDIMazPgvscwHaU0LrccorkuzuIhtDpMuUMIEvQc27qUB_AaYDxuJNz7VeElyUlxaHNGnABnsN5QMzTBTDVSGsx05jIxorxhKmdzR_IiiffekEIQR4xadI5EnXGV8YwxwVHVVo88rn9uq2i-uyNK-W1jaVVwvyb9vqadxunjI4sluWlaRmjOGa0sqxde0pAYhzni0eKL2qxhiuPvpW56hqN44MwRReBRJzNUdWS-P6qOwh"/>
                         Sign in with Google
                     </a>
-<button class="bg-surface-container-lowest text-on-surface px-8 py-4 border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter neo-shadow hover:bg-on-surface hover:text-surface transition-all">
+<a href="dashboard_digital_rebel_desktop.html" class="bg-surface-container-lowest text-on-surface px-8 py-4 border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter neo-shadow hover:bg-on-surface hover:text-surface transition-all inline-flex items-center justify-center min-h-[44px] no-underline">
                         View Live Feed
-                    </button>
+                    </a>
 </div>
 <div class="mt-16 flex items-center gap-4">
 <div class="flex -space-x-3">
@@ -83,7 +85,7 @@
 <div class="flex-1 min-h-[400px] bg-primary-fixed border-l-4 border-on-surface relative group">
 <div class="absolute inset-0 bg-cover bg-center mix-blend-multiply opacity-80" data-alt="abstract 3d metallic geometric shapes reflecting neon green light in a dark void architectural composition" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCQI8Wl4_K8x4wNmN9tifE_OPA1BeHo5vTZZZ1E6NMnT6Mk0PrFfpSCYC0Q7SeJA3CsT02HGl05ghQycOCoVQLinXm6CCi4hjvOJiMkKyt1KhGZiqWYotNdB2yBAEMv3nDDh3heHgIZW5yDu4ICDrfa05TgbHxsW-CD1mBAwB9-zHQl2CoE6ldJIVgW3ONqK9rESrgQioZD8yb9LESW3srx1Iar8QhqLWVEmYA3tCt-VlmfhaEvyCabLomzHNVjPuzTKLd9g3zZ5xn-')"></div>
 <div class="absolute inset-0 flex items-center justify-center p-8">
-<div class="bg-surface-container-lowest border-4 border-on-surface p-6 neo-shadow-large rotate-3 group-hover:rotate-0 transition-transform duration-500">
+<div id="vault-card" class="bg-surface-container-lowest border-4 border-on-surface p-6 neo-shadow-large rotate-3 group-hover:rotate-0 transition-transform duration-500">
 <div class="flex justify-between items-start mb-8">
 <div>
 <h3 class="font-headline font-black text-2xl uppercase leading-none">Global Vault</h3>
@@ -112,7 +114,7 @@
 <h2 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter text-primary-fixed mb-4">
                         The Protocol <br/>Rules
                     </h2>
-<p class="font-headline font-bold text-surface-container-highest uppercase text-lg">
+<p class="font-headline font-bold text-surface-container-highest text-lg normal-case tracking-normal">
                         Everything you were told about finance was a lie. We're here to fix the source code.
                     </p>
 </div>

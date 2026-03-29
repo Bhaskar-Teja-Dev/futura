@@ -13,10 +13,27 @@
   <meta property="og:title" content="Digital Rebel | Own The Revolution" />
   <meta property="og:description" content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://futura.vercel.app/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Digital Rebel | Own The Revolution" />
   <meta name="twitter:description" content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
   <link rel="canonical" href="https://futura.vercel.app/" />
+  <script type="application/ld+json" id="futura-ld-json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Digital Rebel",
+    "url": "https://futura.vercel.app/",
+    "description": "High-speed, zero-custody fintech platform built for those who never wait.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Digital Rebel",
+      "url": "https://futura.vercel.app/"
+    }
+  }
+  </script>
+  <script src="./js/config.js"></script>
+  <script src="./js/site-meta.js"></script>
   <link
     href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap"
     rel="stylesheet" />
@@ -29,7 +46,7 @@
   <a href="#main-content"
     class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:px-4 focus:py-3 focus:bg-primary-fixed focus:text-on-primary-fixed focus:border-2 focus:border-on-surface focus:font-headline focus:font-black focus:uppercase focus:text-xs focus:tracking-widest">Skip
     to main content</a>
-  <div class="sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+  <div class="sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-2 border-on-surface dark:border-surface shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
     <header class="flex flex-wrap justify-between items-center w-full gap-4 px-4 sm:px-6 py-4" id="main-header">
       <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         <button type="button"
@@ -39,7 +56,7 @@
           <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
         </button>
         <a href="index.html"
-          class="text-xl sm:text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline truncate">Digital
+          class="text-xl sm:text-2xl font-black uppercase tracking-tighter text-on-surface dark:text-surface font-headline no-underline truncate">Digital
           Rebel</a>
       </div>
       <nav class="hidden lg:flex items-center gap-8 font-headline font-black uppercase text-xs tracking-widest"
@@ -58,7 +75,7 @@
       </div>
     </header>
     <div id="mobile-nav-panel"
-      class="lg:hidden absolute left-0 right-0 top-full border-b-2 border-on-surface bg-[#f6f6f6] p-6 shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] hidden"
+      class="lg:hidden absolute left-0 right-0 top-full border-b-2 border-on-surface bg-surface p-6 shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] hidden"
       aria-hidden="true">
       <h2 id="mobile-nav-heading" class="sr-only">Site navigation</h2>
       <nav class="flex flex-col gap-4 font-headline font-black uppercase text-sm tracking-widest" aria-label="Mobile">
@@ -92,13 +109,13 @@
           id="hero-title">
           OWN THE <br /><span class="text-primary-fixed drop-shadow-[4px_4px_0px_#121212]">REVOLUTION</span>
         </h1>
-        <p class="font-headline text-xl md:text-2xl uppercase font-bold tracking-tight text-on-surface-variant max-w-xl mb-12"
+        <p class="font-headline text-xl md:text-2xl font-bold tracking-tight text-on-surface-variant max-w-xl mb-12 normal-case"
           id="hero-description">
           Traditional finance is a dead protocol. High-speed, zero-custody, total transparency. The stack built for
           those who never wait.
         </p>
         <div class="flex flex-col sm:flex-row gap-6">
-          <a href="#"
+          <a href="onboarding_digital_rebel_desktop.html"
             class="bg-primary-fixed text-on-primary-fixed px-8 py-4 min-h-[44px] border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter flex items-center justify-center gap-3 neo-shadow-large hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(18,18,18,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] group no-underline"
             id="btn-auth-hero">
             <img alt="" width="24" height="24" class="w-6 h-6" role="presentation"
@@ -113,6 +130,7 @@
         </div>
         <p class="mt-4 max-w-xl text-sm font-body font-medium text-on-surface-variant normal-case tracking-normal">
           Sign in with Google to link your account. View Live Feed opens the dashboard preview without signing in.
+          OAuth is handled by your provider; we only use account data to operate your vault.
         </p>
         <div class="mt-16 flex items-center gap-4">
           <div class="flex -space-x-3" aria-hidden="true">
@@ -167,7 +185,7 @@
           <h2 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter text-primary-fixed mb-4">
             The Protocol <br />Rules
           </h2>
-          <p class="font-headline font-bold text-surface-container-highest uppercase text-lg">
+          <p class="font-headline font-bold text-surface-container-highest text-lg normal-case tracking-normal">
             Everything you were told about finance was a lie. We're here to fix the source code.
           </p>
         </div>
@@ -207,7 +225,7 @@
           <div class="mt-8 pt-8 border-t-2 border-on-primary-fixed/20">
             <a href="settings_digital_rebel_desktop.html"
               class="font-headline font-black text-xs uppercase tracking-widest text-on-primary-fixed hover:underline cursor-pointer no-underline">Security
-              audit v4 â†’</a>
+              audit v4 →</a>
           </div>
         </div>
         <!-- Ghost Mode -->
@@ -242,7 +260,7 @@
             <div
               class="flex items-center justify-between p-4 bg-surface-container border-2 border-on-surface neo-shadow">
               <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-[#f6f6f6] border-2 border-on-surface flex items-center justify-center">
+                <div class="w-10 h-10 bg-surface border-2 border-on-surface flex items-center justify-center">
                   <span class="material-symbols-outlined font-black" aria-hidden="true">token</span>
                 </div>
                 <div>
@@ -258,7 +276,7 @@
             <div
               class="flex items-center justify-between p-4 bg-surface-container border-2 border-on-surface neo-shadow">
               <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-[#f6f6f6] border-2 border-on-surface flex items-center justify-center">
+                <div class="w-10 h-10 bg-surface border-2 border-on-surface flex items-center justify-center">
                   <span class="material-symbols-outlined font-black" aria-hidden="true">currency_bitcoin</span>
                 </div>
                 <div>
@@ -309,9 +327,9 @@
       <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-[#cafd00]"
         href="index.html">Manifesto</a>
       <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-        href="settings_digital_rebel_desktop.html">Privacy.exe</a>
+        href="privacy.html">Privacy</a>
       <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-        href="settings_digital_rebel_desktop.html">Terms.sh</a>
+        href="terms.html">Terms</a>
       <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
         href="settings_digital_rebel_desktop.html">Security</a>
       <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
@@ -332,7 +350,6 @@
   </footer>
   <!-- Supabase + Futura Auth -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="./js/config.js"></script>
   <script src="./js/notifications.js"></script>
   <script src="./js/footer-year.js"></script>
   <script src="./js/auth.js"></script>

@@ -12,8 +12,10 @@
     "dev:web": "npm --workspace futura-web run dev",
     "build:web": "npm --workspace futura-web run build",
     "start:web": "npm --workspace futura-web run start",
-    "build:static": "tailwindcss -i ./css/tailwind.input.css -o ./css/app.css --minify",
-    "watch:static": "tailwindcss -i ./css/tailwind.input.css -o ./css/app.css --watch"
+    "build:static": "node scripts/write-seo-files.js && tailwindcss -i ./css/tailwind.input.css -o ./css/app.css --minify",
+    "build:css": "npm run build:static",
+    "watch:static": "tailwindcss -i ./css/tailwind.input.css -o ./css/app.css --watch",
+    "dev:static": "npm run watch:static"
   },
   "dependencies": {
     "cors": "^2.8.6"

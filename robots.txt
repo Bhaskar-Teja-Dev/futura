@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Dev / tooling (not part of the static marketing app)
+Disallow: /my-react-app/
+
+Sitemap: https://futura.vercel.app/sitemap.xml

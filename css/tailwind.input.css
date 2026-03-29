@@ -37,7 +37,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .landing-page .hover-lift:hover {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .hover-lift:hover {
     transform: none;
   }
 
@@ -46,9 +50,17 @@
     transition-duration: 0.01ms !important;
   }
 
-  .landing-page .transition-all,
-  .landing-page .transition-transform,
-  .landing-page .transition-colors {
+  .transition-all,
+  .transition-transform,
+  .transition-colors,
+  .transition {
     transition-duration: 0.01ms !important;
+  }
+
+  .animate-bounce,
+  .animate-spin,
+  .animate-pulse,
+  .animate-marquee {
+    animation: none !important;
   }
 }
