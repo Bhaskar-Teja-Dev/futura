@@ -19,15 +19,6 @@ try {
         var mi = goal.target_monthly_income;
         dailyCapVal = Math.round(mi * 0.1);
         atmLimitVal = Math.round(mi * 0.024);
-        if (futuraApi.projection && futuraApi.projection.calculate) {
-          var pr = await futuraApi.projection.calculate({
-            currentAge: goal.current_age||25, retirementAge: goal.retirement_age||65,
-            monthlyIncome: mi, monthlyExpense: mi*0.6, currentSavings: 0,
-            monthlyInvestment: mi*0.2, inflationRate: 0.06,
-            returnRate: goal.annual_return_rate ?? 0.12, simulations: 2000
-          });
-          // futureSavings no longer used for liquidity calc
-        }
       }
     }
   }
@@ -358,14 +349,8 @@ function updateLiquidity() {
   if(cr) cr.textContent=activeCount+' CARD'+(activeCount!==1?'S':'')+' ACTIVE';
 }
 
-/* ─── INIT ─── */
-if (!localStorage.getItem('rebel_cards_init')) {
-  localStorage.setItem('rebel_cards', JSON.stringify([
-    {id:Date.now()+1,name:'REBEL_OPERATIVE_01',lastFour:'8829',expiry:'12/28',balance:0,frozen:false,icon:'contactless',title:'TITANIUM_ELITE'},
-    {id:Date.now()+2,name:'REBEL_VAULT_77',lastFour:'4401',expiry:'05/26',balance:0,frozen:true,icon:'ac_unit',title:'COLD_STORAGE'}
-  ]));
-  localStorage.setItem('rebel_cards_init','true');
-}
+/* ─── INIT (shared with checkout / add-card — see js/rebel-cards-init.js) ─── */
+if (typeof ensureRebelCardsSeeded === 'function') ensureRebelCardsSeeded();
 
 var notifBtn = document.getElementById('btn-notifications');
 if (notifBtn) notifBtn.addEventListener('click', function(){ showToast('System is secure. No alerts.','notifications_active'); });

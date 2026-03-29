@@ -14,9 +14,19 @@ function getSupabase() {
 }
 
 // Get current session (returns null if not logged in)
+// Concurrent callers share one in-flight Supabase getSession() for fewer round-trips.
+let _sessionInFlight = null;
+
 async function getSession() {
-  const { data: { session } } = await getSupabase().auth.getSession();
-  return session;
+  if (!_sessionInFlight) {
+    _sessionInFlight = getSupabase()
+      .auth.getSession()
+      .then(({ data: { session } }) => session)
+      .finally(() => {
+        _sessionInFlight = null;
+      });
+  }
+  return _sessionInFlight;
 }
 
 // Get access token for API calls
@@ -41,6 +51,7 @@ async function signInWithGoogle() {
 
 // Sign out
 async function signOut() {
+  _sessionInFlight = null;
   await getSupabase().auth.signOut();
   localStorage.clear();
   sessionStorage.clear();

@@ -1,6 +1,7 @@
-/* Shared Tailwind CDN theme — load after https://cdn.tailwindcss.com */
-tailwind.config = {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   darkMode: 'class',
+  content: ['./*.html', './js/**/*.js', './css/tailwind.input.css'],
   theme: {
     extend: {
       colors: {
@@ -57,11 +58,15 @@ tailwind.config = {
         'tertiary-fixed-dim': '#ff61f8',
       },
       fontFamily: {
-        headline: ['Lexend'],
-        body: ['Inter'],
-        label: ['Inter'],
+        headline: ['Lexend', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        label: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       borderRadius: { DEFAULT: '0px', lg: '0px', xl: '0px', full: '9999px' },
     },
   },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries'),
+  ],
 };

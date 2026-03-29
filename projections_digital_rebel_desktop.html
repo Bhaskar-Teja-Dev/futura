@@ -5,16 +5,15 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link rel="stylesheet" href="css/app.css" />
     <title>Projections | Digital Rebel</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
+        <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    <script src="js/tailwind.config.js"></script>
-    <style>
+        <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -165,20 +164,20 @@
                 <div class="col-span-12 lg:col-span-8 space-y-6">
                     <div
                         class="bg-surface-container-lowest border-4 border-on-surface p-8 neo-shadow relative overflow-hidden">
-                        <div class="flex justify-between items-start mb-12">
-                            <div>
-                                <p class="font-headline font-bold text-xs uppercase tracking-widest text-outline">
-                                    Projected Net Worth (2045)</p>
+                        <div class="flex flex-wrap justify-between items-start gap-4 mb-12">
+                            <div class="min-w-0">
+                                <p id="projection-year-label" class="font-headline font-bold text-xs uppercase tracking-widest text-outline">
+                                    Projected Net Worth</p>
                                 <h3 id="projection-total" class="text-5xl font-headline font-black tracking-tighter">
                                     $1,248,500.00</h3>
                             </div>
-                            <div class="flex gap-2">
-                                <div
-                                    class="bg-primary-fixed border-2 border-on-surface px-3 py-1 font-headline font-bold text-[10px] uppercase">
-                                    Bull Case</div>
-                                <div
-                                    class="bg-surface border-2 border-on-surface px-3 py-1 font-headline font-bold text-[10px] uppercase">
-                                    Base</div>
+                            <div class="flex gap-2 shrink-0 items-center" role="group" aria-label="Return scenario">
+                                <button type="button" id="btn-scenario-bull" data-scenario="bull"
+                                    class="scenario-btn px-3 py-1.5 bg-primary-fixed border-2 border-on-surface font-headline font-bold text-[10px] uppercase transition-colors">
+                                    Bull Case</button>
+                                <button type="button" id="btn-scenario-base" data-scenario="base"
+                                    class="scenario-btn px-3 py-1.5 bg-surface border-2 border-on-surface font-headline font-bold text-[10px] uppercase transition-colors">
+                                    Base</button>
                             </div>
                         </div>
                         <!-- Brutalist Chart Placeholder -->
@@ -561,13 +560,25 @@
             try {
                 const gRes = await futuraApi.goals.get();
                 if (gRes.goal) {
-                    basePayload.currentAge = gRes.goal.current_age || 25;
+                    basePayload.currentAge = gRes.goal.current_age || gRes.goal.age || 25;
                     basePayload.retirementAge = gRes.goal.retirement_age || 65;
                     basePayload.lifeExpectancy = Math.max(85, basePayload.retirementAge + 10);
                     basePayload.monthlyIncome = gRes.goal.target_monthly_income || 50000;
                     basePayload.monthlyExpense = basePayload.monthlyIncome * 0.6;
                 }
             } catch (e) { }
+
+            const SCENARIO_ACTIVE = 'bg-primary-fixed border-2 border-on-surface font-headline font-bold text-[10px] uppercase transition-colors px-3 py-1.5';
+            const SCENARIO_IDLE = 'bg-surface border-2 border-on-surface font-headline font-bold text-[10px] uppercase transition-colors px-3 py-1.5';
+
+            let activeScenario = 'bull';
+
+            function setScenarioButtons() {
+                document.querySelectorAll('.scenario-btn').forEach(function (btn) {
+                    const s = btn.getAttribute('data-scenario');
+                    btn.className = 'scenario-btn ' + (s === activeScenario ? SCENARIO_ACTIVE : SCENARIO_IDLE);
+                });
+            }
 
             const renderChart = (inputs, finalValue, targetValue) => {
                 const container = document.getElementById('chart-bars-inner');
@@ -671,11 +682,18 @@
                         finalReturnRate = infOffset + 0.01;
                     }
 
+                    // Bull = optimistic (+4% absolute annual return vs same inputs); Base = slider-derived only
+                    let scenarioReturnRate = finalReturnRate;
+                    if (activeScenario === 'bull') {
+                        scenarioReturnRate = Math.min(0.22, finalReturnRate + 0.04);
+                        if (scenarioReturnRate <= infOffset) scenarioReturnRate = infOffset + 0.01;
+                    }
+
                     const payload = {
                         ...basePayload,
                         monthlyInvestment: depAmt,
                         inflationRate: infOffset,
-                        returnRate: finalReturnRate
+                        returnRate: scenarioReturnRate
                     };
 
                     const originalText = btnRecalc.textContent;
@@ -686,6 +704,13 @@
                     if (res.result && totalEl) {
                         const futureVal = res.result.futureSavings;
                         totalEl.textContent = '$' + Math.round(futureVal).toLocaleString();
+
+                        const yLabel = document.getElementById('projection-year-label');
+                        if (yLabel) {
+                            const cy = new Date().getFullYear();
+                            const retireY = cy + (payload.retirementAge - payload.currentAge);
+                            yLabel.textContent = 'Projected Net Worth (' + retireY + ')';
+                        }
 
                         // Update dynamic graph
                         renderChart(payload, futureVal, res.result.corpusNeeded);
@@ -717,6 +742,19 @@
             };
 
             if (btnRecalc) btnRecalc.addEventListener('click', recalculate);
+
+            document.querySelectorAll('.scenario-btn').forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    const s = btn.getAttribute('data-scenario');
+                    if (s === 'bull' || s === 'base') {
+                        activeScenario = s;
+                        setScenarioButtons();
+                        recalculate();
+                    }
+                });
+            });
+            setScenarioButtons();
+
             // Initial calc
             recalculate();
         });

@@ -3,13 +3,12 @@
 <html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link rel="stylesheet" href="css/app.css" />
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Lexend:wght@400;700;900&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script src="js/tailwind.config.js"></script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -192,8 +191,11 @@
 <button class="fixed bottom-8 right-8 w-16 h-16 bg-primary-fixed border-4 border-black text-black flex items-center justify-center hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] active:translate-x-0 active:translate-y-0 active:shadow-none transition-all z-50">
 <span class="material-symbols-outlined text-3xl font-black">add</span>
 </button>
+<script src="js/rebel-cards-init.js"></script>
 <script>
 (function () {
+  if (typeof ensureRebelCardsSeeded === 'function') ensureRebelCardsSeeded();
+
   const cardNumberInput = document.getElementById('card-number');
   const nameInput = document.getElementById('cardholder-name');
   const expiryInput = document.getElementById('expiry');

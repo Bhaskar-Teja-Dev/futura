@@ -5,17 +5,16 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<link rel="stylesheet" href="css/app.css" />
     <title>REBEL_CHECKOUT | Digital Rebel</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
+        <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;600&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     
-    <script src="js/tailwind.config.js"></script>
-    <style>
+        <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -33,8 +32,15 @@
             box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 1);
         }
 
+        .hard-shadow {
+            box-shadow: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+        }
+
         input:focus {
             outline: none;
+        }
+
+        .checkout-input {
             box-shadow: none;
         }
     </style>
@@ -76,64 +82,67 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <!-- Left Column: Payment Details -->
             <div class="lg:col-span-7 space-y-12">
-                <!-- Payment Method Section -->
-                <section class="bg-surface-container-lowest border-2 border-on-background neo-shadow p-8">
-                    <h2 class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3">
+                <!-- Payment Method Section — matches add_card_digital_rebel.html -->
+                <section class="bg-surface-container-lowest border-4 border-black p-8 hard-shadow">
+                    <h2 class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3 tracking-tighter">
                         <span class="material-symbols-outlined text-4xl">payments</span>
-                        01. Payment Method
+                        01. PAYMENT_METHOD
                     </h2>
-                    <!-- Toggle Options -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                        <button
-                            class="flex items-center justify-center gap-3 p-4 border-2 border-on-background bg-primary-fixed text-on-surface font-headline font-black uppercase tracking-tight">
-                            <span class="material-symbols-outlined">credit_card</span>
-                            Credit / Debit
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8" id="payment-method-tabs" role="tablist">
+                        <button type="button" role="tab" aria-selected="true" id="tab-card" data-panel="panel-card"
+                            class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-primary-fixed text-black font-headline font-black uppercase tracking-tight text-sm">
+                            <span class="material-symbols-outlined shrink-0">credit_card</span>
+                            <span class="text-center leading-tight">CREDIT / DEBIT</span>
                         </button>
-                        <button
-                            class="flex items-center justify-center gap-3 p-4 border-2 border-on-background bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight">
-                            <span class="material-symbols-outlined">currency_bitcoin</span>
-                            Pay with Crypto
+                        <button type="button" role="tab" aria-selected="false" id="tab-crypto" data-panel="panel-crypto"
+                            class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight text-sm">
+                            <span class="material-symbols-outlined shrink-0">currency_bitcoin</span>
+                            <span class="text-center leading-tight">PAY WITH CRYPTO</span>
+                        </button>
+                        <button type="button" role="tab" aria-selected="false" id="tab-saved" data-panel="panel-saved"
+                            class="payment-tab flex items-center justify-center gap-2 p-4 border-2 border-black bg-surface hover:bg-surface-container-high transition-colors text-on-surface font-headline font-black uppercase tracking-tight text-sm">
+                            <span class="material-symbols-outlined shrink-0">wallet</span>
+                            <span class="text-center leading-tight">SAVED CARDS</span>
                         </button>
                     </div>
-                    <!-- Card Details Form -->
-                    <div class="space-y-6">
-                        <div class="space-y-2">
-                            <label
-                                class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">Cardholder
-                                Name</label>
-                            <input
-                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors"
-                                placeholder="REBEL SURNAME" type="text" />
+
+                    <!-- New card — same field classes as add_card_digital_rebel.html -->
+                    <div id="panel-card" class="payment-panel space-y-8" role="tabpanel">
+                        <div>
+                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-cardholder-name">CARDHOLDER_NAME</label>
+                            <input id="checkout-cardholder-name" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="ENTER FULL NAME" type="text" autocomplete="cc-name" />
                         </div>
-                        <div class="space-y-2">
-                            <label class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">Card
-                                Number</label>
+                        <div>
+                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-card-number">CARD_NUMBER</label>
                             <div class="relative">
-                                <input
-                                    class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors"
-                                    placeholder="0000 0000 0000 0000" type="text" />
-                                <span
-                                    class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-secondary">lock</span>
+                                <input id="checkout-card-number" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold text-xl tracking-[0.2em] focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="0000 0000 0000 0000" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="19" />
+                                <span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-3xl pointer-events-none">credit_card</span>
                             </div>
                         </div>
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label
-                                    class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">Expiry
-                                    Date</label>
-                                <input
-                                    class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors"
-                                    placeholder="MM/YY" type="text" />
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-expiry">EXPIRY_DATE</label>
+                                <input id="checkout-expiry" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="MM / YY" type="text" inputmode="numeric" autocomplete="cc-exp" maxlength="7" />
                             </div>
-                            <div class="space-y-2">
-                                <label
-                                    class="font-headline font-bold uppercase text-xs tracking-widest text-secondary">CVC
-                                    / CVV</label>
-                                <input
-                                    class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-surface-container-high transition-colors"
-                                    placeholder="***" type="text" />
+                            <div>
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-cvv">CVV_CODE</label>
+                                <input id="checkout-cvv" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="***" type="password" inputmode="numeric" autocomplete="cc-csc" maxlength="3" />
                             </div>
                         </div>
+                    </div>
+
+                    <div id="panel-crypto" class="payment-panel hidden border-2 border-black border-dashed p-8 bg-surface-container-low" role="tabpanel">
+                        <p class="font-headline font-black uppercase text-sm tracking-widest mb-2">CRYPTO_RAIL</p>
+                        <p class="text-sm font-bold text-on-surface-variant uppercase tracking-wide leading-relaxed">Crypto checkout opens on execute. Wallet connection and chain selection happen in the next step.</p>
+                    </div>
+
+                    <div id="panel-saved" class="payment-panel hidden" role="tabpanel">
+                        <p class="font-headline font-black uppercase text-xs tracking-widest mb-4 text-on-surface-variant">SELECT_A_SAVED_CARD</p>
+                        <div id="saved-cards-list" class="space-y-3"></div>
+                        <p id="saved-cards-empty" class="hidden font-headline font-bold uppercase text-sm tracking-wide border-2 border-black border-dashed p-6 text-center text-on-surface-variant">
+                            No saved cards yet. <a href="add_card_digital_rebel.html" class="text-black underline underline-offset-4 decoration-primary-fixed">ADD_CARD</a> first.
+                        </p>
+                        <p id="saved-card-selected-hint" class="mt-4 font-headline font-black text-xs uppercase tracking-widest text-on-surface-variant hidden"></p>
                     </div>
                 </section>
                 <!-- Billing Address Mock -->
@@ -288,49 +297,190 @@
             </div>
         </div>
     </footer>
-    </footer>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="./js/config.js"></script>
     <script src="./js/auth.js"></script>
     <script src="./js/api.js"></script>
+    <script src="./js/rebel-cards-init.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
+            if (typeof ensureRebelCardsSeeded === 'function') ensureRebelCardsSeeded();
+
             const session = await requireAuth();
             if (!session) return;
 
             const btnCheckout = document.getElementById('btn-checkout');
+            let selectedSavedCardId = null;
+            let activePaymentMode = 'card';
+
+            const cardNumberInput = document.getElementById('checkout-card-number');
+            const nameInput = document.getElementById('checkout-cardholder-name');
+            const expiryInput = document.getElementById('checkout-expiry');
+            const cvvInput = document.getElementById('checkout-cvv');
+            const savedListEl = document.getElementById('saved-cards-list');
+            const savedEmptyEl = document.getElementById('saved-cards-empty');
+            const savedHintEl = document.getElementById('saved-card-selected-hint');
+
+            function getSavedCards() {
+                try {
+                    return JSON.parse(localStorage.getItem('rebel_cards') || '[]');
+                } catch {
+                    return [];
+                }
+            }
+
+            function inferCardBrand(pan) {
+                const d = String(pan || '').replace(/\D/g, '')[0];
+                if (d === '4') return 'VISA';
+                if (d === '5') return 'MASTERCARD';
+                if (d === '3') return 'AMEX';
+                if (d === '6') return 'DISCOVER';
+                return 'CARD';
+            }
+
+            function renderSavedCards() {
+                const cards = getSavedCards();
+                savedListEl.innerHTML = '';
+                selectedSavedCardId = null;
+                savedHintEl.classList.add('hidden');
+
+                if (!cards.length) {
+                    savedEmptyEl.classList.remove('hidden');
+                    return;
+                }
+                savedEmptyEl.classList.add('hidden');
+
+                cards.forEach((c) => {
+                    const last = c.lastFour || (c.number && String(c.number).slice(-4)) || '????';
+                    const masked = '**** **** **** ' + last;
+                    const brand = inferCardBrand(c.number);
+                    const row = document.createElement('button');
+                    row.type = 'button';
+                    row.className =
+                        'saved-card-row w-full flex items-center justify-between gap-3 p-4 bg-surface-container-low border-2 border-black font-headline font-bold uppercase tracking-widest text-left hover:bg-white transition-colors';
+                    row.dataset.cardId = String(c.id);
+                    row.innerHTML =
+                        '<span class="flex items-center gap-3 min-w-0">' +
+                        '<span class="material-symbols-outlined shrink-0 text-3xl">credit_card</span>' +
+                        '<span class="truncate text-sm md:text-base">' + masked + '</span>' +
+                        '</span>' +
+                        '<span class="shrink-0 text-[10px] font-black bg-black text-white px-2 py-1 border border-black">' +
+                        brand +
+                        '</span>';
+                    row.addEventListener('click', () => {
+                        document.querySelectorAll('.saved-card-row').forEach((el) => {
+                            el.classList.remove('ring-2', 'ring-primary-fixed', 'ring-offset-2', 'bg-primary-fixed/10');
+                        });
+                        row.classList.add('ring-2', 'ring-primary-fixed', 'ring-offset-2', 'bg-primary-fixed/10');
+                        selectedSavedCardId = c.id;
+                        savedHintEl.textContent = 'ELITE_CHARGE_VIA •••• ' + last;
+                        savedHintEl.classList.remove('hidden');
+                    });
+                    savedListEl.appendChild(row);
+                });
+            }
+
+            function setActiveTab(mode) {
+                activePaymentMode = mode;
+                document.querySelectorAll('.payment-tab').forEach((btn) => {
+                    const isActive = btn.dataset.panel === 'panel-' + mode;
+                    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+                    if (isActive) {
+                        btn.classList.add('bg-primary-fixed', 'text-black');
+                        btn.classList.remove('bg-surface', 'hover:bg-surface-container-high');
+                    } else {
+                        btn.classList.remove('bg-primary-fixed', 'text-black');
+                        btn.classList.add('bg-surface', 'hover:bg-surface-container-high');
+                    }
+                });
+
+                const panels = {
+                    card: document.getElementById('panel-card'),
+                    crypto: document.getElementById('panel-crypto'),
+                    saved: document.getElementById('panel-saved')
+                };
+                Object.keys(panels).forEach((key) => {
+                    const show = key === mode;
+                    const el = panels[key];
+                    el.classList.toggle('hidden', !show);
+                    el.hidden = !show;
+                });
+
+                if (mode === 'saved') renderSavedCards();
+            }
+
+            document.querySelectorAll('.payment-tab').forEach((btn) => {
+                btn.addEventListener('click', () => {
+                    const id = btn.id.replace('tab-', '');
+                    setActiveTab(id);
+                });
+            });
+
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener('input', function () {
+                    let raw = this.value.replace(/\D/g, '').slice(0, 16);
+                    this.value = raw.match(/.{1,4}/g)?.join(' ') || '';
+                });
+            }
+            if (expiryInput) {
+                expiryInput.addEventListener('input', function () {
+                    let raw = this.value.replace(/\D/g, '').slice(0, 4);
+                    let formatted = raw;
+                    if (raw.length >= 3) formatted = raw.slice(0, 2) + ' / ' + raw.slice(2);
+                    else if (raw.length === 2 && !this.value.includes('/')) formatted = raw + ' / ';
+                    this.value = formatted;
+                });
+            }
+            if (cvvInput) {
+                cvvInput.addEventListener('input', function () {
+                    this.value = this.value.replace(/\D/g, '').slice(0, 3);
+                });
+            }
 
             btnCheckout.addEventListener('click', async (e) => {
                 e.preventDefault();
+
+                if (activePaymentMode === 'saved') {
+                    const cards = getSavedCards();
+                    if (cards.length && !selectedSavedCardId) {
+                        alert('Select a saved card or switch to CREDIT / DEBIT.');
+                        return;
+                    }
+                    if (!cards.length) {
+                        alert('No saved cards. Add one from ADD_CARD or use CREDIT / DEBIT.');
+                        return;
+                    }
+                }
+
+                const selectedCard = getSavedCards().find(
+                    (c) => String(c.id) === String(selectedSavedCardId)
+                );
+                const prefillName =
+                    activePaymentMode === 'saved' && selectedCard?.name
+                        ? selectedCard.name
+                        : nameInput?.value?.trim() || '';
 
                 try {
                     btnCheckout.innerHTML = 'CONNECTING_TO_NODE...';
                     btnCheckout.style.pointerEvents = 'none';
 
-                    // 1. Initialize Razorpay Client-Side Direct Logic
                     const options = {
                         key: FUTURA_CONFIG.RAZORPAY_KEY_ID,
-                        amount: 19900, // 199 INR
-                        currency: "INR",
-                        name: "Digital Rebel",
-                        description: "Rebel Pro - Elite Monthly Access",
+                        amount: 19900,
+                        currency: 'INR',
+                        name: 'Digital Rebel',
+                        description: 'Rebel Pro - Elite Monthly Access',
                         handler: async function (response) {
                             try {
                                 btnCheckout.innerHTML = 'VERIFYING_CRYPTOGRAPHIC_SEAL...';
-
-                                // 2. Verify on the backend
                                 const verifyRes = await futuraApi.subscriptions.purchaseElite(response.razorpay_payment_id);
-
                                 if (verifyRes.error) throw new Error(verifyRes.error);
-
                                 btnCheckout.innerHTML = 'WELCOME_TO_THE_ELITE';
                                 btnCheckout.classList.add('bg-black', 'text-primary-fixed');
-
                                 setTimeout(() => {
                                     window.location.href = 'dashboard_digital_rebel_desktop.html#elite-hub';
                                 }, 1500);
-
                             } catch (err) {
                                 console.error('Verification Error:', err);
                                 alert('Payment verification failed. ' + err.message);
@@ -338,14 +488,12 @@
                             }
                         },
                         prefill: {
-                            email: session.user?.email || ""
+                            email: session.user?.email || '',
+                            name: prefillName
                         },
-                        theme: {
-                            color: "#cafd00"
-                        },
+                        theme: { color: '#cafd00' },
                         modal: {
                             ondismiss: function () {
-                                console.log('Checkout dismissed');
                                 resetButton();
                             }
                         }
@@ -353,7 +501,6 @@
 
                     const rzp = new window.Razorpay(options);
                     rzp.open();
-
                 } catch (err) {
                     console.error('Checkout Error:', err);
                     alert('Failed to initialize connection. ' + err.message);
@@ -362,11 +509,14 @@
             });
 
             function resetButton() {
-                btnCheckout.innerHTML = 'EXECUTE PAYMENT <span class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>';
+                btnCheckout.innerHTML =
+                    'EXECUTE PAYMENT <span class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform">arrow_forward</span>';
                 btnCheckout.style.pointerEvents = 'auto';
             }
         });
     </script>
 </body>
+
+</html>
 
 </html>

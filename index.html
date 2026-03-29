@@ -5,6 +5,9 @@
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="css/app.css" />
   <title>Digital Rebel | Own The Revolution — Next-Gen Fintech</title>
   <meta name="description" content="Digital Rebel is a high-speed, zero-custody fintech platform built for those who never wait. Trade, track, and grow wealth at sub-second speed." />
   <meta property="og:title" content="Digital Rebel | Own The Revolution" />
@@ -20,46 +23,63 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
     rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind.config.js"></script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-
-    .neo-shadow {
-      box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
-    }
-
-    .neo-shadow-large {
-      box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
-    }
-
-    .active-nav-shadow {
-      box-shadow: 2px 2px 0px 0px rgba(18, 18, 18, 1);
-    }
-
-    .hover-lift:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
-    }
-  </style>
 </head>
 
-<body class="bg-surface font-body text-on-surface">
-  <!-- TopAppBar -->
-  <header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
-    <div class="flex items-center gap-8">
-      <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
+<body class="bg-surface font-body text-on-surface landing-page">
+  <a href="#main-content"
+    class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:px-4 focus:py-3 focus:bg-primary-fixed focus:text-on-primary-fixed focus:border-2 focus:border-on-surface focus:font-headline focus:font-black focus:uppercase focus:text-xs focus:tracking-widest">Skip
+    to main content</a>
+  <div class="sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+    <header class="flex flex-wrap justify-between items-center w-full gap-4 px-4 sm:px-6 py-4" id="main-header">
+      <div class="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+        <button type="button"
+          class="lg:hidden shrink-0 inline-flex items-center justify-center min-w-[44px] min-h-[44px] border-2 border-on-surface bg-surface text-on-surface hover:bg-surface-container transition-colors"
+          id="nav-mobile-toggle" aria-expanded="false" aria-controls="mobile-nav-panel">
+          <span class="sr-only">Open main menu</span>
+          <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
+        </button>
+        <a href="index.html"
+          class="text-xl sm:text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline truncate">Digital
+          Rebel</a>
+      </div>
+      <nav class="hidden lg:flex items-center gap-8 font-headline font-black uppercase text-xs tracking-widest"
+        aria-label="Main">
+        <a class="text-on-surface hover:text-primary-fixed no-underline" href="market_digital_rebel_desktop.html">Marketplace</a>
+        <a class="text-on-surface hover:text-primary-fixed no-underline" href="learn_digital_rebel_desktop.html">Learn</a>
+        <a class="text-on-surface hover:text-primary-fixed no-underline" href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+        <a class="text-on-surface hover:text-primary-fixed no-underline" href="support_digital_rebel_desktop.html">Support</a>
+      </nav>
+      <div class="flex items-center gap-4 shrink-0">
+        <a href="onboarding_digital_rebel_desktop.html"
+          class="hidden lg:inline-flex items-center justify-center min-h-[44px] px-4 bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none no-underline"
+          id="btn-connect-wallet">
+          Connect Wallet
+        </a>
+      </div>
+    </header>
+    <div id="mobile-nav-panel"
+      class="lg:hidden absolute left-0 right-0 top-full border-b-2 border-on-surface bg-[#f6f6f6] p-6 shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] hidden"
+      aria-hidden="true">
+      <h2 id="mobile-nav-heading" class="sr-only">Site navigation</h2>
+      <nav class="flex flex-col gap-4 font-headline font-black uppercase text-sm tracking-widest" aria-label="Mobile">
+        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
+          href="market_digital_rebel_desktop.html">Marketplace</a>
+        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
+          href="learn_digital_rebel_desktop.html">Learn</a>
+        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
+          href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+        <a class="text-on-surface py-2 border-b-2 border-surface-container no-underline hover:text-primary-fixed"
+          href="support_digital_rebel_desktop.html">Support</a>
+        <a href="onboarding_digital_rebel_desktop.html"
+          class="inline-flex items-center justify-center min-h-[44px] px-4 mt-2 bg-primary-fixed text-on-primary-fixed border-2 border-on-surface text-xs tracking-widest text-center no-underline active:translate-x-[2px] active:translate-y-[2px]"
+          id="btn-connect-wallet-mobile">Connect Wallet</a>
+      </nav>
     </div>
-    <div class="flex items-center gap-4">
-      <!-- Connect Wallet (Landing Page Specific) removed per request -->
-    </div>
-  </header>
-  <main>
+  </div>
+  <main id="main-content">
     <!-- Hero Section -->
     <section
-      class="relative min-h-[921px] flex flex-col md:flex-row items-stretch border-b-4 border-on-surface overflow-hidden"
+      class="relative min-h-[min(100svh,52rem)] flex flex-col md:flex-row items-stretch border-b-4 border-on-surface overflow-hidden"
       id="hero-section">
       <div class="flex-1 p-8 md:p-16 flex flex-col justify-center bg-surface z-10 relative">
         <div
@@ -79,25 +99,31 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-6">
           <a href="#"
-            class="bg-primary-fixed text-on-primary-fixed px-8 py-4 border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter flex items-center justify-center gap-3 neo-shadow-large hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(18,18,18,1)] transition-all group no-underline"
+            class="bg-primary-fixed text-on-primary-fixed px-8 py-4 min-h-[44px] border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter flex items-center justify-center gap-3 neo-shadow-large hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[10px_10px_0px_0px_rgba(18,18,18,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] group no-underline"
             id="btn-auth-hero">
-            <img alt="G" class="w-6 h-6"
+            <img alt="" width="24" height="24" class="w-6 h-6" role="presentation"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGbSlYWQx7duriQ_rj1NkH12h0GPa6HXIDIMazPgvscwHaU0LrccorkuzuIhtDpMuUMIEvQc27qUB_AaYDxuJNz7VeElyUlxaHNGnABnsN5QMzTBTDVSGsx05jIxorxhKmdzR_IiiffekEIQR4xadI5EnXGV8YwxwVHVVo88rn9uq2i-uyNK-W1jaVVwvyb9vqadxunjI4sluWlaRmjOGa0sqxde0pAYhzni0eKL2qxhiuPvpW56hqN44MwRReBRJzNUdWS-P6qOwh" />
             Sign in with Google
           </a>
           <a href="dashboard_digital_rebel_desktop.html"
-            class="bg-surface-container-lowest text-on-surface px-8 py-4 border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter neo-shadow hover:bg-on-surface hover:text-surface transition-all no-underline"
+            class="bg-surface-container-lowest text-on-surface px-8 py-4 min-h-[44px] border-4 border-on-surface font-headline font-black text-xl uppercase tracking-tighter neo-shadow hover:bg-on-surface hover:text-surface transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none no-underline"
             id="btn-view-live-feed">
             View Live Feed
           </a>
         </div>
+        <p class="mt-4 max-w-xl text-sm font-body font-medium text-on-surface-variant normal-case tracking-normal">
+          Sign in with Google to link your account. View Live Feed opens the dashboard preview without signing in.
+        </p>
         <div class="mt-16 flex items-center gap-4">
-          <div class="flex -space-x-3">
-            <img class="w-12 h-12 border-2 border-on-surface grayscale"
+          <div class="flex -space-x-3" aria-hidden="true">
+            <img class="w-12 h-12 border-2 border-on-surface grayscale" width="48" height="48" loading="lazy"
+              decoding="async"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyq1m9nE4pMMSMT8TnEDlgwtdeVt4vkQhh0DWbWsswluXuTnFVGm2mjGnOw3jARaKPYo5trD_AKG91_rpRRZ1pB4WcrZQUp_bx5q8lXSBfY9VFsb1l6ZdGY0SqqJ7ZGXL2z3EH-YHDzwLNxaFtPX8Iqiw6H9PnTzDvD8_huU4keUlhPT7MgoUzNRePnoHT9R9GgM4ddS3M_78rN6lx0bcF-pTcjOna3orrM9qe4VH02qR2m8J2-bMAu_2J1Yb44-yk4awssdZOM6-o" />
-            <img class="w-12 h-12 border-2 border-on-surface grayscale"
+            <img class="w-12 h-12 border-2 border-on-surface grayscale" width="48" height="48" loading="lazy"
+              decoding="async"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFMcMek-FWVIV_d_rqQ2NlKrDnPvwKjXPdhfSRaTQta6ncvPInDNoFMXVfy2IrHiGMhSg_RDDi2BT6-htmuEFaj15u7DyjR3Z8PVNnjMxGGUq5_7PcbOBaebLTmjPLMQ_wXrMWahtHbMZ4f3N1EjJnh8TVWdsmbVsL-yxOuGctIwlmGX1AaANW_fM6AsmoJ6Mx0M1ZLXC_QZNP6WGpK_sIp0s8aLmeZwGhDSelh8hbQ-jVbGfuNhrlM_gmbE9U74_x0aBX2p9Mm1bD" />
-            <img class="w-12 h-12 border-2 border-on-surface grayscale"
+            <img class="w-12 h-12 border-2 border-on-surface grayscale" width="48" height="48" loading="lazy"
+              decoding="async"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEV2Q4rXjyGlFeSH0ZJoFuKMmgAg31feLnI-xab-dX0llNJNd_1pfiw8l_1P-2bNm8tuaj2UP2Ee4oiwkYdOtM40LP8Js4VHu2Cy057XVw5Lv4h4teyPu7oylD8jZBeeGSUDp36QluqOlhrMe0kk_LckbXkoi9LYyB8e-8tME7L-n7hBQr5yiAA3SOPA2m4MMO-v3JGCVcgZuOp4j9Rhj3iV-3LONj13bTPI8Tbd_F58j__jHehocoykvuZVCQ4jN1aNTJH0sOb5po" />
           </div>
           <span class="font-headline font-black text-xs uppercase tracking-widest" id="active-rebels-count">+12.4k
@@ -118,7 +144,7 @@
                 <p class="text-[10px] font-headline font-black opacity-50 uppercase tracking-widest mt-1">Status:
                   Operational</p>
               </div>
-              <span class="material-symbols-outlined text-4xl">bolt</span>
+              <span class="material-symbols-outlined text-4xl" aria-hidden="true">bolt</span>
             </div>
             <div class="space-y-4">
               <div class="h-12 bg-surface-container border-2 border-on-surface flex items-center px-4 justify-between">
@@ -154,7 +180,7 @@
         <div class="bg-surface p-8 border-4 border-on-surface neo-shadow hover-lift group" id="card-instant-settlement">
           <div
             class="w-16 h-16 bg-primary-fixed border-2 border-on-surface flex items-center justify-center mb-8 rotate-3 group-hover:rotate-0 transition-all">
-            <span class="material-symbols-outlined text-4xl font-black">electric_bolt</span>
+            <span class="material-symbols-outlined text-4xl font-black" aria-hidden="true">electric_bolt</span>
           </div>
           <h3 class="font-headline font-black text-3xl uppercase mb-4 tracking-tighter">Instant <br />Settlement</h3>
           <p class="font-body text-on-surface-variant font-medium">
@@ -164,14 +190,14 @@
           <div class="mt-8 pt-8 border-t-2 border-surface-container">
             <a href="learn_digital_rebel_desktop.html"
               class="font-headline font-black text-xs uppercase tracking-widest text-primary hover:underline cursor-pointer no-underline">Read
-              the docs â†’</a>
+              the docs →</a>
           </div>
         </div>
         <!-- Zero Custody -->
         <div class="bg-primary-fixed p-8 border-4 border-on-surface neo-shadow hover-lift group" id="card-zero-custody">
           <div
             class="w-16 h-16 bg-surface border-2 border-on-surface flex items-center justify-center mb-8 -rotate-3 group-hover:rotate-0 transition-all">
-            <span class="material-symbols-outlined text-4xl font-black">lock_open</span>
+            <span class="material-symbols-outlined text-4xl font-black" aria-hidden="true">lock_open</span>
           </div>
           <h3 class="font-headline font-black text-3xl uppercase mb-4 tracking-tighter">Zero <br />Custody</h3>
           <p class="font-body text-on-primary-fixed font-medium">
@@ -198,7 +224,7 @@
           <div class="mt-8 pt-8 border-t-2 border-on-tertiary-container/20">
             <a href="settings_digital_rebel_desktop.html"
               class="font-headline font-black text-xs uppercase tracking-widest text-on-tertiary-container hover:underline cursor-pointer no-underline">Privacy.exe
-              â†’</a>
+              →</a>
           </div>
         </div>
       </div>
@@ -210,12 +236,14 @@
           <h2 class="font-headline font-black text-5xl md:text-6xl uppercase tracking-tighter mb-8 leading-[0.9]">
             LIVE FROM THE <br /><span class="bg-on-surface text-primary-fixed px-2">WAR_ROOM</span>
           </h2>
+          <p class="text-[10px] font-headline font-bold uppercase tracking-widest text-on-surface-variant mb-4"
+            id="market-snapshot-updated" aria-live="polite"></p>
           <div class="space-y-4" id="market-list">
             <div
               class="flex items-center justify-between p-4 bg-surface-container border-2 border-on-surface neo-shadow">
               <div class="flex items-center gap-4">
                 <div class="w-10 h-10 bg-[#f6f6f6] border-2 border-on-surface flex items-center justify-center">
-                  <span class="material-symbols-outlined font-black">token</span>
+                  <span class="material-symbols-outlined font-black" aria-hidden="true">token</span>
                 </div>
                 <div>
                   <p class="font-headline font-black uppercase text-sm leading-none">RBL_GENESIS</p>
@@ -231,7 +259,7 @@
               class="flex items-center justify-between p-4 bg-surface-container border-2 border-on-surface neo-shadow">
               <div class="flex items-center gap-4">
                 <div class="w-10 h-10 bg-[#f6f6f6] border-2 border-on-surface flex items-center justify-center">
-                  <span class="material-symbols-outlined font-black">currency_bitcoin</span>
+                  <span class="material-symbols-outlined font-black" aria-hidden="true">currency_bitcoin</span>
                 </div>
                 <div>
                   <p class="font-headline font-black uppercase text-sm leading-none">BTC_CORE</p>
@@ -245,15 +273,20 @@
             </div>
           </div>
           <a href="market_digital_rebel_desktop.html"
-            class="mt-12 w-full lg:w-fit px-12 py-5 bg-on-surface text-surface font-headline font-black uppercase text-xl neo-shadow hover:bg-primary-fixed hover:text-on-surface transition-colors inline-block text-center no-underline"
+            class="mt-12 w-full lg:w-fit min-h-[52px] px-12 py-5 inline-flex items-center justify-center bg-on-surface text-surface font-headline font-black uppercase text-xl neo-shadow hover:bg-primary-fixed hover:text-on-surface transition-colors text-center no-underline active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             id="btn-enter-marketplace">
             Enter Marketplace
           </a>
+          <p class="mt-4 max-w-md text-xs font-body font-medium text-on-surface-variant normal-case tracking-normal">
+            Prices shown are illustrative snapshots, not live quotes. Not investment advice.
+          </p>
         </div>
         <div class="lg:w-1/2 relative">
           <div class="relative z-10 border-4 border-on-surface neo-shadow-large">
-            <img class="w-full grayscale hover:grayscale-0 transition-all duration-700" id="market-preview-image"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc_dlxOeV7StrZjUfmnrrB52UuZhfSZy_FF-A0Hm_m9Ki9SAxa0TzZBtNwUEmkBF4PgP7ntmKH_kEU7fSz0gFQ0RbSZd3R4U12-MLkMFE3Lq20wnI2fNCslGYeo8btGTVxpg4kvBhutahvyOG_dPtRfOr8gdqEf_XA4wpe9UcA9VJXD76pIFj5dls0Buz_ZgDCS16_kNQtsIFrMyNaKB2hjybtx0BtJj1okx94Nh12oGdDUMkdHO1x5CKGkHmJer_I6okKxmytCQGs" />
+            <img class="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700" id="market-preview-image"
+              width="1200" height="800" loading="lazy" decoding="async"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc_dlxOeV7StrZjUfmnrrB52UuZhfSZy_FF-A0Hm_m9Ki9SAxa0TzZBtNwUEmkBF4PgP7ntmKH_kEU7fSz0gFQ0RbSZd3R4U12-MLkMFE3Lq20wnI2fNCslGYeo8btGTVxpg4kvBhutahvyOG_dPtRfOr8gdqEf_XA4wpe9UcA9VJXD76pIFj5dls0Buz_ZgDCS16_kNQtsIFrMyNaKB2hjybtx0BtJj1okx94Nh12oGdDUMkdHO1x5CKGkHmJer_I6okKxmytCQGs"
+              alt="" />
           </div>
           <!-- Decorative Sticker -->
           <div
@@ -285,14 +318,16 @@
         href="projections_digital_rebel_desktop.html">API</a>
     </div>
     <div class="flex gap-4" id="footer-social-actions">
-      <div
-        class="w-12 h-12 border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all">
-        <span class="material-symbols-outlined font-black">terminal</span>
-      </div>
-      <div
-        class="w-12 h-12 border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all">
-        <span class="material-symbols-outlined font-black">hub</span>
-      </div>
+      <button type="button"
+        class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all bg-transparent"
+        aria-label="Developer terminal (coming soon)">
+        <span class="material-symbols-outlined font-black" aria-hidden="true">terminal</span>
+      </button>
+      <button type="button"
+        class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] cursor-pointer transition-all bg-transparent"
+        aria-label="Community hub (coming soon)">
+        <span class="material-symbols-outlined font-black" aria-hidden="true">hub</span>
+      </button>
     </div>
   </footer>
   <!-- Supabase + Futura Auth -->
@@ -349,8 +384,40 @@
       if (rebels) {
         const day = Math.floor(Date.now() / 86400000);
         const n = 11.8 + (day % 17) / 10;
-        rebels.textContent = '+' + n.toFixed(1) + 'k rebels active now';
+        rebels.textContent = '+' + n.toFixed(1) + 'k rebels active now (illustrative)';
       }
+      const marketUpdated = document.getElementById('market-snapshot-updated');
+      if (marketUpdated) {
+        const t = new Date();
+        marketUpdated.textContent =
+          'Snapshot as of ' +
+          t.toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) +
+          ' (illustrative)';
+      }
+      const navToggle = document.getElementById('nav-mobile-toggle');
+      const navPanel = document.getElementById('mobile-nav-panel');
+      const navToggleLabel = navToggle?.querySelector('.sr-only');
+      function setMobileNavOpen(open) {
+        if (!navPanel || !navToggle) return;
+        navPanel.classList.toggle('hidden', !open);
+        navToggle.setAttribute('aria-expanded', String(open));
+        navPanel.setAttribute('aria-hidden', String(!open));
+        if (navToggleLabel) {
+          navToggleLabel.textContent = open ? 'Close main menu' : 'Open main menu';
+        }
+      }
+      navToggle?.addEventListener('click', () => {
+        if (!navPanel) return;
+        setMobileNavOpen(navPanel.classList.contains('hidden'));
+      });
+      navPanel?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMobileNavOpen(false));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navPanel && !navPanel.classList.contains('hidden')) {
+          setMobileNavOpen(false);
+        }
+      });
     });
   </script>
 </body>
