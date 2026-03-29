@@ -5,17 +5,18 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <meta name="description" content="Secure checkout for Digital Rebel upgrades and credits. Complete your payment on this page." />
-<link rel="stylesheet" href="css/app.css" />
+    <meta name="description"
+        content="Secure checkout for Digital Rebel upgrades and credits. Complete your payment on this page." />
+    <link rel="stylesheet" href="css/app.css" />
     <title>REBEL_CHECKOUT | Digital Rebel</title>
-        <link
+    <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;600&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
-    
-        <style>
+
+    <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -85,7 +86,8 @@
             <div class="lg:col-span-7 space-y-12">
                 <!-- Payment Method Section — matches add_card_digital_rebel.html -->
                 <section class="bg-surface-container-lowest border-4 border-black p-8 hard-shadow">
-                    <h2 class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3 tracking-tighter">
+                    <h2
+                        class="font-headline font-black text-3xl uppercase mb-8 flex items-center gap-3 tracking-tighter">
                         <span class="material-symbols-outlined text-4xl">payments</span>
                         01. PAYMENT_METHOD
                     </h2>
@@ -110,40 +112,67 @@
                     <!-- New card — same field classes as add_card_digital_rebel.html -->
                     <div id="panel-card" class="payment-panel space-y-8" role="tabpanel">
                         <div>
-                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-cardholder-name">CARDHOLDER_NAME</label>
-                            <input id="checkout-cardholder-name" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="ENTER FULL NAME" type="text" autocomplete="cc-name" />
+                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                for="checkout-cardholder-name">CARDHOLDER_NAME</label>
+                            <input id="checkout-cardholder-name"
+                                class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                placeholder="ENTER FULL NAME" type="text" autocomplete="cc-name" />
                         </div>
                         <div>
-                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-card-number">CARD_NUMBER</label>
+                            <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                for="checkout-card-number">CARD_NUMBER</label>
                             <div class="relative">
-                                <input id="checkout-card-number" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold text-xl tracking-[0.2em] focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="0000 0000 0000 0000" type="text" inputmode="numeric" autocomplete="cc-number" maxlength="19" />
-                                <span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-3xl pointer-events-none">credit_card</span>
+                                <input id="checkout-card-number"
+                                    class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold text-xl tracking-[0.2em] focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                    placeholder="0000 0000 0000 0000" type="text" inputmode="numeric"
+                                    autocomplete="cc-number" maxlength="19" />
+                                <span
+                                    class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-3xl pointer-events-none">credit_card</span>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-8">
                             <div>
-                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-expiry">EXPIRY_DATE</label>
-                                <input id="checkout-expiry" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="MM / YY" type="text" inputmode="numeric" autocomplete="cc-exp" maxlength="7" />
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                    for="checkout-expiry">EXPIRY_DATE</label>
+                                <input id="checkout-expiry"
+                                    class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                    placeholder="MM / YY" type="text" inputmode="numeric" autocomplete="cc-exp"
+                                    maxlength="7" />
                             </div>
                             <div>
-                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3" for="checkout-cvv">CVV_CODE</label>
-                                <input id="checkout-cvv" class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30" placeholder="***" type="password" inputmode="numeric" autocomplete="cc-csc" maxlength="3" />
+                                <label class="block font-headline font-black uppercase text-sm tracking-widest mb-3"
+                                    for="checkout-cvv">CVV_CODE</label>
+                                <input id="checkout-cvv"
+                                    class="checkout-input w-full bg-surface-container-low border-2 border-black p-4 font-headline font-bold uppercase tracking-widest focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
+                                    placeholder="***" type="password" inputmode="numeric" autocomplete="cc-csc"
+                                    maxlength="3" />
                             </div>
                         </div>
                     </div>
 
-                    <div id="panel-crypto" class="payment-panel hidden border-2 border-black border-dashed p-8 bg-surface-container-low" role="tabpanel">
+                    <div id="panel-crypto"
+                        class="payment-panel hidden border-2 border-black border-dashed p-8 bg-surface-container-low"
+                        role="tabpanel">
                         <p class="font-headline font-black uppercase text-sm tracking-widest mb-2">CRYPTO_RAIL</p>
-                        <p class="text-sm font-bold text-on-surface-variant uppercase tracking-wide leading-relaxed">Crypto checkout opens on execute. Wallet connection and chain selection happen in the next step.</p>
+                        <p class="text-sm font-bold text-on-surface-variant uppercase tracking-wide leading-relaxed">
+                            Crypto checkout opens on execute. Wallet connection and chain selection happen in the next
+                            step.</p>
                     </div>
 
                     <div id="panel-saved" class="payment-panel hidden" role="tabpanel">
-                        <p class="font-headline font-black uppercase text-xs tracking-widest mb-4 text-on-surface-variant">SELECT_A_SAVED_CARD</p>
+                        <p
+                            class="font-headline font-black uppercase text-xs tracking-widest mb-4 text-on-surface-variant">
+                            SELECT_A_SAVED_CARD</p>
                         <div id="saved-cards-list" class="space-y-3"></div>
-                        <p id="saved-cards-empty" class="hidden font-headline font-bold uppercase text-sm tracking-wide border-2 border-black border-dashed p-6 text-center text-on-surface-variant">
-                            No saved cards yet. <a href="add_card_digital_rebel.html" class="text-black underline underline-offset-4 decoration-primary-fixed">ADD_CARD</a> first.
+                        <p id="saved-cards-empty"
+                            class="hidden font-headline font-bold uppercase text-sm tracking-wide border-2 border-black border-dashed p-6 text-center text-on-surface-variant">
+                            No saved cards yet. <a href="add_card_digital_rebel.html"
+                                class="text-black underline underline-offset-4 decoration-primary-fixed">ADD_CARD</a>
+                            first.
                         </p>
-                        <p id="saved-card-selected-hint" class="mt-4 font-headline font-black text-xs uppercase tracking-widest text-on-surface-variant hidden"></p>
+                        <p id="saved-card-selected-hint"
+                            class="mt-4 font-headline font-black text-xs uppercase tracking-widest text-on-surface-variant hidden">
+                        </p>
                     </div>
                 </section>
                 <!-- Billing Address Mock -->
@@ -153,15 +182,15 @@
                         02. Billing Address
                     </h2>
                     <div class="space-y-6">
-                        <input
-                            class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg"
+                        <input id="checkout-address"
+                            class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
                             placeholder="STREET ADDRESS" type="text" />
                         <div class="grid grid-cols-2 gap-6">
-                            <input
-                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg"
+                            <input id="checkout-city"
+                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
                                 placeholder="CITY" type="text" />
-                            <input
-                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg"
+                            <input id="checkout-postal"
+                                class="w-full bg-surface border-2 border-on-background p-4 font-headline font-bold text-lg focus:bg-white focus:border-[3px] outline-none transition-all placeholder:opacity-30"
                                 placeholder="POSTAL CODE" type="text" />
                         </div>
                     </div>
@@ -232,19 +261,26 @@
                         <div class="mt-8 grid grid-cols-2 gap-2">
                             <div class="bg-surface/10 p-3 border border-surface/20">
                                 <span class="material-symbols-outlined text-primary-fixed block mb-1">bolt</span>
-                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">Unlimited Pro Scenarios</span>
+                                <span
+                                    class="font-headline font-bold text-[10px] uppercase block tracking-tighter">Unlimited
+                                    Pro Scenarios</span>
                             </div>
                             <div class="bg-surface/10 p-3 border border-surface/20">
-                                <span class="material-symbols-outlined text-primary-fixed block mb-1">account_balance</span>
-                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">AI Tax Optimization</span>
+                                <span
+                                    class="material-symbols-outlined text-primary-fixed block mb-1">account_balance</span>
+                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">AI
+                                    Tax Optimization</span>
                             </div>
                             <div class="bg-surface/10 p-3 border border-surface/20">
-                                <span class="material-symbols-outlined text-primary-fixed block mb-1">picture_as_pdf</span>
-                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">PDF Roadmaps</span>
+                                <span
+                                    class="material-symbols-outlined text-primary-fixed block mb-1">picture_as_pdf</span>
+                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">PDF
+                                    Roadmaps</span>
                             </div>
                             <div class="bg-surface/10 p-3 border border-surface/20">
                                 <span class="material-symbols-outlined text-primary-fixed block mb-1">healing</span>
-                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">2x/Mo Streak Tokens</span>
+                                <span class="font-headline font-bold text-[10px] uppercase block tracking-tighter">2x/Mo
+                                    Streak Tokens</span>
                             </div>
                         </div>
                     </section>
@@ -439,19 +475,64 @@
                 });
             }
 
+            function showRebelError(title, message) {
+                const modal = document.createElement('div');
+                modal.id = 'rebel-error-modal';
+                modal.className = 'fixed inset-0 z-[3000] flex items-center justify-center bg-[#121212]/80 backdrop-blur-sm px-4';
+                modal.innerHTML = `
+                    <div class="bg-white border-4 border-[#121212] p-6 w-[360px] shadow-[8px_8px_0px_0px_#f95630] relative animate-slideUp">
+                        <button onclick="document.getElementById('rebel-error-modal').remove()" class="absolute top-4 right-4 material-symbols-outlined text-xl font-black hover:text-error transition-colors">close</button>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="material-symbols-outlined text-2xl text-error">warning</span>
+                            <h2 class="font-headline font-black text-xl uppercase tracking-tighter text-[#121212]">${title}</h2>
+                        </div>
+                        <p class="font-body text-[11px] font-bold text-on-surface-variant uppercase tracking-widest leading-relaxed mb-8">${message}</p>
+                        <button onclick="document.getElementById('rebel-error-modal').remove()" class="w-full bg-[#121212] text-white p-4 font-headline font-black text-sm uppercase tracking-widest hover:bg-error transition-colors shadow-[4px_4px_0px_0px_#f95630] active:translate-y-1 active:shadow-none">ACKNOWLEDGE_DEEDS</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+
+                // Close on ESC
+                const esc = (e) => { if (e.key === 'Escape') { modal.remove(); document.removeEventListener('keydown', esc); } };
+                document.addEventListener('keydown', esc);
+            }
+
             btnCheckout.addEventListener('click', async (e) => {
                 e.preventDefault();
 
-                if (activePaymentMode === 'saved') {
+                // 1. Validate Billing Address (Common to all modes)
+                const addr = document.getElementById('checkout-address')?.value?.trim();
+                const city = document.getElementById('checkout-city')?.value?.trim();
+                const post = document.getElementById('checkout-postal')?.value?.trim();
+                if (!addr || !city || !post) {
+                    showRebelError('EXECUTION_BLOCKED', 'Billing details incomplete. Cannot be allowed to execute payment.');
+                    return;
+                }
+
+                // 2. Validate Payment Sections
+                if (activePaymentMode === 'card') {
+                    const cardNum = cardNumberInput?.value?.replace(/\s/g, '');
+                    const holder = nameInput?.value?.trim();
+                    const exp = expiryInput?.value?.trim();
+                    const cvv = cvvInput?.value?.trim();
+
+                    if (!cardNum || cardNum.length < 16 || !holder || !exp || !cvv) {
+                        showRebelError('EXECUTION_BLOCKED', 'Payment details incomplete. Cannot be allowed to execute payment.');
+                        return;
+                    }
+                } else if (activePaymentMode === 'saved') {
                     const cards = getSavedCards();
                     if (cards.length && !selectedSavedCardId) {
-                        alert('Select a saved card or switch to CREDIT / DEBIT.');
+                        showRebelError('EXECUTION_BLOCKED', 'No card selected. Cannot be allowed to execute payment.');
                         return;
                     }
                     if (!cards.length) {
-                        alert('No saved cards. Add one from ADD_CARD or use CREDIT / DEBIT.');
+                        showRebelError('EXECUTION_BLOCKED', 'No saved cards available. Cannot be allowed to execute payment.');
                         return;
                     }
+                } else if (activePaymentMode === 'crypto') {
+                    // Crypto usually connects on the next step, but let's confirm intent
+                    if (!confirm('Redirect to secure Crypto Payment Gateway?')) return;
                 }
 
                 const selectedCard = getSavedCards().find(
