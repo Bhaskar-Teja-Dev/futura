@@ -8,6 +8,7 @@ import { profileRouter } from './routes/profile'
 import { allocationRouter } from './routes/allocation'
 import { zensRouter } from './routes/zens'
 import { subscriptionsRouter } from './routes/subscriptions'
+import { holdingsRouter } from './routes/holdings'
 import type { Env, Variables } from './types'
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>()
@@ -32,5 +33,6 @@ app.route('/api/projection', projectionRouter)
 app.route('/api/allocation', allocationRouter)
 app.route('/api/zens', zensRouter)
 app.route('/api/subscriptions', subscriptionsRouter)
+app.route('/api/holdings', holdingsRouter)
 
 export default app

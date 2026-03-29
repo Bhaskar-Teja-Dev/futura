@@ -11,7 +11,8 @@ const profileUpdateSchema = z.object({
   age: z.number().int().min(10).max(120).optional(),
   retirement_age: z.number().int().min(40).max(90).optional(),
   monthly_income: z.number().positive().optional(),
-  onboarding_complete: z.boolean().optional()
+  onboarding_complete: z.boolean().optional(),
+  liquid_cash: z.number().int().min(0).optional()
 })
 
 router.get('/', async (c) => {
@@ -60,16 +61,18 @@ router.patch('/', zValidator('json', profileUpdateSchema), async (c) => {
   const userId = c.get('userId')
   const body = c.req.valid('json')
 
-  // Use Service Role and UPSERT to ensure the row exists (bypass RLS for initialization)
+  // Use UPDATE — profile row is guaranteed to exist by the time any PATCH is called.
+  // upsert would attempt INSERT on miss, which fails the email NOT NULL constraint.
   const supabaseAdmin = getSupabase(c.env)
   const { data, error } = await supabaseAdmin
     .from('profiles')
-    .upsert({ id: userId, ...body }, { onConflict: 'id' })
+    .update({ ...body })
+    .eq('id', userId)
     .select('*')
     .maybeSingle()
 
   if (error) {
-    console.error("Supabase update error:", error)
+    console.error('Supabase update error:', error)
     return c.json({ error: error.message }, 500)
   }
 

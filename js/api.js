@@ -71,6 +71,12 @@ const futuraApi = {
         method: 'POST',
         body: JSON.stringify({ razorpay_payment_id })
       })
+  },
+  holdings: {
+    list: () => apiFetch('/api/holdings'),
+    create: (body) => apiFetch('/api/holdings', { method: 'POST', body: JSON.stringify(body) }),
+    sell: (id, body) => apiFetch(`/api/holdings/${id}/sell`, { method: 'PATCH', body: JSON.stringify(body) }),
+    remove: (id) => apiFetch(`/api/holdings/${id}`, { method: 'DELETE' })
   }
 };
 

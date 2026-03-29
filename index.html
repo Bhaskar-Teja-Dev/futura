@@ -9,14 +9,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/app.css" />
   <title>Digital Rebel | Own The Revolution — Next-Gen Fintech</title>
-  <meta name="description" content="Digital Rebel is a high-speed, zero-custody fintech platform built for those who never wait. Trade, track, and grow wealth at sub-second speed." />
+  <meta name="description"
+    content="Digital Rebel is a high-speed, zero-custody fintech platform built for those who never wait. Trade, track, and grow wealth at sub-second speed." />
   <meta property="og:title" content="Digital Rebel | Own The Revolution" />
-  <meta property="og:description" content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
+  <meta property="og:description"
+    content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://futura.vercel.app/" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Digital Rebel | Own The Revolution" />
-  <meta name="twitter:description" content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
+  <meta name="twitter:description"
+    content="High-speed, zero-custody, total transparency. The stack built for those who never wait." />
   <link rel="canonical" href="https://futura.vercel.app/" />
   <script type="application/ld+json" id="futura-ld-json">
   {
@@ -46,7 +49,8 @@
   <a href="#main-content"
     class="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:left-4 focus:top-4 focus:px-4 focus:py-3 focus:bg-primary-fixed focus:text-on-primary-fixed focus:border-2 focus:border-on-surface focus:font-headline focus:font-black focus:uppercase focus:text-xs focus:tracking-widest">Skip
     to main content</a>
-  <div class="sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-2 border-on-surface dark:border-surface shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
+  <div
+    class="sticky top-0 z-50 bg-surface dark:bg-inverse-surface border-b-2 border-on-surface dark:border-surface shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
     <header class="flex flex-wrap justify-between items-center w-full gap-4 px-4 sm:px-6 py-4" id="main-header">
       <div class="flex items-center min-w-0 flex-1">
         <a href="index.html"
@@ -240,7 +244,7 @@
             class="mt-12 w-full lg:w-fit min-h-[52px] px-12 py-5 inline-flex flex-col items-center justify-center gap-1 bg-on-surface text-surface font-headline font-black uppercase text-xl neo-shadow hover:bg-primary-fixed hover:text-on-surface transition-colors text-center no-underline active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
             id="btn-continue-signin-market">
             <span>Continue to Sign In</span>
-  
+
           </a>
           <p class="mt-4 max-w-md text-xs font-body font-medium text-on-surface-variant normal-case tracking-normal">
             Prices shown are illustrative snapshots, not live quotes. Not investment advice.
@@ -268,20 +272,19 @@
     id="main-footer">
     <div class="flex flex-col items-center md:items-start">
       <a href="index.html" class="text-4xl font-black text-[#cafd00] font-headline no-underline">DIGITAL REBEL</a>
-      <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.</p>
+      <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] mt-2">©<span
+          data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.</p>
     </div>
     <div class="flex flex-wrap items-center justify-center md:justify-end gap-6 md:ml-auto" id="footer-terms-and-decor">
       <div class="flex gap-4" id="footer-social-actions" aria-hidden="true">
         <div
           class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] transition-all bg-transparent select-none cursor-default"
-          tabindex="-1"
-          title="Developer terminal (decorative)">
+          tabindex="-1" title="Developer terminal (decorative)">
           <span class="material-symbols-outlined font-black" aria-hidden="true">terminal</span>
         </div>
         <div
           class="w-12 h-12 min-w-[48px] min-h-[48px] border-2 border-[#cafd00] flex items-center justify-center text-[#cafd00] hover:bg-[#cafd00] hover:text-[#121212] transition-all bg-transparent select-none cursor-default"
-          tabindex="-1"
-          title="Network hub (decorative)">
+          tabindex="-1" title="Network hub (decorative)">
           <span class="material-symbols-outlined font-black" aria-hidden="true">hub</span>
         </div>
       </div>
@@ -301,7 +304,7 @@
     html.auth-verified #btn-continue-signin-market {
       display: none !important;
     }
-    
+
     /* Optional: Show loading state if session exists but not verified */
     html.auth-loading #btn-auth-hero {
       opacity: 0.5;
@@ -309,26 +312,26 @@
     }
   </style>
   <script>
-      // Robust Visibility Control: Hide sign-in button immediately if session detected
-      (function () {
-        const projectRef = 'oorxjgzhscczvflvjwlk';
-        const storageKey = `sb-${projectRef}-auth-token`;
-        const sessionStr = localStorage.getItem(storageKey);
+    // Robust Visibility Control: Hide sign-in button immediately if session detected
+    (function () {
+      const projectRef = 'oorxjgzhscczvflvjwlk';
+      const storageKey = `sb-${projectRef}-auth-token`;
+      const sessionStr = localStorage.getItem(storageKey);
 
-        if (sessionStr) {
-          try {
-            const session = JSON.parse(sessionStr);
-            if (session && session.user) {
-              const onboardingForceHide = localStorage.getItem('futura_onboarding_complete') === 'true';
-              if (onboardingForceHide) {
-                document.documentElement.classList.add('auth-verified');
-              } else {
-                document.documentElement.classList.add('auth-loading');
-              }
+      if (sessionStr) {
+        try {
+          const session = JSON.parse(sessionStr);
+          if (session && session.user) {
+            const onboardingForceHide = localStorage.getItem('futura_onboarding_complete') === 'true';
+            if (onboardingForceHide) {
+              document.documentElement.classList.add('auth-verified');
+            } else {
+              document.documentElement.classList.add('auth-loading');
             }
-          } catch (e) { }
-        }
-      })();
+          }
+        } catch (e) { }
+      }
+    })();
 
     document.addEventListener('DOMContentLoaded', () => {
       const googleBtn = document.getElementById('btn-auth-hero');
@@ -364,4 +367,3 @@
 </body>
 
 </html>
-scm-history-item:c%3A%5CUsers%5Ctheni%5COneDrive%5CDesktop%5Cfintech%5Cfutura?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%2218e2d19a635ca83b6808d697abd11eed8f71698a%22%2C%22historyItemParentId%22%3A%227b474fabf05d7451b909072175408118fd6022b0%22%2C%22historyItemDisplayId%22%3A%2218e2d19%22%7D

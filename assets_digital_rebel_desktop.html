@@ -262,17 +262,19 @@
       const totalEl = document.getElementById('total-warchest');
       const countEl = document.getElementById('asset-count');
 
-      // 1. Load Portfolio Holdings (ZENS Stocks)
+      // 1. Load Portfolio Holdings from DB
       let portfolioZensSubtotal = 0;
       let assetUnitsCount = 0;
+      let loadedHoldings = [];
 
       // Tracking variables for dynamic momentum
       let totalAmountInvested = 0;
       let totalWeightedReturn = 0;
 
       try {
-        const holdingsStr = localStorage.getItem('portfolioHoldings') || '[]';
-        const holdings = JSON.parse(holdingsStr);
+        const holdingsRes = await futuraApi.holdings.list();
+        const holdings = holdingsRes.holdings || [];
+        loadedHoldings = holdings;
 
         assetUnitsCount += holdings.length;
 
@@ -281,7 +283,7 @@
         } else {
           stocksList.innerHTML = '';
           holdings.forEach((h, index) => {
-            const amountInvested = parseInt(h.amount, 10) || 0;
+            const amountInvested = h.amount_zens || 0;
             portfolioZensSubtotal += amountInvested;
 
             // Mock an active return for visual aesthetic
@@ -294,14 +296,13 @@
             const isSold = h.sold === true;
 
             const card = document.createElement('div');
-            // Remove opacity from the container so background doesn't bleed through. Apply a solid grey.
             card.className = `border-2 border-inverse-surface p-6 flex flex-col md:flex-row justify-between items-center gap-6 transition-colors ${isSold ? 'bg-surface-container-highest grayscale text-outline' : 'bg-white hover:bg-surface-container-low'}`;
 
             const btnClass = isSold ?
               'w-full md:w-auto px-8 py-3 bg-outline text-surface border-2 border-outline font-headline font-black uppercase text-xs cursor-not-allowed' :
               'w-full md:w-auto px-8 py-3 bg-inverse-surface text-primary-fixed font-headline font-black uppercase text-xs hard-shadow-sm hover:bg-error hover:text-white transition-all';
 
-            const btnAction = isSold ? 'disabled' : `onclick="window.sellAsset(${index}, '${h.ticker}', ${amountInvested}, ${swing})"`;
+            const btnAction = isSold ? 'disabled' : `onclick="window.sellAsset('${h.id}', '${h.ticker}', ${amountInvested}, ${swing.toFixed(4)})"`;
             const btnText = isSold ? 'SOLD' : 'SELL';
 
             card.innerHTML = `
@@ -310,8 +311,8 @@
                   <span class="font-headline font-black text-xl shrink-0">${h.ticker}</span>
                 </div>
                 <div>
-                  <h4 class="font-headline font-black text-xl leading-none ${isSold ? 'text-inverse-surface' : ''}">${h.companyName}</h4>
-                  <p class="font-label text-xs font-bold text-on-surface-variant tracking-widest uppercase mt-1">Acquired: ${new Date(h.date).toLocaleDateString()}</p>
+                  <h4 class="font-headline font-black text-xl leading-none ${isSold ? 'text-inverse-surface' : ''}">${h.company_name}</h4>
+                  <p class="font-label text-xs font-bold text-on-surface-variant tracking-widest uppercase mt-1">Acquired: ${new Date(h.purchase_date).toLocaleDateString()}</p>
                 </div>
               </div>
               <div class="flex flex-col md:items-end w-full md:w-auto">
@@ -343,7 +344,8 @@
           }
         }
       } catch (err) {
-        console.error('Failed to parse portfolio holdings:', err);
+        console.error('Failed to load portfolio holdings:', err);
+        stocksList.innerHTML = '<p class="text-error uppercase p-4 text-xs font-bold border-2 border-error">HOLDINGS_FETCH_ERROR</p>';
       }
 
       // 2. Load API Manual Contributions
@@ -412,9 +414,12 @@
         grid.innerHTML = '<p class="text-error uppercase p-4 text-xs font-bold border-2 border-error">DATA_FETCH_ERROR</p>';
       }
 
-      // 3. Handle Liquid Cash
-      let liquidZens = parseInt(localStorage.getItem('trackedLiquidCash') || '0', 10);
-      if (isNaN(liquidZens)) liquidZens = 0;
+      // 3. Handle Liquid Cash — load from DB profile
+      let liquidZens = 0;
+      try {
+        const profileRes = await futuraApi.profile.get();
+        liquidZens = parseInt(profileRes?.profile?.liquid_cash || '0', 10) || 0;
+      } catch (e) { console.warn('liquid_cash fetch failed', e); }
 
       const lcValEl = document.getElementById('liquid-cash-val');
       if (lcValEl) lcValEl.textContent = 'Z ' + liquidZens.toLocaleString('en-US');
@@ -492,21 +497,30 @@
 
         setTimeout(() => document.getElementById('liquid-input-field')?.focus(), 50);
 
-        document.getElementById('liquid-save-btn').onclick = () => {
+        document.getElementById('liquid-save-btn').onclick = async () => {
           const raw = document.getElementById('liquid-input-field').value;
-          if (raw !== "" && !isNaN(parseInt(raw, 10))) {
-            localStorage.setItem('trackedLiquidCash', parseInt(raw, 10));
+          if (raw !== '' && !isNaN(parseInt(raw, 10))) {
+            const newVal = parseInt(raw, 10);
+            const saveBtn = document.getElementById('liquid-save-btn');
+            saveBtn.textContent = 'SAVING...';
+            saveBtn.disabled = true;
+            try {
+              await futuraApi.profile.update({ liquid_cash: newVal });
 
-            // Add notification for reserve update
-            if (typeof RebelNotifications !== 'undefined') {
-              RebelNotifications.add(
-                'Reserves Updated',
-                `Liquid ZENS reserves manually set to Z ${parseInt(raw, 10).toLocaleString('en-US')}.`,
-                'system'
-              );
+              if (typeof RebelNotifications !== 'undefined') {
+                RebelNotifications.add(
+                  'Reserves Updated',
+                  `Liquid ZENS reserves set to Z ${newVal.toLocaleString('en-US')}.`,
+                  'system'
+                );
+              }
+
+              setTimeout(() => location.reload(), 500);
+            } catch (err) {
+              console.error('Failed to save liquid cash:', err);
+              saveBtn.textContent = 'FAILED — TRY AGAIN';
+              saveBtn.disabled = false;
             }
-
-            setTimeout(() => location.reload(), 500); // Small delay to allow notification to sync
           }
         };
 
@@ -522,13 +536,13 @@
         });
       };
 
-      // Tooltip visibility loop if 0
+      // Tooltip visibility if 0
       if (liquidZens === 0) {
         const box = document.getElementById('liquid-cash-box');
         const tip = document.getElementById('liquid-cash-tooltip');
         if (box && tip) {
           box.addEventListener('mouseenter', () => {
-            if (parseInt(localStorage.getItem('trackedLiquidCash') || '0', 10) === 0) {
+            if (liquidZens === 0) {
               tip.classList.remove('opacity-0', 'invisible');
               tip.classList.add('opacity-100', 'visible', 'animate-bounce');
             }
@@ -542,7 +556,7 @@
     });
 
     // 5. Sell Logic: Pre-Confirmation and Execution Receipt
-    window.sellAsset = (index, ticker, investedStr, swingStr) => {
+    window.sellAsset = (holdingId, ticker, investedStr, swingStr) => {
       const invested = parseFloat(investedStr);
       const swing = parseFloat(swingStr);
 
@@ -572,7 +586,7 @@
           <div class="grid grid-cols-2 gap-4 mb-8">
              <div class="bg-surface-container-low p-4 border border-surface-container-high">
                <p class="font-headline font-bold text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">PROCEEDS (EST)</p>
-               <p class="font-headline font-black text-2xl text-white">Z ${finalProceeds.toLocaleString('en-US')}</p>
+               <p class="font-headline font-black text-2xl text-black">Z ${finalProceeds.toLocaleString('en-US')}</p>
              </div>
              <div class="p-4" style="background:${colorHex}1a; border: 1px solid ${colorHex}4d;"> 
                <p class="font-headline font-bold text-[10px] uppercase tracking-widest mb-1" style="color:${colorHex}">PNL IMPACT</p>
@@ -611,19 +625,19 @@
         btn.disabled = true;
         document.getElementById('cancel-sell-btn').style.opacity = '0.5';
         document.getElementById('cancel-sell-btn').style.pointerEvents = 'none';
-        modal.onclick = null; // Disable outside click while processing
+        modal.onclick = null;
 
         try {
+          // 1. Credit ZENS
           const res = await futuraApi.zens.add(finalProceeds);
           if (res.error) throw new Error(res.error);
 
-          const holdingsStr = localStorage.getItem('portfolioHoldings') || '[]';
-          let holdings = JSON.parse(holdingsStr);
-          holdings[index].sold = true;
-          holdings[index].sellProceeds = finalProceeds;
-          holdings[index].sellPnl = Math.floor(pnl);
-          holdings[index].sellDate = new Date().toISOString();
-          localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
+          // 2. Mark holding as sold in DB
+          await futuraApi.holdings.sell(holdingId, {
+            sell_proceeds: finalProceeds,
+            sell_pnl: Math.floor(pnl),
+            sell_date: new Date().toISOString().split('T')[0]
+          });
 
           // Add notification for asset liquidation
           if (typeof RebelNotifications !== 'undefined') {
@@ -710,14 +724,12 @@
         btn.disabled = true;
 
         try {
-          // Delete directly via Supabase since the API doesn't have a DELETE endpoint
-          const { error } = await getSupabase().from('contributions').delete().eq('id', id);
-          if (error) throw error;
+          await futuraApi.contributions.delete(id);
 
           if (typeof RebelNotifications !== 'undefined') {
             RebelNotifications.add('Asset Removed', `"${name}" has been permanently removed from your warchest.`, 'system');
           }
-    setTimeout(() => location.reload(), 500);
+          setTimeout(() => location.reload(), 500);
         } catch (err) {
           console.error('Delete failed:', err);
           btn.textContent = 'FAILED — TRY AGAIN';

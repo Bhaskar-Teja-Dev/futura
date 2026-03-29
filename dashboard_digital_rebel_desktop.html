@@ -5,10 +5,10 @@
 <head>
     <meta charset="utf-8" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://cdn.jsdelivr.net" />
-<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="description"
         content="Digital Rebel dashboard: ZENS balance, streaks, projections, and your rebel overview in one place." />
@@ -458,19 +458,29 @@
                             </p>
                             <p id="liquid-amount" class="font-headline font-black text-xl skeleton">Z 0</p>
                         </div>
-                        <div class="p-4 border-2 border-inverse-surface bg-surface relative group/sip">
+                        <div class="p-4 border-2 border-inverse-surface bg-surface relative" id="sip-card">
                             <div class="flex items-center gap-1.5 mb-1">
-                                <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Required SIP</p>
-                                <span class="material-symbols-outlined text-on-surface-variant cursor-help select-none" style="font-size:14px; line-height:1;">info</span>
+                                <p class="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
+                                    Required SIP</p>
+                                <span class="material-symbols-outlined text-on-surface-variant cursor-help select-none"
+                                    id="sip-info-icon" style="font-size:14px; line-height:1;">info</span>
                             </div>
                             <p id="required-amount" class="font-headline font-black text-xl skeleton">Z 0</p>
-                            <!-- Tooltip -->
-                            <div class="pointer-events-none absolute bottom-full left-0 mb-2 z-50 w-64 hidden group-hover/sip:block">
-                                <div class="bg-inverse-surface text-surface border-2 border-inverse-surface p-3 font-body text-[11px] leading-snug shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]">
-                                    <p class="font-headline font-black uppercase tracking-widest text-[9px] text-primary-fixed mb-1">What is this?</p>
-                                    The minimum you need to save every month — starting today — so that after inflation, you'll have enough money to cover your living expenses throughout your entire retirement.
+                            <!-- Tooltip — shown via JS hover (named-group Tailwind classes require a fresh build) -->
+                            <div id="sip-tooltip"
+                                style="display:none; position:absolute; bottom:calc(100% + 8px); left:0; z-index:50; width:260px; pointer-events:none;">
+                                <div
+                                    style="background:#121212; color:#f6f6f6; border:2px solid #121212; padding:12px; font-size:11px; line-height:1.5; box-shadow:4px 4px 0px 0px rgba(18,18,18,1);">
+                                    <p
+                                        style="font-family:inherit; font-weight:900; font-size:9px; text-transform:uppercase; letter-spacing:0.1em; color:#cafd00; margin-bottom:4px;">
+                                        What is this?</p>
+                                    The minimum you need to save every month starting today so that after inflation,
+                                    you'll have enough money to cover your living expenses throughout your entire
+                                    retirement.
                                 </div>
-                                <div class="w-3 h-3 bg-inverse-surface border-r-2 border-b-2 border-inverse-surface rotate-45 ml-4 -mt-1.5"></div>
+                                <div
+                                    style="width:12px; height:12px; background:#121212; transform:rotate(45deg); margin-left:16px; margin-top:-6px; border-right:2px solid #121212; border-bottom:2px solid #121212;">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -529,7 +539,8 @@
     </div>
     <!-- Footer -->
     <!-- Footer -->
-    <footer class="lg:ml-64 mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:pl-72 lg:pr-8">
+    <footer
+        class="lg:ml-64 mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:pl-72 lg:pr-8">
         <div class="flex flex-col items-center md:items-start text-on-surface">
             <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
             <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
@@ -615,7 +626,8 @@
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
         <div
             class="elite-hub-modal max-w-5xl w-full max-h-[90vh] overflow-y-auto p-8 relative bg-surface border-4 border-[#121212] flex flex-col gap-6 shadow-[8px_8px_0px_0px_rgba(255,179,0,1)]">
-            <button onclick="const m=document.getElementById('elite-hub-modal');m.classList.add('hidden');m.classList.remove('flex')"
+            <button
+                onclick="const m=document.getElementById('elite-hub-modal');m.classList.add('hidden');m.classList.remove('flex')"
                 class="absolute top-6 right-6 text-3xl font-black text-on-surface hover:text-error transition-colors focus:outline-none">✕</button>
 
             <header class="mb-4 border-b-2 border-surface-container pb-4">
@@ -637,7 +649,7 @@
                         <p class="text-[10px] uppercase mb-4 text-on-surface-variant font-bold">Tokens: <span
                                 id="elite-tokens-count" class="text-[#ffb300] font-black text-lg">0</span> Available</p>
                     </div>
-                    <p class="text-xs text-on-surface-variant italic">Not used automatically — confirm on your streak
+                    <p class="text-xs text-on-surface-variant italic">Apply streak freezes on your streak
                         card (Repair) when you want to spend one. Up to 2 refill per calendar month.</p>
                 </div>
 
@@ -1266,14 +1278,14 @@
                     });
                 });
 
-                // 7. Liquid Assets
+                // 7. Liquid Assets — read from DB profile (liquid_cash column)
                 let walletZens = 0;
                 try {
                     const balRes = await futuraApi.zens.balance();
                     walletZens = (balRes && balRes.zens != null) ? balRes.zens : 0;
                 } catch (e) { console.warn('Wallet balance fetch failed:', e); }
-                const manualLiquid = parseInt(localStorage.getItem('trackedLiquidCash') || '0', 10);
-                const totalLiquid = walletZens + manualLiquid;
+                const liquidCash = parseInt(goal.liquid_cash || '0', 10) || 0;
+                const totalLiquid = walletZens + liquidCash;
                 const liquidEl = document.getElementById('liquid-amount');
                 if (liquidEl) {
                     liquidEl.textContent = 'Z ' + totalLiquid.toLocaleString();
@@ -1300,25 +1312,29 @@
                     const container = document.getElementById('recent-flow-list');
                     if (!container) return;
 
-                    const holdings = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
                     const flowItems = [];
 
-                    holdings.forEach(function (h) {
-                        flowItems.push({
-                            label: 'Buy ' + (h.ticker || h.companyName || 'Asset'),
-                            amount: parseInt(h.amount, 10) || 0,
-                            date: h.date,
-                            isBuy: true
-                        });
-                        if (h.sold) {
+                    // Load stock holdings from DB
+                    try {
+                        const holdRes = await futuraApi.holdings.list();
+                        const holdings = holdRes.holdings || [];
+                        holdings.forEach(function (h) {
                             flowItems.push({
-                                label: 'Sell ' + (h.ticker || h.companyName || 'Asset'),
-                                amount: h.sellProceeds || parseInt(h.amount, 10) || 0,
-                                date: h.sellDate || h.date,
-                                isBuy: false
+                                label: 'Buy ' + h.ticker,
+                                amount: h.amount_zens || 0,
+                                date: h.purchase_date,
+                                isBuy: true   // stock = ZENS spent (negative)
                             });
-                        }
-                    });
+                            if (h.sold) {
+                                flowItems.push({
+                                    label: 'Sell ' + h.ticker,
+                                    amount: h.sell_proceeds || h.amount_zens || 0,
+                                    date: h.sell_date || h.purchase_date,
+                                    isBuy: false  // sell = ZENS received (positive)
+                                });
+                            }
+                        });
+                    } catch (e) { console.warn('Holdings flow fetch failed:', e); }
 
                     try {
                         const res = await futuraApi.contributions.list();
@@ -1334,7 +1350,7 @@
                                 label: assetName,
                                 amount: Math.round((parseFloat(c.amount) || 0) * 10),
                                 date: c.contribution_date,
-                                isBuy: true
+                                isBuy: false  // manual asset = warchest addition (positive)
                             });
                         });
                     } catch (e) { }
@@ -1368,7 +1384,17 @@
             }
         });
     </script>
-<script src="./js/mobile-footer-nav.js"></script>
+    <script>
+        // ─── SIP Tooltip Hover ───────────────────────────────────────────────
+        (function () {
+            var card = document.getElementById('sip-card');
+            var tip = document.getElementById('sip-tooltip');
+            if (!card || !tip) return;
+            card.addEventListener('mouseenter', function () { tip.style.display = 'block'; });
+            card.addEventListener('mouseleave', function () { tip.style.display = 'none'; });
+        })();
+    </script>
+    <script src="./js/mobile-footer-nav.js"></script>
 </body>
 
 </html>

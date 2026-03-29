@@ -1,327 +1,376 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
-<meta charset="utf-8"/>
+<html lang="en">
 
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://cdn.jsdelivr.net" />
-<link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta name="description" content="Upgrade your Digital Rebel tier for more power, perks, and protocol access." />
-<link rel="stylesheet" href="css/app.css" />
-<title>Digital Rebel | Upgrade Power</title>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<head>
+  <meta charset="utf-8" />
 
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        .neo-shadow {
-            box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .neo-shadow-lg {
-            box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
-        }
-        .neo-shadow-active {
-            box-shadow: 0px 0px 0px 0px rgba(18, 18, 18, 1);
-        }
-    </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="/js/config.js"></script>
-<script src="/js/notifications.js"></script>
-<script src="/js/mobile-nav.js"></script>
-<script src="/js/auth.js"></script>
-<script src="/js/api.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://oorxjgzhscczvflvjwlk.supabase.co" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta name="description" content="Upgrade your Digital Rebel tier for more power, perks, and protocol access." />
+  <link rel="stylesheet" href="css/app.css" />
+  <title>Digital Rebel | Upgrade Power</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;900&amp;family=Inter:wght@400;500;700&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .neo-shadow {
+      box-shadow: 4px 4px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .neo-shadow-lg {
+      box-shadow: 8px 8px 0px 0px rgba(18, 18, 18, 1);
+    }
+
+    .neo-shadow-active {
+      box-shadow: 0px 0px 0px 0px rgba(18, 18, 18, 1);
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/notifications.js"></script>
+  <script src="/js/mobile-nav.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/api.js"></script>
 </head>
-<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
-<!-- TopNavBar -->
-<header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
-  <div class="flex items-center gap-3 lg:gap-8">
-    <button type="button" id="mobile-sidebar-toggle"
-      class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
-    <a href="index.html"
-      class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
-      Rebel</a>
-    <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
-      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-        href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-        href="market_digital_rebel_desktop.html">Markets</a>
-      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-        href="assets_digital_rebel_desktop.html">Assets</a>
-      <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-        href="learn_digital_rebel_desktop.html">Learn</a>
-    </div>
-  </div>
-  <div class="flex items-center gap-4">
-    <!-- ZENS Balance Pill -->
-    <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-white text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
-      <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
-      <span id="nav-zens-balance">0 ZENS</span>
-    </div>
-    <!-- Notification Bell -->
-    <span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all" id="notif-bell">notifications</span>
-    <!-- User Avatar / Profile -->
-    <div id="nav-avatar" class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
-      <span class="material-symbols-outlined">account_circle</span>
-    </div>
-  </div>
-</header>
 
-<div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
-<div class="flex flex-1 w-full">
-  <!-- SideNavBar -->
-  <aside id="app-sidebar"
-    class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
-    <a href="settings_digital_rebel_desktop.html"
-      class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
-      <div id="sidebar-avatar"
-        class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
-        <img alt="Rebel_01" class="w-full h-full object-cover"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+<body
+  class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
+  <!-- TopNavBar -->
+  <header
+    class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
+    id="main-header">
+    <div class="flex items-center gap-3 lg:gap-8">
+      <button type="button" id="mobile-sidebar-toggle"
+        class="lg:hidden p-2 border-2 border-[#121212] dark:border-[#f6f6f6] bg-surface" aria-label="Open menu">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <a href="index.html"
+        class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
+        Rebel</a>
+      <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="dashboard_digital_rebel_desktop.html">Dashboard</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="market_digital_rebel_desktop.html">Markets</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="assets_digital_rebel_desktop.html">Assets</a>
+        <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+          href="learn_digital_rebel_desktop.html">Learn</a>
       </div>
-      <div class="overflow-hidden">
-        <h3 id="sidebar-user-name"
-          class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
-          Rebel_01</h3>
-        <p id="sidebar-tier-label"
-          class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
-      </div>
-    </a>
-    <nav class="flex-1 space-y-1">
-      <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-        href="dashboard_digital_rebel_desktop.html">
-        <span class="material-symbols-outlined">grid_view</span> Overview
-      </a>
-      <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-        href="projections_digital_rebel_desktop.html">
-        <span class="material-symbols-outlined">trending_up</span> Projections
-      </a>
-      <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-        href="transactions.html">
-        <span class="material-symbols-outlined">swap_horiz</span> Transactions
-      </a>
-      <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-        href="cards_digital_rebel_desktop.html">
-        <span class="material-symbols-outlined">credit_card</span> Cards
-      </a>
-
-      <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
-        href="support_digital_rebel_desktop.html">
-        <span class="material-symbols-outlined">help_outline</span> Support
-      </a>
-    </nav>
-    <div class="p-4 border-t-2 border-inverse-surface mt-auto">
-      <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
-        class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
-        Power</a>
-      <a id="logout-link"
-        class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
-        href="index.html" aria-label="Sign out">
-        <span class="material-symbols-outlined">logout</span> Logout
-      </a>
     </div>
-  </aside>
-<main class="lg:ml-64 flex-1 px-6 py-12 max-w-7xl mx-auto w-full">
-<!-- Hero Section -->
-<section class="mb-20 flex flex-col items-center text-center">
-<div class="bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] px-4 py-1 border-2 border-black mb-6 rotate-[-1deg] inline-block">
-                Power Level Critical
+    <div class="flex items-center gap-4">
+      <!-- ZENS Balance Pill -->
+      <div id="nav-zens-pill"
+        class="hidden md:flex items-center gap-2 bg-white text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+        <span class="material-symbols-outlined" style="font-size:inherit">toll</span>
+        <span id="nav-zens-balance">0 ZENS</span>
+      </div>
+      <!-- Notification Bell -->
+      <span
+        class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all"
+        id="notif-bell">notifications</span>
+      <!-- User Avatar / Profile -->
+      <div id="nav-avatar"
+        class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
+        <span class="material-symbols-outlined">account_circle</span>
+      </div>
+    </div>
+  </header>
+
+  <div id="sidebar-overlay" class="fixed inset-0 z-30 bg-black/50 lg:hidden hidden pointer-events-none"></div>
+  <div class="flex flex-1 w-full">
+    <!-- SideNavBar -->
+    <aside id="app-sidebar"
+      class="fixed left-0 top-0 z-40 flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] dark:border-[#f6f6f6] h-screen w-64 -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-out">
+      <a href="settings_digital_rebel_desktop.html"
+        class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
+        <div id="sidebar-avatar"
+          class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
+          <img alt="Rebel_01" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+        </div>
+        <div class="overflow-hidden">
+          <h3 id="sidebar-user-name"
+            class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
+            Rebel_01</h3>
+          <p id="sidebar-tier-label"
+            class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
+        </div>
+      </a>
+      <nav class="flex-1 space-y-1">
+        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+          href="dashboard_digital_rebel_desktop.html">
+          <span class="material-symbols-outlined">grid_view</span> Overview
+        </a>
+        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+          href="projections_digital_rebel_desktop.html">
+          <span class="material-symbols-outlined">trending_up</span> Projections
+        </a>
+        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+          href="transactions.html">
+          <span class="material-symbols-outlined">swap_horiz</span> Transactions
+        </a>
+        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+          href="cards_digital_rebel_desktop.html">
+          <span class="material-symbols-outlined">credit_card</span> Cards
+        </a>
+
+        <a class="flex items-center gap-4 py-3 px-6 text-[#121212] dark:text-[#f6f6f6] hover:bg-[#cafd00] hover:skew-x-1 hover:translate-x-1 mx-2 my-1 font-Lexend font-bold uppercase tracking-widest text-xs transition-all"
+          href="support_digital_rebel_desktop.html">
+          <span class="material-symbols-outlined">help_outline</span> Support
+        </a>
+      </nav>
+      <div class="p-4 border-t-2 border-inverse-surface mt-auto">
+        <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
+          class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
+          Power</a>
+        <a id="logout-link"
+          class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
+          href="index.html" aria-label="Sign out">
+          <span class="material-symbols-outlined">logout</span> Logout
+        </a>
+      </div>
+    </aside>
+    <main class="lg:ml-64 flex-1 pt-24 pb-16 px-6 md:px-12 w-full overflow-x-hidden">
+      <div class="max-w-5xl mx-auto">
+        <!-- Hero Section -->
+        <section class="mb-20 flex flex-col items-center text-center">
+          <div
+            class="bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] px-4 py-1 border-2 border-black mb-6 rotate-[-1deg] inline-block">
+            Power Level Critical
+          </div>
+          <h1
+            class="font-headline font-black text-6xl md:text-8xl uppercase tracking-tighter leading-[0.85] mb-8 text-on-background">
+            UPGRADE<br />YOUR <span class="text-primary">CORE</span>
+          </h1>
+          <p class="font-Inter text-xl max-w-2xl text-on-surface-variant font-medium">
+            The standard feed is for spectators. Rebel Pro is for the architects of the new digital economy. Break the
+            latency, own the nodes.
+          </p>
+        </section>
+        <!-- Bento Pricing Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-24">
+          <!-- Free Tier -->
+          <div
+            class="md:col-span-5 bg-surface-container-lowest border-2 border-black p-8 flex flex-col neo-shadow-lg relative overflow-hidden group">
+            <div
+              class="absolute -top-10 -right-10 w-40 h-40 bg-surface-variant opacity-10 rounded-full group-hover:scale-150 transition-transform duration-500">
             </div>
-<h1 class="font-headline font-black text-6xl md:text-8xl uppercase tracking-tighter leading-[0.85] mb-8 text-on-background">
-                UPGRADE<br/>YOUR <span class="text-primary">CORE</span>
-</h1>
-<p class="font-Inter text-xl max-w-2xl text-on-surface-variant font-medium">
-                The standard feed is for spectators. Rebel Pro is for the architects of the new digital economy. Break the latency, own the nodes.
-            </p>
-</section>
-<!-- Bento Pricing Cards -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-24">
-<!-- Free Tier -->
-<div class="md:col-span-5 bg-surface-container-lowest border-2 border-black p-8 flex flex-col neo-shadow-lg relative overflow-hidden group">
-<div class="absolute -top-10 -right-10 w-40 h-40 bg-surface-variant opacity-10 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
-<div class="mb-12">
-<h2 class="font-headline font-black text-4xl uppercase mb-2">Free Gear</h2>
-<p class="font-Inter font-bold text-outline uppercase tracking-widest text-sm">Entry Level Access</p>
-</div>
-<div class="flex-grow space-y-6 mb-12">
-<div class="flex items-center gap-4 border-b-2 border-surface-container py-2">
-<span class="material-symbols-outlined text-outline">check_circle</span>
-<span class="font-headline font-bold uppercase text-sm">Goal Setting & Sync</span>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-surface-container py-2">
-<span class="material-symbols-outlined text-outline">check_circle</span>
-<span class="font-headline font-bold uppercase text-sm">Core Dashboard Projections</span>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-surface-container py-2 opacity-40">
-<span class="material-symbols-outlined">block</span>
-<span class="font-headline font-bold uppercase text-sm">Unlimited Pro Scenarios</span>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-surface-container py-2 opacity-40">
-<span class="material-symbols-outlined">block</span>
-<span class="font-headline font-bold uppercase text-sm">AI Tax Optimization</span>
-</div>
-</div>
-<div class="mt-auto">
-<div class="font-headline font-black text-4xl mb-6">Z 199<span class="text-xl font-normal">/MO</span></div>
-<button class="w-full py-4 border-2 border-black font-headline font-bold uppercase text-sm hover:bg-black hover:text-white transition-colors">
-                        Stay Basic
-                    </button>
-</div>
-</div>
-<!-- Pro Tier -->
-<div class="md:col-span-7 bg-primary-container border-2 border-black p-8 flex flex-col neo-shadow-lg relative z-10 scale-105 border-4">
-<div class="absolute -top-4 -right-4 bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black px-4 py-2 border-2 border-black rotate-3 neo-shadow">
-                    RECOMMENDED
+            <div class="mb-12">
+              <h2 class="font-headline font-black text-4xl uppercase mb-2">Free Gear</h2>
+              <p class="font-Inter font-bold text-outline uppercase tracking-widest text-sm">Entry Level Access</p>
+            </div>
+            <div class="flex-grow space-y-6 mb-12">
+              <div class="flex items-center gap-4 border-b-2 border-surface-container py-2">
+                <span class="material-symbols-outlined text-outline">check_circle</span>
+                <span class="font-headline font-bold uppercase text-sm">Goal Setting & Sync</span>
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-surface-container py-2">
+                <span class="material-symbols-outlined text-outline">check_circle</span>
+                <span class="font-headline font-bold uppercase text-sm">Core Dashboard Projections</span>
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-surface-container py-2 opacity-40">
+                <span class="material-symbols-outlined">block</span>
+                <span class="font-headline font-bold uppercase text-sm">Unlimited Pro Scenarios</span>
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-surface-container py-2 opacity-40">
+                <span class="material-symbols-outlined">block</span>
+                <span class="font-headline font-bold uppercase text-sm">AI Tax Optimization</span>
+              </div>
+            </div>
+            <div class="mt-auto">
+              <div class="font-headline font-black text-4xl mb-6">Z FREE<span class="text-xl font-normal">/MO</span>
+              </div>
+              <a href="dashboard_digital_rebel_desktop.html"
+                class="flex-grow md:max-w-xs py-6 border-2 border-black font-headline font-black text-2xl uppercase inline-flex items-center justify-center hover:bg-black hover:text-white transition-all">
+                Stay Basic
+              </a>
+            </div>
+          </div>
+          <!-- Pro Tier -->
+          <div
+            class="md:col-span-7 bg-primary-container border-4 border-black p-8 flex flex-col neo-shadow-lg relative z-10">
+            <div
+              class="absolute -top-4 -right-4 bg-tertiary-fixed text-on-tertiary-fixed font-headline font-black px-4 py-2 border-2 border-black rotate-3 neo-shadow">
+              RECOMMENDED
+            </div>
+            <div class="mb-12">
+              <h2 class="font-headline font-black text-5xl md:text-6xl uppercase mb-2 italic">Rebel Pro</h2>
+              <p class="font-Inter font-black text-on-primary-container uppercase tracking-widest text-sm">Elite
+                Performance</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-12">
+              <div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
+                <span class="material-symbols-outlined text-on-primary-container"
+                  style="font-variation-settings: 'FILL' 1;">bolt</span>
+                <div>
+                  <span class="font-headline font-black uppercase text-sm block leading-none">Pro Scenarios</span>
+                  <span class="text-[10px] font-bold uppercase opacity-60">Unlimited Simulation</span>
                 </div>
-<div class="mb-12">
-<h2 class="font-headline font-black text-5xl md:text-6xl uppercase mb-2 italic">Rebel Pro</h2>
-<p class="font-Inter font-black text-on-primary-container uppercase tracking-widest text-sm">Elite Performance</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-12">
-<div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">bolt</span>
-<div>
-<span class="font-headline font-black uppercase text-sm block leading-none">Pro Scenarios</span>
-<span class="text-[10px] font-bold uppercase opacity-60">Unlimited Simulation</span>
-</div>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">analytics</span>
-<div>
-<span class="font-headline font-black uppercase text-sm block leading-none">Intelligent Allocation</span>
-<span class="text-[10px] font-bold uppercase opacity-60">Asset Breakdown</span>
-</div>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
-<div>
-<span class="font-headline font-black uppercase text-sm block leading-none">Roadmap PDF</span>
-<span class="text-[10px] font-bold uppercase opacity-60">Exportable Report</span>
-</div>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">account_balance</span>
-<div>
-<span class="font-headline font-black uppercase text-sm block leading-none">Tax Optimization</span>
-<span class="text-[10px] font-bold uppercase opacity-60">ISA/SIPP AI Tips</span>
-</div>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">healing</span>
-<div>
-<span class="font-headline font-black uppercase text-sm block leading-none">Streak Recovery</span>
-<span class="text-[10px] font-bold uppercase opacity-60">2 Tokens / Month</span>
-</div>
-</div>
-<div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
-<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">stars</span>
-<div>
-<span class="font-headline font-black uppercase text-sm block leading-none">Priority Finance Bites</span>
-<span class="text-[10px] font-bold uppercase opacity-60">Full Library Access</span>
-</div>
-</div>
-</div>
-<div class="mt-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
-<div class="font-headline font-black text-6xl leading-none">₹199<span class="text-2xl font-black">/MO</span></div>
-<p class="text-xs font-black uppercase tracking-widest mt-2 opacity-70">Billed monthly. No questions asked.</p>
-</div>
-<a href="checkout_digital_rebel_desktop.html" class="flex-grow md:max-w-xs py-6 bg-black text-primary-fixed font-headline font-black text-2xl uppercase border-2 border-black neo-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(202,253,0,1)] transition-all inline-flex items-center justify-center">
-                        Join the Elite
-                    </a>
-</div>
-</div>
-</div>
-<!-- Comparison Table (Neo-Brutalist Layout) -->
-<section class="mb-24 overflow-x-auto">
-<h3 class="font-headline font-black text-4xl uppercase mb-8 border-l-8 border-primary px-4">The Specification</h3>
-<table class="w-full border-collapse">
-<thead>
-<tr class="bg-black text-white">
-<th class="p-6 text-left font-headline font-black uppercase tracking-widest text-sm">Feature Set</th>
-<th class="p-6 text-center font-headline font-black uppercase tracking-widest text-sm bg-secondary">Free Gear</th>
-<th class="p-6 text-center font-headline font-black uppercase tracking-widest text-sm bg-primary">Rebel Pro</th>
-</tr>
-</thead>
-<tbody class="font-headline font-bold text-sm uppercase">
-<tr class="border-b-2 border-black">
-<td class="p-6 bg-surface-container-low">Goal Projections</td>
-<td class="p-6 text-center border-x-2 border-black">Basic Mode</td>
-<td class="p-6 text-center bg-primary-container/30">Unlimited Scenarios</td>
-</tr>
-<tr class="border-b-2 border-black">
-<td class="p-6 bg-surface-container-low">Tax Optimization</td>
-<td class="p-6 text-center border-x-2 border-black">Disabled</td>
-<td class="p-6 text-center bg-primary-container/30">ISA/SIPP AI Tips</td>
-</tr>
-<tr class="border-b-2 border-black">
-<td class="p-6 bg-surface-container-low">Exportable Roadmap</td>
-<td class="p-6 text-center border-x-2 border-black">None</td>
-<td class="p-6 text-center bg-primary-container/30">PDF Generation</td>
-</tr>
-<tr class="border-b-2 border-black">
-<td class="p-6 bg-surface-container-low">Asset Allocation</td>
-<td class="p-6 text-center border-x-2 border-black">Standard Layout</td>
-<td class="p-6 text-center bg-primary-container/30">Intelligent Breakdown</td>
-</tr>
-<tr class="border-b-2 border-black">
-<td class="p-6 bg-surface-container-low">Finance Bites</td>
-<td class="p-6 text-center border-x-2 border-black">1 Per Day</td>
-<td class="p-6 text-center bg-primary-container/30">Full Priority Library</td>
-</tr>
-<tr class="border-b-2 border-black">
-<td class="p-6 bg-surface-container-low">Streak Recovery</td>
-<td class="p-6 text-center border-x-2 border-black">0 Tokens</td>
-<td class="p-6 text-center bg-primary-container/30">2 Tokens / Month</td>
-</tr>
-</tbody>
-</table>
-</section>
-<!-- Asymmetric Grid: visual proof -->
-<section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
-<div class="relative">
-<div class="absolute -top-4 -left-4 w-full h-full border-2 border-black z-0"></div>
-<img alt="Server hardware" class="relative z-10 border-2 border-black grayscale contrast-125" data-alt="High-tech glowing server racks in a dark data center with neon green cable lighting and aggressive hardware aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoT7cOAV5G0ts6s0pi3IjFcKgX96FhSohXITBRQesVjpF5lnMXeqCc6HULTsjhPveNvNRBR49dXzEcLNwyW7Yx0qdl0b3G7yh9IfFu0Q4_jraWhMZynliyJNgBo7GvUKIVX-zXqa1pfVZJgpuSisSELgs5aVAMtyJCYaXnpZ3zysUdo9sQUaM6YD62BJm14Tg3051O3zE1Mn4FF4e-S7qxgvyqc80KVT0rLybe3CqmgB9UwYXw-toHV8uK_W-TRUwvbjoxEsgqNWe_"/>
-<div class="absolute bottom-4 right-4 bg-primary px-4 py-2 border-2 border-black z-20 font-headline font-black uppercase text-xs">
-                    Node Cluster #019
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
+                <span class="material-symbols-outlined text-on-primary-container"
+                  style="font-variation-settings: 'FILL' 1;">analytics</span>
+                <div>
+                  <span class="font-headline font-black uppercase text-sm block leading-none">Intelligent
+                    Allocation</span>
+                  <span class="text-[10px] font-bold uppercase opacity-60">Asset Breakdown</span>
                 </div>
-</div>
-<div class="space-y-6">
-<h3 class="font-headline font-black text-5xl uppercase leading-none">POWER IS NOT<br/>A PRIVILEGE.</h3>
-<p class="font-Inter text-lg font-medium border-l-4 border-primary pl-6 py-2">
-                    We built the architecture. You command the execution. With Rebel Pro, you're not just using a platform; you're hard-wired into the core of global volatility.
-                </p>
-<div class="flex gap-4">
-<div class="bg-surface-container-highest p-4 border-2 border-black flex-1">
-<div class="font-headline font-black text-3xl">99.9%</div>
-<div class="text-[10px] font-black uppercase tracking-tighter">Uptime Guarantee</div>
-</div>
-<div class="bg-surface-container-highest p-4 border-2 border-black flex-1">
-<div class="font-headline font-black text-3xl">&lt;1ms</div>
-<div class="text-[10px] font-black uppercase tracking-tighter">Average Latency</div>
-</div>
-</div>
-</div>
-</section>
-</main>
-</div>
-<!-- Footer -->
-<footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:ml-64">
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
+                <span class="material-symbols-outlined text-on-primary-container"
+                  style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+                <div>
+                  <span class="font-headline font-black uppercase text-sm block leading-none">Roadmap PDF</span>
+                  <span class="text-[10px] font-bold uppercase opacity-60">Exportable Report</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
+                <span class="material-symbols-outlined text-on-primary-container"
+                  style="font-variation-settings: 'FILL' 1;">account_balance</span>
+                <div>
+                  <span class="font-headline font-black uppercase text-sm block leading-none">Tax Optimization</span>
+                  <span class="text-[10px] font-bold uppercase opacity-60">ISA/SIPP AI Tips</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
+                <span class="material-symbols-outlined text-on-primary-container"
+                  style="font-variation-settings: 'FILL' 1;">healing</span>
+                <div>
+                  <span class="font-headline font-black uppercase text-sm block leading-none">Streak Recovery</span>
+                  <span class="text-[10px] font-bold uppercase opacity-60">2 Tokens / Month</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 border-b-2 border-black/20 py-3 bg-white/10 px-2">
+                <span class="material-symbols-outlined text-on-primary-container"
+                  style="font-variation-settings: 'FILL' 1;">stars</span>
+                <div>
+                  <span class="font-headline font-black uppercase text-sm block leading-none">Priority Finance
+                    Bites</span>
+                  <span class="text-[10px] font-bold uppercase opacity-60">Full Library Access</span>
+                </div>
+              </div>
+            </div>
+            <div class="mt-auto flex flex-col md:flex-row md:items-end justify-between gap-8">
+              <div class="font-headline font-black text-6xl leading-none">₹199<span
+                  class="text-2xl font-black">/MO</span></div>
+              <p class="text-xs font-black uppercase tracking-widest mt-2 opacity-70">Billed monthly. No questions
+                asked.</p>
+            </div>
+            <a href="checkout_digital_rebel_desktop.html"
+              class="flex-grow md:max-w-xs py-6 bg-black text-primary-fixed font-headline font-black text-2xl uppercase border-2 border-black neo-shadow hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[8px_8px_0px_0px_rgba(202,253,0,1)] transition-all inline-flex items-center justify-center">
+              Join the Elite
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Comparison Table (Neo-Brutalist Layout) -->
+      <section class="mb-24 overflow-x-auto">
+        <h3 class="font-headline font-black text-4xl uppercase mb-8 border-l-8 border-primary px-4">The Specification
+        </h3>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-black text-white">
+              <th class="p-6 text-left font-headline font-black uppercase tracking-widest text-sm">Feature Set</th>
+              <th class="p-6 text-center font-headline font-black uppercase tracking-widest text-sm bg-secondary">Free
+                Gear</th>
+              <th class="p-6 text-center font-headline font-black uppercase tracking-widest text-sm bg-primary">Rebel
+                Pro</th>
+            </tr>
+          </thead>
+          <tbody class="font-headline font-bold text-sm uppercase">
+            <tr class="border-b-2 border-black">
+              <td class="p-6 bg-surface-container-low">Goal Projections</td>
+              <td class="p-6 text-center border-x-2 border-black">Basic Mode</td>
+              <td class="p-6 text-center bg-primary-container/30">Unlimited Scenarios</td>
+            </tr>
+            <tr class="border-b-2 border-black">
+              <td class="p-6 bg-surface-container-low">Tax Optimization</td>
+              <td class="p-6 text-center border-x-2 border-black">Disabled</td>
+              <td class="p-6 text-center bg-primary-container/30">ISA/SIPP AI Tips</td>
+            </tr>
+            <tr class="border-b-2 border-black">
+              <td class="p-6 bg-surface-container-low">Exportable Roadmap</td>
+              <td class="p-6 text-center border-x-2 border-black">None</td>
+              <td class="p-6 text-center bg-primary-container/30">PDF Generation</td>
+            </tr>
+            <tr class="border-b-2 border-black">
+              <td class="p-6 bg-surface-container-low">Asset Allocation</td>
+              <td class="p-6 text-center border-x-2 border-black">Standard Layout</td>
+              <td class="p-6 text-center bg-primary-container/30">Intelligent Breakdown</td>
+            </tr>
+            <tr class="border-b-2 border-black">
+              <td class="p-6 bg-surface-container-low">Finance Bites</td>
+              <td class="p-6 text-center border-x-2 border-black">1 Per Day</td>
+              <td class="p-6 text-center bg-primary-container/30">Full Priority Library</td>
+            </tr>
+            <tr class="border-b-2 border-black">
+              <td class="p-6 bg-surface-container-low">Streak Recovery</td>
+              <td class="p-6 text-center border-x-2 border-black">0 Tokens</td>
+              <td class="p-6 text-center bg-primary-container/30">2 Tokens / Month</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <!-- Asymmetric Grid: visual proof -->
+      <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
+        <div class="relative">
+          <div class="absolute -top-4 -left-4 w-full h-full border-2 border-black z-0"></div>
+          <img alt="Server hardware" class="relative z-10 border-2 border-black grayscale contrast-125"
+            data-alt="High-tech glowing server racks in a dark data center with neon green cable lighting and aggressive hardware aesthetic"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoT7cOAV5G0ts6s0pi3IjFcKgX96FhSohXITBRQesVjpF5lnMXeqCc6HULTsjhPveNvNRBR49dXzEcLNwyW7Yx0qdl0b3G7yh9IfFu0Q4_jraWhMZynliyJNgBo7GvUKIVX-zXqa1pfVZJgpuSisSELgs5aVAMtyJCYaXnpZ3zysUdo9sQUaM6YD62BJm14Tg3051O3zE1Mn4FF4e-S7qxgvyqc80KVT0rLybe3CqmgB9UwYXw-toHV8uK_W-TRUwvbjoxEsgqNWe_" />
+          <div
+            class="absolute bottom-4 right-4 bg-primary px-4 py-2 border-2 border-black z-20 font-headline font-black uppercase text-xs">
+            Node Cluster #019
+          </div>
+        </div>
+        <div class="space-y-6">
+          <h3 class="font-headline font-black text-5xl uppercase leading-none">POWER IS NOT<br />A PRIVILEGE.</h3>
+          <p class="font-Inter text-lg font-medium border-l-4 border-primary pl-6 py-2">
+            We built the architecture. You command the execution. With Rebel Pro, you're not just using a platform;
+            you're hard-wired into the core of global volatility.
+          </p>
+          <div class="flex gap-4">
+            <div class="bg-surface-container-highest p-4 border-2 border-black flex-1">
+              <div class="font-headline font-black text-3xl">99.9%</div>
+              <div class="text-[10px] font-black uppercase tracking-tighter">Uptime Guarantee</div>
+            </div>
+            <div class="bg-surface-container-highest p-4 border-2 border-black flex-1">
+              <div class="font-headline font-black text-3xl">&lt;1ms</div>
+              <div class="text-[10px] font-black uppercase tracking-tighter">Average Latency</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  </div>
+  <!-- Footer -->
+  <footer
+    class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity px-8 lg:ml-64">
     <div class="flex flex-col items-center md:items-start text-on-surface">
-        <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
-        <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
-            ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
-        </p>
+      <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+      <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+        ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+      </p>
     </div>
     <div class="flex items-center gap-6">
-        <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
-            href="terms.html">terms.sh</a>
+      <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+        href="terms.html">terms.sh</a>
     </div>
-</footer>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="./js/config.js"></script>
@@ -329,6 +378,7 @@
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script src="./js/footer-year.js"></script>
-<script src="./js/mobile-footer-nav.js"></script>
-</body></html>
+  <script src="./js/mobile-footer-nav.js"></script>
+</body>
 
+</html>

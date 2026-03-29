@@ -368,10 +368,16 @@
             const navBalance = document.getElementById('nav-zens-balance');
             if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
 
-            // Push to portfolio
-            const holdings = JSON.parse(localStorage.getItem('portfolioHoldings') || '[]');
-            holdings.push({ ticker, companyName: name, amount: amt, price, date: new Date().toISOString() });
-            localStorage.setItem('portfolioHoldings', JSON.stringify(holdings));
+            // Persist to DB (replaces localStorage)
+            try {
+              await futuraApi.holdings.create({
+                ticker: ticker,
+                company_name: name,
+                amount_zens: amt,
+                price_at_purchase: price,
+                purchase_date: new Date().toISOString().split('T')[0]
+              });
+            } catch (e) { console.error('Holdings DB write failed:', e); }
 
             // Log as contribution to increment streak (saving)
             try {
