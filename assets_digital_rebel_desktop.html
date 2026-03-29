@@ -628,6 +628,7 @@
 
     // 5. Sell Logic: Pre-Confirmation and Execution Receipt
     window.sellAsset = (holdingId, ticker, investedStr, swingStr) => {
+      const api = window.futuraApi || futuraApi;
       const invested = parseFloat(investedStr);
       const swing = parseFloat(swingStr);
 
@@ -761,6 +762,7 @@
 
     // Delete Manual Asset
     window.deleteManualAsset = (id, name) => {
+      const api = window.futuraApi || futuraApi;
       const modal = document.createElement('div');
       modal.id = 'delete-confirm-modal';
       modal.className = 'fixed inset-0 z-[2000] flex items-center justify-center bg-[#121212]/90 backdrop-blur-md px-4';

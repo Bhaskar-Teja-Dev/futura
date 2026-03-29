@@ -354,6 +354,7 @@
 
     // ── Quick BUY Modal ───────────────────────────────────────────────────────
     function openBuyModal(ticker, name, price, change, risk) {
+      const api = window.futuraApi || futuraApi;
       const isElite = userTier === 'elite';
       const goal = getGoalData();
       const years = Math.max(1, (goal.retirement_age || 60) - (goal.current_age || 25));

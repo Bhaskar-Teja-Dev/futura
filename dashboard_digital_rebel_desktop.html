@@ -826,6 +826,7 @@
 
         // ─── Handle Repair API Call ────────────────────────────────────────
         async function handleRepairStreak(modal, btn) {
+            const api = window.futuraApi || futuraApi;
             try {
                 const res = await api.contributions.repairStreak();
                 if (res.success) {
