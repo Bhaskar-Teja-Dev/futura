@@ -36,6 +36,7 @@ const futuraApi = {
   contributions: {
     list: () => apiFetch('/api/contributions'),
     create: (body) => apiFetch('/api/contributions', { method: 'POST', body: JSON.stringify(body) }),
+    delete: (id) => apiFetch(`/api/contributions/${id}`, { method: 'DELETE' }),
     streak: () => apiFetch('/api/contributions/streak')
   },
   projection: {
@@ -160,7 +161,7 @@ function initiateRazorpayPurchase(amountINR, zensExpected, onSuccess) {
     handler: async (response) => {
       try {
         const result = await futuraApi.zens.purchase(response.razorpay_payment_id);
-        
+
         // Add notification for successful purchase
         if (typeof RebelNotifications !== 'undefined') {
           RebelNotifications.add(

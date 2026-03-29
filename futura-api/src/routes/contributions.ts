@@ -223,4 +223,23 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
   return c.json({ contribution: data, streak: streakToReturn }, 201)
 })
 
+// ─── DELETE /:id — remove a contribution ────────────────────────────
+router.delete('/:id', async (c) => {
+  const supabase = getSupabase(c.env, c.get('token'))
+  const userId = c.get('userId')
+  const id = c.req.param('id')
+
+  const { error } = await supabase
+    .from('contributions')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', userId)
+
+  if (error) {
+    return c.json({ error: error.message }, 500)
+  }
+
+  return c.json({ success: true, id })
+})
+
 export { router as contributionsRouter }

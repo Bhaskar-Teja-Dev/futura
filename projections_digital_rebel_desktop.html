@@ -126,27 +126,39 @@
     </style>
 </head>
 
-<body class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
+<body
+    class="bg-surface text-on-surface font-body selection:bg-primary-fixed selection:text-on-primary-fixed flex flex-col min-h-screen">
     <!-- TopNavBar -->
-    <header class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]" id="main-header">
+    <header
+        class="flex justify-between items-center w-full px-6 py-4 sticky top-0 z-50 bg-[#f6f6f6] dark:bg-[#121212] border-b-2 border-[#121212] dark:border-[#f6f6f6] shadow-[4px_4px_0px_0px_rgba(18,18,18,1)]"
+        id="main-header">
         <div class="flex items-center gap-8">
-            <a href="index.html" class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital Rebel</a>
+            <a href="index.html"
+                class="text-2xl font-black uppercase tracking-tighter text-[#121212] dark:text-[#f6f6f6] font-headline no-underline">Digital
+                Rebel</a>
             <div class="hidden md:flex gap-6 font-headline font-black tracking-tighter uppercase text-sm" id="main-nav">
-                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="dashboard_digital_rebel_desktop.html" id="nav-dashboard">Dashboard</a>
-                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="market_digital_rebel_desktop.html" id="nav-markets">Markets</a>
-                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline" href="assets_digital_rebel_desktop.html" id="nav-assets">Assets</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="dashboard_digital_rebel_desktop.html" id="nav-dashboard">Dashboard</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="market_digital_rebel_desktop.html" id="nav-markets">Markets</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="assets_digital_rebel_desktop.html" id="nav-assets">Assets</a>
             </div>
         </div>
         <div class="flex items-center gap-4">
             <!-- ZENS Balance Pill -->
-            <div id="nav-zens-pill" class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
+            <div id="nav-zens-pill"
+                class="hidden md:flex items-center gap-2 bg-[#121212] text-[#cafd00] border-2 border-[#121212] px-3 py-1 font-headline font-black tracking-widest text-sm neo-shadow-sm cursor-pointer">
                 <span>🪙</span>
                 <span id="nav-zens-balance">0 ZENS</span>
             </div>
             <!-- Notification Bell -->
-            <span class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all" id="notif-bell">notifications</span>
+            <span
+                class="material-symbols-outlined p-2 border-2 border-on-surface bg-surface hover:bg-primary-fixed cursor-pointer transition-all"
+                id="notif-bell">notifications</span>
             <!-- User Avatar / Profile -->
-            <div id="nav-avatar" class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
+            <div id="nav-avatar"
+                class="w-10 h-10 border-2 border-black bg-white overflow-hidden cursor-pointer flex items-center justify-center">
                 <span class="material-symbols-outlined">account_circle</span>
             </div>
         </div>
@@ -155,13 +167,19 @@
         <!-- SideNavBar -->
         <aside
             class="fixed left-0 top-0 h-full flex flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] h-screen w-64 border-r-2 border-[#121212] dark:border-[#f6f6f6] z-40">
-            <a href="settings_digital_rebel_desktop.html" class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
-                <div id="sidebar-avatar" class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
-                    <img alt="Rebel_01" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+            <a href="settings_digital_rebel_desktop.html"
+                class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
+                <div id="sidebar-avatar"
+                    class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
+                    <img alt="Rebel_01" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
                 </div>
                 <div class="overflow-hidden">
-                    <h3 id="user-name" class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">Rebel_01</h3>
-                    <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
+                    <h3 id="user-name"
+                        class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
+                        Rebel_01</h3>
+                    <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite
+                        Tier</p>
                 </div>
             </a>
             <nav class="flex-1 space-y-2">
@@ -191,7 +209,8 @@
                 <a href="upgrade_digital_rebel_desktop.html"
                     class="w-full py-4 border-2 border-on-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
                     Power</a>
-                <a id="logout-link" class="flex items-center gap-4 mt-6 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:italic"
+                <a id="logout-link"
+                    class="flex items-center gap-4 mt-6 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:italic"
                     href="#">
                     <span class="material-symbols-outlined" data-icon="logout">logout</span> Logout
                 </a>
@@ -257,44 +276,52 @@
                                 <div class="border-r border-b border-on-surface"></div>
                             </div>
                             <!-- Bar Visuals -->
-                            <div class="flex-1 flex items-end justify-between px-4 gap-2 h-full z-10">
-                                <div class="w-full bg-on-surface h-[10%] opacity-20"></div>
-                                <div class="w-full bg-on-surface h-[15%] opacity-20"></div>
-                                <div class="w-full bg-on-surface h-[12%] opacity-20"></div>
-                                <div class="w-full bg-on-surface h-[22%] opacity-20"></div>
-                                <div class="w-full bg-on-surface h-[30%] opacity-20"></div>
-                                <div class="w-full bg-on-surface h-[28%] opacity-20"></div>
-                                <div class="w-full bg-on-surface h-[45%] opacity-20"></div>
-                                <div class="w-full bg-on-surface h-[55%] opacity-20"></div>
-                                <div class="w-full bg-primary-fixed border-t-4 border-on-surface h-[70%]"></div>
-                                <div class="w-full bg-primary-fixed border-t-4 border-on-surface h-[85%] relative">
-                                    <div
-                                        class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface font-headline font-black text-xs px-2 py-1 transform -rotate-2">
-                                        TARGET_X</div>
-                                </div>
+                            <div id="chart-bars-container"
+                                class="flex-1 flex items-end justify-between px-4 gap-2 h-full z-10">
+                                <!-- Dynamic bars will be injected here -->
                             </div>
                             <!-- Legend -->
                             <div
                                 class="absolute bottom-4 left-4 font-headline font-bold text-[10px] uppercase text-outline">
-                                Timeline: 2024 - 2045</div>
+                                Timeline: <span id="timeline-label">2024 - 2045</span></div>
                         </div>
                     </div>
                     <!-- Metrics -->
                     <div class="grid grid-cols-3 gap-6">
                         <div class="bg-surface border-2 border-on-surface p-4 neo-shadow-sm">
-                            <p class="font-headline font-bold text-[10px] uppercase text-outline mb-1">Total
-                                Contributions</p>
-                            <p class="text-2xl font-headline font-black tracking-tighter">$420,000</p>
+                            <div class="flex justify-between items-start mb-1">
+                                <p class="font-headline font-bold text-[10px] uppercase text-outline">Total
+                                    Contributions</p>
+                                <button onclick="showMetricInfo('contributions')"
+                                    class="text-outline hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[14px]">info</span>
+                                </button>
+                            </div>
+                            <p id="metric-contributions" class="text-2xl font-headline font-black tracking-tighter">
+                                $420,000</p>
                         </div>
                         <div class="bg-primary-fixed border-2 border-on-surface p-4 neo-shadow-sm">
-                            <p class="font-headline font-bold text-[10px] uppercase text-on-primary-fixed mb-1">
-                                Compounded Growth</p>
-                            <p class="text-2xl font-headline font-black tracking-tighter">+$828,500</p>
+                            <div class="flex justify-between items-start mb-1">
+                                <p class="font-headline font-bold text-[10px] uppercase text-on-primary-fixed">
+                                    Compounded Growth</p>
+                                <button onclick="showMetricInfo('growth')"
+                                    class="text-on-primary-fixed hover:text-on-surface transition-colors">
+                                    <span class="material-symbols-outlined text-[14px]">info</span>
+                                </button>
+                            </div>
+                            <p id="metric-growth" class="text-2xl font-headline font-black tracking-tighter">+$828,500
+                            </p>
                         </div>
                         <div class="bg-surface border-2 border-on-surface p-4 neo-shadow-sm">
-                            <p class="font-headline font-bold text-[10px] uppercase text-outline mb-1">Tax Offset Est.
-                            </p>
-                            <p class="text-2xl font-headline font-black tracking-tighter">$32,150</p>
+                            <div class="flex justify-between items-start mb-1">
+                                <p class="font-headline font-bold text-[10px] uppercase text-outline">Tax Offset Est.
+                                </p>
+                                <button onclick="showMetricInfo('tax')"
+                                    class="text-outline hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[14px]">info</span>
+                                </button>
+                            </div>
+                            <p id="metric-tax" class="text-2xl font-headline font-black tracking-tighter">$32,150</p>
                         </div>
                     </div>
                 </div>
@@ -446,6 +473,7 @@
             let basePayload = {
                 currentAge: 25,
                 retirementAge: 65,
+                lifeExpectancy: 85,
                 monthlyIncome: 50000,
                 monthlyExpense: 30000,
                 currentSavings: 0,
@@ -460,10 +488,92 @@
                 if (gRes.goal) {
                     basePayload.currentAge = gRes.goal.current_age || 25;
                     basePayload.retirementAge = gRes.goal.retirement_age || 65;
+                    basePayload.lifeExpectancy = Math.max(85, basePayload.retirementAge + 10);
                     basePayload.monthlyIncome = gRes.goal.target_monthly_income || 50000;
                     basePayload.monthlyExpense = basePayload.monthlyIncome * 0.6;
                 }
             } catch (e) { }
+
+            const renderChart = (inputs, finalValue, targetValue) => {
+                const container = document.getElementById('chart-bars-container');
+                const timeline = document.getElementById('timeline-label');
+                if (!container) return;
+
+                container.innerHTML = '';
+                const currentYear = new Date().getFullYear();
+                const startAge = inputs.currentAge;
+                const endAge = inputs.retirementAge;
+                const years = endAge - startAge;
+
+                if (timeline) {
+                    timeline.textContent = `${currentYear} - ${currentYear + years}`;
+                }
+
+                // Generate 12 data points
+                const steps = 12;
+                const yearStep = years / (steps - 1);
+                const r = inputs.returnRate;
+                const monthlyPmt = inputs.monthlyInvestment;
+                const pv = inputs.currentSavings || 0;
+
+                let maxVal = 0;
+                const points = [];
+
+                for (let i = 0; i < steps; i++) {
+                    const t = i * yearStep;
+                    const months = t * 12;
+                    const rMonthly = Math.pow(1 + r, 1 / 12) - 1;
+
+                    let fv = pv * Math.pow(1 + r, t);
+                    if (rMonthly > 0) {
+                        fv += monthlyPmt * (Math.pow(1 + rMonthly, months) - 1) / rMonthly;
+                    } else {
+                        fv += monthlyPmt * months;
+                    }
+                    points.push(fv);
+                    if (fv > maxVal) maxVal = fv;
+                }
+
+                // Scale maxVal slightly higher for breathing room, considering the goal
+                maxVal = Math.max(maxVal, finalValue, targetValue || 0) * 1.2;
+
+                // Create Target Goal Line
+                if (targetValue > 0) {
+                    const targetHeight = (targetValue / maxVal) * 100;
+                    const line = document.createElement('div');
+                    line.className = 'absolute left-0 right-0 border-t-2 border-dashed border-primary z-30 pointer-events-none transition-all duration-500';
+                    line.style.bottom = `${targetHeight}%`;
+                    line.innerHTML = `
+                        <div class="absolute right-0 -top-6 bg-primary text-on-primary font-headline font-black text-[8px] px-2 py-0.5 uppercase transform rotate-1">
+                            GOAL: $${Math.round(targetValue).toLocaleString()}
+                        </div>
+                    `;
+                    container.appendChild(line);
+                }
+
+                points.forEach((val, idx) => {
+                    const heightPercent = (val / maxVal) * 100;
+                    const bar = document.createElement('div');
+
+                    if (idx >= steps - 2) {
+                        // Highlight target years
+                        bar.className = 'w-full bg-primary-fixed border-t-4 border-on-surface relative transition-all duration-500';
+                        bar.style.height = `${Math.max(2, heightPercent)}%`;
+                        if (idx === steps - 1) {
+                            bar.innerHTML = `
+                                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-on-surface text-surface font-headline font-black text-[10px] px-2 py-1 transform -rotate-2 whitespace-nowrap z-20">
+                                    TARGET_X
+                                </div>
+                            `;
+                        }
+                    } else {
+                        bar.className = 'w-full bg-on-surface opacity-20 transition-all duration-500';
+                        bar.style.height = `${Math.max(1, heightPercent)}%`;
+                    }
+
+                    container.appendChild(bar);
+                });
+            };
 
             const recalculate = async () => {
                 try {
@@ -473,12 +583,18 @@
                     // Pseudo-logic: mapping 0-100 volatility slider to return rate variance
                     const vol = parseInt(volSlider?.value || 50, 10);
                     const returnOffset = ((50 - vol) / 100) * 0.05; // -2.5% to +2.5% adjustment
+                    let finalReturnRate = 0.12 + returnOffset;
+
+                    // Guard: Ensure return rate is at least 1% higher than inflation to avoid backend error
+                    if (finalReturnRate <= infOffset) {
+                        finalReturnRate = infOffset + 0.01;
+                    }
 
                     const payload = {
                         ...basePayload,
                         monthlyInvestment: depAmt,
                         inflationRate: infOffset,
-                        returnRate: 0.12 + returnOffset
+                        returnRate: finalReturnRate
                     };
 
                     const originalText = btnRecalc.textContent;
@@ -487,7 +603,25 @@
 
                     const res = await futuraApi.projection.calculate(payload);
                     if (res.result && totalEl) {
-                        totalEl.textContent = '$' + Math.round(res.result.futureSavings).toLocaleString();
+                        const futureVal = res.result.futureSavings;
+                        totalEl.textContent = '$' + Math.round(futureVal).toLocaleString();
+
+                        // Update dynamic graph
+                        renderChart(payload, futureVal, res.result.corpusNeeded);
+
+                        // Update Summary Metrics
+                        const years = payload.retirementAge - payload.currentAge;
+                        const totalContrib = payload.monthlyInvestment * 12 * years;
+                        const growth = futureVal - totalContrib;
+                        const taxOffset = totalContrib * 0.08;
+
+                        const contribEl = document.getElementById('metric-contributions');
+                        const growthEl = document.getElementById('metric-growth');
+                        const taxEl = document.getElementById('metric-tax');
+
+                        if (contribEl) contribEl.textContent = '$' + Math.round(totalContrib).toLocaleString();
+                        if (growthEl) growthEl.textContent = (growth >= 0 ? '+' : '-') + '$' + Math.abs(Math.round(growth)).toLocaleString();
+                        if (taxEl) taxEl.textContent = '$' + Math.round(taxOffset).toLocaleString();
                     }
 
                     btnRecalc.textContent = 'RECALCULATE WEALTH';
@@ -501,11 +635,58 @@
                 }
             };
 
+            window.showMetricInfo = (type) => {
+                const modal = document.getElementById('metric-info-modal');
+                const title = document.getElementById('metric-info-title');
+                const content = document.getElementById('metric-info-content');
+
+                const data = {
+                    contributions: {
+                        title: "Total Contributions",
+                        content: "This is the total out-of-pocket amount you will have invested from today until your retirement age. It's the sum of all your monthly deposits over your entire working timeline."
+                    },
+                    growth: {
+                        title: "Compounded Growth",
+                        content: "This is the 'pure profit' generated by the markets and compound interest. It represents the wealth created over time that didn't come directly from your own pocket."
+                    },
+                    tax: {
+                        title: "Tax Offset Est.",
+                        content: "This is an estimate of the tax benefits and credits you secure by using retirement-optimized accounts. It significantly lowers your effective cost of building wealth."
+                    }
+                };
+
+                const info = data[type];
+                if (info && modal) {
+                    title.textContent = info.title;
+                    content.textContent = info.content;
+                    modal.classList.remove('hidden');
+                }
+            };
+
+            window.hideMetricInfo = () => {
+                const modal = document.getElementById('metric-info-modal');
+                if (modal) modal.classList.add('hidden');
+            };
+
             if (btnRecalc) btnRecalc.addEventListener('click', recalculate);
             // Initial calc
             recalculate();
         });
     </script>
+    <!-- Metric Info Modal -->
+    <div id="metric-info-modal"
+        class="fixed inset-0 bg-on-surface/50 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-6">
+        <div class="bg-surface border-4 border-on-surface p-8 neo-shadow max-w-sm w-full">
+            <h4 id="metric-info-title" class="text-2xl font-headline font-black uppercase mb-4 text-on-surface">Metric
+                Info</h4>
+            <div class="h-1 w-12 bg-primary-fixed mb-6"></div>
+            <p id="metric-info-content"
+                class="text-sm font-body leading-relaxed mb-8 text-on-surface-variant font-medium">
+                Explanation goes here.</p>
+            <button onclick="hideMetricInfo()"
+                class="w-full py-4 border-2 border-on-surface bg-primary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">Understood</button>
+        </div>
+    </div>
 </body>
 
 </html>
