@@ -247,7 +247,8 @@
       const startTime = Date.now();
       while (Date.now() - startTime < timeout) {
         const api = (typeof futuraApi !== 'undefined' && futuraApi !== null) ? futuraApi : window.futuraApi;
-        if (api && typeof api === 'object') {
+        // Verify api is a fully-loaded object with critical namespaces (holdings, zens, etc.)
+        if (api && typeof api === 'object' && typeof api.holdings === 'object' && typeof api.zens === 'object') {
           // Expose to local scope if found on window
           if (typeof futuraApi === 'undefined') {
             window.futuraApi = api;
@@ -256,7 +257,9 @@
         }
         await new Promise(resolve => setTimeout(resolve, 100));
       }
-      console.error('futuraApi not found on window or local scope after', timeout, 'ms');
+      const partialApi = window.futuraApi || (typeof futuraApi !== 'undefined' ? futuraApi : null);
+      console.error('futuraApi not fully available after', timeout, 'ms');
+      console.error('Partial api keys:', partialApi ? Object.keys(partialApi) : 'none');
       console.error('Available on window:', Object.keys(window).filter(k => k.includes('futura') || k.includes('Api')));
       throw new Error('futuraApi failed to initialize after ' + timeout + 'ms. Check that api.js is loaded correctly.');
     }
@@ -288,6 +291,9 @@
 
       // Set up local references to globals for better compatibility
       const api = window.futuraApi || futuraApi;
+      console.log('DEBUG: api object:', api);
+      console.log('DEBUG: api.holdings exists?', !!api?.holdings);
+      console.log('DEBUG: window.futuraApi:', window.futuraApi);
       if (!api) {
         console.error('futuraApi is still not available');
         alert('API failed to initialize. Please refresh the page.');
@@ -323,6 +329,9 @@
       let totalWeightedReturn = 0;
 
       try {
+        if (!api.holdings || typeof api.holdings.list !== 'function') {
+          throw new Error('api.holdings is not available. API keys present: ' + Object.keys(api).join(', '));
+        }
         const holdingsRes = await api.holdings.list();
         const holdings = holdingsRes.holdings || holdingsRes || [];
         loadedHoldings = holdings;
