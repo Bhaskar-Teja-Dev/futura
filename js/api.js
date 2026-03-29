@@ -85,7 +85,7 @@ function hydrateEliteSidebar(sub) {
   if (isElite) {
     if (tierLabel) {
       tierLabel.textContent = 'Elite Tier';
-      tierLabel.classList.add('text-[#ff81f5]', 'animate-pulse');
+      tierLabel.classList.add('text-[#FF6F00]', 'animate-pulse');
     }
     if (upgradeBtn) {
       upgradeBtn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px; animation: premiumPulse 2s infinite;">local_fire_department</span> <span class="relative z-10">Explore Benefits</span>';
