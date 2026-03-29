@@ -53,13 +53,7 @@
           class="text-xl sm:text-2xl font-black uppercase tracking-tighter text-on-surface dark:text-surface font-headline no-underline truncate">Digital
           Rebel</a>
       </div>
-      <div class="flex items-center gap-4 shrink-0">
-        <a href="onboarding_digital_rebel_desktop.html"
-          class="inline-flex items-center justify-center min-h-[44px] px-4 bg-primary-fixed text-on-primary-fixed border-2 border-on-surface font-headline font-black uppercase tracking-widest text-xs hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[4px_4px_0px_0px_rgba(18,18,18,1)] transition-all active:translate-x-0 active:translate-y-0 active:shadow-none no-underline"
-          id="btn-connect-wallet">
-          Connect Wallet
-        </a>
-      </div>
+
     </header>
   </div>
   <main id="main-content">
@@ -169,11 +163,7 @@
             Wait cycles are for the legacy world. Execute trades and move capital in sub-second blocks. Absolute speed
             is our baseline.
           </p>
-          <div class="mt-8 pt-8 border-t-2 border-surface-container">
-            <a href="learn_digital_rebel_desktop.html"
-              class="font-headline font-black text-xs uppercase tracking-widest text-primary hover:underline cursor-pointer no-underline">Read
-              the docs →</a>
-          </div>
+
         </div>
         <!-- Zero Custody -->
         <div class="bg-primary-fixed p-8 border-4 border-on-surface neo-shadow hover-lift group" id="card-zero-custody">
@@ -186,11 +176,7 @@
             Your keys, your access. We never hold your assets. You are the sovereign ruler of your digital wealth. No
             permission required.
           </p>
-          <div class="mt-8 pt-8 border-t-2 border-on-primary-fixed/20">
-            <a href="settings_digital_rebel_desktop.html"
-              class="font-headline font-black text-xs uppercase tracking-widest text-on-primary-fixed hover:underline cursor-pointer no-underline">Security
-              audit v4 →</a>
-          </div>
+
         </div>
         <!-- Ghost Mode -->
         <div class="bg-tertiary-fixed p-8 border-4 border-on-surface neo-shadow hover-lift group" id="card-ghost-mode">
@@ -203,11 +189,7 @@
             Encryption-first privacy. Operate without being tracked by legacy surveillance entities. Your identity is
             your choice.
           </p>
-          <div class="mt-8 pt-8 border-t-2 border-on-tertiary-container/20">
-            <a href="settings_digital_rebel_desktop.html"
-              class="font-headline font-black text-xs uppercase tracking-widest text-on-tertiary-container hover:underline cursor-pointer no-underline">Ghost
-              settings →</a>
-          </div>
+
         </div>
       </div>
     </section>
@@ -316,8 +298,7 @@
   <style>
     /* Auth Guard: Prevents ghost sessions and UI flickering */
     html.auth-verified #btn-auth-hero,
-    html.auth-verified #btn-continue-signin-market,
-    html.auth-verified [id*="connect-wallet"] {
+    html.auth-verified #btn-continue-signin-market {
       display: none !important;
     }
     

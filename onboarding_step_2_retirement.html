@@ -87,6 +87,7 @@
                             class="absolute right-8 font-headline font-black text-4xl text-outline pointer-events-none group-focus-within:text-inverse-surface">YRS</span>
                     </div>
                 </div>
+                <p id="onboarding-retirement-error" class="hidden text-error-container bg-error px-4 py-2 border-2 border-inverse-surface font-headline font-bold text-xs uppercase tracking-widest neo-shadow" role="alert">Enter your target retirement age.</p>
                 <!-- Action Button -->
                 <div class="flex flex-col md:flex-row gap-6 mt-4">
                     <a href="onboarding_step_3_income.html"
@@ -171,22 +172,42 @@
             if (currentData.retirement_age) input.value = currentData.retirement_age;
 
             if (nextBtn && input) {
+                const errEl = document.getElementById('onboarding-retirement-error');
+                
                 nextBtn.addEventListener('click', (e) => {
                     e.preventDefault();
+                    const retAge = parseInt(input.value, 10);
+
                     if (!input.value) {
-                        alert("Enter your target retirement age.");
+                        errEl.textContent = "Enter your target retirement age.";
+                        errEl.classList.remove('hidden');
                         return;
                     }
 
-                    const currentData = JSON.parse(localStorage.getItem('onboarding_data') || '{}');
-                    currentData.retirement_age = parseInt(input.value, 10);
-
-                    if (currentData.current_age && currentData.retirement_age <= currentData.current_age) {
-                        alert("Retirement target must exceed your current chron-level.");
+                    if (retAge < 30) {
+                        errEl.textContent = "Get a job man";
+                        errEl.classList.remove('hidden');
                         return;
                     }
 
-                    localStorage.setItem('onboarding_data', JSON.stringify(currentData));
+                    if (retAge > 100) {
+                        errEl.textContent = "Hope is good but this is too much hope";
+                        errEl.classList.remove('hidden');
+                        return;
+                    }
+
+                    if (currentData.current_age && retAge <= currentData.current_age) {
+                        errEl.textContent = "Retirement target must exceed your current chron-level.";
+                        errEl.classList.remove('hidden');
+                        return;
+                    }
+
+                    errEl.classList.add('hidden');
+
+                    const currentDataObj = JSON.parse(localStorage.getItem('onboarding_data') || '{}');
+                    currentDataObj.retirement_age = retAge;
+
+                    localStorage.setItem('onboarding_data', JSON.stringify(currentDataObj));
                     window.location.href = nextBtn.getAttribute('href');
                 });
             }
