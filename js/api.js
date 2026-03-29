@@ -64,13 +64,60 @@ const futuraApi = {
     balance: () => apiFetch('/api/zens/balance')
   },
   subscriptions: {
-    purchasePro: (razorpay_payment_id) =>
-      apiFetch('/api/subscriptions/purchase-pro', {
+    purchaseElite: (razorpay_payment_id) =>
+      apiFetch('/api/subscriptions/purchase-elite', {
         method: 'POST',
         body: JSON.stringify({ razorpay_payment_id })
       })
   }
 };
+
+/**
+ * Global helper to hydrate the Elite Sidebar across all pages.
+ * @param {Object} sub - User subscription data
+ */
+function hydrateEliteSidebar(sub) {
+  const isElite = sub?.entitlement === 'elite';
+  const tierLabel = document.getElementById('sidebar-tier-label');
+  const upgradeBtn = document.getElementById('sidebar-upgrade-btn');
+
+  if (isElite) {
+    if (tierLabel) {
+      tierLabel.textContent = 'Elite Tier';
+      tierLabel.classList.add('text-[#ff81f5]');
+    }
+    if (upgradeBtn) {
+      upgradeBtn.textContent = 'Show Benefits';
+      upgradeBtn.href = '#';
+      upgradeBtn.classList.add('premium-btn-glow');
+      
+      // Clean up any existing listeners by cloning (simple way to remove all listeners)
+      const newBtn = upgradeBtn.cloneNode(true);
+      upgradeBtn.parentNode.replaceChild(newBtn, upgradeBtn);
+      
+      newBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const modal = document.getElementById('elite-hub-modal');
+        if (modal) {
+          modal.classList.remove('hidden');
+        } else {
+          // If not on dashboard, redirect to dashboard with elite-hub trigger
+          window.location.href = 'dashboard_digital_rebel_desktop.html#elite-hub';
+        }
+      });
+    }
+  } else {
+    if (tierLabel) {
+      tierLabel.textContent = 'Free Tier';
+      tierLabel.classList.remove('text-[#ff81f5]');
+    }
+    if (upgradeBtn) {
+      upgradeBtn.textContent = 'Upgrade Power';
+      upgradeBtn.href = 'upgrade_digital_rebel_desktop.html';
+      upgradeBtn.classList.remove('premium-btn-glow');
+    }
+  }
+}
 
 // Load Razorpay SDK dynamically
 function loadRazorpayScript() {
@@ -185,9 +232,9 @@ function initiateRazorpayPurchase(amountINR, zensExpected, onSuccess) {
 }
 
 // Purchase Elite / Pro using Razorpay Payment ID
-async function buyPro(razorpay_payment_id) {
+async function buyElite(razorpay_payment_id) {
   try {
-    const result = await futuraApi.subscriptions.purchasePro(razorpay_payment_id);
+    const result = await futuraApi.subscriptions.purchaseElite(razorpay_payment_id);
     return result;
   } catch (err) {
     const msg = err.message || '';

@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { z } from 'zod'
 import { zValidator } from '@hono/zod-validator'
-import { requirePro } from '../middleware/entitlement'
+import { requireElite } from '../middleware/entitlement'
 import { calculateRetirement } from '../lib/calculator'
 import type { Env, Variables } from '../types'
 
@@ -61,7 +61,7 @@ router.post('/', zValidator('json', projectionSchema), async (c) => {
   })
 })
 
-router.post('/scenarios', requirePro, zValidator('json', scenariosSchema), async (c) => {
+router.post('/scenarios', requireElite, zValidator('json', scenariosSchema), async (c) => {
   const body = c.req.valid('json')
 
   const scenarios = body.scenarios.map((scenario) => {
@@ -76,6 +76,37 @@ router.post('/scenarios', requirePro, zValidator('json', scenariosSchema), async
     scenarios,
     disclaimer: 'Projections are illustrative only and not financial advice.'
   })
+})
+
+router.post('/roadmap', requireElite, zValidator('json', projectionSchema), async (c) => {
+  const body = c.req.valid('json')
+  const result = calculateRetirement(body)
+
+  if ('error' in result) {
+    return c.json({ error: result.error, field: result.field }, 400)
+  }
+
+  // Generate a detailed breakdown for the "Roadmap"
+  const roadmap = {
+    title: `Digital Rebel: ${result.status} Retirement Roadmap`,
+    status: result.status,
+    statusColor: result.statusColor,
+    statusDescription: result.statusDescription,
+    keyMetrics: [
+      { label: 'Corpus Needed', value: result.corpusNeeded },
+      { label: 'Projected Savings', value: result.futureSavings },
+      { label: 'Probability of Success', value: `${result.probability}%` },
+      { label: 'Time Horizon', value: `${result.yearsToRetirement} Years` }
+    ],
+    milestones: [
+      { age: body.currentAge + Math.floor(result.yearsToRetirement * 0.25), label: 'Accumulation Phase I' },
+      { age: body.currentAge + Math.floor(result.yearsToRetirement * 0.5), label: 'Mid-Career Review' },
+      { age: body.currentAge + Math.floor(result.yearsToRetirement * 0.75), label: 'Pre-Retirement Consolidation' },
+      { age: body.retirementAge, label: 'Financial Independence' }
+    ]
+  }
+
+  return c.json({ roadmap })
 })
 
 export { router as projectionRouter }

@@ -75,6 +75,7 @@
             background: #cafd00;
         }
     </style>
+    <link href="/css/premium.css" rel="stylesheet" />
 </head>
 
 <body class="bg-surface font-body text-on-surface rebel-grid min-h-screen flex flex-col">
@@ -117,8 +118,8 @@
                     <img alt="Rebel_01" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
                 </div>
                 <div class="overflow-hidden">
-                    <h3 id="user-name" class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">Rebel_01</h3>
-                    <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
+                    <h3 id="sidebar-user-name" class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">Rebel_01</h3>
+                    <p id="sidebar-tier-label" class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
                 </div>
             </a>
             <nav class="flex-1 space-y-1">
@@ -145,7 +146,7 @@
                 </a>
             </nav>
             <div class="p-4 border-t-2 border-[#2d2f2f] mt-auto">
-                <a href="upgrade_digital_rebel_desktop.html"
+                <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
                     class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
                     Power</a>
                 <a class="flex items-center gap-4 py-3 px-6 text-[#f6f6f6] mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
@@ -283,7 +284,33 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="/js/config.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/api.js"></script>
     <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const session = await requireAuth();
+            if (!session) return;
+
+            try {
+                const profileResult = await futuraApi.profile.get();
+                const goal = profileResult.profile;
+                const sub = profileResult.subscription;
+
+                if (goal) {
+                    const userNameEl = document.getElementById('user-name');
+                    if (userNameEl) userNameEl.textContent = goal.email.split('@')[0];
+                }
+
+                // Hydrate Elite Sidebar
+                hydrateEliteSidebar(sub);
+            } catch (err) {
+                console.error('Failed to hydrate sidebar:', err);
+            }
+        });
+
         function handleChatSubmit(e) {
             e.preventDefault();
             const input = document.getElementById('chat-input');
@@ -328,5 +355,6 @@
         }
     </script>
 </body>
+
 </html>
 

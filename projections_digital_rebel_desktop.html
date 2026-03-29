@@ -124,6 +124,7 @@
             cursor: pointer;
         }
     </style>
+    <link href="/css/premium.css" rel="stylesheet" />
 </head>
 
 <body
@@ -175,11 +176,8 @@
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
                 </div>
                 <div class="overflow-hidden">
-                    <h3 id="user-name"
-                        class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
-                        Rebel_01</h3>
-                    <p class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite
-                        Tier</p>
+                    <h3 id="sidebar-user-name" class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">Rebel_01</h3>
+                    <p id="sidebar-tier-label" class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
                 </div>
             </a>
             <nav class="flex-1 space-y-2">
@@ -206,7 +204,7 @@
                 </a>
             </nav>
             <div class="p-6 border-t-2 border-on-surface">
-                <a href="upgrade_digital_rebel_desktop.html"
+                <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
                     class="w-full py-4 border-2 border-on-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
                     Power</a>
                 <a id="logout-link"
@@ -350,8 +348,16 @@
                     </div>
                 </div>
                 <!-- Control Sidebar -->
-                <div class="col-span-12 lg:col-span-4 space-y-6">
-                    <div class="bg-on-surface text-surface border-4 border-on-surface p-6 neo-shadow">
+                <div class="col-span-12 lg:col-span-4 space-y-6 relative">
+                    <!-- Gating Overlay -->
+                    <div id="pro-gate-overlay" class="absolute inset-0 z-20 hidden flex flex-col items-center justify-center bg-black/40 backdrop-blur-md border-4 border-on-surface p-8 text-center neo-shadow">
+                        <span class="material-symbols-outlined text-6xl text-primary-fixed mb-4" style="font-variation-settings: 'FILL' 1;">security</span>
+                        <h4 class="font-headline font-black text-2xl text-surface uppercase tracking-tighter mb-4">Elite Access Required</h4>
+                        <p class="text-surface-dim text-xs font-bold uppercase tracking-widest mb-8">Unlock advanced variable modeling & AI forecasting</p>
+                        <a href="upgrade_digital_rebel_desktop.html" class="bg-primary-fixed text-on-primary-fixed px-8 py-3 font-headline font-black uppercase tracking-widest neo-shadow hover:translate-x-1 hover:translate-y-1 transition-all no-underline">Upgrade Now</a>
+                    </div>
+
+                    <div id="pro-controls-container" class="bg-on-surface text-surface border-4 border-on-surface p-6 neo-shadow">
                         <div class="flex items-center gap-2 mb-6">
                             <span class="material-symbols-outlined text-primary-fixed" data-icon="tune">tune</span>
                             <h4 class="font-headline font-black uppercase text-lg tracking-widest">Pro Scenarios</h4>
@@ -474,12 +480,35 @@
             const session = await requireAuth();
             if (!session) return;
 
-            // Elements
+            // 1. Fetch Profile & Subscription
+            const profileResult = await futuraApi.profile.get();
+            const goal = profileResult.profile;
+            const sub = profileResult.subscription;
+
+            // 2. Elements
             const volSlider = document.getElementById('volatility-slider');
             const infSlider = document.getElementById('inflation-slider');
             const depSlider = document.getElementById('deposit-slider');
             const btnRecalc = document.getElementById('btn-recalculate');
             const totalEl = document.getElementById('projection-total');
+
+            // 3. Hydrate Sidebar & Elite Gating
+            hydrateEliteSidebar(sub);
+            
+            const isElite = sub?.entitlement === 'elite';
+            if (!isElite) {
+                const gate = document.getElementById('pro-gate-overlay');
+                if (gate) gate.classList.remove('hidden');
+                
+                const controls = document.getElementById('pro-controls-container');
+                if (controls) controls.classList.add('grayscale', 'opacity-50');
+                
+                // Disable sliders
+                if (volSlider) volSlider.disabled = true;
+                if (infSlider) infSlider.disabled = true;
+                if (depSlider) depSlider.disabled = true;
+                if (btnRecalc) btnRecalc.disabled = true;
+            }
 
             // Labels corresponding to sliders
             const infLabel = infSlider?.parentElement.querySelector('.text-primary-fixed');

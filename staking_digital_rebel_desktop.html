@@ -370,19 +370,8 @@
     </footer>
 
     <script>
-        // Fake countdown logic
-        setInterval(() => {
-            const timer = document.getElementById('countdown-timer');
-            if(timer) {
-                let parts = timer.innerText.split(':');
-                let h = parseInt(parts[0]), m = parseInt(parts[1]), s = parseInt(parts[2]);
-                s--;
-                if(s < 0) { s = 59; m--; }
-                if(m < 0) { m = 59; h--; }
-                if(h < 0) { h = 0; m = 0; s = 0; }
-                timer.innerText = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            }
-        }, 1000);
+        // Staking / Vault has been retired. Redirecting to Dashboard.
+        window.location.href = 'dashboard_digital_rebel_desktop.html';
     </script>
 </body>
 </html>
