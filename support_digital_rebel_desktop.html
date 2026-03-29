@@ -9,8 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700;800;900&family=Inter:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
@@ -60,19 +59,73 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
         }
-        
+
         /* Terminal scrollbar */
         .terminal-scroll::-webkit-scrollbar {
             width: 8px;
         }
+
         .terminal-scroll::-webkit-scrollbar-track {
             background: #121212;
         }
+
         .terminal-scroll::-webkit-scrollbar-thumb {
             background: #cafd00;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translate(-4px, 0);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translate(4px, 0);
+            }
+        }
+
+        .animate-shake {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        @keyframes pulse-slow {
+
+            0%,
+            100% {
+                opacity: 1;
+                border-color: #b02500;
+            }
+
+            50% {
+                opacity: 0.9;
+                border-color: #8d021f;
+            }
+        }
+
+        .animate-pulse-slow {
+            animation: pulse-slow 3s infinite;
         }
     </style>
     <link href="/css/premium.css" rel="stylesheet" />
@@ -113,13 +166,20 @@
         <!-- SideNavBar -->
         <aside
             class="hidden lg:flex fixed left-0 top-0 h-full w-64 flex-col pt-24 bg-[#f6f6f6] dark:bg-[#121212] border-r-2 border-[#121212] z-40">
-            <a href="settings_digital_rebel_desktop.html" class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
-                <div id="sidebar-avatar" class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
-                    <img alt="Rebel_01" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
+            <a href="settings_digital_rebel_desktop.html"
+                class="px-6 mb-8 flex items-center gap-3 group cursor-pointer no-underline hover:opacity-80 transition-opacity">
+                <div id="sidebar-avatar"
+                    class="w-12 h-12 border-2 border-inverse-surface neo-shadow bg-surface-container-lowest overflow-hidden flex shrink-0 items-center justify-center font-headline font-black text-xl">
+                    <img alt="Rebel_01" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuALG0k86mRTM6N3Eywb2MTEUDzxRV88EeAScODRmnvlk13InFVjS9EaJYwBnFhFlGGS7pHB2jALDt4lSyxV3DIFqJgWav34td8zPz7dQE3p4pDxcM6K2IFm_4JJ2viMwRCVrb_C3a75_-Cpsh9JYRy6Ss_BR8vBvFSRYfNApeBTFFj3JOx764xBctTY6I6urnDOND4x-f31TkFGx7U-F55FP4AUgRH89CYsnK5E3UXAudUGXrVlptZrxnQAmtZMwIC0SXFiJgn6ohKy" />
                 </div>
                 <div class="overflow-hidden">
-                    <h3 id="sidebar-user-name" class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">Rebel_01</h3>
-                    <p id="sidebar-tier-label" class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">Elite Tier</p>
+                    <h3 id="sidebar-user-name"
+                        class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
+                        Rebel_01</h3>
+                    <p id="sidebar-tier-label"
+                        class="font-Lexend font-bold uppercase tracking-widest text-[10px] text-[#ff81f5] truncate">
+                        Elite Tier</p>
                 </div>
             </a>
             <nav class="flex-1 space-y-1">
@@ -159,17 +219,22 @@
         <!-- Main Content -->
         <main class="lg:ml-64 flex-1 p-6 md:p-10 z-10">
             <!-- Header -->
-            <div class="mb-10 flex flex-col md:flex-row flex-wrap justify-between items-start md:items-center gap-6 border-b-4 border-on-surface pb-6">
+            <div
+                class="mb-10 flex flex-col md:flex-row flex-wrap justify-between items-start md:items-center gap-6 border-b-4 border-on-surface pb-6">
                 <div>
-                    <span class="bg-error text-white font-headline font-black text-xs uppercase tracking-widest px-2 py-1 border-2 border-on-surface neo-shadow inline-block mb-4">Urgent Comms Link</span>
+                    <span
+                        class="bg-error text-white font-headline font-black text-xs uppercase tracking-widest px-2 py-1 border-2 border-on-surface neo-shadow inline-block mb-4">Urgent
+                        Comms Link</span>
                     <h1 class="font-headline font-black text-5xl md:text-7xl uppercase tracking-tighter leading-none">
                         Support_Protocol
                     </h1>
                 </div>
-                <div class="bg-surface-container-lowest border-2 border-on-surface px-6 py-4 flex items-center gap-4 neo-shadow shrink-0">
+                <div
+                    class="bg-surface-container-lowest border-2 border-on-surface px-6 py-4 flex items-center gap-4 neo-shadow shrink-0">
                     <div class="w-3 h-3 bg-[#cafd00] animate-pulse rounded-full border border-on-surface"></div>
                     <div>
-                        <p class="font-headline font-bold text-[10px] text-[#767777] uppercase tracking-widest">System Status</p>
+                        <p class="font-headline font-bold text-[10px] text-[#767777] uppercase tracking-widest">System
+                            Status</p>
                         <p class="font-headline font-black text-sm uppercase">100% Operational</p>
                     </div>
                 </div>
@@ -177,27 +242,31 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10 items-start">
                 <!-- Hacker Terminal Chat -->
-                <div class="lg:col-span-8 bg-[#121212] border-4 border-[#2d2f2f] neo-shadow-large flex flex-col h-[600px] overflow-hidden self-start">
+                <div
+                    class="lg:col-span-8 bg-[#121212] border-4 border-[#2d2f2f] neo-shadow-large flex flex-col h-[600px] overflow-hidden self-start">
                     <div class="bg-[#2d2f2f] flex justify-between items-center p-3 border-b-2 border-[#121212]">
                         <div class="flex gap-2">
                             <div class="w-4 h-4 bg-error rounded-none border border-[#121212]"></div>
                             <div class="w-4 h-4 bg-[#cafd00] rounded-none border border-[#121212]"></div>
                             <div class="w-4 h-4 bg-[#767777] rounded-none border border-[#121212]"></div>
                         </div>
-                        <div class="font-mono text-[#cafd00] text-xs uppercase tracking-widest opacity-80">root@rebel-support:~</div>
+                        <div class="font-mono text-[#cafd00] text-xs uppercase tracking-widest opacity-80">
+                            root@rebel-support:~</div>
                         <span class="material-symbols-outlined text-[#cafd00]">terminal</span>
                     </div>
-                    
-                    <div class="flex-1 p-6 overflow-y-auto terminal-scroll font-mono text-sm space-y-6" id="chat-history">
+
+                    <div class="flex-1 p-6 overflow-y-auto terminal-scroll font-mono text-sm space-y-6"
+                        id="chat-history">
                         <div class="text-[#cafd00] leading-relaxed">
                             <span class="opacity-50">[SYSTEM]</span> Initializing encypted support tunnel...<br>
                             <span class="opacity-50">[SYSTEM]</span> Key-exchange complete (RSA-4096).<br>
                             <span class="opacity-50">[SYSTEM]</span> Connected to Digital Rebel Support Nexus.<br>
                         </div>
-                        
+
                         <div class="flex flex-col gap-1 items-start">
                             <div class="bg-[#2d2f2f] text-[#f6f6f6] px-4 py-3 border-l-4 border-error max-w-[80%]">
-                                <span class="text-error font-bold uppercase text-[10px] block mb-1">Support_Agent_44</span>
+                                <span
+                                    class="text-error font-bold uppercase text-[10px] block mb-1">Support_Agent_44</span>
                                 Protocol active. How can we resolve your anomaly today, Rebel_01?
                             </div>
                         </div>
@@ -216,52 +285,68 @@
                     <div class="p-4 bg-[#121212] border-t-2 border-[#2d2f2f]">
                         <form id="chat-form" onsubmit="handleChatSubmit(event)" class="flex gap-4">
                             <span class="text-[#cafd00] font-mono font-bold text-xl mt-3">></span>
-                            <input autocomplete="off" type="text" id="chat-input" class="flex-1 bg-transparent border-none text-[#cafd00] font-mono text-lg focus:ring-0 placeholder-[#767777]" placeholder="Enter query protocol...">
-                            <button type="submit" class="bg-[#cafd00] text-[#121212] font-headline font-black uppercase tracking-widest px-6 py-2 border-2 border-[#121212] hover:bg-[#e1ff88] transition-all">Send</button>
+                            <input autocomplete="off" type="text" id="chat-input"
+                                class="flex-1 bg-transparent border-none text-[#cafd00] font-mono text-lg focus:ring-0 placeholder-[#767777]"
+                                placeholder="Enter query protocol...">
+                            <button type="submit"
+                                class="bg-[#cafd00] text-[#121212] font-headline font-black uppercase tracking-widest px-6 py-2 border-2 border-[#121212] hover:bg-[#e1ff88] transition-all">Send</button>
                         </form>
                     </div>
                 </div>
 
                 <!-- FAQ Protocol -->
                 <div class="lg:col-span-4 space-y-6 self-start">
-                    <h2 class="font-headline font-black text-2xl uppercase tracking-widest border-b-4 border-on-surface pb-2">HQ Intel (FAQ)</h2>
-                    
+                    <h2
+                        class="font-headline font-black text-2xl uppercase tracking-widest border-b-4 border-on-surface pb-2">
+                        HQ Intel (FAQ)</h2>
+
                     <div class="space-y-4">
                         <details class="group bg-surface-container-lowest border-2 border-on-surface neo-shadow">
-                            <summary class="font-headline font-bold uppercase tracking-widest text-sm p-4 cursor-pointer hover:bg-[#cafd00] hover:text-[#121212] transition-colors flex justify-between items-center group-open:bg-[#cafd00] group-open:text-[#121212]">
+                            <summary
+                                class="font-headline font-bold uppercase tracking-widest text-sm p-4 cursor-pointer hover:bg-[#cafd00] hover:text-[#121212] transition-colors flex justify-between items-center group-open:bg-[#cafd00] group-open:text-[#121212]">
                                 Wallet Connection Failures
-                                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
                             </summary>
                             <div class="p-4 border-t-2 border-on-surface font-body text-sm bg-surface">
-                                If your non-custodial wallet fails to bridge, ensure you are on the primary mainnet. Clear your browser cache or reset the RPC nodes in your wallet settings.
+                                If your non-custodial wallet fails to bridge, ensure you are on the primary mainnet.
+                                Clear your browser cache or reset the RPC nodes in your wallet settings.
                             </div>
                         </details>
 
                         <details class="group bg-surface-container-lowest border-2 border-on-surface neo-shadow">
-                            <summary class="font-headline font-bold uppercase tracking-widest text-sm p-4 cursor-pointer hover:bg-[#cafd00] hover:text-[#121212] transition-colors flex justify-between items-center group-open:bg-[#cafd00] group-open:text-[#121212]">
+                            <summary
+                                class="font-headline font-bold uppercase tracking-widest text-sm p-4 cursor-pointer hover:bg-[#cafd00] hover:text-[#121212] transition-colors flex justify-between items-center group-open:bg-[#cafd00] group-open:text-[#121212]">
                                 Missing Yield Payouts
-                                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
                             </summary>
                             <div class="p-4 border-t-2 border-on-surface font-body text-sm bg-surface">
-                                Yield payouts are distributed via batch smart contracts every 24 hours (00:00 UTC). If you don't see your yield, wait for the next block confirmation cycle.
+                                Yield payouts are distributed via batch smart contracts every 24 hours (00:00 UTC). If
+                                you don't see your yield, wait for the next block confirmation cycle.
                             </div>
                         </details>
 
                         <details class="group bg-surface-container-lowest border-2 border-on-surface neo-shadow">
-                            <summary class="font-headline font-bold uppercase tracking-widest text-sm p-4 cursor-pointer hover:bg-[#cafd00] hover:text-[#121212] transition-colors flex justify-between items-center group-open:bg-[#cafd00] group-open:text-[#121212]">
+                            <summary
+                                class="font-headline font-bold uppercase tracking-widest text-sm p-4 cursor-pointer hover:bg-[#cafd00] hover:text-[#121212] transition-colors flex justify-between items-center group-open:bg-[#cafd00] group-open:text-[#121212]">
                                 Changing Tier Levels
-                                <span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                                <span
+                                    class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
                             </summary>
                             <div class="p-4 border-t-2 border-on-surface font-body text-sm bg-surface">
-                                Tier upgrades (e.g., from Base to Elite) require an active transaction in the Upgrade Power module. Upgrades are irreversible for the billing period.
+                                Tier upgrades (e.g., from Base to Elite) require an active transaction in the Upgrade
+                                Power module. Upgrades are irreversible for the billing period.
                             </div>
                         </details>
                     </div>
 
                     <div class="bg-inverse-surface text-surface border-2 border-inverse-surface p-6 neo-shadow mt-8">
                         <h3 class="font-headline font-black uppercase text-lg mb-2">Priority Escalation</h3>
-                        <p class="font-body text-xs text-outline-variant mb-4">For tier 1 critical system failures, activate the emergency override email protocol.</p>
-                        <a href="mailto:override@digitalrebel.io" class="inline-block bg-[#121212] text-error border-2 border-error font-headline font-black uppercase tracking-widest px-4 py-2 hover:bg-error hover:text-[#f6f6f6] transition-colors text-xs text-center w-full">override@digitalrebel.io</a>
+                        <p class="font-body text-xs text-outline-variant mb-4">For tier 1 critical system failures,
+                            activate the emergency override email protocol.</p>
+                        <a id="escalation-target" href="mailto:override@digitalrebel.io"
+                            class="inline-block bg-[#121212] text-error border-2 border-error font-headline font-black uppercase tracking-widest px-4 py-2 hover:bg-error hover:text-[#f6f6f6] transition-colors text-xs text-center w-full">override@digitalrebel.io</a>
                     </div>
                 </div>
             </div>
@@ -283,6 +368,71 @@
                 href="settings_digital_rebel_desktop.html">Terms</a>
         </div>
     </footer>
+
+    <!-- Emergency Override Modal -->
+    <div id="emergency-modal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 backdrop-blur-xl p-4 overflow-hidden">
+        <!-- Scanned Line Effect -->
+        <div class="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] z-10"
+            style="background-size: 100% 2px, 3px 100%;"></div>
+
+        <div
+            class="max-w-2xl w-full border-4 border-error p-8 bg-[#050000] relative neo-shadow-large animate-pulse-slow">
+            <div class="flex justify-between items-start mb-8">
+                <div>
+                    <h2
+                        class="text-error font-headline font-black text-3xl uppercase tracking-tighter mb-1 font-headline">
+                        CRITICAL_OVERRIDE_ACTIVE</h2>
+                    <p class="text-error/70 font-mono text-[10px] uppercase tracking-[0.3em]">Direct Neural Link to
+                        Rebel_HQ</p>
+                </div>
+                <button onclick="closeEmergencyProtocol()" class="text-error hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined font-black">close</span>
+                </button>
+            </div>
+
+            <div class="font-mono text-sm mb-8 space-y-4 max-h-64 overflow-y-auto terminal-scroll"
+                id="emergency-terminal">
+                <p class="text-error">[SECURITY] Authorizing escalation...</p>
+                <p class="text-[#cafd00]">[V0.1] Connection established via satellite relay.</p>
+                <p class="text-[#f6f6f6]">Please provide the signature of failure below. HQ Operatives are standing by
+                    for force-manual override.</p>
+            </div>
+
+            <form id="emergency-form" class="space-y-6">
+                <div>
+                    <label
+                        class="block text-error font-headline font-black text-[10px] uppercase tracking-widest mb-2">Failure_Signature
+                        (Subject)</label>
+                    <input id="emergency-subject" required type="text"
+                        class="w-full bg-transparent border-2 border-error/30 text-error p-4 font-mono focus:border-error focus:ring-0 outline-none transition-all"
+                        placeholder="e.g. SYSTEM_TOTAL_DESYNC">
+                </div>
+                <div>
+                    <label
+                        class="block text-error font-headline font-black text-[10px] uppercase tracking-widest mb-2">Encryption_Log
+                        (Message)</label>
+                    <textarea id="emergency-message" required rows="4"
+                        class="w-full bg-transparent border-2 border-error/30 text-error p-4 font-mono focus:border-error focus:ring-0 outline-none transition-all"
+                        placeholder="Describe the anomaly in detail..."></textarea>
+                </div>
+                <button type="submit"
+                    class="w-full bg-error text-white font-headline font-black uppercase py-4 tracking-widest hover:bg-[#8d021f] transition-colors border-2 border-[#121212] flex items-center justify-center gap-3">
+                    ACTIVATE_FORCE_OVERRIDE
+                    <span class="material-symbols-outlined">bolt</span>
+                </button>
+            </form>
+
+            <div id="emergency-success" class="hidden flex flex-col items-center justify-center py-12 text-center">
+                <span
+                    class="material-symbols-outlined text-8xl text-error mb-4 animate-bounce">security_update_good</span>
+                <h3 class="text-error font-headline font-black text-2xl uppercase tracking-tighter mb-2">
+                    SECURED_ON_CHAIN</h3>
+                <p class="text-error/70 text-xs font-mono uppercase tracking-widest">Report encrypted and transmitted.
+                    Ops are en-route.</p>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="/js/config.js"></script>
@@ -309,14 +459,83 @@
             } catch (err) {
                 console.error('Failed to hydrate sidebar:', err);
             }
+
+            // Emergency Override Logic Initialization
+            const overrideLink = document.getElementById('escalation-target');
+            if (overrideLink) {
+                overrideLink.addEventListener('click', triggerEscalationProtocol);
+            }
         });
+
+        const emergencyModal = document.getElementById('emergency-modal');
+        const emergencyForm = document.getElementById('emergency-form');
+        const emergencySuccess = document.getElementById('emergency-success');
+        const emergencyTerminal = document.getElementById('emergency-terminal');
+
+        function triggerEscalationProtocol(e) {
+            e.preventDefault();
+
+            // Screen Shake Effect
+            document.body.classList.add('animate-shake');
+            setTimeout(() => document.body.classList.remove('animate-shake'), 500);
+
+            emergencyModal.classList.remove('hidden');
+            emergencyModal.classList.add('flex');
+
+            // Simulation log sequence
+            const logs = [
+                "> BOOTING_OVERRIDE_DAEMON...",
+                "> BYPASSING_FIREWALLS...",
+                "> ESTABLISHING_ENCRYPTION_LAYER_7...",
+                "> OPERATIVE_44_PINGED..."
+            ];
+
+            let i = 0;
+            const existingPs = emergencyTerminal.querySelectorAll('.escalation-log');
+            existingPs.forEach(p => p.remove());
+
+            const interval = setInterval(() => {
+                const p = document.createElement('p');
+                p.className = 'text-error opacity-70 escalation-log';
+                p.textContent = logs[i];
+                emergencyTerminal.appendChild(p);
+                emergencyTerminal.scrollTop = emergencyTerminal.scrollHeight;
+                i++;
+                if (i >= logs.length) clearInterval(interval);
+            }, 400);
+        }
+
+        function closeEmergencyProtocol() {
+            emergencyModal.classList.add('hidden');
+            emergencyModal.classList.remove('flex');
+            emergencyForm.classList.remove('hidden');
+            emergencySuccess.classList.add('hidden');
+        }
+
+        if (emergencyForm) {
+            emergencyForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                btn.disabled = true;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = 'ENCRYPTING_REPORT...';
+
+                // Simulate encryption delay
+                setTimeout(() => {
+                    emergencyForm.classList.add('hidden');
+                    emergencySuccess.classList.remove('hidden');
+                    btn.disabled = false;
+                    btn.innerHTML = originalText;
+                }, 2000);
+            });
+        }
 
         function handleChatSubmit(e) {
             e.preventDefault();
             const input = document.getElementById('chat-input');
             const history = document.getElementById('chat-history');
             const msg = input.value.trim();
-            if(!msg) return;
+            if (!msg) return;
 
             // Generate user message
             const userHtml = `
@@ -347,14 +566,13 @@
 
         function escapeHtml(unsafe) {
             return unsafe
-                 .replace(/&/g, "&amp;")
-                 .replace(/</g, "&lt;")
-                 .replace(/>/g, "&gt;")
-                 .replace(/"/g, "&quot;")
-                 .replace(/'/g, "&#039;");
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
     </script>
 </body>
 
 </html>
-
