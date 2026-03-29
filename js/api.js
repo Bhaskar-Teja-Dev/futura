@@ -80,9 +80,6 @@ const futuraApi = {
   }
 };
 
-// Ensure futuraApi is available globally for all scripts
-window.futuraApi = futuraApi;
-
 /**
  * Recovery tokens: streak GET runs monthly refresh RPC — prefer it over profile snapshot.
  * Case-insensitive elite check: DB stores 'elite', but defensive guard added for future-proofing.
@@ -101,10 +98,7 @@ async function hydrateEliteSidebar(sub, streakRes) {
 
   if (isElite && !hasValidTokens) {
     try {
-      const API = window.futuraApi;
-      if (API && API.contributions) {
-        streakPayload = await API.contributions.streak();
-      }
+      streakPayload = await futuraApi.contributions.streak();
     } catch (_) {
       streakPayload = null;
     }
@@ -163,16 +157,11 @@ async function hydrateEliteSidebar(sub, streakRes) {
           try {
             const tokenEl = document.getElementById('elite-tokens-count');
             if (tokenEl) {
-              const API = window.futuraApi;
-              if (API && API.contributions) {
-                const sr = await API.contributions.streak().catch(() => null);
-                tokenEl.textContent = String(sr?.streak?.recovery_tokens ?? sub?.streak_recovery_tokens ?? 0);
-              }
+              const sr = await futuraApi.contributions.streak().catch(() => null);
+              tokenEl.textContent = String(sr?.streak?.recovery_tokens ?? sub?.streak_recovery_tokens ?? 0);
             }
 
-            const API = window.futuraApi;
-            if (!API || !API.goals) throw new Error('Goals API not available');
-            const goalsRes = await API.goals.get();
+            const goalsRes = await futuraApi.goals.get();
             const goal = goalsRes?.goal;
             if (goal) {
               const income = (goal.target_monthly_income || 0) * 12;
@@ -195,9 +184,7 @@ async function hydrateEliteSidebar(sub, streakRes) {
                   try {
                     printBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Generating...';
                     printBtn.disabled = true;
-                    const API2 = window.futuraApi;
-                    if (!API2 || !API2.projection) throw new Error('Projection API not available');
-                    const report = await API2.projection.roadmap();
+                    const report = await futuraApi.projection.roadmap();
                     if (report && report.summary) {
                       const printWin = window.open('', '', 'width=800,height=600');
                       printWin.document.write(`
@@ -376,9 +363,7 @@ function initiateRazorpayPurchase(amountINR, zensExpected, onSuccess) {
     description: `${zensExpected.toLocaleString('en-US')} Zens Credit Pack`,
     handler: async (response) => {
       try {
-        const API = window.futuraApi;
-    if (!API || !API.zens) throw new Error('ZENS API not available');
-    const result = await API.zens.purchase(response.razorpay_payment_id);
+        const result = await futuraApi.zens.purchase(response.razorpay_payment_id);
 
         // Add notification for successful purchase
         if (typeof RebelNotifications !== 'undefined') {
@@ -405,13 +390,16 @@ function initiateRazorpayPurchase(amountINR, zensExpected, onSuccess) {
 // Purchase Elite / Pro using Razorpay Payment ID
 async function buyElite(razorpay_payment_id) {
   try {
-    const API = window.futuraApi;
-    if (!API || !API.subscriptions) throw new Error('Subscriptions API not available');
-    const result = await API.subscriptions.purchaseElite(razorpay_payment_id);
+    const result = await futuraApi.subscriptions.purchaseElite(razorpay_payment_id);
     return result;
   } catch (err) {
     const msg = err.message || '';
     alert('Failed to upgrade to Elite: ' + msg);
     throw err;
   }
+}
+
+// Expose futuraApi to global scope for production compatibility
+if (typeof window !== 'undefined') {
+  window.futuraApi = futuraApi;
 }

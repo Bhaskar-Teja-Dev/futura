@@ -532,14 +532,33 @@
     <script src="./js/auth.js"></script>
     <script src="./js/api.js"></script>
     <script>
+        // ── API Initialization with Retry Logic ────────────────────────────────────
+        async function ensureApi(timeout = 5000) {
+            const startTime = Date.now();
+            while (Date.now() - startTime < timeout) {
+                const api = (typeof futuraApi !== 'undefined' && futuraApi !== null) ? futuraApi : window.futuraApi;
+                if (api && typeof api === 'object') {
+                    if (typeof futuraApi === 'undefined') window.futuraApi = api;
+                    return true;
+                }
+                await new Promise(resolve => setTimeout(resolve, 100));
+            }
+            throw new Error('futuraApi failed to initialize');
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
+            const api = window.futuraApi || futuraApi;
+            if (!api) {
+                console.error('futuraApi is not available');
+                alert('API failed to initialize. Please refresh the page.');
+                return;
+            }
+
             const session = await requireAuth();
             if (!session) return;
 
             // 1. Fetch Profile & Subscription
-            const API = window.futuraApi;
-            if (!API || !API.profile) throw new Error('Profile API not available');
-            const profileResult = await API.profile.get();
+            const profileResult = await api.profile.get();
             const goal = profileResult.profile;
             const sub = profileResult.subscription;
 
@@ -600,9 +619,7 @@
             };
 
             try {
-                const API2 = window.futuraApi;
-                if (!API2 || !API2.goals) throw new Error('Goals API not available');
-                const gRes = await API2.goals.get();
+                const gRes = await api.goals.get();
                 if (gRes.goal) {
                     basePayload.currentAge = gRes.goal.current_age || gRes.goal.age || 25;
                     basePayload.retirementAge = gRes.goal.retirement_age || 65;
@@ -744,9 +761,7 @@
                     btnRecalc.textContent = 'CALCULATING...';
                     btnRecalc.style.pointerEvents = 'none';
 
-                    const API3 = window.futuraApi;
-                    if (!API3 || !API3.projection) throw new Error('Projection API not available');
-                    const res = await API3.projection.calculate(payload);
+                    const res = await api.projection.calculate(payload);
                     if (res.result && totalEl) {
                         const futureVal = res.result.futureSavings;
                         totalEl.textContent = 'Z ' + Math.round(futureVal).toLocaleString();

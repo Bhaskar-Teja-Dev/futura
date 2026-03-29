@@ -352,9 +352,7 @@
             if (!session) return;
 
             try {
-                const API = window.futuraApi;
-                if (!API || !API.profile) throw new Error('Profile API not available');
-                const profileResult = await API.profile.get();
+                const profileResult = await futuraApi.profile.get();
                 const goal = profileResult.profile;
                 const sub = profileResult.subscription;
 

@@ -360,6 +360,20 @@
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script>
+    // ── API Initialization with Retry Logic ────────────────────────────────────
+    async function ensureApi(timeout = 5000) {
+      const startTime = Date.now();
+      while (Date.now() - startTime < timeout) {
+        const api = (typeof futuraApi !== 'undefined' && futuraApi !== null) ? futuraApi : window.futuraApi;
+        if (api && typeof api === 'object') {
+          if (typeof futuraApi === 'undefined') window.futuraApi = api;
+          return true;
+        }
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      throw new Error('futuraApi failed to initialize');
+    }
+
     let allContributions = [];
 
     function parseContribution(c) {
@@ -678,9 +692,7 @@
       if (!session) return;
 
       try {
-        const API = window.futuraApi;
-        if (!API || !API.profile) throw new Error('Profile API not available');
-        const profileResult = await API.profile.get();
+        const profileResult = await futuraApi.profile.get();
         const goal = profileResult.profile;
         const sub = profileResult.subscription;
 
@@ -692,9 +704,7 @@
         // Hydrate Elite Sidebar
         await hydrateEliteSidebar(sub);
 
-        const API2 = window.futuraApi;
-        if (!API2 || !API2.contributions) throw new Error('Contributions API not available');
-        const res = await API2.contributions.list();
+        const res = await futuraApi.contributions.list();
         const apiContribs = res.contributions || [];
 
         let localStocks = [];

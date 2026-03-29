@@ -242,42 +242,64 @@
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script>
-    // Ensure futuraApi is available with retry logic
-    async function ensureApi(timeout = 10000) {
+    // Ensure futuraApi is available with retry logic and window fallback
+    async function ensureApi(timeout = 5000) {
       const startTime = Date.now();
-      let lastError = null;
-      
       while (Date.now() - startTime < timeout) {
-        if (typeof window.futuraApi !== 'undefined' && window.futuraApi !== null) {
-          console.log('futuraApi initialized successfully');
-          return window.futuraApi;
+        const api = (typeof futuraApi !== 'undefined' && futuraApi !== null) ? futuraApi : window.futuraApi;
+        if (api && typeof api === 'object') {
+          // Expose to local scope if found on window
+          if (typeof futuraApi === 'undefined') {
+            window.futuraApi = api;
+          }
+          return true;
         }
-        lastError = new Error('futuraApi not yet defined (window.futuraApi = ' + typeof window.futuraApi + ')');
-        console.warn('Waiting for futuraApi...', lastError.message);
-        await new Promise(resolve => setTimeout(resolve, 200));
+        await new Promise(resolve => setTimeout(resolve, 100));
       }
-      throw new Error('futuraApi failed to initialize after ' + timeout + 'ms. Last check: ' + lastError.message);
+      console.error('futuraApi not found on window or local scope after', timeout, 'ms');
+      console.error('Available on window:', Object.keys(window).filter(k => k.includes('futura') || k.includes('Api')));
+      throw new Error('futuraApi failed to initialize after ' + timeout + 'ms. Check that api.js is loaded correctly.');
+    }
+
+    // Also ensure auth globals are available
+    async function ensureAuth(timeout = 3000) {
+      const startTime = Date.now();
+      while (Date.now() - startTime < timeout) {
+        if (typeof requireAuth !== 'undefined' || window.requireAuth) {
+          return true;
+        }
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      throw new Error('Auth functions not available after ' + timeout + 'ms. Check that auth.js is loaded correctly.');
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
-      let api = null;
       try {
-        api = await ensureApi();
-        console.log('API ready, starting page initialization', api);
+        console.log('Initializing page - checking dependencies...');
+        await ensureAuth();
+        console.log('Auth loaded successfully');
+        await ensureApi();
+        console.log('API loaded successfully');
       } catch (err) {
         console.error('API initialization timeout:', err);
-        document.body.innerHTML = '<div style="padding: 40px; text-align: center; font-family: Arial;"><h2>⚠️ System Initialization Failed</h2><p>' + err.message + '</p><button onclick="location.reload()">Refresh Page</button></div>';
+        alert('System initialization failed. Please refresh the page.');
         return;
       }
 
-      const session = await requireAuth();
+      // Set up local references to globals for better compatibility
+      const api = window.futuraApi || futuraApi;
+      if (!api) {
+        console.error('futuraApi is still not available');
+        alert('API failed to initialize. Please refresh the page.');
+        return;
+      }
+
+      const session = await (window.requireAuth || requireAuth)();
       if (!session) return;
 
       // Fetch Zens Balance for pill manually
       try {
-        const API = window.futuraApi;
-        if (!API || !API.zens) throw new Error('ZENS API not available');
-        const balanceResponse = await API.zens.balance();
+        const balanceResponse = await api.zens.balance();
         if (balanceResponse && typeof balanceResponse.zens === 'number') {
           const pill = document.getElementById('nav-zens-balance');
           if (pill) pill.textContent = balanceResponse.zens.toLocaleString('en-US') + ' ZENS';
@@ -301,16 +323,8 @@
       let totalWeightedReturn = 0;
 
       try {
-        // Use the api object we got from ensureApi() and also check window.futuraApi as fallback
-        const API = api || window.futuraApi;
-        if (!API || !API.holdings) {
-          throw new Error('Holdings API not available. futuraApi=' + typeof API + ', holdings=' + (API ? typeof API.holdings : 'N/A'));
-        }
-        
-        console.log('Fetching portfolio holdings...');
-        const holdingsRes = await API.holdings.list();
+        const holdingsRes = await api.holdings.list();
         const holdings = holdingsRes.holdings || holdingsRes || [];
-        console.log('Holdings fetched successfully:', holdings.length, 'items');
         loadedHoldings = holdings;
 
         assetUnitsCount += holdings.length;
@@ -388,18 +402,10 @@
       // 2. Load API Manual Contributions
       let manualZensSubtotal = 0;
       try {
-        // Use the api object we got from ensureApi() and also check window.futuraApi as fallback
-        const API = api || window.futuraApi;
-        if (!API || !API.contributions) {
-          throw new Error('Contributions API not available. futuraApi=' + typeof API + ', contributions=' + (API ? typeof API.contributions : 'N/A'));
-        }
-        
-        console.log('Fetching contributions...');
-        const res = await API.contributions.list();
+        const res = await api.contributions.list();
         if (res.error) throw new Error(res.error);
 
         const contributions = res.contributions || [];
-        console.log('Contributions fetched successfully:', contributions.length, 'items');
 
         grid.innerHTML = ''; // clear
 
@@ -462,9 +468,7 @@
       // 3. Handle Liquid Cash — load from DB profile
       let liquidZens = 0;
       try {
-        const API = window.futuraApi;
-        if (!API || !API.profile) throw new Error('Profile API not available');
-        const profileRes = await API.profile.get();
+        const profileRes = await api.profile.get();
         liquidZens = parseInt(profileRes?.profile?.liquid_cash || '0', 10) || 0;
       } catch (e) { console.warn('liquid_cash fetch failed', e); }
 
@@ -474,9 +478,7 @@
       // 4. Fetch Wallet Balance & Final Computation
       let walletZens = 0;
       try {
-        const API = window.futuraApi;
-        if (!API || !API.zens) throw new Error('ZENS API not available');
-        const balRes = await API.zens.balance();
+        const balRes = await api.zens.balance();
         walletZens = balRes.zens || 0;
       } catch (e) { console.error('Wallet fetch failed', e); }
 
@@ -554,9 +556,7 @@
             saveBtn.textContent = 'SAVING...';
             saveBtn.disabled = true;
             try {
-              const API = window.futuraApi;
-              if (!API || !API.profile) throw new Error('Profile API not available');
-              await API.profile.update({ liquid_cash: newVal });
+              await api.profile.update({ liquid_cash: newVal });
 
               if (typeof RebelNotifications !== 'undefined') {
                 RebelNotifications.add(
@@ -679,18 +679,12 @@
         modal.onclick = null;
 
         try {
-          // Use window.futuraApi with fallback
-          const API = window.futuraApi;
-          if (!API || !API.zens || !API.holdings) {
-            throw new Error('API not available. Type: ' + typeof API);
-          }
-          
           // 1. Credit ZENS
-          const res = await API.zens.add(finalProceeds);
+          const res = await api.zens.add(finalProceeds);
           if (res.error) throw new Error(res.error);
 
           // 2. Mark holding as sold in DB
-          await API.holdings.sell(holdingId, {
+          await api.holdings.sell(holdingId, {
             sell_proceeds: finalProceeds,
             sell_pnl: Math.floor(pnl),
             sell_date: new Date().toISOString().split('T')[0]
@@ -781,12 +775,7 @@
         btn.disabled = true;
 
         try {
-          const API = window.futuraApi;
-          if (!API || !API.contributions) {
-            throw new Error('Contributions API not available');
-          }
-          
-          await API.contributions.delete(id);
+          await api.contributions.delete(id);
 
           if (typeof RebelNotifications !== 'undefined') {
             RebelNotifications.add('Asset Removed', `"${name}" has been permanently removed from your warchest.`, 'system');

@@ -243,6 +243,31 @@
   <script src="./js/auth.js"></script>
   <script src="./js/api.js"></script>
   <script>
+    // ── API Initialization with Retry Logic ────────────────────────────────────
+    async function ensureApi(timeout = 5000) {
+      const startTime = Date.now();
+      while (Date.now() - startTime < timeout) {
+        const api = (typeof futuraApi !== 'undefined' && futuraApi !== null) ? futuraApi : window.futuraApi;
+        if (api && typeof api === 'object') {
+          console.log('futuraApi initialized, window exposure status:', !!window.futuraApi);
+          if (typeof futuraApi === 'undefined') window.futuraApi = api;
+          return true;
+        }
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      console.error('futuraApi failed to initialize after', timeout, 'ms. Available window keys:', Object.keys(window).filter(k => k.includes('api') || k.includes('Api')));
+      throw new Error('futuraApi failed to initialize');
+    }
+
+    async function ensureAuth(timeout = 3000) {
+      const startTime = Date.now();
+      while (Date.now() - startTime < timeout) {
+        if (typeof getSupabase === 'function' || window.getSupabase) return true;
+        await new Promise(resolve => setTimeout(resolve, 100));
+      }
+      throw new Error('Auth functions failed to initialize');
+    }
+
     // ── Toast System ──────────────────────────────────────────────────────────
     function showToast(msg, type = 'success') {
       const colors = { success: '#4caf50', error: '#b02500', warning: '#ff8800' };
@@ -420,22 +445,18 @@
         confirmBtn.textContent = 'PROCESSING...';
 
         try {
-          const API = window.futuraApi;
-          if (!API || !API.zens) throw new Error('ZENS API not available');
-          const result = await API.zens.spend(amt);
+          const result = await api.zens.spend(amt);
           if (result.success) {
             const navBalance = document.getElementById('nav-zens-balance');
             if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
             try {
-              const API2 = window.futuraApi;
-              if (API2 && API2.holdings) {
-                await API2.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
+              if (api && api.holdings) {
+                await api.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
               }
             } catch (e) { console.error('Holdings DB write failed:', e); }
             try {
-              const API3 = window.futuraApi;
-              if (API3 && API3.contributions) {
-                await API3.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
+              if (api && api.contributions) {
+                await api.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
               }
             } catch (e) { console.error('Silent streak log failed', e); }
             if (typeof RebelNotifications !== 'undefined') {
@@ -729,14 +750,20 @@
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
+      // Set up local references to globals for production compatibility
+      const api = window.futuraApi || futuraApi;
+      if (!api) {
+        console.error('futuraApi is not available');
+        alert('API failed to initialize. Please refresh the page.');
+        return;
+      }
+
       const session = await requireAuth();
       if (!session) return;
 
       // Hydrate Elite sidebar (tier label + token count) + set userTier
       try {
-        const API = window.futuraApi;
-        if (!API || !API.profile) throw new Error('Profile API not available');
-        const profileRes = await API.profile.get().catch(() => null);
+        const profileRes = await api.profile.get().catch(() => null);
         const sub = profileRes?.subscription; // Object: { entitlement: 'elite'|'free', ... }
         const entitlement = sub?.entitlement?.toLowerCase?.() ?? 'free';
         if (entitlement === 'elite') {
@@ -795,12 +822,6 @@
 </main>
 </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script src="./js/config.js"></script>
-  <script src="./js/notifications.js"></script>
-  <script src="./js/mobile-nav.js"></script>
-  <script src="./js/auth.js"></script>
-  <script src="./js/api.js"></script>
   <script src="./js/footer-year.js"></script>
 <script src="./js/mobile-footer-nav.js"></script>
 </body>
