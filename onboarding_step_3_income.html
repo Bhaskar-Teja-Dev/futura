@@ -70,6 +70,7 @@
               placeholder="0.00" type="number" />
           </div>
         </div>
+        <p id="onboarding-income-error" class="hidden text-error-container bg-error px-4 py-2 border-2 border-inverse-surface font-headline font-bold text-xs uppercase tracking-widest neo-shadow" role="alert"></p>
       </div>
       <!-- Visual Column / Bento Style Info -->
       <div class="lg:col-span-5 space-y-6">
@@ -159,13 +160,25 @@
       if (nextBtn && input) {
         nextBtn.addEventListener('click', async (e) => {
           e.preventDefault();
+          const errEl = document.getElementById('onboarding-income-error');
+          const incomeValue = parseInt(input.value, 10);
+
           if (!input.value) {
-            alert("Submit your wealth fuel metric.");
+            errEl.textContent = "Submit your wealth fuel metric.";
+            errEl.classList.remove('hidden');
             return;
           }
 
+          if (incomeValue > 1000000) {
+            errEl.textContent = "If salary is that high you don't need a retirement plan bruh!";
+            errEl.classList.remove('hidden');
+            return;
+          }
+
+          errEl.classList.add('hidden');
+
           const currentData = JSON.parse(localStorage.getItem('onboarding_data') || '{}');
-          currentData.target_monthly_income = parseInt(input.value, 10);
+          currentData.target_monthly_income = incomeValue;
 
           // Prevent double click
           if (nextBtn.getAttribute('data-working') === 'true') return;
@@ -204,7 +217,8 @@
             if (msg === "Failed to fetch") {
               msg = "Cannot reach the Rebel API. \n\nTips:\n1. Ensure Wrangler is running (npm run dev)\n2. If testing on local network, use your machine's IP (e.g. 192.168.x.x) instead of 127.0.0.1 in the browser.";
             }
-            alert("SYSTEM ERROR: " + msg);
+            errEl.textContent = "SYSTEM ERROR: " + msg;
+            errEl.classList.remove('hidden');
             nextBtn.innerHTML = originalText;
             nextBtn.removeAttribute('data-working');
           }

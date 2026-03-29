@@ -78,9 +78,9 @@
                 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
                     href="market_digital_rebel_desktop.html" id="nav-markets">Markets</a>
                 <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
-                    href="learn_digital_rebel_desktop.html" id="nav-learn">Learn</a>
-                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
                     href="assets_digital_rebel_desktop.html" id="nav-assets">Assets</a>
+                <a class="text-[#767777] hover:bg-[#cafd00] hover:text-[#121212] transition-all duration-100 px-2 py-1 no-underline"
+                    href="learn_digital_rebel_desktop.html" id="nav-learn">Learn</a>
             </div>
         </div>
         <div class="flex items-center gap-4">
@@ -145,14 +145,14 @@
                     <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span> Support
                 </a>
             </nav>
-            <div class="p-6 border-t-2 border-on-surface">
+            <div class="p-4 border-t-2 border-inverse-surface mt-auto">
                 <a id="sidebar-upgrade-btn" href="upgrade_digital_rebel_desktop.html"
-                    class="w-full py-4 border-2 border-on-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
+                    class="w-full py-4 border-2 border-inverse-surface bg-tertiary-fixed font-headline font-black uppercase text-xs tracking-[0.2em] neo-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-center block">Upgrade
                     Power</a>
                 <a id="logout-link"
-                    class="flex items-center gap-4 mt-6 font-headline font-bold uppercase tracking-widest text-xs text-[#121212] dark:text-[#f6f6f6] hover:italic"
+                    class="flex items-center gap-4 py-3 px-6 text-on-surface mt-4 font-Lexend font-bold uppercase tracking-widest text-xs"
                     href="index.html" aria-label="Sign out">
-                    <span class="material-symbols-outlined" data-icon="logout">logout</span> Logout
+                    <span class="material-symbols-outlined">logout</span> Logout
                 </a>
             </div>
         </aside>
@@ -396,35 +396,19 @@
         </main>
     </div>
     <!-- Footer -->
-    <footer
-        class="w-full mt-auto py-12 px-8 lg:pl-72 lg:pr-8 flex flex-col md:flex-row justify-between items-center gap-8 bg-[#121212] dark:bg-[#000000] border-t-4 border-[#cafd00]">
-        <div class="flex flex-col items-center md:items-start gap-4">
-            <h2 class="text-4xl font-black text-[#cafd00] font-headline uppercase tracking-tighter">DIGITAL REBEL</h2>
-            <p class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6]">©<span
-                    data-year-range></span> DIGITAL REBEL. NO
-                PERMISSION GRANTED.</p>
-        </div>
-        <div class="flex gap-8 flex-wrap justify-center">
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="index.html">Home</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="dashboard_digital_rebel_desktop.html">Dashboard</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="assets_digital_rebel_desktop.html">Assets</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="market_digital_rebel_desktop.html">Market</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="transactions.html">Transactions</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="cards_digital_rebel_desktop.html">Cards</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="add_card_digital_rebel.html">Add Card</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="add_manual_asset_digital_rebel.html">Add Asset</a>
-            <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all"
-                href="checkout_digital_rebel_desktop.html">Checkout</a>
-        </div>
-    </footer>
+        <!-- Footer -->
+        <footer class="mt-20 py-10 border-t-2 border-inverse-surface flex flex-col md:flex-row justify-between items-center gap-6 opacity-70 hover:opacity-100 transition-opacity">
+            <div class="flex flex-col items-center md:items-start text-on-surface">
+                <span class="font-headline font-black text-xl uppercase tracking-tighter">Digital Rebel</span>
+                <p class="text-[10px] font-headline font-bold uppercase tracking-widest mt-1">
+                    ©<span data-year-range></span> DIGITAL REBEL. NO PERMISSION GRANTED.
+                </p>
+            </div>
+            <div class="flex items-center gap-6">
+                <a class="font-Lexend font-black uppercase text-sm tracking-widest text-[#121212] dark:text-[#f6f6f6] hover:text-[#ff81f5] hover:italic transition-all underline underline-offset-8 decoration-primary-fixed"
+                    href="terms.html">terms.sh</a>
+            </div>
+        </footer>
     <!-- Elite Hub Modal -->
     <div id="elite-hub-modal"
         class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
