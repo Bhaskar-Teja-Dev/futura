@@ -4,7 +4,6 @@
 (async function () {
 'use strict';
 
-var BASE_LIQUIDITY = 142800;
 var dailyCapVal = 5000;
 var atmLimitVal = 1200;
 var spentToday  = 1240;
@@ -27,7 +26,7 @@ try {
             monthlyInvestment: mi*0.2, inflationRate: 0.06,
             returnRate: goal.annual_return_rate ?? 0.12, simulations: 2000
           });
-          if (pr && pr.result && pr.result.futureSavings) BASE_LIQUIDITY = pr.result.futureSavings;
+          // futureSavings no longer used for liquidity calc
         }
       }
     }
@@ -42,7 +41,7 @@ if (savedAtm) atmLimitVal = parseInt(savedAtm, 10);
 var savedSpent = localStorage.getItem('spent_today');
 if (savedSpent) spentToday = parseInt(savedSpent, 10);
 
-function fmt(v) { return '$' + v.toLocaleString('en-US'); }
+function fmt(v) { return 'Z ' + v.toLocaleString('en-US'); }
 
 /* ─── TOAST ─── */
 function showToast(msg, icon) {
@@ -89,13 +88,13 @@ window.openDrawer = function(type) {
     body.innerHTML =
       '<span class="drawer-label">Current Limit</span>' +
       '<div class="drawer-val-big" id="d-cap-disp">' + fmt(dailyCapVal) + '</div>' +
-      '<span class="drawer-label">Adjust Limit ($0 – $10,000)</span>' +
+      '<span class="drawer-label">Adjust Limit (Z 0 – Z 10,000)</span>' +
       '<input type="range" id="d-cap-slider" min="0" max="10000" step="100" value="' + dailyCapVal + '">' +
       '<hr class="drawer-divider">' +
       '<span class="drawer-label">Temporary Raise</span>' +
       '<div style="display:flex;gap:8px;margin-bottom:1rem">' +
-        '<button class="drawer-btn" style="background:#a400a4;color:#fff;flex:1" onclick="tempRaise(500,1)">+$500 / 1 HR</button>' +
-        '<button class="drawer-btn" style="background:#5b005b;color:#fff;flex:1" onclick="tempRaise(1000,24)">+$1,000 / 24 HR</button>' +
+        '<button class="drawer-btn" style="background:#a400a4;color:#fff;flex:1" onclick="tempRaise(500,1)">+Z 500 / 1 HR</button>' +
+        '<button class="drawer-btn" style="background:#5b005b;color:#fff;flex:1" onclick="tempRaise(1000,24)">+Z 1,000 / 24 HR</button>' +
       '</div>' +
       '<hr class="drawer-divider">' +
       '<button class="drawer-btn" style="background:#cafd00" onclick="resetDaily()">Reset to Default</button>' +
@@ -123,7 +122,7 @@ window.openDrawer = function(type) {
     body.innerHTML =
       '<span class="drawer-label">Current Limit</span>' +
       '<div class="drawer-val-big" id="a-cap-disp">' + fmt(atmLimitVal) + '</div>' +
-      '<span class="drawer-label">Adjust Limit ($0 – $5,000)</span>' +
+      '<span class="drawer-label">Adjust Limit (Z 0 – Z 5,000)</span>' +
       '<input type="range" id="a-cap-slider" min="0" max="5000" step="50" value="' + atmLimitVal + '">' +
       '<hr class="drawer-divider">' +
       '<button class="drawer-btn" style="background:#cafd00" onclick="resetAtm()">Reset to Default</button>';
@@ -188,7 +187,7 @@ window.resetDaily = function() {
   localStorage.setItem('daily_cap_val', dailyCapVal);
   refreshDailyUI();
   closeDrawer();
-  showToast('Daily cap reset to $5,000', 'restart_alt');
+  showToast('Daily cap reset to Z 5,000', 'restart_alt');
   addLog('Daily cap reset to default', 'restart_alt');
 };
 
@@ -197,7 +196,7 @@ window.resetAtm = function() {
   localStorage.setItem('atm_limit_val', atmLimitVal);
   document.getElementById('atm-value').textContent = fmt(atmLimitVal);
   closeDrawer();
-  showToast('ATM limit reset to $1,200', 'restart_alt');
+  showToast('ATM limit reset to Z 1,200', 'restart_alt');
   addLog('ATM limit reset to default', 'restart_alt');
 };
 
@@ -337,9 +336,22 @@ function updateLiquidity() {
   var cards = JSON.parse(localStorage.getItem('rebel_cards')||'[]');
   var userTotal=0, activeCount=0;
   cards.forEach(function(c){ if(!c.frozen){userTotal+=(c.balance||0);activeCount++} });
-  var total = BASE_LIQUIDITY + userTotal;
-  var pct = (((total-(total/1.124))/(total/1.124))*100).toFixed(1);
-  var f; if (total>=1000000) f='$'+(total/1000000).toFixed(2)+'M'; else f='$'+(total/1000).toFixed(1)+'K';
+
+  // Compute real total from assets: portfolio holdings + liquid cash + card balances
+  var portfolioTotal = 0;
+  try {
+    var holdings = JSON.parse(localStorage.getItem('portfolioHoldings')||'[]');
+    holdings.forEach(function(h){ if(!h.sold) portfolioTotal += (parseInt(h.amount,10)||0); });
+  } catch(e){}
+  var liquidCash = parseInt(localStorage.getItem('trackedLiquidCash')||'0', 10);
+  if (isNaN(liquidCash)) liquidCash = 0;
+
+  var total = portfolioTotal + liquidCash + userTotal;
+  var pct = total > 0 ? (((total-(total/1.124))/(total/1.124))*100).toFixed(1) : '0.0';
+  var f;
+  if (total>=1000000) f='Z '+(total/1000000).toFixed(2)+'M';
+  else if (total>=1000) f='Z '+(total/1000).toFixed(1)+'K';
+  else f='Z '+total.toLocaleString('en-US');
   var a=document.getElementById('liquidity-amount'),c2=document.getElementById('liquidity-change'),cr=document.getElementById('liquidity-cards');
   if(a){a.style.transition='opacity 0.3s';a.style.opacity='0';setTimeout(function(){a.textContent=f;a.style.opacity='1'},200)}
   if(c2) c2.textContent='+'+pct+'% THIS MONTH';

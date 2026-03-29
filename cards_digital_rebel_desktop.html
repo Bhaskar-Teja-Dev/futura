@@ -184,7 +184,7 @@
           </div>
       </aside>
 <!-- Main Canvas -->
-<main class="lg:ml-64 flex-1 p-8 space-y-8 w-full">
+<main class="lg:ml-64 flex-1 p-8 space-y-8 overflow-hidden">
 <header class="flex justify-between items-end border-b-4 border-[#121212] pb-4">
 <div>
 <h1 class="font-headline font-black text-6xl tracking-tighter uppercase leading-none">Cards Management</h1>
@@ -210,7 +210,7 @@
     <p class="font-headline font-black text-3xl uppercase leading-tight tracking-tighter">Total<br/>Liquidity</p>
   </div>
   <div>
-    <span id="liquidity-amount" class="text-5xl font-black font-headline tracking-tighter block mb-3">$142.8K</span>
+    <span id="liquidity-amount" class="text-5xl font-black font-headline tracking-tighter block mb-3">Z 0</span>
     <div class="bg-[#121212] text-white px-4 py-3 flex items-center justify-between">
       <p id="liquidity-change" class="font-headline font-bold uppercase tracking-widest text-[10px]">+12.4% THIS MONTH</p>
       <p id="liquidity-cards" class="font-headline font-bold uppercase tracking-widest text-[10px] opacity-60">2 ACTIVE</p>
@@ -230,21 +230,21 @@
   </div>
   <div class="space-y-4">
     <!-- Daily Cap Row -->
-    <div id="row-daily" class="border-2 border-[#121212] p-4 bg-surface-container cursor-pointer hover:bg-[#cafd00] transition-colors group" onclick="openDrawer('daily')">
-      <div class="flex items-center justify-between">
-        <div>
+    <div id="row-daily" class="border-2 border-[#121212] p-4 bg-surface-container cursor-pointer hover:bg-[#cafd00] transition-colors group overflow-hidden" onclick="openDrawer('daily')">
+      <div class="flex items-center justify-between gap-4">
+        <div class="min-w-0 flex-1">
           <p class="font-headline font-black uppercase text-sm">DAILY TRANSACTION CAP</p>
-          <div class="flex items-end gap-3">
-            <p id="daily-value" class="text-4xl font-black font-headline tracking-tighter">$5,000</p>
+          <div class="flex items-end gap-3 flex-wrap">
+            <p id="daily-value" class="text-4xl font-black font-headline tracking-tighter">Z 5,000</p>
             <span id="daily-temp-badge" class="hidden mb-1 font-headline font-black text-[10px] bg-[#a400a4] text-white border border-[#121212] px-2 py-0.5 uppercase"></span>
           </div>
         </div>
-        <span class="material-symbols-outlined text-2xl opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all">edit</span>
+        <span class="material-symbols-outlined text-2xl opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all flex-shrink-0">edit</span>
       </div>
       <div class="mt-3">
-        <div class="flex justify-between mb-1">
-          <span class="font-headline font-bold text-[10px] uppercase tracking-widest opacity-50">Spent Today</span>
-          <span id="daily-spent-label" class="font-headline font-bold text-[10px] uppercase tracking-widest opacity-70">$1,240 / $5,000</span>
+        <div class="flex justify-between mb-1 gap-2">
+          <span class="font-headline font-bold text-[10px] uppercase tracking-widest opacity-50 flex-shrink-0">Spent Today</span>
+          <span id="daily-spent-label" class="font-headline font-bold text-[10px] uppercase tracking-widest opacity-70 text-right truncate">Z 1,240 / Z 5,000</span>
         </div>
         <div class="h-2 bg-[#dbdddd] border border-[#121212]">
           <div id="daily-progress" class="h-full bg-[#121212] transition-all duration-700" style="width:24.8%"></div>
@@ -256,7 +256,7 @@
       <div class="flex items-center justify-between">
         <div>
           <p class="font-headline font-black uppercase text-sm">ATM WITHDRAWAL LIMIT</p>
-          <p id="atm-value" class="text-4xl font-black font-headline tracking-tighter">$1,200</p>
+          <p id="atm-value" class="text-4xl font-black font-headline tracking-tighter">Z 1,200</p>
         </div>
         <span class="material-symbols-outlined text-2xl opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all">edit</span>
       </div>
