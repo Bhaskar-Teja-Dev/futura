@@ -759,47 +759,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 2500);
 
-  // ── SAFETY NET: Force-correct button state after all async settling ──
-  // Catches any race condition where the button is reset after TierStateManager updates it
+  // ── SAFETY NET: Tier label only (sidebar upgrade CTA removed site-wide)
   setTimeout(() => {
     var eliteFlag = localStorage.getItem('isElite') === 'true';
-    var btn = document.getElementById('sidebar-upgrade-btn');
     var label = document.getElementById('sidebar-tier-label');
-    if (!btn) return;
-
-    var btnText = (btn.textContent || '').toLowerCase();
-    var isBtnCorrect = eliteFlag
-      ? btnText.includes('explore')
-      : btnText.includes('upgrade');
-
-    if (!isBtnCorrect) {
-      console.log('[Auth Safety] Button mismatch detected. isElite:', eliteFlag, 'btnText:', btnText, '— forcing correction');
-      if (eliteFlag) {
-        // Force elite button
-        if (label) { label.textContent = 'Elite Tier'; label.style.color = '#FF6F00'; }
-        btn.innerHTML = '<span class="material-symbols-outlined" style="margin-right:8px;">local_fire_department</span> <span class="relative z-10">Explore Benefits</span>';
-        btn.removeAttribute('href');
-        btn.className = 'w-full py-4 mt-8 font-headline font-black uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all flex items-center justify-center relative overflow-hidden group border-2 border-[#121212] dark:border-[#f6f6f6]';
-        btn.style.cssText = 'background: linear-gradient(90deg, #ffb300, #ff6f00, #ffb300); background-size: 200% auto; animation: premiumFire 3s linear infinite; box-shadow: 0 0 15px rgba(255,111,0,0.7); color: #121212 !important;';
-        // Inject animation keyframes if needed
-        if (!document.getElementById('rebel-premium-styles')) {
-          var s = document.createElement('style');
-          s.id = 'rebel-premium-styles';
-          s.textContent = '@keyframes premiumFire { 0% { background-position: 0% center; } 50% { background-position: 100% center; } 100% { background-position: 0% center; } }';
-          document.head.appendChild(s);
-        }
-        btn.onclick = function(e) {
-          e.preventDefault();
-          var modal = document.getElementById('elite-hub-modal');
-          if (modal) { modal.classList.remove('hidden'); modal.classList.add('flex'); }
-        };
-      } else {
-        // Force basic button
-        if (label) { label.textContent = 'Basic Tier'; label.style.color = '#767777'; }
-        btn.textContent = 'Upgrade Power';
-        btn.href = 'upgrade_digital_rebel_desktop.html';
-        btn.style.cssText = '';
-      }
+    if (label) {
+      label.textContent = eliteFlag ? 'Elite Tier' : 'Basic Tier';
+      label.style.color = eliteFlag ? '#FF6F00' : '#767777';
     }
   }, 3000);
 
