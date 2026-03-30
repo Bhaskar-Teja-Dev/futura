@@ -116,10 +116,19 @@
       </nav>
       <div class="p-4 border-t-2 border-inverse-surface mt-auto">
         <a id="logout-link"
-          class="flex w-full justify-center items-center gap-2 py-4 px-6 font-Lexend font-bold uppercase tracking-widest text-xs text-[#ff81f5] hover:opacity-90 transition-opacity no-underline"
           href="index.html"
-          aria-label="Sign out">
-          <span class="material-symbols-outlined" style="font-size:18px;">logout</span> Logout
+          aria-label="Sign out"
+          class="flex w-full justify-center items-center gap-2 py-4 px-6 
+                 font-Lexend font-bold uppercase tracking-widest text-xs 
+                 bg-[#ff81f5] text-black border-2 border-black 
+                 shadow-[4px_4px_0px_#000] 
+                 hover:translate-x-[2px] hover:translate-y-[2px] 
+                 hover:shadow-none transition-all no-underline">
+          
+          <span class="material-symbols-outlined" style="font-size:18px;">
+            logout
+          </span>
+          Logout
         </a>
       </div>
     </aside>
@@ -268,7 +277,7 @@
 
     // ── Toast System ──────────────────────────────────────────────────────────
     function showToast(msg, type = 'success') {
-      const colors = { success: '#4caf50', error: '#b02500', warning: '#ff8800' };
+      const colors = { success: '#4caf50', error: '#b02500', warning: '#ff8800', info: '#2196f3' };
       const t = document.createElement('div');
       t.textContent = msg;
       t.style.cssText = `position:fixed;bottom:24px;right:24px;z-index:9999;padding:14px 20px;
@@ -292,6 +301,12 @@
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────
+    /** User's local calendar date — matches streak / contribution UX better than UTC-only ISO date */
+    function localCalendarDateYMD() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
     function getGoalData() {
       try { return JSON.parse(localStorage.getItem('onboarding_data') || '{}'); } catch { return {}; }
     }
@@ -448,16 +463,30 @@
           if (result.success) {
             const navBalance = document.getElementById('nav-zens-balance');
             if (navBalance) navBalance.textContent = result.zens.toLocaleString('en-US') + ' ZENS';
+            const saveDate = localCalendarDateYMD();
             try {
               if (api && api.holdings) {
-                await api.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: new Date().toISOString().split('T')[0] });
+                await api.holdings.create({ ticker, company_name: name, amount_zens: amt, price_at_purchase: price, purchase_date: saveDate });
               }
             } catch (e) { console.error('Holdings DB write failed:', e); }
             try {
               if (api && api.contributions) {
-                await api.contributions.create({ amount: Math.round(amt / 10), contribution_date: new Date().toISOString().split('T')[0], note: '[MARKET_INVESTMENT] ' + ticker });
+                const cr = await api.contributions.create({
+                  amount: Math.round(amt / 10),
+                  contribution_date: saveDate,
+                  note: '[MARKET_INVESTMENT] ' + ticker
+                });
+                if (cr && cr.streak_persist_failed) {
+                  showToast('Purchase saved — streak could not be updated. Try dashboard refresh or contact support.', 'warning');
+                }
+              } else {
+                console.error('api.contributions missing — streak not logged for this purchase');
+                showToast('Purchase saved, but streak API was unavailable. Refresh the page and try logging activity from the dashboard if needed.', 'warning');
               }
-            } catch (e) { console.error('Silent streak log failed', e); }
+            } catch (e) {
+              console.error('Streak contribution failed:', e);
+              showToast('Purchase saved, but saving streak activity failed: ' + (e.message || 'unknown error'), 'warning');
+            }
             if (typeof RebelNotifications !== 'undefined') {
               RebelNotifications.add('Investment Opened', `Successfully purchased position in ${ticker} for ${amt.toLocaleString('en-US')} ZENS.`, 'success');
             }
@@ -779,6 +808,16 @@
           create: (body) => directApiFetch('/api/holdings', 'POST', body),
           sell: (id, body) => directApiFetch('/api/holdings/' + id + '/sell', 'PATCH', body),
           remove: (id) => directApiFetch('/api/holdings/' + id, 'DELETE')
+        };
+      }
+      if (!api.contributions) {
+        console.warn('api.contributions missing on market page — using direct fetch fallback (streaks)');
+        api.contributions = {
+          list: () => directApiFetch('/api/contributions'),
+          create: (body) => directApiFetch('/api/contributions', 'POST', body),
+          delete: (id) => directApiFetch('/api/contributions/' + id, 'DELETE'),
+          streak: () => directApiFetch('/api/contributions/streak'),
+          repairStreak: () => directApiFetch('/api/contributions/repair-streak', 'POST')
         };
       }
 

@@ -365,7 +365,8 @@
                         class="font-Lexend font-black uppercase tracking-widest text-xs group-hover:text-primary-fixed transition-colors truncate text-[#121212] dark:text-[#f6f6f6]">
                         Rebel_01</h3>
                     <p id="sidebar-tier-label"
-                        class="font-Lexend font-bold uppercase tracking-widest text-[10px] truncate" style="color:#767777">
+                        class="font-Lexend font-bold uppercase tracking-widest text-[10px] truncate"
+                        style="color:#767777">
                         Basic
                         Tier</p>
                 </div>
@@ -394,10 +395,17 @@
                 </a>
             </nav>
             <div class="p-4 border-t-2 border-inverse-surface mt-auto">
-                <a id="logout-link"
-                    class="flex w-full justify-center items-center gap-2 py-4 px-6 font-Lexend font-bold uppercase tracking-widest text-xs text-[#ff81f5] hover:opacity-90 transition-opacity no-underline"
-                    href="index.html" aria-label="Sign out">
-                    <span class="material-symbols-outlined" style="font-size:18px;">logout</span> Logout
+                <a id="logout-link" href="index.html" aria-label="Sign out" class="flex w-full justify-center items-center gap-2 py-4 px-6 
+                         font-Lexend font-bold uppercase tracking-widest text-xs 
+                         bg-[#ff81f5] text-black border-2 border-black 
+                         shadow-[4px_4px_0px_#000] 
+                         hover:translate-x-[2px] hover:translate-y-[2px] 
+                         hover:shadow-none transition-all no-underline">
+
+                    <span class="material-symbols-outlined" style="font-size:18px;">
+                        logout
+                    </span>
+                    Logout
                 </a>
             </div>
         </aside>
@@ -1189,28 +1197,28 @@
                 // Set up local references to globals for production compatibility
                 const api = window.futuraApi || futuraApi;
                 if (!api) {
-                  console.error('futuraApi is not available');
-                  alert('API failed to initialize. Please refresh the page.');
-                  return;
+                    console.error('futuraApi is not available');
+                    alert('API failed to initialize. Please refresh the page.');
+                    return;
                 }
 
                 // Patch in missing holdings namespace if deployed api.js is stale
                 if (!api.holdings) {
-                  const _t = () => (window.getAccessToken || getAccessToken)();
-                  const _f = async (p, m, b) => {
-                    const token = await _t(); if (!token) throw new Error('Not authenticated');
-                    const o = { method: m || 'GET', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } };
-                    if (b && m && m !== 'GET') o.body = JSON.stringify(b);
-                    const r = await fetch(FUTURA_CONFIG.API_BASE_URL + p, o);
-                    if (!r.ok) throw new Error(await r.text() || 'API error ' + r.status);
-                    return r.json();
-                  };
-                  api.holdings = {
-                    list: () => _f('/api/holdings'),
-                    create: (body) => _f('/api/holdings', 'POST', body),
-                    sell: (id, body) => _f('/api/holdings/' + id + '/sell', 'PATCH', body),
-                    remove: (id) => _f('/api/holdings/' + id, 'DELETE')
-                  };
+                    const _t = () => (window.getAccessToken || getAccessToken)();
+                    const _f = async (p, m, b) => {
+                        const token = await _t(); if (!token) throw new Error('Not authenticated');
+                        const o = { method: m || 'GET', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token } };
+                        if (b && m && m !== 'GET') o.body = JSON.stringify(b);
+                        const r = await fetch(FUTURA_CONFIG.API_BASE_URL + p, o);
+                        if (!r.ok) throw new Error(await r.text() || 'API error ' + r.status);
+                        return r.json();
+                    };
+                    api.holdings = {
+                        list: () => _f('/api/holdings'),
+                        create: (body) => _f('/api/holdings', 'POST', body),
+                        sell: (id, body) => _f('/api/holdings/' + id + '/sell', 'PATCH', body),
+                        remove: (id) => _f('/api/holdings/' + id, 'DELETE')
+                    };
                 }
 
                 // 1. Enforce Auth

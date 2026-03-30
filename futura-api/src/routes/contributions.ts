@@ -60,7 +60,10 @@ router.get('/streak', async (c) => {
 
   if (lastDate) {
     const lastMs = new Date(`${lastDate}T00:00:00Z`).getTime()
-    const diffDays = Math.floor((today.getTime() - lastMs) / (1000 * 60 * 60 * 24))
+    const diffDaysRaw = Math.floor((today.getTime() - lastMs) / (1000 * 60 * 60 * 24))
+    // Client may send local calendar dates; last_date can appear "ahead" of UTC midnight today → negative diff.
+    // Treat that as same-day so the streak is not shown as dead right after a purchase.
+    const diffDays = diffDaysRaw < 0 ? 0 : diffDaysRaw
 
     if (diffDays === 0 || diffDays === 1) {
       // Still within normal streak window
@@ -98,7 +101,8 @@ router.get('/streak', async (c) => {
       can_replenish: canReplenish,
       replenish_deadline: replenishDeadline,
       recovery_tokens: sub?.streak_recovery_tokens ?? 0,
-      is_elite: sub?.entitlement === 'elite'
+      is_elite:
+        typeof sub?.entitlement === 'string' && sub.entitlement.toLowerCase() === 'elite'
     }
   })
 })
@@ -123,7 +127,9 @@ router.post('/repair-streak', async (c) => {
     .eq('user_id', userId)
     .maybeSingle()
 
-  if (sub?.entitlement !== 'elite' || (sub?.streak_recovery_tokens ?? 0) <= 0) {
+  const repairIsElite =
+    typeof sub?.entitlement === 'string' && sub.entitlement.toLowerCase() === 'elite'
+  if (!repairIsElite || (sub?.streak_recovery_tokens ?? 0) <= 0) {
     return c.json({ error: 'Not eligible or no tokens available' }, 403)
   }
 
@@ -251,13 +257,14 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
   // Check replenish: if gap is 2, look for a contribution on the missed day
   const lastDateStr = streakRow?.last_contribution_date ?? null
   let hasMissedDayContribution = false
+  let gapDaysFromLast: number | null = null
 
   if (lastDateStr) {
     const lastD = new Date(`${lastDateStr}T00:00:00Z`)
     const incomingD = new Date(`${body.contribution_date}T00:00:00Z`)
-    const diffDays = Math.floor((incomingD.getTime() - lastD.getTime()) / (1000 * 60 * 60 * 24))
+    gapDaysFromLast = Math.floor((incomingD.getTime() - lastD.getTime()) / (1000 * 60 * 60 * 24))
 
-    if (diffDays === 2) {
+    if (gapDaysFromLast === 2) {
       // The missed day is lastDate + 1
       const missedDay = new Date(lastD)
       missedDay.setUTCDate(missedDay.getUTCDate() + 1)
@@ -276,19 +283,27 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
 
   const { data: sub } = await supabase
     .from('user_subscriptions')
-    .select('streak_recovery_tokens')
+    .select('entitlement, streak_recovery_tokens')
     .eq('user_id', userId)
     .maybeSingle()
 
   const tokensBefore = sub?.streak_recovery_tokens ?? 0
+  const isElite =
+    typeof sub?.entitlement === 'string' && sub.entitlement.toLowerCase() === 'elite'
 
-  // Elite recovery tokens are never spent on contribution POST — user must confirm via Repair (POST /repair-streak).
+  // GET /streak shows the streak as still alive during a 1-day miss (replenish window).
+  // Elite: bridging that gap on POST must match — same +2 as token/missed-day paths, without spending a token.
+  // Basic: unchanged (2-day gap with no missed-day row still resets to 1).
+  const eliteGraceBridge =
+    isElite && gapDaysFromLast === 2 && !hasMissedDayContribution
+
+  // Elite recovery tokens are never spent on contribution POST — use Repair (POST /repair-streak) to spend one.
   const nextCurrent = calculateStreak(
     lastDateStr,
     streakRow?.current_streak ?? 0,
     body.contribution_date,
     hasMissedDayContribution,
-    false
+    eliteGraceBridge
   )
 
   const recoveryTokensRemaining = tokensBefore
@@ -300,7 +315,7 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     ? (streakRow?.current_streak ?? 0)
     : (streakRow?.previous_streak ?? 0);
 
-  await supabase.from('streaks').upsert(
+  const { error: upsertErr } = await supabase.from('streaks').upsert(
     {
       user_id: userId,
       current_streak: nextCurrent,
@@ -311,6 +326,20 @@ router.post('/', zValidator('json', contributionSchema), async (c) => {
     },
     { onConflict: 'user_id' }
   )
+
+  if (upsertErr) {
+    console.error('[contributions POST] streak upsert failed:', upsertErr.message)
+    return c.json(
+      {
+        contribution: data,
+        streak: streakToReturn,
+        recovery_tokens_remaining: recoveryTokensRemaining,
+        streak_persist_failed: true,
+        streak_persist_error: upsertErr.message
+      },
+      201
+    )
+  }
 
   return c.json(
     {

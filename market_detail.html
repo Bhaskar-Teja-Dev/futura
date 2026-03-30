@@ -254,6 +254,11 @@
 			return Math.round(amount * ((Math.pow(1 + r, years * 12) - 1) / r));
 		}
 
+		function localCalendarDateYMD() {
+			const d = new Date();
+			return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+		}
+
 		function showToast(msg, type = 'success') {
 			const colors = { success: '#4caf50', error: '#b02500', warning: '#ff8800' };
 			const t = document.createElement('div');
@@ -345,12 +350,22 @@
 
 						// Log as contribution to increment streak (saving)
 						try {
-							await futuraApi.contributions.create({
-								amount: Math.round(a / 10), // Convert Zens back to USD metric for streak tracking
-								contribution_date: new Date().toISOString().split('T')[0],
-								note: '[MARKET_INVESTMENT] ' + ticker
-							});
-						} catch (e) { console.error('Silent streak log failed', e); }
+							if (futuraApi && futuraApi.contributions) {
+								const cr = await futuraApi.contributions.create({
+									amount: Math.round(a / 10),
+									contribution_date: localCalendarDateYMD(),
+									note: '[MARKET_INVESTMENT] ' + ticker
+								});
+								if (cr && cr.streak_persist_failed) {
+									showToast('Purchase saved — streak could not be updated. Refresh the dashboard.', 'warning');
+								}
+							} else {
+								showToast('Purchase saved, but streak API missing. Refresh the page.', 'warning');
+							}
+						} catch (e) {
+							console.error('Streak contribution failed', e);
+							showToast('Purchase saved, but streak log failed: ' + (e.message || 'error'), 'warning');
+						}
 
 						ov.remove();
 						showToast(`${a.toLocaleString('en-US')} ZENS added to ${ticker}. Portfolio updated!`);

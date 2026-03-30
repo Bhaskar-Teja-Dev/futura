@@ -1,8 +1,9 @@
 /**
- * Streak calculation with replenish + optional Elite token path (only when caller passes canUseToken):
+ * Streak calculation with replenish + bridge paths for a single missed calendar day (diffDays === 2):
  * - diffDays === 0  → same day, streak unchanged
  * - diffDays === 1  → consecutive day, streak increments
- * - diffDays === 2  → missed ONE day; contribution on missed day continues streak; OR canUseToken bridges (explicit flows only — not contribution POST)
+ * - diffDays === 2  → missed ONE day: hasMissedDayContribution OR canUseToken bridges (+2); otherwise resets to 1
+ *   (Contributions POST sets canUseToken for Elite during the replenish window so UI and DB stay aligned.)
  * - diffDays >= 3   → streak resets to 1
  */
 export function calculateStreak(
